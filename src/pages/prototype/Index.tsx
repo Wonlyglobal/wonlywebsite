@@ -63,7 +63,7 @@ const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per
 
 /* ── Section 3 · Why WONLY ─────────────────────────────────── */
 const MILESTONES = [
-  { icon: TrendingUp, k: "Listed", v: "Shanghai Stock Exchange (SSE: 605268) — the sector's first public company, 2021" },
+  { icon: TrendingUp, k: "Listed", v: "The First Listed Enterprise in China's Security Door & Lock Industry (SSE:605268)" },
   { icon: CalendarDays, k: "30 years", v: "Founded 1996 in Yongkang, Zhejiang" },
   { icon: Factory, k: "5 bases · 6 R&D centers", v: "Vertically integrated manufacturing & innovation" },
   { icon: Lightbulb, k: "1,000+ patents", v: "Proprietary security & smart-lock technology" },
