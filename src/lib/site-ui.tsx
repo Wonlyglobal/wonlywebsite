@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
 export const GOLD = "#BFA06A";
@@ -34,16 +34,27 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
   );
 }
 
-const NAV = [
-  { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Security Doors", to: "/products/security-doors" },
-  { label: "Smart Lock S80", to: "/products/smart-locks/s80" },
+/* Full nav framework (mirrors the homepage). Section items link back to the
+   homepage and scroll there via its hash handler; S80 + About are real pages. */
+const NAV: { label: string; href: string; children?: { label: string; href: string }[] }[] = [
+  { label: "Products", href: "/#products", children: [
+    { label: "Security Doors", href: "/products/security-doors" },
+    { label: "Smart Lock S80", href: "/products/smart-locks/s80" },
+    { label: "Wooden Doors", href: "/#products" },
+    { label: "Aluminum Windows", href: "/#products" },
+    { label: "Whole-House Intelligence", href: "/#products" },
+  ] },
+  { label: "Solutions", href: "/#solutions" },
+  { label: "Why WONLY", href: "/#why" },
+  { label: "Global Footprint", href: "/#footprint" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 /* Sticky header — transparent over a dark hero, frosted once scrolled */
 export function SiteHeader() {
   const [solid, setSolid] = useState(false);
+  const [openDrop, setOpenDrop] = useState(false);
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     onScroll();
@@ -59,7 +70,18 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => (
-            <Link key={n.to} to={n.to} className="px-3.5 py-2 text-sm font-light transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}</Link>
+            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(true)} onMouseLeave={() => setOpenDrop(false)}>
+              <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>
+                {n.label}{n.children && <ChevronDown size={13} />}
+              </Link>
+              {n.children && openDrop && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
+                  {n.children.map((c) => (
+                    <Link key={c.label} to={c.href} className="block w-full text-left px-4 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>{c.label}</Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
         <Link to="/#contact" className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote</Link>
