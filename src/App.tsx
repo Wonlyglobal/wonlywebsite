@@ -25,7 +25,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter basename={basename}>
         <Routes>
-          <Route path="/" element={<Index />} />
+          {/* The /prototype interactive page is now the official homepage. */}
+          <Route path="/" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
+          {/* Previous homepage kept for reference (not linked). */}
+          <Route path="/home-old" element={<Index />} />
           <Route path="/products/security-doors" element={<SecurityDoors />} />
           <Route path="/products/security-doors/x70" element={<SecurityDoorX70 />} />
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />

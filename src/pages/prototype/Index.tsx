@@ -84,11 +84,16 @@ const FOOTPRINT_STATS = [
 
 /* ── Section 4 · Products ──────────────────────────────────── */
 const PRODUCT_RAIL = [
-  { n: "01", name: "Robotic Security Door X70", d: "Flagship: autonomous locking, multi-vector intrusion sensing, cast-aluminum build.", img: IMG.aluMax },
-  { n: "02", name: "S80 True-Sensing Smart Lock", d: "Hands-free long-range sensing, biometric + app control, tamper-proof architecture.", img: IMG.lockS80 },
-  { n: "03", name: "4.0 Global Series Doors", d: "Fire-rated, anti-theft, climate-adapted to global standards.", img: IMG.alu40 },
-  { n: "04", name: "Engineering Doors", d: "Fire-rated / access-control / acoustic — compliant with Gulf, SEA & Central Asia standards.", img: IMG.aluT200 },
-  { n: "05", name: "Medical-Grade Doors", d: "Hermetic operating-room & ward doors engineered for hospitals.", img: IMG.wood2 },
+  { n: "01", name: "Robotic Security Door X70", cat: "door", d: "Flagship: autonomous locking, multi-vector intrusion sensing, cast-aluminum build.", img: IMG.aluMax },
+  { n: "02", name: "S80 True-Sensing Smart Lock", cat: "lock", d: "Hands-free long-range sensing, biometric + app control, tamper-proof architecture.", img: IMG.lockS80 },
+  { n: "03", name: "4.0 Global Series Doors", cat: "door", d: "Fire-rated, anti-theft, climate-adapted to global standards.", img: IMG.alu40 },
+  { n: "04", name: "Engineering Doors", cat: "door", d: "Fire-rated / access-control / acoustic — compliant with Gulf, SEA & Central Asia standards.", img: IMG.aluT200 },
+  { n: "05", name: "Medical-Grade Doors", cat: "door", d: "Hermetic operating-room & ward doors engineered for hospitals.", img: IMG.wood2 },
+];
+const PROD_CATS = [
+  { key: "all", label: "All" },
+  { key: "door", label: "Doors" },
+  { key: "lock", label: "Locks" },
 ];
 
 /* ── Section 5 · Solutions ─────────────────────────────────── */
@@ -100,20 +105,13 @@ const SOLUTIONS = [
 ];
 
 /* ── Section 6 · Certifications & Honors ───────────────────── */
-const CERTS = ["ISO 9001", "ISO 14001", "CE", "UL", "EN 1634 Fire", "CMA", "CSPPA"];
-const HONORS = [
-  "iF Product Design Award",
-  "National High-Tech Enterprise",
-  "National Quality Benchmark",
-  "National Standard Co-drafter",
-  "TOP500 Preferred Supplier — China Real-Estate Supply Chain, 2025",
-];
-// TODO: replace top500 placeholders with real certification / award images
-const CERT_IMAGES = [
-  `${BASE}images/top500-2.png`,
-  `${BASE}images/top500-3.png`,
-  `${BASE}images/top500-4.png`,
-  `${BASE}images/top500-5.jpg`,
+// Real credentials only — no fabricated certifications on a live company site.
+// To use actual certificate BADGE IMAGES instead of these text pills, drop them
+// in public/images/certs/ and tell me the count; I'll switch the marquee to images.
+const CERT_ROWS = [
+  ["ISO 9001", "ISO 14001", "CE", "UL"],
+  ["EN 1634 Fire", "CMA", "CSPPA", "iF Product Design Award"],
+  ["National High-Tech Enterprise", "National Quality Benchmark", "National Standard Co-drafter", "TOP500 Preferred Supplier 2025"],
 ];
 
 /* ── Section 7 · Partnership ───────────────────────────────── */
@@ -229,30 +227,19 @@ function WorldDots({ className = "" }: { className?: string }) {
   );
 }
 
-/* Auto-rotating certification / award image carousel */
-function CertCarousel({ images }: { images: string[] }) {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setI((p) => (p + 1) % images.length), 4000);
-    return () => clearInterval(id);
-  }, [images.length]);
+/* Three-row certification marquee — adjacent rows scroll in opposite directions */
+function CertMarquee({ rows }: { rows: string[][] }) {
   return (
-    <div className="relative">
-      <div className="overflow-hidden rounded-2xl" style={{ background: "#fff" }}>
-        <div className="flex transition-transform duration-700 ease-out" style={{ transform: `translateX(-${i * 100}%)` }}>
-          {images.map((src, k) => (
-            <div key={k} className="w-full shrink-0 flex items-center justify-center p-6 md:p-10">
-              <img src={src} alt={`WONLY certification / award ${k + 1}`} loading="lazy" className="max-h-[320px] md:max-h-[420px] w-auto object-contain" />
-            </div>
-          ))}
+    <div className="space-y-4" style={{ maskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)" }}>
+      {rows.map((row, ri) => (
+        <div key={ri} className="partner-row overflow-hidden">
+          <div className={`${ri % 2 === 0 ? "partner-track-left" : "partner-track-right"} flex gap-4 w-max`}>
+            {[...row, ...row, ...row, ...row].map((c, i) => (
+              <span key={i} className="shrink-0 whitespace-nowrap px-6 py-3 rounded-full text-sm font-medium border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.05)", color: "rgba(245,241,234,0.92)" }}>{c}</span>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="mt-5 flex justify-center gap-2.5">
-        {images.map((_, k) => (
-          <button key={k} onClick={() => setI(k)} aria-label={`Slide ${k + 1}`} className="h-2 rounded-full transition-all" style={{ width: k === i ? 22 : 8, background: k === i ? GOLD : "rgba(245,241,234,0.3)" }} />
-        ))}
-      </div>
+      ))}
     </div>
   );
 }
@@ -294,6 +281,42 @@ function ProductRail({ items }: { items: typeof PRODUCT_RAIL }) {
   );
 }
 
+/* Interactive company timeline — progress line fills, nodes pop, cards fade in on view */
+function Timeline({ items }: { items: { y: string; m: string }[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setOn(true); return; }
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { setOn(true); io.disconnect(); } }), { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className="mt-20">
+      <div className="relative mb-8 hidden md:block">
+        <div className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2 overflow-hidden" style={{ background: `${SILVER}44` }}>
+          {on && <div className="timeline-progress-line h-full" style={{ background: GOLD }} />}
+        </div>
+        <div className="relative grid grid-cols-4">
+          {items.map((t, i) => (
+            <span key={t.y} className={`block w-3 h-3 rounded-full ${on ? "timeline-node-active" : ""}`} style={{ background: GOLD, opacity: on ? 1 : 0, animationDelay: `${i * 0.45}s` }} />
+          ))}
+        </div>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6">
+        {items.map((t, i) => (
+          <div key={t.y} className={on ? "timeline-card-in" : ""} style={{ opacity: on ? undefined : 0, animationDelay: `${0.35 + i * 0.45}s` }}>
+            <div className="text-3xl md:text-4xl font-light" style={{ color: DARK }}>{t.y}</div>
+            <p className="mt-3 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{t.m}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const eyebrow = "text-[11px] tracking-[0.5em] uppercase font-light";
 const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[34px] md:text-[58px]";
 
@@ -309,12 +332,13 @@ const Prototype = () => {
   const [openDrop, setOpenDrop] = useState(false);
   const [sent, setSent] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [prodCat, setProdCat] = useState("all");
 
   useSeo({
     title: "WONLY | Global Smart-Security Ecosystem Leader — Security Doors & Smart Locks Manufacturer",
     description:
       "WONLY is a listed (SSE: 605268) manufacturer of premium security doors and smart locks — 1,000,000+ m² base, 6M doors & 3M locks a year, 1,000+ patents, serving distributors and projects in 60+ countries.",
-    path: "/prototype",
+    path: "/",
     type: "website",
     jsonLd: {
       "@context": "https://schema.org",
@@ -395,7 +419,7 @@ const Prototype = () => {
   return (
     <div className="w-full text-[#221F20] font-sans antialiased overflow-x-hidden" style={{ background: CHAMP_BG }}>
       {/* ══ Header ══ */}
-      <header className={`fixed top-0 inset-x-0 z-[70] transition-all duration-700 ${solid ? "bg-[#F5F1EA]/80 backdrop-blur-xl shadow-[0_1px_0_rgba(34,31,32,0.06)]" : "bg-transparent"}`}>
+      <header className={`fixed top-0 inset-x-0 z-[70] transition-all duration-700 ${solid ? "bg-[#F5F1EA]/90 backdrop-blur-md shadow-[0_1px_0_rgba(34,31,32,0.06)]" : "bg-transparent"}`}>
         {!solid && <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0))" }} />}
         <div className="relative max-w-[1600px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
           <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
@@ -486,9 +510,6 @@ const Prototype = () => {
                 <img src={IMG.factoryLineB} alt="WONLY press line and mold tower" loading="lazy" className="w-full h-full object-cover" />
                 <img src={IMG.factoryAbb} alt="WONLY ABB robotic automation" loading="lazy" className="w-full h-full object-cover" />
               </div>
-              <div className="absolute bottom-5 left-5 px-5 py-3 rounded-xl backdrop-blur-md" style={{ background: "rgba(34,31,32,0.82)" }}>
-                <div className="text-white text-lg font-light leading-none">5 Bases · 6 R&amp;D Centers</div>
-              </div>
             </div>
           </Reveal>
         </div>
@@ -557,11 +578,15 @@ const Prototype = () => {
             <div className={eyebrow} style={{ color: GOLD }}>Our Products</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Flagship line-up.</h2>
           </Reveal>
-          <div className="mt-12 flex items-baseline justify-between mb-6">
-            <div className="text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: MUTED }}>A full building-entry portfolio</div>
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div className="flex flex-wrap items-center gap-2.5">
+              {PROD_CATS.map((c) => (
+                <button key={c.key} onClick={() => setProdCat(c.key)} className="px-5 py-2 rounded-full text-[13px] font-medium transition-all" style={prodCat === c.key ? { background: GOLD, color: DARK } : { background: "transparent", color: MUTED, border: `1px solid ${SILVER}66` }}>{c.label}</button>
+              ))}
+            </div>
             <div className="text-[11px] tracking-[0.3em] uppercase font-light" style={{ color: SILVER }}>scroll →</div>
           </div>
-          <ProductRail items={PRODUCT_RAIL} />
+          <ProductRail key={prodCat} items={PRODUCT_RAIL.filter((p) => prodCat === "all" || p.cat === prodCat)} />
           <button onClick={() => scrollToId("contact")} className="mt-8 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Browse Full Catalog <ArrowRight size={15} /></button>
         </div>
       </section>
@@ -605,13 +630,8 @@ const Prototype = () => {
           <h2 className={h2cls + " mt-5 text-white"}>Held to standards, honored at the top.</h2>
         </Reveal>
         <Reveal className="mt-14">
-          <CertCarousel images={CERT_IMAGES} />
+          <CertMarquee rows={CERT_ROWS} />
         </Reveal>
-        <div className="mt-14 flex flex-wrap gap-x-10 gap-y-5 border-y py-8" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
-          {CERTS.map((c) => (
-            <span key={c} className="font-mono text-sm md:text-base tracking-wide" style={{ color: "rgba(245,241,234,0.85)" }}>{c}</span>
-          ))}
-        </div>
       </section>
 
       {/* ══ 7 · Partnership (visual anchor — dark image background) ══ */}
@@ -660,16 +680,7 @@ const Prototype = () => {
             </div>
           </Reveal>
         </div>
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6">
-          {TIMELINE.map((t, i) => (
-            <Reveal key={t.y} delay={i * 100}>
-              <div className="relative pt-8 border-t-2" style={{ borderColor: GOLD }}>
-                <div className="text-3xl md:text-4xl font-light" style={{ color: DARK }}>{t.y}</div>
-                <p className="mt-3 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{t.m}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Timeline items={TIMELINE} />
       </section>
 
       {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
