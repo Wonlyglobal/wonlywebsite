@@ -333,6 +333,25 @@ const Prototype = () => {
   const [sent, setSent] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const [prodCat, setProdCat] = useState("all");
+  const [form, setForm] = useState({ name: "", company: "", country: "", email: "", interest: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const setField = (name: keyof typeof form, value: string) => {
+    setForm((f) => ({ ...f, [name]: value }));
+    setErrors((er) => { if (!er[name]) return er; const n = { ...er }; delete n[name]; return n; });
+  };
+  const onContactSubmit = (ev: React.FormEvent) => {
+    ev.preventDefault();
+    const e: Record<string, string> = {};
+    if (!form.name.trim()) e.name = "Please enter your name.";
+    if (!form.company.trim()) e.company = "Please enter your company name.";
+    if (!form.country.trim()) e.country = "Please enter your country or region.";
+    if (!form.email.trim()) e.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
+    if (!form.interest) e.interest = "Please select an option.";
+    if (!form.message.trim()) e.message = "Please tell us about your project.";
+    setErrors(e);
+    if (Object.keys(e).length === 0) setSent(true);
+  };
 
   useSeo({
     title: "WONLY | Global Smart-Security Ecosystem Leader — Security Doors & Smart Locks Manufacturer",
@@ -719,25 +738,28 @@ const Prototype = () => {
                 <p className="mt-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.7)" }}>Our team will reply within 24 hours with tailored specifications, compliance documentation and pricing.</p>
               </div>
             ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSent(true); /* TODO: connect real recipient */ }} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {([["Name", "Your full name", "text"], ["Company", "Company name", "text"], ["Country", "Country / region", "text"], ["Email", "you@company.com", "email"]] as const).map(([l, ph, t]) => (
-                <label key={l} className="block">
-                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{l}</span>
-                  <input type={t} required className="mt-1.5 w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" placeholder={ph} />
+            <form noValidate onSubmit={onContactSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {([["name", "Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, t]) => (
+                <label key={key} className="block">
+                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{l} <span style={{ color: "#e6928a" }}>*</span></span>
+                  <input type={t} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={ph} />
+                  {errors[key] && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors[key]}</span>}
                 </label>
               ))}
               <label className="block sm:col-span-2">
-                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Interest</span>
-                <select required defaultValue="" className="mt-1.5 w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#BFA06A] invalid:text-white/30">
+                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Interest <span style={{ color: "#e6928a" }}>*</span></span>
+                <select value={form.interest} onChange={(ev) => setField("interest", ev.target.value)} aria-invalid={!!errors.interest} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors.interest ? "#c0564a" : "rgba(255,255,255,0.15)", color: form.interest ? "#fff" : "rgba(255,255,255,0.3)" }}>
                   <option value="" disabled className="text-black">Select an option…</option>
                   <option className="text-black">Distributor</option>
                   <option className="text-black">Project</option>
                   <option className="text-black">OEM / ODM</option>
                 </select>
+                {errors.interest && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.interest}</span>}
               </label>
               <label className="block sm:col-span-2">
-                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Message</span>
-                <textarea required rows={3} className="mt-1.5 w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" placeholder="Tell us about your project or territory..." />
+                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Message <span style={{ color: "#e6928a" }}>*</span></span>
+                <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder="Tell us about your project or territory..." />
+                {errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.message}</span>}
               </label>
               <button type="submit" className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote</button>
             </form>
