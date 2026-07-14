@@ -377,6 +377,14 @@ const Prototype = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Arriving at /#contact (etc.) from another page: jump to that section.
+  useEffect(() => {
+    if (!window.location.hash) return;
+    const id = window.location.hash.slice(1);
+    const t = setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }), 350);
+    return () => clearTimeout(t);
+  }, []);
+
   // Hero: scroll once → autoplay the door open → reveal copy on the bright interior frame → release page.
   useLayoutEffect(() => {
     const v = doorVideo.current;
@@ -384,7 +392,7 @@ const Prototype = () => {
 
     const showReveal = () => { if (reveal.current) { reveal.current.style.opacity = "1"; reveal.current.style.visibility = "visible"; } setContentIn(true); };
 
-    if (reduced) {
+    if (reduced || window.location.hash) {
       if (v) {
         v.pause();
         const setOpen = () => { try { v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } catch { /* poster ok */ } };
@@ -536,11 +544,11 @@ const Prototype = () => {
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {MILESTONES.map((m, i) => (
             <Reveal key={m.k} delay={(i % 3) * 80}>
-              <div className="group h-full rounded-2xl p-6 md:p-7 border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ background: "#faf8f4", borderColor: `${SILVER}55` }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: `${GOLD}1a` }}>
-                  <m.icon size={20} style={{ color: GOLD }} />
+              <div className="group h-full rounded-2xl p-6 md:p-7 border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ background: "#f7f7f5", borderColor: `${SILVER}66` }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: GOLD }}>
+                  <m.icon size={20} style={{ color: "#fff" }} />
                 </div>
-                <div className="mt-5 text-2xl md:text-[26px] font-light" style={{ color: GOLD }}>{m.k}</div>
+                <div className="mt-5 text-2xl md:text-[26px] font-normal" style={{ color: DARK }}>{m.k}</div>
                 <div className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{m.v}</div>
               </div>
             </Reveal>

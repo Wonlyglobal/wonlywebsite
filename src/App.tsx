@@ -11,6 +11,8 @@ import NotFound from "./pages/not-found/Index";
 
 // Lazy-loaded so GSAP ships only on /prototype and never enters the main bundle.
 const Prototype = lazy(() => import("./pages/prototype/Index"));
+const About = lazy(() => import("./pages/about/Index"));
+const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
           <Route path="/" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
           {/* Previous homepage kept for reference (not linked). */}
           <Route path="/home-old" element={<Index />} />
+          <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
+          <Route path="/products/smart-locks/s80" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLockS80 /></Suspense>} />
           <Route path="/products/security-doors" element={<SecurityDoors />} />
           <Route path="/products/security-doors/x70" element={<SecurityDoorX70 />} />
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
