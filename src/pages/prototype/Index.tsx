@@ -45,12 +45,20 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-const NAV = [
-  { label: "Products", to: "products", children: ["Security Doors", "Smart Locks", "Wooden Doors", "Aluminum Windows", "Whole-House Intelligence"] },
+type NavChild = { label: string; href?: string; to?: string };
+type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
+const NAV: NavItem[] = [
+  { label: "Products", to: "products", children: [
+    { label: "Security Doors", href: "/products/security-doors" },
+    { label: "Smart Lock S80", href: "/products/smart-locks/s80" },
+    { label: "Wooden Doors", to: "products" },
+    { label: "Aluminum Windows", to: "products" },
+    { label: "Whole-House Intelligence", to: "products" },
+  ] },
   { label: "Solutions", to: "solutions" },
   { label: "Why WONLY", to: "why" },
   { label: "Global Footprint", to: "footprint" },
-  { label: "About", to: "why" },
+  { label: "About", href: "/about" },
   { label: "Contact", to: "contact" },
 ];
 
@@ -455,13 +463,21 @@ const Prototype = () => {
           <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
             {NAV.map((n) => (
               <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(true)} onMouseLeave={() => setOpenDrop(false)}>
-                <button onClick={() => scrollToId(n.to)} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>
-                  {n.label}{n.children && <ChevronDown size={13} />}
-                </button>
+                {n.href ? (
+                  <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}</Link>
+                ) : (
+                  <button onClick={() => scrollToId(n.to!)} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>
+                    {n.label}{n.children && <ChevronDown size={13} />}
+                  </button>
+                )}
                 {n.children && openDrop && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
                     {n.children.map((c) => (
-                      <button key={c} onClick={() => scrollToId("products")} className="block w-full text-left px-4 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>{c}</button>
+                      c.href ? (
+                        <Link key={c.label} to={c.href} className="block w-full text-left px-4 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>{c.label}</Link>
+                      ) : (
+                        <button key={c.label} onClick={() => scrollToId(c.to || "products")} className="block w-full text-left px-4 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>{c.label}</button>
+                      )
                     ))}
                   </div>
                 )}
