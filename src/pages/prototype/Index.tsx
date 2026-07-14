@@ -468,7 +468,7 @@ const Prototype = () => {
 
       {/* ══ 1 · Hero door video + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="auto" aria-hidden="true" />
+        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="metadata" aria-hidden="true" />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)" }} />
 
@@ -494,7 +494,7 @@ const Prototype = () => {
           {/* subtle dark gradient so the white heading stays readable without a hard overlay */}
           <div className="absolute inset-x-0 top-0 h-[68%] pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.28) 45%, rgba(13,13,13,0) 100%)" }} />
           <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
-            <h2 className="font-bold leading-[1.12] tracking-[0.06em] text-[36px] md:text-[64px] text-white">Global Smart-Security<br />Ecosystem Leader</h2>
+            <h2 className="font-light uppercase leading-[1.12] tracking-[0.08em] text-[36px] md:text-[64px] text-white">Global Smart-Security<br />Ecosystem Leader</h2>
             <div className="mt-12 md:mt-14 rounded-3xl px-6 py-9 md:px-12 md:py-11" style={{ background: "rgba(20,18,19,0.6)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 gap-x-8">
                 {STATS.map((s) => (
