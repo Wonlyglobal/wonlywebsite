@@ -272,7 +272,7 @@ function ProductRail({ items }: { items: typeof PRODUCT_RAIL }) {
       {items.map((p) => (
         <div key={p.n} className="shrink-0 w-[300px] md:w-[360px]" style={{ scrollSnapAlign: "start" }}>
           <div className="overflow-hidden"><img src={p.img} alt={p.name} loading="lazy" className="w-full h-[300px] object-cover" /></div>
-          <div className="mt-4 font-mono text-xs" style={{ color: GOLD }}>{p.n}</div>
+          <div className="mt-4 text-xs tracking-[0.2em]" style={{ color: GOLD }}>{p.n}</div>
           <div className="mt-1 text-lg font-light" style={{ color: DARK }}>{p.name}</div>
           <p className="mt-2 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{p.d}</p>
         </div>
