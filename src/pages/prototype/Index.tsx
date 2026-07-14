@@ -13,35 +13,35 @@ const MUTED = "#5f5a54";
 
 const BASE = import.meta.env.BASE_URL;
 const DOOR_VIDEO = `${BASE}videos/hero-door.mp4`;
-const DOOR_POSTER = `${BASE}videos/hero-door-poster.jpg`;
-const LOGO = `${BASE}images/logo-trim.png`;
+const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
+const LOGO = `${BASE}images/logo-trim.webp`;
 const VIDEO_FALLBACK_DURATION = 3.5;
 const IMG = {
   interior: `${BASE}images/interior-bg.jpg`,
-  yizhai1: `${BASE}images/yizhai-1.jpg`, // bronze relief
+  yizhai1: `${BASE}images/yizhai-1.webp`, // bronze relief
   yizhai2: `${BASE}images/yizhai-2.jpg`, // koi
   yizhai3: `${BASE}images/yizhai-3.jpg`, // wave
   yizhai4: `${BASE}images/yizhai-4.jpg`, // silver dragon
   haja1: `${BASE}images/haja-1.jpg`,
   haja3: `${BASE}images/haja-3.jpg`,
-  factoryLab: `${BASE}images/factory-1.jpg`, // clean R&D / QC lab
-  factoryLine: `${BASE}images/factory-2.jpg`, // SMT production line
-  factoryLineA: `${BASE}images/factory-line-a.jpg`, // 8K WONLY stamping line (branded)
-  factoryLineB: `${BASE}images/factory-line-b.jpg`, // WONLY press line + mold tower (branded)
-  factoryAbb: `${BASE}images/factory-abb.jpg`, // ABB robot handling a door panel
-  lockS80: `${BASE}images/lock-s80.png`, // real WONLY S80 smart lock
-  aluPro: `${BASE}images/alu-k300pro.png`,
-  aluMax: `${BASE}images/alu-k300max.png`,
-  aluT200: `${BASE}images/alu-t200.png`,
-  alu40: `${BASE}images/alu-40.png`, // 4.0 Global Series
+  factoryLab: `${BASE}images/factory-1.webp`, // clean R&D / QC lab
+  factoryLine: `${BASE}images/factory-2.webp`, // SMT production line
+  factoryLineA: `${BASE}images/factory-line-a.webp`, // 8K WONLY stamping line (branded)
+  factoryLineB: `${BASE}images/factory-line-b.webp`, // WONLY press line + mold tower (branded)
+  factoryAbb: `${BASE}images/factory-abb.webp`, // ABB robot handling a door panel
+  lockS80: `${BASE}images/lock-s80.webp`, // real WONLY S80 smart lock
+  aluPro: `${BASE}images/alu-k300pro.webp`,
+  aluMax: `${BASE}images/alu-k300max.webp`,
+  aluT200: `${BASE}images/alu-t200.webp`,
+  alu40: `${BASE}images/alu-40.webp`, // 4.0 Global Series
   wood1: `${BASE}images/wood-1.png`,
-  wood2: `${BASE}images/wood-2.png`,
-  proj1: `${BASE}images/proj-1.jpg`, // Hangzhou G20 Expo Center
-  proj2: `${BASE}images/proj-2.png`, // Egypt New Capital CBD
-  residential: `${BASE}images/proj-s-5.jpg`, // Tianjin National Village — residential
-  publicInst: `${BASE}images/proj-s-7.jpg`, // institutional building
+  wood2: `${BASE}images/wood-2.webp`,
+  proj1: `${BASE}images/proj-1.webp`, // Hangzhou G20 Expo Center
+  proj2: `${BASE}images/proj-2.webp`, // Egypt New Capital CBD
+  residential: `${BASE}images/proj-s-5.webp`, // Tianjin National Village — residential
+  publicInst: `${BASE}images/proj-s-7.webp`, // institutional building
   top500: `${BASE}images/top500-5.jpg`,
-  partnersRe: `${BASE}images/partners-re.png`,
+  partnersRe: `${BASE}images/partners-re.webp`,
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
