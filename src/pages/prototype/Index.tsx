@@ -438,7 +438,7 @@ const Prototype = () => {
   return (
     <div className="w-full text-[#221F20] font-sans antialiased overflow-x-hidden" style={{ background: CHAMP_BG }}>
       {/* ══ Header ══ */}
-      <header className={`fixed top-0 inset-x-0 z-[70] transition-all duration-700 ${solid ? "bg-[#F5F1EA]/90 backdrop-blur-md shadow-[0_1px_0_rgba(34,31,32,0.06)]" : "bg-transparent"}`}>
+      <header className={`fixed top-0 inset-x-0 z-[70] transition-[background-color,box-shadow] duration-500 ${solid ? "bg-[#F5F1EA]/90 backdrop-blur-md shadow-[0_1px_0_rgba(34,31,32,0.06)]" : "bg-transparent"}`}>
         {!solid && <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0))" }} />}
         <div className="relative max-w-[1600px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
           <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
@@ -490,7 +490,7 @@ const Prototype = () => {
         </div>
 
         {/* Reveal copy on interior end frame — no full overlay; per-stat glass panels keep copy readable */}
-        <div ref={reveal} className="absolute inset-0 z-30 flex flex-col items-center justify-center px-[7vw] pt-40 md:pt-52 pb-16 overflow-y-auto">
+        <div ref={reveal} className="absolute inset-0 z-30 flex flex-col items-center justify-center px-[7vw] pt-40 md:pt-52 pb-16 overflow-hidden">
           {/* subtle dark gradient so the white heading stays readable without a hard overlay */}
           <div className="absolute inset-x-0 top-0 h-[68%] pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.28) 45%, rgba(13,13,13,0) 100%)" }} />
           <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
