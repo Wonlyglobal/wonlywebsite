@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【AI HANDOVER NOTE】
+1. DESIGN PHILOSOPHY:
+   - The design system, 'Industrial Precision & Security', is tailored for WONLY's global corporate presence. It fuses high-tech security attributes with premium architectural aesthetics.
+   - Visual Style: 'Physicality with Rim-light'. This style mimics the tactile, metallic surfaces of security doors and smart locks using subtle inner shadows and high-contrast accents. It moves away from the 'organic olive' reference towards a more structured, 'Starry Night' corporate feel to emphasize reliability and technological leadership.
+   - Variance Level: MEDIUM-HIGH. The layout uses high-impact photography of 5G factories and luxury villas, balanced by a strict grid to convey institutional trust.
+
+2. TYPOGRAPHY:
+   - Sans (Poppins & Plus Jakarta Sans): Chosen for their geometric clarity and modern international feel. Poppins provides the 'Global Brand' authority for headings, while Plus Jakarta Sans offers superior legibility for body text. Chinese fallbacks (PingFang SC) ensure a premium look for the domestic market.
+   - Mono (JetBrains Mono): Utilized for technical specifications, certification numbers, and 5G factory data displays to reinforce the engineering-led brand identity.
+
+3. COLOR SYSTEM:
+   - The palette is anchored by 'Tech Blue' (oklch 0.60 0.16 235), directly derived from WONLY's VI (#008FCE). It symbolizes intelligence and security.
+   - 'Starry Night Black' (#221F20) serves as the core dark-mode background and high-contrast element in light mode, providing a sophisticated backdrop for security products.
+   - Semantic colors are tuned for industrial contexts: Success (Success Green) for 'Certified' status, and Warning for security alerts.
+
+4. USAGE GUIDE:
+   - Layout: Mixed approach. Use full-width Hero sections for immersion, and a 1440px centered container for complex data/content grids.
+   - Effects: Use 'rim-light' (1px inner border with high lightness) on cards to simulate the chamfered edges of premium security hardware. Backdrop-blur (Glassmorphism 2.0) is recommended for navigation overlays and sticky headers.
+   - Grid: Follow the 5-column footer structure and horizontal sliding tracks for product galleries to maintain a rhythmic, modular browsing experience.
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: "Poppins", "Plus Jakarta Sans", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "Cascadia Code", monospace;
+  
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Core UI Tokens */
+  --background: oklch(0.99 0.002 235);
+  --foreground: oklch(0.18 0.015 260);
+  --card: oklch(1.0 0.0 0);
+  --card-foreground: oklch(0.18 0.015 260);
+  --popover: oklch(1.0 0.0 0);
+  --popover-foreground: oklch(0.18 0.015 260);
+  --primary: oklch(0.78 0.11 85);
+  --primary-foreground: oklch(0.18 0.02 85);
+  --secondary: oklch(0.92 0.01 250);
+  --secondary-foreground: oklch(0.25 0.02 250);
+  --muted: oklch(0.96 0.005 250);
+  --muted-foreground: oklch(0.45 0.02 250);
+  --accent: oklch(0.85 0.07 85);
+  --accent-foreground: oklch(0.20 0.04 85);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+  --border: oklch(0.91 0.01 235);
+  --input: oklch(0.91 0.01 235);
+  --ring: oklch(0.60 0.16 235);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.60 0.16 235);
+  --chart-2: oklch(0.75 0.12 215);
+  --chart-3: oklch(0.45 0.10 250);
+  --chart-4: oklch(0.85 0.08 190);
+  --chart-5: oklch(0.50 0.14 235);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.98 0.005 235);
+  --sidebar-foreground: oklch(0.25 0.02 235);
+  --sidebar-primary: oklch(0.60 0.16 235);
+  --sidebar-primary-foreground: oklch(1.0 0.0 0);
+  --sidebar-accent: oklch(0.94 0.01 235);
+  --sidebar-accent-foreground: oklch(0.20 0.10 235);
+  --sidebar-border: oklch(0.92 0.01 235);
+  --sidebar-ring: oklch(0.60 0.16 235);
+}
+
+.dark {
+  --background: oklch(0.18 0.015 260);
+  --foreground: oklch(0.98 0.005 235);
+  --card: oklch(0.22 0.018 260);
+  --card-foreground: oklch(0.98 0.005 235);
+  --popover: oklch(0.22 0.018 260);
+  --popover-foreground: oklch(0.98 0.005 235);
+  --primary: oklch(0.65 0.17 235);
+  --primary-foreground: oklch(0.10 0.01 235);
+  --secondary: oklch(0.28 0.02 235);
+  --secondary-foreground: oklch(0.95 0.01 235);
+  --muted: oklch(0.25 0.02 235);
+  --muted-foreground: oklch(0.70 0.01 235);
+  --accent: oklch(0.55 0.12 225);
+  --accent-foreground: oklch(0.98 0.005 235);
+  --destructive: oklch(0.50 0.16 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+  --border: oklch(0.32 0.02 260);
+  --input: oklch(0.32 0.02 260);
+  --ring: oklch(0.65 0.17 235);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.65 0.17 235);
+  --chart-2: oklch(0.55 0.12 225);
+  --chart-3: oklch(0.75 0.10 200);
+  --chart-4: oklch(0.45 0.15 245);
+  --chart-5: oklch(0.80 0.08 220);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.15 0.015 260);
+  --sidebar-foreground: oklch(0.95 0.01 235);
+  --sidebar-primary: oklch(0.65 0.17 235);
+  --sidebar-primary-foreground: oklch(1.0 0.0 0);
+  --sidebar-accent: oklch(0.22 0.02 260);
+  --sidebar-accent-foreground: oklch(0.98 0.005 235);
+  --sidebar-border: oklch(0.25 0.02 260);
+  --sidebar-ring: oklch(0.65 0.17 235);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+}
+
+@keyframes partner-scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes partner-scroll-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.partner-track-left {
+  animation: partner-scroll-left 40s linear infinite;
+}
+.partner-track-right {
+  animation: partner-scroll-right 40s linear infinite;
+}
+.partner-row:hover .partner-track-left,
+.partner-row:hover .partner-track-right {
+  animation-play-state: paused;
+}
+
+@keyframes timeline-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.timeline-progress-line {
+  animation: timeline-progress 2.5s ease-out forwards;
+}
+@keyframes timeline-node-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.timeline-node-active {
+  animation: timeline-node-pop 0.5s ease-out forwards;
+}
+@keyframes timeline-card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.timeline-card-in {
+  animation: timeline-card-in 0.4s ease-out forwards;
+}
+
+/* Dropdown menu animation */
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translate(-50%, -8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Hide platform-injected AI watermark */
+#ai-watermark {
+  display: none !important;
+}
+body {
+  padding-bottom: 0 !important;
+}

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "PowerShell(foreach \\($f in \"top500-2.png\",\"top500-3.png\",\"top500-4.png\",\"top500-5.jpg\"\\) { \"{0,-14} {1}\" -f $f, \\(\\(Test-Path \"public/images/$f\"\\) ? 'OK' : 'MISSING'\\) })",
+      "PowerShell(Set-Location *)",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_wait_for",
+      "PowerShell(Set-Location \"D:\\\\ai项目\\\\wonly官网\"; npx tsc --noEmit -p tsconfig.app.json 2>&1 | Select-Object -First 40; \"EXIT: $LASTEXITCODE\")",
+      "PowerShell(Set-Location \"D:\\\\ai项目\\\\wonly官网\"; npx tsc --noEmit -p tsconfig.app.json 2>&1 | Select-Object -First 30; \"EXIT: $LASTEXITCODE\")",
+      "PowerShell(Set-Location \"D:\\\\ai项目\\\\wonly官网\"; npx tsc --noEmit -p tsconfig.app.json 2>&1 | Select-Object -First 20; \"EXIT: $LASTEXITCODE\")",
+      "PowerShell(Set-Location \"D:\\\\ai项目\\\\wonly官网\"; $env:VITE_ENABLE_ROUTE_MESSAGING = \"true\"; npx vite --host)",
+      "PowerShell($ff = Get-Command ffmpeg -ErrorAction SilentlyContinue; if \\($ff\\) { \"ffmpeg: $\\($ff.Source\\)\"; ffmpeg -version | Select-Object -First 1 } else { \"NO ffmpeg\" })",
+      "PowerShell(Set-Location \"D:\\\\ai项目\\\\wonly官网\"; $env:VITE_ENABLE_ROUTE_MESSAGING = \"true\"; npx vite build 2>&1 | Select-Object -Last 25)",
+      "PowerShell(Start-Sleep -Seconds 3; Get-Content \"C:\\\\Users\\\\10849\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--ai---wonly--\\\\007db02c-099a-4eff-8ee9-39b9c5724ba8\\\\tasks\\\\bvh6bkaqv.output\" -Tail 8; \"--- listening on 8080? ---\"; \\(Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue | Measure-Object\\).Count)",
+      "PowerShell(npm run *)"
+    ]
+  }
+}

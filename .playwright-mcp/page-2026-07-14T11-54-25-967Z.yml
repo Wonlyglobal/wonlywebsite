@@ -1,0 +1,344 @@
+- generic [ref=f20e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=f20e4]:
+    - banner [ref=f20e5]:
+      - generic [ref=f20e6]:
+        - button "WONLY — home" [ref=f20e7]:
+          - img "WONLY" [ref=f20e8]
+        - navigation [ref=f20e9]:
+          - button "Products" [ref=f20e11]
+          - button "Solutions" [ref=f20e15]
+          - button "Why WONLY" [ref=f20e17]
+          - button "Global Footprint" [ref=f20e19]
+          - button "About" [ref=f20e21]
+          - button "Contact" [ref=f20e23]
+        - button "Get Solutions & Quote" [ref=f20e24]
+    - generic [ref=f20e25]:
+      - generic:
+        - generic:
+          - generic: Security Doors · Smart Locks · OEM/ODM Manufacturer
+          - heading "Open the Door to Your Next Market" [level=1]: Open the Doorto YourNext Market
+          - paragraph: A trusted manufacturer of premium security doors and smart locks — supplying distributors and projects worldwide.
+          - generic: Scroll to Enter ↓
+      - generic [ref=f20e28]:
+        - heading "Global Smart-Security Ecosystem Leader" [level=2] [ref=f20e29]: Global Smart-SecurityEcosystem Leader
+        - generic [ref=f20e31]:
+          - generic [ref=f20e32]:
+            - generic [ref=f20e33]: 1,000,000+ m²
+            - generic [ref=f20e36]: Manufacturing Base
+          - generic [ref=f20e37]:
+            - generic [ref=f20e38]:
+              - generic [ref=f20e39]: 6M
+              - text: / year
+            - generic [ref=f20e41]: Annual Production Capacity
+          - generic [ref=f20e42]:
+            - generic [ref=f20e43]: 60+
+            - generic [ref=f20e46]: Countries & Regions
+        - generic [ref=f20e47]: Scroll ↓
+    - generic [ref=f20e48]:
+      - generic [ref=f20e49]:
+        - generic [ref=f20e50]:
+          - generic [ref=f20e51]: Why WONLY
+          - heading "A partner built for scale, trusted at the top." [level=2] [ref=f20e52]
+          - paragraph [ref=f20e53]: Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.
+        - generic [ref=f20e55]:
+          - img "WONLY manufacturing base and R&D center" [ref=f20e56]
+          - generic [ref=f20e57]:
+            - generic [ref=f20e58]: 5 Bases · 6 R&D Centers
+            - generic [ref=f20e59]: 1,000,000+ m² Manufacturing
+      - generic [ref=f20e60]:
+        - generic [ref=f20e61]:
+          - generic [ref=f20e62]: Listed
+          - generic [ref=f20e63]: "Shanghai Stock Exchange (SSE: 605268) — the sector's first public company, 2021"
+        - generic [ref=f20e64]:
+          - generic [ref=f20e65]: 30 years
+          - generic [ref=f20e66]: Founded 1996 in Yongkang, Zhejiang
+        - generic [ref=f20e67]:
+          - generic [ref=f20e68]: 5 bases · 6 R&D centers
+          - generic [ref=f20e69]: Vertically integrated manufacturing & innovation
+        - generic [ref=f20e70]:
+          - generic [ref=f20e71]: 1,000+ patents
+          - generic [ref=f20e72]: Proprietary security & smart-lock technology
+        - generic [ref=f20e73]:
+          - generic [ref=f20e74]: 200M+ users
+          - generic [ref=f20e75]: Protected worldwide
+        - generic [ref=f20e76]:
+          - generic [ref=f20e77]: No.1
+          - generic [ref=f20e78]: National sales leader in smart doors & smart locks, 2024–2025
+      - generic [ref=f20e80]:
+        - generic [ref=f20e81]:
+          - generic [ref=f20e82]: Who We Are
+          - heading "One partner for the entire building entry." [level=3] [ref=f20e83]
+          - paragraph [ref=f20e84]: "Founded in 1996 and listed on the Shanghai Stock Exchange (SSE: 605268), WONLY manufactures security doors, smart locks, wooden doors and aluminum windows across five bases and six R&D centers — protecting over 200 million users worldwide."
+          - generic [ref=f20e85]: No.1 in China · Smart Doors & Locks
+          - list [ref=f20e90]:
+            - listitem [ref=f20e91]:
+              - generic [ref=f20e95]: One-Stop Ecosystem — doors, locks, windows & whole-house intelligence
+            - listitem [ref=f20e96]:
+              - generic [ref=f20e100]: Certified Quality — ISO 9001 / 14001, CE, UL, EN 1634 fire-rated
+            - listitem [ref=f20e101]:
+              - generic [ref=f20e105]: Premium security 20–30% below comparable Western brands
+          - button "Get Solutions & Quote" [ref=f20e106]
+        - generic [ref=f20e109]:
+          - img "WONLY flagship cast-aluminum security door" [ref=f20e110]
+          - generic [ref=f20e111]:
+            - generic [ref=f20e112]: 30 Years
+            - generic [ref=f20e113]: "SSE: 605268"
+    - generic [ref=f20e114]:
+      - img "WONLY 5G-connected smart factory production line" [ref=f20e115]
+      - generic [ref=f20e117]:
+        - generic [ref=f20e118]: Manufacturing
+        - heading "Built in our own 5G-connected smart factories." [level=2] [ref=f20e119]
+        - button [ref=f20e120]
+    - generic [ref=f20e125]:
+      - generic [ref=f20e126]:
+        - generic [ref=f20e127]: Our Products
+        - heading "Flagship line-up." [level=2] [ref=f20e128]
+      - generic [ref=f20e129]:
+        - generic [ref=f20e130]: A full building-entry portfolio
+        - generic [ref=f20e131]: scroll →
+      - generic [ref=f20e132]:
+        - generic [ref=f20e133]:
+          - img "Robotic Security Door X70" [ref=f20e135]
+          - generic [ref=f20e136]: "01"
+          - generic [ref=f20e137]: Robotic Security Door X70
+          - paragraph [ref=f20e138]: "Flagship: autonomous locking, multi-vector intrusion sensing, cast-aluminum build."
+        - generic [ref=f20e139]:
+          - img "S80 True-Sensing Smart Lock" [ref=f20e141]
+          - generic [ref=f20e142]: "02"
+          - generic [ref=f20e143]: S80 True-Sensing Smart Lock
+          - paragraph [ref=f20e144]: Hands-free long-range sensing, biometric + app control, tamper-proof architecture.
+        - generic [ref=f20e145]:
+          - img "4.0 Global Series Doors" [ref=f20e147]
+          - generic [ref=f20e148]: "03"
+          - generic [ref=f20e149]: 4.0 Global Series Doors
+          - paragraph [ref=f20e150]: Fire-rated, anti-theft, climate-adapted to global standards.
+        - generic [ref=f20e151]:
+          - img "Engineering Doors" [ref=f20e153]
+          - generic [ref=f20e154]: "04"
+          - generic [ref=f20e155]: Engineering Doors
+          - paragraph [ref=f20e156]: Fire-rated / access-control / acoustic — compliant with Gulf, SEA & Central Asia standards.
+        - generic [ref=f20e157]:
+          - img "Medical-Grade Doors" [ref=f20e159]
+          - generic [ref=f20e160]: "05"
+          - generic [ref=f20e161]: Medical-Grade Doors
+          - paragraph [ref=f20e162]: Hermetic operating-room & ward doors engineered for hospitals.
+      - button "Browse Full Catalog" [ref=f20e163]
+    - generic [ref=f20e166]:
+      - generic [ref=f20e167]:
+        - generic [ref=f20e168]: Solutions
+        - heading "Engineered for every project type." [level=2] [ref=f20e169]
+      - generic [ref=f20e170]:
+        - generic [ref=f20e172]:
+          - generic [ref=f20e173]:
+            - img "Premium Residential & Villas" [ref=f20e174]
+            - generic [ref=f20e175]: "01"
+          - heading "Premium Residential & Villas" [level=3] [ref=f20e176]
+          - paragraph [ref=f20e177]: Bespoke designs, ultra-high security grades and whole-house smart integration.
+        - generic [ref=f20e179]:
+          - generic [ref=f20e180]:
+            - img "High-Security Commercial" [ref=f20e181]
+            - generic [ref=f20e182]: "02"
+          - heading "High-Security Commercial" [level=3] [ref=f20e183]
+          - paragraph [ref=f20e184]: Banks, data centers and corporate HQs — defeats forced entry while meeting fire codes.
+        - generic [ref=f20e186]:
+          - generic [ref=f20e187]:
+            - img "Medical & Public Institutions" [ref=f20e188]
+            - generic [ref=f20e189]: "03"
+          - heading "Medical & Public Institutions" [level=3] [ref=f20e190]
+          - paragraph [ref=f20e191]: Hermetic OR doors, ward doors and access-controlled entries.
+        - generic [ref=f20e193]:
+          - generic [ref=f20e194]:
+            - img "Engineering / Bulk Projects" [ref=f20e195]
+            - generic [ref=f20e196]: "04"
+          - heading "Engineering / Bulk Projects" [level=3] [ref=f20e197]
+          - paragraph [ref=f20e198]: Standardized, certified supply for large developments.
+      - button "Explore Solutions" [ref=f20e199]
+    - generic [ref=f20e202]:
+      - img "WONLY doors installed in landmark projects" [ref=f20e203]
+      - generic [ref=f20e205]:
+        - generic [ref=f20e206]: Landmark Projects
+        - heading "Chosen for the projects that cannot fail." [level=2] [ref=f20e207]
+    - generic [ref=f20e208]:
+      - generic [ref=f20e209]:
+        - generic [ref=f20e210]: Certified & Recognized
+        - heading "Held to standards, honored at the top." [level=2] [ref=f20e211]
+      - generic [ref=f20e213]:
+        - generic [ref=f20e215]:
+          - img "WONLY certification / award 1" [ref=f20e217]
+          - img "WONLY certification / award 2" [ref=f20e219]
+          - img "WONLY certification / award 3" [ref=f20e221]
+          - img "WONLY certification / award 4" [ref=f20e223]
+        - generic [ref=f20e224]:
+          - button "Slide 1" [ref=f20e225]
+          - button "Slide 2" [ref=f20e226]
+          - button "Slide 3" [ref=f20e227]
+          - button "Slide 4" [ref=f20e228]
+      - generic [ref=f20e229]:
+        - generic [ref=f20e230]: ISO 9001
+        - generic [ref=f20e231]: ISO 14001
+        - generic [ref=f20e232]: CE
+        - generic [ref=f20e233]: UL
+        - generic [ref=f20e234]: EN 1634 Fire
+        - generic [ref=f20e235]: CMA
+        - generic [ref=f20e236]: CSPPA
+      - generic [ref=f20e237]:
+        - generic [ref=f20e239]:
+          - generic [ref=f20e240]: "01"
+          - generic [ref=f20e241]: iF Product Design Award
+        - generic [ref=f20e243]:
+          - generic [ref=f20e244]: "02"
+          - generic [ref=f20e245]: National High-Tech Enterprise
+        - generic [ref=f20e247]:
+          - generic [ref=f20e248]: "03"
+          - generic [ref=f20e249]: National Quality Benchmark
+        - generic [ref=f20e251]:
+          - generic [ref=f20e252]: "04"
+          - generic [ref=f20e253]: National Standard Co-drafter
+        - generic [ref=f20e255]:
+          - generic [ref=f20e256]: "05"
+          - generic [ref=f20e257]: TOP500 Preferred Supplier — China Real-Estate Supply Chain, 2025
+    - generic [ref=f20e261]:
+      - generic [ref=f20e262]:
+        - generic [ref=f20e263]: Partner With WONLY
+        - heading "Open the door to partnership." [level=2] [ref=f20e264]
+      - generic [ref=f20e265]:
+        - button "01 Distributor Program Join a global network backed by 30 years of brand equity, full product training and regional marketing support. Become a Distributor" [ref=f20e267]:
+          - generic [ref=f20e268]: "01"
+          - heading "Distributor Program" [level=3] [ref=f20e269]
+          - paragraph [ref=f20e270]: Join a global network backed by 30 years of brand equity, full product training and regional marketing support.
+          - generic [ref=f20e271]: Become a Distributor
+        - button "02 Project Cooperation Residential, commercial, medical, hotel, government and public projects. Submit a Project" [ref=f20e277]:
+          - generic [ref=f20e278]: "02"
+          - heading "Project Cooperation" [level=3] [ref=f20e279]
+          - paragraph [ref=f20e280]: Residential, commercial, medical, hotel, government and public projects.
+          - generic [ref=f20e281]: Submit a Project
+        - button "03 OEM / ODM Services Leverage our smart factories and 1,000+ patents to build your own branded security line. Request OEM/ODM Brief" [ref=f20e287]:
+          - generic [ref=f20e288]: "03"
+          - heading "OEM / ODM Services" [level=3] [ref=f20e289]
+          - paragraph [ref=f20e290]: Leverage our smart factories and 1,000+ patents to build your own branded security line.
+          - generic [ref=f20e291]: Request OEM/ODM Brief
+        - button "04 Global Distribution Network Regional HQs, local offices and authorized partners across the Middle East, Southeast Asia and Central Asia. Find a Local Partner" [ref=f20e297]:
+          - generic [ref=f20e298]: "04"
+          - heading "Global Distribution Network" [level=3] [ref=f20e299]
+          - paragraph [ref=f20e300]: Regional HQs, local offices and authorized partners across the Middle East, Southeast Asia and Central Asia.
+          - generic [ref=f20e301]: Find a Local Partner
+    - generic [ref=f20e306]:
+      - generic [ref=f20e1047]:
+        - generic [ref=f20e1048]: Global Footprint
+        - heading "We spread around the world." [level=2] [ref=f20e1049]
+        - paragraph [ref=f20e1050]: From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.
+        - generic [ref=f20e1051]:
+          - generic [ref=f20e1052]:
+            - generic [ref=f20e1053]: 0+
+            - generic [ref=f20e1055]: Countries & Regions
+          - generic [ref=f20e1056]:
+            - generic [ref=f20e1057]: "0"
+            - generic [ref=f20e1058]: Manufacturing Bases
+          - generic [ref=f20e1059]:
+            - generic [ref=f20e1060]: "0"
+            - generic [ref=f20e1061]: R&D Centers
+          - generic [ref=f20e1062]:
+            - generic [ref=f20e1063]: 0M+
+            - generic [ref=f20e1065]: Users Worldwide
+      - generic [ref=f20e1066]:
+        - generic [ref=f20e1068]:
+          - generic [ref=f20e1069]: "1996"
+          - paragraph [ref=f20e1070]: Brand founded, Yongkang, Zhejiang
+        - generic [ref=f20e1072]:
+          - generic [ref=f20e1073]: 2000s
+          - paragraph [ref=f20e1074]: National sales leadership in security doors & smart locks
+        - generic [ref=f20e1076]:
+          - generic [ref=f20e1077]: "2021"
+          - paragraph [ref=f20e1078]: "Listed on Shanghai Stock Exchange (SSE: 605268)"
+        - generic [ref=f20e1080]:
+          - generic [ref=f20e1081]: Today
+          - paragraph [ref=f20e1082]: 5 global bases, 6 R&D centers, 200M+ users worldwide
+    - generic [ref=f20e1084]:
+      - generic [ref=f20e1085]: Trusted Across Industries
+      - paragraph [ref=f20e1086]: Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
+      - img "WONLY's real-estate development partners" [ref=f20e1087]
+    - generic [ref=f20e1089]:
+      - generic [ref=f20e1090]:
+        - generic [ref=f20e1091]: Get Solutions & Quote
+        - heading "Ready to open your market?" [level=2] [ref=f20e1092]: Ready to openyour market?
+        - paragraph [ref=f20e1093]: Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
+        - generic [ref=f20e1094]:
+          - generic [ref=f20e1095]: overseas@wonly.net
+          - generic [ref=f20e1099]: WhatsApp +86 137-3896-0922
+          - generic [ref=f20e1102]: LinkedIn · YouTube · Facebook · X · Instagram
+      - generic [ref=f20e1106]:
+        - generic [ref=f20e1107]:
+          - text: Name
+          - textbox "Name" [ref=f20e1108]:
+            - /placeholder: Your full name
+        - generic [ref=f20e1109]:
+          - text: Company
+          - textbox "Company" [ref=f20e1110]:
+            - /placeholder: Company name
+        - generic [ref=f20e1111]:
+          - text: Country
+          - textbox "Country" [ref=f20e1112]:
+            - /placeholder: Country / region
+        - generic [ref=f20e1113]:
+          - text: Email
+          - textbox "Email" [ref=f20e1114]:
+            - /placeholder: you@company.com
+        - generic [ref=f20e1115]:
+          - text: Interest
+          - combobox "Interest" [ref=f20e1116]:
+            - option "Select an option…" [disabled] [selected]
+            - option "Distributor"
+            - option "Project"
+            - option "OEM / ODM"
+        - generic [ref=f20e1117]:
+          - text: Message
+          - textbox "Message" [ref=f20e1118]:
+            - /placeholder: Tell us about your project or territory...
+        - button "Get Solutions & Quote" [ref=f20e1119]
+    - contentinfo [ref=f20e1120]:
+      - generic [ref=f20e1121]:
+        - generic [ref=f20e1122]:
+          - img "WONLY" [ref=f20e1123]
+          - paragraph [ref=f20e1124]: "Global Smart-Security Ecosystem Leader. SSE: 605268."
+        - generic [ref=f20e1125]:
+          - heading "Products" [level=4] [ref=f20e1126]
+          - list [ref=f20e1127]:
+            - listitem [ref=f20e1128]: Security Doors
+            - listitem [ref=f20e1129]: Smart Locks
+            - listitem [ref=f20e1130]: Wooden Doors
+            - listitem [ref=f20e1131]: Aluminum Windows
+            - listitem [ref=f20e1132]: Whole-House Intelligence
+        - generic [ref=f20e1133]:
+          - heading "Solutions" [level=4] [ref=f20e1134]
+          - list [ref=f20e1135]:
+            - listitem [ref=f20e1136]: Premium Residential
+            - listitem [ref=f20e1137]: Commercial
+            - listitem [ref=f20e1138]: Medical & Public
+            - listitem [ref=f20e1139]: Engineering
+            - listitem [ref=f20e1140]: OEM / ODM
+        - generic [ref=f20e1141]:
+          - heading "Company" [level=4] [ref=f20e1142]
+          - list [ref=f20e1143]:
+            - listitem [ref=f20e1144]: Why WONLY
+            - listitem [ref=f20e1145]: Global Footprint
+            - listitem [ref=f20e1146]: About
+            - listitem [ref=f20e1147]: Newsroom
+            - listitem [ref=f20e1148]: ESG
+        - generic [ref=f20e1149]:
+          - heading "Resources" [level=4] [ref=f20e1150]
+          - list [ref=f20e1151]:
+            - listitem [ref=f20e1152]: Product Catalogs
+            - listitem [ref=f20e1153]: Certifications
+            - listitem [ref=f20e1154]: Install Guides
+            - listitem [ref=f20e1155]: Warranty
+        - generic [ref=f20e1156]:
+          - heading "Contact" [level=4] [ref=f20e1157]
+          - list [ref=f20e1158]:
+            - listitem [ref=f20e1159]: overseas@wonly.net
+            - listitem [ref=f20e1160]: WhatsApp +86 137-3896-0922
+            - listitem [ref=f20e1161]: LinkedIn · YouTube
+            - listitem [ref=f20e1162]: Facebook · X · Instagram
+      - generic [ref=f20e1163]: "© 2026 WONLY Security Technology Holding Co., Ltd. · SSE: 605268 · Privacy · Terms"

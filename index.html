@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- spa-github-pages: decode a path bounced here by 404.html back into the URL
+         so BrowserRouter can render deep links on GitHub Pages. Must run before the app. -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      }(window.location));
+    </script>
+
+    <title>WONLY | Security Doors & Smart Locks</title>
+    <meta name="description" content="WONLY - China's leading security door and smart lock brand. 30 years of manufacturing excellence, serving 200M+ users worldwide." />
+    <meta name="author" content="WONLY" />
+    <meta name="theme-color" content="#221F20" />
+    <link rel="canonical" href="https://www.wonly.net/" />
+
+    <meta property="og:title" content="WONLY | Security Doors & Smart Locks" />
+    <meta property="og:description" content="WONLY - China's leading security door and smart lock brand. 30 years of manufacturing excellence, serving 200M+ users worldwide." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="WONLY" />
+    <meta property="og:url" content="https://www.wonly.net/" />
+    <meta property="og:image" content="https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WONLY | Security Doors & Smart Locks" />
+    <meta name="twitter:description" content="WONLY - China's leading security door and smart lock brand. 30 years of manufacturing excellence, serving 200M+ users worldwide." />
+    <meta name="twitter:image" content="https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "WONLY",
+        "legalName": "WONLY Security Technology Holding Co., Ltd.",
+        "url": "https://www.wonly.net/",
+        "logo": "https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg",
+        "description": "China's leading security door and smart lock brand — 30 years of manufacturing excellence, serving 200M+ users worldwide.",
+        "email": "overseas@wonly.net",
+        "sameAs": ["https://www.linkedin.com/company/wonly"]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
