@@ -1,4 +1,4 @@
-import { ShieldCheck, Factory, Globe2, Award, Cpu, FlaskConical, Lightbulb, Target, Eye, BadgeCheck, Layers, Users, MapPin } from "lucide-react";
+import { Cpu, FlaskConical, Lightbulb, Target, Eye, BadgeCheck, Layers, MapPin, HeartHandshake, Gem, Handshake } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
 
@@ -24,30 +24,32 @@ const IMG = {
 
 const STATS = [
   { v: "30", s: "yrs", label: "Since 1996" },
-  { v: "5", s: "", label: "Manufacturing Bases" },
-  { v: "6", s: "", label: "R&D Centers" },
   { v: "200M", s: "+", label: "Users Protected" },
+  { v: "50M", s: "+", label: "Families Served" },
+  { v: "No.1", s: "", label: "Brand Value · 14 yrs" },
 ];
 
 const ECOSYSTEM = [
-  { img: IMG.door, name: "Security Doors", d: "Cast-aluminum and steel doors that defeat forced entry while meeting global fire and acoustic codes." },
-  { img: IMG.lock, name: "Smart Locks", d: "True-sensing, biometric and app-controlled locks — the intelligent layer of the modern entrance." },
-  { img: IMG.wood, name: "Wooden Doors", d: "Interior and villa doors where craftsmanship meets engineered stability and finish." },
-  { img: IMG.window, name: "Aluminum Windows", d: "Weather-sealed systems and whole-house intelligence that tie the building envelope together." },
+  { img: IMG.door, name: "Security Doors", d: "Cast-aluminum and robotic anti-theft doors that defeat forced entry while meeting global fire and acoustic codes." },
+  { img: IMG.lock, name: "Smart Locks", d: "True-sensing, face-recognition and app-controlled locks — the intelligent layer of the modern entrance." },
+  { img: IMG.wood, name: "Wooden & Medical Doors", d: "Steel-wood anti-warp silent doors and hermetic medical doors — craftsmanship meets engineered stability." },
+  { img: IMG.window, name: "Windows & Whole-House", d: "Smart aluminum windows and a 28-category whole-house intelligence ecosystem that ties the building together." },
 ];
 
 const RD = [
-  { icon: FlaskConical, t: "Six R&D Centers", d: "Dedicated labs for structural security, biometrics, materials and firmware — testing to destruction so the field never sees failure." },
-  { icon: Lightbulb, t: "1,000+ Patents", d: "A proprietary library of locking mechanisms, sensing algorithms and anti-tamper architecture built over three decades." },
-  { icon: Cpu, t: "5G Smart Factories", d: "Robotic stamping, welding and assembly lines with automated storage and full digital traceability per unit." },
-  { icon: Layers, t: "Vertically Integrated", d: "From cast aluminum to finished smart door — designed, tooled and built in-house across five bases." },
+  { icon: FlaskConical, t: "5 R&D Bases · 6 Centers", d: "Yongkang, Hangzhou, Shenzhen, Shanghai and Munich — a 400+ engineer team investing ¥80M+ each year, including a joint lab with Peking University." },
+  { icon: Lightbulb, t: "1,000+ Patents", d: "Over 1,000 national patents and 300+ invention patents — more than the rest of the industry's top ten combined; co-author of ~100 national and industry standards." },
+  { icon: Cpu, t: "National 5G Future Factory", d: "The sector's only state-recognised 5G smart factory — robotic lines with automotive-grade coating precision to 1/10 of a human hair." },
+  { icon: Layers, t: "Five Manufacturing Bases", d: "Yongkang, Wuyi, Sichuan, Hangzhou and Hubei (under construction) — 3M smart locks, 3M wooden doors and 6M steel doors a year." },
 ];
 
 const STORY = [
-  { y: "1996", m: "Founded in Yongkang, Zhejiang — China's hardware capital." },
-  { y: "2000s", m: "Becomes the national sales leader in security doors and smart locks." },
-  { y: "2021", m: "Lists on the Shanghai Stock Exchange (605268) — the sector's first public company." },
-  { y: "Today", m: "Five bases, six R&D centers, 200M+ users across 60+ countries." },
+  { y: "1996", m: "WONLY is founded in Yongkang, Zhejiang — a singular focus on entrance security begins." },
+  { y: "2003", m: "Wins the 'Challenge the Lock-Picking Champion' — its locks remain unopened 20+ years on." },
+  { y: "2005", m: "Named a China Well-Known Trademark — the sector's only dual commercial + judicial recognition." },
+  { y: "2021", m: "Lists on the Shanghai Stock Exchange (605268) — the industry's only main-board company." },
+  { y: "2024", m: "Opens the sector's only national-level 5G future factory." },
+  { y: "2026", m: "Launches global expansion — the first year of the going-global strategy." },
 ];
 
 const LANDMARKS = [
@@ -59,28 +61,29 @@ const LANDMARKS = [
   { img: IMG.govHousing, name: "Central Ministry Residences", place: "Beijing, China" },
 ];
 
-const CERTS = ["ISO 9001", "ISO 14001", "ISO 45001", "CE", "UL", "EN 1634 Fire", "CMA", "CSPPA"];
+const CERTS = ["ISO 9001", "ISO 14001", "CE", "UL", "EN 1634 Fire", "RoHS", "ETL", "IECEE", "SASO", "FSC"];
 const HONORS = [
+  "Red Dot Best of the Best",
   "iF Product Design Award",
-  "National High-Tech Enterprise",
-  "National Quality Benchmark",
-  "National Standard Co-drafter",
-  "TOP500 Preferred Supplier — China Real-Estate Supply Chain",
+  "Forbes Design Leader Brand",
+  "China Well-Known Trademark (dual-certified)",
+  "National Quality Benchmark Enterprise",
+  "TOP500 Preferred Supplier — 12 consecutive years",
 ];
 const AWARDS = [IMG.award1, IMG.award2, IMG.award3, IMG.award4];
 
 const VALUES = [
-  { icon: ShieldCheck, t: "Security is Non-Negotiable", d: "Every design decision starts from the threat model and works backwards — never the other way around." },
-  { icon: Award, t: "Certified, Not Claimed", d: "Independent testing and international certification back every specification we publish." },
-  { icon: Users, t: "Built for Partners", d: "Distributor training, regional support and OEM/ODM flexibility make us easy to build a business on." },
-  { icon: Globe2, t: "Global by Design", d: "Products climate-adapted and standards-compliant for the Gulf, SE Asia, Central Asia and beyond." },
+  { icon: HeartHandshake, t: "Integrity & Gratitude", d: "We keep our word — to customers, partners and each other — and never forget who put their trust in us." },
+  { icon: Gem, t: "Humility & Respect", d: "We respect the craft, the standards and the responsibility that comes with protecting people's homes." },
+  { icon: Target, t: "Diligence & Accountability", d: "We push quality relentlessly forward and own every outcome, from the factory floor to the front door." },
+  { icon: Handshake, t: "Win-Win Cooperation", d: "We grow by making our partners successful — profitable, protected and supported for the long term." },
 ];
 
 const About = () => {
   useSeo({
-    title: "About WONLY | 30-Year Listed Security Door & Smart Lock Manufacturer",
+    title: "About WONLY | China's No.1 Security Door & Smart Lock Brand (SSE: 605268)",
     description:
-      "WONLY (SSE: 605268) — a Shanghai-listed manufacturer of security doors and smart locks. Founded 1996, five bases, six R&D centers, 1,000+ patents, protecting 200M+ users across 60+ countries.",
+      "WONLY (SSE: 605268) — the industry's only A-share main-board listed door & lock maker, brand value No.1 for 14 years. Founded 1996: 5 bases, 6 R&D centers, 1,000+ patents, 200M+ users across 60+ countries.",
     path: "/about",
     type: "website",
     jsonLd: { "@context": "https://schema.org", "@type": "AboutPage", name: "About WONLY", url: SITE_URL + "/about" },
@@ -97,7 +100,7 @@ const About = () => {
         <div className="relative z-10 px-[7vw] max-w-3xl">
           <div className={eyebrow + " mb-6"} style={{ color: CHAMP }}>About WONLY</div>
           <h1 className="font-light uppercase text-white leading-[1.08] tracking-[0.06em] text-[40px] md:text-[74px]">Securing the world's<br /><span style={{ color: CHAMP }}>front doors</span></h1>
-          <p className="mt-7 max-w-lg text-base md:text-lg font-normal leading-relaxed" style={{ color: "#efe9dd" }}>For nearly three decades we have engineered the moment a door opens into something safe, effortless and intelligent.</p>
+          <p className="mt-7 max-w-lg text-base md:text-lg font-normal leading-relaxed" style={{ color: "#efe9dd" }}>For 30 years we have engineered the moment a door opens into something safe, effortless and intelligent.</p>
         </div>
       </section>
 
@@ -105,23 +108,23 @@ const About = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
           <Reveal>
-            <div className={eyebrow} style={{ color: GOLD }}>Our Heritage</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A workshop that became a listed leader.</h2>
+            <div className={eyebrow} style={{ color: GOLD }}>Who We Are</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>China's No.1 in entrance security.</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
-              WONLY began in 1996 in Yongkang — the town Chinese industry calls its "hardware capital." What started as a single security-door workshop grew, decade by decade, into a Shanghai-listed group (605268) whose products now guard homes, banks, hospitals and landmark projects on four continents.
+              WONLY is a high-tech security group that unites R&amp;D, design, manufacturing, sales and service under one roof. Founded in 1996 in Yongkang — China's "hardware capital" — it is today the industry's <strong style={{ color: DARK, fontWeight: 500 }}>only company listed on China's A-share main board</strong> (SSE: 605268), with a brand value ranked first in its sector for 14 consecutive years.
             </p>
             <p className="mt-4 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
-              The obsession has never changed: get the entrance right — the one part of a building everyone touches, every day.
+              That focus protects more than 200 million users and 50 million families — and now reaches homes, banks, hospitals and landmark projects across four continents.
             </p>
           </Reveal>
           <Reveal delay={120}>
             <div className="grid grid-cols-2 gap-4">
               {STATS.map((s) => (
                 <div key={s.label} className="rounded-2xl p-6" style={{ background: "#f7f7f5", border: `1px solid ${SILVER}44` }}>
-                  <div className="font-light leading-none" style={{ color: GOLD }}>
-                    <span className="text-[34px] md:text-[42px]">{s.v}</span><span className="text-lg ml-0.5">{s.s}</span>
+                  <div className="font-light leading-none whitespace-nowrap" style={{ color: GOLD }}>
+                    <span className="text-[32px] md:text-[40px]">{s.v}</span><span className="text-lg ml-0.5">{s.s}</span>
                   </div>
-                  <div className="mt-3 text-[11px] tracking-[0.18em] uppercase font-medium" style={{ color: DARK }}>{s.label}</div>
+                  <div className="mt-3 text-[11px] tracking-[0.16em] uppercase font-medium" style={{ color: DARK }}>{s.label}</div>
                 </div>
               ))}
             </div>
@@ -134,16 +137,16 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
           <Reveal>
             <div className="flex items-center gap-2.5 mb-5"><Target size={18} style={{ color: GOLD }} /><span className={eyebrow} style={{ color: CHAMP }}>Mission</span></div>
-            <h3 className="text-2xl md:text-4xl font-light leading-[1.15] text-white">Make world-class security effortless — for every family and building we serve.</h3>
+            <h3 className="text-2xl md:text-4xl font-light leading-[1.15] text-white">Let families around the world enjoy a safe, smart and better life.</h3>
           </Reveal>
           <Reveal delay={100}>
             <div className="flex items-center gap-2.5 mb-5"><Eye size={18} style={{ color: GOLD }} /><span className={eyebrow} style={{ color: CHAMP }}>Vision</span></div>
-            <h3 className="text-2xl md:text-4xl font-light leading-[1.15] text-white">To be the global standard for the intelligent, secure entrance.</h3>
+            <h3 className="text-2xl md:text-4xl font-light leading-[1.15] text-white">Become the leader of the global smart-security ecosystem.</h3>
           </Reveal>
         </div>
         {/* Ecosystem */}
         <div className="mt-16 md:mt-20">
-          <Reveal><div className={eyebrow + " mb-8"} style={{ color: CHAMP }}>One Ecosystem · Four Pillars</div></Reveal>
+          <Reveal><div className={eyebrow + " mb-8"} style={{ color: CHAMP }}>One Ecosystem · Seven Categories</div></Reveal>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {ECOSYSTEM.map((e, i) => (
               <Reveal key={e.name} delay={(i % 4) * 80}>
@@ -173,10 +176,10 @@ const About = () => {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <div className={eyebrow} style={{ color: GOLD }}>R&D &amp; Smart Manufacturing</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Engineered, then proven — in-house.</h2>
+            <div className={eyebrow} style={{ color: GOLD }}>R&amp;D &amp; Smart Manufacturing</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Patents no rival can match.</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
-              Security you can trust has to be manufactured, not just designed. WONLY controls the entire chain — from casting aluminum to writing lock firmware — in 5G-connected smart factories, then tests every design to destruction before it ships.
+              Security you can trust has to be engineered and proven — not just designed. WONLY controls the entire chain, from casting aluminum to writing lock firmware, and holds a patent portfolio larger than the rest of the industry's top ten combined.
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {RD.map((r) => (
@@ -197,9 +200,9 @@ const About = () => {
           <div className={eyebrow} style={{ color: GOLD }}>Milestones</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Thirty years, one direction.</h2>
         </Reveal>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6">
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-8">
           {STORY.map((t, i) => (
-            <Reveal key={t.y} delay={i * 90}>
+            <Reveal key={t.y} delay={(i % 3) * 90}>
               <div className="relative pt-8 border-t-2" style={{ borderColor: GOLD }}>
                 <div className="text-3xl md:text-4xl font-light" style={{ color: DARK }}>{t.y}</div>
                 <p className="mt-3 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{t.m}</p>
@@ -217,11 +220,11 @@ const About = () => {
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Chosen for the projects that cannot fail.</h2>
           </Reveal>
           <Reveal>
-            <div className="flex items-center gap-2 text-sm font-medium" style={{ color: MUTED }}><MapPin size={16} style={{ color: GOLD }} /> 60+ countries &amp; regions</div>
+            <div className="flex items-center gap-2 text-sm font-medium" style={{ color: MUTED }}><MapPin size={16} style={{ color: GOLD }} /> Overseas since 2010 · 600+ international projects</div>
           </Reveal>
         </div>
         <p className="mt-6 max-w-3xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>
-          From summit venues and international airports to sovereign capital districts, WONLY is specified where security, fire performance and reliability are not allowed to fail. A selection of landmark deployments:
+          Across 60+ countries — Africa, the Middle East, Southeast Asia and the Americas — WONLY is specified where security cannot be compromised, from presidential palaces and sovereign banks to summit venues and international airports. A selection of landmark deployments:
         </p>
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {LANDMARKS.map((p, i) => (
@@ -237,13 +240,17 @@ const About = () => {
             </Reveal>
           ))}
         </div>
+        <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>
+          International references include the Egypt New Administrative Capital CBD, Ethiopia's Abyssinia Bank, and presidential palace projects in Togo and Vanuatu.
+        </p>
       </section>
 
       {/* Certifications & honors */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: DARK }}>
         <Reveal className="max-w-3xl">
           <div className="flex items-center gap-2.5 mb-5"><BadgeCheck size={18} style={{ color: CHAMP }} /><span className={eyebrow} style={{ color: CHAMP }}>Qualifications, Certifications &amp; Honors</span></div>
-          <h2 className={h2cls + " text-white"}>Held to standards, honored at the top.</h2>
+          <h2 className={h2cls + " text-white"}>16 national honors. 1,000+ awards.</h2>
+          <p className="mt-5 text-base font-light leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>If it isn't the only, it's the first — from international design's highest prizes to national quality benchmarks.</p>
         </Reveal>
         <div className="mt-12 flex flex-wrap gap-3">
           {CERTS.map((c) => (
@@ -273,11 +280,11 @@ const About = () => {
         </div>
       </section>
 
-      {/* Values */}
+      {/* Core values */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>What We Stand For</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Principles behind every product.</h2>
+          <div className={eyebrow} style={{ color: GOLD }}>Core Values</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>What we stand for.</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {VALUES.map((v, i) => (
