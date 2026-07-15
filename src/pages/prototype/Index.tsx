@@ -133,10 +133,11 @@ const SOLUTIONS = [
 // Real credentials only — no fabricated certifications on a live company site.
 // To use actual certificate BADGE IMAGES instead of these text pills, drop them
 // in public/images/certs/ and tell me the count; I'll switch the marquee to images.
-const CERT_ROWS = [
-  ["ISO 9001", "ISO 14001", "CE", "UL"],
-  ["EN 1634 Fire", "CMA", "CSPPA", "iF Product Design Award"],
-  ["National High-Tech Enterprise", "National Quality Benchmark", "National Standard Co-drafter", "TOP500 Preferred Supplier 2025"],
+// Stylised colored badges (recognisable colored mark + label — not the trademarked artwork).
+const CERT_ROWS: { m: string; l: string; c: string }[][] = [
+  [{ m: "ISO", l: "ISO 9001", c: "#1565C0" }, { m: "ISO", l: "ISO 14001", c: "#2E7D32" }, { m: "CE", l: "CE Marking", c: "#003399" }, { m: "UL", l: "UL Listed", c: "#C8102E" }],
+  [{ m: "RoHS", l: "RoHS", c: "#43A047" }, { m: "FSC", l: "FSC Certified", c: "#2E7D32" }, { m: "ETL", l: "ETL Listed", c: "#C8102E" }, { m: "IEC", l: "IECEE CB", c: "#0277BD" }],
+  [{ m: "SASO", l: "SASO", c: "#1B7A3D" }, { m: "EN", l: "EN 1634 Fire", c: "#E65100" }, { m: "iF", l: "iF Design Award", c: "#1a1a1a" }, { m: "RD", l: "Red Dot: Best of Best", c: "#E2001A" }],
 ];
 
 /* ── Section 7 · Partnership ───────────────────────────────── */
@@ -255,15 +256,18 @@ function WorldDots({ className = "" }: { className?: string }) {
   );
 }
 
-/* Three-row certification marquee — adjacent rows scroll in opposite directions */
-function CertMarquee({ rows }: { rows: string[][] }) {
+/* Three-row certification marquee — adjacent rows scroll in opposite directions; colored badge + label */
+function CertMarquee({ rows }: { rows: { m: string; l: string; c: string }[][] }) {
   return (
     <div className="space-y-4" style={{ maskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)" }}>
       {rows.map((row, ri) => (
         <div key={ri} className="partner-row overflow-hidden">
           <div className={`${ri % 2 === 0 ? "partner-track-left" : "partner-track-right"} flex gap-4 w-max`}>
             {[...row, ...row, ...row, ...row].map((c, i) => (
-              <span key={i} className="shrink-0 whitespace-nowrap px-6 py-3 rounded-full text-sm font-medium border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.05)", color: "rgba(245,241,234,0.92)" }}>{c}</span>
+              <span key={i} className="shrink-0 whitespace-nowrap flex items-center gap-2.5 pl-1.5 pr-5 py-1.5 rounded-full border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.05)" }}>
+                <span className="rounded-full flex items-center justify-center text-white shrink-0" style={{ width: 30, height: 30, background: c.c, fontWeight: 700, fontSize: c.m.length > 3 ? 8 : 11, letterSpacing: "0.02em" }}>{c.m}</span>
+                <span className="text-sm font-medium" style={{ color: "rgba(245,241,234,0.92)" }}>{c.l}</span>
+              </span>
             ))}
           </div>
         </div>
