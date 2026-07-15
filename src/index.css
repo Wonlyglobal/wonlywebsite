@@ -267,8 +267,11 @@
 .conveyor:hover .door-hang { animation-play-state: paused; }
 .rail-chain { animation: rail-chain-move 0.9s linear infinite; }
 .shine-sweep { animation: shine-sweep 4.2s ease-in-out infinite; }
+/* Real-photo door production line: seamless horizontal marquee (2 identical halves, translate -50%) */
+.photo-conveyor-track { animation: conveyor-move 42s linear infinite; }
+.conveyor-photo:hover .photo-conveyor-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
-  .conveyor-track, .door-hang, .rail-chain, .shine-sweep { animation: none !important; }
+  .conveyor-track, .door-hang, .rail-chain, .shine-sweep, .photo-conveyor-track { animation: none !important; }
 }
 
 /* Hide platform-injected AI watermark */
