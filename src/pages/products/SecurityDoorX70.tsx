@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Shield, Cpu, ChevronRight, Globe, ArrowRight, Play, Award, Home,
-  Lock, DoorOpen, Mail, MessageCircle, Phone, Layers, Check, Flame,
-  Wind, Volume2, ScanFace, BatteryCharging, Wifi, ChevronDown,
+  Lock, DoorOpen, Mail, MessageCircle, Phone, Layers, Check,
+  Wind, Wifi, ChevronDown,
 } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 
@@ -51,14 +51,15 @@ const GALLERY = [
   { src: IMG.factory2, alt: "X70 security door on a 5G smart-factory production line" },
 ];
 
-/* Signature capabilities */
-const HIGHLIGHTS = [
-  { icon: ScanFace, t: "3D Facial Recognition", d: "Sub-second, anti-spoofing 3D face unlock recognizes household members from up to 1.5 m — hands-free entry that a photo or mask cannot fool." },
-  { icon: Shield, t: "Multi-Vector Intrusion Sensing", d: "Onboard sensors detect prying, drilling, and lock-picking in real time, sound a 90 dB local alarm, and push an instant alert to your phone." },
-  { icon: Lock, t: "Autonomous Robotic Locking", d: "The moment the door closes, 16 hardened bolts drive home automatically across all four edges — no manual turn, no forgotten deadbolt." },
-  { icon: Flame, t: "90-Minute Fire Integrity", d: "EN 1634-certified core holds its seal and structure for 90 minutes under direct fire, buying the time that matters most." },
-  { icon: Volume2, t: "STC 38 Acoustic Seal", d: "A dense composite core and four-sided compression gasket cut street and hallway noise for library-quiet interiors." },
-  { icon: BatteryCharging, t: "6-Month Battery, 30-Sec Backup", d: "An 8000 mAh pack runs six months per charge; a USB-C emergency port and mechanical key guarantee you are never locked out." },
+/* Signature capabilities — image-background cards */
+const BASE = import.meta.env.BASE_URL;
+const HIGHLIGHTS: { t: string; d: string; img?: string }[] = [
+  { t: "Remote Sensing", d: "3–6 m hands-free entry — the X70 senses you approaching and readies to open.", img: `${BASE}images/door-factory.webp` },
+  { t: "Auto Open & Close", d: "The door opens as you arrive and closes securely behind you — no hands needed.", img: `${BASE}images/door-cell.webp` },
+  { t: "AI Anti-Pinch", d: "Safe for kids, pets and busy hands — it detects the path and stops instantly." },
+  { t: "10.1\" Smart Screen", d: "Hi-def touch control at eye level — no bending down to a keypad." },
+  { t: "Formaldehyde Sentinel", d: "Continuous air-quality monitoring with instant alerts to your phone." },
+  { t: "Auto Arm & Disarm", d: "Arms itself when you leave and disarms the moment you return home." },
 ];
 
 /* Full technical specifications */
@@ -344,15 +345,17 @@ const SecurityDoorX70 = () => {
             <h2 className="text-[#221F20] text-5xl font-semibold mt-3">Six Reasons the X70 Leads</h2>
             <p className="text-neutral-500 text-base mt-3 max-w-2xl mx-auto">Every feature earns its place — engineered to protect, tested to last, and designed to disappear into daily life.</p>
           </Reveal>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {HIGHLIGHTS.map((f, i) => (
               <Reveal key={f.t} delay={i * 100}>
-                <div className="p-7 rounded-2xl border hover:shadow-xl transition-all duration-300 group h-full" style={{ borderColor: "rgba(191,160,106,0.25)" }}>
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110" style={{ background: `${GOLD}15` }}>
-                    <f.icon size={28} style={{ color: GOLD }} />
+                <div className="group relative rounded-2xl overflow-hidden h-[300px] md:h-[340px]" style={{ background: "linear-gradient(140deg,#2a2627,#0d0d0d)" }}>
+                  {f.img && <img src={f.img} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />}
+                  <div className="absolute inset-0" style={{ background: f.img ? "linear-gradient(rgba(13,13,13,0.2) 30%, rgba(13,13,13,0.9) 100%)" : "linear-gradient(150deg, rgba(191,160,106,0.14), rgba(13,13,13,0.25) 60%)" }} />
+                  <div className="absolute top-6 left-7 w-9 h-[2px]" style={{ background: GOLD }} />
+                  <div className="absolute bottom-0 left-0 p-7">
+                    <h3 className="text-white text-2xl font-light leading-tight">{f.t}</h3>
+                    <p className="mt-2.5 text-sm font-light leading-relaxed max-w-[94%]" style={{ color: CHAMP }}>{f.d}</p>
                   </div>
-                  <h3 className="text-[#221F20] text-lg font-semibold mb-3">{f.t}</h3>
-                  <p className="text-neutral-500 text-sm leading-relaxed">{f.d}</p>
                 </div>
               </Reveal>
             ))}
