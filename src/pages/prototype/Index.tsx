@@ -71,15 +71,14 @@ const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per
 ];
 
 /* ── Section 3 · Why WONLY ─────────────────────────────────── */
-const DOOR_CELL = `${BASE}images/door-cell.webp`;
-const NAMEPLATES = [
-  { value: "Listed", label: "SSE 605268" },
-  { value: "30 Years", label: "Since 1996" },
-  { value: "5", label: "Production Bases" },
-  { value: "6", label: "R&D Centers" },
-  { value: "1,000+", label: "Patents" },
-  { value: "200M+", label: "Users" },
-  { value: "No.1", label: "Smart doors & locks · 2024–2025" },
+const STAT_CARDS: { value: string; label: string; img?: string }[] = [
+  { value: "30 Years", label: "Since 1996", img: `${BASE}images/factory-line-a.webp` },
+  { value: "Listed", label: "SSE 605268", img: `${BASE}images/factory-2.webp` },
+  { value: "No.1", label: "Smart Doors & Locks · 2024–2025" },
+  { value: "5", label: "Production Bases", img: `${BASE}images/factory-line-b.webp` },
+  { value: "6", label: "R&D Centers", img: `${BASE}images/factory-abb.webp` },
+  { value: "1,000+", label: "Patents", img: `${BASE}images/factory-1.webp` },
+  { value: "200M+", label: "Users Protected" },
 ];
 const WHO_CHECK = [
   "One-Stop Ecosystem — doors, locks, windows & whole-house intelligence",
@@ -369,34 +368,30 @@ function Timeline({ items }: { items: { y: string; m: string }[] }) {
 /* Real-photo door production line: doors ride a red monorail across a light workshop;
    the photo tiles seamlessly in an infinite marquee, with gold data nameplates over the floor. */
 function DoorConveyor() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [on, setOn] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setOn(true); return; }
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { setOn(true); io.disconnect(); } }), { threshold: 0.25 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  const cells = [...NAMEPLATES, ...NAMEPLATES];
   return (
-    <div ref={ref} className="mt-12 conveyor-photo relative overflow-hidden rounded-2xl" style={{ background: "#e9eaea" }}>
-      {/* a queue of single-door cells; each door carries its own gold nameplate and moves with it */}
-      <div className="photo-conveyor-track flex w-max">
-        {cells.map((n, i) => {
-          const idx = i % NAMEPLATES.length;
-          return (
-            <div key={i} className="relative shrink-0 h-[280px] sm:h-[420px] md:h-[560px]" style={{ aspectRatio: "560 / 1500" }}>
-              <img src={DOOR_CELL} alt={i === 0 ? "WONLY smart security door on the production line" : ""} aria-hidden={i !== 0} draggable={false} className="h-full w-full object-cover select-none" />
-              <div className="absolute left-1/2 -translate-x-1/2 top-[29%] w-[64%] rounded-md px-2 py-1.5 text-center" style={{ background: "linear-gradient(135deg,#e2c68a,#b8965a)", boxShadow: "0 3px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.5)", opacity: on ? 1 : 0, transform: on ? "none" : "translateY(8px)", transition: `opacity .5s ease ${idx * 0.14}s, transform .5s ease ${idx * 0.14}s` }}>
-                <div className="text-[13px] md:text-[17px] font-semibold leading-none" style={{ color: "#3a2d16" }}>{n.value}</div>
-                <div className="mt-0.5 text-[7.5px] md:text-[9px] tracking-[0.04em] uppercase font-semibold leading-tight" style={{ color: "#5c4620" }}>{n.label}</div>
-              </div>
+    <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {STAT_CARDS.map((c, i) => (
+        <Reveal key={c.value} delay={(i % 4) * 80} className={i === 0 ? "sm:col-span-2" : ""}>
+          <div className="group relative rounded-2xl overflow-hidden h-[190px] md:h-[210px]" style={{ background: "linear-gradient(140deg,#2a2627,#0d0d0d)" }}>
+            {c.img && (
+              <img src={c.img} alt="" aria-hidden loading="lazy" draggable={false} className="absolute inset-0 h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-[1.06]" />
+            )}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: c.img
+                  ? "linear-gradient(180deg, rgba(13,13,13,0.18) 20%, rgba(13,13,13,0.55) 62%, rgba(13,13,13,0.9) 100%)"
+                  : "linear-gradient(150deg, rgba(191,160,106,0.18), rgba(34,31,32,0.55) 55%, rgba(13,13,13,0.85))",
+              }}
+            />
+            <div className="absolute top-6 left-6 h-[2px] w-9" style={{ background: GOLD }} />
+            <div className="absolute inset-x-0 bottom-0 p-6">
+              <div className="text-white font-light leading-none text-[34px] md:text-[42px]">{c.value}</div>
+              <div className="mt-2.5 text-[11px] tracking-[0.16em] uppercase font-medium" style={{ color: CHAMP }}>{c.label}</div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        </Reveal>
+      ))}
     </div>
   );
 }
