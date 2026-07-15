@@ -54,9 +54,6 @@ const NAV: NavItem[] = [
     { label: "Smart Locks", href: "/products/smart-locks/s80", img: IMG.lockS80 },
     { label: "Wooden Doors", href: "/products/wooden-doors", img: IMG.wood2 },
     { label: "Smart Windows", href: "/products/smart-windows", img: IMG.aluT200 },
-    { label: "Engineering Doors", href: "/products/engineering-doors", img: IMG.alu40 },
-    { label: "Medical Doors", href: "/products/medical-doors", img: IMG.aluPro },
-    { label: "YIZHAI YISHU · Artisan", href: "/products/yizhai-yishu", img: IMG.aluMax },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: IMG.lockS80 },
   ] },
   { label: "Solutions", to: "solutions" },
@@ -110,15 +107,20 @@ const PROJECTS: { name: string; place: string; tag: string; img?: string; placeh
 /* ── Section 4 · Products ──────────────────────────────────── */
 const PRODUCT_RAIL = [
   { n: "01", name: "Robotic Security Door X70", cat: "door", d: "Flagship: autonomous locking, multi-vector intrusion sensing, cast-aluminum build.", img: IMG.aluMax },
-  { n: "02", name: "S80 True-Sensing Smart Lock", cat: "lock", d: "Hands-free long-range sensing, biometric + app control, tamper-proof architecture.", img: IMG.lockS80 },
-  { n: "03", name: "4.0 Global Series Doors", cat: "door", d: "Fire-rated, anti-theft, climate-adapted to global standards.", img: IMG.alu40 },
-  { n: "04", name: "Engineering Doors", cat: "door", d: "Fire-rated / access-control / acoustic — compliant with Gulf, SEA & Central Asia standards.", img: IMG.aluT200 },
-  { n: "05", name: "Medical-Grade Doors", cat: "door", d: "Hermetic operating-room & ward doors engineered for hospitals.", img: IMG.wood2 },
+  { n: "02", name: "4.0 Global Series Doors", cat: "door", d: "Fire-rated, anti-theft, climate-adapted to global standards.", img: IMG.alu40 },
+  { n: "03", name: "Engineering & Medical Doors", cat: "door", d: "Fire / access-control / acoustic and hermetic hospital doors.", img: IMG.aluT200 },
+  { n: "04", name: "S80 True-Sensing Smart Lock", cat: "lock", d: "Hands-free long-range sensing, biometric + app control, tamper-proof.", img: IMG.lockS80 },
+  { n: "05", name: "Steel-Wood Silent Door", cat: "wood", d: "Double the silence, never warps — steel-reinforced wooden door.", img: IMG.wood2 },
+  { n: "06", name: "Smart Aluminum Window", cat: "window", d: "Insulation like a wall; auto-closes in wind and rain.", img: IMG.aluPro },
+  { n: "07", name: "Whole-House Intelligence", cat: "whole", d: "A 28-category smart-home ecosystem, from the front door.", img: IMG.lockS80 },
 ];
 const PROD_CATS = [
   { key: "all", label: "All" },
-  { key: "door", label: "Doors" },
-  { key: "lock", label: "Locks" },
+  { key: "door", label: "Security Doors" },
+  { key: "lock", label: "Smart Locks" },
+  { key: "wood", label: "Wooden Doors" },
+  { key: "window", label: "Smart Windows" },
+  { key: "whole", label: "Whole-House" },
 ];
 
 /* ── Section 5 · Solutions ─────────────────────────────────── */
@@ -160,6 +162,21 @@ const TIMELINE = [
 ];
 
 /* ── Footer ────────────────────────────────────────────────── */
+/* Strategic collaborations (English names + year of agreement; ceremony photos omitted — Chinese banners) */
+const TECH_PARTNERS = [
+  { n: "Huawei", y: "2021" },
+  { n: "Alibaba", y: "2021" },
+  { n: "Siemens", y: "2019" },
+  { n: "Hikvision", y: "2019" },
+  { n: "China Mobile", y: "2019" },
+  { n: "China Telecom", y: "2020" },
+  { n: "China Unicom", y: "2021" },
+  { n: "Foxconn", y: "2018" },
+  { n: "Shanghai Electric", y: "2019" },
+  { n: "Midea", y: "2021" },
+  { n: "Hope Group", y: "2018" },
+];
+
 const FOOTER = [
   { h: "Products", links: ["Security Doors", "Smart Locks", "Wooden Doors", "Aluminum Windows", "Whole-House Intelligence"] },
   { h: "Solutions", links: ["Premium Residential", "Commercial", "Medical & Public", "Engineering", "OEM / ODM"] },
@@ -832,7 +849,14 @@ const Prototype = () => {
           <p className="text-lg md:text-2xl font-light max-w-4xl mx-auto leading-snug" style={{ color: DARK }}>
             Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
           </p>
-          <img src={IMG.partnersRe} alt="WONLY's real-estate development partners" loading="lazy" className="mt-12 w-full max-w-5xl mx-auto h-auto" />
+          <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Strategic Technology &amp; Industry Partners</div>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
+            {TECH_PARTNERS.map((p) => (
+              <span key={p.n} className="px-5 py-2.5 rounded-full text-sm font-medium border" style={{ borderColor: `${SILVER}66`, color: DARK }}>{p.n}<span className="ml-2 text-[11px] font-light" style={{ color: MUTED }}>{p.y}</span></span>
+            ))}
+          </div>
+          <div className="mt-12 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Real-Estate Development Partners</div>
+          <img src={IMG.partnersRe} alt="WONLY's real-estate development partners" loading="lazy" className="mt-6 w-full max-w-5xl mx-auto h-auto" />
         </Reveal>
       </section>
 
