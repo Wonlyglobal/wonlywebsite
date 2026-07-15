@@ -46,18 +46,18 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-type NavChild = { label: string; href?: string; to?: string };
+type NavChild = { label: string; href?: string; to?: string; img?: string };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
-    { label: "Security Doors", href: "/products/security-doors" },
-    { label: "Smart Locks", href: "/products/smart-locks/s80" },
-    { label: "Wooden Doors", href: "/products/wooden-doors" },
-    { label: "Smart Windows", href: "/products/smart-windows" },
-    { label: "Engineering Doors", href: "/products/engineering-doors" },
-    { label: "Medical Doors", href: "/products/medical-doors" },
-    { label: "YIZHAI YISHU · Artisan", href: "/products/yizhai-yishu" },
-    { label: "Whole-House Intelligence", href: "/products/whole-house" },
+    { label: "Security Doors", href: "/products/security-doors", img: IMG.aluMax },
+    { label: "Smart Locks", href: "/products/smart-locks/s80", img: IMG.lockS80 },
+    { label: "Wooden Doors", href: "/products/wooden-doors", img: IMG.wood2 },
+    { label: "Smart Windows", href: "/products/smart-windows", img: IMG.aluT200 },
+    { label: "Engineering Doors", href: "/products/engineering-doors", img: IMG.alu40 },
+    { label: "Medical Doors", href: "/products/medical-doors", img: IMG.aluPro },
+    { label: "YIZHAI YISHU · Artisan", href: "/products/yizhai-yishu", img: IMG.aluMax },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: IMG.lockS80 },
   ] },
   { label: "Solutions", to: "solutions" },
   { label: "Projects", to: "projects" },
@@ -74,7 +74,7 @@ const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per
 ];
 
 /* ── Section 3 · Why WONLY ─────────────────────────────────── */
-const DOOR_FACTORY = `${BASE}images/door-factory.webp`;
+const DOOR_CELL = `${BASE}images/door-cell.webp`;
 const NAMEPLATES = [
   { value: "Listed", label: "SSE 605268" },
   { value: "30 Years", label: "Since 1996" },
@@ -358,22 +358,23 @@ function DoorConveyor() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
+  const cells = [...NAMEPLATES, ...NAMEPLATES];
   return (
     <div ref={ref} className="mt-12 conveyor-photo relative overflow-hidden rounded-2xl" style={{ background: "#e9eaea" }}>
-      {/* seamless moving photo (two identical halves; the track translates -50%) */}
-      <div className="photo-conveyor-track flex w-max h-[260px] sm:h-[400px] md:h-[540px]">
-        {[0, 1, 2, 3].map((k) => (
-          <img key={k} src={DOOR_FACTORY} alt={k === 0 ? "WONLY smart security doors on the production line" : ""} aria-hidden={k !== 0} draggable={false} className="h-full w-auto max-w-none select-none" />
-        ))}
-      </div>
-      {/* gold data nameplates over the reflective floor */}
-      <div className="absolute inset-x-0 bottom-3 md:bottom-6 px-3 flex flex-wrap justify-center gap-2 md:gap-3 pointer-events-none">
-        {NAMEPLATES.map((n, i) => (
-          <div key={n.value} className="rounded-md px-3 py-1.5 text-center" style={{ background: "linear-gradient(135deg,#e2c68a,#b8965a)", boxShadow: "0 3px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)", opacity: on ? 1 : 0, transform: on ? "none" : "translateY(12px)", transition: `opacity .55s ease ${i * 0.18}s, transform .55s ease ${i * 0.18}s` }}>
-            <div className="text-[13px] md:text-[16px] font-semibold leading-none" style={{ color: "#3a2d16" }}>{n.value}</div>
-            <div className="mt-0.5 text-[8px] md:text-[9px] tracking-[0.06em] uppercase font-semibold leading-tight" style={{ color: "#5c4620" }}>{n.label}</div>
-          </div>
-        ))}
+      {/* a queue of single-door cells; each door carries its own gold nameplate and moves with it */}
+      <div className="photo-conveyor-track flex w-max">
+        {cells.map((n, i) => {
+          const idx = i % NAMEPLATES.length;
+          return (
+            <div key={i} className="relative shrink-0 h-[280px] sm:h-[420px] md:h-[560px]" style={{ aspectRatio: "560 / 1500" }}>
+              <img src={DOOR_CELL} alt={i === 0 ? "WONLY smart security door on the production line" : ""} aria-hidden={i !== 0} draggable={false} className="h-full w-full object-cover select-none" />
+              <div className="absolute left-1/2 -translate-x-1/2 top-[29%] w-[64%] rounded-md px-2 py-1.5 text-center" style={{ background: "linear-gradient(135deg,#e2c68a,#b8965a)", boxShadow: "0 3px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.5)", opacity: on ? 1 : 0, transform: on ? "none" : "translateY(8px)", transition: `opacity .5s ease ${idx * 0.14}s, transform .5s ease ${idx * 0.14}s` }}>
+                <div className="text-[13px] md:text-[17px] font-semibold leading-none" style={{ color: "#3a2d16" }}>{n.value}</div>
+                <div className="mt-0.5 text-[7.5px] md:text-[9px] tracking-[0.04em] uppercase font-semibold leading-tight" style={{ color: "#5c4620" }}>{n.label}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -526,14 +527,17 @@ const Prototype = () => {
                   </button>
                 )}
                 {n.children && openDrop && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
-                    {n.children.map((c) => (
-                      c.href ? (
-                        <Link key={c.label} to={c.href} className="block w-full text-left px-4 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>{c.label}</Link>
-                      ) : (
-                        <button key={c.label} onClick={() => scrollToId(c.to || "products")} className="block w-full text-left px-4 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>{c.label}</button>
-                      )
-                    ))}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
+                    {n.children.map((c) => {
+                      const cls = "flex items-center gap-3 w-full text-left px-3 py-2 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
+                      const inner = (<>
+                        {c.img && <span className="w-9 h-9 rounded-md flex items-center justify-center shrink-0 overflow-hidden" style={{ background: "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain p-0.5" /></span>}
+                        <span>{c.label}</span>
+                      </>);
+                      return c.href
+                        ? <Link key={c.label} to={c.href} className={cls} style={{ color: DARK }}>{inner}</Link>
+                        : <button key={c.label} onClick={() => scrollToId(c.to || "products")} className={cls} style={{ color: DARK }}>{inner}</button>;
+                    })}
                   </div>
                 )}
               </div>
@@ -911,8 +915,7 @@ const Prototype = () => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ background: "rgba(13,13,13,0.92)" }} onClick={() => setVideoOpen(false)}>
           <button onClick={() => setVideoOpen(false)} className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors" aria-label="Close video"><X size={30} /></button>
           <div className="w-full max-w-5xl aspect-video" onClick={(e) => e.stopPropagation()}>
-            {/* TODO: restore <video src={`${BASE}videos/factory-tour.mp4`} controls autoPlay /> once the .mov is compressed to a web-friendly MP4 (H.264) */}
-            <img src={IMG.factoryLineA} alt="WONLY smart factory" className="w-full h-full object-cover rounded-xl bg-black shadow-2xl" />
+            {videoOpen && <iframe src="https://www.youtube.com/embed/XAfeQnuuRxE?autoplay=1&rel=0&modestbranding=1" title="WONLY factory tour" className="w-full h-full rounded-xl bg-black shadow-2xl" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />}
           </div>
         </div>
       )}

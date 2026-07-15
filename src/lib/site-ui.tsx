@@ -37,16 +37,16 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 
 /* Full nav framework (mirrors the homepage). Section items link back to the
    homepage and scroll there via its hash handler; S80 + About are real pages. */
-const NAV: { label: string; href: string; children?: { label: string; href: string }[] }[] = [
+const NAV: { label: string; href: string; children?: { label: string; href: string; img?: string }[] }[] = [
   { label: "Products", href: "/#products", children: [
-    { label: "Security Doors", href: "/products/security-doors" },
-    { label: "Smart Locks", href: "/products/smart-locks/s80" },
-    { label: "Wooden Doors", href: "/products/wooden-doors" },
-    { label: "Smart Windows", href: "/products/smart-windows" },
-    { label: "Engineering Doors", href: "/products/engineering-doors" },
-    { label: "Medical Doors", href: "/products/medical-doors" },
-    { label: "YIZHAI YISHU · Artisan", href: "/products/yizhai-yishu" },
-    { label: "Whole-House Intelligence", href: "/products/whole-house" },
+    { label: "Security Doors", href: "/products/security-doors", img: `${BASE}images/alu-k300max.webp` },
+    { label: "Smart Locks", href: "/products/smart-locks/s80", img: `${BASE}images/lock-s80.webp` },
+    { label: "Wooden Doors", href: "/products/wooden-doors", img: `${BASE}images/wood-2.webp` },
+    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/alu-t200.webp` },
+    { label: "Engineering Doors", href: "/products/engineering-doors", img: `${BASE}images/alu-40.webp` },
+    { label: "Medical Doors", href: "/products/medical-doors", img: `${BASE}images/alu-k300pro.webp` },
+    { label: "YIZHAI YISHU · Artisan", href: "/products/yizhai-yishu", img: `${BASE}images/alu-k300max.webp` },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/lock-s80.webp` },
   ] },
   { label: "Solutions", href: "/#solutions" },
   { label: "Projects", href: "/#projects" },
@@ -213,9 +213,12 @@ export function SiteHeader() {
                 {n.label}{n.children && <ChevronDown size={13} />}
               </Link>
               {n.children && openDrop && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
                   {n.children.map((c) => (
-                    <Link key={c.label} to={c.href} className="block w-full text-left px-4 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>{c.label}</Link>
+                    <Link key={c.label} to={c.href} className="flex items-center gap-3 w-full text-left px-3 py-2 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                      {c.img && <span className="w-9 h-9 rounded-md flex items-center justify-center shrink-0 overflow-hidden" style={{ background: "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain p-0.5" /></span>}
+                      <span>{c.label}</span>
+                    </Link>
                   ))}
                 </div>
               )}
