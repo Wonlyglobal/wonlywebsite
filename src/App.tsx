@@ -4,13 +4,14 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/home/Index";
-import SecurityDoors from "./pages/products/SecurityDoors";
-import SecurityDoorX70 from "./pages/products/SecurityDoorX70";
 import NotFound from "./pages/not-found/Index";
 
-// Lazy-loaded so GSAP ships only on /prototype and never enters the main bundle.
+// Lazy-loaded so each route ships as its own chunk and never enters the initial
+// bundle the homepage visitor downloads.
 const Prototype = lazy(() => import("./pages/prototype/Index"));
+const Index = lazy(() => import("./pages/home/Index"));
+const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
+const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
 const About = lazy(() => import("./pages/about/Index"));
 const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
 const WoodenDoors = lazy(() => import("./pages/products/WoodenDoors"));

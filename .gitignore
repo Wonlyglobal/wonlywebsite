@@ -113,3 +113,26 @@ public/images/王力与著名企业单位合作图片20221022/
 public/images/*.pdf
 public/images/图片生成-*.png
 public/*.pdf
+# Heavy raw source media — the site serves optimized .webp copies; keep only the used hero clip.
+# These bloat the GitHub Pages deploy (~190MB) without being rendered anywhere.
+public/videos/*.mov
+public/videos/factory-tour.mp4
+public/images/IMG_*.JPG
+public/images/factory-inspect.jpg
+public/images/factory-pano.jpg
+public/images/factory-robot.jpg
+public/images/product-1.png
+public/images/hero-door.png
+public/images/wood-1.png
+public/images/haja-3.jpg
+public/images/proj-s-*.png
+public/images/proj-s-1.jpg
+public/images/proj-s-3.jpg
+public/images/proj-s-4.jpg
+public/images/proj-s-6.jpg
+public/images/proj-s-8.jpg
+public/images/proj-s-9.jpg
+public/images/alu-k300pro.png
+public/images/alu-t200.png
+# Stray raw product-photo folder (singular "image/") — not referenced by the live site
+public/image/

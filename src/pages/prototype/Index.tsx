@@ -140,10 +140,24 @@ const SOLUTIONS = [
 // To use actual certificate BADGE IMAGES instead of these text pills, drop them
 // in public/images/certs/ and tell me the count; I'll switch the marquee to images.
 // Stylised colored badges (recognisable colored mark + label — not the trademarked artwork).
-const CERT_ROWS: { m: string; l: string; c: string }[][] = [
-  [{ m: "ISO", l: "ISO 9001", c: "#1565C0" }, { m: "ISO", l: "ISO 14001", c: "#2E7D32" }, { m: "CE", l: "CE Marking", c: "#003399" }, { m: "UL", l: "UL Listed", c: "#C8102E" }],
-  [{ m: "RoHS", l: "RoHS", c: "#43A047" }, { m: "FSC", l: "FSC Certified", c: "#2E7D32" }, { m: "ETL", l: "ETL Listed", c: "#C8102E" }, { m: "IEC", l: "IECEE CB", c: "#0277BD" }],
-  [{ m: "SASO", l: "SASO", c: "#1B7A3D" }, { m: "EN", l: "EN 1634 Fire", c: "#E65100" }, { m: "iF", l: "iF Design Award", c: "#1a1a1a" }, { m: "RD", l: "Red Dot: Best of Best", c: "#E2001A" }],
+// Real logo artwork lives in public/images/{awards,certs}. Editorial grayscale
+// logo wall — brightens to full color on hover.
+const AWARD_LOGOS = [
+  { f: "reddot.png", alt: "Red Dot Design Award" },
+  { f: "forbes.png", alt: "Forbes" },
+  { f: "if-design.png", alt: "iF Design Award" },
+  { f: "china-hardware-gold.png", alt: "China Hardware Gold Award" },
+];
+const CERT_LOGOS = [
+  { f: "iso.png", alt: "ISO 9001 / 14001" },
+  { f: "ce.png", alt: "CE Marking" },
+  { f: "ul.png", alt: "UL Listed" },
+  { f: "saso.png", alt: "SASO" },
+  { f: "rohs.png", alt: "RoHS" },
+  { f: "esg.png", alt: "ESG" },
+  { f: "etl.png", alt: "ETL Listed" },
+  { f: "fsc.png", alt: "FSC Certified" },
+  { f: "iecee.png", alt: "IECEE CB" },
 ];
 
 /* ── Section 7 · Partnership ───────────────────────────────── */
@@ -274,26 +288,6 @@ function WorldDots({ className = "" }: { className?: string }) {
         </g>
       ))}
     </svg>
-  );
-}
-
-/* Three-row certification marquee — adjacent rows scroll in opposite directions; colored badge + label */
-function CertMarquee({ rows }: { rows: { m: string; l: string; c: string }[][] }) {
-  return (
-    <div className="space-y-4" style={{ maskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)" }}>
-      {rows.map((row, ri) => (
-        <div key={ri} className="partner-row overflow-hidden">
-          <div className={`${ri % 2 === 0 ? "partner-track-left" : "partner-track-right"} flex gap-4 w-max`}>
-            {[...row, ...row, ...row, ...row].map((c, i) => (
-              <span key={i} className="shrink-0 whitespace-nowrap flex items-center gap-2.5 pl-1.5 pr-5 py-1.5 rounded-full border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.05)" }}>
-                <span className="rounded-full flex items-center justify-center text-white shrink-0" style={{ width: 30, height: 30, background: c.c, fontWeight: 700, fontSize: c.m.length > 3 ? 8 : 11, letterSpacing: "0.02em" }}>{c.m}</span>
-                <span className="text-sm font-medium" style={{ color: "rgba(245,241,234,0.92)" }}>{c.l}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
   );
 }
 
@@ -786,14 +780,31 @@ const Prototype = () => {
         </Reveal>
       </section>
 
-      {/* ══ 6 · Certifications & Honors ══ */}
-      <section id="certs" className="px-[7vw] py-16 md:py-20" style={{ background: DARK }}>
+      {/* ══ 6 · Certifications & Honors — real-logo wall ══ */}
+      <section id="certs" className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: CHAMP }}>Certified &amp; Recognized</div>
-          <h2 className={h2cls + " mt-5 text-white"}>Held to standards, honored at the top.</h2>
+          <div className={eyebrow} style={{ color: GOLD }}>Certified &amp; Recognized</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Held to standards, honored at the top.</h2>
         </Reveal>
-        <Reveal className="mt-14">
-          <CertMarquee rows={CERT_ROWS} />
+
+        <Reveal className="mt-16">
+          <div className="text-[11px] tracking-[0.34em] uppercase font-semibold mb-8" style={{ color: GOLD }}>Design Awards</div>
+          <div className="flex flex-wrap items-center gap-x-14 gap-y-9">
+            {AWARD_LOGOS.map((a) => (
+              <img key={a.f} src={`${BASE}images/awards/${a.f}`} alt={a.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100" />
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-16">
+          <div className="pt-14 border-t" style={{ borderColor: `${SILVER}55` }}>
+            <div className="text-[11px] tracking-[0.34em] uppercase font-semibold mb-8" style={{ color: GOLD }}>Certifications</div>
+            <div className="flex flex-wrap items-center gap-x-12 gap-y-9">
+              {CERT_LOGOS.map((c) => (
+                <img key={c.f} src={`${BASE}images/certs/${c.f}`} alt={c.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100" />
+              ))}
+            </div>
+          </div>
         </Reveal>
       </section>
 
