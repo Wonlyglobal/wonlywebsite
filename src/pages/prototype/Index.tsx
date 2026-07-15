@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, ShieldCheck, Play, X, TrendingUp, CalendarDays, Factory, Lightbulb, Users, Trophy } from "lucide-react";
+import { ChevronDown, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, ShieldCheck, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 
@@ -71,13 +71,14 @@ const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per
 ];
 
 /* ── Section 3 · Why WONLY ─────────────────────────────────── */
-const MILESTONES = [
-  { icon: TrendingUp, k: "Listed", v: "The First Listed Enterprise in China's Security Door & Lock Industry" },
-  { icon: CalendarDays, k: "30 years", v: "Founded 1996 in Yongkang, Zhejiang" },
-  { icon: Factory, k: "5 bases · 6 R&D centers", v: "Vertically integrated manufacturing & innovation" },
-  { icon: Lightbulb, k: "1,000+ patents", v: "Proprietary security & smart-lock technology" },
-  { icon: Users, k: "200M+ users", v: "Protected worldwide" },
-  { icon: Trophy, k: "No.1", v: "National sales leader in smart doors & smart locks, 2024–2025" },
+const DOORS = [
+  { value: "Listed", label: "SSE 605268", sub: "The industry's only company on China's A-share main board.", img: IMG.aluMax },
+  { value: "30 Years", label: "Founded 1996, Yongkang", sub: "Three decades focused on entrance security.", img: IMG.aluPro },
+  { value: "5", label: "Production Bases", sub: "Yongkang, Wuyi, Sichuan, Hangzhou and Hubei.", img: IMG.alu40 },
+  { value: "6", label: "R&D Centers", sub: "Five R&D bases and six centers, incl. a Peking University joint lab.", img: IMG.aluT200 },
+  { value: "1,000+", label: "Patents", sub: "1,000+ patents and 300+ invention patents — first in the industry.", img: IMG.wood2 },
+  { value: "200M+", label: "Users Protected", sub: "Serving 200M+ users and 50M+ families worldwide.", img: IMG.aluMax },
+  { value: "No.1", label: "Smart Doors & Locks", sub: "National sales leader, 2024–2025.", img: IMG.aluPro },
 ];
 const WHO_CHECK = [
   "One-Stop Ecosystem — doors, locks, windows & whole-house intelligence",
@@ -326,6 +327,65 @@ function Timeline({ items }: { items: { y: string; m: string }[] }) {
   );
 }
 
+/* Overhead-rail hanging-door conveyor — 7 doors carrying WONLY's key numbers */
+function DoorConveyor() {
+  const [sel, setSel] = useState<number | null>(null);
+  const loop = [...DOORS, ...DOORS];
+  return (
+    <div className="mt-14">
+      {/* top rail with scrolling chain */}
+      <div className="relative z-10 h-[14px] rounded-full" style={{ background: "linear-gradient(180deg,#f0efe9,#cbc7bf 55%,#a29d94)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.85), 0 3px 8px rgba(0,0,0,0.16)" }}>
+        <div className="rail-chain absolute inset-x-0 top-1/2 -translate-y-1/2 h-[5px]" style={{ backgroundImage: "repeating-linear-gradient(90deg,#9c978f 0 6px, transparent 6px 11px)", opacity: 0.5 }} />
+      </div>
+      {/* conveyor */}
+      <div className="conveyor relative overflow-hidden pb-2" style={{ maskImage: "linear-gradient(to right, transparent, #000 4%, #000 96%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 4%, #000 96%, transparent)" }}>
+        <div className="conveyor-track flex gap-6 md:gap-10 w-max">
+          {loop.map((d, i) => {
+            const idx = i % DOORS.length;
+            return (
+              <button key={i} onClick={() => setSel(idx)} aria-label={`${d.value} — ${d.label}`} className="door-hang group relative shrink-0 w-[144px] md:w-[186px] flex flex-col items-center outline-none" style={{ animationDelay: `${idx * 0.28}s` }}>
+                <div className="flex flex-col items-center -mt-[9px]">
+                  <div className="w-[14px] h-[14px] rounded-full" style={{ background: "radial-gradient(circle at 35% 30%, #f2dcab, #b58c4c)", boxShadow: "0 1px 3px rgba(0,0,0,0.45)" }} />
+                  <div className="w-[3px] h-5" style={{ background: "linear-gradient(#c9a15a,#87672f)" }} />
+                </div>
+                <div className="relative w-full rounded-lg overflow-hidden transition-shadow duration-300 group-hover:shadow-[0_20px_40px_-14px_rgba(34,31,32,0.45)]" style={{ background: "linear-gradient(135deg,#f4f2ed,#e2dfd7)", border: "1px solid #cfcabf", boxShadow: "0 12px 26px -14px rgba(34,31,32,0.35)" }}>
+                  <div className="relative h-[210px] md:h-[270px]">
+                    <img src={d.img} alt={d.label} loading="lazy" className="absolute inset-0 w-full h-full object-contain p-3" />
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: "repeating-linear-gradient(112deg, rgba(255,255,255,0.06) 0 1.5px, rgba(0,0,0,0.02) 1.5px 3px)" }} />
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none"><div className="shine-sweep absolute top-0 left-0 h-full w-1/3" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent)" }} /></div>
+                    <div className="absolute top-1/2 -translate-y-1/2 right-3 w-[5px] h-14 rounded-full" style={{ background: "linear-gradient(90deg,#6f5228,#caa063,#6f5228)", boxShadow: "0 1px 3px rgba(0,0,0,0.4)" }} />
+                    <div className="absolute left-1/2 -translate-x-1/2 bottom-3.5 w-[86%] px-3 py-2 rounded-md text-center" style={{ background: "linear-gradient(135deg,#dcc084,#b8965a)", boxShadow: "0 2px 8px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.45)" }}>
+                      <div className="text-[19px] md:text-[23px] font-medium leading-none" style={{ color: "#3a2d16" }}>{d.value}</div>
+                      <div className="mt-1 text-[8.5px] md:text-[10px] tracking-[0.1em] uppercase font-semibold leading-tight" style={{ color: "#5c4620" }}>{d.label}</div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="mt-4 text-center text-[11px] tracking-[0.2em] uppercase font-light" style={{ color: SILVER }}>Hover to pause · click a door to expand</div>
+
+      {sel !== null && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4" style={{ background: "rgba(13,13,13,0.82)" }} onClick={() => setSel(null)}>
+          <div className="relative w-full max-w-md rounded-2xl overflow-hidden bg-white" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setSel(null)} aria-label="Close" className="absolute top-3 right-3 z-10 text-black/40 hover:text-black transition-colors"><X size={22} /></button>
+            <div className="h-[300px] flex items-center justify-center" style={{ background: "linear-gradient(135deg,#f4f2ed,#e2dfd7)" }}>
+              <img src={DOORS[sel].img} alt="" className="h-full w-auto object-contain p-6" />
+            </div>
+            <div className="p-7 text-center">
+              <div className="text-4xl font-light" style={{ color: GOLD }}>{DOORS[sel].value}</div>
+              <div className="mt-1.5 text-[11px] tracking-[0.18em] uppercase font-medium" style={{ color: DARK }}>{DOORS[sel].label}</div>
+              <p className="mt-4 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{DOORS[sel].sub}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const eyebrow = "text-[11px] tracking-[0.5em] uppercase font-light";
 const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[34px] md:text-[58px]";
 
@@ -559,19 +619,7 @@ const Prototype = () => {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {MILESTONES.map((m, i) => (
-            <Reveal key={m.k} delay={(i % 3) * 80}>
-              <div className="group h-full rounded-2xl p-6 md:p-7 border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ background: "#f7f7f5", borderColor: `${SILVER}66` }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: GOLD }}>
-                  <m.icon size={20} style={{ color: "#fff" }} />
-                </div>
-                <div className="mt-5 text-2xl md:text-[26px] font-normal" style={{ color: DARK }}>{m.k}</div>
-                <div className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{m.v}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <DoorConveyor />
 
         {/* Who We Are — structured panel */}
         <Reveal>

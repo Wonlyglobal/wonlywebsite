@@ -256,6 +256,21 @@
   to { opacity: 1; transform: translate(-50%, 0); }
 }
 
+/* Overhead-rail hanging-door conveyor (Why WONLY) */
+@keyframes conveyor-move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes door-sway { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
+@keyframes rail-chain-move { from { background-position: 0 0; } to { background-position: -22px 0; } }
+@keyframes shine-sweep { 0% { transform: translateX(-160%) skewX(-16deg); } 55%, 100% { transform: translateX(340%) skewX(-16deg); } }
+.conveyor-track { animation: conveyor-move 46s linear infinite; }
+.conveyor:hover .conveyor-track { animation-play-state: paused; }
+.door-hang { animation: door-sway 3.6s ease-in-out infinite; transform-origin: top center; will-change: transform; }
+.conveyor:hover .door-hang { animation-play-state: paused; }
+.rail-chain { animation: rail-chain-move 0.9s linear infinite; }
+.shine-sweep { animation: shine-sweep 4.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .conveyor-track, .door-hang, .rail-chain, .shine-sweep { animation: none !important; }
+}
+
 /* Hide platform-injected AI watermark */
 #ai-watermark {
   display: none !important;
