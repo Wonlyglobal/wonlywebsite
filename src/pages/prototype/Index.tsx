@@ -92,6 +92,15 @@ const FOOTPRINT_STATS = [
   { to: 200, suffix: "M+", label: "Users Worldwide" },
 ];
 
+/* ── Featured overseas projects (government & institutional first) ── */
+const PROJECTS = [
+  { name: "New Administrative Capital CBD", place: "Cairo, Egypt", tag: "Government", img: `${BASE}images/proj-egypt-cbd.webp` },
+  { name: "National Food Centre", place: "Barbados", tag: "Government", img: `${BASE}images/proj-barbados.webp` },
+  { name: "Landmark Arc Hotel", place: "Cairo, Egypt", tag: "Hospitality", img: `${BASE}images/proj-cairo-hotel.webp` },
+  { name: "Mixed-Use Complex", place: "Mozambique", tag: "Commercial", img: `${BASE}images/proj-mozambique.webp` },
+  { name: "Jazan Industrial City Villas", place: "Saudi Arabia", tag: "Residential", img: `${BASE}images/proj-saudi-villa.webp` },
+];
+
 /* ── Section 4 · Products ──────────────────────────────────── */
 const PRODUCT_RAIL = [
   { n: "01", name: "Robotic Security Door X70", cat: "door", d: "Flagship: autonomous locking, multi-vector intrusion sensing, cast-aluminum build.", img: IMG.aluMax },
@@ -663,6 +672,46 @@ const Prototype = () => {
         </Reveal>
       </section>
 
+      {/* ══ Featured overseas projects — governments & institutions first ══ */}
+      <section id="projects" className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
+        <Reveal className="max-w-3xl">
+          <div className={eyebrow} style={{ color: GOLD }}>Global Landmark Projects</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions.</h2>
+          <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
+        </Reveal>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {PROJECTS.slice(0, 2).map((p) => (
+            <Reveal key={p.name}>
+              <div className="group relative rounded-2xl overflow-hidden h-[320px] md:h-[360px]">
+                <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 38%, rgba(13,13,13,0.9))" }} />
+                <div className="absolute top-5 left-5 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{p.tag}</div>
+                <div className="absolute bottom-0 left-0 p-6">
+                  <div className="text-white text-xl md:text-2xl font-medium">{p.name}</div>
+                  <div className="mt-1 text-[11px] tracking-[0.16em] uppercase" style={{ color: CHAMP }}>{p.place}</div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {PROJECTS.slice(2).map((p, i) => (
+            <Reveal key={p.name} delay={(i % 3) * 80}>
+              <div className="group relative rounded-2xl overflow-hidden h-[240px]">
+                <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 42%, rgba(13,13,13,0.88))" }} />
+                <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-medium" style={{ background: `${CHAMP_BG}e6`, color: DARK }}>{p.tag}</div>
+                <div className="absolute bottom-0 left-0 p-5">
+                  <div className="text-white text-base font-medium">{p.name}</div>
+                  <div className="mt-1 text-[10px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>{p.place}</div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>Further references include Ethiopia's Abyssinia Bank and presidential-palace projects in Togo and Vanuatu.</p>
+      </section>
+
       {/* ══ 4 · Products ══ */}
       <section id="products" className="px-[7vw] py-28 md:py-36" style={{ background: CHAMP_BG }}>
         {/* horizontal product rail */}
@@ -717,7 +766,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 6 · Certifications & Honors ══ */}
-      <section id="certs" className="px-[7vw] py-28 md:py-36" style={{ background: DARK }}>
+      <section id="certs" className="px-[7vw] py-16 md:py-20" style={{ background: DARK }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: CHAMP }}>Certified &amp; Recognized</div>
           <h2 className={h2cls + " mt-5 text-white"}>Held to standards, honored at the top.</h2>

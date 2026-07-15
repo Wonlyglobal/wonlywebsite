@@ -104,4 +104,7 @@ uploaded_files/
 .playwright-mcp/
 # root-level debug screenshots from preview/verification
 /*.png
+# Internal briefs & raw source assets — kept local (repo is public); optimized WebP copies live in public/images
+docs/
+public/项目案例/
 
