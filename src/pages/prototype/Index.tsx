@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, ShieldCheck, Play, X, TrendingUp, CalendarDays, Factory, Lightbulb, Users, Trophy } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
+import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -124,10 +125,10 @@ const CERT_ROWS = [
 
 /* ── Section 7 · Partnership ───────────────────────────────── */
 const PARTNERSHIP = [
-  { t: "Distributor Program", d: "Join a global network backed by 30 years of brand equity, full product training and regional marketing support.", cta: "Become a Distributor" },
-  { t: "Project Cooperation", d: "Residential, commercial, medical, hotel, government and public projects.", cta: "Submit a Project" },
-  { t: "OEM / ODM Services", d: "Leverage our smart factories and 1,000+ patents to build your own branded security line.", cta: "Request OEM/ODM Brief" },
-  { t: "Global Distribution Network", d: "Regional HQs, local offices and authorized partners across the Middle East, Southeast Asia and Central Asia.", cta: "Find a Local Partner" },
+  { t: "Distributor Program", d: "Join a global network backed by 30 years of brand equity, full product training and regional marketing support.", cta: "Become a Distributor", biz: "Distributor / Dealer" },
+  { t: "Project Cooperation", d: "Residential, commercial, medical, hotel, government and public projects.", cta: "Submit a Project", biz: "Project / Developer" },
+  { t: "OEM / ODM Services", d: "Leverage our smart factories and 1,000+ patents to build your own branded security line.", cta: "Request OEM/ODM Brief", biz: "OEM / ODM" },
+  { t: "Global Distribution Network", d: "Regional HQs, local offices and authorized partners across the Middle East, Southeast Asia and Central Asia.", cta: "Find a Local Partner", biz: "Distributor / Dealer" },
 ];
 
 /* ── Section 8 · Timeline ──────────────────────────────────── */
@@ -341,6 +342,7 @@ const Prototype = () => {
   const [sent, setSent] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const [prodCat, setProdCat] = useState("all");
+  const openQuote = useQuoteStore((s) => s.openQuote);
   const [form, setForm] = useState({ name: "", company: "", country: "", email: "", interest: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const setField = (name: keyof typeof form, value: string) => {
@@ -689,7 +691,7 @@ const Prototype = () => {
           <div className="mt-14 border-t" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
             {PARTNERSHIP.map((p, i) => (
               <Reveal key={p.t}>
-                <button onClick={() => scrollToId("contact")} className="group w-full text-left grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-center py-7 md:py-9 border-b transition-colors duration-300 hover:bg-white/[0.05] px-2 md:px-6 -mx-2 md:-mx-6" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
+                <button onClick={() => openQuote({ biz: p.biz, subject: p.t })} className="group w-full text-left grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-center py-7 md:py-9 border-b transition-colors duration-300 hover:bg-white/[0.05] px-2 md:px-6 -mx-2 md:-mx-6" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
                   <div className="md:col-span-2 text-5xl md:text-7xl font-light leading-none" style={{ color: GOLD }}>{`0${i + 1}`}</div>
                   <h3 className="md:col-span-3 text-xl md:text-2xl font-light text-white">{p.t}</h3>
                   <p className="md:col-span-4 text-sm font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.6)" }}>{p.d}</p>
@@ -825,6 +827,7 @@ const Prototype = () => {
           </div>
         </div>
       )}
+      <QuoteModal />
     </div>
   );
 };
