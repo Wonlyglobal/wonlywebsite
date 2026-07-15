@@ -51,14 +51,17 @@ type NavItem = { label: string; to?: string; href?: string; children?: NavChild[
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
     { label: "Security Doors", href: "/products/security-doors" },
-    { label: "Smart Lock S80", href: "/products/smart-locks/s80" },
+    { label: "Smart Locks", href: "/products/smart-locks/s80" },
     { label: "Wooden Doors", to: "products" },
-    { label: "Aluminum Windows", to: "products" },
+    { label: "Smart Windows", to: "products" },
+    { label: "Engineering Doors", to: "products" },
+    { label: "Medical Doors", to: "products" },
+    { label: "YIZHAI YISHU · Artisan", to: "products" },
     { label: "Whole-House Intelligence", to: "products" },
   ] },
   { label: "Solutions", to: "solutions" },
-  { label: "Why WONLY", to: "why" },
-  { label: "Global Footprint", to: "footprint" },
+  { label: "Projects", to: "projects" },
+  { label: "R&D & Manufacturing", to: "why" },
   { label: "About", href: "/about" },
   { label: "Contact", to: "contact" },
 ];

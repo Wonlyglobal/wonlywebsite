@@ -40,14 +40,17 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 const NAV: { label: string; href: string; children?: { label: string; href: string }[] }[] = [
   { label: "Products", href: "/#products", children: [
     { label: "Security Doors", href: "/products/security-doors" },
-    { label: "Smart Lock S80", href: "/products/smart-locks/s80" },
+    { label: "Smart Locks", href: "/products/smart-locks/s80" },
     { label: "Wooden Doors", href: "/#products" },
-    { label: "Aluminum Windows", href: "/#products" },
+    { label: "Smart Windows", href: "/#products" },
+    { label: "Engineering Doors", href: "/#products" },
+    { label: "Medical Doors", href: "/#products" },
+    { label: "YIZHAI YISHU · Artisan", href: "/#products" },
     { label: "Whole-House Intelligence", href: "/#products" },
   ] },
   { label: "Solutions", href: "/#solutions" },
-  { label: "Why WONLY", href: "/#why" },
-  { label: "Global Footprint", href: "/#footprint" },
+  { label: "Projects", href: "/#projects" },
+  { label: "R&D & Manufacturing", href: "/#why" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/#contact" },
 ];
