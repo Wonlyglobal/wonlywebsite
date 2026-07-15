@@ -148,10 +148,13 @@ const PARTNERSHIP = [
 
 /* ── Section 8 · Timeline ──────────────────────────────────── */
 const TIMELINE = [
-  { y: "1996", m: "Brand founded, Yongkang, Zhejiang" },
-  { y: "2000s", m: "National sales leadership in security doors & smart locks" },
-  { y: "2021", m: "Listed on Shanghai Stock Exchange (SSE: 605268)" },
-  { y: "Today", m: "5 global bases, 6 R&D centers, 200M+ users worldwide" },
+  { y: "1996", m: "Brand founded in Yongkang, Zhejiang." },
+  { y: "2003", m: "Wins the 'Challenge the Lock-Picking Champion' — unopened 20+ years since." },
+  { y: "2005", m: "Named a China Well-Known Trademark — the sector's only dual certification." },
+  { y: "2016", m: "SAP go-live — the start of digital transformation." },
+  { y: "2021", m: "Listed on the Shanghai Stock Exchange (605268) — the industry's only main-board company." },
+  { y: "2024", m: "Opens the sector's only national-level 5G future factory." },
+  { y: "2026", m: "Global expansion begins — the first year of the going-global strategy." },
 ];
 
 /* ── Footer ────────────────────────────────────────────────── */
@@ -319,21 +322,21 @@ function Timeline({ items }: { items: { y: string; m: string }[] }) {
   }, []);
   return (
     <div ref={ref} className="mt-20">
-      <div className="relative mb-8 hidden md:block">
+      <div className="relative mb-8 hidden lg:block">
         <div className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2 overflow-hidden" style={{ background: `${SILVER}44` }}>
           {on && <div className="timeline-progress-line h-full" style={{ background: GOLD }} />}
         </div>
-        <div className="relative grid grid-cols-4">
+        <div className="relative grid grid-cols-7">
           {items.map((t, i) => (
-            <span key={t.y} className={`block w-3 h-3 rounded-full ${on ? "timeline-node-active" : ""}`} style={{ background: GOLD, opacity: on ? 1 : 0, animationDelay: `${i * 0.45}s` }} />
+            <span key={t.y} className={`block w-3 h-3 rounded-full ${on ? "timeline-node-active" : ""}`} style={{ background: GOLD, opacity: on ? 1 : 0, animationDelay: `${i * 0.35}s` }} />
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5">
         {items.map((t, i) => (
-          <div key={t.y} className={on ? "timeline-card-in" : ""} style={{ opacity: on ? undefined : 0, animationDelay: `${0.35 + i * 0.45}s` }}>
-            <div className="text-3xl md:text-4xl font-light" style={{ color: DARK }}>{t.y}</div>
-            <p className="mt-3 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{t.m}</p>
+          <div key={t.y} className={on ? "timeline-card-in" : ""} style={{ opacity: on ? undefined : 0, animationDelay: `${0.3 + i * 0.35}s` }}>
+            <div className="text-2xl md:text-3xl font-light" style={{ color: DARK }}>{t.y}</div>
+            <p className="mt-3 text-[13px] font-normal leading-relaxed" style={{ color: MUTED }}>{t.m}</p>
           </div>
         ))}
       </div>

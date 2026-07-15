@@ -16,10 +16,6 @@ const IMG = {
   asianGames: `${BASE}images/landmark-asiangames.webp`,
   tianjin: `${BASE}images/proj-s-5.webp`,
   govHousing: `${BASE}images/landmark-govhousing.webp`,
-  award1: `${BASE}images/top500-2.webp`,
-  award2: `${BASE}images/top500-3.webp`,
-  award3: `${BASE}images/top500-4.webp`,
-  award4: `${BASE}images/top500-5.webp`,
 };
 
 const STATS = [
@@ -70,8 +66,6 @@ const HONORS = [
   "National Quality Benchmark Enterprise",
   "TOP500 Preferred Supplier — 12 consecutive years",
 ];
-const AWARDS = [IMG.award1, IMG.award2, IMG.award3, IMG.award4];
-
 const VALUES = [
   { icon: HeartHandshake, t: "Integrity & Gratitude", d: "We keep our word — to customers, partners and each other — and never forget who put their trust in us." },
   { icon: Gem, t: "Humility & Respect", d: "We respect the craft, the standards and the responsibility that comes with protecting people's homes." },
@@ -257,26 +251,15 @@ const About = () => {
             <Reveal key={c}><span className="px-5 py-2.5 rounded-full text-sm font-medium border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "rgba(255,255,255,0.05)", color: "rgba(245,241,234,0.92)" }}>{c}</span></Reveal>
           ))}
         </div>
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <Reveal>
-            <ul className="space-y-4">
-              {HONORS.map((h, i) => (
-                <li key={h} className="flex items-start gap-4 py-1">
-                  <span className="text-sm mt-0.5 font-light" style={{ color: GOLD }}>{`0${i + 1}`}</span>
-                  <span className="text-base font-light" style={{ color: "rgba(245,241,234,0.9)" }}>{h}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="grid grid-cols-2 gap-3">
-              {AWARDS.map((a, i) => (
-                <div key={i} className="rounded-xl overflow-hidden" style={{ background: "#fff" }}>
-                  <img src={a} alt="WONLY honor / recognition" loading="lazy" className="w-full h-36 object-contain p-3" />
-                </div>
-              ))}
-            </div>
-          </Reveal>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2">
+          {HONORS.map((h, i) => (
+            <Reveal key={h}>
+              <div className="flex items-start gap-4 py-3 border-b" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+                <span className="text-sm mt-0.5 font-light" style={{ color: GOLD }}>{`0${i + 1}`}</span>
+                <span className="text-base font-light" style={{ color: "rgba(245,241,234,0.9)" }}>{h}</span>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
