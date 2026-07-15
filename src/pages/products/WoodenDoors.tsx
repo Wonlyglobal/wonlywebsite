@@ -1,0 +1,33 @@
+import { Volume2, Shield, Ruler, Droplets, Lock, Leaf } from "lucide-react";
+import { BASE } from "@/lib/site-ui";
+import { ProductPage, type ProductPageData } from "@/lib/product-page";
+
+const data: ProductPageData = {
+  seo: {
+    title: "Wooden Doors — Steel-Wood Anti-Warp Silent Doors | WONLY",
+    description: "WONLY steel-wood wooden doors: double the silence, a double-keel galvanized-steel frame that never sags or warps, moisture-proof and formaldehyde-free (ENF).",
+    path: "/products/wooden-doors",
+  },
+  hero: {
+    eyebrow: "Wooden Doors",
+    title: <>Steel-Wood<br /><span style={{ color: "#D4C4A0" }}>Silent</span> Doors</>,
+    sub: "Double the silence, engineered never to warp — where craftsmanship meets a steel-reinforced core for residential, commercial and bespoke interiors.",
+    img: `${BASE}images/wood-2.webp`,
+    mode: "render",
+  },
+  highlights: ["One door with the effect of two", "ENF-grade, formaldehyde-free build", "Won't sag, warp or fear moisture"],
+  featuresEyebrow: "Engineered In",
+  featuresTitle: "Quiet, solid, and built to last.",
+  features: [
+    { icon: Volume2, t: "Double Silence", d: "A four-sided stepped-seal patent structure blocks noise, smoke, dust and insects." },
+    { icon: Shield, t: "More Secure", d: "Steel door frame and bolt lock rigidly together to resist violent forced entry." },
+    { icon: Ruler, t: "Never Sags or Warps", d: "A double-keel door leaf and galvanized-steel-reinforced frame hold their shape for life." },
+    { icon: Droplets, t: "Moisture-Proof", d: "Steel-wood bonding blocks contact between the wall and the timber, defeating damp." },
+    { icon: Lock, t: "More Private", d: "A 6 cm-thick leaf delivers acoustic privacy on par with a five-star hotel." },
+    { icon: Leaf, t: "Eco & Healthy", d: "No sawing, no glue, no dust and no formaldehyde — certified to the ENF standard." },
+  ],
+  band: { img: `${BASE}images/factory-2.webp`, eyebrow: "Crafted at Scale", title: "3 million wooden doors a year, made in-house." },
+  cta: { title: "Bring WONLY wooden doors to your market.", sub: "Residential, commercial or custom interior — request the catalog, samples and pricing." },
+};
+
+export default function WoodenDoors() { return <ProductPage data={data} />; }

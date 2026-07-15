@@ -13,6 +13,12 @@ import NotFound from "./pages/not-found/Index";
 const Prototype = lazy(() => import("./pages/prototype/Index"));
 const About = lazy(() => import("./pages/about/Index"));
 const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
+const WoodenDoors = lazy(() => import("./pages/products/WoodenDoors"));
+const SmartWindows = lazy(() => import("./pages/products/SmartWindows"));
+const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
+const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
+const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
+const WholeHouse = lazy(() => import("./pages/products/WholeHouse"));
 
 const queryClient = new QueryClient();
 
@@ -33,6 +39,12 @@ const App = () => (
           <Route path="/home-old" element={<Index />} />
           <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
           <Route path="/products/smart-locks/s80" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLockS80 /></Suspense>} />
+          <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
+          <Route path="/products/smart-windows" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
+          <Route path="/products/engineering-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EngineeringDoors /></Suspense>} />
+          <Route path="/products/medical-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MedicalDoors /></Suspense>} />
+          <Route path="/products/yizhai-yishu" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><YizhaiYishu /></Suspense>} />
+          <Route path="/products/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
           <Route path="/products/security-doors" element={<SecurityDoors />} />
           <Route path="/products/security-doors/x70" element={<SecurityDoorX70 />} />
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />

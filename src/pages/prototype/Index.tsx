@@ -52,12 +52,12 @@ const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
     { label: "Security Doors", href: "/products/security-doors" },
     { label: "Smart Locks", href: "/products/smart-locks/s80" },
-    { label: "Wooden Doors", to: "products" },
-    { label: "Smart Windows", to: "products" },
-    { label: "Engineering Doors", to: "products" },
-    { label: "Medical Doors", to: "products" },
-    { label: "YIZHAI YISHU · Artisan", to: "products" },
-    { label: "Whole-House Intelligence", to: "products" },
+    { label: "Wooden Doors", href: "/products/wooden-doors" },
+    { label: "Smart Windows", href: "/products/smart-windows" },
+    { label: "Engineering Doors", href: "/products/engineering-doors" },
+    { label: "Medical Doors", href: "/products/medical-doors" },
+    { label: "YIZHAI YISHU · Artisan", href: "/products/yizhai-yishu" },
+    { label: "Whole-House Intelligence", href: "/products/whole-house" },
   ] },
   { label: "Solutions", to: "solutions" },
   { label: "Projects", to: "projects" },
@@ -95,13 +95,15 @@ const FOOTPRINT_STATS = [
   { to: 200, suffix: "M+", label: "Users Worldwide" },
 ];
 
-/* ── Featured overseas projects (government & institutional first) ── */
-const PROJECTS = [
+/* ── Featured overseas projects (government & institutional first) ──
+   English site: clean, TEXT-FREE photos only + English HTML overlays. Never a burned-in-Chinese image. */
+const PROJECTS: { name: string; place: string; tag: string; img?: string; placeholder?: boolean }[] = [
   { name: "New Administrative Capital CBD", place: "Cairo, Egypt", tag: "Government", img: `${BASE}images/proj-egypt-cbd.webp` },
   { name: "National Food Centre", place: "Barbados", tag: "Government", img: `${BASE}images/proj-barbados.webp` },
-  { name: "Landmark Arc Hotel", place: "Cairo, Egypt", tag: "Hospitality", img: `${BASE}images/proj-cairo-hotel.webp` },
-  { name: "Mixed-Use Complex", place: "Mozambique", tag: "Commercial", img: `${BASE}images/proj-mozambique.webp` },
-  { name: "Jazan Industrial City Villas", place: "Saudi Arabia", tag: "Residential", img: `${BASE}images/proj-saudi-villa.webp` },
+  { name: "New Capital Arc Landmark", place: "Cairo, Egypt", tag: "Landmark", img: `${BASE}images/proj-cairo-hotel.webp` },
+  { name: "Jazan Industrial City", place: "Saudi Arabia", tag: "Industrial", img: `${BASE}images/proj-saudi-villa.webp` },
+  // TODO: replace with a clean, text-free photo of the Mozambique complex (current source is a Chinese PPT slide — must not ship).
+  { name: "Mixed-Use Complex", place: "Mozambique · 35,000 m²", tag: "Commercial", placeholder: true },
 ];
 
 /* ── Section 4 · Products ──────────────────────────────────── */
@@ -686,7 +688,11 @@ const Prototype = () => {
           {PROJECTS.slice(0, 2).map((p) => (
             <Reveal key={p.name}>
               <div className="group relative rounded-2xl overflow-hidden h-[320px] md:h-[360px]">
-                <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                {p.placeholder ? (
+                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: "linear-gradient(135deg,#2a2627,#0d0d0d)" }}><span className="text-[11px] tracking-[0.22em] uppercase" style={{ color: "rgba(245,241,234,0.4)" }}>Photo coming soon</span></div>
+                ) : (
+                  <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
                 <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 38%, rgba(13,13,13,0.9))" }} />
                 <div className="absolute top-5 left-5 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{p.tag}</div>
                 <div className="absolute bottom-0 left-0 p-6">
@@ -701,7 +707,11 @@ const Prototype = () => {
           {PROJECTS.slice(2).map((p, i) => (
             <Reveal key={p.name} delay={(i % 3) * 80}>
               <div className="group relative rounded-2xl overflow-hidden h-[240px]">
-                <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                {p.placeholder ? (
+                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: "linear-gradient(135deg,#2a2627,#0d0d0d)" }}><span className="text-[11px] tracking-[0.22em] uppercase" style={{ color: "rgba(245,241,234,0.4)" }}>Photo coming soon</span></div>
+                ) : (
+                  <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
                 <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 42%, rgba(13,13,13,0.88))" }} />
                 <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-medium" style={{ background: `${CHAMP_BG}e6`, color: DARK }}>{p.tag}</div>
                 <div className="absolute bottom-0 left-0 p-5">
