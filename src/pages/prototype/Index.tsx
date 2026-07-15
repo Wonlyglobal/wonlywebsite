@@ -85,6 +85,11 @@ const WHO_CHECK = [
   "Certified Quality — ISO 9001 / 14001, CE, UL, EN 1634 fire-rated",
   "Premium security 20–30% below comparable Western brands",
 ];
+const WHY_FEATURES = [
+  { img: `${BASE}images/factory-line-a.webp`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
+  { img: `${BASE}images/factory-abb.webp`, t: "Robotic precision", d: "ABB automated welding and CNC lines hold the tolerances export projects depend on." },
+  { img: `${BASE}images/factory-line-b.webp`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
+];
 const FOOTPRINT_STATS = [
   { to: 60, suffix: "+", label: "Countries & Regions" },
   { to: 5, label: "Manufacturing Bases" },
@@ -622,12 +627,16 @@ const Prototype = () => {
             <p className="mt-6 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.</p>
           </Reveal>
           <Reveal delay={120}>
-            <div className="relative h-[300px] md:h-[400px]">
-              <div className="grid grid-cols-2 grid-rows-2 gap-2 h-full rounded-2xl overflow-hidden">
-                <img src={IMG.factoryLineA} alt="WONLY smart stamping line" loading="lazy" className="row-span-2 w-full h-full object-cover" />
-                <img src={IMG.factoryLineB} alt="WONLY press line and mold tower" loading="lazy" className="w-full h-full object-cover" />
-                <img src={IMG.factoryAbb} alt="WONLY ABB robotic automation" loading="lazy" className="w-full h-full object-cover" />
-              </div>
+            <div className="space-y-3.5">
+              {WHY_FEATURES.map((f) => (
+                <div key={f.t} className="flex items-center gap-4 rounded-2xl p-3 pr-5" style={{ background: CHAMP_BG }}>
+                  <img src={f.img} alt={f.t} loading="lazy" className="w-28 h-24 md:w-36 md:h-28 rounded-xl object-cover shrink-0" />
+                  <div>
+                    <div className="text-base md:text-lg font-medium" style={{ color: DARK }}>{f.t}</div>
+                    <div className="mt-1 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>
