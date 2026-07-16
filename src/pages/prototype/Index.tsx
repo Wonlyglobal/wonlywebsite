@@ -357,7 +357,12 @@ function DoorConveyor() {
 const eyebrow = "text-[12px] tracking-[0.3em] uppercase font-semibold text-[#B08D4F]";
 const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[34px] md:text-[58px]";
 
-const scrollToId = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+const scrollToId = (id: string) => {
+  // Clear any intro scroll-lock so nav links work even before the hero intro finishes.
+  document.body.style.overflow = "";
+  document.body.style.touchAction = "";
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 const Prototype = () => {
   const doorVideo = useRef<HTMLVideoElement>(null);
@@ -489,7 +494,7 @@ const Prototype = () => {
           <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
             <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto transition-[filter] duration-500" style={{ filter: solid ? "none" : "brightness(0) invert(1)" }} />
           </button>
-          <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
+          <nav className="hidden lg:flex items-center gap-1">
             {NAV.map((n) => (
               <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(true)} onMouseLeave={() => setOpenDrop(false)}>
                 {n.href ? (
@@ -516,7 +521,7 @@ const Prototype = () => {
               </div>
             ))}
           </nav>
-          <button onClick={() => scrollToId("contact")} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
+          <button onClick={() => scrollToId("contact")} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-transform duration-300 hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
             Get Solutions &amp; Quote
           </button>
         </div>
