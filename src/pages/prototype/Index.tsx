@@ -750,7 +750,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 8 · Global Footprint (one screen, centered) ══ */}
-      <section id="footprint" className="px-[7vw] py-16 md:py-0 md:min-h-screen md:max-h-[960px] flex flex-col md:justify-center" style={{ background: CHAMP_BG }}>
+      <section id="footprint" className="px-[7vw] pt-24 pb-24 md:pt-40 md:pb-40 flex flex-col" style={{ background: CHAMP_BG }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <Reveal>
             <WorldDots className="w-full h-auto" />
@@ -789,7 +789,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ Company timeline ══ */}
-      <section className="px-[7vw] py-24 md:py-28" style={{ background: "#fff" }}>
+      <section className="px-[7vw] pt-24 pb-14 md:pt-28 md:pb-16" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Our Journey</div>
           <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Three decades in the making</h2>
@@ -798,7 +798,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
-      <section id="partners" className="px-[7vw] py-20 md:py-24 text-center" style={{ background: "#fff" }}>
+      <section id="partners" className="px-[7vw] pt-12 pb-20 md:pt-14 md:pb-24 text-center" style={{ background: "#fff" }}>
         <Reveal>
           <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
           <p className="text-lg md:text-2xl font-light max-w-4xl mx-auto leading-snug" style={{ color: DARK }}>
