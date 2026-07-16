@@ -5,21 +5,18 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/not-found/Index";
+import ProductComingSoon from "./pages/products/ComingSoon";
 
 // Lazy-loaded so each route ships as its own chunk and never enters the initial
 // bundle the homepage visitor downloads.
 const Prototype = lazy(() => import("./pages/prototype/Index"));
 const Index = lazy(() => import("./pages/home/Index"));
-const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
 const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
 const About = lazy(() => import("./pages/about/Index"));
 const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
-const WoodenDoors = lazy(() => import("./pages/products/WoodenDoors"));
-const SmartWindows = lazy(() => import("./pages/products/SmartWindows"));
 const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
 const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
 const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
-const WholeHouse = lazy(() => import("./pages/products/WholeHouse"));
 
 const queryClient = new QueryClient();
 
@@ -39,15 +36,18 @@ const App = () => (
           {/* Previous homepage kept for reference (not linked). */}
           <Route path="/home-old" element={<Index />} />
           <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
+          {/* Five canonical product-line routes — placeholder pages for now (see ComingSoon.tsx). */}
+          <Route path="/products/security-doors" element={<ProductComingSoon name="Security Doors" />} />
+          <Route path="/products/wooden-doors" element={<ProductComingSoon name="Wooden Doors" />} />
+          <Route path="/products/smart-locks" element={<ProductComingSoon name="Smart Locks" />} />
+          <Route path="/products/smart-windows" element={<ProductComingSoon name="Smart Windows" />} />
+          <Route path="/products/whole-house" element={<ProductComingSoon name="Whole-House Intelligence" />} />
+          {/* Detailed sub-pages already built. */}
           <Route path="/products/smart-locks/s80" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLockS80 /></Suspense>} />
-          <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
-          <Route path="/products/smart-windows" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
+          <Route path="/products/security-doors/x70" element={<SecurityDoorX70 />} />
           <Route path="/products/engineering-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EngineeringDoors /></Suspense>} />
           <Route path="/products/medical-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MedicalDoors /></Suspense>} />
           <Route path="/products/yizhai-yishu" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><YizhaiYishu /></Suspense>} />
-          <Route path="/products/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
-          <Route path="/products/security-doors" element={<SecurityDoors />} />
-          <Route path="/products/security-doors/x70" element={<SecurityDoorX70 />} />
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

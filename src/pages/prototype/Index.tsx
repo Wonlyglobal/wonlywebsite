@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, ShieldCheck, Play, X } from "lucide-react";
+import { ChevronDown, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 
@@ -50,8 +50,8 @@ type NavItem = { label: string; to?: string; href?: string; children?: NavChild[
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
     { label: "Security Doors", href: "/products/security-doors", img: IMG.aluMax },
-    { label: "Smart Locks", href: "/products/smart-locks/s80", img: IMG.lockS80 },
     { label: "Wooden Doors", href: "/products/wooden-doors", img: IMG.wood2 },
+    { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
     { label: "Smart Windows", href: "/products/smart-windows", img: IMG.aluT200 },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: IMG.lockS80 },
   ] },
@@ -78,11 +78,6 @@ const STAT_CARDS = [
   { value: "6", label: "R&D Centers", img: `${BASE}images/proj-egypt-cbd.webp` },
   { value: "1,000+", label: "Patents", img: `${BASE}images/proj-saudi-villa.webp` },
   { value: "200M+", label: "Users Protected", img: `${BASE}images/proj-1.webp` },
-];
-const WHO_CHECK = [
-  "One-Stop Ecosystem — doors, locks, windows & whole-house intelligence",
-  "Certified Quality — ISO 9001 / 14001, CE, UL, EN 1634 fire-rated",
-  "Premium security 20–30% below comparable Western brands",
 ];
 const WHY_FEATURES = [
   { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
@@ -113,22 +108,13 @@ const PROJECTS: { name: string; place: string; tag: string; img?: string; placeh
 ];
 
 /* ── Section 4 · Products ──────────────────────────────────── */
-const PRODUCT_RAIL = [
-  { n: "01", name: "Robotic Security Door X70", cat: "door", d: "Flagship: autonomous locking, multi-vector intrusion sensing, cast-aluminum build.", img: IMG.aluMax },
-  { n: "02", name: "4.0 Global Series Doors", cat: "door", d: "Fire-rated, anti-theft, climate-adapted to global standards.", img: IMG.alu40 },
-  { n: "03", name: "Engineering & Medical Doors", cat: "door", d: "Fire / access-control / acoustic and hermetic hospital doors.", img: IMG.aluT200 },
-  { n: "04", name: "S80 True-Sensing Smart Lock", cat: "lock", d: "Hands-free long-range sensing, biometric + app control, tamper-proof.", img: IMG.lockS80 },
-  { n: "05", name: "Steel-Wood Silent Door", cat: "wood", d: "Double the silence, never warps — steel-reinforced wooden door.", img: IMG.wood2 },
-  { n: "06", name: "Smart Aluminum Window", cat: "window", d: "Insulation like a wall; auto-closes in wind and rain.", img: IMG.aluPro },
-  { n: "07", name: "Whole-House Intelligence", cat: "whole", d: "A 28-category smart-home ecosystem, from the front door.", img: IMG.lockS80 },
-];
-const PROD_CATS = [
-  { key: "all", label: "All" },
-  { key: "door", label: "Security Doors" },
-  { key: "lock", label: "Smart Locks" },
-  { key: "wood", label: "Wooden Doors" },
-  { key: "window", label: "Smart Windows" },
-  { key: "whole", label: "Whole-House" },
+// Product gallery — doors first. Each card links to its /products/ route (see App.tsx).
+const PRODUCTS_GALLERY = [
+  { name: "Security Doors", href: "/products/security-doors", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Cast-aluminum security doors — autonomous locking and multi-vector intrusion sensing." },
+  { name: "Wooden Doors", href: "/products/wooden-doors", img: `${BASE}images/5products/prod-wooden-doors.jpg`, d: "Warm, quiet interior doors — steel-reinforced cores that stay true and never warp." },
+  { name: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
+  { name: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
+  { name: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
 ];
 
 /* ── Section 5 · Solutions ─────────────────────────────────── */
@@ -288,42 +274,6 @@ function WorldDots({ className = "" }: { className?: string }) {
 }
 
 /* Auto-advancing flagship product rail (pauses on hover, wraps instantly) */
-function ProductRail({ items }: { items: typeof PRODUCT_RAIL }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const idx = useRef(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const el = ref.current;
-    if (!el) return;
-    let paused = false;
-    const enter = () => { paused = true; };
-    const leave = () => { paused = false; };
-    el.addEventListener("mouseenter", enter);
-    el.addEventListener("mouseleave", leave);
-    const id = setInterval(() => {
-      if (paused) return;
-      const cards = el.children;
-      if (!cards.length) return;
-      idx.current = (idx.current + 1) % cards.length;
-      const card = cards[idx.current] as HTMLElement;
-      el.scrollTo({ left: card.offsetLeft, behavior: idx.current === 0 ? "auto" : "smooth" });
-    }, 3200);
-    return () => { clearInterval(id); el.removeEventListener("mouseenter", enter); el.removeEventListener("mouseleave", leave); };
-  }, []);
-  return (
-    <div ref={ref} className="relative flex gap-6 overflow-x-auto pb-4" style={{ scrollSnapType: "x mandatory" }}>
-      {items.map((p) => (
-        <div key={p.n} className="shrink-0 w-[300px] md:w-[360px]" style={{ scrollSnapAlign: "start" }}>
-          <div className="overflow-hidden"><img src={p.img} alt={p.name} loading="lazy" className="w-full h-[300px] object-cover" /></div>
-          <div className="mt-4 text-xs tracking-[0.2em]" style={{ color: GOLD }}>{p.n}</div>
-          <div className="mt-1 text-lg font-light" style={{ color: DARK }}>{p.name}</div>
-          <p className="mt-2 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{p.d}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 /* Interactive company timeline — progress line fills, nodes pop, cards fade in on view */
 function Timeline({ items }: { items: { y: string; m: string }[] }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -397,7 +347,6 @@ const Prototype = () => {
   const [openDrop, setOpenDrop] = useState(false);
   const [sent, setSent] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
-  const [prodCat, setProdCat] = useState("all");
   const openQuote = useQuoteStore((s) => s.openQuote);
   const [form, setForm] = useState({ name: "", company: "", country: "", email: "", interest: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -621,33 +570,6 @@ const Prototype = () => {
         </div>
 
         <DoorConveyor />
-
-        {/* Who We Are — structured panel */}
-        <Reveal>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden" style={{ background: "#efeae0" }}>
-            <div className="p-8 md:px-12 md:py-10 flex flex-col justify-center">
-              <div className={eyebrow} style={{ color: GOLD }}>Who We Are</div>
-              <h3 className="mt-4 text-2xl md:text-[38px] font-light leading-[1.15]" style={{ color: DARK }}>One partner for the entire building entry.</h3>
-              <p className="mt-5 text-base font-normal leading-relaxed" style={{ color: MUTED }}>Founded in 1996 and listed on the Shanghai Stock Exchange (SSE: 605268), WONLY manufactures security doors, smart locks, wooden doors and aluminum windows across five bases and six R&D centers — protecting over 200 million users worldwide.</p>
-              <div className="mt-6 inline-flex items-center gap-2.5 self-start px-4 py-2 rounded-full" style={{ background: `${GOLD}1f` }}>
-                <ShieldCheck size={16} style={{ color: GOLD }} />
-                <span className="text-xs font-medium" style={{ color: DARK }}>No.1 in China · Smart Doors &amp; Locks</span>
-              </div>
-              <ul className="mt-6 space-y-3">
-                {WHO_CHECK.map((it) => (
-                  <li key={it} className="flex items-start gap-3">
-                    <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: `${GOLD}22` }}><Check size={13} style={{ color: GOLD }} /></span>
-                    <span className="text-sm font-normal" style={{ color: DARK }}>{it}</span>
-                  </li>
-                ))}
-              </ul>
-              <button onClick={() => scrollToId("contact")} className="mt-7 self-start inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote <ArrowRight size={15} /></button>
-            </div>
-            <div className="relative min-h-[320px] md:min-h-0 flex items-center justify-center overflow-hidden" style={{ background: "#E8E4DD" }}>
-              <img src={`${BASE}images/door-k300pro.png`} alt="WONLY K300 Pro cast-aluminum security door" loading="lazy" className="w-auto max-w-[70%] max-h-[280px] md:max-h-[52vh] object-contain select-none" style={{ filter: "drop-shadow(0 18px 40px rgba(40,36,33,0.28))" }} draggable={false} />
-            </div>
-          </div>
-        </Reveal>
       </section>
 
       {/* ══ Full-bleed image band A ══ */}
@@ -664,24 +586,26 @@ const Prototype = () => {
         </Reveal>
       </section>
 
-      {/* ══ 4 · Products ══ */}
-      <section id="products" className="px-[7vw] py-28 md:py-36" style={{ background: CHAMP_BG }}>
-        {/* horizontal product rail */}
-        <div>
-          <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: GOLD }}>Our Products</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Flagship line-up.</h2>
-          </Reveal>
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 mb-8">
-            <div className="flex flex-wrap items-center gap-2.5">
-              {PROD_CATS.map((c) => (
-                <button key={c.key} onClick={() => setProdCat(c.key)} className="px-5 py-2 rounded-full text-[13px] font-medium transition-all" style={prodCat === c.key ? { background: GOLD, color: DARK } : { background: "transparent", color: MUTED, border: `1px solid ${SILVER}66` }}>{c.label}</button>
-              ))}
-            </div>
-            <div className="text-[11px] tracking-[0.3em] uppercase font-light" style={{ color: SILVER }}>scroll →</div>
-          </div>
-          <ProductRail key={prodCat} items={PRODUCT_RAIL.filter((p) => prodCat === "all" || p.cat === prodCat)} />
-          <button onClick={() => scrollToId("contact")} className="mt-8 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Browse Full Catalog <ArrowRight size={15} /></button>
+      {/* ══ 4 · Products — expanding horizontal gallery ══ */}
+      <section id="products" className="px-[7vw] pt-24 pb-12 md:pt-28 md:pb-14 md:h-screen md:max-h-[940px] flex flex-col" style={{ background: CHAMP_BG }}>
+        <Reveal className="shrink-0">
+          <div className={eyebrow} style={{ color: GOLD }}>Our Products</div>
+          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built for every opening.</h2>
+        </Reveal>
+        <div className="product-gallery mt-8 md:mt-10 flex-1 min-h-0 flex flex-col md:flex-row gap-3 md:gap-4">
+          {PRODUCTS_GALLERY.map((p) => (
+            <Link key={p.name} to={p.href} className="product-card group relative block overflow-hidden rounded-2xl min-w-0 h-[240px] md:h-auto">
+              <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(12,10,9,.88), rgba(12,10,9,.12) 34%, transparent 50%)" }} />
+              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                <h3 className="text-white text-lg md:text-xl font-semibold leading-tight">{p.name}</h3>
+                <div className="overflow-hidden transition-all duration-500 ease-out max-h-40 opacity-100 md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100">
+                  <p className="mt-2 text-[13px] leading-relaxed text-white/85 max-w-[16rem]">{p.d}</p>
+                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium" style={{ color: CHAMP }}>Discover <ArrowRight size={15} /></span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -847,34 +771,30 @@ const Prototype = () => {
             Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
           </p>
           <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Strategic Technology &amp; Industry Partners</div>
-          <div className="mt-7 overflow-hidden max-w-6xl mx-auto">
-            <div className="partner-row overflow-hidden">
-              <div className="partner-track-left flex gap-4 md:gap-5 w-max">
-                {[...PARTNER_PHOTOS, ...PARTNER_PHOTOS].map((p, i) => (
-                  <div key={i} className="group relative shrink-0 w-[280px] md:w-[340px] rounded-2xl overflow-hidden">
-                    <img src={p.img} alt={`WONLY strategic partnership — ${p.n}`} loading="lazy" className="w-full h-[185px] md:h-[214px] object-cover" />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 45%, rgba(13,13,13,0.85) 100%)" }} />
-                    <div className="absolute left-4 bottom-3 text-left">
-                      <div className="text-white text-sm md:text-base font-semibold leading-tight">{p.n}</div>
-                      <div className="text-[10px] tracking-[0.16em] uppercase" style={{ color: CHAMP }}>Strategic Partner · {p.y}</div>
-                    </div>
-                  </div>
-                ))}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
+            {PARTNER_PHOTOS.map((p) => (
+              <div key={p.n} className="group relative rounded-2xl overflow-hidden">
+                <img src={p.img} alt={`WONLY strategic partnership — ${p.n}`} loading="lazy" className="w-full h-[200px] md:h-[220px] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 45%, rgba(13,13,13,0.85) 100%)" }} />
+                <div className="absolute left-4 bottom-3 text-left">
+                  <div className="text-white text-sm md:text-base font-semibold leading-tight">{p.n}</div>
+                  <div className="text-[10px] tracking-[0.16em] uppercase" style={{ color: CHAMP }}>Strategic Partner · {p.y}</div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* Trusted by China's leading developers — real client logo wall */}
+          {/* Trusted by China's leading developers — full-bleed logo carousel */}
           <div className="mt-16 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Trusted by China&apos;s Leading Developers</div>
-          <div className="mt-6 rounded-3xl p-5 md:p-7 max-w-6xl mx-auto overflow-hidden" style={{ background: CHAMP_BG }}>
+          <div className="mt-7 w-screen ml-[calc(50%-50vw)] overflow-hidden">
             <div className="flex flex-col gap-3 md:gap-4">
               {[0, 1, 2].map((row) => {
                 const items = Array.from({ length: 10 }, (_, i) => `re-${String(row * 10 + i + 1).padStart(2, "0")}.png`);
                 return (
                   <div key={row} className="partner-row overflow-hidden">
-                    <div className={`${row % 2 === 1 ? "partner-track-right" : "partner-track-left"} flex gap-3 md:gap-4 w-max`}>
+                    <div className={`${row % 2 === 1 ? "partner-track-right" : "partner-track-left"} flex gap-3 md:gap-4 w-max px-2`}>
                       {[...items, ...items].map((f, i) => (
-                        <div key={i} className="flex items-center justify-center rounded-xl bg-white h-20 md:h-24 w-36 md:w-44 shrink-0 p-3 md:p-4">
+                        <div key={i} className="flex items-center justify-center rounded-xl bg-white h-20 md:h-24 w-36 md:w-44 shrink-0 p-3 md:p-4 border shadow-sm" style={{ borderColor: `${SILVER}44` }}>
                           <img src={`${BASE}images/partners-re/${f}`} alt="" aria-hidden="true" loading="lazy" className="max-h-full max-w-full object-contain opacity-90" />
                         </div>
                       ))}

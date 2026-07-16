@@ -227,6 +227,23 @@
   animation-play-state: paused;
 }
 
+/* Products — expanding horizontal gallery (desktop): hovered card widens, siblings narrow */
+@media (min-width: 768px) {
+  .product-gallery .product-card {
+    flex: 1 1 0%;
+    transition: flex 0.65s cubic-bezier(0.55, 0.05, 0.1, 1);
+  }
+  .product-gallery:hover .product-card {
+    flex: 0.82 1 0%;
+  }
+  .product-gallery .product-card:hover {
+    flex: 2.4 1 0%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-gallery .product-card { transition: none; }
+}
+
 @keyframes timeline-progress {
   from { width: 0%; }
   to { width: 100%; }
