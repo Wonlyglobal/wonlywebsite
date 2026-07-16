@@ -6,6 +6,7 @@ import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
+const GOLD_DEEP = "#B08D4F"; // deeper, higher-contrast gold for uppercase kickers/eyebrows
 const CHAMP = "#D4C4A0";
 const SILVER = "#B8BFC8";
 const CHAMP_BG = "#F5F1EA";
@@ -52,8 +53,8 @@ const NAV: NavItem[] = [
     { label: "Security Doors", href: "/products/security-doors", img: IMG.aluMax },
     { label: "Wooden Doors", href: "/products/wooden-doors", img: IMG.wood2 },
     { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
-    { label: "Smart Windows", href: "/products/smart-windows", img: IMG.aluT200 },
-    { label: "Whole-House Intelligence", href: "/products/whole-house", img: IMG.lockS80 },
+    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/nav-smart-windows.jpg` },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/nav-whole-house.jpg` },
   ] },
   { label: "Projects", to: "projects" },
   { label: "R&D & Manufacturing", to: "why" },
@@ -353,7 +354,7 @@ function DoorConveyor() {
   );
 }
 
-const eyebrow = "text-[11px] tracking-[0.5em] uppercase font-light";
+const eyebrow = "text-[12px] tracking-[0.3em] uppercase font-semibold text-[#B08D4F]";
 const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[34px] md:text-[58px]";
 
 const scrollToId = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -572,7 +573,7 @@ const Prototype = () => {
       {/* ══ 3 · Why WONLY ══ */}
       <section id="why" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Why WONLY</div>
+          <div className={eyebrow}>Why WONLY</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top</h2>
           <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.</p>
         </Reveal>
@@ -610,7 +611,7 @@ const Prototype = () => {
       {/* ══ 4 · Products — expanding horizontal gallery ══ */}
       <section id="products" className="px-[7vw] pt-24 pb-12 md:pt-28 md:pb-14 md:h-screen md:max-h-[940px] flex flex-col" style={{ background: CHAMP_BG }}>
         <Reveal className="shrink-0">
-          <div className={eyebrow} style={{ color: GOLD }}>Our Products</div>
+          <div className={eyebrow}>Our Products</div>
           <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built for every opening</h2>
         </Reveal>
         <div className="product-gallery mt-8 md:mt-10 flex-1 min-h-0 flex flex-col md:flex-row gap-1.5">
@@ -634,7 +635,7 @@ const Prototype = () => {
       <section id="projects" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
         {/* Global landmark projects */}
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Global Landmark Projects</div>
+          <div className={eyebrow}>Global Landmark Projects</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions</h2>
           <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
         </Reveal>
@@ -692,26 +693,26 @@ const Prototype = () => {
         </Reveal>
       </section>
 
-      {/* ══ 6 · Certifications & Honors — real-logo wall ══ */}
-      <section id="certs" className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}>
+      {/* ══ 6 · Certifications & Honors — real-logo wall (one screen, centered) ══ */}
+      <section id="certs" className="px-[7vw] py-16 md:py-0 md:min-h-screen md:max-h-[880px] flex flex-col md:justify-center" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Certified &amp; Recognized</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Held to standards, honored at the top</h2>
+          <div className={eyebrow}>Certified &amp; Recognized</div>
+          <h2 className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] mt-4" style={{ color: DARK }}>Held to standards, honored at the top</h2>
         </Reveal>
 
-        <Reveal className="mt-16">
-          <div className="text-[11px] tracking-[0.34em] uppercase font-semibold mb-8" style={{ color: GOLD }}>Design Awards</div>
-          <div className="flex flex-wrap items-center gap-x-14 gap-y-9">
+        <Reveal className="mt-10">
+          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Design Awards</div>
+          <div className="flex flex-wrap items-center gap-x-14 gap-y-8">
             {AWARD_LOGOS.map((a) => (
               <img key={a.f} src={`${BASE}images/awards/${a.f}`} alt={a.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100" />
             ))}
           </div>
         </Reveal>
 
-        <Reveal className="mt-16">
-          <div className="pt-14 border-t" style={{ borderColor: `${SILVER}55` }}>
-            <div className="text-[11px] tracking-[0.34em] uppercase font-semibold mb-8" style={{ color: GOLD }}>Certifications</div>
-            <div className="flex flex-wrap items-center gap-x-12 gap-y-9">
+        <Reveal className="mt-10">
+          <div className="pt-10 border-t" style={{ borderColor: `${SILVER}55` }}>
+            <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Certifications</div>
+            <div className="flex flex-wrap items-center gap-x-12 gap-y-8">
               {CERT_LOGOS.map((c) => (
                 <img key={c.f} src={`${BASE}images/certs/${c.f}`} alt={c.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100" />
               ))}
@@ -753,7 +754,7 @@ const Prototype = () => {
             <WorldDots className="w-full h-auto" />
           </Reveal>
           <Reveal delay={120}>
-            <div className={eyebrow} style={{ color: GOLD }}>Global Footprint</div>
+            <div className={eyebrow}>Global Footprint</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>We spread around the world</h2>
             <p className="mt-5 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
             <div className="mt-8 grid grid-cols-2 gap-4">
@@ -769,7 +770,7 @@ const Prototype = () => {
 
         {/* Landmark installations — text-free reference photos */}
         <Reveal className="mt-16">
-          <div className="text-[11px] tracking-[0.34em] uppercase font-semibold mb-7" style={{ color: GOLD }}>Landmark Installations</div>
+          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-7" style={{ color: GOLD_DEEP }}>Landmark Installations</div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {LANDMARKS.map((l) => (
               <div key={l.t} className="group relative rounded-2xl overflow-hidden h-[220px] md:h-[260px]">
@@ -790,11 +791,11 @@ const Prototype = () => {
       {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
       <section id="partners" className="px-[7vw] py-20 md:py-24 text-center" style={{ background: "#fff" }}>
         <Reveal>
-          <div className={eyebrow + " mb-6"} style={{ color: GOLD }}>Trusted Across Industries</div>
+          <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
           <p className="text-lg md:text-2xl font-light max-w-4xl mx-auto leading-snug" style={{ color: DARK }}>
             Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
           </p>
-          <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Strategic Technology &amp; Industry Partners</div>
+          <div className="mt-10 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Strategic Technology &amp; Industry Partners</div>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
             {PARTNER_PHOTOS.map((p) => (
               <div key={p.n} className="group relative rounded-2xl overflow-hidden">
@@ -809,7 +810,7 @@ const Prototype = () => {
           </div>
 
           {/* Trusted by China's leading developers — full-bleed logo carousel */}
-          <div className="mt-16 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Trusted by China&apos;s Leading Developers</div>
+          <div className="mt-16 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
           <div className="mt-7 w-screen ml-[calc(50%-50vw)] overflow-hidden">
             <div className="flex flex-col gap-3 md:gap-4">
               {[0, 1, 2].map((row) => {

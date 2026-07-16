@@ -152,6 +152,7 @@ public/images/project/
 public/images/项目案例/
 # Unused factory shot with burned-in Chinese "模芯立体库-1" (HQ card uses card-listed-group4.jpg)
 public/images/card-listed-group.jpg
-# Product gallery: keep only the optimized prod-*.jpg; ignore raw sources + the reference mockup
+# Product gallery: keep only the optimized prod-*.jpg / nav-*.jpg; ignore raw sources + mockups
 public/images/5products/*
 !public/images/5products/prod-*.jpg
+!public/images/5products/nav-*.jpg
