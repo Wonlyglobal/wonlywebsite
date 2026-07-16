@@ -500,12 +500,12 @@ const Prototype = () => {
                   </button>
                 )}
                 {n.children && openDrop && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[330px] rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
                     {n.children.map((c) => {
                       const cls = "flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
                       const inner = (<>
                         {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden" style={{ background: "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-cover" /></span>}
-                        <span className="leading-tight">{c.label}</span>
+                        <span className="leading-tight whitespace-nowrap">{c.label}</span>
                       </>);
                       return c.href
                         ? <Link key={c.label} to={c.href} className={cls} style={{ color: DARK }}>{inner}</Link>
