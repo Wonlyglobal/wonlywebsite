@@ -46,15 +46,15 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-type NavChild = { label: string; href?: string; to?: string; img?: string };
+type NavChild = { label: string; href?: string; to?: string; img?: string; contain?: boolean };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
     { label: "Security Doors", href: "/products/security-doors", img: IMG.aluMax },
     { label: "Wooden Doors", href: "/products/wooden-doors", img: IMG.wood2 },
     { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
-    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/nav-smart-windows.jpg` },
-    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/nav-whole-house.jpg` },
+    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/header/nav-smart-windows_1.jpg`, contain: true },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/header/nav-whole-house_1.jpg`, contain: true },
   ] },
   { label: "Projects", to: "projects" },
   { label: "R&D & Manufacturing", to: "why" },
@@ -504,7 +504,7 @@ const Prototype = () => {
                     {n.children.map((c) => {
                       const cls = "flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
                       const inner = (<>
-                        {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden" style={{ background: "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-cover" /></span>}
+                        {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center" style={{ background: c.contain ? "#fff" : "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className={`w-full h-full ${c.contain ? "object-contain p-0.5" : "object-cover"}`} /></span>}
                         <span className="leading-tight whitespace-nowrap">{c.label}</span>
                       </>);
                       return c.href
