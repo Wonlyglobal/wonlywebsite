@@ -494,7 +494,7 @@ const Prototype = () => {
           <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
             <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto transition-[filter] duration-500" style={{ filter: solid ? "none" : "brightness(0) invert(1)" }} />
           </button>
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
             {NAV.map((n) => (
               <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(true)} onMouseLeave={() => setOpenDrop(false)}>
                 {n.href ? (
@@ -521,7 +521,7 @@ const Prototype = () => {
               </div>
             ))}
           </nav>
-          <button onClick={() => scrollToId("contact")} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-transform duration-300 hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
+          <button onClick={() => scrollToId("contact")} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
             Get Solutions &amp; Quote
           </button>
         </div>
@@ -797,7 +797,7 @@ const Prototype = () => {
       <section className="px-[7vw] pt-24 pb-14 md:pt-28 md:pb-16" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Our Journey</div>
-          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Three decades in the making</h2>
+          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>A thirty-year journey</h2>
         </Reveal>
         <Timeline items={TIMELINE} />
       </section>
@@ -807,7 +807,7 @@ const Prototype = () => {
         <Reveal>
           <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
           <p className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] max-w-4xl mx-auto" style={{ color: DARK }}>
-            Trusted by leading technology companies<br />and top real-estate developers.
+            Trusted by tech &amp; real-estate leaders.
           </p>
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
             {PARTNER_PHOTOS.map((p) => (
