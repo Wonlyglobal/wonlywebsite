@@ -711,7 +711,7 @@ const Prototype = () => {
           <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Design Awards</div>
           <div className="flex flex-wrap items-center gap-x-14 gap-y-8">
             {AWARD_LOGOS.map((a) => (
-              <img key={a.f} src={`${BASE}images/awards/${a.f}`} alt={a.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100" />
+              <img key={a.f} src={`${BASE}images/awards/${a.f}`} alt={a.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-[1.06]" />
             ))}
           </div>
         </Reveal>
@@ -721,7 +721,7 @@ const Prototype = () => {
             <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Certifications</div>
             <div className="flex flex-wrap items-center gap-x-12 gap-y-8">
               {CERT_LOGOS.map((c) => (
-                <img key={c.f} src={`${BASE}images/certs/${c.f}`} alt={c.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100" />
+                <img key={c.f} src={`${BASE}images/certs/${c.f}`} alt={c.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-[1.06]" />
               ))}
             </div>
           </div>
