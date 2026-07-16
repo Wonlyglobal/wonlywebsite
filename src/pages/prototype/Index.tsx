@@ -85,9 +85,9 @@ const WHO_CHECK = [
   "Premium security 20–30% below comparable Western brands",
 ];
 const WHY_FEATURES = [
-  { img: `${BASE}images/factory-line-a.webp`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
-  { img: `${BASE}images/factory-abb.webp`, t: "Robotic precision", d: "ABB automated welding and CNC lines hold the tolerances export projects depend on." },
-  { img: `${BASE}images/factory-line-b.webp`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
+  { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
+  { img: `${BASE}images/card-robotic-precision.jpg`, t: "Robotic precision", d: "ABB automated welding and CNC lines hold the tolerances export projects depend on." },
+  { img: `${BASE}images/factory-1.webp`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
 ];
 const FOOTPRINT_STATS = [
   { to: 60, suffix: "+", label: "Countries & Regions" },
@@ -100,13 +100,6 @@ const LANDMARKS = [
   { img: `${BASE}images/landmark-daxing.webp`, t: "International Airport", d: "Aviation hub" },
   { img: `${BASE}images/landmark-asiangames.webp`, t: "Olympic Sports Center", d: "Stadium & arena" },
   { img: `${BASE}images/landmark-metro.webp`, t: "Metropolitan Residential", d: "Smart community" },
-];
-// Industry-application photos for Partners — replaces the burned-in Chinese developer-logo grid.
-const INDUSTRIES = [
-  { img: `${BASE}images/landmark-metro.webp`, t: "Premium Residential" },
-  { img: `${BASE}images/proj-1.webp`, t: "Commercial & Corporate" },
-  { img: `${BASE}images/proj-cairo-hotel.webp`, t: "Hospitality & Landmark" },
-  { img: `${BASE}images/proj-egypt-cbd.webp`, t: "Public & Institutional" },
 ];
 
 /* ── Featured overseas projects (government & institutional first) ──
@@ -609,33 +602,31 @@ const Prototype = () => {
 
       {/* ══ 3 · Why WONLY ══ */}
       <section id="why" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <Reveal>
-            <div className={eyebrow} style={{ color: GOLD }}>Why WONLY</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top.</h2>
-            <p className="mt-6 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.</p>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="space-y-3.5">
-              {WHY_FEATURES.map((f) => (
-                <div key={f.t} className="flex items-center gap-4 rounded-2xl p-3 pr-5" style={{ background: CHAMP_BG }}>
-                  <img src={f.img} alt={f.t} loading="lazy" className="w-28 h-24 md:w-36 md:h-28 rounded-xl object-cover shrink-0" />
-                  <div>
-                    <div className="text-base md:text-lg font-medium" style={{ color: DARK }}>{f.t}</div>
-                    <div className="mt-1 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</div>
-                  </div>
+        <Reveal className="max-w-3xl">
+          <div className={eyebrow} style={{ color: GOLD }}>Why WONLY</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top.</h2>
+          <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.</p>
+        </Reveal>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {WHY_FEATURES.map((f, i) => (
+            <Reveal key={f.t} delay={(i % 3) * 90}>
+              <div className="h-full flex flex-col rounded-2xl overflow-hidden" style={{ background: CHAMP_BG }}>
+                <img src={f.img} alt={f.t} loading="lazy" className="w-full h-[200px] md:h-[230px] object-cover shrink-0" />
+                <div className="p-6 md:p-7">
+                  <div className="text-lg md:text-xl font-medium" style={{ color: DARK }}>{f.t}</div>
+                  <div className="mt-2 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</div>
                 </div>
-              ))}
-            </div>
-          </Reveal>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         <DoorConveyor />
 
         {/* Who We Are — structured panel */}
         <Reveal>
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden" style={{ background: "#efeae0" }}>
-            <div className="p-8 md:p-14 flex flex-col justify-center">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden" style={{ background: "#efeae0" }}>
+            <div className="p-8 md:px-12 md:py-10 flex flex-col justify-center">
               <div className={eyebrow} style={{ color: GOLD }}>Who We Are</div>
               <h3 className="mt-4 text-2xl md:text-[38px] font-light leading-[1.15]" style={{ color: DARK }}>One partner for the entire building entry.</h3>
               <p className="mt-5 text-base font-normal leading-relaxed" style={{ color: MUTED }}>Founded in 1996 and listed on the Shanghai Stock Exchange (SSE: 605268), WONLY manufactures security doors, smart locks, wooden doors and aluminum windows across five bases and six R&D centers — protecting over 200 million users worldwide.</p>
@@ -643,7 +634,7 @@ const Prototype = () => {
                 <ShieldCheck size={16} style={{ color: GOLD }} />
                 <span className="text-xs font-medium" style={{ color: DARK }}>No.1 in China · Smart Doors &amp; Locks</span>
               </div>
-              <ul className="mt-7 space-y-3.5">
+              <ul className="mt-6 space-y-3">
                 {WHO_CHECK.map((it) => (
                   <li key={it} className="flex items-start gap-3">
                     <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: `${GOLD}22` }}><Check size={13} style={{ color: GOLD }} /></span>
@@ -651,10 +642,10 @@ const Prototype = () => {
                   </li>
                 ))}
               </ul>
-              <button onClick={() => scrollToId("contact")} className="mt-8 self-start inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote <ArrowRight size={15} /></button>
+              <button onClick={() => scrollToId("contact")} className="mt-7 self-start inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote <ArrowRight size={15} /></button>
             </div>
-            <div className="relative min-h-[360px] md:min-h-0 flex items-center justify-center overflow-hidden" style={{ background: "linear-gradient(160deg, #2b2828 0%, #1a1818 100%)" }}>
-              <img src={`${BASE}images/door-k300pro.png`} alt="WONLY K300 Pro cast-aluminum security door" loading="lazy" className="w-auto max-w-[72%] max-h-[300px] md:max-h-[500px] object-contain drop-shadow-2xl select-none" draggable={false} />
+            <div className="relative min-h-[320px] md:min-h-0 flex items-center justify-center overflow-hidden" style={{ background: "#E8E4DD" }}>
+              <img src={`${BASE}images/door-k300pro.png`} alt="WONLY K300 Pro cast-aluminum security door" loading="lazy" className="w-auto max-w-[70%] max-h-[280px] md:max-h-[52vh] object-contain select-none" style={{ filter: "drop-shadow(0 18px 40px rgba(40,36,33,0.28))" }} draggable={false} />
             </div>
           </div>
         </Reveal>
@@ -865,27 +856,23 @@ const Prototype = () => {
 
           {/* Trusted by China's leading developers — real client logo wall */}
           <div className="mt-16 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Trusted by China&apos;s Leading Developers</div>
-          <div className="mt-6 rounded-3xl p-5 md:p-8 max-w-6xl mx-auto" style={{ background: CHAMP_BG }}>
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-              {Array.from({ length: 30 }, (_, i) => `re-${String(i + 1).padStart(2, "0")}.png`).map((f) => (
-                <div key={f} className="flex items-center justify-center rounded-xl bg-white h-20 md:h-24 p-3 md:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                  <img src={`${BASE}images/partners-re/${f}`} alt="" aria-hidden="true" loading="lazy" className="max-h-full max-w-full object-contain opacity-90 transition-opacity duration-300 hover:opacity-100" />
-                </div>
-              ))}
+          <div className="mt-6 rounded-3xl p-5 md:p-7 max-w-6xl mx-auto overflow-hidden" style={{ background: CHAMP_BG }}>
+            <div className="flex flex-col gap-3 md:gap-4">
+              {[0, 1, 2].map((row) => {
+                const items = Array.from({ length: 10 }, (_, i) => `re-${String(row * 10 + i + 1).padStart(2, "0")}.png`);
+                return (
+                  <div key={row} className="partner-row overflow-hidden">
+                    <div className={`${row % 2 === 1 ? "partner-track-right" : "partner-track-left"} flex gap-3 md:gap-4 w-max`}>
+                      {[...items, ...items].map((f, i) => (
+                        <div key={i} className="flex items-center justify-center rounded-xl bg-white h-20 md:h-24 w-36 md:w-44 shrink-0 p-3 md:p-4">
+                          <img src={`${BASE}images/partners-re/${f}`} alt="" aria-hidden="true" loading="lazy" className="max-h-full max-w-full object-contain opacity-90" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-
-          <div className="mt-16 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Specified Across Industries</div>
-          <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {INDUSTRIES.map((it) => (
-              <div key={it.t} className="group relative rounded-2xl overflow-hidden h-[200px] md:h-[240px]">
-                <img src={it.img} alt={it.t} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(13,13,13,0.05) 45%, rgba(13,13,13,0.8) 100%)" }} />
-                <div className="absolute inset-x-0 bottom-0 p-4 text-left">
-                  <div className="text-white text-sm md:text-base font-medium leading-tight">{it.t}</div>
-                </div>
-              </div>
-            ))}
           </div>
         </Reveal>
       </section>
