@@ -177,12 +177,33 @@ const PARTNER_PHOTOS = [
   { img: `${BASE}images/partners-ceremony/partner-foxconn.webp`, n: "Foxconn", y: "2018" },
 ];
 
-const FOOTER = [
-  { h: "Products", links: ["Security Doors", "Smart Locks", "Wooden Doors", "Aluminum Windows", "Whole-House Intelligence"] },
-  { h: "Solutions", links: ["Premium Residential", "Commercial", "Medical & Public", "Engineering", "OEM / ODM"] },
-  { h: "Company", links: ["Why WONLY", "Global Footprint", "About", "Newsroom", "ESG"] },
-  { h: "Resources", links: ["Product Catalogs", "Certifications", "Install Guides", "Warranty"] },
-  { h: "Contact", links: ["overseas@wonly.net", "WhatsApp +86 137-3896-0922", "LinkedIn · YouTube", "Facebook · X · Instagram"] },
+type FooterLink = { l: string; href?: string; to?: string };
+const FOOTER: { h: string; links: FooterLink[] }[] = [
+  { h: "Products", links: [
+    { l: "Security Doors", href: "/products/security-doors" },
+    { l: "Wooden Doors", href: "/products/wooden-doors" },
+    { l: "Smart Locks", href: "/products/smart-locks" },
+    { l: "Smart Windows", href: "/products/smart-windows" },
+    { l: "Whole-House Intelligence", href: "/products/whole-house" },
+  ] },
+  { h: "Company", links: [
+    { l: "Why WONLY", to: "why" },
+    { l: "Global Footprint", to: "footprint" },
+    { l: "Projects", to: "projects" },
+    { l: "About", href: "/about" },
+  ] },
+  { h: "Explore", links: [
+    { l: "Certifications", to: "certs" },
+    { l: "Partners", to: "partners" },
+    { l: "Get a Quote", to: "contact" },
+    { l: "All Projects", href: "/projects" },
+  ] },
+  { h: "Contact", links: [
+    { l: "overseas@wonly.net" },
+    { l: "WhatsApp +86 137-3896-0922" },
+    { l: "LinkedIn · YouTube" },
+    { l: "Facebook · X · Instagram" },
+  ] },
 ];
 
 /* ── Helpers ───────────────────────────────────────────────── */
@@ -480,10 +501,10 @@ const Prototype = () => {
                 {n.children && openDrop && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
                     {n.children.map((c) => {
-                      const cls = "flex items-center gap-3 w-full text-left px-3 py-2 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
+                      const cls = "flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
                       const inner = (<>
-                        {c.img && <span className="w-9 h-9 rounded-md flex items-center justify-center shrink-0 overflow-hidden" style={{ background: "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain p-0.5" /></span>}
-                        <span>{c.label}</span>
+                        {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden" style={{ background: "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-cover" /></span>}
+                        <span className="leading-tight">{c.label}</span>
                       </>);
                       return c.href
                         ? <Link key={c.label} to={c.href} className={cls} style={{ color: DARK }}>{inner}</Link>
@@ -552,7 +573,7 @@ const Prototype = () => {
       <section id="why" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Why WONLY</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top</h2>
           <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.</p>
         </Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -578,7 +599,7 @@ const Prototype = () => {
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.5), rgba(34,31,32,0.68))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
           <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Manufacturing</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Built in our own 5G-connected smart factories.</h2>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Built in our own 5G-connected smart factories</h2>
           <button onClick={() => setVideoOpen(true)} className="mt-9 inline-flex items-center gap-3 pl-3 pr-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
             <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: DARK }}><Play size={13} style={{ color: GOLD }} fill={GOLD} /></span>
             Watch the Factory Tour
@@ -590,12 +611,12 @@ const Prototype = () => {
       <section id="products" className="px-[7vw] pt-24 pb-12 md:pt-28 md:pb-14 md:h-screen md:max-h-[940px] flex flex-col" style={{ background: CHAMP_BG }}>
         <Reveal className="shrink-0">
           <div className={eyebrow} style={{ color: GOLD }}>Our Products</div>
-          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built for every opening.</h2>
+          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built for every opening</h2>
         </Reveal>
-        <div className="product-gallery mt-8 md:mt-10 flex-1 min-h-0 flex flex-col md:flex-row gap-3 md:gap-4">
+        <div className="product-gallery mt-8 md:mt-10 flex-1 min-h-0 flex flex-col md:flex-row gap-1.5">
           {PRODUCTS_GALLERY.map((p) => (
             <Link key={p.name} to={p.href} className="product-card group relative block overflow-hidden rounded-2xl min-w-0 h-[240px] md:h-auto">
-              <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+              <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(12,10,9,.88), rgba(12,10,9,.12) 34%, transparent 50%)" }} />
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                 <h3 className="text-white text-lg md:text-xl font-semibold leading-tight">{p.name}</h3>
@@ -614,7 +635,7 @@ const Prototype = () => {
         {/* Global landmark projects */}
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Global Landmark Projects</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions</h2>
           <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
         </Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -656,6 +677,9 @@ const Prototype = () => {
           ))}
         </div>
         <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>Further references include Ethiopia's Abyssinia Bank and presidential-palace projects in Togo and Vanuatu.</p>
+        <div className="mt-9">
+          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Explore All Projects <ArrowRight size={15} /></Link>
+        </div>
       </section>
 
       {/* ══ Full-bleed image band B ══ */}
@@ -664,7 +688,7 @@ const Prototype = () => {
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.42), rgba(34,31,32,0.7))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
           <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Landmark Projects</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Chosen for the projects that cannot fail.</h2>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Chosen for the projects that cannot fail</h2>
         </Reveal>
       </section>
 
@@ -672,7 +696,7 @@ const Prototype = () => {
       <section id="certs" className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Certified &amp; Recognized</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Held to standards, honored at the top.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Held to standards, honored at the top</h2>
         </Reveal>
 
         <Reveal className="mt-16">
@@ -703,7 +727,7 @@ const Prototype = () => {
         <div className="relative z-10 max-w-6xl mx-auto">
           <Reveal className="max-w-3xl">
             <div className={eyebrow} style={{ color: CHAMP }}>Partner With WONLY</div>
-            <h2 className={h2cls + " mt-5 text-white"}>Open the door to partnership.</h2>
+            <h2 className={h2cls + " mt-5 text-white"}>Open the door to partnership</h2>
           </Reveal>
           <div className="mt-14 border-t" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
             {PARTNERSHIP.map((p, i) => (
@@ -730,7 +754,7 @@ const Prototype = () => {
           </Reveal>
           <Reveal delay={120}>
             <div className={eyebrow} style={{ color: GOLD }}>Global Footprint</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>We spread around the world.</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>We spread around the world</h2>
             <p className="mt-5 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {FOOTPRINT_STATS.map((s) => (
@@ -864,7 +888,7 @@ const Prototype = () => {
 
       {/* ══ Footer ══ */}
       <footer className="px-[7vw] pt-16 pb-10" style={{ background: "#1a1718" }}>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
             <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
             <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
@@ -873,9 +897,19 @@ const Prototype = () => {
             <div key={col.h}>
               <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{col.h}</h4>
               <ul className="space-y-2.5">
-                {col.links.map((l) => (
-                  <li key={l} className="text-xs font-light" style={{ color: "rgba(245,241,234,0.6)" }}>{l}</li>
-                ))}
+                {col.links.map((item) => {
+                  const cls = "text-xs font-light transition-colors hover:text-white";
+                  const style = { color: "rgba(245,241,234,0.6)" };
+                  return (
+                    <li key={item.l}>
+                      {item.href
+                        ? <Link to={item.href} className={cls} style={style}>{item.l}</Link>
+                        : item.to
+                          ? <button onClick={() => scrollToId(item.to!)} className={cls + " text-left"} style={style}>{item.l}</button>
+                          : <span className="text-xs font-light" style={style}>{item.l}</span>}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

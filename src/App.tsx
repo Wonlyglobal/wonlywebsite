@@ -36,6 +36,8 @@ const App = () => (
           {/* Previous homepage kept for reference (not linked). */}
           <Route path="/home-old" element={<Index />} />
           <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
+          {/* Full projects portfolio — placeholder for now (homepage shows the featured set). */}
+          <Route path="/projects" element={<ProductComingSoon name="All Projects" eyebrow="WONLY Projects" />} />
           {/* Five canonical product-line routes — placeholder pages for now (see ComingSoon.tsx). */}
           <Route path="/products/security-doors" element={<ProductComingSoon name="Security Doors" />} />
           <Route path="/products/wooden-doors" element={<ProductComingSoon name="Wooden Doors" />} />
