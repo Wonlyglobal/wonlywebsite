@@ -524,12 +524,12 @@ const Prototype = () => {
 
       {/* ══ 1 · Hero door video + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="metadata" aria-hidden="true" />
+        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="auto" aria-hidden="true" />
 
-        <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)" }} />
+        <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
 
         {/* Title over closed door */}
-        <div ref={title} className="absolute inset-0 z-20 pointer-events-none">
+        <div ref={title} className="absolute inset-0 z-20 pointer-events-none" style={{ willChange: "opacity, transform", transform: "translateZ(0)" }}>
           {/* Eyebrow + headline + sub + scroll cue — dead-centered in the viewport */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
             <div className="text-[12px] sm:text-[13px] tracking-[0.4em] uppercase font-semibold mb-8" style={{ color: CHAMP, textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>Security Doors · Smart Locks · OEM/ODM Manufacturer</div>
