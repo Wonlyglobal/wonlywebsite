@@ -250,7 +250,7 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
 const FOOTER = [
   { h: "Products", links: ["Security Doors", "Smart Locks", "Wooden Doors", "Aluminum Windows", "Whole-House Intelligence"] },
   { h: "Company", links: ["About WONLY", "Global Footprint", "Newsroom", "ESG"] },
-  { h: "Contact", links: ["overseas@wonly.net", "WhatsApp +86 137-3896-0922", "LinkedIn · YouTube", "Facebook · X · Instagram"] },
+  { h: "Contact", links: ["wonlyglobal@wonly.net", "WhatsApp +1 (205) 240-1832", "LinkedIn · YouTube", "Facebook · X · Instagram"] },
 ];
 
 export function SiteFooter() {

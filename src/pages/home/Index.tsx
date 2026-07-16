@@ -631,8 +631,8 @@ const Index = () => {
             ))}
           </div>
           <div className="mt-4 text-neutral-500 text-xs space-y-1">
-            <div>Email: overseas@wonly.net</div>
-            <div>WhatsApp: +86 137-3896-0922</div>
+            <div>Email: wonlyglobal@wonly.net</div>
+            <div>WhatsApp: +1 (205) 240-1832</div>
             <div className="text-neutral-400">LinkedIn · YouTube · Facebook · X · Instagram</div>
           </div>
         </div>

@@ -46,15 +46,15 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-type NavChild = { label: string; href?: string; to?: string; img?: string; contain?: boolean };
+type NavChild = { label: string; href?: string; to?: string; img?: string };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
     { label: "Security Doors", href: "/products/security-doors", img: IMG.aluMax },
     { label: "Wooden Doors", href: "/products/wooden-doors", img: IMG.wood2 },
     { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
-    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/header/nav-smart-windows_1.jpg`, contain: true },
-    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/header/nav-whole-house_1.jpg`, contain: true },
+    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
   { label: "Projects", to: "projects" },
   { label: "R&D & Manufacturing", to: "why" },
@@ -200,8 +200,8 @@ const FOOTER: { h: string; links: FooterLink[] }[] = [
     { l: "All Projects", href: "/projects" },
   ] },
   { h: "Contact", links: [
-    { l: "overseas@wonly.net" },
-    { l: "WhatsApp +86 137-3896-0922" },
+    { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
+    { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
     { l: "LinkedIn · YouTube" },
     { l: "Facebook · X · Instagram" },
   ] },
@@ -404,7 +404,7 @@ const Prototype = () => {
       url: SITE_URL + "/",
       slogan: "Global Smart-Security Ecosystem Leader",
       foundingDate: "1996",
-      email: "overseas@wonly.net",
+      email: "wonlyglobal@wonly.net",
     },
   });
 
@@ -504,7 +504,7 @@ const Prototype = () => {
                     {n.children.map((c) => {
                       const cls = "flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
                       const inner = (<>
-                        {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center" style={{ background: c.contain ? "#fff" : "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className={`w-full h-full ${c.contain ? "object-contain p-0.5" : "object-cover"}`} /></span>}
+                        {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
                         <span className="leading-tight whitespace-nowrap">{c.label}</span>
                       </>);
                       return c.href
@@ -850,13 +850,13 @@ const Prototype = () => {
               Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
             </p>
             <div className="mt-10 space-y-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.85)" }}>
-              <div className="flex items-center gap-3"><Mail size={16} style={{ color: GOLD }} /> overseas@wonly.net</div>
-              <div className="flex items-center gap-3"><MessageCircle size={16} style={{ color: GOLD }} /> WhatsApp +86 137-3896-0922</div>
+              <a href="mailto:wonlyglobal@wonly.net" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> wonlyglobal@wonly.net</a>
+              <a href="https://wa.me/12052401832" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:underline"><MessageCircle size={16} style={{ color: GOLD }} /> WhatsApp +1 (205) 240-1832</a>
               <div className="flex items-center gap-3"><Phone size={16} style={{ color: GOLD }} /> LinkedIn · YouTube · Facebook · X · Instagram</div>
             </div>
           </Reveal>
 
-          {/* TODO: wire submission to a real endpoint (overseas@wonly.net or a form service) before launch */}
+          {/* TODO: wire submission to a real endpoint (wonlyglobal@wonly.net or a form service) before launch */}
           <Reveal delay={120}>
             {sent ? (
               <div className="rounded-2xl border border-white/15 bg-white/5 p-10 md:p-14 text-center">
@@ -912,7 +912,9 @@ const Prototype = () => {
                   return (
                     <li key={item.l}>
                       {item.href
-                        ? <Link to={item.href} className={cls} style={style}>{item.l}</Link>
+                        ? (/^(mailto:|tel:|https?:)/.test(item.href)
+                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{item.l}</a>
+                            : <Link to={item.href} className={cls} style={style}>{item.l}</Link>)
                         : item.to
                           ? <button onClick={() => scrollToId(item.to!)} className={cls + " text-left"} style={style}>{item.l}</button>
                           : <span className="text-xs font-light" style={style}>{item.l}</span>}

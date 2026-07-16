@@ -156,5 +156,6 @@ public/images/card-listed-group.jpg
 public/images/5products/*
 !public/images/5products/prod-*.jpg
 !public/images/5products/nav-*.jpg
+!public/images/5products/dropdown-*.png
 # Nav dropdown thumbnails: keep the small *.jpg product shots; ignore heavy raw PNG sources
 public/images/header/*.png
