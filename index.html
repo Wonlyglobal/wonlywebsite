@@ -22,10 +22,11 @@
     <meta name="author" content="WONLY" />
     <meta name="theme-color" content="#221F20" />
 
-    <!-- Preload self-hosted fonts + LCP poster for fast first paint -->
+    <!-- Preload self-hosted fonts (used on every page) -->
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/videos/hero-door-poster.webp" as="image" />
+    <!-- Preload the hero-video poster (LCP) only on the homepage, where it's used -->
+    <script>if(location.pathname==="/"){var l=document.createElement("link");l.rel="preload";l.as="image";l.href="/videos/hero-door-poster.webp";document.head.appendChild(l);}</script>
 
     <!-- Brand favicon (WONLY logo) -->
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png" />
