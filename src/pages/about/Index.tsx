@@ -1,6 +1,6 @@
 import { Cpu, FlaskConical, Lightbulb, Target, Eye, BadgeCheck, Layers, MapPin, HeartHandshake, Gem, Handshake } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
-import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
+import { GOLD, GOLD_DEEP, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
 
 const IMG = {
   hero: `${BASE}images/factory-line-a.webp`,
@@ -102,7 +102,7 @@ const About = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
           <Reveal>
-            <div className={eyebrow} style={{ color: GOLD }}>Who We Are</div>
+            <div className={eyebrow} style={{ color: GOLD_DEEP }}>Who We Are</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>China's No.1 in entrance security.</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
               WONLY is a high-tech security group that unites R&amp;D, design, manufacturing, sales and service under one roof. Founded in 1996 in Yongkang — China's "hardware capital" — it is today the industry's <strong style={{ color: DARK, fontWeight: 500 }}>only company listed on China's A-share main board</strong> (SSE: 605268), with a brand value ranked first in its sector for 14 consecutive years.
@@ -170,7 +170,7 @@ const About = () => {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <div className={eyebrow} style={{ color: GOLD }}>R&amp;D &amp; Smart Manufacturing</div>
+            <div className={eyebrow} style={{ color: GOLD_DEEP }}>R&amp;D &amp; Smart Manufacturing</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Patents no rival can match.</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
               Security you can trust has to be engineered and proven — not just designed. WONLY controls the entire chain, from casting aluminum to writing lock firmware, and holds a patent portfolio larger than the rest of the industry's top ten combined.
@@ -191,7 +191,7 @@ const About = () => {
       {/* Story timeline */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Milestones</div>
+          <div className={eyebrow} style={{ color: GOLD_DEEP }}>Milestones</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Thirty years, one direction.</h2>
         </Reveal>
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-8">
@@ -210,7 +210,7 @@ const About = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <Reveal className="max-w-2xl">
-            <div className={eyebrow} style={{ color: GOLD }}>Global Footprint</div>
+            <div className={eyebrow} style={{ color: GOLD_DEEP }}>Global Footprint</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Chosen for the projects that cannot fail.</h2>
           </Reveal>
           <Reveal>
@@ -266,7 +266,7 @@ const About = () => {
       {/* Core values */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Core Values</div>
+          <div className={eyebrow} style={{ color: GOLD_DEEP }}>Core Values</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>What we stand for.</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

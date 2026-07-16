@@ -5,13 +5,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/not-found/Index";
-import ProductComingSoon from "./pages/products/ComingSoon";
 
 // Lazy-loaded so each route ships as its own chunk and never enters the initial
 // bundle the homepage visitor downloads.
 const Prototype = lazy(() => import("./pages/prototype/Index"));
 const Index = lazy(() => import("./pages/home/Index"));
 const About = lazy(() => import("./pages/about/Index"));
+const Projects = lazy(() => import("./pages/projects/Index"));
 // Product category pages (each lists the full series in its line)
 const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
 const SmartLocks = lazy(() => import("./pages/products/SmartLocks"));
@@ -43,8 +43,8 @@ const App = () => (
           {/* Previous homepage kept for reference (not linked). */}
           <Route path="/home-old" element={<Index />} />
           <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
-          {/* Full projects portfolio — placeholder for now (homepage shows the featured set). */}
-          <Route path="/projects" element={<ProductComingSoon name="All Projects" eyebrow="WONLY Projects" />} />
+          {/* Full projects portfolio page. */}
+          <Route path="/projects" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Projects /></Suspense>} />
           {/* Five product-line category pages — each shows the full series in that line. */}
           <Route path="/products/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
           <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />

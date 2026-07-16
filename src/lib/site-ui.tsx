@@ -5,6 +5,7 @@ import { create } from "zustand";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
 export const GOLD = "#BFA06A";
+export const GOLD_DEEP = "#B08D4F"; // deeper, higher-contrast gold for uppercase kickers
 export const CHAMP = "#D4C4A0";
 export const SILVER = "#B8BFC8";
 export const CHAMP_BG = "#F5F1EA";
@@ -13,7 +14,7 @@ export const MUTED = "#5f5a54";
 export const BASE = import.meta.env.BASE_URL;
 export const LOGO = `${BASE}images/logo-trim.webp`;
 
-export const eyebrow = "text-[11px] tracking-[0.5em] uppercase font-light";
+export const eyebrow = "text-[12px] tracking-[0.3em] uppercase font-semibold";
 export const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[34px] md:text-[58px]";
 
 /* Scroll-reveal wrapper (identical behaviour to the homepage) */

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Check, type LucideIcon } from "lucide-react";
 import { useSeo } from "@/lib/seo";
-import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand, useQuoteStore } from "@/lib/site-ui";
+import { GOLD, GOLD_DEEP, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand, useQuoteStore } from "@/lib/site-ui";
 
 export type Feature = { icon: LucideIcon; t: string; d: string };
 export type Series = { name: string; tag?: string; d: string; img: string; path?: string };
@@ -77,7 +77,7 @@ export function ProductPage({ data }: { data: ProductPageData }) {
       {data.series && (
         <section id="series" className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
           <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: GOLD }}>{data.seriesEyebrow ?? "Product Series"}</div>
+            <div className={eyebrow} style={{ color: GOLD_DEEP }}>{data.seriesEyebrow ?? "Product Series"}</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{data.seriesTitle ?? "Explore the full range."}</h2>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -102,7 +102,7 @@ export function ProductPage({ data }: { data: ProductPageData }) {
 
       <section id="features" className="px-[7vw] py-24 md:py-32" style={{ background: data.series ? "#fff" : (data.highlights ? CHAMP_BG : "#fff") }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>{data.featuresEyebrow}</div>
+          <div className={eyebrow} style={{ color: GOLD_DEEP }}>{data.featuresEyebrow}</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{data.featuresTitle}</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -134,7 +134,7 @@ export function ProductPage({ data }: { data: ProductPageData }) {
       {data.specs && (
         <section className="px-[7vw] py-24 md:py-32" style={{ background: data.band ? CHAMP_BG : "#fff" }}>
           <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: GOLD }}>Specifications</div>
+            <div className={eyebrow} style={{ color: GOLD_DEEP }}>Specifications</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>The details, in full.</h2>
           </Reveal>
           <div className="mt-12 max-w-4xl border-t" style={{ borderColor: `${SILVER}66` }}>
