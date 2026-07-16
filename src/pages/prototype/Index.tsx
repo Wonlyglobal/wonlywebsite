@@ -750,7 +750,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 8 · Global Footprint (one screen, centered) ══ */}
-      <section id="footprint" className="px-[7vw] pt-24 pb-24 md:pt-40 md:pb-40 flex flex-col" style={{ background: CHAMP_BG }}>
+      <section id="footprint" className="px-[7vw] pt-12 pb-12 md:pt-20 md:pb-20 flex flex-col" style={{ background: CHAMP_BG }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <Reveal>
             <WorldDots className="w-full h-auto" />
