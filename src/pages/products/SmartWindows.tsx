@@ -16,6 +16,13 @@ const data: ProductPageData = {
     mode: "scene",
   },
   highlights: ["Auto-closes in wind & rain", "50,000+ slide cycles without deforming", "App remote control & scenes"],
+  seriesEyebrow: "Window Range",
+  seriesTitle: "A system for every opening.",
+  series: [
+    { name: "Energy-Saving Casement", tag: "Best Seller", d: "Thermal-break aluminum that insulates like a wall — quiet, sealed and efficient.", img: `${BASE}images/alu-t200.webp` },
+    { name: "Smart Auto-Close Window", tag: "Smart", d: "Senses wind and rain and closes itself; opens to ventilate on smoke or gas.", img: `${BASE}images/5products/dropdown-window.png` },
+    { name: "Hurricane Series", tag: "Reinforced", d: "Storm-rated systems engineered for North America and the Caribbean.", img: `${BASE}images/5products/prod-smart-windows.jpg` },
+  ],
   featuresEyebrow: "Intelligent by Design",
   featuresTitle: "The window that looks after itself.",
   features: [

@@ -11,8 +11,15 @@ import ProductComingSoon from "./pages/products/ComingSoon";
 // bundle the homepage visitor downloads.
 const Prototype = lazy(() => import("./pages/prototype/Index"));
 const Index = lazy(() => import("./pages/home/Index"));
-const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
 const About = lazy(() => import("./pages/about/Index"));
+// Product category pages (each lists the full series in its line)
+const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
+const SmartLocks = lazy(() => import("./pages/products/SmartLocks"));
+const WoodenDoors = lazy(() => import("./pages/products/WoodenDoors"));
+const SmartWindows = lazy(() => import("./pages/products/SmartWindows"));
+const WholeHouse = lazy(() => import("./pages/products/WholeHouse"));
+// Detailed / sub-line pages
+const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
 const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
 const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
 const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
@@ -38,12 +45,12 @@ const App = () => (
           <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
           {/* Full projects portfolio — placeholder for now (homepage shows the featured set). */}
           <Route path="/projects" element={<ProductComingSoon name="All Projects" eyebrow="WONLY Projects" />} />
-          {/* Five canonical product-line routes — placeholder pages for now (see ComingSoon.tsx). */}
-          <Route path="/products/security-doors" element={<ProductComingSoon name="Security Doors" />} />
-          <Route path="/products/wooden-doors" element={<ProductComingSoon name="Wooden Doors" />} />
-          <Route path="/products/smart-locks" element={<ProductComingSoon name="Smart Locks" />} />
-          <Route path="/products/smart-windows" element={<ProductComingSoon name="Smart Windows" />} />
-          <Route path="/products/whole-house" element={<ProductComingSoon name="Whole-House Intelligence" />} />
+          {/* Five product-line category pages — each shows the full series in that line. */}
+          <Route path="/products/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
+          <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
+          <Route path="/products/smart-locks" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />
+          <Route path="/products/smart-windows" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
+          <Route path="/products/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
           {/* Detailed sub-pages already built. */}
           <Route path="/products/smart-locks/s80" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLockS80 /></Suspense>} />
           <Route path="/products/security-doors/x70" element={<SecurityDoorX70 />} />

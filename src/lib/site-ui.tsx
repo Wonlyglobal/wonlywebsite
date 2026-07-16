@@ -40,12 +40,11 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 const NAV: { label: string; href: string; children?: { label: string; href: string; img?: string }[] }[] = [
   { label: "Products", href: "/#products", children: [
     { label: "Security Doors", href: "/products/security-doors", img: `${BASE}images/alu-k300max.webp` },
-    { label: "Smart Locks", href: "/products/smart-locks/s80", img: `${BASE}images/lock-s80.webp` },
     { label: "Wooden Doors", href: "/products/wooden-doors", img: `${BASE}images/wood-2.webp` },
-    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/alu-t200.webp` },
-    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/lock-s80.webp` },
+    { label: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/lock-s80.webp` },
+    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
-  { label: "Solutions", href: "/#solutions" },
   { label: "Projects", href: "/#projects" },
   { label: "R&D & Manufacturing", href: "/#why" },
   { label: "About", href: "/about" },
