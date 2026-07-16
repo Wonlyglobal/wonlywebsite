@@ -633,11 +633,16 @@ const Prototype = () => {
 
       {/* ══ 5 · Global landmark projects (below the product line) ══ */}
       <section id="projects" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
-        {/* Global landmark projects */}
-        <Reveal className="max-w-3xl">
-          <div className={eyebrow}>Global Landmark Projects</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions</h2>
-          <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
+        {/* Global landmark projects — header row: copy left, CTA bottom-right */}
+        <Reveal>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
+            <div className="max-w-3xl">
+              <div className={eyebrow}>Global Landmark Projects</div>
+              <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions</h2>
+              <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
+            </div>
+            <Link to="/projects" className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Explore All Projects <ArrowRight size={15} /></Link>
+          </div>
         </Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
           {PROJECTS.slice(0, 2).map((p) => (
@@ -678,9 +683,6 @@ const Prototype = () => {
           ))}
         </div>
         <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>Further references include Ethiopia's Abyssinia Bank and presidential-palace projects in Togo and Vanuatu.</p>
-        <div className="mt-9">
-          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Explore All Projects <ArrowRight size={15} /></Link>
-        </div>
       </section>
 
       {/* ══ Full-bleed image band B ══ */}
@@ -747,17 +749,17 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ 8 · Global Footprint ══ */}
-      <section id="footprint" className="px-[7vw] py-28 md:py-36" style={{ background: CHAMP_BG }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      {/* ══ 8 · Global Footprint (one screen, centered) ══ */}
+      <section id="footprint" className="px-[7vw] py-16 md:py-0 md:min-h-screen md:max-h-[960px] flex flex-col md:justify-center" style={{ background: CHAMP_BG }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <Reveal>
             <WorldDots className="w-full h-auto" />
           </Reveal>
           <Reveal delay={120}>
             <div className={eyebrow}>Global Footprint</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>We spread around the world</h2>
-            <p className="mt-5 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
-            <div className="mt-8 grid grid-cols-2 gap-4">
+            <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>We spread around the world</h2>
+            <p className="mt-4 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
+            <div className="mt-7 grid grid-cols-2 gap-4">
               {FOOTPRINT_STATS.map((s) => (
                 <div key={s.label} className="rounded-xl p-5" style={{ background: "#efeae0" }}>
                   <div className="text-3xl md:text-4xl font-light leading-none" style={{ color: GOLD }}><CountUp to={s.to} suffix={s.suffix || ""} /></div>
@@ -769,22 +771,29 @@ const Prototype = () => {
         </div>
 
         {/* Landmark installations — text-free reference photos */}
-        <Reveal className="mt-16">
-          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-7" style={{ color: GOLD_DEEP }}>Landmark Installations</div>
+        <Reveal className="mt-10">
+          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Landmark Installations</div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {LANDMARKS.map((l) => (
-              <div key={l.t} className="group relative rounded-2xl overflow-hidden h-[220px] md:h-[260px]">
+              <div key={l.t} className="group relative rounded-2xl overflow-hidden h-[160px] md:h-[190px]">
                 <img src={l.img} alt={l.t} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(13,13,13,0.05) 40%, rgba(13,13,13,0.82) 100%)" }} />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <div className="text-white text-lg font-medium leading-tight">{l.t}</div>
+                <div className="absolute inset-x-0 bottom-0 p-4">
+                  <div className="text-white text-base font-medium leading-tight">{l.t}</div>
                   <div className="mt-1 text-[11px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>{l.d}</div>
                 </div>
               </div>
             ))}
           </div>
         </Reveal>
+      </section>
 
+      {/* ══ Company timeline ══ */}
+      <section className="px-[7vw] py-24 md:py-28" style={{ background: "#fff" }}>
+        <Reveal className="max-w-3xl">
+          <div className={eyebrow}>Our Journey</div>
+          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Three decades in the making</h2>
+        </Reveal>
         <Timeline items={TIMELINE} />
       </section>
 
@@ -795,8 +804,7 @@ const Prototype = () => {
           <p className="text-lg md:text-2xl font-light max-w-4xl mx-auto leading-snug" style={{ color: DARK }}>
             Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
           </p>
-          <div className="mt-10 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Strategic Technology &amp; Industry Partners</div>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
             {PARTNER_PHOTOS.map((p) => (
               <div key={p.n} className="group relative rounded-2xl overflow-hidden">
                 <img src={p.img} alt={`WONLY strategic partnership — ${p.n}`} loading="lazy" className="w-full h-[200px] md:h-[220px] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
