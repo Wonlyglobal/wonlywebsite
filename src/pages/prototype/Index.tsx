@@ -801,7 +801,7 @@ const Prototype = () => {
       <section id="partners" className="px-[7vw] pt-12 pb-20 md:pt-14 md:pb-24 text-center" style={{ background: "#fff" }}>
         <Reveal>
           <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
-          <p className="text-2xl md:text-4xl font-semibold max-w-4xl mx-auto leading-snug" style={{ color: DARK }}>
+          <p className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] max-w-4xl mx-auto" style={{ color: DARK }}>
             Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
           </p>
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
