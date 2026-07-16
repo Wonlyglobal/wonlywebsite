@@ -87,7 +87,7 @@ const WHO_CHECK = [
 const WHY_FEATURES = [
   { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
   { img: `${BASE}images/card-robotic-precision.jpg`, t: "Robotic precision", d: "ABB automated welding and CNC lines hold the tolerances export projects depend on." },
-  { img: `${BASE}images/factory-1.webp`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
+  { img: `${BASE}images/card-listed-group4.jpg`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
 ];
 const FOOTPRINT_STATS = [
   { to: 60, suffix: "+", label: "Countries & Regions" },
@@ -178,18 +178,17 @@ const TIMELINE = [
 
 /* ── Footer ────────────────────────────────────────────────── */
 /* Strategic collaborations (English names + year of agreement; ceremony photos omitted — Chinese banners) */
-const TECH_PARTNERS = [
-  { n: "Huawei", y: "2021" },
-  { n: "Alibaba", y: "2021" },
-  { n: "Siemens", y: "2019" },
-  { n: "Hikvision", y: "2019" },
-  { n: "China Mobile", y: "2019" },
-  { n: "China Telecom", y: "2020" },
-  { n: "China Unicom", y: "2021" },
-  { n: "Foxconn", y: "2018" },
-  { n: "Shanghai Electric", y: "2019" },
-  { n: "Midea", y: "2021" },
-  { n: "Hope Group", y: "2018" },
+// Strategic-partner signing-ceremony photos (optimized from the source archive).
+const PARTNER_PHOTOS = [
+  { img: `${BASE}images/partners-ceremony/partner-huawei.webp`, n: "Huawei", y: "2020" },
+  { img: `${BASE}images/partners-ceremony/partner-siemens.webp`, n: "Siemens", y: "2019" },
+  { img: `${BASE}images/partners-ceremony/partner-alibaba.webp`, n: "Alibaba", y: "2021" },
+  { img: `${BASE}images/partners-ceremony/partner-hikvision.webp`, n: "Hikvision", y: "2019" },
+  { img: `${BASE}images/partners-ceremony/partner-china-telecom.webp`, n: "China Telecom", y: "2020" },
+  { img: `${BASE}images/partners-ceremony/partner-china-mobile.webp`, n: "China Mobile", y: "2019" },
+  { img: `${BASE}images/partners-ceremony/partner-midea.webp`, n: "Midea", y: "2021" },
+  { img: `${BASE}images/partners-ceremony/partner-shanghai-electric.webp`, n: "Shanghai Electric", y: "2019" },
+  { img: `${BASE}images/partners-ceremony/partner-foxconn.webp`, n: "Foxconn", y: "2018" },
 ];
 
 const FOOTER = [
@@ -848,10 +847,21 @@ const Prototype = () => {
             Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
           </p>
           <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Strategic Technology &amp; Industry Partners</div>
-          <div className="mt-6 flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
-            {TECH_PARTNERS.map((p) => (
-              <span key={p.n} className="px-5 py-2.5 rounded-full text-sm font-medium border" style={{ borderColor: `${SILVER}66`, color: DARK }}>{p.n}<span className="ml-2 text-[11px] font-light" style={{ color: MUTED }}>{p.y}</span></span>
-            ))}
+          <div className="mt-7 overflow-hidden max-w-6xl mx-auto">
+            <div className="partner-row overflow-hidden">
+              <div className="partner-track-left flex gap-4 md:gap-5 w-max">
+                {[...PARTNER_PHOTOS, ...PARTNER_PHOTOS].map((p, i) => (
+                  <div key={i} className="group relative shrink-0 w-[280px] md:w-[340px] rounded-2xl overflow-hidden">
+                    <img src={p.img} alt={`WONLY strategic partnership — ${p.n}`} loading="lazy" className="w-full h-[185px] md:h-[214px] object-cover" />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 45%, rgba(13,13,13,0.85) 100%)" }} />
+                    <div className="absolute left-4 bottom-3 text-left">
+                      <div className="text-white text-sm md:text-base font-semibold leading-tight">{p.n}</div>
+                      <div className="text-[10px] tracking-[0.16em] uppercase" style={{ color: CHAMP }}>Strategic Partner · {p.y}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Trusted by China's leading developers — real client logo wall */}
