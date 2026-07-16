@@ -55,7 +55,6 @@ const NAV: NavItem[] = [
     { label: "Smart Windows", href: "/products/smart-windows", img: IMG.aluT200 },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: IMG.lockS80 },
   ] },
-  { label: "Solutions", to: "solutions" },
   { label: "Projects", to: "projects" },
   { label: "R&D & Manufacturing", to: "why" },
   { label: "About", href: "/about" },
@@ -140,13 +139,6 @@ const PROD_CATS = [
 ];
 
 /* ── Section 5 · Solutions ─────────────────────────────────── */
-const SOLUTIONS = [
-  { t: "Premium Residential & Villas", d: "Bespoke designs, ultra-high security grades and whole-house smart integration.", img: IMG.residential },
-  { t: "High-Security Commercial", d: "Banks, data centers and corporate HQs — defeats forced entry while meeting fire codes.", img: IMG.proj1 },
-  { t: "Medical & Public Institutions", d: "Hermetic OR doors, ward doors and access-controlled entries.", img: IMG.publicInst },
-  { t: "Engineering / Bulk Projects", d: "Standardized, certified supply for large developments.", img: IMG.proj2 },
-];
-
 /* ── Section 6 · Certifications & Honors ───────────────────── */
 // Real credentials only — no fabricated certifications on a live company site.
 // To use actual certificate BADGE IMAGES instead of these text pills, drop them
@@ -661,8 +653,8 @@ const Prototype = () => {
               </ul>
               <button onClick={() => scrollToId("contact")} className="mt-8 self-start inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote <ArrowRight size={15} /></button>
             </div>
-            <div className="relative min-h-[440px] md:min-h-0 flex items-center justify-center overflow-hidden" style={{ background: "radial-gradient(115% 115% at 50% 28%, #35322f 0%, #1c1918 52%, #0c0b0b 100%)" }}>
-              <img src={`${BASE}images/door-k300pro.png`} alt="WONLY K300 Pro cast-aluminum security door" loading="lazy" className="h-full w-auto max-w-[82%] object-contain py-10 md:py-14 drop-shadow-2xl select-none" draggable={false} />
+            <div className="relative min-h-[360px] md:min-h-0 flex items-center justify-center overflow-hidden" style={{ background: "linear-gradient(160deg, #2b2828 0%, #1a1818 100%)" }}>
+              <img src={`${BASE}images/door-k300pro.png`} alt="WONLY K300 Pro cast-aluminum security door" loading="lazy" className="w-auto max-w-[72%] max-h-[300px] md:max-h-[500px] object-contain drop-shadow-2xl select-none" draggable={false} />
             </div>
           </div>
         </Reveal>
@@ -703,7 +695,7 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ 5 · Projects + Solutions (merged, below the product line) ══ */}
+      {/* ══ 5 · Global landmark projects (below the product line) ══ */}
       <section id="projects" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
         {/* Global landmark projects */}
         <Reveal className="max-w-3xl">
@@ -750,28 +742,6 @@ const Prototype = () => {
           ))}
         </div>
         <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>Further references include Ethiopia's Abyssinia Bank and presidential-palace projects in Togo and Vanuatu.</p>
-
-        {/* Solutions — engineered for every project type */}
-        <div id="solutions" className="mt-24 md:mt-28 pt-16 md:pt-20 border-t" style={{ borderColor: `${SILVER}55` }}>
-          <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: GOLD }}>Solutions</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Engineered for every project type.</h2>
-          </Reveal>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14">
-            {SOLUTIONS.map((s, i) => (
-              <Reveal key={s.t} delay={(i % 2) * 90}>
-                <div className="group">
-                  <div className="relative overflow-hidden h-[300px] md:h-[380px]">
-                    <img src={s.img} alt={s.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
-                  </div>
-                  <h3 className="mt-6 text-xl md:text-2xl font-light" style={{ color: DARK }}>{s.t}</h3>
-                  <p className="mt-3 max-w-md text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{s.d}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <button onClick={() => scrollToId("contact")} className="mt-12 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Explore Solutions <ArrowRight size={15} /></button>
-        </div>
       </section>
 
       {/* ══ Full-bleed image band B ══ */}
