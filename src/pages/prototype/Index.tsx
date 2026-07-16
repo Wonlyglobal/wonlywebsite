@@ -802,7 +802,7 @@ const Prototype = () => {
         <Reveal>
           <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
           <p className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] max-w-4xl mx-auto" style={{ color: DARK }}>
-            Trusted by leading technology companies and top real-estate developers across Asia and the Middle East.
+            Trusted by leading technology companies<br />and top real-estate developers.
           </p>
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
             {PARTNER_PHOTOS.map((p) => (
