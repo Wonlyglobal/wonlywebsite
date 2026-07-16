@@ -136,3 +136,17 @@ public/images/alu-k300pro.png
 public/images/alu-t200.png
 # Stray raw product-photo folder (singular "image/") — not referenced by the live site
 public/image/
+# Burned-in Chinese developer-logo grid — violates the no-Chinese-text rule; replaced by industry photos
+public/images/partners-re.webp
+# Unused 302KB duplicate of landmark-metro.webp
+public/images/landmark-govhousing.webp
+# Burned-in Chinese text ("天津金逸村") — violates the no-Chinese-text rule
+public/images/proj-s-5.webp
+# Baidu (百科) watermark — not clean for an English B2B site
+public/images/proj-2.webp
+# Unused raw door PNGs (only door-k300pro.png is referenced)
+public/images/door-k300max.png
+public/images/door-t200.png
+# Raw project-photo sources — the site serves optimized .webp copies
+public/images/project/
+public/images/项目案例/

@@ -38,11 +38,10 @@ const IMG = {
   wood1: `${BASE}images/wood-1.png`,
   wood2: `${BASE}images/wood-2.webp`,
   proj1: `${BASE}images/proj-1.webp`, // Hangzhou G20 Expo Center
-  proj2: `${BASE}images/proj-2.webp`, // Egypt New Capital CBD
-  residential: `${BASE}images/proj-s-5.webp`, // Tianjin National Village — residential
-  publicInst: `${BASE}images/proj-s-7.webp`, // institutional building
+  proj2: `${BASE}images/landmark-daxing.webp`, // Daxing airport — major engineering/bulk project (text-free)
+  residential: `${BASE}images/landmark-metro.webp`, // aerial residential community (text-free)
+  publicInst: `${BASE}images/landmark-asiangames.webp`, // Olympic sports center — public institution (text-free)
   top500: `${BASE}images/top500-5.jpg`,
-  partnersRe: `${BASE}images/partners-re.webp`,
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
@@ -71,14 +70,15 @@ const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per
 ];
 
 /* ── Section 3 · Why WONLY ─────────────────────────────────── */
-const STAT_CARDS: { value: string; label: string; img?: string }[] = [
-  { value: "30 Years", label: "Since 1996", img: `${BASE}images/factory-line-a.webp` },
-  { value: "Listed", label: "SSE 605268", img: `${BASE}images/factory-2.webp` },
-  { value: "No.1", label: "Smart Doors & Locks · 2024–2025" },
-  { value: "5", label: "Production Bases", img: `${BASE}images/factory-line-b.webp` },
-  { value: "6", label: "R&D Centers", img: `${BASE}images/factory-abb.webp` },
-  { value: "1,000+", label: "Patents", img: `${BASE}images/factory-1.webp` },
-  { value: "200M+", label: "Users Protected" },
+// Real project/landmark photo behind every stat — no more flat black cards.
+const STAT_CARDS = [
+  { value: "30 Years", label: "Since 1996", img: `${BASE}images/landmark-daxing.webp` },
+  { value: "Listed", label: "SSE 605268", img: `${BASE}images/landmark-asiangames.webp` },
+  { value: "No.1", label: "Smart Doors & Locks · 2024–2025", img: `${BASE}images/landmark-metro.webp` },
+  { value: "5", label: "Production Bases", img: `${BASE}images/proj-cairo-hotel.webp` },
+  { value: "6", label: "R&D Centers", img: `${BASE}images/proj-egypt-cbd.webp` },
+  { value: "1,000+", label: "Patents", img: `${BASE}images/proj-saudi-villa.webp` },
+  { value: "200M+", label: "Users Protected", img: `${BASE}images/proj-1.webp` },
 ];
 const WHO_CHECK = [
   "One-Stop Ecosystem — doors, locks, windows & whole-house intelligence",
@@ -96,6 +96,19 @@ const FOOTPRINT_STATS = [
   { to: 6, label: "R&D Centers" },
   { to: 200, suffix: "M+", label: "Users Worldwide" },
 ];
+// Clean, text-free landmark references for the Global Footprint strip.
+const LANDMARKS = [
+  { img: `${BASE}images/landmark-daxing.webp`, t: "International Airport", d: "Aviation hub" },
+  { img: `${BASE}images/landmark-asiangames.webp`, t: "Olympic Sports Center", d: "Stadium & arena" },
+  { img: `${BASE}images/landmark-metro.webp`, t: "Metropolitan Residential", d: "Smart community" },
+];
+// Industry-application photos for Partners — replaces the burned-in Chinese developer-logo grid.
+const INDUSTRIES = [
+  { img: `${BASE}images/landmark-metro.webp`, t: "Premium Residential" },
+  { img: `${BASE}images/proj-1.webp`, t: "Commercial & Corporate" },
+  { img: `${BASE}images/proj-cairo-hotel.webp`, t: "Hospitality & Landmark" },
+  { img: `${BASE}images/proj-egypt-cbd.webp`, t: "Public & Institutional" },
+];
 
 /* ── Featured overseas projects (government & institutional first) ──
    English site: clean, TEXT-FREE photos only + English HTML overlays. Never a burned-in-Chinese image. */
@@ -104,8 +117,7 @@ const PROJECTS: { name: string; place: string; tag: string; img?: string; placeh
   { name: "National Food Centre", place: "Barbados", tag: "Government", img: `${BASE}images/proj-barbados.webp` },
   { name: "New Capital Arc Landmark", place: "Cairo, Egypt", tag: "Landmark", img: `${BASE}images/proj-cairo-hotel.webp` },
   { name: "Jazan Industrial City", place: "Saudi Arabia", tag: "Industrial", img: `${BASE}images/proj-saudi-villa.webp` },
-  // TODO: replace with a clean, text-free photo of the Mozambique complex (current source is a Chinese PPT slide — must not ship).
-  { name: "Mixed-Use Complex", place: "Mozambique · 35,000 m²", tag: "Commercial", placeholder: true },
+  { name: "Mixed-Use Complex", place: "Mozambique · 35,000 m²", tag: "Commercial", img: `${BASE}images/proj-s-7.webp` },
 ];
 
 /* ── Section 4 · Products ──────────────────────────────────── */
@@ -371,18 +383,9 @@ function DoorConveyor() {
     <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {STAT_CARDS.map((c, i) => (
         <Reveal key={c.value} delay={(i % 4) * 80} className={i === 0 ? "sm:col-span-2" : ""}>
-          <div className="group relative rounded-2xl overflow-hidden h-[190px] md:h-[210px]" style={{ background: "linear-gradient(140deg,#2a2627,#0d0d0d)" }}>
-            {c.img && (
-              <img src={c.img} alt="" aria-hidden loading="lazy" draggable={false} className="absolute inset-0 h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-[1.06]" />
-            )}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: c.img
-                  ? "linear-gradient(180deg, rgba(13,13,13,0.18) 20%, rgba(13,13,13,0.55) 62%, rgba(13,13,13,0.9) 100%)"
-                  : "linear-gradient(150deg, rgba(191,160,106,0.18), rgba(34,31,32,0.55) 55%, rgba(13,13,13,0.85))",
-              }}
-            />
+          <div className="group relative rounded-2xl overflow-hidden h-[190px] md:h-[210px]" style={{ background: "#0d0d0d" }}>
+            <img src={c.img} alt="" aria-hidden loading="lazy" draggable={false} className="absolute inset-0 h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-[1.06]" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(13,13,13,0.30) 0%, rgba(13,13,13,0.42) 45%, rgba(13,13,13,0.88) 100%)" }} />
             <div className="absolute top-6 left-6 h-[2px] w-9" style={{ background: GOLD }} />
             <div className="absolute inset-x-0 bottom-0 p-6">
               <div className="text-white font-light leading-none text-[34px] md:text-[42px]">{c.value}</div>
@@ -640,7 +643,7 @@ const Prototype = () => {
         {/* Who We Are — structured panel */}
         <Reveal>
           <div className="mt-20 grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden" style={{ background: "#efeae0" }}>
-            <div className="p-8 md:p-14 flex flex-col justify-center order-2 md:order-1">
+            <div className="p-8 md:p-14 flex flex-col justify-center">
               <div className={eyebrow} style={{ color: GOLD }}>Who We Are</div>
               <h3 className="mt-4 text-2xl md:text-[38px] font-light leading-[1.15]" style={{ color: DARK }}>One partner for the entire building entry.</h3>
               <p className="mt-5 text-base font-normal leading-relaxed" style={{ color: MUTED }}>Founded in 1996 and listed on the Shanghai Stock Exchange (SSE: 605268), WONLY manufactures security doors, smart locks, wooden doors and aluminum windows across five bases and six R&D centers — protecting over 200 million users worldwide.</p>
@@ -658,8 +661,8 @@ const Prototype = () => {
               </ul>
               <button onClick={() => scrollToId("contact")} className="mt-8 self-start inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote <ArrowRight size={15} /></button>
             </div>
-            <div className="relative min-h-[340px] md:min-h-0 order-1 md:order-2">
-              <img src={IMG.aluPro} alt="WONLY flagship cast-aluminum security door" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="relative min-h-[440px] md:min-h-0 flex items-center justify-center overflow-hidden" style={{ background: "radial-gradient(115% 115% at 50% 28%, #35322f 0%, #1c1918 52%, #0c0b0b 100%)" }}>
+              <img src={`${BASE}images/door-k300pro.png`} alt="WONLY K300 Pro cast-aluminum security door" loading="lazy" className="h-full w-auto max-w-[82%] object-contain py-10 md:py-14 drop-shadow-2xl select-none" draggable={false} />
             </div>
           </div>
         </Reveal>
@@ -679,8 +682,30 @@ const Prototype = () => {
         </Reveal>
       </section>
 
-      {/* ══ Featured overseas projects — governments & institutions first ══ */}
-      <section id="projects" className="px-[7vw] pt-24 md:pt-32 pb-14 md:pb-16" style={{ background: CHAMP_BG }}>
+      {/* ══ 4 · Products ══ */}
+      <section id="products" className="px-[7vw] py-28 md:py-36" style={{ background: CHAMP_BG }}>
+        {/* horizontal product rail */}
+        <div>
+          <Reveal className="max-w-3xl">
+            <div className={eyebrow} style={{ color: GOLD }}>Our Products</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Flagship line-up.</h2>
+          </Reveal>
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div className="flex flex-wrap items-center gap-2.5">
+              {PROD_CATS.map((c) => (
+                <button key={c.key} onClick={() => setProdCat(c.key)} className="px-5 py-2 rounded-full text-[13px] font-medium transition-all" style={prodCat === c.key ? { background: GOLD, color: DARK } : { background: "transparent", color: MUTED, border: `1px solid ${SILVER}66` }}>{c.label}</button>
+              ))}
+            </div>
+            <div className="text-[11px] tracking-[0.3em] uppercase font-light" style={{ color: SILVER }}>scroll →</div>
+          </div>
+          <ProductRail key={prodCat} items={PRODUCT_RAIL.filter((p) => prodCat === "all" || p.cat === prodCat)} />
+          <button onClick={() => scrollToId("contact")} className="mt-8 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Browse Full Catalog <ArrowRight size={15} /></button>
+        </div>
+      </section>
+
+      {/* ══ 5 · Projects + Solutions (merged, below the product line) ══ */}
+      <section id="projects" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
+        {/* Global landmark projects */}
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Global Landmark Projects</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions.</h2>
@@ -725,49 +750,28 @@ const Prototype = () => {
           ))}
         </div>
         <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>Further references include Ethiopia's Abyssinia Bank and presidential-palace projects in Togo and Vanuatu.</p>
-      </section>
 
-      {/* ══ 4 · Products ══ */}
-      <section id="products" className="px-[7vw] py-28 md:py-36" style={{ background: CHAMP_BG }}>
-        {/* horizontal product rail */}
-        <div>
+        {/* Solutions — engineered for every project type */}
+        <div id="solutions" className="mt-24 md:mt-28 pt-16 md:pt-20 border-t" style={{ borderColor: `${SILVER}55` }}>
           <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: GOLD }}>Our Products</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Flagship line-up.</h2>
+            <div className={eyebrow} style={{ color: GOLD }}>Solutions</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Engineered for every project type.</h2>
           </Reveal>
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 mb-8">
-            <div className="flex flex-wrap items-center gap-2.5">
-              {PROD_CATS.map((c) => (
-                <button key={c.key} onClick={() => setProdCat(c.key)} className="px-5 py-2 rounded-full text-[13px] font-medium transition-all" style={prodCat === c.key ? { background: GOLD, color: DARK } : { background: "transparent", color: MUTED, border: `1px solid ${SILVER}66` }}>{c.label}</button>
-              ))}
-            </div>
-            <div className="text-[11px] tracking-[0.3em] uppercase font-light" style={{ color: SILVER }}>scroll →</div>
-          </div>
-          <ProductRail key={prodCat} items={PRODUCT_RAIL.filter((p) => prodCat === "all" || p.cat === prodCat)} />
-          <button onClick={() => scrollToId("contact")} className="mt-8 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Browse Full Catalog <ArrowRight size={15} /></button>
-        </div>
-      </section>
-
-      {/* ══ 5 · Solutions ══ */}
-      <section id="solutions" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
-        <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Solutions</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Engineered for every project type.</h2>
-        </Reveal>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14">
-          {SOLUTIONS.map((s, i) => (
-            <Reveal key={s.t} delay={(i % 2) * 90}>
-              <div className="group">
-                <div className="relative overflow-hidden h-[300px] md:h-[380px]">
-                  <img src={s.img} alt={s.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14">
+            {SOLUTIONS.map((s, i) => (
+              <Reveal key={s.t} delay={(i % 2) * 90}>
+                <div className="group">
+                  <div className="relative overflow-hidden h-[300px] md:h-[380px]">
+                    <img src={s.img} alt={s.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+                  </div>
+                  <h3 className="mt-6 text-xl md:text-2xl font-light" style={{ color: DARK }}>{s.t}</h3>
+                  <p className="mt-3 max-w-md text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{s.d}</p>
                 </div>
-                <h3 className="mt-6 text-xl md:text-2xl font-light" style={{ color: DARK }}>{s.t}</h3>
-                <p className="mt-3 max-w-md text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{s.d}</p>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
+          <button onClick={() => scrollToId("contact")} className="mt-12 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Explore Solutions <ArrowRight size={15} /></button>
         </div>
-        <button onClick={() => scrollToId("contact")} className="mt-12 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Explore Solutions <ArrowRight size={15} /></button>
       </section>
 
       {/* ══ Full-bleed image band B ══ */}
@@ -854,6 +858,24 @@ const Prototype = () => {
             </div>
           </Reveal>
         </div>
+
+        {/* Landmark installations — text-free reference photos */}
+        <Reveal className="mt-16">
+          <div className="text-[11px] tracking-[0.34em] uppercase font-semibold mb-7" style={{ color: GOLD }}>Landmark Installations</div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {LANDMARKS.map((l) => (
+              <div key={l.t} className="group relative rounded-2xl overflow-hidden h-[220px] md:h-[260px]">
+                <img src={l.img} alt={l.t} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(13,13,13,0.05) 40%, rgba(13,13,13,0.82) 100%)" }} />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <div className="text-white text-lg font-medium leading-tight">{l.t}</div>
+                  <div className="mt-1 text-[11px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>{l.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
         <Timeline items={TIMELINE} />
       </section>
 
@@ -870,8 +892,31 @@ const Prototype = () => {
               <span key={p.n} className="px-5 py-2.5 rounded-full text-sm font-medium border" style={{ borderColor: `${SILVER}66`, color: DARK }}>{p.n}<span className="ml-2 text-[11px] font-light" style={{ color: MUTED }}>{p.y}</span></span>
             ))}
           </div>
-          <div className="mt-12 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Real-Estate Development Partners</div>
-          <img src={IMG.partnersRe} alt="WONLY's real-estate development partners" loading="lazy" className="mt-6 w-full max-w-5xl mx-auto h-auto" />
+
+          {/* Trusted by China's leading developers — real client logo wall */}
+          <div className="mt-16 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Trusted by China&apos;s Leading Developers</div>
+          <div className="mt-6 rounded-3xl p-5 md:p-8 max-w-6xl mx-auto" style={{ background: CHAMP_BG }}>
+            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+              {Array.from({ length: 30 }, (_, i) => `re-${String(i + 1).padStart(2, "0")}.png`).map((f) => (
+                <div key={f} className="flex items-center justify-center rounded-xl bg-white h-20 md:h-24 p-3 md:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <img src={`${BASE}images/partners-re/${f}`} alt="" aria-hidden="true" loading="lazy" className="max-h-full max-w-full object-contain opacity-90 transition-opacity duration-300 hover:opacity-100" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-16 text-[11px] tracking-[0.4em] uppercase font-light" style={{ color: GOLD }}>Specified Across Industries</div>
+          <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {INDUSTRIES.map((it) => (
+              <div key={it.t} className="group relative rounded-2xl overflow-hidden h-[200px] md:h-[240px]">
+                <img src={it.img} alt={it.t} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(13,13,13,0.05) 45%, rgba(13,13,13,0.8) 100%)" }} />
+                <div className="absolute inset-x-0 bottom-0 p-4 text-left">
+                  <div className="text-white text-sm md:text-base font-medium leading-tight">{it.t}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </Reveal>
       </section>
 
