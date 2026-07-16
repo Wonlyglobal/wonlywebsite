@@ -174,18 +174,18 @@ const PARTNER_PHOTOS = [
 
 type FooterLink = { l: string; href?: string; to?: string };
 const FOOTER: { h: string; links: FooterLink[] }[] = [
+  { h: "Company", links: [
+    { l: "Why WONLY", to: "why" },
+    { l: "Global Footprint", to: "footprint" },
+    { l: "Projects", to: "projects" },
+    { l: "About", href: "/about" },
+  ] },
   { h: "Products", links: [
     { l: "Security Doors", href: "/products/security-doors" },
     { l: "Wooden Doors", href: "/products/wooden-doors" },
     { l: "Smart Locks", href: "/products/smart-locks" },
     { l: "Smart Windows", href: "/products/smart-windows" },
     { l: "Whole-House Intelligence", href: "/products/whole-house" },
-  ] },
-  { h: "Company", links: [
-    { l: "Why WONLY", to: "why" },
-    { l: "Global Footprint", to: "footprint" },
-    { l: "Projects", to: "projects" },
-    { l: "About", href: "/about" },
   ] },
   { h: "Explore", links: [
     { l: "Certifications", to: "certs" },
