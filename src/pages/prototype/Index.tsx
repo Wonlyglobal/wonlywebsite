@@ -91,12 +91,6 @@ const FOOTPRINT_STATS = [
   { to: 6, label: "R&D Centers" },
   { to: 200, suffix: "M+", label: "Users Worldwide" },
 ];
-// Clean, text-free landmark references for the Global Footprint strip.
-const LANDMARKS = [
-  { img: `${BASE}images/landmark-daxing.webp`, t: "International Airport", d: "Aviation hub" },
-  { img: `${BASE}images/landmark-asiangames.webp`, t: "Olympic Sports Center", d: "Stadium & arena" },
-  { img: `${BASE}images/landmark-metro.webp`, t: "Metropolitan Residential", d: "Smart community" },
-];
 
 /* ── Featured overseas projects (government & institutional first) ──
    English site: clean, TEXT-FREE photos only + English HTML overlays. Never a burned-in-Chinese image. */
@@ -754,8 +748,17 @@ const Prototype = () => {
         </div>
       </section>
 
+      {/* ══ Company timeline ══ */}
+      <section className="px-[7vw] pt-24 pb-14 md:pt-28 md:pb-16" style={{ background: "#fff" }}>
+        <Reveal className="max-w-3xl">
+          <div className={eyebrow}>Our Journey</div>
+          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>A thirty-year journey</h2>
+        </Reveal>
+        <Timeline items={TIMELINE} />
+      </section>
+
       {/* ══ 8 · Global Footprint (one screen, centered) ══ */}
-      <section id="footprint" className="px-[7vw] pt-12 pb-12 md:pt-20 md:pb-20 flex flex-col" style={{ background: CHAMP_BG }}>
+      <section id="footprint" className="px-[7vw] pt-16 pb-16 md:pt-24 md:pb-24 flex flex-col" style={{ background: CHAMP_BG }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <Reveal>
             <WorldDots className="w-full h-auto" />
@@ -774,33 +777,8 @@ const Prototype = () => {
             </div>
           </Reveal>
         </div>
-
-        {/* Landmark installations — text-free reference photos */}
-        <Reveal className="mt-10">
-          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Landmark Installations</div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {LANDMARKS.map((l) => (
-              <div key={l.t} className="group relative rounded-2xl overflow-hidden h-[160px] md:h-[190px]">
-                <img src={l.img} alt={l.t} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(13,13,13,0.05) 40%, rgba(13,13,13,0.82) 100%)" }} />
-                <div className="absolute inset-x-0 bottom-0 p-4">
-                  <div className="text-white text-base font-medium leading-tight">{l.t}</div>
-                  <div className="mt-1 text-[11px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>{l.d}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
       </section>
 
-      {/* ══ Company timeline ══ */}
-      <section className="px-[7vw] pt-24 pb-14 md:pt-28 md:pb-16" style={{ background: "#fff" }}>
-        <Reveal className="max-w-3xl">
-          <div className={eyebrow}>Our Journey</div>
-          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>A thirty-year journey</h2>
-        </Reveal>
-        <Timeline items={TIMELINE} />
-      </section>
 
       {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
       <section id="partners" className="px-[7vw] pt-12 pb-20 md:pt-14 md:pb-24 text-center" style={{ background: "#fff" }}>
