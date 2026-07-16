@@ -46,12 +46,15 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-type NavChild = { label: string; href?: string; to?: string; img?: string };
+type NavSubChild = { label: string; href: string };
+type NavChild = { label: string; href?: string; to?: string; img?: string; children?: NavSubChild[] };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
-    { label: "Security Doors", href: "/products/security-doors", img: IMG.aluMax },
-    { label: "Wooden Doors", href: "/products/wooden-doors", img: IMG.wood2 },
+    { label: "Entrance Door", href: "/products/entrance-door", img: IMG.aluMax, children: [
+      { label: "Security Doors", href: "/products/security-doors" },
+      { label: "Wooden Doors", href: "/products/wooden-doors" },
+    ] },
     { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
     { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
@@ -330,7 +333,7 @@ function Timeline({ items }: { items: { y: string; m: string }[] }) {
    the photo tiles seamlessly in an infinite marquee, with gold data nameplates over the floor. */
 function DoorConveyor() {
   return (
-    <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {STAT_CARDS.map((c, i) => (
         <Reveal key={c.value} delay={(i % 4) * 80} className={i === 0 ? "sm:col-span-2" : ""}>
           <div className="group relative rounded-2xl overflow-hidden h-[190px] md:h-[210px]" style={{ background: "#0d0d0d" }}>
@@ -506,9 +509,21 @@ const Prototype = () => {
                         {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
                         <span className="leading-tight whitespace-nowrap">{c.label}</span>
                       </>);
-                      return c.href
-                        ? <Link key={c.label} to={c.href} className={cls} style={{ color: DARK }}>{inner}</Link>
-                        : <button key={c.label} onClick={() => scrollToId(c.to || "products")} className={cls} style={{ color: DARK }}>{inner}</button>;
+                      const main = c.href
+                        ? <Link to={c.href} className={cls} style={{ color: DARK }}>{inner}</Link>
+                        : <button onClick={() => scrollToId(c.to || "products")} className={cls} style={{ color: DARK }}>{inner}</button>;
+                      return (
+                        <div key={c.label}>
+                          {main}
+                          {c.children && (
+                            <div className="pl-14 pb-1">
+                              {c.children.map((sc) => (
+                                <Link key={sc.label} to={sc.href} className="block px-3 py-1.5 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: MUTED }}>{sc.label}</Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
                     })}
                   </div>
                 )}
@@ -579,17 +594,22 @@ const Prototype = () => {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           {WHY_FEATURES.map((f, i) => (
             <Reveal key={f.t} delay={(i % 3) * 90}>
-              <div className="h-full flex flex-col rounded-2xl overflow-hidden" style={{ background: CHAMP_BG }}>
-                <img src={f.img} alt={f.t} loading="lazy" className="w-full h-[200px] md:h-[230px] object-cover shrink-0" />
-                <div className="p-6 md:p-7">
-                  <div className="text-lg md:text-xl font-medium" style={{ color: DARK }}>{f.t}</div>
-                  <div className="mt-2 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</div>
+              {/* Image only by default; title + description reveal on hover */}
+              <div className="group relative h-[300px] md:h-[340px] rounded-2xl overflow-hidden">
+                <img src={f.img} alt={f.t} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(0deg, rgba(12,10,9,0.92) 8%, rgba(12,10,9,0.4) 55%, rgba(12,10,9,0.08) 100%)" }} />
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 translate-y-3 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  <div className="text-lg md:text-xl font-semibold text-white">{f.t}</div>
+                  <div className="mt-2 text-sm font-normal leading-relaxed text-white/85">{f.d}</div>
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
+      </section>
 
+      {/* ══ Company at a glance — stat cards ══ */}
+      <section className="px-[7vw] py-20 md:py-24" style={{ background: CHAMP_BG }}>
         <DoorConveyor />
       </section>
 
@@ -781,36 +801,37 @@ const Prototype = () => {
 
 
       {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
-      <section id="partners" className="px-[7vw] pt-12 pb-20 md:pt-14 md:pb-24 text-center" style={{ background: "#fff" }}>
+      <section id="partners" className="px-[7vw] py-12 md:py-14 text-center" style={{ background: "#fff" }}>
         <Reveal>
           <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
           <p className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] max-w-4xl mx-auto" style={{ color: DARK }}>
             Trusted by tech &amp; real-estate leaders.
           </p>
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
+          {/* Responsive, extensible grid — flows to more rows as partners are added */}
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4 max-w-6xl mx-auto">
             {PARTNER_PHOTOS.map((p) => (
-              <div key={p.n} className="group relative rounded-2xl overflow-hidden">
-                <img src={p.img} alt={`WONLY strategic partnership — ${p.n}`} loading="lazy" className="w-full h-[200px] md:h-[220px] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 45%, rgba(13,13,13,0.85) 100%)" }} />
-                <div className="absolute left-4 bottom-3 text-left">
-                  <div className="text-white text-sm md:text-base font-semibold leading-tight">{p.n}</div>
-                  <div className="text-[10px] tracking-[0.16em] uppercase" style={{ color: CHAMP }}>Strategic Partner · {p.y}</div>
+              <div key={p.n} className="group relative rounded-xl overflow-hidden">
+                <img src={p.img} alt={`WONLY strategic partnership — ${p.n}`} loading="lazy" className="w-full h-[110px] md:h-[132px] object-cover transition-transform duration-500 group-hover:scale-[1.05]" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 38%, rgba(13,13,13,0.86) 100%)" }} />
+                <div className="absolute left-3 bottom-2.5 text-left">
+                  <div className="text-white text-xs md:text-sm font-semibold leading-tight">{p.n}</div>
+                  <div className="text-[9px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>Partner · {p.y}</div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Trusted by China's leading developers — full-bleed logo carousel */}
-          <div className="mt-16 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
-          <div className="mt-7 w-screen ml-[calc(50%-50vw)] overflow-hidden">
-            <div className="flex flex-col gap-3 md:gap-4">
-              {[0, 1, 2].map((row) => {
-                const items = Array.from({ length: 10 }, (_, i) => `re-${String(row * 10 + i + 1).padStart(2, "0")}.png`);
+          <div className="mt-10 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
+          <div className="mt-6 w-screen ml-[calc(50%-50vw)] overflow-hidden">
+            <div className="flex flex-col gap-3">
+              {[0, 1].map((row) => {
+                const items = Array.from({ length: 15 }, (_, i) => `re-${String(row * 15 + i + 1).padStart(2, "0")}.png`);
                 return (
                   <div key={row} className="partner-row overflow-hidden">
                     <div className={`${row % 2 === 1 ? "partner-track-right" : "partner-track-left"} flex gap-3 md:gap-4 w-max px-2`}>
                       {[...items, ...items].map((f, i) => (
-                        <div key={i} className="flex items-center justify-center rounded-xl bg-white h-20 md:h-24 w-36 md:w-44 shrink-0 p-3 md:p-4 border shadow-sm" style={{ borderColor: `${SILVER}44` }}>
+                        <div key={i} className="flex items-center justify-center rounded-xl bg-white h-16 md:h-20 w-32 md:w-40 shrink-0 p-3 border shadow-sm" style={{ borderColor: `${SILVER}44` }}>
                           <img src={`${BASE}images/partners-re/${f}`} alt="" aria-hidden="true" loading="lazy" className="max-h-full max-w-full object-contain opacity-90" />
                         </div>
                       ))}

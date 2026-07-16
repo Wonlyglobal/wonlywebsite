@@ -13,6 +13,7 @@ const Index = lazy(() => import("./pages/home/Index"));
 const About = lazy(() => import("./pages/about/Index"));
 const Projects = lazy(() => import("./pages/projects/Index"));
 // Product category pages (each lists the full series in its line)
+const EntranceDoor = lazy(() => import("./pages/products/EntranceDoor"));
 const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
 const SmartLocks = lazy(() => import("./pages/products/SmartLocks"));
 const WoodenDoors = lazy(() => import("./pages/products/WoodenDoors"));
@@ -45,7 +46,8 @@ const App = () => (
           <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
           {/* Full projects portfolio page. */}
           <Route path="/projects" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Projects /></Suspense>} />
-          {/* Five product-line category pages — each shows the full series in that line. */}
+          {/* Product-line category pages — each shows the full series in that line. */}
+          <Route path="/products/entrance-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EntranceDoor /></Suspense>} />
           <Route path="/products/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
           <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
           <Route path="/products/smart-locks" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />

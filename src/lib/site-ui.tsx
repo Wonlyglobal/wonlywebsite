@@ -38,10 +38,12 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 
 /* Full nav framework (mirrors the homepage). Section items link back to the
    homepage and scroll there via its hash handler; S80 + About are real pages. */
-const NAV: { label: string; href: string; children?: { label: string; href: string; img?: string }[] }[] = [
+const NAV: { label: string; href: string; children?: { label: string; href: string; img?: string; children?: { label: string; href: string }[] }[] }[] = [
   { label: "Products", href: "/#products", children: [
-    { label: "Security Doors", href: "/products/security-doors", img: `${BASE}images/alu-k300max.webp` },
-    { label: "Wooden Doors", href: "/products/wooden-doors", img: `${BASE}images/wood-2.webp` },
+    { label: "Entrance Door", href: "/products/entrance-door", img: `${BASE}images/alu-k300max.webp`, children: [
+      { label: "Security Doors", href: "/products/security-doors" },
+      { label: "Wooden Doors", href: "/products/wooden-doors" },
+    ] },
     { label: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/lock-s80.webp` },
     { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
@@ -210,12 +212,21 @@ export function SiteHeader() {
                 {n.label}{n.children && <ChevronDown size={13} />}
               </Link>
               {n.children && openDrop && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[330px] rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
                   {n.children.map((c) => (
-                    <Link key={c.label} to={c.href} className="flex items-center gap-3 w-full text-left px-3 py-2 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
-                      {c.img && <span className="w-9 h-9 rounded-md flex items-center justify-center shrink-0 overflow-hidden" style={{ background: "rgba(34,31,32,0.06)" }}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain p-0.5" /></span>}
-                      <span>{c.label}</span>
-                    </Link>
+                    <div key={c.label}>
+                      <Link to={c.href} className="flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                        {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
+                        <span className="leading-tight whitespace-nowrap">{c.label}</span>
+                      </Link>
+                      {c.children && (
+                        <div className="pl-14 pb-1">
+                          {c.children.map((sc) => (
+                            <Link key={sc.label} to={sc.href} className="block px-3 py-1.5 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: MUTED }}>{sc.label}</Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               )}
