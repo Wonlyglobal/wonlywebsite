@@ -46,8 +46,8 @@ const NAV: { label: string; href: string; children?: { label: string; href: stri
     { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
-  { label: "Projects", href: "/#projects" },
   { label: "R&D & Manufacturing", href: "/#why" },
+  { label: "Projects", href: "/#projects" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/#contact" },
 ];

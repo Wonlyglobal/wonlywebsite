@@ -56,8 +56,8 @@ const NAV: NavItem[] = [
     { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
-  { label: "Projects", to: "projects" },
   { label: "R&D & Manufacturing", to: "why" },
+  { label: "Projects", to: "projects" },
   { label: "About", href: "/about" },
   { label: "Contact", to: "contact" },
 ];
