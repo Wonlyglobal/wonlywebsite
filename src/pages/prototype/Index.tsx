@@ -156,7 +156,7 @@ const TIMELINE = [
   { y: "2016", m: "SAP go-live — the start of digital transformation." },
   { y: "2021", m: "Listed on the Shanghai Stock Exchange (605268) — the industry's only main-board company." },
   { y: "2024", m: "Opens the sector's only national-level 5G future factory." },
-  { y: "2026", m: "Global expansion begins — the first year of the going-global strategy." },
+  { y: "2026", m: "Our 30th anniversary — a new era begins. WONLY launches its global development strategy, taking premium smart-security to the world." },
 ];
 
 /* ── Footer ────────────────────────────────────────────────── */
