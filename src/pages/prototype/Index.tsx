@@ -83,6 +83,14 @@ const STAT_CARDS = [
   { value: "1,000+", label: "Patents", desc: "Over 1,000 proprietary security and smart-lock patents.", img: `${BASE}images/proj-saudi-villa.webp` },
   { value: "200M+", label: "Users Protected", desc: "Protecting more than 200 million users worldwide.", img: `${BASE}images/proj-1.webp` },
 ];
+// Manufacturing-strength cards under the Why headline. The "listed group" card uses
+// card-listed-group4.jpg (clean HQ building); card-listed-group.jpg is a factory shot
+// with burned-in Chinese "模芯立体库-1" text, excluded from the English site.
+const WHY_FEATURES = [
+  { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
+  { img: `${BASE}images/card-robotic-precision.jpg`, t: "Robotic precision", d: "ABB automated welding and CNC lines hold the tolerances export projects depend on." },
+  { img: `${BASE}images/card-listed-group4.jpg`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
+];
 const FOOTPRINT_STATS = [
   { to: 60, suffix: "+", label: "Countries & Regions" },
   { to: 5, label: "Manufacturing Bases" },
@@ -680,15 +688,31 @@ const Prototype = () => {
 
       </section>
 
-      {/* ══ 3 · Why WONLY — headline + the numbers coverflow as its body ══ */}
-      <section id="why" className="px-[7vw] py-20 md:py-24" style={{ background: "#fff" }}>
+      {/* ══ 3 · Why WONLY — headline, numbers coverflow, and manufacturing cards ══ */}
+      <section id="why" className="px-[7vw] py-24 md:py-28" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Why WONLY</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top</h2>
-          <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.</p>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top.</h2>
+          <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
         </Reveal>
-        <div className="mt-10 md:mt-12">
+        <div className="mt-10 md:mt-14">
           <NumbersCoverflow />
+        </div>
+        <div className="mt-14 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {WHY_FEATURES.map((f, i) => (
+            <Reveal key={f.t} delay={(i % 3) * 90}>
+              {/* Vertical card: image on top, text below; equal height across the row */}
+              <div className="group h-full flex flex-col rounded-2xl overflow-hidden bg-white shadow-sm" style={{ border: `1px solid ${SILVER}33` }}>
+                <div className="h-[200px] md:h-[220px] overflow-hidden">
+                  <img src={f.img} alt={f.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+                </div>
+                <div className="flex-1 p-6 md:p-7">
+                  <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{f.t}</div>
+                  <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
