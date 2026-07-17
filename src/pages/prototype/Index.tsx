@@ -75,13 +75,13 @@ const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per
 /* ── Section 3 · Why WONLY ─────────────────────────────────── */
 // Real project/landmark photo behind every stat — no more flat black cards.
 const STAT_CARDS = [
-  { value: "30 Years", label: "Since 1996", img: `${BASE}images/landmark-daxing.webp` },
-  { value: "Listed", label: "SSE 605268", img: `${BASE}images/landmark-asiangames.webp` },
+  { value: "30 Years", label: "Since 1996 · Yongkang", img: `${BASE}images/landmark-daxing.webp` },
+  { value: "Listed", label: "Shanghai Stock Exchange · SSE 605268", img: `${BASE}images/landmark-asiangames.webp` },
   { value: "No.1", label: "Smart Doors & Locks · 2024–2025", img: `${BASE}images/landmark-metro.webp` },
   { value: "5", label: "Production Bases", img: `${BASE}images/proj-cairo-hotel.webp` },
   { value: "6", label: "R&D Centers", img: `${BASE}images/proj-egypt-cbd.webp` },
   { value: "1,000+", label: "Patents", img: `${BASE}images/proj-saudi-villa.webp` },
-  { value: "200M+", label: "Users Protected", img: `${BASE}images/proj-1.webp` },
+  { value: "200M+", label: "Users Protected Worldwide", img: `${BASE}images/proj-1.webp` },
 ];
 const WHY_FEATURES = [
   { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
@@ -108,8 +108,7 @@ const PROJECTS: { name: string; place: string; tag: string; img?: string; placeh
 /* ── Section 4 · Products ──────────────────────────────────── */
 // Product gallery — doors first. Each card links to its /products/ route (see App.tsx).
 const PRODUCTS_GALLERY = [
-  { name: "Security Doors", href: "/products/security-doors", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Cast-aluminum security doors — autonomous locking and multi-vector intrusion sensing." },
-  { name: "Wooden Doors", href: "/products/wooden-doors", img: `${BASE}images/5products/prod-wooden-doors.jpg`, d: "Warm, quiet interior doors — steel-reinforced cores that stay true and never warp." },
+  { name: "Entrance Door", href: "/products/entrance-door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Security doors and steel-wood interior doors — the entire building entry, protection outside and quiet craft within." },
   { name: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
   { name: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
   { name: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
@@ -332,21 +331,28 @@ function Timeline({ items }: { items: { y: string; m: string }[] }) {
 /* Real-photo door production line: doors ride a red monorail across a light workshop;
    the photo tiles seamlessly in an infinite marquee, with gold data nameplates over the floor. */
 function DoorConveyor() {
+  // Seamless horizontal ticker: the 7 stat cards are duplicated (14 total) so the
+  // -50% translate loops back to the exact start with no jump. Hover pauses the belt.
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {STAT_CARDS.map((c, i) => (
-        <Reveal key={c.value} delay={(i % 4) * 80} className={i === 0 ? "sm:col-span-2" : ""}>
-          <div className="group relative rounded-2xl overflow-hidden h-[190px] md:h-[210px]" style={{ background: "#0d0d0d" }}>
-            <img src={c.img} alt="" aria-hidden loading="lazy" draggable={false} className="absolute inset-0 h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-[1.06]" />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(13,13,13,0.30) 0%, rgba(13,13,13,0.42) 45%, rgba(13,13,13,0.88) 100%)" }} />
-            <div className="absolute top-6 left-6 h-[2px] w-9" style={{ background: GOLD }} />
+    <div className="numbers-band overflow-x-auto md:overflow-hidden select-none">
+      <div className="numbers-track flex gap-5 w-max">
+        {[...STAT_CARDS, ...STAT_CARDS].map((c, i) => (
+          <div
+            key={i}
+            aria-hidden={i >= STAT_CARDS.length}
+            className="numbers-card group relative shrink-0 rounded-2xl overflow-hidden w-[220px] h-[280px] md:w-[300px] md:h-[360px]"
+            style={{ background: "#0f0d0c" }}
+          >
+            <img src={c.img} alt="" aria-hidden loading="lazy" draggable={false} className="numbers-img absolute inset-0 h-full w-full object-cover select-none" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(0deg, rgba(15,13,12,0.9) 0%, rgba(15,13,12,0.35) 45%, rgba(15,13,12,0.15) 100%)" }} />
+            <div className="absolute top-6 left-6 h-[2px] w-[26px]" style={{ background: GOLD_DEEP }} />
             <div className="absolute inset-x-0 bottom-0 p-6">
-              <div className="text-white font-light leading-none text-[34px] md:text-[42px]">{c.value}</div>
-              <div className="mt-2.5 text-[11px] tracking-[0.16em] uppercase font-medium" style={{ color: CHAMP }}>{c.label}</div>
+              <div className="text-white font-semibold leading-none text-[40px]">{c.value}</div>
+              <div className="mt-2.5 text-[11px] tracking-[0.16em] uppercase font-medium text-white">{c.label}</div>
             </div>
           </div>
-        </Reveal>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
@@ -608,9 +614,14 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ Company at a glance — stat cards ══ */}
-      <section className="px-[7vw] py-20 md:py-24" style={{ background: CHAMP_BG }}>
-        <DoorConveyor />
+      {/* ══ Company at a glance — auto-scrolling numbers ticker ══ */}
+      <section className="py-[70px] md:py-[70px]" style={{ background: CHAMP_BG }}>
+        <Reveal className="px-[7vw]">
+          <div className={eyebrow}>WONLY in Numbers</div>
+        </Reveal>
+        <div className="mt-10 md:mt-12">
+          <DoorConveyor />
+        </div>
       </section>
 
       {/* ══ Full-bleed image band A ══ */}
@@ -630,8 +641,13 @@ const Prototype = () => {
       {/* ══ 4 · Products — expanding horizontal gallery ══ */}
       <section id="products" className="px-[7vw] pt-24 pb-12 md:pt-28 md:pb-14 md:h-screen md:max-h-[940px] flex flex-col" style={{ background: CHAMP_BG }}>
         <Reveal className="shrink-0">
-          <div className={eyebrow}>Our Products</div>
-          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built for every opening</h2>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-5">
+            <div>
+              <div className={eyebrow}>Our Products</div>
+              <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built for every opening</h2>
+            </div>
+            <Link to="/products" className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>View All Products <ArrowRight size={15} /></Link>
+          </div>
         </Reveal>
         <div className="product-gallery mt-8 md:mt-10 flex-1 min-h-0 flex flex-col md:flex-row gap-1.5">
           {PRODUCTS_GALLERY.map((p) => (
