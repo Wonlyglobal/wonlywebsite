@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 
@@ -83,11 +83,6 @@ const STAT_CARDS = [
   { value: "1,000+", label: "Patents", desc: "Over 1,000 proprietary security and smart-lock patents.", img: `${BASE}images/proj-saudi-villa.webp` },
   { value: "200M+", label: "Users Protected", desc: "Protecting more than 200 million users worldwide.", img: `${BASE}images/proj-1.webp` },
 ];
-const WHY_FEATURES = [
-  { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
-  { img: `${BASE}images/card-robotic-precision.jpg`, t: "Robotic precision", d: "ABB automated welding and CNC lines hold the tolerances export projects depend on." },
-  { img: `${BASE}images/card-listed-group4.jpg`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
-];
 const FOOTPRINT_STATS = [
   { to: 60, suffix: "+", label: "Countries & Regions" },
   { to: 5, label: "Manufacturing Bases" },
@@ -167,11 +162,11 @@ const PARTNER_PHOTOS = [
   { img: `${BASE}images/partners-ceremony/partner-siemens.webp`, n: "Siemens", y: "2019" },
   { img: `${BASE}images/partners-ceremony/partner-alibaba.webp`, n: "Alibaba", y: "2021" },
   { img: `${BASE}images/partners-ceremony/partner-hikvision.webp`, n: "Hikvision", y: "2019" },
-  { img: `${BASE}images/partners-ceremony/partner-china-telecom.webp`, n: "China Telecom", y: "2020" },
   { img: `${BASE}images/partners-ceremony/partner-china-mobile.webp`, n: "China Mobile", y: "2019" },
+  { img: `${BASE}images/partners-ceremony/partner-china-telecom.webp`, n: "China Telecom", y: "2020" },
   { img: `${BASE}images/partners-ceremony/partner-midea.webp`, n: "Midea", y: "2021" },
-  { img: `${BASE}images/partners-ceremony/partner-shanghai-electric.webp`, n: "Shanghai Electric", y: "2019" },
   { img: `${BASE}images/partners-ceremony/partner-foxconn.webp`, n: "Foxconn", y: "2018" },
+  { img: `${BASE}images/partners-ceremony/partner-shanghai-electric.webp`, n: "Shanghai Electric", y: "2019" },
 ];
 
 type FooterLink = { l: string; href?: string; to?: string };
@@ -410,6 +405,48 @@ function NumbersCoverflow() {
   );
 }
 
+/* Partners — paginated flat grid (4×2, 8 per page). Arrows slide the whole page
+   horizontally via translateX; they grey out at the first/last page. */
+function PartnersPager() {
+  const PER = 8;
+  const pageCount = Math.ceil(PARTNER_PHOTOS.length / PER);
+  const pages = Array.from({ length: pageCount }, (_, p) => PARTNER_PHOTOS.slice(p * PER, p * PER + PER));
+  const [page, setPage] = useState(0);
+  return (
+    <div className="mt-8 max-w-6xl mx-auto">
+      <div className="overflow-hidden">
+        <div className="pages flex transition-transform duration-500 ease-[cubic-bezier(.4,0,.2,1)]" style={{ transform: `translateX(-${page * 100}%)` }}>
+          {pages.map((group, p) => (
+            <div key={p} className="w-full shrink-0 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-fr">
+              {group.map((pt) => (
+                <div key={pt.n} className="group relative rounded-xl overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+                  <img src={pt.img} alt={`WONLY strategic partnership — ${pt.n}`} loading="lazy" className="w-full h-[150px] md:h-[190px] object-cover" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 40%, rgba(13,13,13,0.88) 100%)" }} />
+                  <div className="absolute left-4 bottom-3 text-left">
+                    <div className="text-white text-sm md:text-base font-semibold leading-tight">{pt.n}</div>
+                    <div className="mt-0.5 text-[9px] md:text-[10px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>Partner · {pt.y}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      {pageCount > 1 && (
+        <div className="mt-8 flex items-center justify-center gap-6">
+          <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0} aria-label="Previous partners" className="w-11 h-11 rounded-full flex items-center justify-center border transition-colors disabled:opacity-25 disabled:cursor-not-allowed hover:bg-[#F5F1EA]" style={{ borderColor: `${SILVER}66`, color: DARK }}>
+            <ChevronLeft size={18} />
+          </button>
+          <div className="text-sm tracking-[0.2em] tabular-nums" style={{ color: DARK }}>{page + 1}/{pageCount}</div>
+          <button onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))} disabled={page === pageCount - 1} aria-label="Next partners" className="w-11 h-11 rounded-full flex items-center justify-center border transition-colors disabled:opacity-25 disabled:cursor-not-allowed hover:bg-[#F5F1EA]" style={{ borderColor: `${SILVER}66`, color: DARK }}>
+            <ChevronRight size={18} />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const eyebrow = "text-[12px] tracking-[0.3em] uppercase font-semibold text-[#B08D4F]";
 const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[34px] md:text-[58px]";
 
@@ -643,34 +680,12 @@ const Prototype = () => {
 
       </section>
 
-      {/* ══ 3 · Why WONLY ══ */}
-      <section id="why" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
+      {/* ══ 3 · Why WONLY — headline + the numbers coverflow as its body ══ */}
+      <section id="why" className="px-[7vw] py-20 md:py-24" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Why WONLY</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top</h2>
           <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Thirty years of vertically integrated manufacturing — five bases, six R&D centers and a listed parent standing behind every order.</p>
-        </Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {WHY_FEATURES.map((f, i) => (
-            <Reveal key={f.t} delay={(i % 3) * 90}>
-              {/* Image only by default; title + description reveal on hover */}
-              <div className="group relative h-[300px] md:h-[340px] rounded-2xl overflow-hidden">
-                <img src={f.img} alt={f.t} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(0deg, rgba(12,10,9,0.92) 8%, rgba(12,10,9,0.4) 55%, rgba(12,10,9,0.08) 100%)" }} />
-                <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 translate-y-3 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                  <div className="text-lg md:text-xl font-semibold text-white">{f.t}</div>
-                  <div className="mt-2 text-sm font-normal leading-relaxed text-white/85">{f.d}</div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ══ Company at a glance — 3D coverflow of the numbers ══ */}
-      <section className="py-[54px] md:py-[70px]" style={{ background: CHAMP_BG }}>
-        <Reveal className="px-[7vw] text-center">
-          <div className={eyebrow}>WONLY in Numbers</div>
         </Reveal>
         <div className="mt-10 md:mt-12">
           <NumbersCoverflow />
@@ -876,19 +891,8 @@ const Prototype = () => {
           <p className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] max-w-4xl mx-auto" style={{ color: DARK }}>
             Trusted by tech &amp; real-estate leaders.
           </p>
-          {/* Responsive, extensible grid — flows to more rows as partners are added */}
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4 max-w-6xl mx-auto">
-            {PARTNER_PHOTOS.map((p) => (
-              <div key={p.n} className="group relative rounded-xl overflow-hidden">
-                <img src={p.img} alt={`WONLY strategic partnership — ${p.n}`} loading="lazy" className="w-full h-[110px] md:h-[132px] object-cover transition-transform duration-500 group-hover:scale-[1.05]" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 38%, rgba(13,13,13,0.86) 100%)" }} />
-                <div className="absolute left-3 bottom-2.5 text-left">
-                  <div className="text-white text-xs md:text-sm font-semibold leading-tight">{p.n}</div>
-                  <div className="text-[9px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>Partner · {p.y}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* Paginated flat grid — 4×2, 8 per page; arrows slide whole pages */}
+          <PartnersPager />
 
           {/* Trusted by China's leading developers — full-bleed logo carousel */}
           <div className="mt-10 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
