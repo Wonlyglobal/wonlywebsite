@@ -363,7 +363,7 @@ function NumbersCoverflow() {
   const stop = () => { if (timer.current) { clearInterval(timer.current); timer.current = null; } };
   const start = () => {
     stop();
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Always auto-advance (owner-requested); resumes on mouseleave, pauses on hover.
     timer.current = window.setInterval(() => setActive((a) => (a + 1) % n), 2800);
   };
 
@@ -688,31 +688,41 @@ const Prototype = () => {
 
       </section>
 
-      {/* ══ 3 · Why WONLY — headline, numbers coverflow, and manufacturing cards ══ */}
-      <section id="why" className="px-[7vw] py-24 md:py-28" style={{ background: CHAMP_BG }}>
-        <Reveal className="max-w-3xl">
+      {/* ══ 3 · Why WONLY — headline → numbers coverflow → manufacturing strength ══ */}
+      <section id="why" className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
+        {/* Title area — centered, leads the section */}
+        <Reveal className="max-w-3xl mx-auto text-center">
           <div className={eyebrow}>Why WONLY</div>
           <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top.</h2>
-          <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
+          <p className="mt-6 mx-auto max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
         </Reveal>
-        <div className="mt-10 md:mt-14">
+
+        {/* The numbers — 3D coverflow, centered with symmetric side whitespace */}
+        <div className="mt-14 md:mt-20 mx-auto max-w-5xl">
           <NumbersCoverflow />
         </div>
-        <div className="mt-14 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {WHY_FEATURES.map((f, i) => (
-            <Reveal key={f.t} delay={(i % 3) * 90}>
-              {/* Vertical card: image on top, text below; equal height across the row */}
-              <div className="group h-full flex flex-col rounded-2xl overflow-hidden bg-white shadow-sm" style={{ border: `1px solid ${SILVER}33` }}>
-                <div className="h-[200px] md:h-[220px] overflow-hidden">
-                  <img src={f.img} alt={f.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+
+        {/* Manufacturing strength — a distinct sub-section of cards */}
+        <div className="mt-20 md:mt-28">
+          <Reveal className="text-center">
+            <div className={eyebrow}>Manufacturing Strength</div>
+          </Reveal>
+          <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {WHY_FEATURES.map((f, i) => (
+              <Reveal key={f.t} delay={(i % 3) * 90}>
+                {/* Vertical card: image on top, text below; equal height across the row */}
+                <div className="group h-full flex flex-col rounded-2xl overflow-hidden bg-white shadow-sm" style={{ border: `1px solid ${SILVER}33` }}>
+                  <div className="h-[200px] md:h-[220px] overflow-hidden">
+                    <img src={f.img} alt={f.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+                  </div>
+                  <div className="flex-1 p-6 md:p-7">
+                    <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{f.t}</div>
+                    <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
+                  </div>
                 </div>
-                <div className="flex-1 p-6 md:p-7">
-                  <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{f.t}</div>
-                  <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
