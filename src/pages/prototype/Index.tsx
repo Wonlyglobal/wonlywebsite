@@ -639,7 +639,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 4 · Products — expanding horizontal gallery ══ */}
-      <section id="products" className="px-[7vw] pt-24 pb-12 md:pt-28 md:pb-14 md:h-screen md:max-h-[940px] flex flex-col" style={{ background: CHAMP_BG }}>
+      <section id="products" className="px-[7vw] pt-24 pb-12 md:pt-28 md:pb-14 flex flex-col" style={{ background: CHAMP_BG }}>
         <Reveal className="shrink-0">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-5">
             <div>
@@ -649,9 +649,9 @@ const Prototype = () => {
             <Link to="/products" className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>View All Products <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
-        <div className="product-gallery mt-8 md:mt-10 flex-1 min-h-0 flex flex-col md:flex-row gap-1.5">
+        <div className="product-gallery mt-8 md:mt-10 flex flex-col md:flex-row gap-1.5 md:h-[520px]">
           {PRODUCTS_GALLERY.map((p) => (
-            <Link key={p.name} to={p.href} className="product-card group relative block overflow-hidden rounded-2xl min-w-0 h-[240px] md:h-auto">
+            <Link key={p.name} to={p.href} className="product-card group relative block overflow-hidden rounded-2xl min-w-0 h-[320px] md:h-full">
               <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(12,10,9,.88), rgba(12,10,9,.12) 34%, transparent 50%)" }} />
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
