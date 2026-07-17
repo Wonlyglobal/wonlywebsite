@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
@@ -75,13 +75,13 @@ const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per
 /* ── Section 3 · Why WONLY ─────────────────────────────────── */
 // Real project/landmark photo behind every stat — no more flat black cards.
 const STAT_CARDS = [
-  { value: "30 Years", label: "Since 1996 · Yongkang", img: `${BASE}images/landmark-daxing.webp` },
-  { value: "Listed", label: "Shanghai Stock Exchange · SSE 605268", img: `${BASE}images/landmark-asiangames.webp` },
-  { value: "No.1", label: "Smart Doors & Locks · 2024–2025", img: `${BASE}images/landmark-metro.webp` },
-  { value: "5", label: "Production Bases", img: `${BASE}images/proj-cairo-hotel.webp` },
-  { value: "6", label: "R&D Centers", img: `${BASE}images/proj-egypt-cbd.webp` },
-  { value: "1,000+", label: "Patents", img: `${BASE}images/proj-saudi-villa.webp` },
-  { value: "200M+", label: "Users Protected Worldwide", img: `${BASE}images/proj-1.webp` },
+  { value: "30 Years", label: "Since 1996 · Yongkang", desc: "Three decades of continuous, vertically integrated manufacturing since our founding in Yongkang, Zhejiang.", img: `${BASE}images/landmark-daxing.webp` },
+  { value: "Listed", label: "SSE 605268", desc: "The sector's first publicly listed company on the Shanghai Stock Exchange (2021).", img: `${BASE}images/landmark-asiangames.webp` },
+  { value: "No.1", label: "Smart Doors & Locks · 2024–2025", desc: "National sales leader in smart doors and smart locks two years running.", img: `${BASE}images/landmark-metro.webp` },
+  { value: "5", label: "Production Bases", desc: "Five vertically integrated production bases across China.", img: `${BASE}images/proj-cairo-hotel.webp` },
+  { value: "6", label: "R&D Centers", desc: "Six R&D centers driving continuous product innovation.", img: `${BASE}images/proj-egypt-cbd.webp` },
+  { value: "1,000+", label: "Patents", desc: "Over 1,000 proprietary security and smart-lock patents.", img: `${BASE}images/proj-saudi-villa.webp` },
+  { value: "200M+", label: "Users Protected", desc: "Protecting more than 200 million users worldwide.", img: `${BASE}images/proj-1.webp` },
 ];
 const WHY_FEATURES = [
   { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
@@ -348,28 +348,63 @@ function Timeline({ items }: { items: { y: string; m: string }[] }) {
 
 /* Real-photo door production line: doors ride a red monorail across a light workshop;
    the photo tiles seamlessly in an infinite marquee, with gold data nameplates over the floor. */
-function DoorConveyor() {
-  // Seamless horizontal ticker: the 7 stat cards are duplicated (14 total) so the
-  // -50% translate loops back to the exact start with no jump. Hover pauses the belt.
+function NumbersCoverflow() {
+  // 3D coverflow: the 7 stat cards ring past a focused center, auto-advancing every
+  // 2.8s (paused on hover). Each card's 3D transform is derived from its ring-shortest
+  // offset `o` to the active index, so first and last cards join into a loop.
+  const n = STAT_CARDS.length;
+  const [active, setActive] = useState(0);
+  const [mobile, setMobile] = useState(false);
+  const timer = useRef<number | null>(null);
+
+  const stop = () => { if (timer.current) { clearInterval(timer.current); timer.current = null; } };
+  const start = () => {
+    stop();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    timer.current = window.setInterval(() => setActive((a) => (a + 1) % n), 2800);
+  };
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const sync = () => setMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    start();
+    return () => { mq.removeEventListener("change", sync); stop(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const X = mobile ? 110 : 150;
+  const Z = mobile ? 150 : 220;
+
   return (
-    <div className="numbers-band overflow-x-auto md:overflow-hidden select-none">
-      <div className="numbers-track flex gap-5 w-max">
-        {[...STAT_CARDS, ...STAT_CARDS].map((c, i) => (
-          <div
-            key={i}
-            aria-hidden={i >= STAT_CARDS.length}
-            className="numbers-card group relative shrink-0 rounded-2xl overflow-hidden w-[220px] h-[280px] md:w-[300px] md:h-[360px]"
-            style={{ background: "#0f0d0c" }}
-          >
-            <img src={c.img} alt="" aria-hidden loading="lazy" draggable={false} className="numbers-img absolute inset-0 h-full w-full object-cover select-none" />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(0deg, rgba(15,13,12,0.9) 0%, rgba(15,13,12,0.35) 45%, rgba(15,13,12,0.15) 100%)" }} />
-            <div className="absolute top-6 left-6 h-[2px] w-[26px]" style={{ background: GOLD_DEEP }} />
-            <div className="absolute inset-x-0 bottom-0 p-6">
-              <div className="text-white font-semibold leading-none text-[40px]">{c.value}</div>
-              <div className="mt-2.5 text-[11px] tracking-[0.16em] uppercase font-medium text-white">{c.label}</div>
-            </div>
-          </div>
-        ))}
+    <div className="numbers-stage" onMouseEnter={stop} onMouseLeave={start}>
+      <div className="numbers-cf-track">
+        {STAT_CARDS.map((c, i) => {
+          let o = i - active;
+          if (o > n / 2) o -= n;
+          if (o < -n / 2) o += n;
+          const abs = Math.abs(o);
+          const isActive = o === 0;
+          const style: CSSProperties = {
+            transform: `translateX(${o * X}px) translateZ(${-abs * Z}px) rotateY(${o * -38}deg) scale(${isActive ? 1 : Math.max(0.6, 0.82 - abs * 0.045)})`,
+            opacity: abs > 3 ? 0 : 1 - abs * 0.16,
+            zIndex: 100 - abs,
+            pointerEvents: isActive ? "auto" : "none",
+          };
+          return (
+            <article key={c.value} className={`numbers-cf-card${isActive ? " is-active" : ""}`} style={style} aria-hidden={!isActive}>
+              <img src={c.img} alt="" aria-hidden draggable={false} loading="lazy" className="numbers-cf-img" />
+              <div className="numbers-cf-grad" />
+              <span className="numbers-cf-dash" />
+              <div className="numbers-cf-body">
+                <div className="numbers-cf-value">{c.value}</div>
+                <div className="numbers-cf-label">{c.label}</div>
+                <p className="numbers-cf-desc">{c.desc}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   );
@@ -632,13 +667,13 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ Company at a glance — auto-scrolling numbers ticker ══ */}
-      <section className="py-[70px] md:py-[70px]" style={{ background: CHAMP_BG }}>
-        <Reveal className="px-[7vw]">
+      {/* ══ Company at a glance — 3D coverflow of the numbers ══ */}
+      <section className="py-[54px] md:py-[70px]" style={{ background: CHAMP_BG }}>
+        <Reveal className="px-[7vw] text-center">
           <div className={eyebrow}>WONLY in Numbers</div>
         </Reveal>
         <div className="mt-10 md:mt-12">
-          <DoorConveyor />
+          <NumbersCoverflow />
         </div>
       </section>
 
