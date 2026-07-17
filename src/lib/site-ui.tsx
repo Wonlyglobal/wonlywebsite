@@ -40,7 +40,7 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
    homepage and scroll there via its hash handler; S80 + About are real pages. */
 const NAV: { label: string; href: string; children?: { label: string; href: string; img?: string; children?: { label: string; href: string }[] }[] }[] = [
   { label: "Products", href: "/#products", children: [
-    { label: "Entrance Door", href: "/products/entrance-door", img: `${BASE}images/alu-k300max.webp`, children: [
+    { label: "Door", href: "/products/entrance-door", img: `${BASE}images/alu-k300max.webp`, children: [
       { label: "Security Doors", href: "/products/security-doors" },
       { label: "Wooden Doors", href: "/products/wooden-doors" },
     ] },

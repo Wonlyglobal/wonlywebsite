@@ -51,7 +51,7 @@ type NavChild = { label: string; href?: string; to?: string; img?: string; child
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
-    { label: "Entrance Door", href: "/products/entrance-door", img: IMG.aluMax, children: [
+    { label: "Door", href: "/products/entrance-door", img: IMG.aluMax, children: [
       { label: "Security Doors", href: "/products/security-doors" },
       { label: "Wooden Doors", href: "/products/wooden-doors" },
     ] },
