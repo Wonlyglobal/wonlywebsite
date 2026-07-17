@@ -276,15 +276,33 @@ function WorldDots({ className = "" }: { className?: string }) {
       if (inLand(x, y)) dots.push([x, y]);
     }
   }
-  // Key target markets highlighted in gold (China HQ, Middle East, SE Asia, Central Asia, Europe, Americas)
-  const markets: [number, number][] = [[75, 16], [57, 20], [80, 24], [62, 13], [48, 12], [16, 13]];
+  // Key target markets in gold — a real global network across every continent (60+ countries).
+  // `big` marks the China HQ. Coordinates sit inside the land blobs above.
+  const markets: { x: number; y: number; big?: boolean }[] = [
+    // East Asia — China HQ (emphasis)
+    { x: 75, y: 16, big: true },
+    // Southeast Asia — Vietnam, Philippines, Malaysia, Indonesia
+    { x: 79, y: 21 }, { x: 82.5, y: 24 }, { x: 80, y: 26.5 }, { x: 83, y: 27.5 },
+    // Middle East — Saudi Arabia, UAE, Qatar, Egypt
+    { x: 56.5, y: 21.5 }, { x: 59, y: 22 }, { x: 58, y: 20.8 }, { x: 53.5, y: 23 },
+    // Central Asia — Kazakhstan, Uzbekistan
+    { x: 63, y: 13 }, { x: 61, y: 15 },
+    // Africa — Nigeria, East Africa, Mozambique, South Africa
+    { x: 49, y: 27 }, { x: 54, y: 30 }, { x: 53, y: 34 }, { x: 51, y: 36 },
+    // Europe
+    { x: 48, y: 12 }, { x: 46, y: 13 }, { x: 50, y: 10 },
+    // Americas — North America, Brazil, Barbados
+    { x: 16, y: 13 }, { x: 28, y: 34 }, { x: 25, y: 40 },
+    // Oceania — Australia
+    { x: 85, y: 38 },
+  ];
   return (
     <svg viewBox="0 0 100 50" className={className} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={0.42} fill={SILVER} />)}
-      {markets.map(([x, y], i) => (
+      {markets.map((m, i) => (
         <g key={`m${i}`}>
-          <circle cx={x} cy={y} r={1.9} fill={GOLD} opacity={0.18} />
-          <circle cx={x} cy={y} r={0.85} fill={GOLD} />
+          <circle cx={m.x} cy={m.y} r={m.big ? 2.6 : 1.9} fill={GOLD} opacity={0.18} />
+          <circle cx={m.x} cy={m.y} r={m.big ? 1.15 : 0.85} fill={GOLD} />
         </g>
       ))}
     </svg>
