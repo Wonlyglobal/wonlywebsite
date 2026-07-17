@@ -364,7 +364,7 @@ function NumbersCoverflow() {
   const start = () => {
     stop();
     // Always auto-advance (owner-requested); resumes on mouseleave, pauses on hover.
-    timer.current = window.setInterval(() => setActive((a) => (a + 1) % n), 2800);
+    timer.current = window.setInterval(() => setActive((a) => (a + 1) % n), 1800);
   };
 
   useEffect(() => {
@@ -377,8 +377,8 @@ function NumbersCoverflow() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const X = mobile ? 110 : 150;
-  const Z = mobile ? 150 : 220;
+  const X = mobile ? 180 : 250;
+  const Z = mobile ? 90 : 140;
 
   return (
     <div className="numbers-stage" onMouseEnter={stop} onMouseLeave={start}>
@@ -390,7 +390,7 @@ function NumbersCoverflow() {
           const abs = Math.abs(o);
           const isActive = o === 0;
           const style: CSSProperties = {
-            transform: `translateX(${o * X}px) translateZ(${-abs * Z}px) rotateY(${o * -38}deg) scale(${isActive ? 1 : Math.max(0.6, 0.82 - abs * 0.045)})`,
+            transform: `translateX(${o * X}px) translateZ(${-abs * Z}px) rotateY(${o * -26}deg) scale(${isActive ? 1 : Math.max(0.6, 0.86 - abs * 0.06)})`,
             opacity: abs > 3 ? 0 : 1 - abs * 0.16,
             zIndex: 100 - abs,
             pointerEvents: isActive ? "auto" : "none",
