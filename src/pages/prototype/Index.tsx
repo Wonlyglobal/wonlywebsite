@@ -108,7 +108,7 @@ const PROJECTS: { name: string; place: string; tag: string; img?: string; placeh
 /* ── Section 4 · Products ──────────────────────────────────── */
 // Product gallery — doors first. Each card links to its /products/ route (see App.tsx).
 const PRODUCTS_GALLERY = [
-  { name: "Entrance Door", href: "/products/entrance-door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Security doors and steel-wood interior doors — the entire building entry, protection outside and quiet craft within." },
+  { name: "Door", href: "/products/entrance-door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Security doors and steel-wood interior doors — the entire building entry, protection outside and quiet craft within." },
   { name: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
   { name: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
   { name: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
@@ -588,12 +588,12 @@ const Prototype = () => {
           {/* subtle dark gradient so the white heading stays readable without a hard overlay */}
           <div className="absolute inset-x-0 top-0 h-[68%] pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.28) 45%, rgba(13,13,13,0) 100%)" }} />
           <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
-            <h2 className="font-light uppercase leading-[1.12] tracking-[0.08em] text-[36px] md:text-[64px] text-white">Global Smart-Security<br />Ecosystem Leader</h2>
+            <h2 className="font-light uppercase leading-[1.12] tracking-[0.08em] text-[36px] md:text-[64px] text-white" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.55)" }}>Global Smart-Security<br />Ecosystem Leader</h2>
             <div className="mt-12 md:mt-14 rounded-3xl px-6 py-9 md:px-12 md:py-11" style={{ background: "rgba(20,18,19,0.6)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 gap-x-8">
                 {STATS.map((s) => (
                   <div key={s.label} className="px-2">
-                    <div className="font-light leading-none whitespace-nowrap" style={{ color: GOLD }}>
+                    <div className="font-light leading-none whitespace-nowrap" style={{ color: GOLD, textShadow: "0 2px 20px rgba(0,0,0,0.55)" }}>
                       <span className="text-[30px] md:text-[44px]">{s.text ? s.text : <CountUp to={s.to!} run={contentIn} comma={s.comma} suffix={s.suffix} />}</span>
                       {s.per && <span className="text-base md:text-lg ml-1 font-light">{s.per}</span>}
                     </div>
