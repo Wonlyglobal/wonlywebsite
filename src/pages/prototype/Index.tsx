@@ -455,8 +455,22 @@ function PartnersPager() {
   );
 }
 
-const eyebrow = "text-[12px] tracking-[0.3em] uppercase font-semibold text-[#B08D4F]";
-const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[34px] md:text-[58px]";
+/* ── Homepage design-system tokens — one consistent visual rhythm ─────────── */
+const eyebrow = "text-[11px] md:text-[12px] tracking-[0.3em] uppercase font-bold text-[#B08D4F]";
+const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[clamp(28px,3.4vw,46px)]";
+// Uniform section vertical rhythm: 60px mobile · 80px tablet · 110px desktop.
+const SECTION = "py-[60px] md:py-20 lg:py-[110px]";
+// Uniform content container: capped width, centered, symmetric side padding.
+const CONTAINER = "max-w-[1400px] mx-auto px-[5vw] md:px-[6vw]";
+// Subtitle under an h2 (color applied inline: #6b655d).
+const SUBTITLE = "mt-[14px] max-w-[560px] text-[15px] leading-relaxed";
+// Primary CTA — gold solid pill, dark text (bg/color applied inline).
+const BTN_PRIMARY = "inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]";
+// Alternating section backgrounds + shared card treatment.
+const BG_CHAMP = "#F5F1EA";
+const BG_LIGHT = "#FAF7F1";
+const SUB_COLOR = "#6b655d";
+const CARD_SHADOW = "0 26px 50px -30px rgba(34,31,32,0.45)";
 
 const scrollToId = (id: string) => {
   // Clear any intro scroll-lock so nav links work even before the hero intro finishes.
@@ -689,39 +703,41 @@ const Prototype = () => {
       </section>
 
       {/* ══ 3 · Why WONLY — headline → numbers coverflow → manufacturing strength ══ */}
-      <section id="why" className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
-        {/* Title area — centered, leads the section */}
-        <Reveal className="max-w-3xl mx-auto text-center">
-          <div className={eyebrow}>Why WONLY</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A Partner Built For Scale, Trusted At The Top</h2>
-          <p className="mt-6 mx-auto max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
-        </Reveal>
-
-        {/* The numbers — 3D coverflow, centered with symmetric side whitespace */}
-        <div className="mt-14 md:mt-20 mx-auto max-w-5xl">
-          <NumbersCoverflow />
-        </div>
-
-        {/* Manufacturing strength — a distinct sub-section of cards */}
-        <div className="mt-20 md:mt-28">
-          <Reveal className="text-center">
-            <div className={eyebrow}>Manufacturing Strength</div>
+      <section id="why" className={SECTION} style={{ background: BG_CHAMP }}>
+        <div className={CONTAINER}>
+          {/* Title area — centered, leads the section */}
+          <Reveal className="max-w-3xl mx-auto text-center">
+            <div className={eyebrow}>Why WONLY</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>A Partner Built For Scale, Trusted At The Top</h2>
+            <p className={SUBTITLE + " mx-auto"} style={{ color: SUB_COLOR }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
           </Reveal>
-          <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {WHY_FEATURES.map((f, i) => (
-              <Reveal key={f.t} delay={(i % 3) * 90}>
-                {/* Vertical card: image on top, text below; equal height across the row */}
-                <div className="group h-full flex flex-col rounded-2xl overflow-hidden bg-white shadow-sm" style={{ border: `1px solid ${SILVER}33` }}>
-                  <div className="h-[200px] md:h-[220px] overflow-hidden">
-                    <img src={f.img} alt={f.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+
+          {/* The numbers — 3D coverflow, centered with symmetric side whitespace */}
+          <div className="mt-14 md:mt-20 mx-auto max-w-5xl">
+            <NumbersCoverflow />
+          </div>
+
+          {/* Manufacturing strength — a distinct sub-section of cards */}
+          <div className="mt-20 md:mt-28">
+            <Reveal className="text-center">
+              <div className={eyebrow}>Manufacturing Strength</div>
+            </Reveal>
+            <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {WHY_FEATURES.map((f, i) => (
+                <Reveal key={f.t} delay={(i % 3) * 90}>
+                  {/* Vertical card: image on top, text below; equal height across the row */}
+                  <div className="group h-full flex flex-col rounded-2xl overflow-hidden bg-white" style={{ border: `1px solid ${SILVER}33`, boxShadow: CARD_SHADOW }}>
+                    <div className="h-[200px] md:h-[220px] overflow-hidden">
+                      <img src={f.img} alt={f.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+                    </div>
+                    <div className="flex-1 p-6 md:p-7">
+                      <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{f.t}</div>
+                      <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
+                    </div>
                   </div>
-                  <div className="flex-1 p-6 md:p-7">
-                    <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{f.t}</div>
-                    <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -741,17 +757,18 @@ const Prototype = () => {
       </section>
 
       {/* ══ 4 · Products — expanding horizontal gallery ══ */}
-      <section id="products" className="px-[7vw] pt-24 pb-12 md:pt-28 md:pb-14 flex flex-col" style={{ background: CHAMP_BG }}>
+      <section id="products" className={SECTION} style={{ background: BG_LIGHT }}>
+        <div className={CONTAINER}>
         <Reveal className="shrink-0">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-5">
             <div>
               <div className={eyebrow}>Our Products</div>
-              <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built For Every Opening</h2>
+              <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Built For Every Opening</h2>
             </div>
-            <Link to="/products" className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>View All Products <ArrowRight size={15} /></Link>
+            <Link to="/products" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>View All Products <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
-        <div className="product-gallery mt-8 md:mt-10 flex flex-col md:flex-row gap-1.5 md:h-[520px]">
+        <div className="product-gallery mt-10 md:mt-12 flex flex-col md:flex-row gap-1.5 md:h-[520px]">
           {PRODUCTS_GALLERY.map((p) => (
             <Link key={p.name} to={p.href} className="product-card group relative block overflow-hidden rounded-2xl min-w-0 h-[320px] md:h-full">
               <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
@@ -766,22 +783,24 @@ const Prototype = () => {
             </Link>
           ))}
         </div>
+        </div>
       </section>
 
       {/* ══ 5 · Global landmark projects (below the product line) ══ */}
-      <section id="projects" className="px-[7vw] py-28 md:py-36" style={{ background: "#fff" }}>
+      <section id="projects" className={SECTION} style={{ background: BG_CHAMP }}>
+        <div className={CONTAINER}>
         {/* Global landmark projects — header row: copy left, CTA bottom-right */}
         <Reveal>
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
             <div className="max-w-3xl">
               <div className={eyebrow}>Global Landmark Projects</div>
-              <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted By Governments And Institutions</h2>
-              <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
+              <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Trusted By Governments And Institutions</h2>
+              <p className={SUBTITLE} style={{ color: SUB_COLOR }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
             </div>
-            <Link to="/projects" className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Explore All Projects <ArrowRight size={15} /></Link>
+            <Link to="/projects" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>Explore All Projects <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
           {PROJECTS.slice(0, 2).map((p) => (
             <Reveal key={p.name}>
               <div className="group relative rounded-2xl overflow-hidden h-[320px] md:h-[360px]">
@@ -800,7 +819,7 @@ const Prototype = () => {
             </Reveal>
           ))}
         </div>
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
           {PROJECTS.slice(2).map((p, i) => (
             <Reveal key={p.name} delay={(i % 3) * 80}>
               <div className="group relative rounded-2xl overflow-hidden h-[240px]">
@@ -820,6 +839,7 @@ const Prototype = () => {
           ))}
         </div>
         <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>Further references include Ethiopia's Abyssinia Bank and presidential-palace projects in Togo and Vanuatu.</p>
+        </div>
       </section>
 
       {/* ══ Full-bleed image band B ══ */}
@@ -833,13 +853,14 @@ const Prototype = () => {
       </section>
 
       {/* ══ 6 · Certifications & Honors — real-logo wall (one screen, centered) ══ */}
-      <section id="certs" className="px-[7vw] py-16 md:py-0 md:min-h-screen md:max-h-[880px] flex flex-col md:justify-center" style={{ background: CHAMP_BG }}>
+      <section id="certs" className={SECTION} style={{ background: BG_LIGHT }}>
+        <div className={CONTAINER}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Certified &amp; Recognized</div>
-          <h2 className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] mt-4" style={{ color: DARK }}>Held To Standards, Honored At The Top</h2>
+          <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Held To Standards, Honored At The Top</h2>
         </Reveal>
 
-        <Reveal className="mt-10">
+        <Reveal className="mt-12">
           <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Design Awards</div>
           <div className="flex flex-wrap items-center gap-x-14 gap-y-8">
             {AWARD_LOGOS.map((a) => (
@@ -858,16 +879,17 @@ const Prototype = () => {
             </div>
           </div>
         </Reveal>
+        </div>
       </section>
 
       {/* ══ 7 · Partnership (visual anchor — dark image background) ══ */}
-      <section id="partnership" className="relative px-[7vw] py-28 md:py-36 overflow-hidden">
+      <section id="partnership" className={"relative overflow-hidden " + SECTION}>
         <img src={IMG.yizhai1} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "rgba(26,23,24,0.9)" }} />
-        <div className="relative z-10 max-w-6xl mx-auto">
+        <div className={"relative z-10 " + CONTAINER}>
           <Reveal className="max-w-3xl">
             <div className={eyebrow} style={{ color: CHAMP }}>Partner With WONLY</div>
-            <h2 className={h2cls + " mt-5 text-white"}>Open The Door To Partnership</h2>
+            <h2 className={h2cls + " mt-[14px] text-white"}>Open The Door To Partnership</h2>
           </Reveal>
           <div className="mt-14 border-t" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
             {PARTNERSHIP.map((p, i) => (
@@ -887,24 +909,27 @@ const Prototype = () => {
       </section>
 
       {/* ══ Company timeline ══ */}
-      <section className="px-[7vw] pt-24 pb-14 md:pt-28 md:pb-16" style={{ background: "#fff" }}>
-        <Reveal className="max-w-3xl">
-          <div className={eyebrow}>Our Journey</div>
-          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>A Thirty-Year Journey</h2>
-        </Reveal>
-        <Timeline items={TIMELINE} />
+      <section className={SECTION} style={{ background: BG_CHAMP }}>
+        <div className={CONTAINER}>
+          <Reveal className="max-w-3xl">
+            <div className={eyebrow}>Our Journey</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>A Thirty-Year Journey</h2>
+          </Reveal>
+          <Timeline items={TIMELINE} />
+        </div>
       </section>
 
       {/* ══ 8 · Global Footprint (one screen, centered) ══ */}
-      <section id="footprint" className="px-[7vw] pt-16 pb-16 md:pt-24 md:pb-24 flex flex-col" style={{ background: CHAMP_BG }}>
+      <section id="footprint" className={SECTION} style={{ background: BG_LIGHT }}>
+        <div className={CONTAINER}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <Reveal>
             <WorldDots className="w-full h-auto" />
           </Reveal>
           <Reveal delay={120}>
             <div className={eyebrow}>Global Footprint</div>
-            <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>We Spread Around The World</h2>
-            <p className="mt-4 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>We Spread Around The World</h2>
+            <p className={SUBTITLE} style={{ color: SUB_COLOR }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
             <div className="mt-7 grid grid-cols-2 gap-4">
               {FOOTPRINT_STATS.map((s) => (
                 <div key={s.label} className="rounded-xl p-5" style={{ background: "#efeae0" }}>
@@ -915,22 +940,25 @@ const Prototype = () => {
             </div>
           </Reveal>
         </div>
+        </div>
       </section>
 
 
       {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
-      <section id="partners" className="px-[7vw] py-12 md:py-14 text-center" style={{ background: "#fff" }}>
+      <section id="partners" className={SECTION + " text-center"} style={{ background: BG_CHAMP }}>
+        <div className={CONTAINER}>
         <Reveal>
-          <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
-          <p className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] max-w-4xl mx-auto" style={{ color: DARK }}>
-            Trusted By Tech &amp; Real-Estate Leaders
-          </p>
+          <div className={eyebrow + " mb-[14px]"}>Trusted Across Industries</div>
+          <h2 className={h2cls + " max-w-4xl mx-auto"} style={{ color: DARK }}>Trusted By Tech &amp; Real-Estate Leaders</h2>
           {/* Paginated flat grid — 4×2, 8 per page; arrows slide whole pages */}
           <PartnersPager />
 
-          {/* Trusted by China's leading developers — full-bleed logo carousel */}
-          <div className="mt-10 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
-          <div className="mt-6 w-screen ml-[calc(50%-50vw)] overflow-hidden">
+          {/* Trusted by China's leading developers */}
+          <div className="mt-12 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
+        </Reveal>
+        </div>
+        {/* full-bleed logo carousel — spans the whole section width */}
+        <div className="mt-6 w-full overflow-hidden">
             <div className="flex flex-col gap-3">
               {[0, 1].map((row) => {
                 const items = Array.from({ length: 15 }, (_, i) => `re-${String(row * 15 + i + 1).padStart(2, "0")}.png`);
@@ -948,15 +976,15 @@ const Prototype = () => {
               })}
             </div>
           </div>
-        </Reveal>
       </section>
 
       {/* ══ 10 · Contact / Inquiry ══ */}
-      <section id="contact" className="px-[7vw] py-28 md:py-36" style={{ background: DARK }}>
+      <section id="contact" className={SECTION} style={{ background: DARK }}>
+        <div className={CONTAINER}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-start">
           <Reveal>
             <div className={eyebrow} style={{ color: CHAMP }}>Get Solutions &amp; Quote</div>
-            <h2 className="mt-5 font-light leading-[1.1] text-[38px] md:text-[64px] text-white">Ready To Open<br />Your Market?</h2>
+            <h2 className={h2cls + " mt-[14px] text-white"}>Ready To Open<br />Your Market?</h2>
             <p className="mt-6 max-w-md text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>
               Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
             </p>
@@ -1003,6 +1031,7 @@ const Prototype = () => {
             </form>
             )}
           </Reveal>
+        </div>
         </div>
       </section>
 
