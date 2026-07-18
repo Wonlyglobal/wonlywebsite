@@ -61,7 +61,7 @@ export default function Projects() {
       <section className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD_DEEP }}>Selected References</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Specified across 60+ countries.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Specified Across 60+ Countries</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROJECTS.map((p, i) => (
@@ -85,7 +85,7 @@ export default function Projects() {
       <section className="px-[7vw] py-20 md:py-28" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD_DEEP }}>Where We Deliver</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Built for every project type.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Built For Every Project Type</h2>
         </Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 border-t" style={{ borderColor: `${SILVER}66` }}>
           {[
@@ -104,7 +104,7 @@ export default function Projects() {
         </div>
       </section>
 
-      <CtaBand eyebrowText="Global Projects" title="Have a project in mind?" sub="Tell us your territory or specification — our team replies within 24 hours with references, compliance docs and pricing." />
+      <CtaBand eyebrowText="Global Projects" title="Have A Project In Mind?" sub="Tell us your territory or specification — our team replies within 24 hours with references, compliance docs and pricing." />
       <SiteFooter />
     </div>
   );

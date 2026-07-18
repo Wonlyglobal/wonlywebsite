@@ -17,13 +17,13 @@ const data: ProductPageData = {
   },
   highlights: ["Security & interior doors under one roof", "Fire-rated, anti-theft and acoustic", "3M+ doors a year, made in-house"],
   seriesEyebrow: "Two Door Families",
-  seriesTitle: "Choose your entrance.",
+  seriesTitle: "Choose Your Entrance",
   series: [
     { name: "Security Doors", tag: "Exterior", d: "Cast-aluminum security doors with autonomous locking and multi-vector intrusion sensing.", img: `${BASE}images/alu-k300max.webp`, path: "/products/security-doors" },
     { name: "Wooden Doors", tag: "Interior", d: "Steel-wood silent doors — double the quiet, engineered never to sag or warp.", img: `${BASE}images/wood-2.webp`, path: "/products/wooden-doors" },
   ],
   featuresEyebrow: "Engineered In",
-  featuresTitle: "Protection, quiet and craft.",
+  featuresTitle: "Protection, Quiet And Craft",
   features: [
     { icon: Shield, t: "Multi-Vector Security", d: "Sensors detect forced entry, prying, drilling and lock-picking in real time and alert instantly." },
     { icon: Flame, t: "90-Minute Fire Rating", d: "EN 1634-certified exterior doors hold integrity and insulation for 90 minutes under fire." },
@@ -32,8 +32,8 @@ const data: ProductPageData = {
     { icon: Ruler, t: "Never Sags or Warps", d: "Steel-reinforced frames and double-keel leaves hold their shape for the life of the door." },
     { icon: Leaf, t: "ENF Eco-Health", d: "Interior doors are built glue-free and dust-free, certified to the formaldehyde-free ENF standard." },
   ],
-  band: { img: `${BASE}images/factory-2.webp`, eyebrow: "Made In-House", title: "Millions of doors a year, built on our own lines." },
-  cta: { title: "Bring WONLY entrance doors to your market.", sub: "Security or interior, residential or project — request the catalog, samples and pricing." },
+  band: { img: `${BASE}images/factory-2.webp`, eyebrow: "Made In-House", title: "Millions Of Doors A Year, Built On Our Own Lines" },
+  cta: { title: "Bring WONLY Entrance Doors To Your Market", sub: "Security or interior, residential or project — request the catalog, samples and pricing." },
 };
 
 export default function EntranceDoor() { return <ProductPage data={data} />; }

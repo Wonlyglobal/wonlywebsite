@@ -608,7 +608,7 @@ const Index = () => {
       <section className="px-20 mt-24">
         <div className="relative rounded-2xl overflow-hidden h-80 flex items-center justify-center bg-[linear-gradient(to_bottom,rgba(191,160,106,0.85),rgba(34,31,32,0.85)),url(https://picture-search.tiangong.cn/image/rt/571ffb7e8d819bc25651e98e64cab5a2.jpg)] bg-cover bg-center">
           <div className="text-center px-4">
-            <h2 className="text-white text-4xl font-semibold mb-4">Let's Build Safer Entries, Together.</h2>
+            <h2 className="text-white text-4xl font-semibold mb-4">Let's Build Safer Entries, Together</h2>
             <div className="flex justify-center gap-3 flex-wrap">
               {["Request a Quote →", "Book a Consultation", "Become a Partner"].map((c) => (
                 <div key={c} className="px-6 py-3 bg-white rounded-full text-sm font-semibold cursor-pointer hover:scale-105 transition-all" style={{ color: GOLD }}>{c}</div>

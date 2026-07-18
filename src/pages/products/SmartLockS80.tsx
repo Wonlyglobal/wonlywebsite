@@ -114,7 +114,7 @@ const SmartLockS80 = () => {
       <section className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>How It Works</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Three steps. Under two seconds.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Three Steps. Under Two Seconds</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
           {STEPS.map((s, i) => (
@@ -136,7 +136,7 @@ const SmartLockS80 = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Engineered In</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Security you never have to think about.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Security You Never Have To Think About</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f, i) => (
@@ -158,7 +158,7 @@ const SmartLockS80 = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           <Reveal>
             <div className={eyebrow} style={{ color: GOLD }}>Design</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Considered from every angle.</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Considered From Every Angle</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
               A full-height tempered-glass fascia keeps the camera, face sensor and backlit keypad hidden until you need them. The interior panel keeps everyday controls within reach — one-touch exit, volume and a manual override — all in a single cast-aluminum body finished to resist corrosion and daily wear.
             </p>
@@ -182,7 +182,7 @@ const SmartLockS80 = () => {
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.55), rgba(34,31,32,0.72))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
           <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Precision Engineered</div>
-          <h2 className="font-light text-white leading-[1.1] text-[28px] md:text-[50px]">Built to the same standard as our vault doors.</h2>
+          <h2 className="font-light text-white leading-[1.1] text-[28px] md:text-[50px]">Built To The Same Standard As Our Vault Doors</h2>
         </Reveal>
       </section>
 
@@ -190,7 +190,7 @@ const SmartLockS80 = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Where It Fits</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>One lock, every kind of door.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>One Lock, Every Kind Of Door</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {SCENARIOS.map((s, i) => (
@@ -209,7 +209,7 @@ const SmartLockS80 = () => {
       <section id="specs" className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Technical Specifications</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>The details, in full.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>The Details, In Full</h2>
         </Reveal>
         <div className="mt-12 max-w-4xl border-t" style={{ borderColor: `${SILVER}66` }}>
           {SPECS.map(([k, v]) => (
@@ -224,7 +224,7 @@ const SmartLockS80 = () => {
         <p className="mt-6 text-xs font-light" style={{ color: MUTED }}>Specifications are indicative and may vary by market and configuration.</p>
       </section>
 
-      <CtaBand eyebrowText="Order & OEM" title="Bring the S80 to your market." sub="Request pricing, samples or OEM/ODM configurations — our team replies within 24 hours." />
+      <CtaBand eyebrowText="Order & OEM" title="Bring The S80 To Your Market" sub="Request pricing, samples or OEM/ODM configurations — our team replies within 24 hours." />
       <SiteFooter />
     </div>
   );

@@ -113,7 +113,7 @@ const SecurityDoors = () => {
       <section id="series" className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>The Range</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Six series. Every grade and scenario.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Six Series. Every Grade And Scenario</h2>
           <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Covering every security grade, fire rating and application — all backed by 1,000+ patents and 30 years of engineering.</p>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -142,7 +142,7 @@ const SecurityDoors = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Core Technology</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Six layers of defense, in every door.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Six Layers Of Defense, In Every Door</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f, i) => (
@@ -165,7 +165,7 @@ const SecurityDoors = () => {
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.5), rgba(34,31,32,0.7))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
           <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Tested to Destruction</div>
-          <h2 className="font-light text-white leading-[1.1] text-[28px] md:text-[50px]">Certified in our own labs before it ships.</h2>
+          <h2 className="font-light text-white leading-[1.1] text-[28px] md:text-[50px]">Certified In Our Own Labs Before It Ships</h2>
         </Reveal>
       </section>
 
@@ -174,7 +174,7 @@ const SecurityDoors = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
           <Reveal>
             <div className={eyebrow} style={{ color: GOLD }}>Specifications</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Technical excellence, to spec.</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Technical Excellence, To Spec</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>Every parameter meets or exceeds international security standards. Custom configurations are available for project-specific requirements — request the full spec sheet.</p>
             <Link to="/#contact" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Request Full Spec Sheet <ArrowRight size={15} /></Link>
           </Reveal>
@@ -195,7 +195,7 @@ const SecurityDoors = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD }}>Applications</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Built for every space.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Built For Every Space</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
           {APPLICATIONS.map((s, i) => (
@@ -218,7 +218,7 @@ const SecurityDoors = () => {
       <section className="px-[7vw] py-20 md:py-24" style={{ background: DARK }}>
         <Reveal className="max-w-3xl">
           <div className="flex items-center gap-2.5 mb-5"><ShieldCheck size={18} style={{ color: CHAMP }} /><span className={eyebrow} style={{ color: CHAMP }}>Certified &amp; Recognized</span></div>
-          <h2 className="text-2xl md:text-4xl font-light text-white">Held to the highest security standards.</h2>
+          <h2 className="text-2xl md:text-4xl font-light text-white">Held To The Highest Security Standards</h2>
         </Reveal>
         <div className="mt-10 flex flex-wrap gap-3">
           {CERTS.map((c) => (
@@ -227,7 +227,7 @@ const SecurityDoors = () => {
         </div>
       </section>
 
-      <CtaBand eyebrowText="Ready to Secure Your Project?" title="Custom security-door solutions & pricing." sub="Our engineering team replies within 24 hours with tailored specifications, compliance documentation and project pricing." />
+      <CtaBand eyebrowText="Ready to Secure Your Project?" title="Custom Security-Door Solutions & Pricing" sub="Our engineering team replies within 24 hours with tailored specifications, compliance documentation and project pricing." />
       <SiteFooter />
     </div>
   );

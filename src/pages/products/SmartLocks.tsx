@@ -17,7 +17,7 @@ const data: ProductPageData = {
   },
   highlights: ["Hands-free long-range sensing", "Palm-vein & fingerprint biometrics", "Encrypted, tamper-proof design"],
   seriesEyebrow: "Lock Range",
-  seriesTitle: "A lock for every door.",
+  seriesTitle: "A Lock For Every Door",
   series: [
     { name: "S80 True-Sensing Smart Lock", tag: "Flagship", d: "Hands-free long-range sensing with biometric and app control — the WONLY benchmark.", img: `${BASE}images/lock-s80.webp`, path: "/products/smart-locks/s80" },
     { name: "Palm-Vein Push-Pull Lock", tag: "Biometric", d: "Contactless palm-vein recognition with a one-motion push-pull handle.", img: `${BASE}images/5products/dropdown-control.png` },
@@ -25,7 +25,7 @@ const data: ProductPageData = {
     { name: "Commercial Access System", tag: "Enterprise", d: "RFID, PIN and app access control for offices, hotels and public buildings.", img: `${BASE}images/5products/prod-whole-house.jpg` },
   ],
   featuresEyebrow: "Engineered In",
-  featuresTitle: "Security you never have to think about.",
+  featuresTitle: "Security You Never Have To Think About",
   features: [
     { icon: ScanFace, t: "True-Sensing Entry", d: "Long-range sensing recognizes you and unlocks hands-free as you approach." },
     { icon: Fingerprint, t: "Multi-Biometric", d: "Palm-vein, fingerprint, PIN, card and app — up to six ways to open." },
@@ -34,8 +34,8 @@ const data: ProductPageData = {
     { icon: KeyRound, t: "Tamper-Proof", d: "Encrypted communication with anti-pry, anti-drill architecture." },
     { icon: ShieldCheck, t: "Auto Arm / Disarm", d: "The home arms as you leave and disarms the instant you return." },
   ],
-  band: { img: `${BASE}images/factory-abb.webp`, eyebrow: "Made In-House", title: "Millions of smart locks a year, built on our own lines." },
-  cta: { title: "Bring WONLY smart locks to your market.", sub: "Residential, hospitality or commercial — request the catalog, samples and pricing." },
+  band: { img: `${BASE}images/factory-abb.webp`, eyebrow: "Made In-House", title: "Millions Of Smart Locks A Year, Built On Our Own Lines" },
+  cta: { title: "Bring WONLY Smart Locks To Your Market", sub: "Residential, hospitality or commercial — request the catalog, samples and pricing." },
 };
 
 export default function SmartLocks() { return <ProductPage data={data} />; }

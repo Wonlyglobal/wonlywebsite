@@ -17,7 +17,7 @@ const data: ProductPageData = {
   },
   highlights: ["EN 1634 — 90-minute fire integrity", "Access-control & acoustic variants", "Standardized, certified project supply"],
   featuresEyebrow: "Project-Ready",
-  featuresTitle: "One supplier for the whole spec.",
+  featuresTitle: "One Supplier For The Whole Spec",
   features: [
     { icon: Flame, t: "Fire Doors", d: "EN 1634-rated with 90-minute integrity for life-safety compliance." },
     { icon: Lock, t: "Access-Control Doors", d: "Card, biometric and controller-ready systems for managed entrances." },
@@ -26,7 +26,7 @@ const data: ProductPageData = {
     { icon: Layers, t: "Project-Scale Supply", d: "Standardized, certified volume for large developments and tenders." },
     { icon: ShieldCheck, t: "Tested & Certified", d: "Every model passes in-house destructive testing before it ships." },
   ],
-  band: { img: `${BASE}images/proj-1.webp`, eyebrow: "Landmark Projects", title: "Chosen for the projects that cannot fail." },
+  band: { img: `${BASE}images/proj-1.webp`, eyebrow: "Landmark Projects", title: "Chosen For The Projects That Cannot Fail" },
   specs: [
     ["Fire Rating", "EN 1634 — up to 90 minutes"],
     ["Types", "Fire · Access-control · Acoustic"],
@@ -35,7 +35,7 @@ const data: ProductPageData = {
     ["Supply", "Standardized, project-scale volume"],
     ["Certification", "ISO 9001 · CE · UL · EN 1634"],
   ],
-  cta: { title: "Specify WONLY on your next project.", sub: "Send your fire, access-control and acoustic requirements — we reply with compliance docs and pricing." },
+  cta: { title: "Specify WONLY On Your Next Project", sub: "Send your fire, access-control and acoustic requirements — we reply with compliance docs and pricing." },
 };
 
 export default function EngineeringDoors() { return <ProductPage data={data} />; }

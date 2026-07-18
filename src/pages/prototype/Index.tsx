@@ -693,7 +693,7 @@ const Prototype = () => {
         {/* Title area — centered, leads the section */}
         <Reveal className="max-w-3xl mx-auto text-center">
           <div className={eyebrow}>Why WONLY</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A partner built for scale, trusted at the top.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>A Partner Built For Scale, Trusted At The Top</h2>
           <p className="mt-6 mx-auto max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
         </Reveal>
 
@@ -732,7 +732,7 @@ const Prototype = () => {
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.5), rgba(34,31,32,0.68))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
           <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Manufacturing</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Built in our own 5G-connected smart factories</h2>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Built In Our Own 5G-Connected Smart Factories</h2>
           <button onClick={() => setVideoOpen(true)} className="mt-9 inline-flex items-center gap-3 pl-3 pr-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
             <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: DARK }}><Play size={13} style={{ color: GOLD }} fill={GOLD} /></span>
             Watch the Factory Tour
@@ -746,7 +746,7 @@ const Prototype = () => {
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-5">
             <div>
               <div className={eyebrow}>Our Products</div>
-              <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built for every opening</h2>
+              <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>Built For Every Opening</h2>
             </div>
             <Link to="/products" className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>View All Products <ArrowRight size={15} /></Link>
           </div>
@@ -775,7 +775,7 @@ const Prototype = () => {
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
             <div className="max-w-3xl">
               <div className={eyebrow}>Global Landmark Projects</div>
-              <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted by governments and institutions</h2>
+              <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Trusted By Governments And Institutions</h2>
               <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
             </div>
             <Link to="/projects" className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Explore All Projects <ArrowRight size={15} /></Link>
@@ -828,7 +828,7 @@ const Prototype = () => {
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.42), rgba(34,31,32,0.7))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
           <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Landmark Projects</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Chosen for the projects that cannot fail</h2>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Chosen For The Projects That Cannot Fail</h2>
         </Reveal>
       </section>
 
@@ -836,7 +836,7 @@ const Prototype = () => {
       <section id="certs" className="px-[7vw] py-16 md:py-0 md:min-h-screen md:max-h-[880px] flex flex-col md:justify-center" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Certified &amp; Recognized</div>
-          <h2 className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] mt-4" style={{ color: DARK }}>Held to standards, honored at the top</h2>
+          <h2 className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] mt-4" style={{ color: DARK }}>Held To Standards, Honored At The Top</h2>
         </Reveal>
 
         <Reveal className="mt-10">
@@ -867,7 +867,7 @@ const Prototype = () => {
         <div className="relative z-10 max-w-6xl mx-auto">
           <Reveal className="max-w-3xl">
             <div className={eyebrow} style={{ color: CHAMP }}>Partner With WONLY</div>
-            <h2 className={h2cls + " mt-5 text-white"}>Open the door to partnership</h2>
+            <h2 className={h2cls + " mt-5 text-white"}>Open The Door To Partnership</h2>
           </Reveal>
           <div className="mt-14 border-t" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
             {PARTNERSHIP.map((p, i) => (
@@ -890,7 +890,7 @@ const Prototype = () => {
       <section className="px-[7vw] pt-24 pb-14 md:pt-28 md:pb-16" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Our Journey</div>
-          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>A thirty-year journey</h2>
+          <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>A Thirty-Year Journey</h2>
         </Reveal>
         <Timeline items={TIMELINE} />
       </section>
@@ -903,7 +903,7 @@ const Prototype = () => {
           </Reveal>
           <Reveal delay={120}>
             <div className={eyebrow}>Global Footprint</div>
-            <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>We spread around the world</h2>
+            <h2 className={h2cls + " mt-4"} style={{ color: DARK }}>We Spread Around The World</h2>
             <p className="mt-4 max-w-md text-base font-normal leading-relaxed" style={{ color: MUTED }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
             <div className="mt-7 grid grid-cols-2 gap-4">
               {FOOTPRINT_STATS.map((s) => (
@@ -923,7 +923,7 @@ const Prototype = () => {
         <Reveal>
           <div className={eyebrow + " mb-6"}>Trusted Across Industries</div>
           <p className="font-light leading-[1.1] tracking-[0.01em] text-[28px] md:text-[44px] max-w-4xl mx-auto" style={{ color: DARK }}>
-            Trusted by tech &amp; real-estate leaders.
+            Trusted By Tech &amp; Real-Estate Leaders
           </p>
           {/* Paginated flat grid — 4×2, 8 per page; arrows slide whole pages */}
           <PartnersPager />
@@ -956,7 +956,7 @@ const Prototype = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-start">
           <Reveal>
             <div className={eyebrow} style={{ color: CHAMP }}>Get Solutions &amp; Quote</div>
-            <h2 className="mt-5 font-light leading-[1.1] text-[38px] md:text-[64px] text-white">Ready to open<br />your market?</h2>
+            <h2 className="mt-5 font-light leading-[1.1] text-[38px] md:text-[64px] text-white">Ready To Open<br />Your Market?</h2>
             <p className="mt-6 max-w-md text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>
               Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
             </p>

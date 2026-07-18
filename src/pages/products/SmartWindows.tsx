@@ -17,14 +17,14 @@ const data: ProductPageData = {
   },
   highlights: ["Auto-closes in wind & rain", "50,000+ slide cycles without deforming", "App remote control & scenes"],
   seriesEyebrow: "Window Range",
-  seriesTitle: "A system for every opening.",
+  seriesTitle: "A System For Every Opening",
   series: [
     { name: "Energy-Saving Casement", tag: "Best Seller", d: "Thermal-break aluminum that insulates like a wall — quiet, sealed and efficient.", img: `${BASE}images/alu-t200.webp` },
     { name: "Smart Auto-Close Window", tag: "Smart", d: "Senses wind and rain and closes itself; opens to ventilate on smoke or gas.", img: `${BASE}images/5products/dropdown-window.png` },
     { name: "Hurricane Series", tag: "Reinforced", d: "Storm-rated systems engineered for North America and the Caribbean.", img: `${BASE}images/5products/prod-smart-windows.jpg` },
   ],
   featuresEyebrow: "Intelligent by Design",
-  featuresTitle: "The window that looks after itself.",
+  featuresTitle: "The Window That Looks After Itself",
   features: [
     { icon: CloudRain, t: "Auto-Close in Bad Weather", d: "Senses changing weather and closes automatically to protect the home." },
     { icon: AlertTriangle, t: "Smoke & Gas Ventilation", d: "On detecting smoke or a gas leak, it opens to ventilate the space safely." },
@@ -33,8 +33,8 @@ const data: ProductPageData = {
     { icon: RefreshCw, t: "50,000+ Cycle Tested", d: "Slide-tested over 50,000 times without deforming — quality that lasts." },
     { icon: Wind, t: "Hurricane Series", d: "Reinforced systems engineered for North America and the Caribbean." },
   ],
-  band: { img: `${BASE}images/proj-1.webp`, eyebrow: "Building Envelope", title: "Windows that finish the whole-house system." },
-  cta: { title: "Bring WONLY smart windows to your market.", sub: "Energy-saving, balcony/terrace or hurricane series — request specifications and pricing." },
+  band: { img: `${BASE}images/proj-1.webp`, eyebrow: "Building Envelope", title: "Windows That Finish The Whole-House System" },
+  cta: { title: "Bring WONLY Smart Windows To Your Market", sub: "Energy-saving, balcony/terrace or hurricane series — request specifications and pricing." },
 };
 
 export default function SmartWindows() { return <ProductPage data={data} />; }

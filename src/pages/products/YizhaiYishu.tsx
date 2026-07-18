@@ -17,7 +17,7 @@ const data: ProductPageData = {
   },
   highlights: ["Flagship villa security doors", "Integrated smart-home door systems", "Exclusive bespoke luxury service"],
   featuresEyebrow: "The Artisan Standard",
-  featuresTitle: "Heritage craft, uncompromising security.",
+  featuresTitle: "Heritage Craft, Uncompromising Security",
   features: [
     { icon: Gem, t: "Sculptural Design", d: "Hand-finished relief artistry rendered onto a cast, high-security core." },
     { icon: ShieldCheck, t: "Ultra-High Security", d: "Villa-grade protection engineered beneath the artistry — never a trade-off." },
@@ -26,8 +26,8 @@ const data: ProductPageData = {
     { icon: Home, t: "For Villas & Flagships", d: "Made for estates, penthouses and landmark flagship projects." },
     { icon: Award, t: "Award-Winning", d: "Recognized by Red Dot Best of the Best and the iF Design Award." },
   ],
-  band: { img: `${BASE}images/yizhai-3.webp`, eyebrow: "Made to Commission", title: "One of a kind, by design." },
-  cta: { eyebrow: "Bespoke Enquiry", title: "Commission a WONLY artisan door.", sub: "Tell us about your residence or project — our bespoke team will design to your brief." },
+  band: { img: `${BASE}images/yizhai-3.webp`, eyebrow: "Made to Commission", title: "One Of A Kind, By Design" },
+  cta: { eyebrow: "Bespoke Enquiry", title: "Commission A WONLY Artisan Door", sub: "Tell us about your residence or project — our bespoke team will design to your brief." },
 };
 
 export default function YizhaiYishu() { return <ProductPage data={data} />; }

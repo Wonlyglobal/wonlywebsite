@@ -257,7 +257,7 @@ const SecurityDoorX70 = () => {
           </nav>
           <div className="flex flex-col justify-center items-center text-center px-4">
             <div className="text-[#D4C4A0] text-sm font-semibold tracking-[0.25em] uppercase mb-3">Flagship · Robotic Security Door</div>
-            <h1 className="text-white text-4xl xl:text-6xl font-bold leading-[1.1] max-w-[900px]">The X70 Guards Your Home Before You Ask.</h1>
+            <h1 className="text-white text-4xl xl:text-6xl font-bold leading-[1.1] max-w-[900px]">The X70 Guards Your Home Before You Ask</h1>
             <p className="mt-4 text-white/80 text-base max-w-2xl">Robotic auto-locking, 3D face unlock, and 90-minute fire integrity — the flagship security door engineered for villas and executive residences that accept nothing less than Class A.</p>
             <div className="mt-6 flex items-center gap-3">
               <button className="px-5 py-2.5 rounded-full cursor-pointer hover:scale-105 hover:shadow-xl transition-all duration-300 flex items-center gap-2" style={{ background: GOLD }} onClick={() => setShowInquiry(true)}>
@@ -307,7 +307,7 @@ const SecurityDoorX70 = () => {
             </Reveal>
             <Reveal delay={120}>
               <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>Overview</div>
-              <h2 className="text-[#221F20] text-4xl font-semibold mt-3 leading-tight">Security that runs itself — and answers to you.</h2>
+              <h2 className="text-[#221F20] text-4xl font-semibold mt-3 leading-tight">Security That Runs Itself — And Answers To You</h2>
               <p className="text-neutral-600 text-base mt-4 leading-relaxed">
                 The X70 is WONLY's flagship robotic security door: the instant it closes, sixteen hardened bolts drive home across all four edges — no turn of a key, no forgotten deadbolt. 3D facial recognition welcomes your family hands-free, while multi-vector sensors watch the frame for any attempt to force it. Behind the aesthetics sits a cast-aluminum body with an EN 1634 fire-rated core, tested to survive 100,000 cycles and three decades of WONLY engineering.
               </p>
@@ -342,7 +342,7 @@ const SecurityDoorX70 = () => {
         <section className="mt-24 px-20">
           <Reveal className="text-center mb-10">
             <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>Signature Capabilities</div>
-            <h2 className="text-[#221F20] text-5xl font-semibold mt-3">Six Reasons the X70 Leads</h2>
+            <h2 className="text-[#221F20] text-5xl font-semibold mt-3">Six Reasons The X70 Leads</h2>
             <p className="text-neutral-500 text-base mt-3 max-w-2xl mx-auto">Every feature earns its place — engineered to protect, tested to last, and designed to disappear into daily life.</p>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -432,7 +432,7 @@ const SecurityDoorX70 = () => {
         <section className="mt-24 px-20">
           <Reveal className="text-center mb-10">
             <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>In Application</div>
-            <h2 className="text-[#221F20] text-5xl font-semibold mt-3">Where the X70 Belongs</h2>
+            <h2 className="text-[#221F20] text-5xl font-semibold mt-3">Where The X70 Belongs</h2>
           </Reveal>
           <div className="grid grid-cols-3 gap-6">
             {SCENARIOS.map((s, i) => (

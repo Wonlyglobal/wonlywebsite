@@ -242,7 +242,7 @@ export function SiteHeader() {
 }
 
 /* Closing CTA band shared by subpages */
-export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready to open your market?", sub = "Tell us about your project or territory — our team replies within 24 hours." }: { eyebrowText?: string; title?: string; sub?: string }) {
+export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready To Open Your Market?", sub = "Tell us about your project or territory — our team replies within 24 hours." }: { eyebrowText?: string; title?: string; sub?: string }) {
   const openQuote = useQuoteStore((s) => s.openQuote);
   return (
     <section className="px-[7vw] py-24 md:py-32 text-center" style={{ background: DARK }}>

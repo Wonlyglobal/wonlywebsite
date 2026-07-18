@@ -78,7 +78,7 @@ export function ProductPage({ data }: { data: ProductPageData }) {
         <section id="series" className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
           <Reveal className="max-w-3xl">
             <div className={eyebrow} style={{ color: GOLD_DEEP }}>{data.seriesEyebrow ?? "Product Series"}</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{data.seriesTitle ?? "Explore the full range."}</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{data.seriesTitle ?? "Explore The Full Range"}</h2>
           </Reveal>
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.series.map((s, i) => (
@@ -135,7 +135,7 @@ export function ProductPage({ data }: { data: ProductPageData }) {
         <section className="px-[7vw] py-24 md:py-32" style={{ background: data.band ? CHAMP_BG : "#fff" }}>
           <Reveal className="max-w-3xl">
             <div className={eyebrow} style={{ color: GOLD_DEEP }}>Specifications</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>The details, in full.</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>The Details, In Full</h2>
           </Reveal>
           <div className="mt-12 max-w-4xl border-t" style={{ borderColor: `${SILVER}66` }}>
             {data.specs.map(([k, v]) => (

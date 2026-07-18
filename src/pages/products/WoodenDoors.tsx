@@ -17,14 +17,14 @@ const data: ProductPageData = {
   },
   highlights: ["One door with the effect of two", "ENF-grade, formaldehyde-free build", "Won't sag, warp or fear moisture"],
   seriesEyebrow: "Wooden Door Range",
-  seriesTitle: "One craft, several series.",
+  seriesTitle: "One Craft, Several Series",
   series: [
     { name: "Steel-Wood Silent Door", tag: "Flagship", d: "A double-keel leaf with a galvanized-steel frame — the quiet, warp-proof benchmark.", img: `${BASE}images/wood-2.webp` },
     { name: "ENF Eco Wood Door", tag: "Formaldehyde-Free", d: "Certified to the ENF standard — no glue, no dust, healthy interiors for family homes.", img: `${BASE}images/5products/prod-wooden-doors.jpg` },
     { name: "YIZHAI Art Wood Door", tag: "Luxury", d: "Bespoke artisan leaves where interior craftsmanship becomes heritage art.", img: `${BASE}images/yizhai-1.webp` },
   ],
   featuresEyebrow: "Engineered In",
-  featuresTitle: "Quiet, solid, and built to last.",
+  featuresTitle: "Quiet, Solid, And Built To Last",
   features: [
     { icon: Volume2, t: "Double Silence", d: "A four-sided stepped-seal patent structure blocks noise, smoke, dust and insects." },
     { icon: Shield, t: "More Secure", d: "Steel door frame and bolt lock rigidly together to resist violent forced entry." },
@@ -33,8 +33,8 @@ const data: ProductPageData = {
     { icon: Lock, t: "More Private", d: "A 6 cm-thick leaf delivers acoustic privacy on par with a five-star hotel." },
     { icon: Leaf, t: "Eco & Healthy", d: "No sawing, no glue, no dust and no formaldehyde — certified to the ENF standard." },
   ],
-  band: { img: `${BASE}images/factory-2.webp`, eyebrow: "Crafted at Scale", title: "3 million wooden doors a year, made in-house." },
-  cta: { title: "Bring WONLY wooden doors to your market.", sub: "Residential, commercial or custom interior — request the catalog, samples and pricing." },
+  band: { img: `${BASE}images/factory-2.webp`, eyebrow: "Crafted at Scale", title: "3 Million Wooden Doors A Year, Made In-House" },
+  cta: { title: "Bring WONLY Wooden Doors To Your Market", sub: "Residential, commercial or custom interior — request the catalog, samples and pricing." },
 };
 
 export default function WoodenDoors() { return <ProductPage data={data} />; }

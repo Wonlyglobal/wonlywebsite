@@ -17,7 +17,7 @@ const data: ProductPageData = {
   },
   highlights: ["Zero-contact, one-second open", "AI anti-pinch safety", "Concealed, hidden door operator"],
   featuresEyebrow: "Clinically Engineered",
-  featuresTitle: "Built for sterile, safe environments.",
+  featuresTitle: "Built For Sterile, Safe Environments",
   features: [
     { icon: Radar, t: "Touchless Auto-Open", d: "Long-range sensing opens the door in a second — hands-free, contamination-free." },
     { icon: Wind, t: "Hermetic OR Doors", d: "Air-tight sealing for operating rooms and clean, pressure-controlled areas." },
@@ -26,8 +26,8 @@ const data: ProductPageData = {
     { icon: EyeOff, t: "Concealed Operator", d: "A hidden door-opening mechanism keeps clean, uninterrupted sightlines." },
     { icon: Building2, t: "Institution-Proven", d: "Deployed across hospitals and public institutions with full project references." },
   ],
-  band: { img: `${BASE}images/landmark-govhousing.webp`, eyebrow: "Public Institutions", title: "Specified where hygiene cannot be compromised." },
-  cta: { title: "Equip your facility with WONLY medical doors.", sub: "Ward, OR or access-controlled entries — tell us your project and we reply within 24 hours." },
+  band: { img: `${BASE}images/landmark-govhousing.webp`, eyebrow: "Public Institutions", title: "Specified Where Hygiene Cannot Be Compromised" },
+  cta: { title: "Equip Your Facility With WONLY Medical Doors", sub: "Ward, OR or access-controlled entries — tell us your project and we reply within 24 hours." },
 };
 
 export default function MedicalDoors() { return <ProductPage data={data} />; }

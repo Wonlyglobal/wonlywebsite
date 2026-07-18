@@ -103,7 +103,7 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
           <Reveal>
             <div className={eyebrow} style={{ color: GOLD_DEEP }}>Who We Are</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>China's No.1 in entrance security.</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>China's No.1 In Entrance Security</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
               WONLY is a high-tech security group that unites R&amp;D, design, manufacturing, sales and service under one roof. Founded in 1996 in Yongkang — China's "hardware capital" — it is today the industry's <strong style={{ color: DARK, fontWeight: 500 }}>only company listed on China's A-share main board</strong> (SSE: 605268), with a brand value ranked first in its sector for 14 consecutive years.
             </p>
@@ -171,7 +171,7 @@ const About = () => {
           </Reveal>
           <Reveal delay={120}>
             <div className={eyebrow} style={{ color: GOLD_DEEP }}>R&amp;D &amp; Smart Manufacturing</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Patents no rival can match.</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Patents No Rival Can Match</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>
               Security you can trust has to be engineered and proven — not just designed. WONLY controls the entire chain, from casting aluminum to writing lock firmware, and holds a patent portfolio larger than the rest of the industry's top ten combined.
             </p>
@@ -192,7 +192,7 @@ const About = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD_DEEP }}>Milestones</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Thirty years, one direction.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Thirty Years, One Direction</h2>
         </Reveal>
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-8">
           {STORY.map((t, i) => (
@@ -211,7 +211,7 @@ const About = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <Reveal className="max-w-2xl">
             <div className={eyebrow} style={{ color: GOLD_DEEP }}>Global Footprint</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Chosen for the projects that cannot fail.</h2>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Chosen For The Projects That Cannot Fail</h2>
           </Reveal>
           <Reveal>
             <div className="flex items-center gap-2 text-sm font-medium" style={{ color: MUTED }}><MapPin size={16} style={{ color: GOLD }} /> Overseas since 2010 · 600+ international projects</div>
@@ -243,7 +243,7 @@ const About = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: DARK }}>
         <Reveal className="max-w-3xl">
           <div className="flex items-center gap-2.5 mb-5"><BadgeCheck size={18} style={{ color: CHAMP }} /><span className={eyebrow} style={{ color: CHAMP }}>Qualifications, Certifications &amp; Honors</span></div>
-          <h2 className={h2cls + " text-white"}>16 national honors. 1,000+ awards.</h2>
+          <h2 className={h2cls + " text-white"}>16 National Honors. 1,000+ Awards</h2>
           <p className="mt-5 text-base font-light leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>If it isn't the only, it's the first — from international design's highest prizes to national quality benchmarks.</p>
         </Reveal>
         <div className="mt-12 flex flex-wrap gap-3">
@@ -267,7 +267,7 @@ const About = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow} style={{ color: GOLD_DEEP }}>Core Values</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>What we stand for.</h2>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>What We Stand For</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {VALUES.map((v, i) => (
@@ -284,7 +284,7 @@ const About = () => {
         </div>
       </section>
 
-      <CtaBand title="Partner with WONLY." sub="Distributor, project or OEM/ODM — tell us your territory and our team will reply within 24 hours." />
+      <CtaBand title="Partner With WONLY" sub="Distributor, project or OEM/ODM — tell us your territory and our team will reply within 24 hours." />
       <SiteFooter />
     </div>
   );
