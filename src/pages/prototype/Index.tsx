@@ -301,6 +301,10 @@ function WorldDots({ className = "" }: { className?: string }) {
     { x: 26, y: 29 }, { x: 28, y: 33 }, { x: 30, y: 34.5 }, { x: 24.5, y: 36 }, { x: 26, y: 38 }, { x: 24, y: 42 }, { x: 26, y: 44 },
     // Oceania — Australia (W & E), New Zealand
     { x: 84, y: 38 }, { x: 88, y: 39 }, { x: 92, y: 43 },
+    // Fill remaining gaps — South Asia (India, Sri Lanka), Central Asia, Myanmar,
+    // central/west/SW Africa, Greenland
+    { x: 64, y: 22 }, { x: 65, y: 24.5 }, { x: 65, y: 16.5 }, { x: 76, y: 19 },
+    { x: 50, y: 30 }, { x: 45, y: 24 }, { x: 48, y: 32 }, { x: 33, y: 6 },
   ];
   return (
     <svg viewBox="0 0 100 50" className={className} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
