@@ -46,14 +46,14 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-type NavSubChild = { label: string; href: string };
+type NavSubChild = { label: string; href: string; img?: string };
 type NavChild = { label: string; href?: string; to?: string; img?: string; children?: NavSubChild[] };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
     { label: "Doors", href: "/products/entrance-door", img: IMG.aluMax, children: [
-      { label: "Security Door", href: "/products/security-doors" },
-      { label: "Wooden Door", href: "/products/wooden-doors" },
+      { label: "Security Door", href: "/products/security-doors", img: `${BASE}images/5products/nav-security-door.png` },
+      { label: "Wooden Door", href: "/products/wooden-doors", img: `${BASE}images/5products/nav-wooden-door.png` },
     ] },
     { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
     { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
@@ -667,9 +667,12 @@ const Prototype = () => {
                         <div key={c.label}>
                           {main}
                           {c.children && (
-                            <div className="pl-14 pb-1">
+                            <div className="pl-4 pb-1">
                               {c.children.map((sc) => (
-                                <Link key={sc.label} to={sc.href} className="block px-3 py-1.5 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: MUTED }}>{sc.label}</Link>
+                                <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: MUTED }}>
+                                  {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
+                                  <span className="leading-tight whitespace-nowrap">{sc.label}</span>
+                                </Link>
                               ))}
                             </div>
                           )}
