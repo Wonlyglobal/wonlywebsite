@@ -272,8 +272,9 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
 }
 
 const FOOTER = [
-  { h: "Company", links: ["About WONLY", "Global Footprint", "Newsroom", "ESG"] },
-  { h: "Products", links: ["Security Doors", "Wooden Doors", "Smart Locks", "Smart Windows", "Whole-House Intelligence"] },
+  { h: "Products", links: ["Security Door", "Wooden Door", "Smart Locks", "Smart Windows", "Whole-House Intelligence"] },
+  { h: "Advantages", links: ["Why Steel Door", "Why Smart Lock", "Core Lock Technology", "Certifications"] },
+  { h: "Company", links: ["Projects", "Partnership", "Global Footprint", "Global Strategy", "About WONLY"] },
   { h: "Contact", links: ["wonlyglobal@wonly.net", "WhatsApp +1 (205) 240-1832", "LinkedIn · YouTube", "Facebook · X · Instagram"] },
 ];
 
@@ -281,7 +282,7 @@ export function SiteFooter() {
   return (
     <footer className="pt-16 pb-10" style={{ background: "#1a1718" }}>
       <div className="max-w-[1400px] mx-auto px-[5vw] md:px-[6vw]">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
             <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
             <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>

@@ -192,24 +192,25 @@ const PARTNER_PHOTOS = [
 
 type FooterLink = { l: string; href?: string; to?: string };
 const FOOTER: { h: string; links: FooterLink[] }[] = [
-  { h: "Company", links: [
-    { l: "Why WONLY", to: "why" },
-    { l: "Global Footprint", to: "footprint" },
-    { l: "Projects", to: "projects" },
-    { l: "About", href: "/about" },
-  ] },
   { h: "Products", links: [
-    { l: "Security Doors", href: "/products/security-doors" },
-    { l: "Wooden Doors", href: "/products/wooden-doors" },
+    { l: "Security Door", href: "/products/security-doors" },
+    { l: "Wooden Door", href: "/products/wooden-doors" },
     { l: "Smart Locks", href: "/products/smart-locks" },
     { l: "Smart Windows", href: "/products/smart-windows" },
     { l: "Whole-House Intelligence", href: "/products/whole-house" },
   ] },
-  { h: "Explore", links: [
+  { h: "Advantages", links: [
+    { l: "Why Steel Door", href: "/products/security-doors" },
+    { l: "Why Smart Lock", href: "/products/smart-locks" },
+    { l: "Core Lock Technology", href: "/products/smart-locks/s80" },
     { l: "Certifications", to: "certs" },
-    { l: "Partners", to: "partners" },
-    { l: "Get a Quote", to: "contact" },
-    { l: "All Projects", href: "/projects" },
+  ] },
+  { h: "Company", links: [
+    { l: "Projects", to: "projects" },
+    { l: "Partnership", to: "partnership" },
+    { l: "Global Footprint", to: "footprint" },
+    { l: "Global Strategy", href: "/about" },
+    { l: "About WONLY", href: "/about" },
   ] },
   { h: "Contact", links: [
     { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
