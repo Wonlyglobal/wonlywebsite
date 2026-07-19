@@ -262,11 +262,6 @@
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
 }
-/* Only the focused card is lifted — side cards cast no shadow, so stacked
-   semi-transparent cards no longer pile into a dark smudge below the row. */
-.numbers-cf-card.is-active {
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
-}
 .numbers-cf-img {
   position: absolute;
   inset: 0;
