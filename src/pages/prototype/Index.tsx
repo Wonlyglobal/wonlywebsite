@@ -291,6 +291,8 @@ function WorldDots({ className = "" }: { className?: string }) {
     { x: 46, y: 21 }, { x: 48.5, y: 27 }, { x: 55, y: 26.5 }, { x: 54, y: 30.5 }, { x: 53, y: 34 }, { x: 51, y: 36 },
     // Europe
     { x: 48, y: 12 }, { x: 45.5, y: 13.5 }, { x: 50.5, y: 10 }, { x: 44, y: 11 },
+    // Northern belt — fill the upper landmasses (N. Canada, Scandinavia, W. Russia, Siberia, Mongolia)
+    { x: 23, y: 7 }, { x: 27, y: 8 }, { x: 49, y: 8.5 }, { x: 58, y: 11 }, { x: 66, y: 9 }, { x: 72, y: 9.5 },
     // North America — US: New York (key), Los Angeles, Chicago, Houston, Miami, Seattle
     { x: 20, y: 12, big: true }, { x: 9, y: 15 }, { x: 17, y: 11 }, { x: 15, y: 16 }, { x: 19, y: 17 }, { x: 9.5, y: 10.5 },
     // Canada: Toronto, Vancouver · Mexico: Mexico City
