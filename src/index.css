@@ -227,6 +227,32 @@
   animation-play-state: paused;
 }
 
+/* Dotted world-map markers — breathing gold dot + expanding radar ring, staggered
+   per marker (delay set inline) so points pulse in a rippling wave. Scaling uses
+   fill-box so each circle grows around its own centre. */
+@keyframes map-dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.32); opacity: 0.6; }
+}
+@keyframes map-ping {
+  0% { transform: scale(0.5); opacity: 0.55; }
+  70%, 100% { transform: scale(2.6); opacity: 0; }
+}
+.map-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: map-dot-pulse 2.6s ease-in-out infinite;
+}
+.map-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: map-ping 2.6s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-dot { animation: none; }
+  .map-ping { animation: none; opacity: 0; }
+}
+
 /* Skip rendering/compositing of heavy sections while they're off-screen — the
    browser reserves the intrinsic height but does no paint work (big win for the
    infinite logo marquees and the dotted world map when the user is elsewhere). */

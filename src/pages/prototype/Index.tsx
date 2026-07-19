@@ -293,35 +293,44 @@ function WorldDots({ className = "" }: { className?: string }) {
       if (inLand(x, y)) dots.push([x, y]);
     }
   }
-  // Key target markets in gold — a real global network across every continent (60+ countries).
-  // `big` marks the China HQ. Coordinates sit inside the land blobs above.
+  // Key target markets in gold — a dense, evenly spread global network across every
+  // continent (60+ countries). `big` marks the China HQ. Coordinates sit on land.
   const markets: { x: number; y: number; big?: boolean }[] = [
-    // East Asia — China HQ (emphasis)
-    { x: 75, y: 16, big: true },
-    // Southeast Asia — Vietnam, Philippines, Malaysia, Indonesia
-    { x: 79, y: 21 }, { x: 82.5, y: 24 }, { x: 80, y: 26.5 }, { x: 83, y: 27.5 },
-    // Middle East — Saudi Arabia, UAE, Qatar, Egypt
-    { x: 56.5, y: 21.5 }, { x: 59, y: 22 }, { x: 58, y: 20.8 }, { x: 53.5, y: 23 },
+    // East Asia — China HQ (emphasis), Japan, Korea, N. China
+    { x: 75, y: 16, big: true }, { x: 82, y: 15 }, { x: 80, y: 13.5 }, { x: 70, y: 12 },
+    // Southeast Asia — Vietnam, Thailand, Philippines, Malaysia, Indonesia, Singapore
+    { x: 79, y: 21 }, { x: 77, y: 21.5 }, { x: 82.5, y: 23.5 }, { x: 80, y: 26.5 }, { x: 83, y: 27.5 }, { x: 80.5, y: 27.5 },
+    // Middle East — Saudi Arabia, UAE, Qatar, Egypt, Iran
+    { x: 56.5, y: 21.5 }, { x: 59, y: 22 }, { x: 58, y: 20.6 }, { x: 53.5, y: 23 }, { x: 60.5, y: 19 },
     // Central Asia — Kazakhstan, Uzbekistan
-    { x: 63, y: 13 }, { x: 61, y: 15 },
-    // Africa — Nigeria, East Africa, Mozambique, South Africa
-    { x: 49, y: 27 }, { x: 54, y: 30 }, { x: 53, y: 34 }, { x: 51, y: 36 },
+    { x: 63, y: 13 }, { x: 61, y: 15.5 },
+    // Africa — Morocco, Nigeria, Ethiopia, East Africa, Mozambique, South Africa
+    { x: 46, y: 21 }, { x: 48.5, y: 27 }, { x: 55, y: 26.5 }, { x: 54, y: 30.5 }, { x: 53, y: 34 }, { x: 51, y: 36 },
     // Europe
-    { x: 48, y: 12 }, { x: 46, y: 13 }, { x: 50, y: 10 },
-    // Americas — North America, Brazil, Barbados
-    { x: 16, y: 13 }, { x: 28, y: 34 }, { x: 25, y: 40 },
-    // Oceania — Australia
-    { x: 85, y: 38 },
+    { x: 48, y: 12 }, { x: 45.5, y: 13.5 }, { x: 50.5, y: 10 }, { x: 44, y: 11 },
+    // North America
+    { x: 16, y: 13 }, { x: 11, y: 16 }, { x: 21, y: 10 }, { x: 15, y: 21 },
+    // South America — Colombia/Brazil, Brazil-S, Argentina/Barbados
+    { x: 28, y: 33 }, { x: 26, y: 38 }, { x: 25, y: 42 },
+    // Oceania — Australia (W & E), New Zealand
+    { x: 84, y: 38 }, { x: 88, y: 39 }, { x: 92, y: 43 },
   ];
   return (
     <svg viewBox="0 0 100 50" className={className} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={0.42} fill={SILVER} />)}
-      {markets.map((m, i) => (
-        <g key={`m${i}`}>
-          <circle cx={m.x} cy={m.y} r={m.big ? 2.6 : 1.9} fill={GOLD} opacity={0.18} />
-          <circle cx={m.x} cy={m.y} r={m.big ? 1.15 : 0.85} fill={GOLD} />
-        </g>
-      ))}
+      {markets.map((m, i) => {
+        const delay = `${(i % 7) * 0.32}s`;
+        return (
+          <g key={`m${i}`}>
+            {/* soft static glow */}
+            <circle cx={m.x} cy={m.y} r={m.big ? 2.4 : 1.8} fill={GOLD} opacity={0.15} />
+            {/* expanding radar ring (staggered) */}
+            <circle className="map-ping" cx={m.x} cy={m.y} r={m.big ? 1.15 : 0.85} fill="none" stroke={GOLD} strokeWidth={0.35} style={{ animationDelay: delay }} />
+            {/* breathing dot */}
+            <circle className="map-dot" cx={m.x} cy={m.y} r={m.big ? 1.15 : 0.85} fill={GOLD} style={{ animationDelay: delay }} />
+          </g>
+        );
+      })}
     </svg>
   );
 }
@@ -445,10 +454,10 @@ function PartnersPager() {
       <div className="overflow-hidden">
         <div className="pages flex transition-transform duration-500 ease-[cubic-bezier(.4,0,.2,1)]" style={{ transform: `translateX(-${page * 100}%)` }}>
           {pages.map((group, p) => (
-            <div key={p} className="w-full shrink-0 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-fr">
+            <div key={p} className="w-full shrink-0 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 content-start">
               {group.map((pt) => (
-                <div key={pt.n} className="group relative rounded-xl overflow-hidden transition-transform duration-300 hover:-translate-y-1">
-                  <img src={pt.img} alt={`WONLY strategic partnership — ${pt.n}`} loading="lazy" className="w-full h-[150px] md:h-[190px] object-cover" />
+                <div key={pt.n} className="group relative rounded-xl overflow-hidden h-[150px] md:h-[190px] transition-transform duration-300 hover:-translate-y-1">
+                  <img src={pt.img} alt={`WONLY strategic partnership — ${pt.n}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 40%, rgba(13,13,13,0.88) 100%)" }} />
                   <div className="absolute left-4 bottom-3 text-left">
                     <div className="text-white text-sm md:text-base font-semibold leading-tight">{pt.n}</div>
