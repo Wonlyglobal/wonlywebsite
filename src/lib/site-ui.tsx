@@ -40,17 +40,30 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
    homepage and scroll there via its hash handler; S80 + About are real pages. */
 const NAV: { label: string; href: string; children?: { label: string; href: string; img?: string; children?: { label: string; href: string }[] }[] }[] = [
   { label: "Products", href: "/#products", children: [
-    { label: "Door", href: "/products/entrance-door", img: `${BASE}images/alu-k300max.webp`, children: [
-      { label: "Security Doors", href: "/products/security-doors" },
-      { label: "Wooden Doors", href: "/products/wooden-doors" },
+    { label: "Doors", href: "/products/entrance-door", img: `${BASE}images/alu-k300max.webp`, children: [
+      { label: "Security Door", href: "/products/security-doors" },
+      { label: "Wooden Door", href: "/products/wooden-doors" },
     ] },
     { label: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/lock-s80.webp` },
     { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
-  { label: "R&D & Manufacturing", href: "/#why" },
+  { label: "Advantages", href: "/#why", children: [
+    { label: "Why Steel Door", href: "/products/security-doors" },
+    { label: "Why Smart Lock", href: "/products/smart-locks" },
+    { label: "Core Lock Technology", href: "/products/smart-locks/s80" },
+    { label: "Certifications", href: "/#certs" },
+  ] },
   { label: "Projects", href: "/#projects" },
-  { label: "About", href: "/about" },
+  { label: "Partnership", href: "/#partnership", children: [
+    { label: "Distributor Program", href: "/#partnership" },
+    { label: "Project Cooperation", href: "/#partnership" },
+    { label: "OEM/ODM Services", href: "/#partnership" },
+  ] },
+  { label: "Global", href: "/#footprint", children: [
+    { label: "Global Footprint", href: "/#footprint" },
+    { label: "Global Strategy", href: "/about" },
+  ] },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -189,7 +202,7 @@ export function QuoteModal() {
 /* Sticky header — transparent over a dark hero, frosted once scrolled */
 export function SiteHeader() {
   const [solid, setSolid] = useState(false);
-  const [openDrop, setOpenDrop] = useState(false);
+  const [openDrop, setOpenDrop] = useState<string | null>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -207,11 +220,11 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => (
-            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(true)} onMouseLeave={() => setOpenDrop(false)}>
+            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
               <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>
                 {n.label}{n.children && <ChevronDown size={13} />}
               </Link>
-              {n.children && openDrop && (
+              {n.children && openDrop === n.label && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-[330px] rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
                   {n.children.map((c) => (
                     <div key={c.label}>

@@ -51,17 +51,30 @@ type NavChild = { label: string; href?: string; to?: string; img?: string; child
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Products", to: "products", children: [
-    { label: "Door", href: "/products/entrance-door", img: IMG.aluMax, children: [
-      { label: "Security Doors", href: "/products/security-doors" },
-      { label: "Wooden Doors", href: "/products/wooden-doors" },
+    { label: "Doors", href: "/products/entrance-door", img: IMG.aluMax, children: [
+      { label: "Security Door", href: "/products/security-doors" },
+      { label: "Wooden Door", href: "/products/wooden-doors" },
     ] },
     { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
     { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
-  { label: "R&D & Manufacturing", to: "why" },
+  { label: "Advantages", to: "why", children: [
+    { label: "Why Steel Door", href: "/products/security-doors" },
+    { label: "Why Smart Lock", href: "/products/smart-locks" },
+    { label: "Core Lock Technology", href: "/products/smart-locks/s80" },
+    { label: "Certifications", to: "certs" },
+  ] },
   { label: "Projects", to: "projects" },
-  { label: "About", href: "/about" },
+  { label: "Partnership", to: "partnership", children: [
+    { label: "Distributor Program", to: "partnership" },
+    { label: "Project Cooperation", to: "partnership" },
+    { label: "OEM/ODM Services", to: "partnership" },
+  ] },
+  { label: "Global", to: "footprint", children: [
+    { label: "Global Footprint", to: "footprint" },
+    { label: "Global Strategy", href: "/about" },
+  ] },
   { label: "Contact", to: "contact" },
 ];
 
@@ -492,7 +505,7 @@ const Prototype = () => {
   const reveal = useRef<HTMLDivElement>(null);
   const [contentIn, setContentIn] = useState(false);
   const [solid, setSolid] = useState(false);
-  const [openDrop, setOpenDrop] = useState(false);
+  const [openDrop, setOpenDrop] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const openQuote = useQuoteStore((s) => s.openQuote);
@@ -630,7 +643,7 @@ const Prototype = () => {
           </button>
           <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
             {NAV.map((n) => (
-              <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(true)} onMouseLeave={() => setOpenDrop(false)}>
+              <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
                 {n.href ? (
                   <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}</Link>
                 ) : (
@@ -638,7 +651,7 @@ const Prototype = () => {
                     {n.label}{n.children && <ChevronDown size={13} />}
                   </button>
                 )}
-                {n.children && openDrop && (
+                {n.children && openDrop === n.label && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 w-[330px] rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
                     {n.children.map((c) => {
                       const cls = "flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
