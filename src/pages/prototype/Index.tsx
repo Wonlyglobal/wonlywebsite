@@ -293,8 +293,8 @@ function WorldDots({ className = "" }: { className?: string }) {
     { x: 48, y: 12 }, { x: 45.5, y: 13.5 }, { x: 50.5, y: 10 }, { x: 44, y: 11 },
     // North America
     { x: 16, y: 13 }, { x: 11, y: 16 }, { x: 21, y: 10 }, { x: 15, y: 21 },
-    // South America — Colombia/Brazil, Brazil-S, Argentina/Barbados
-    { x: 28, y: 33 }, { x: 26, y: 38 }, { x: 25, y: 42 },
+    // South America — Colombia, Brazil (N/central/E), Peru, Argentina, Chile
+    { x: 26, y: 29 }, { x: 28, y: 33 }, { x: 30, y: 34.5 }, { x: 24.5, y: 36 }, { x: 26, y: 38 }, { x: 24, y: 42 }, { x: 26, y: 44 },
     // Oceania — Australia (W & E), New Zealand
     { x: 84, y: 38 }, { x: 88, y: 39 }, { x: 92, y: 43 },
   ];
@@ -377,6 +377,9 @@ function NumbersCoverflow() {
       if (!timer.current) timer.current = window.setInterval(() => setActive((a) => (a + 1) % n), 1800);
     } else stop();
   };
+  // Click a side card to bring it to the centre; restart the auto-advance countdown
+  // so the picked card holds centre for a full interval before rotation resumes.
+  const pick = (i: number) => { setActive(i); stop(); sync(); };
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -405,10 +408,11 @@ function NumbersCoverflow() {
             transform: `translateX(${o * X}px) translateZ(${-abs * Z}px) rotateY(${o * -26}deg) scale(${isActive ? 1 : Math.max(0.6, 0.86 - abs * 0.06)})`,
             opacity: abs > 3 ? 0 : 1 - abs * 0.16,
             zIndex: 100 - abs,
-            pointerEvents: isActive ? "auto" : "none",
+            pointerEvents: abs > 3 ? "none" : "auto",
+            cursor: isActive ? "default" : "pointer",
           };
           return (
-            <article key={c.value} className={`numbers-cf-card${isActive ? " is-active" : ""}`} style={style} aria-hidden={!isActive}>
+            <article key={c.value} onClick={() => { if (!isActive) pick(i); }} className={`numbers-cf-card${isActive ? " is-active" : ""}`} style={style} aria-hidden={!isActive}>
               <img src={c.img} alt="" aria-hidden draggable={false} loading="lazy" className="numbers-cf-img" />
               <div className="numbers-cf-grad" />
               <span className="numbers-cf-dash" />
