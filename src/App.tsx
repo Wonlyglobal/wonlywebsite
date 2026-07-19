@@ -25,6 +25,9 @@ const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
 const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
 const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
 const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
+// Unified placeholders for planned-but-unbuilt pages.
+const ProductComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").then((m) => ({ default: m.ProductComingSoon })));
+const SectionComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").then((m) => ({ default: m.SectionComingSoon })));
 
 const queryClient = new QueryClient();
 
@@ -59,6 +62,22 @@ const App = () => (
           <Route path="/products/engineering-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EngineeringDoors /></Suspense>} />
           <Route path="/products/medical-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MedicalDoors /></Suspense>} />
           <Route path="/products/yizhai-yishu" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><YizhaiYishu /></Suspense>} />
+
+          {/* New IA — singular /product/* scheme (reuses existing pages; placeholders for the rest). */}
+          <Route path="/product/door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EntranceDoor /></Suspense>} />
+          <Route path="/product/door/metal-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
+          <Route path="/product/door/wooden-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
+          <Route path="/product/door/wpc-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><ProductComingSoon /></Suspense>} />
+          <Route path="/product/smart-lock" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />
+          <Route path="/product/smart-window" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
+          <Route path="/product/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
+          {/* Sections not yet built → placeholder (hash anchors resolve within them). */}
+          <Route path="/advantages" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+          <Route path="/manufacturing-rd" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+          <Route path="/global-strategy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+          <Route path="/partnership" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+          <Route path="/contact" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

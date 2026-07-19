@@ -50,32 +50,25 @@ type NavSubChild = { label: string; href: string; img?: string };
 type NavChild = { label: string; href?: string; to?: string; img?: string; children?: NavSubChild[] };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
-  { label: "Products", to: "products", children: [
-    { label: "Doors", href: "/products/entrance-door", img: IMG.aluMax, children: [
-      { label: "Security Door", href: "/products/security-doors", img: `${BASE}images/5products/nav-security-door.png` },
-      { label: "Wooden Door", href: "/products/wooden-doors", img: `${BASE}images/5products/nav-wooden-door.png` },
+  { label: "Product", children: [
+    { label: "Door", href: "/product/door", img: IMG.aluMax, children: [
+      { label: "Metal Door", href: "/product/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
+      { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
+      { label: "WPC Door", href: "/product/door/wpc-door" },
     ] },
-    { label: "Smart Locks", href: "/products/smart-locks", img: IMG.lockS80 },
-    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
-    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
+    { label: "Smart Lock", href: "/product/smart-lock", img: IMG.lockS80 },
+    { label: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/dropdown-window.png` },
+    { label: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
-  { label: "Advantages", to: "why", children: [
-    { label: "Why Steel Door", href: "/products/security-doors" },
-    { label: "Why Smart Lock", href: "/products/smart-locks" },
-    { label: "Core Lock Technology", href: "/products/smart-locks/s80" },
-    { label: "Certifications", to: "certs" },
+  { label: "Advantages", href: "/advantages", children: [
+    { label: "Why Wonly Door", href: "/advantages#why-wonly-door" },
+    { label: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
+    { label: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
   ] },
-  { label: "Projects", to: "projects" },
-  { label: "Partnership", to: "partnership", children: [
-    { label: "Distributor Program", to: "partnership" },
-    { label: "Project Cooperation", to: "partnership" },
-    { label: "OEM/ODM Services", to: "partnership" },
-  ] },
-  { label: "Global", to: "footprint", children: [
-    { label: "Global Footprint", to: "footprint" },
-    { label: "Global Strategy", href: "/about" },
-  ] },
-  { label: "Contact", to: "contact" },
+  { label: "Manufacturing & R&D", href: "/manufacturing-rd" },
+  { label: "Global Strategy", href: "/global-strategy" },
+  { label: "Partnership", href: "/partnership" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /* ── Section 2 · capacity stats ────────────────────────────── */
@@ -111,23 +104,13 @@ const FOOTPRINT_STATS = [
   { to: 200, suffix: "M+", label: "Users Worldwide" },
 ];
 
-/* ── Featured overseas projects (government & institutional first) ──
-   English site: clean, TEXT-FREE photos only + English HTML overlays. Never a burned-in-Chinese image. */
-const PROJECTS: { name: string; place: string; tag: string; img?: string; placeholder?: boolean }[] = [
-  { name: "New Administrative Capital CBD", place: "Cairo, Egypt", tag: "Government", img: `${BASE}images/proj-egypt-cbd.webp` },
-  { name: "National Food Centre", place: "Barbados", tag: "Government", img: `${BASE}images/proj-barbados.webp` },
-  { name: "New Capital Arc Landmark", place: "Cairo, Egypt", tag: "Landmark", img: `${BASE}images/proj-cairo-hotel.webp` },
-  { name: "Jazan Industrial City", place: "Saudi Arabia", tag: "Industrial", img: `${BASE}images/proj-saudi-villa.webp` },
-  { name: "Mixed-Use Complex", place: "Mozambique · 35,000 m²", tag: "Commercial", img: `${BASE}images/proj-s-7.webp` },
-];
-
 /* ── Section 4 · Products ──────────────────────────────────── */
-// Product gallery — doors first. Each card links to its /products/ route (see App.tsx).
+// Product gallery — doors first. Each card links to its /product/ route (see App.tsx).
 const PRODUCTS_GALLERY = [
-  { name: "Door", href: "/products/entrance-door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Security doors and steel-wood interior doors — the entire building entry, protection outside and quiet craft within." },
-  { name: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
-  { name: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
-  { name: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
+  { name: "Door", href: "/product/door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Metal, wooden and WPC doors — the entire building entry, protection outside and quiet craft within." },
+  { name: "Smart Lock", href: "/product/smart-lock", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
+  { name: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
+  { name: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
 ];
 
 /* ── Section 5 · Solutions ─────────────────────────────────── */
@@ -192,27 +175,27 @@ const PARTNER_PHOTOS = [
 
 type FooterLink = { l: string; href?: string; to?: string };
 const FOOTER: { h: string; links: FooterLink[] }[] = [
-  { h: "Products", links: [
-    { l: "Security Door", href: "/products/security-doors" },
-    { l: "Wooden Door", href: "/products/wooden-doors" },
-    { l: "Smart Locks", href: "/products/smart-locks" },
-    { l: "Smart Windows", href: "/products/smart-windows" },
-    { l: "Whole-House Intelligence", href: "/products/whole-house" },
+  { h: "Product", links: [
+    { l: "Door", href: "/product/door" },
+    { l: "Metal Door", href: "/product/door/metal-door" },
+    { l: "Wooden Door", href: "/product/door/wooden-door" },
+    { l: "WPC Door", href: "/product/door/wpc-door" },
+    { l: "Smart Lock", href: "/product/smart-lock" },
+    { l: "Smart Window", href: "/product/smart-window" },
+    { l: "Whole-House Intelligence", href: "/product/whole-house" },
   ] },
   { h: "Advantages", links: [
-    { l: "Why Steel Door", href: "/products/security-doors" },
-    { l: "Why Smart Lock", href: "/products/smart-locks" },
-    { l: "Core Lock Technology", href: "/products/smart-locks/s80" },
-    { l: "Certifications", to: "certs" },
+    { l: "Why Wonly Door", href: "/advantages#why-wonly-door" },
+    { l: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
+    { l: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
   ] },
   { h: "Company", links: [
-    { l: "Projects", to: "projects" },
-    { l: "Partnership", to: "partnership" },
-    { l: "Global Footprint", to: "footprint" },
-    { l: "Global Strategy", href: "/about" },
-    { l: "About WONLY", href: "/about" },
+    { l: "Manufacturing & R&D", href: "/manufacturing-rd" },
+    { l: "Global Strategy", href: "/global-strategy" },
+    { l: "Partnership", href: "/partnership" },
+    { l: "Contact", href: "/contact" },
   ] },
-  { h: "Contact", links: [
+  { h: "Get in Touch", links: [
     { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
     { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
     { l: "LinkedIn · YouTube" },
@@ -516,6 +499,7 @@ const Prototype = () => {
   const [contentIn, setContentIn] = useState(false);
   const [solid, setSolid] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
+  const [openSub, setOpenSub] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const openQuote = useQuoteStore((s) => s.openQuote);
@@ -653,41 +637,33 @@ const Prototype = () => {
           </button>
           <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
             {NAV.map((n) => (
-              <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
+              <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
                 {n.href ? (
-                  <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}</Link>
+                  <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</Link>
                 ) : (
-                  <button onClick={() => scrollToId(n.to!)} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>
-                    {n.label}{n.children && <ChevronDown size={13} />}
-                  </button>
+                  <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</span>
                 )}
                 {n.children && openDrop === n.label && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[330px] rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
-                    {n.children.map((c) => {
-                      const cls = "flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors";
-                      const inner = (<>
-                        {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                        <span className="leading-tight whitespace-nowrap">{c.label}</span>
-                      </>);
-                      const main = c.href
-                        ? <Link to={c.href} className={cls} style={{ color: DARK }}>{inner}</Link>
-                        : <button onClick={() => scrollToId(c.to || "products")} className={cls} style={{ color: DARK }}>{inner}</button>;
-                      return (
-                        <div key={c.label}>
-                          {main}
-                          {c.children && (
-                            <div className="pl-4 pb-1">
-                              {c.children.map((sc) => (
-                                <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: MUTED }}>
-                                  {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                                  <span className="leading-tight whitespace-nowrap">{sc.label}</span>
-                                </Link>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                    {n.children.map((c) => (
+                      <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
+                        <Link to={c.href || "#"} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                          {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
+                          <span className="leading-tight whitespace-nowrap flex-1">{c.label}</span>
+                          {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
+                        </Link>
+                        {c.children && openSub === c.label && (
+                          <div className="absolute top-0 left-full w-[220px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                            {c.children.map((sc) => (
+                              <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                                {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
+                                <span className="leading-tight whitespace-nowrap">{sc.label}</span>
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
@@ -810,7 +786,7 @@ const Prototype = () => {
               <div className={eyebrow}>Our Products</div>
               <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Built For Every Opening</h2>
             </div>
-            <Link to="/products" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>View All Products <ArrowRight size={15} /></Link>
+            <Link to="/product/door" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>Explore Products <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
         <div className="product-gallery mt-10 md:mt-12 flex flex-col md:flex-row gap-1.5 md:h-[520px]">
@@ -828,62 +804,6 @@ const Prototype = () => {
             </Link>
           ))}
         </div>
-        </div>
-      </section>
-
-      {/* ══ 5 · Global landmark projects (below the product line) ══ */}
-      <section id="projects" className={SECTION + " cv-auto"} style={{ background: BG_CHAMP }}>
-        <div className={CONTAINER}>
-        {/* Global landmark projects — header row: copy left, CTA bottom-right */}
-        <Reveal>
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
-            <div className="max-w-3xl">
-              <div className={eyebrow}>Global Landmark Projects</div>
-              <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Trusted By Governments And Institutions</h2>
-              <p className={SUBTITLE} style={{ color: SUB_COLOR }}>From sovereign capital districts to national institutions, WONLY is specified across 60+ countries where security, fire performance and reliability are not allowed to fail.</p>
-            </div>
-            <Link to="/projects" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>Explore All Projects <ArrowRight size={15} /></Link>
-          </div>
-        </Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {PROJECTS.slice(0, 2).map((p) => (
-            <Reveal key={p.name}>
-              <div className="group relative rounded-2xl overflow-hidden h-[320px] md:h-[360px]">
-                {p.placeholder ? (
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: "linear-gradient(135deg,#2a2627,#0d0d0d)" }}><span className="text-[11px] tracking-[0.22em] uppercase" style={{ color: "rgba(245,241,234,0.4)" }}>Photo coming soon</span></div>
-                ) : (
-                  <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                )}
-                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 38%, rgba(13,13,13,0.9))" }} />
-                <div className="absolute top-5 left-5 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{p.tag}</div>
-                <div className="absolute bottom-0 left-0 p-6">
-                  <div className="text-white text-xl md:text-2xl font-medium">{p.name}</div>
-                  <div className="mt-1 text-[11px] tracking-[0.16em] uppercase" style={{ color: CHAMP }}>{p.place}</div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {PROJECTS.slice(2).map((p, i) => (
-            <Reveal key={p.name} delay={(i % 3) * 80}>
-              <div className="group relative rounded-2xl overflow-hidden h-[240px]">
-                {p.placeholder ? (
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: "linear-gradient(135deg,#2a2627,#0d0d0d)" }}><span className="text-[11px] tracking-[0.22em] uppercase" style={{ color: "rgba(245,241,234,0.4)" }}>Photo coming soon</span></div>
-                ) : (
-                  <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                )}
-                <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 42%, rgba(13,13,13,0.88))" }} />
-                <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-medium" style={{ background: `${CHAMP_BG}e6`, color: DARK }}>{p.tag}</div>
-                <div className="absolute bottom-0 left-0 p-5">
-                  <div className="text-white text-base font-medium">{p.name}</div>
-                  <div className="mt-1 text-[10px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>{p.place}</div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-6 text-sm font-light" style={{ color: MUTED }}>Further references include Ethiopia's Abyssinia Bank and presidential-palace projects in Togo and Vanuatu.</p>
         </div>
       </section>
 
@@ -1112,7 +1032,7 @@ const Prototype = () => {
           ))}
         </div>
         <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
-          © 2026 WONLY Security Technology Holding Co., Ltd. · SSE: 605268 · Privacy · Terms
+          © WONLY · SSE 605268 · Global Smart-Security Ecosystem Leader
         </div>
         </div>
       </footer>

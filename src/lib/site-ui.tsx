@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, X, Check } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, X, Check } from "lucide-react";
 import { create } from "zustand";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
@@ -38,33 +38,26 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 
 /* Full nav framework (mirrors the homepage). Section items link back to the
    homepage and scroll there via its hash handler; S80 + About are real pages. */
-const NAV: { label: string; href: string; children?: { label: string; href: string; img?: string; children?: { label: string; href: string; img?: string }[] }[] }[] = [
-  { label: "Products", href: "/#products", children: [
-    { label: "Doors", href: "/products/entrance-door", img: `${BASE}images/alu-k300max.webp`, children: [
-      { label: "Security Door", href: "/products/security-doors", img: `${BASE}images/5products/nav-security-door.png` },
-      { label: "Wooden Door", href: "/products/wooden-doors", img: `${BASE}images/5products/nav-wooden-door.png` },
+const NAV: { label: string; href?: string; children?: { label: string; href: string; img?: string; children?: { label: string; href: string; img?: string }[] }[] }[] = [
+  { label: "Product", children: [
+    { label: "Door", href: "/product/door", img: `${BASE}images/alu-k300max.webp`, children: [
+      { label: "Metal Door", href: "/product/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
+      { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
+      { label: "WPC Door", href: "/product/door/wpc-door" },
     ] },
-    { label: "Smart Locks", href: "/products/smart-locks", img: `${BASE}images/lock-s80.webp` },
-    { label: "Smart Windows", href: "/products/smart-windows", img: `${BASE}images/5products/dropdown-window.png` },
-    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
+    { label: "Smart Lock", href: "/product/smart-lock", img: `${BASE}images/lock-s80.webp` },
+    { label: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/dropdown-window.png` },
+    { label: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
   ] },
-  { label: "Advantages", href: "/#why", children: [
-    { label: "Why Steel Door", href: "/products/security-doors" },
-    { label: "Why Smart Lock", href: "/products/smart-locks" },
-    { label: "Core Lock Technology", href: "/products/smart-locks/s80" },
-    { label: "Certifications", href: "/#certs" },
+  { label: "Advantages", href: "/advantages", children: [
+    { label: "Why Wonly Door", href: "/advantages#why-wonly-door" },
+    { label: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
+    { label: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
   ] },
-  { label: "Projects", href: "/#projects" },
-  { label: "Partnership", href: "/#partnership", children: [
-    { label: "Distributor Program", href: "/#partnership" },
-    { label: "Project Cooperation", href: "/#partnership" },
-    { label: "OEM/ODM Services", href: "/#partnership" },
-  ] },
-  { label: "Global", href: "/#footprint", children: [
-    { label: "Global Footprint", href: "/#footprint" },
-    { label: "Global Strategy", href: "/about" },
-  ] },
-  { label: "Contact", href: "/#contact" },
+  { label: "Manufacturing & R&D", href: "/manufacturing-rd" },
+  { label: "Global Strategy", href: "/global-strategy" },
+  { label: "Partnership", href: "/partnership" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /* Shared "Get a Quote" modal state (zustand) */
@@ -203,6 +196,7 @@ export function QuoteModal() {
 export function SiteHeader() {
   const [solid, setSolid] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
+  const [openSub, setOpenSub] = useState<string | null>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -220,22 +214,25 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => (
-            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
-              <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>
-                {n.label}{n.children && <ChevronDown size={13} />}
-              </Link>
+            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
+              {n.href ? (
+                <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</Link>
+              ) : (
+                <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</span>
+              )}
               {n.children && openDrop === n.label && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[330px] rounded-xl bg-[#F5F1EA] shadow-2xl border border-black/5 p-2">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
                   {n.children.map((c) => (
-                    <div key={c.label}>
-                      <Link to={c.href} className="flex items-center gap-3 w-full text-left px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                    <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
+                      <Link to={c.href} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                         {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                        <span className="leading-tight whitespace-nowrap">{c.label}</span>
+                        <span className="leading-tight whitespace-nowrap flex-1">{c.label}</span>
+                        {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
                       </Link>
-                      {c.children && (
-                        <div className="pl-4 pb-1">
+                      {c.children && openSub === c.label && (
+                        <div className="absolute top-0 left-full w-[220px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
                           {c.children.map((sc) => (
-                            <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: MUTED }}>
+                            <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                               {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
                               <span className="leading-tight whitespace-nowrap">{sc.label}</span>
                             </Link>
@@ -274,11 +271,33 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
   );
 }
 
-const FOOTER = [
-  { h: "Products", links: ["Security Door", "Wooden Door", "Smart Locks", "Smart Windows", "Whole-House Intelligence"] },
-  { h: "Advantages", links: ["Why Steel Door", "Why Smart Lock", "Core Lock Technology", "Certifications"] },
-  { h: "Company", links: ["Projects", "Partnership", "Global Footprint", "Global Strategy", "About WONLY"] },
-  { h: "Contact", links: ["wonlyglobal@wonly.net", "WhatsApp +1 (205) 240-1832", "LinkedIn · YouTube", "Facebook · X · Instagram"] },
+const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = [
+  { h: "Product", links: [
+    { l: "Door", href: "/product/door" },
+    { l: "Metal Door", href: "/product/door/metal-door" },
+    { l: "Wooden Door", href: "/product/door/wooden-door" },
+    { l: "WPC Door", href: "/product/door/wpc-door" },
+    { l: "Smart Lock", href: "/product/smart-lock" },
+    { l: "Smart Window", href: "/product/smart-window" },
+    { l: "Whole-House Intelligence", href: "/product/whole-house" },
+  ] },
+  { h: "Advantages", links: [
+    { l: "Why Wonly Door", href: "/advantages#why-wonly-door" },
+    { l: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
+    { l: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
+  ] },
+  { h: "Company", links: [
+    { l: "Manufacturing & R&D", href: "/manufacturing-rd" },
+    { l: "Global Strategy", href: "/global-strategy" },
+    { l: "Partnership", href: "/partnership" },
+    { l: "Contact", href: "/contact" },
+  ] },
+  { h: "Get in Touch", links: [
+    { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
+    { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
+    { l: "LinkedIn · YouTube" },
+    { l: "Facebook · X · Instagram" },
+  ] },
 ];
 
 export function SiteFooter() {
@@ -294,15 +313,25 @@ export function SiteFooter() {
             <div key={col.h}>
               <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{col.h}</h4>
               <ul className="space-y-2.5">
-                {col.links.map((l) => (
-                  <li key={l} className="text-xs font-light" style={{ color: "rgba(245,241,234,0.6)" }}>{l}</li>
-                ))}
+                {col.links.map((item) => {
+                  const cls = "text-xs font-light transition-colors hover:text-white";
+                  const style = { color: "rgba(245,241,234,0.6)" };
+                  return (
+                    <li key={item.l}>
+                      {item.href
+                        ? (/^(mailto:|tel:|https?:)/.test(item.href)
+                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{item.l}</a>
+                            : <Link to={item.href} className={cls} style={style}>{item.l}</Link>)
+                        : <span className="text-xs font-light" style={style}>{item.l}</span>}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
         </div>
         <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
-          © 2026 WONLY Security Technology Holding Co., Ltd. · SSE: 605268 · Privacy · Terms
+          © WONLY · SSE 605268 · Global Smart-Security Ecosystem Leader
         </div>
       </div>
     </footer>
