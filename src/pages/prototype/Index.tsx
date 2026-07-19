@@ -358,22 +358,28 @@ function NumbersCoverflow() {
   const n = STAT_CARDS.length;
   const [active, setActive] = useState(0);
   const [mobile, setMobile] = useState(false);
+  const stageRef = useRef<HTMLDivElement>(null);
   const timer = useRef<number | null>(null);
+  const visible = useRef(false);
+  const hovered = useRef(false);
 
   const stop = () => { if (timer.current) { clearInterval(timer.current); timer.current = null; } };
-  const start = () => {
-    stop();
-    // Always auto-advance (owner-requested); resumes on mouseleave, pauses on hover.
-    timer.current = window.setInterval(() => setActive((a) => (a + 1) % n), 1800);
+  // Only run the interval while the coverflow is on-screen AND not hovered — so it
+  // stops re-rendering/animating (and burning CPU/GPU) when the user is elsewhere.
+  const sync = () => {
+    if (visible.current && !hovered.current) {
+      if (!timer.current) timer.current = window.setInterval(() => setActive((a) => (a + 1) % n), 1800);
+    } else stop();
   };
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
-    const sync = () => setMobile(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    start();
-    return () => { mq.removeEventListener("change", sync); stop(); };
+    const onMq = () => setMobile(mq.matches);
+    onMq();
+    mq.addEventListener("change", onMq);
+    const io = new IntersectionObserver(([e]) => { visible.current = e.isIntersecting; sync(); }, { threshold: 0.15 });
+    if (stageRef.current) io.observe(stageRef.current);
+    return () => { mq.removeEventListener("change", onMq); io.disconnect(); stop(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -381,7 +387,7 @@ function NumbersCoverflow() {
   const Z = mobile ? 90 : 140;
 
   return (
-    <div className="numbers-stage" onMouseEnter={stop} onMouseLeave={start}>
+    <div ref={stageRef} className="numbers-stage" onMouseEnter={() => { hovered.current = true; sync(); }} onMouseLeave={() => { hovered.current = false; sync(); }}>
       <div className="numbers-cf-track">
         {STAT_CARDS.map((c, i) => {
           let o = i - active;
@@ -600,6 +606,19 @@ const Prototype = () => {
     return () => { removeIntent(); v?.removeEventListener("ended", onEnded); unlock(); };
   }, []);
 
+  // Warm up the (heavy) hero video during browser idle time — after the critical
+  // above-the-fold render — so it's buffered before the user scrolls, without
+  // the 3 MB fetch competing with the initial paint.
+  useEffect(() => {
+    const v = doorVideo.current;
+    if (!v) return;
+    const warm = () => { try { v.preload = "auto"; v.load(); } catch { /* noop */ } };
+    const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+    if (ric) { const id = ric(warm, { timeout: 2500 }); return () => (window as unknown as { cancelIdleCallback?: (h: number) => void }).cancelIdleCallback?.(id); }
+    const t = window.setTimeout(warm, 1500);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="w-full text-[#221F20] font-sans antialiased overflow-x-hidden" style={{ background: CHAMP_BG }}>
       {/* ══ Header ══ */}
@@ -656,7 +675,7 @@ const Prototype = () => {
 
       {/* ══ 1 · Hero door video + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="auto" aria-hidden="true" />
+        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="metadata" aria-hidden="true" />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
 
@@ -787,7 +806,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 5 · Global landmark projects (below the product line) ══ */}
-      <section id="projects" className={SECTION} style={{ background: BG_CHAMP }}>
+      <section id="projects" className={SECTION + " cv-auto"} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
         {/* Global landmark projects — header row: copy left, CTA bottom-right */}
         <Reveal>
@@ -853,7 +872,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 6 · Certifications & Honors — real-logo wall (one screen, centered) ══ */}
-      <section id="certs" className={SECTION} style={{ background: BG_LIGHT }}>
+      <section id="certs" className={SECTION + " cv-auto"} style={{ background: BG_LIGHT }}>
         <div className={CONTAINER}>
         <Reveal className="max-w-3xl">
           <div className={eyebrow}>Certified &amp; Recognized</div>
@@ -920,7 +939,7 @@ const Prototype = () => {
       </section>
 
       {/* ══ 8 · Global Footprint (one screen, centered) ══ */}
-      <section id="footprint" className={SECTION} style={{ background: BG_LIGHT }}>
+      <section id="footprint" className={SECTION + " cv-auto"} style={{ background: BG_LIGHT }}>
         <div className={CONTAINER}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           <Reveal>
@@ -945,7 +964,7 @@ const Prototype = () => {
 
 
       {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
-      <section id="partners" className={SECTION + " text-center"} style={{ background: BG_CHAMP }}>
+      <section id="partners" className={SECTION + " text-center cv-auto"} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
         <Reveal>
           <div className={eyebrow + " mb-[14px]"}>Trusted Across Industries</div>

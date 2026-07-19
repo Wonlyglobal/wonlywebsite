@@ -227,6 +227,11 @@
   animation-play-state: paused;
 }
 
+/* Skip rendering/compositing of heavy sections while they're off-screen — the
+   browser reserves the intrinsic height but does no paint work (big win for the
+   infinite logo marquees and the dotted world map when the user is elsewhere). */
+.cv-auto { content-visibility: auto; contain-intrinsic-size: auto 640px; }
+
 /* Numbers — 3D coverflow: 7 cards ring past a focused center, auto-advancing.
    Card 3D transforms are set inline from JS; this styles the stage, card chrome
    and the center card's gold dash + expanding description. */
@@ -254,7 +259,7 @@
   border-radius: 18px;
   overflow: hidden;
   background: #0e0c0b;
-  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.55s ease;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
 }
 /* Only the focused card is lifted — side cards cast no shadow, so stacked
