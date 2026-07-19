@@ -266,25 +266,27 @@ const FOOTER = [
 
 export function SiteFooter() {
   return (
-    <footer className="px-[7vw] pt-16 pb-10" style={{ background: "#1a1718" }}>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div className="col-span-2 md:col-span-1">
-          <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
-          <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
-        </div>
-        {FOOTER.map((col) => (
-          <div key={col.h}>
-            <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{col.h}</h4>
-            <ul className="space-y-2.5">
-              {col.links.map((l) => (
-                <li key={l} className="text-xs font-light" style={{ color: "rgba(245,241,234,0.6)" }}>{l}</li>
-              ))}
-            </ul>
+    <footer className="pt-16 pb-10" style={{ background: "#1a1718" }}>
+      <div className="max-w-[1400px] mx-auto px-[5vw] md:px-[6vw]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="col-span-2 md:col-span-1">
+            <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+            <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
           </div>
-        ))}
-      </div>
-      <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
-        © 2026 WONLY Security Technology Holding Co., Ltd. · SSE: 605268 · Privacy · Terms
+          {FOOTER.map((col) => (
+            <div key={col.h}>
+              <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{col.h}</h4>
+              <ul className="space-y-2.5">
+                {col.links.map((l) => (
+                  <li key={l} className="text-xs font-light" style={{ color: "rgba(245,241,234,0.6)" }}>{l}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
+          © 2026 WONLY Security Technology Holding Co., Ltd. · SSE: 605268 · Privacy · Terms
+        </div>
       </div>
     </footer>
   );

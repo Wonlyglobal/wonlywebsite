@@ -1055,7 +1055,8 @@ const Prototype = () => {
       </section>
 
       {/* ══ Footer ══ */}
-      <footer className="px-[7vw] pt-16 pb-10" style={{ background: "#1a1718" }}>
+      <footer className="pt-16 pb-10" style={{ background: "#1a1718" }}>
+        <div className={CONTAINER}>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
             <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
@@ -1086,6 +1087,7 @@ const Prototype = () => {
         </div>
         <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
           © 2026 WONLY Security Technology Holding Co., Ltd. · SSE: 605268 · Privacy · Terms
+        </div>
         </div>
       </footer>
 
