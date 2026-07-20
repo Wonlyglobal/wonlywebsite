@@ -23,6 +23,7 @@ const WholeHouse = lazy(() => import("./pages/products/WholeHouse"));
 const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
 const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
 const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
+const MetalDoor = lazy(() => import("./pages/products/MetalDoor"));
 const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
 const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
 // Unified placeholders for planned-but-unbuilt pages.
@@ -53,6 +54,8 @@ const App = () => (
           <Route path="/products/entrance-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EntranceDoor /></Suspense>} />
           <Route path="/products/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
           <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
+          {/* Metal Door — bespoke robotic-security-door page (Banner + Smart Features). */}
+          <Route path="/products/door/metal-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MetalDoor /></Suspense>} />
           <Route path="/products/smart-locks" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />
           <Route path="/products/smart-windows" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
           <Route path="/products/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
@@ -65,7 +68,7 @@ const App = () => (
 
           {/* New IA — singular /product/* scheme (reuses existing pages; placeholders for the rest). */}
           <Route path="/product/door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EntranceDoor /></Suspense>} />
-          <Route path="/product/door/metal-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
+          <Route path="/product/door/metal-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MetalDoor /></Suspense>} />
           <Route path="/product/door/wooden-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
           <Route path="/product/door/wpc-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><ProductComingSoon /></Suspense>} />
           <Route path="/product/smart-lock" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />

@@ -41,7 +41,7 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 const NAV: { label: string; href?: string; children?: { label: string; href: string; img?: string; children?: { label: string; href: string; img?: string }[] }[] }[] = [
   { label: "Product", children: [
     { label: "Door", href: "/product/door", img: `${BASE}images/alu-k300max.webp`, children: [
-      { label: "Metal Door", href: "/product/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
+      { label: "Metal Door", href: "/products/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
       { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
       { label: "WPC Door", href: "/product/door/wpc-door" },
     ] },
@@ -274,7 +274,7 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
 const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = [
   { h: "Product", links: [
     { l: "Door", href: "/product/door" },
-    { l: "Metal Door", href: "/product/door/metal-door" },
+    { l: "Metal Door", href: "/products/door/metal-door" },
     { l: "Wooden Door", href: "/product/door/wooden-door" },
     { l: "WPC Door", href: "/product/door/wpc-door" },
     { l: "Smart Lock", href: "/product/smart-lock" },
