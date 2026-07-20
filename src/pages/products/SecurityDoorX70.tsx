@@ -51,7 +51,6 @@ const GALLERY = [
   { src: IMG.factory2, alt: "X70 security door on a 5G smart-factory production line" },
 ];
 
-/* Signature capabilities — image-background cards */
 const BASE = import.meta.env.BASE_URL;
 
 /* ── Banner + Smart Features (merged in from the Metal Door page) ─────────────
@@ -120,15 +119,6 @@ const MD_CSS = `
 // Force muted before autoplay — React does not reliably set the `muted` DOM
 // property from the attribute alone, and browsers block unmuted autoplay.
 const forceMute = (v: HTMLVideoElement | null) => { if (v) v.muted = true; };
-
-const HIGHLIGHTS: { t: string; d: string; img?: string }[] = [
-  { t: "Remote Sensing", d: "3–6 m hands-free entry — the X70 senses you approaching and readies to open.", img: `${BASE}images/door-factory.webp` },
-  { t: "Auto Open & Close", d: "The door opens as you arrive and closes securely behind you — no hands needed.", img: `${BASE}images/door-cell.webp` },
-  { t: "AI Anti-Pinch", d: "Safe for kids, pets and busy hands — it detects the path and stops instantly." },
-  { t: "10.1\" Smart Screen", d: "Hi-def touch control at eye level — no bending down to a keypad." },
-  { t: "Formaldehyde Sentinel", d: "Continuous air-quality monitoring with instant alerts to your phone." },
-  { t: "Auto Arm & Disarm", d: "Arms itself when you leave and disarms the moment you return home." },
-];
 
 /* Full technical specifications */
 const SPECS: { label: string; value: string }[] = [
@@ -467,30 +457,6 @@ const SecurityDoorX70 = () => {
                 </button>
               </div>
             </Reveal>
-          </div>
-        </section>
-
-        {/* Highlights */}
-        <section className="mt-24 px-20">
-          <Reveal className="text-center mb-10">
-            <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>Signature Capabilities</div>
-            <h2 className="text-[#221F20] text-5xl font-semibold mt-3">Six Reasons The X70 Leads</h2>
-            <p className="text-neutral-500 text-base mt-3 max-w-2xl mx-auto">Every feature earns its place — engineered to protect, tested to last, and designed to disappear into daily life.</p>
-          </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {HIGHLIGHTS.map((f, i) => (
-              <Reveal key={f.t} delay={i * 100}>
-                <div className="group relative rounded-2xl overflow-hidden h-[300px] md:h-[340px]" style={{ background: "linear-gradient(140deg,#2a2627,#0d0d0d)" }}>
-                  {f.img && <img src={f.img} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />}
-                  <div className="absolute inset-0" style={{ background: f.img ? "linear-gradient(rgba(13,13,13,0.2) 30%, rgba(13,13,13,0.9) 100%)" : "linear-gradient(150deg, rgba(191,160,106,0.14), rgba(13,13,13,0.25) 60%)" }} />
-                  <div className="absolute top-6 left-7 w-9 h-[2px]" style={{ background: GOLD }} />
-                  <div className="absolute bottom-0 left-0 p-7">
-                    <h3 className="text-white text-2xl font-light leading-tight">{f.t}</h3>
-                    <p className="mt-2.5 text-sm font-light leading-relaxed max-w-[94%]" style={{ color: CHAMP }}>{f.d}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </section>
 
