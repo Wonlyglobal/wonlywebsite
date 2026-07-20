@@ -117,9 +117,14 @@ const SecurityDoors = () => {
           <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Covering every security grade, fire rating and application — all backed by 1,000+ patents and 30 years of engineering.</p>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERIES.map((p, i) => (
-            <Reveal key={p.n} delay={(i % 3) * 90}>
-              <div className="group h-full rounded-2xl overflow-hidden flex flex-col" style={{ background: "#f7f7f5", border: `1px solid ${SILVER}55` }}>
+          {SERIES.map((p, i) => {
+            // Cards that have a detail page are clickable in full — the "View Details"
+            // line is only the affordance, not the sole hit area.
+            const card = (
+              <div
+                className={`group h-full rounded-2xl overflow-hidden flex flex-col transition-all duration-300 ${p.path ? "hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" : ""}`}
+                style={{ background: "#f7f7f5", border: `1px solid ${SILVER}55` }}
+              >
                 <div className="relative h-[260px] overflow-hidden" style={{ background: "#ecebe7" }}>
                   <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{p.tag}</div>
@@ -129,12 +134,17 @@ const SecurityDoors = () => {
                   <h3 className="mt-2 text-lg font-medium leading-tight" style={{ color: DARK }}>{p.name}</h3>
                   <p className="mt-2.5 text-sm font-normal leading-relaxed flex-1" style={{ color: MUTED }}>{p.d}</p>
                   {p.path && (
-                    <Link to={p.path} className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>View Details <ArrowRight size={14} /></Link>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium transition-all group-hover:gap-3" style={{ color: GOLD }}>View Details <ArrowRight size={14} /></span>
                   )}
                 </div>
               </div>
-            </Reveal>
-          ))}
+            );
+            return (
+              <Reveal key={p.n} delay={(i % 3) * 90}>
+                {p.path ? <Link to={p.path} className="block h-full" aria-label={`${p.name} — view details`}>{card}</Link> : card}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
