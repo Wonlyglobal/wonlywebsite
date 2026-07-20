@@ -219,15 +219,6 @@ const SecurityDoorX70 = () => {
   return (
     <div className="min-w-[1000px] bg-white text-[#221F20] font-sans">
       <SiteHeader />
-      <nav aria-label="Breadcrumb" className="px-20 pt-24 pb-3">
-        <ol className="flex items-center gap-2 text-neutral-400 text-xs tracking-wide">
-          <li><Link to="/" className="flex items-center gap-1 hover:text-[#BFA06A] transition-colors"><Home size={13} /> Home</Link></li>
-          <li aria-hidden="true"><ChevronRight size={13} /></li>
-          <li><Link to="/products/security-doors" className="hover:text-[#BFA06A] transition-colors">Security Doors</Link></li>
-          <li aria-hidden="true"><ChevronRight size={13} /></li>
-          <li aria-current="page" className="font-semibold" style={{ color: GOLD }}>X70</li>
-        </ol>
-      </nav>
 
       <main>
         {/* Banner + Smart Features — scoped under .md-root so the reference CSS
@@ -239,7 +230,15 @@ const SecurityDoorX70 = () => {
           <section className="hero">
             <img className="bg" src={BANNER} alt="WONLY X70 robotic security door" />
             <div className="tx">
-              <div className="eyebrow">WONLY · X70</div>
+              <nav aria-label="Breadcrumb" className="mb-4">
+              <ol className="flex items-center gap-2 text-xs tracking-wide" style={{ color: "#8a8378" }}>
+                <li><Link to="/" className="flex items-center gap-1 hover:text-[#BFA06A] transition-colors"><Home size={13} /> Home</Link></li>
+                <li aria-hidden="true"><ChevronRight size={13} /></li>
+                <li><Link to="/products/security-doors" className="hover:text-[#BFA06A] transition-colors">Security Doors</Link></li>
+                <li aria-hidden="true"><ChevronRight size={13} /></li>
+                <li aria-current="page" className="font-semibold" style={{ color: GOLD }}>X70</li>
+              </ol>
+            </nav>
               <h1>Pioneer of the<br /><b>Robotic Security Door</b></h1>
               <p className="sub">Cast-aluminium doors that open as you approach — 30 years of security, reimagined.</p>
               <div className="cta">
@@ -303,14 +302,14 @@ const SecurityDoorX70 = () => {
 
         {/* Breadcrumb + key figures — the strip the old hero used to carry. */}
         <section className="px-20 py-8 border-b border-gray-100">
-          <div className="mt-6 flex items-center gap-16">
+          <div className="mt-6 flex items-center justify-center gap-16">
             {[
               { v: <Counter to={16} />, l: "Locking Bolts" },
               { v: <Counter to={90} suffix=" min" />, l: "Fire Rating" },
               { v: <Counter to={38} suffix=" STC" />, l: "Acoustic" },
               { v: <Counter to={100} suffix="K+" />, l: "Cycle Test" },
             ].map((s, i) => (
-              <div key={i}>
+              <div key={i} className="text-center">
                 <div className="text-3xl font-bold" style={{ color: GOLD }}>{s.v}</div>
                 <div className="text-neutral-400 text-xs tracking-[0.2em] uppercase mt-1">{s.l}</div>
               </div>
