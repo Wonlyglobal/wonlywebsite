@@ -21,10 +21,10 @@ const IMG = {
 
 /* Product gallery */
 const GALLERY = [
-  { src: IMG.hero, alt: "WONLY X70 robotic security door — front view on a luxury villa entrance" },
-  { src: IMG.lock1, alt: "X70 biometric smart lock module with facial recognition panel" },
-  { src: IMG.lock3, alt: "X70 cast-aluminum door edge showing multi-point locking bolts" },
-  { src: IMG.factory2, alt: "X70 security door on a 5G smart-factory production line" },
+  { src: `${BASE}images/door/gallery/g1-front.jpg`, alt: "WONLY X70 robotic security door — front view with smart panel and lock" },
+  { src: `${BASE}images/door/gallery/g2-scene.jpg`, alt: "WONLY X70 cast-aluminium door in a premium residential entrance" },
+  { src: `${BASE}images/door/gallery/g3-detail.jpg`, alt: "WONLY X70 door body and smart-lock detail on the production line" },
+  { src: `${BASE}images/door/gallery/g4-factory.jpg`, alt: "WONLY X70 security doors on the 5G smart-factory line" },
 ];
 
 const BASE = import.meta.env.BASE_URL;
@@ -217,6 +217,15 @@ const SecurityDoorX70 = () => {
   return (
     <div className="min-w-[1000px] bg-white text-[#221F20] font-sans">
       <SiteHeader />
+      <nav aria-label="Breadcrumb" className="px-20 pt-24 pb-3">
+        <ol className="flex items-center gap-2 text-neutral-400 text-xs tracking-wide">
+          <li><Link to="/" className="flex items-center gap-1 hover:text-[#BFA06A] transition-colors"><Home size={13} /> Home</Link></li>
+          <li aria-hidden="true"><ChevronRight size={13} /></li>
+          <li><Link to="/products/security-doors" className="hover:text-[#BFA06A] transition-colors">Security Doors</Link></li>
+          <li aria-hidden="true"><ChevronRight size={13} /></li>
+          <li aria-current="page" className="font-semibold" style={{ color: GOLD }}>X70</li>
+        </ol>
+      </nav>
 
       <main>
         {/* Banner + Smart Features — scoped under .md-root so the reference CSS
@@ -282,7 +291,7 @@ const SecurityDoorX70 = () => {
                 <div className="label"><h3>Smart Perimeter Monitoring</h3></div>
               </div>
               <div className="tile wide">
-                <video ref={forceMute} src={media("Smart Voice Message.mp4")} autoPlay muted loop playsInline preload="metadata" />
+                <video ref={forceMute} src={media("Smart Voice Message2.mp4")} autoPlay muted loop playsInline preload="metadata" />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Voice Message</h3></div>
               </div>
@@ -292,15 +301,6 @@ const SecurityDoorX70 = () => {
 
         {/* Breadcrumb + key figures — the strip the old hero used to carry. */}
         <section className="px-20 py-8 border-b border-gray-100">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-neutral-400 text-xs tracking-wide">
-              <li><Link to="/" className="flex items-center gap-1 hover:text-[#BFA06A] transition-colors"><Home size={13} /> Home</Link></li>
-              <li aria-hidden="true"><ChevronRight size={13} /></li>
-              <li><Link to="/products/security-doors" className="hover:text-[#BFA06A] transition-colors">Security Doors</Link></li>
-              <li aria-hidden="true"><ChevronRight size={13} /></li>
-              <li aria-current="page" className="font-semibold" style={{ color: GOLD }}>X70</li>
-            </ol>
-          </nav>
           <div className="mt-6 flex items-center gap-16">
             {[
               { v: <Counter to={16} />, l: "Locking Bolts" },
