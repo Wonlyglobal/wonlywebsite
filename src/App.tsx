@@ -1,10 +1,59 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import NotFound from "./pages/not-found/Index";
+
+// Take over scroll handling from the browser so lazy routes behave predictably.
+if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
+// Forward navigation (PUSH) opens a page at its banner; browser back/forward
+// (POP) restores the scroll position the user left that page at. Lazy pages get
+// a short retry loop so restoration waits for the content to finish mounting.
+function ScrollManager() {
+  const location = useLocation();
+  const navType = useNavigationType();
+
+  // Record the position while the page is still on screen. Saving it in a
+  // cleanup instead would always store 0: by the time a passive effect cleanup
+  // runs the outgoing page's DOM is gone and the browser has clamped scrollY to
+  // the (viewport-height) Suspense fallback. The listener is registered in a
+  // layout effect so it is detached before that teardown, and the clamp-to-zero
+  // scroll event it fires never lands on the outgoing page's key.
+  useLayoutEffect(() => {
+    const key = `scroll:${location.key}`;
+    // Only real scroll events are recorded — writing once on mount would clobber
+    // the stored position with 0 before the restore effect below gets to read it.
+    const onScroll = () => sessionStorage.setItem(key, String(window.scrollY));
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [location]);
+
+  useEffect(() => {
+    if (navType === "POP") {
+      const saved = sessionStorage.getItem(`scroll:${location.key}`);
+      if (saved !== null) {
+        const y = parseInt(saved, 10);
+        let tries = 0;
+        const restore = () => {
+          window.scrollTo(0, y);
+          if (Math.abs(window.scrollY - y) > 2 && tries++ < 20) {
+            requestAnimationFrame(restore);
+          }
+        };
+        requestAnimationFrame(restore);
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [location, navType]);
+
+  return null;
+}
 
 // Lazy-loaded so each route ships as its own chunk and never enters the initial
 // bundle the homepage visitor downloads.
@@ -41,6 +90,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter basename={basename}>
+        <ScrollManager />
         <Routes>
           {/* The /prototype interactive page is now the official homepage. */}
           <Route path="/" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />

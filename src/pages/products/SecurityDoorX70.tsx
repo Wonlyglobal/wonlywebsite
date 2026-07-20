@@ -439,7 +439,7 @@ const SecurityDoorX70 = () => {
         </section>
 
         {/* In application */}
-        <section className="mt-24 px-20">
+        <section className="mt-24 pb-28 px-20">
           <Reveal className="text-center mb-10">
             <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>In Application</div>
             <h2 className="text-[#221F20] text-5xl font-semibold mt-3">Where The X70 Belongs</h2>
