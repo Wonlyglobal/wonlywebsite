@@ -9,6 +9,10 @@ const GOLD = "#BFA06A";
 const CHAMP = "#D4C4A0";
 const DARK = "#221F20";
 
+// Declared before GALLERY / media() below — they read it at module scope, so a
+// later `const` would leave them in the temporal dead zone and blank the page.
+const BASE = import.meta.env.BASE_URL;
+
 const IMG = {
   hero: "https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg",
   lock1: "https://picture-search.tiangong.cn/image/rt/37df649adeceb5a6e298b9c079ca9832.jpg",
@@ -26,8 +30,6 @@ const GALLERY = [
   { src: `${BASE}images/door/gallery/g3-detail.jpg`, alt: "WONLY X70 door body and smart-lock detail on the production line" },
   { src: `${BASE}images/door/gallery/g4-factory.jpg`, alt: "WONLY X70 security doors on the 5G smart-factory line" },
 ];
-
-const BASE = import.meta.env.BASE_URL;
 
 /* ── Banner + Smart Features (merged in from the Metal Door page) ─────────────
    Local media, referenced via Vite's BASE_URL so paths resolve on both the root
