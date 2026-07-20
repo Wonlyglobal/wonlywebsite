@@ -59,7 +59,7 @@ const BASE = import.meta.env.BASE_URL;
    domain and a GitHub Pages project sub-path. encodeURI keeps the spaces (and the
    "&" in "Auto Open & Close.mp4") valid inside the directory name once deployed. */
 const media = (file: string) => encodeURI(`${BASE}images/door/selling point/${file}`);
-const BANNER = `${BASE}images/door/door-banner6-1920x1000.jpg`;
+const BANNER = `${BASE}images/door/door-banner7-1920x1000.jpg`;
 
 /* Pixel replica of public/_agent/metal-door-reference.html — the reference class
    names are preserved verbatim but scoped under `.md-root` so they never collide
