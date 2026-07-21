@@ -1,6 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, useQuoteStore } from "@/lib/site-ui";
+import { ArrowLeft, ArrowUpRight, Mail } from "lucide-react";
+import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP } from "@/lib/site-ui";
 import { useSeo } from "@/lib/seo";
 
 // Turn a URL path into a readable title, e.g. "/product/door/wpc-door" → "WPC Door".
@@ -15,7 +15,6 @@ function titleFromPath(pathname: string) {
 function ComingSoon({ kind }: { kind: "product" | "section" }) {
   const { pathname } = useLocation();
   const title = titleFromPath(pathname);
-  const openQuote = useQuoteStore((s) => s.openQuote);
   useSeo({
     title: `${title} | WONLY`,
     description: `${title} — page coming soon. WONLY, global smart-security ecosystem leader (SSE: 605268).`,
@@ -31,14 +30,17 @@ function ComingSoon({ kind }: { kind: "product" | "section" }) {
           </div>
           <h1 className="mt-5 font-light leading-[1.1] text-[34px] md:text-[52px] text-white">{title}</h1>
           <p className="mt-5 text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>
-            This page is coming soon. In the meantime, tell us what you need and our team will reply within 24 hours.
+            Our new global website is still under construction. In the meantime, you can explore this section on our previous website — or email us for richer, more detailed information.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <button onClick={() => openQuote()} className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
-              Get Solutions &amp; Quote
-            </button>
+            <a href="http://en.wanglianfang.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
+              Visit Our Previous Site <ArrowUpRight size={16} />
+            </a>
+            <a href="mailto:wonlyglobal@wonly.net" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium border transition-colors hover:bg-white/5" style={{ borderColor: "rgba(191,160,106,0.5)", color: CHAMP }}>
+              <Mail size={16} /> wonlyglobal@wonly.net
+            </a>
             <Link to="/" className="inline-flex items-center gap-2 text-sm font-light transition-colors hover:text-white" style={{ color: CHAMP }}>
-              <ArrowLeft size={15} /> Back to home
+              <ArrowLeft size={15} /> Back to Home
             </Link>
           </div>
         </div>
