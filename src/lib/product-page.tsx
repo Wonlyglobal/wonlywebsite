@@ -16,6 +16,7 @@ export type ProductPageData = {
   featuresTitle: string;
   features: Feature[];
   band?: { img: string; eyebrow: string; title: string };
+  ecosystem?: { eyebrow: string; title: string; items: { img: string; name: string }[] };
   specs?: [string, string][];
   cta: { eyebrow?: string; title: string; sub: string };
 };
@@ -143,6 +144,27 @@ export function ProductPage({ data }: { data: ProductPageData }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8 py-5 border-b" style={{ borderColor: `${SILVER}44` }}>
                   <div className="text-[11px] tracking-[0.2em] uppercase font-medium" style={{ color: GOLD }}>{k}</div>
                   <div className="md:col-span-2 text-sm md:text-base font-normal" style={{ color: DARK }}>{v}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {data.ecosystem && (
+        <section className="px-[7vw] py-24 md:py-32" style={{ background: data.specs ? "#fff" : CHAMP_BG }}>
+          <Reveal>
+            <div className={eyebrow} style={{ color: GOLD_DEEP }}>{data.ecosystem.eyebrow}</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{data.ecosystem.title}</h2>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {data.ecosystem.items.map((it, i) => (
+              <Reveal key={it.name} delay={(i % 6) * 60}>
+                <div className="rounded-2xl bg-white border p-4 text-center h-full" style={{ borderColor: `${SILVER}44` }}>
+                  <div className="h-[130px] flex items-center justify-center">
+                    <img src={it.img} alt={it.name} loading="lazy" className="max-h-full max-w-full object-contain" />
+                  </div>
+                  <div className="mt-3 text-[12px] font-medium tracking-[0.04em]" style={{ color: DARK }}>{it.name}</div>
                 </div>
               </Reveal>
             ))}

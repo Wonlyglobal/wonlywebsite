@@ -12,7 +12,7 @@ const data: ProductPageData = {
     eyebrow: "Wooden Doors",
     title: <>Steel-Wood<br /><span style={{ color: "#D4C4A0" }}>Silent</span> Doors</>,
     sub: "Double the silence, engineered never to warp — where craftsmanship meets a steel-reinforced core for residential, commercial and bespoke interiors.",
-    img: `${BASE}images/wood-2.webp`,
+    img: `${BASE}images/wood-hero.jpg`,
     mode: "render",
   },
   highlights: ["One door with the effect of two", "ENF-grade, formaldehyde-free build", "Won't sag, warp or fear moisture"],
@@ -21,7 +21,7 @@ const data: ProductPageData = {
   series: [
     { name: "Steel-Wood Silent Door", tag: "Flagship", d: "A double-keel leaf with a galvanized-steel frame — the quiet, warp-proof benchmark.", img: `${BASE}images/wood-2.webp` },
     { name: "ENF Eco Wood Door", tag: "Formaldehyde-Free", d: "Certified to the ENF standard — no glue, no dust, healthy interiors for family homes.", img: `${BASE}images/5products/prod-wooden-doors.jpg` },
-    { name: "YIZHAI Art Wood Door", tag: "Luxury", d: "Bespoke artisan leaves where interior craftsmanship becomes heritage art.", img: `${BASE}images/yizhai-1.webp` },
+    { name: "YIZHAI Art Wood Door", tag: "Luxury", d: "Bespoke artisan leaves where interior craftsmanship becomes heritage art.", img: `${BASE}images/yizhai-clean.jpg` },
   ],
   featuresEyebrow: "Engineered In",
   featuresTitle: "Quiet, Solid, And Built To Last",

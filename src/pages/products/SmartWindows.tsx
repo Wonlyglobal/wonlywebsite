@@ -12,7 +12,7 @@ const data: ProductPageData = {
     eyebrow: "Aluminum & Smart Windows",
     title: <>Warmth in,<br /><span style={{ color: "#D4C4A0" }}>weather</span> out</>,
     sub: "Insulation and acoustics that rival a solid wall — smart windows that close themselves the moment the storm rolls in.",
-    img: `${BASE}images/landmark-daxing.webp`,
+    img: `${BASE}images/win-scene1.jpg`,
     mode: "scene",
   },
   highlights: ["Auto-closes in wind & rain", "50,000+ slide cycles without deforming", "App remote control & scenes"],
@@ -33,7 +33,7 @@ const data: ProductPageData = {
     { icon: RefreshCw, t: "50,000+ Cycle Tested", d: "Slide-tested over 50,000 times without deforming — quality that lasts." },
     { icon: Wind, t: "Hurricane Series", d: "Reinforced systems engineered for North America and the Caribbean." },
   ],
-  band: { img: `${BASE}images/proj-1.webp`, eyebrow: "Building Envelope", title: "Windows That Finish The Whole-House System" },
+  band: { img: `${BASE}images/win-scene2.jpg`, eyebrow: "Building Envelope", title: "Windows That Finish The Whole-House System" },
   cta: { title: "Bring WONLY Smart Windows To Your Market", sub: "Energy-saving, balcony/terrace or hurricane series — request specifications and pricing." },
 };
 

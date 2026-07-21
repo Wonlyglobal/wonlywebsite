@@ -34,6 +34,18 @@ const data: ProductPageData = {
     { icon: Moon, t: "AI Sleep Assist", d: "Environment tuning quietly adjusts the home for better, deeper rest." },
   ],
   band: { img: `${BASE}images/proj-s-7.webp`, eyebrow: "Living, Connected", title: "From The Front Door To Every Room" },
+  ecosystem: {
+    eyebrow: "Smart-Home Ecosystem",
+    title: "28 Categories, One Connected Home",
+    items: [
+      { img: `${BASE}images/sh-presence.jpg`, name: "Presence Sensor" },
+      { img: `${BASE}images/sh-air.jpg`, name: "Air-Quality Sensor" },
+      { img: `${BASE}images/sh-fall.jpg`, name: "Fall Detection" },
+      { img: `${BASE}images/sh-light.jpg`, name: "Light Sensor" },
+      { img: `${BASE}images/sh-cooker.jpg`, name: "Integrated Cooker" },
+      { img: `${BASE}images/sh-sofa.jpg`, name: "Smart Sofa" },
+    ],
+  },
   cta: { title: "Bring WONLY Smart Living To Your Market", sub: "Ask about the ecosystem, integration and OEM/ODM options — we reply within 24 hours." },
 };
 
