@@ -60,6 +60,7 @@ function ScrollManager() {
 const Prototype = lazy(() => import("./pages/prototype/Index"));
 const Index = lazy(() => import("./pages/home/Index"));
 const About = lazy(() => import("./pages/about/Index"));
+const Contact = lazy(() => import("./pages/contact/Index"));
 const Projects = lazy(() => import("./pages/projects/Index"));
 // Product category pages (each lists the full series in its line)
 const EntranceDoor = lazy(() => import("./pages/products/EntranceDoor"));
@@ -129,7 +130,7 @@ const App = () => (
           <Route path="/manufacturing-rd" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
           <Route path="/global-strategy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
           <Route path="/partnership" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
-          <Route path="/contact" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+          <Route path="/contact" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Contact /></Suspense>} />
 
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

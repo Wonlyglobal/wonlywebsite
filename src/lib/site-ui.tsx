@@ -88,6 +88,7 @@ export function QuoteModal() {
   const [form, setForm] = useState({ name: "", company: "", role: "", country: "", email: "", phone: "", biz: "", volume: "", timeline: "", message: "" });
   const [picks, setPicks] = useState<string[]>([]);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -107,7 +108,7 @@ export function QuoteModal() {
   };
   const togglePick = (p: string) => setPicks((ps) => ps.includes(p) ? ps.filter((x) => x !== p) : [...ps, p]);
   const close = () => { setOpen(false); setTimeout(() => setSent(false), 300); };
-  const submit = (ev: React.FormEvent) => {
+  const submit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
@@ -118,7 +119,37 @@ export function QuoteModal() {
     if (!form.biz) e.biz = "Please select a business type.";
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
-    if (Object.keys(e).length === 0) setSent(true);
+    if (Object.keys(e).length > 0) return;
+    setSending(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "5054e990-b5a3-47e9-a659-f8e4dd7e69c7",
+          subject: presetSubject ? `WONLY Enquiry \u2014 ${presetSubject}` : "New WONLY Website Enquiry",
+          from_name: "WONLY Website",
+          name: form.name,
+          company: form.company,
+          job_title: form.role,
+          country: form.country,
+          email: form.email,
+          phone: form.phone,
+          business_type: form.biz,
+          volume: form.volume,
+          timeline: form.timeline,
+          interests: picks.join(", "),
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) setSent(true);
+      else setErrors({ submit: data.message || "Submission failed. Please email wonlyglobal@wonly.net." });
+    } catch {
+      setErrors({ submit: "Network error. Please email wonlyglobal@wonly.net directly." });
+    } finally {
+      setSending(false);
+    }
   };
 
   const border = (k: string) => ({ border: `1px solid ${errors[k] ? "#c0564a" : "rgba(34,31,32,0.16)"}` });
@@ -183,7 +214,8 @@ export function QuoteModal() {
             <label className="block mt-5"><span className={qLabel} style={{ color: MUTED }}>Message <span style={{ color: "#c0564a" }}>*</span></span>
               <textarea rows={3} className={qInput + " resize-none"} style={border("message")} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Tell us about your project, territory or requirements…" /><Err k="message" /></label>
 
-            <button type="submit" className="mt-6 w-full px-8 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.01]" style={{ background: GOLD, color: DARK }}>Submit Request</button>
+            {errors.submit ? <div className="mt-4 text-[13px] text-center" style={{ color: "#c0564a" }}>{errors.submit}</div> : null}
+            <button type="submit" disabled={sending} className="mt-6 w-full px-8 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.01] disabled:opacity-60" style={{ background: GOLD, color: DARK }}>{sending ? "Sending\u2026" : "Submit Request"}</button>
             <p className="mt-3 text-center text-[11px] font-light" style={{ color: MUTED }}>We reply within 24 hours. Your details are used only to respond to this enquiry.</p>
           </form>
         )}

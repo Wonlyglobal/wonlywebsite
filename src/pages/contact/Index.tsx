@@ -1,0 +1,171 @@
+import { useState } from "react";
+import { Mail, MessageCircle, MapPin, ArrowUpRight, Check } from "lucide-react";
+import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, MUTED } from "@/lib/site-ui";
+import { useSeo } from "@/lib/seo";
+
+const ACCESS_KEY = "5054e990-b5a3-47e9-a659-f8e4dd7e69c7";
+const label = "text-[11px] tracking-[0.12em] uppercase";
+const input = "mt-1.5 w-full rounded-lg px-4 py-2.5 text-sm text-[#221F20] bg-[#faf8f4] placeholder-black/25 focus:outline-none";
+
+export default function Contact() {
+  useSeo({
+    title: "Contact | WONLY",
+    description: "Contact WONLY for distributor, project or OEM/ODM enquiries. Email wonlyglobal@wonly.net or message us on WhatsApp — replies within 24 hours.",
+    path: "/contact",
+  });
+
+  const [form, setForm] = useState({ name: "", company: "", role: "", country: "", email: "", phone: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const set = (k: keyof typeof form, v: string) => {
+    setForm((f) => ({ ...f, [k]: v }));
+    setErrors((e) => { if (!e[k]) return e; const n = { ...e }; delete n[k]; return n; });
+  };
+  const border = (k: string) => ({ border: `1px solid ${errors[k] ? "#c0564a" : "rgba(34,31,32,0.16)"}` });
+
+  const submit = async (ev: React.FormEvent) => {
+    ev.preventDefault();
+    const e: Record<string, string> = {};
+    if (!form.name.trim()) e.name = "Please enter your name.";
+    if (!form.company.trim()) e.company = "Please enter your company.";
+    if (!form.country.trim()) e.country = "Please enter your country or region.";
+    if (!form.email.trim()) e.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
+    if (!form.message.trim()) e.message = "Please tell us about your enquiry.";
+    setErrors(e);
+    if (Object.keys(e).length > 0) return;
+    setSending(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject: "New WONLY Contact Enquiry",
+          from_name: "WONLY Website",
+          name: form.name,
+          company: form.company,
+          job_title: form.role,
+          country: form.country,
+          email: form.email,
+          phone: form.phone,
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) setSent(true);
+      else setErrors({ submit: data.message || "Submission failed. Please email wonlyglobal@wonly.net." });
+    } catch {
+      setErrors({ submit: "Network error. Please email wonlyglobal@wonly.net directly." });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <div className="min-w-[320px] bg-[#F5F1EA] text-[#221F20]">
+      <SiteHeader />
+
+      {/* Hero */}
+      <section className="text-white px-[6vw] pt-[150px] pb-[90px]" style={{ background: "radial-gradient(120% 90% at 78% 20%, #2a2627 0%, #0d0d0d 72%)" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-[12px] tracking-[0.3em] uppercase font-bold" style={{ color: CHAMP }}>Contact</div>
+          <h1 className="mt-4 font-light leading-[1.05] tracking-[-1px] text-[clamp(34px,5vw,64px)]">Let's Open Your Market <span style={{ color: CHAMP }}>Together</span></h1>
+          <p className="mt-5 max-w-[520px] text-[15px] leading-[1.7]" style={{ color: "rgba(245,241,234,0.72)" }}>
+            Distributor, project or OEM/ODM enquiry — our overseas team replies within 24 hours with specifications, compliance documents and pricing.
+          </p>
+        </div>
+      </section>
+
+      {/* Body */}
+      <div className="max-w-[1200px] mx-auto px-[6vw] py-[70px] grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-[56px]">
+        {/* Channels */}
+        <div>
+          <h2 className="text-[13px] tracking-[0.28em] uppercase font-bold mb-6" style={{ color: GOLD }}>Get in Touch</h2>
+
+          <a href="mailto:wonlyglobal@wonly.net" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+            <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><Mail size={19} style={{ color: GOLD }} /></span>
+            <span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Email</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">wonlyglobal@wonly.net</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Overseas sales &amp; partnership enquiries</span>
+            </span>
+          </a>
+
+          <a href="https://wa.me/12052401832" target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+            <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><MessageCircle size={19} style={{ color: GOLD }} /></span>
+            <span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>WhatsApp</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">+1 (205) 240-1832</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Fastest response — message us anytime</span>
+            </span>
+          </a>
+
+          <div className="flex gap-4 py-5 border-b border-[#e4ddcf]">
+            <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><MapPin size={19} style={{ color: GOLD }} /></span>
+            <span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Headquarters</span>
+              <span className="block text-[16px] font-semibold mt-0.5">Zhejiang, China</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>WONLY · SSE: 605268</span>
+            </span>
+          </div>
+
+          <a href="http://en.wanglianfang.com/" target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+            <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><ArrowUpRight size={19} style={{ color: GOLD }} /></span>
+            <span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Previous Site</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">en.wanglianfang.com</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Full product library while the new site is being built</span>
+            </span>
+          </a>
+
+          <div className="mt-8 text-[13px] leading-[1.9]" style={{ color: MUTED }}>
+            <b className="text-[#221F20]">Priority regions:</b> Middle East · Southeast Asia · Central Asia<br />
+            Radiating to Africa, Latin America and Oceania.
+          </div>
+        </div>
+
+        {/* Form */}
+        <div>
+          <div className="bg-white border border-[#e4ddcf] rounded-2xl p-[34px] shadow-[0_30px_60px_-40px_rgba(34,31,32,0.3)]">
+            {sent ? (
+              <div className="py-14 text-center">
+                <div className="mx-auto w-12 h-12 rounded-full grid place-items-center" style={{ background: `${GOLD}22` }}><Check size={22} style={{ color: GOLD }} /></div>
+                <h3 className="mt-5 text-xl font-light" style={{ color: DARK }}>Thank you — we'll be in touch within 24 hours.</h3>
+                <p className="mt-3 text-sm font-light" style={{ color: MUTED }}>Your enquiry has been sent to our overseas team.</p>
+              </div>
+            ) : (
+              <form noValidate onSubmit={submit}>
+                <h3 className="text-[22px] font-normal">Send an Enquiry</h3>
+                <p className="text-[13px] mt-1.5 mb-5" style={{ color: MUTED }}>Tell us about your project or territory. Fields marked <span style={{ color: "#c0564a" }}>*</span> are required.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <label className="block"><span className={label} style={{ color: MUTED }}>Full Name <span style={{ color: "#c0564a" }}>*</span></span>
+                    <input className={input} style={border("name")} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your full name" />{errors.name && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.name}</span>}</label>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>Company <span style={{ color: "#c0564a" }}>*</span></span>
+                    <input className={input} style={border("company")} value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Company name" />{errors.company && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.company}</span>}</label>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>Job Title</span>
+                    <input className={input} style={border("role")} value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. Purchasing Manager" /></label>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>Country / Region <span style={{ color: "#c0564a" }}>*</span></span>
+                    <input className={input} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" />{errors.country && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.country}</span>}</label>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>Email <span style={{ color: "#c0564a" }}>*</span></span>
+                    <input type="email" className={input} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" />{errors.email && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.email}</span>}</label>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>Phone / WhatsApp</span>
+                    <input className={input} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+.." /></label>
+                </div>
+                <label className="block mt-4"><span className={label} style={{ color: MUTED }}>Message <span style={{ color: "#c0564a" }}>*</span></span>
+                  <textarea className={input + " min-h-[110px] resize-y"} style={border("message")} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Products, quantities, target market, timeline…" />{errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.message}</span>}</label>
+                {errors.submit && <div className="mt-4 text-[13px] text-center" style={{ color: "#c0564a" }}>{errors.submit}</div>}
+                <button type="submit" disabled={sending} className="mt-5 w-full py-[15px] rounded-lg text-sm font-semibold text-white disabled:opacity-60" style={{ background: DARK }}>{sending ? "Sending…" : "Submit Enquiry →"}</button>
+                <div className="mt-3 text-[12px] text-center" style={{ color: MUTED }}>Or email us directly at wonlyglobal@wonly.net — we reply within 24 hours.</div>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <SiteFooter />
+    </div>
+  );
+}
