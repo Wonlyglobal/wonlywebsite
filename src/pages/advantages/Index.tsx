@@ -19,7 +19,7 @@ const LOCK = {
     "3D face · fingerprint · palm-vein · RFID · App · PIN",
     "Hands-free, no-sense unlocking as you approach",
     "Anti-technical-opening — bump & pick resistant",
-    "Remote App control, pry & tamper alarms, 100,000+ cycle tested",
+    "Remote App control, pry & tamper alarms, 200,000+ cycle tested",
   ],
 };
 
