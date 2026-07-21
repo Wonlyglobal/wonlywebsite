@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useSeo } from "@/lib/seo";
 import { SiteFooter } from "@/lib/site-ui";
 import {
-  Shield, Zap, Cpu, MapPin, Calendar, Users, Search, ChevronLeft, ChevronRight,
+  Shield, Cpu, MapPin, Calendar, Users, Search, ChevronLeft, ChevronRight,
   Globe, ArrowRight, Play, Award, Building2, HeartHandshake,
-  Lock, DoorOpen, Mail, MessageCircle, Phone, Leaf, Target, Eye,
+  Lock, DoorOpen, Phone, Leaf, Target, Eye,
   Layers, TrendingUp, ShieldCheck, ChevronDown,
 } from "lucide-react";
 

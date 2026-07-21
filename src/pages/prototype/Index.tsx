@@ -196,8 +196,6 @@ const FOOTER: { h: string; links: FooterLink[] }[] = [
   { h: "Get in Touch", links: [
     { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
     { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
-    { l: "LinkedIn · YouTube" },
-    { l: "Facebook · X · Instagram" },
   ] },
 ];
 
@@ -966,7 +964,6 @@ const Prototype = () => {
             <div className="mt-10 space-y-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.85)" }}>
               <a href="mailto:wonlyglobal@wonly.net" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> wonlyglobal@wonly.net</a>
               <a href="https://wa.me/12052401832" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:underline"><MessageCircle size={16} style={{ color: GOLD }} /> WhatsApp +1 (205) 240-1832</a>
-              <div className="flex items-center gap-3"><Phone size={16} style={{ color: GOLD }} /> LinkedIn · YouTube · Facebook · X · Instagram</div>
             </div>
           </Reveal>
 
