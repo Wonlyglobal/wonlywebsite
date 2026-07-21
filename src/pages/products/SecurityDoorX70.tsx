@@ -95,9 +95,40 @@ const MD_CSS = `
  .md-root .tile.big,.md-root .tile.wide,.md-root .tile.sm{grid-column:span 1;grid-row:span 1;}}
 `;
 
-// Force muted before autoplay — React does not reliably set the `muted` DOM
-// property from the attribute alone, and browsers block unmuted autoplay.
-const forceMute = (v: HTMLVideoElement | null) => { if (v) v.muted = true; };
+// Viewport-gated video: the source is only attached once the tile nears the
+// viewport, and playback pauses when it scrolls away. This keeps all five
+// selling-point clips (~36 MB) off the initial download — the page opens with
+// just the banner, and each clip fetches only as its tile is scrolled to. The
+// videos themselves are unchanged. `muted` is forced on the DOM property before
+// play() because React does not reliably set it from the attribute, and browsers
+// block unmuted autoplay.
+function LazyVideo({ src }: { src: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => {
+        if (e.isIntersecting) { setSeen(true); el.muted = true; el.play?.().catch(() => {}); }
+        else { el.pause?.(); }
+      }),
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  // The observer flips `seen` and calls play() in the same tick, before React has
+  // attached the src — and with preload="none" nothing loads until play() runs on
+  // a real source. So kick playback once more here, after the src is on the
+  // element. The observer still handles pausing/resuming on later scroll.
+  useEffect(() => {
+    if (!seen) return;
+    const el = ref.current;
+    if (el) { el.muted = true; el.play?.().catch(() => {}); }
+  }, [seen]);
+  return <video ref={ref} src={seen ? src : undefined} muted loop playsInline preload="none" />;
+}
 
 /* Full technical specifications */
 const SPECS: { label: string; value: string }[] = [
@@ -262,17 +293,17 @@ const SecurityDoorX70 = () => {
             </div>
             <div className="bento">
               <div className="tile big">
-                <video ref={forceMute} src={media("Auto Open & Close.mp4")} autoPlay muted loop playsInline preload="metadata" />
+                <LazyVideo src={media("Auto Open & Close.mp4")} />
                 <div className="scrim" />
                 <div className="label"><h3>Auto Open &amp; Close</h3></div>
               </div>
               <div className="tile wide">
-                <video ref={forceMute} src={media("Smart Anti-Pinch System.mp4")} autoPlay muted loop playsInline preload="metadata" />
+                <LazyVideo src={media("Smart Anti-Pinch System.mp4")} />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Anti-Pinch System</h3></div>
               </div>
               <div className="tile sm">
-                <video ref={forceMute} src={media("power supply3.mp4")} autoPlay muted loop playsInline preload="metadata" />
+                <LazyVideo src={media("power supply3.mp4")} />
                 <div className="scrim" />
                 <div className="label"><h3>Dual Power Supply</h3></div>
               </div>
@@ -294,12 +325,12 @@ const SecurityDoorX70 = () => {
                 <div className="label"><h3>Formaldehyde Sentinel</h3></div>
               </div>
               <div className="tile wide">
-                <video ref={forceMute} src={media("Smart Perimeter Monitoring.mp4")} autoPlay muted loop playsInline preload="metadata" />
+                <LazyVideo src={media("Smart Perimeter Monitoring.mp4")} />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Perimeter Monitoring</h3></div>
               </div>
               <div className="tile wide">
-                <video ref={forceMute} src={media("Smart Voice Message2.mp4")} autoPlay muted loop playsInline preload="metadata" />
+                <LazyVideo src={media("Smart Voice Message2.mp4")} />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Voice Message</h3></div>
               </div>
