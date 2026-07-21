@@ -325,8 +325,6 @@ const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = [
   { h: "Get in Touch", links: [
     { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
     { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
-    { l: "LinkedIn · YouTube" },
-    { l: "Facebook · X · Instagram" },
   ] },
 ];
 

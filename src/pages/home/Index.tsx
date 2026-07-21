@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSeo } from "@/lib/seo";
+import { SiteFooter } from "@/lib/site-ui";
 import {
   Shield, Zap, Cpu, MapPin, Calendar, Users, Search, ChevronLeft, ChevronRight,
   Globe, ArrowRight, Play, Award, Building2, HeartHandshake,
@@ -620,39 +621,7 @@ const Index = () => {
 
       </main>
 
-      {/* Footer */}
-      <footer className="grid grid-cols-5 gap-8 px-20 py-16">
-        <div className="col-span-1">
-          <h3 className="text-[#221F20] text-xl font-medium mb-4">WONLY</h3>
-          <p className="text-neutral-600 text-sm mb-5">The Door to One-stop Home Security.</p>
-          <div className="flex gap-3">
-            {[Mail, MessageCircle, Phone].map((Icon, i) => (
-              <div key={i} className="w-9 h-9 rounded-full border flex items-center justify-center cursor-pointer hover:scale-110 transition-all duration-300" style={{ borderColor: SILVER }} onMouseEnter={(e) => { e.currentTarget.style.background = GOLD; e.currentTarget.style.borderColor = GOLD; }} onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = SILVER; }}><Icon size={16} style={{ color: DARK }} /></div>
-            ))}
-          </div>
-          <div className="mt-4 text-neutral-500 text-xs space-y-1">
-            <div>Email: wonlyglobal@wonly.net</div>
-            <div>WhatsApp: +1 (205) 240-1832</div>
-            <div className="text-neutral-400">LinkedIn · YouTube · Facebook · X · Instagram</div>
-          </div>
-        </div>
-        {[
-          { h: "Products", links: ["Security Doors", "Smart Locks", "Wooden Doors", "Smart Windows & Doors", "Engineering Doors", "Medical Doors", "Yizhai Yishu", "Smart Home"] },
-          { h: "Solutions", links: ["Premium Residential", "Commercial", "Medical & Public", "Engineering", "OEM/ODM"] },
-          { h: "Company", links: ["About", "R&D", "Global Footprint", "ESG", "Careers", "Newsroom"] },
-          { h: "Resources", links: ["Product Catalogs", "Install Guides", "Warranty", "Certifications", "Contact"] },
-        ].map((col) => (
-          <div key={col.h}>
-            <h4 className="text-[#221F20] text-lg font-medium mb-6">{col.h}</h4>
-            <div className="space-y-3.5">
-              {col.links.map((l) => (
-                <div key={l} className="text-neutral-500 text-sm hover:translate-x-1 transition-all duration-300 cursor-pointer" onMouseEnter={(e) => e.currentTarget.style.color = GOLD} onMouseLeave={(e) => e.currentTarget.style.color = ""}>{l}</div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </footer>
-      <div className="px-20 pb-10 text-neutral-400 text-xs text-center">© 2026 WONLY Security Technology Holding Co., Ltd. SSE: 605268 · Privacy Policy · Terms · Cookie Settings</div>
+      <SiteFooter />
 
       {/* Inquiry modal */}
       {showInquiry && (
