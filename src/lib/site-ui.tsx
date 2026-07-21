@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, X, Check } from "lucide-react";
 import { create } from "zustand";
+import { trackLead } from "@/lib/analytics";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
 export const GOLD = "#BFA06A";
@@ -142,7 +143,7 @@ export function QuoteModal() {
         }),
       });
       const data = await res.json();
-      if (data.success) setSent(true);
+      if (data.success) { setSent(true); trackLead({ form_location: "quote_modal", business_type: form.biz || "" }); }
       else setErrors({ submit: data.message || "Submission failed. Please email wonlyglobal@wonly.net." });
     } catch {
       setErrors({ submit: "Network error. Please email wonlyglobal@wonly.net directly." });

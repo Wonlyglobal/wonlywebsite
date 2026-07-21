@@ -50,3 +50,12 @@ export function trackPageview(path: string): void {
     });
   }
 }
+
+/** GA4 lead-generation conversion — fire on a successful enquiry submit. */
+export function trackLead(params: Record<string, string> = {}): void {
+  if (typeof window === "undefined") return;
+  const w = window as any;
+  if (GA_MEASUREMENT_ID && w.gtag) {
+    w.gtag("event", "generate_lead", { currency: "USD", value: 0, ...params });
+  }
+}

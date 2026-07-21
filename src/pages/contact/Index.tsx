@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, MessageCircle, MapPin, ArrowUpRight, Check } from "lucide-react";
 import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, MUTED } from "@/lib/site-ui";
+import { trackLead } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
 
 const ACCESS_KEY = "5054e990-b5a3-47e9-a659-f8e4dd7e69c7";
@@ -55,7 +56,7 @@ export default function Contact() {
         }),
       });
       const data = await res.json();
-      if (data.success) setSent(true);
+      if (data.success) { setSent(true); trackLead({ form_location: "contact_page" }); }
       else setErrors({ submit: data.message || "Submission failed. Please email wonlyglobal@wonly.net." });
     } catch {
       setErrors({ submit: "Network error. Please email wonlyglobal@wonly.net directly." });
