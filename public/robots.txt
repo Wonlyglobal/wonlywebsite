@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://www.wonly.net/sitemap.xml
+Sitemap: https://www.wonlyglobal.com/sitemap.xml

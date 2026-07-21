@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import NotFound from "./pages/not-found/Index";
+import { initAnalytics, trackPageview } from "@/lib/analytics";
 
 // Take over scroll handling from the browser so lazy routes behave predictably.
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
@@ -51,6 +52,12 @@ function ScrollManager() {
     }
     window.scrollTo(0, 0);
   }, [location, navType]);
+
+  // Analytics: initialise once, then send a page_view on every SPA route change.
+  useEffect(() => { initAnalytics(); }, []);
+  useEffect(() => {
+    trackPageview(location.pathname + location.search);
+  }, [location.pathname, location.search]);
 
   return null;
 }

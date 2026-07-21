@@ -2,10 +2,10 @@ import { useEffect } from "react";
 
 /**
  * Site-wide SEO constants.
- * Canonical domain is inferred from the brand's overseas contact domain (wonly.net).
+ * Canonical/production domain used for per-route canonical + Open Graph URLs.
  * Change SITE_URL in one place if the production domain differs.
  */
-export const SITE_URL = "https://www.wonly.net";
+export const SITE_URL = "https://www.wonlyglobal.com";
 export const SITE_NAME = "WONLY";
 export const DEFAULT_OG_IMAGE =
   "https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg";
