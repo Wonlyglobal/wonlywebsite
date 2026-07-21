@@ -2,7 +2,7 @@
 // Fill the two IDs below once each property is created. Leaving an ID empty
 // keeps that tool fully disabled — no script is injected and no request is made.
 export const GA_MEASUREMENT_ID = "G-PV49HRLD18"; // e.g. "G-XXXXXXXXXX"  (Google Analytics 4)
-export const CLARITY_PROJECT_ID = ""; // e.g. "abcdefghij"    (Microsoft Clarity)
+export const CLARITY_PROJECT_ID = "xptk0qka3l"; // e.g. "abcdefghij"    (Microsoft Clarity)
 
 let started = false;
 
