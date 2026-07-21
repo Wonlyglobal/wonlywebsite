@@ -109,7 +109,7 @@ const HONORS = [
 const WHY = [
   { icon: Layers, t: "One-Stop Service", d: "From doors to smart locks to windows — WONLY delivers the full building-entry ecosystem under one roof. One supplier, one warranty, one accountable partner from threshold to rooftop, eliminating multi-vendor coordination and risk.", img: IMG.commercial2 },
   { icon: TrendingUp, t: "Unbeatable Cost-Performance", d: "Vertical integration across 5 manufacturing bases and 1,000+ patents drives costs down without compromising grade. Global clients get premium security at a price point 20–30% below comparable Western brands.", img: IMG.factory2 },
-  { icon: ShieldCheck, t: "Quality First", d: "ISO 9001 / 14001, CE, UL, and EN 1634 fire-rated. Every door survives 90-min fire, forced-entry, and 100,000-cycle testing before it ships. Three decades of zero major safety incidents — that is the standard.", img: IMG.lock3 },
+  { icon: ShieldCheck, t: "Quality First", d: "ISO 9001 / 14001, CE, UL, and EN 1634 fire-rated. Every door survives 90-min fire, forced-entry, and 200,000-cycle testing before it ships. Three decades of zero major safety incidents — that is the standard.", img: IMG.lock3 },
 ];
 
 const PARTNER_PATHS = [

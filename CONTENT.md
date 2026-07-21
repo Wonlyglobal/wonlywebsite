@@ -45,7 +45,7 @@ H2：A partner built for scale, trusted at the top.
 三大价值主张（简洁陈述，不要三卡片堆叠，用编辑式左右交错图文）：
 1. **One-Stop Ecosystem** — Doors, smart locks, windows and whole-house intelligence under one roof. One supplier, one warranty, one accountable partner.
 2. **Unbeatable Cost-Performance** — Vertical integration + 1,000+ patents deliver premium security 20–30% below comparable Western brands.
-3. **Quality First** — ISO 9001/14001, CE, UL, EN 1634 fire-rated. Every door passes 90-min fire, forced-entry and 100,000-cycle testing. Three decades, zero major safety incidents.
+3. **Quality First** — ISO 9001/14001, CE, UL, EN 1634 fire-rated. Every door passes 90-min fire, forced-entry and 200,000-cycle testing. Three decades, zero major safety incidents.
 
 ## 4. Products — 产品线（两大系列，用真实产品图）
 Eyebrow：OUR PRODUCTS

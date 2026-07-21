@@ -20,7 +20,7 @@ const IMG = {
 const STATS = [
   { v: "30", s: "", label: "Years" },
   { v: "90", s: "min", label: "Fire Rating" },
-  { v: "100", s: "K+", label: "Cycle Test" },
+  { v: "200", s: "K+", label: "Cycle Test" },
   { v: "A", s: "", label: "Class Grade" },
 ];
 
@@ -39,7 +39,7 @@ const FEATURES = [
   { icon: Lock, t: "Autonomous Smart Locking", d: "AI-driven locking with biometric authentication, app control and tamper-proof architecture." },
   { icon: Wind, t: "Climate-Adapted Engineering", d: "Hurricane-rated, corrosion-resistant and thermal-break designs built for the world's harshest climates." },
   { icon: Volume2, t: "Acoustic Insulation", d: "Sound-reducing cores and precision sealing deliver STC 35+ for privacy and quiet." },
-  { icon: Award, t: "100,000-Cycle Durability", d: "Every door survives 100,000 open-close cycles in testing — backed by 30 years without a major safety incident." },
+  { icon: Award, t: "200,000-Cycle Durability", d: "Every door survives 200,000 open-close cycles in testing — backed by 30 years without a major safety incident." },
 ];
 
 const SPECS: [string, string][] = [
@@ -50,7 +50,7 @@ const SPECS: [string, string][] = [
   ["Door Thickness", "90–120 mm"],
   ["Acoustic Rating", "STC 35+"],
   ["Wind Resistance", "Class 12 (hurricane-rated)"],
-  ["Cycle Test", "100,000+ cycles"],
+  ["Cycle Test", "200,000+ cycles"],
   ["Certifications", "ISO 9001 · CE · UL · CMA"],
 ];
 

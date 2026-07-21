@@ -111,7 +111,7 @@ const SPECS: { label: string; value: string }[] = [
   { label: "Wind Resistance", value: "Class 12 (Hurricane-Rated)" },
   { label: "Connectivity", value: "Wi-Fi 2.4 GHz · Bluetooth 5.0 · Zigbee" },
   { label: "Power", value: "8000 mAh rechargeable · USB-C backup" },
-  { label: "Cycle Test", value: "100,000+ open-close cycles" },
+  { label: "Cycle Test", value: "200,000+ open-close cycles" },
   { label: "Warranty", value: "5-year hardware · 2-year electronics" },
   { label: "Certifications", value: "ISO 9001 · CE · UL · CMA" },
 ];
@@ -307,7 +307,7 @@ const SecurityDoorX70 = () => {
               { v: <Counter to={16} />, l: "Locking Bolts" },
               { v: <Counter to={90} suffix=" min" />, l: "Fire Rating" },
               { v: <Counter to={38} suffix=" STC" />, l: "Acoustic" },
-              { v: <Counter to={100} suffix="K+" />, l: "Cycle Test" },
+              { v: <Counter to={200} suffix="K+" />, l: "Cycle Test" },
             ].map((s, i) => (
               <div key={i} className="text-center">
                 <div className="text-3xl font-bold" style={{ color: GOLD }}>{s.v}</div>
@@ -343,7 +343,7 @@ const SecurityDoorX70 = () => {
               <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>Overview</div>
               <h2 className="text-[#221F20] text-4xl font-semibold mt-3 leading-tight">Security That Runs Itself — And Answers To You</h2>
               <p className="text-neutral-600 text-base mt-4 leading-relaxed">
-                The X70 is WONLY's flagship robotic security door: the instant it closes, sixteen hardened bolts drive home across all four edges — no turn of a key, no forgotten deadbolt. 3D facial recognition welcomes your family hands-free, while multi-vector sensors watch the frame for any attempt to force it. Behind the aesthetics sits a cast-aluminum body with an EN 1634 fire-rated core, tested to survive 100,000 cycles and three decades of WONLY engineering.
+                The X70 is WONLY's flagship robotic security door: the instant it closes, sixteen hardened bolts drive home across all four edges — no turn of a key, no forgotten deadbolt. 3D facial recognition welcomes your family hands-free, while multi-vector sensors watch the frame for any attempt to force it. Behind the aesthetics sits a cast-aluminum body with an EN 1634 fire-rated core, tested to survive 200,000 cycles and three decades of WONLY engineering.
               </p>
               <ul className="mt-6 space-y-3">
                 {[
