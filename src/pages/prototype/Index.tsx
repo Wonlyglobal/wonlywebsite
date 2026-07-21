@@ -54,7 +54,6 @@ const NAV: NavItem[] = [
     { label: "Door", href: "/product/door", img: IMG.aluMax, children: [
       { label: "Metal Door", href: "/product/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
       { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
-      { label: "WPC Door", href: "/product/door/wpc-door" },
     ] },
     { label: "Smart Lock", href: "/product/smart-lock", img: IMG.lockS80 },
     { label: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/dropdown-window.png` },
@@ -107,7 +106,7 @@ const FOOTPRINT_STATS = [
 /* ── Section 4 · Products ──────────────────────────────────── */
 // Product gallery — doors first. Each card links to its /product/ route (see App.tsx).
 const PRODUCTS_GALLERY = [
-  { name: "Door", href: "/product/door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Metal, wooden and WPC doors — the entire building entry, protection outside and quiet craft within." },
+  { name: "Door", href: "/product/door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Metal and wooden doors — the entire building entry, protection outside and quiet craft within." },
   { name: "Smart Lock", href: "/product/smart-lock", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
   { name: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
   { name: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
@@ -179,7 +178,6 @@ const FOOTER: { h: string; links: FooterLink[] }[] = [
     { l: "Door", href: "/product/door" },
     { l: "Metal Door", href: "/product/door/metal-door" },
     { l: "Wooden Door", href: "/product/door/wooden-door" },
-    { l: "WPC Door", href: "/product/door/wpc-door" },
     { l: "Smart Lock", href: "/product/smart-lock" },
     { l: "Smart Window", href: "/product/smart-window" },
     { l: "Whole-House Intelligence", href: "/product/whole-house" },

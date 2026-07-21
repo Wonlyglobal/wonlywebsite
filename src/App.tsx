@@ -62,6 +62,9 @@ const Index = lazy(() => import("./pages/home/Index"));
 const About = lazy(() => import("./pages/about/Index"));
 const Contact = lazy(() => import("./pages/contact/Index"));
 const Manufacturing = lazy(() => import("./pages/manufacturing/Index"));
+const Partnership = lazy(() => import("./pages/partnership/Index"));
+const Advantages = lazy(() => import("./pages/advantages/Index"));
+const GlobalStrategy = lazy(() => import("./pages/global-strategy/Index"));
 const Projects = lazy(() => import("./pages/projects/Index"));
 // Product category pages (each lists the full series in its line)
 const EntranceDoor = lazy(() => import("./pages/products/EntranceDoor"));
@@ -127,10 +130,10 @@ const App = () => (
           <Route path="/product/smart-window" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
           <Route path="/product/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
           {/* Sections not yet built → placeholder (hash anchors resolve within them). */}
-          <Route path="/advantages" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+          <Route path="/advantages" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Advantages /></Suspense>} />
           <Route path="/manufacturing-rd" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Manufacturing /></Suspense>} />
-          <Route path="/global-strategy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
-          <Route path="/partnership" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SectionComingSoon /></Suspense>} />
+          <Route path="/global-strategy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><GlobalStrategy /></Suspense>} />
+          <Route path="/partnership" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Partnership /></Suspense>} />
           <Route path="/contact" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Contact /></Suspense>} />
 
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />

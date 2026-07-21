@@ -43,7 +43,6 @@ const NAV: { label: string; href?: string; children?: { label: string; href: str
     { label: "Door", href: "/product/door", img: `${BASE}images/alu-k300max.webp`, children: [
       { label: "Metal Door", href: "/products/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
       { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
-      { label: "WPC Door", href: "/product/door/wpc-door" },
     ] },
     { label: "Smart Lock", href: "/product/smart-lock", img: `${BASE}images/lock-s80.webp` },
     { label: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/dropdown-window.png` },
@@ -308,7 +307,6 @@ const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = [
     { l: "Door", href: "/product/door" },
     { l: "Metal Door", href: "/products/door/metal-door" },
     { l: "Wooden Door", href: "/product/door/wooden-door" },
-    { l: "WPC Door", href: "/product/door/wpc-door" },
     { l: "Smart Lock", href: "/product/smart-lock" },
     { l: "Smart Window", href: "/product/smart-window" },
     { l: "Whole-House Intelligence", href: "/product/whole-house" },
