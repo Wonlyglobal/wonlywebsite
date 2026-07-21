@@ -80,8 +80,10 @@ const MD_CSS = `
 .md-root .air{background:radial-gradient(120% 100% at 50% 20%,#16221c,#0b120e);display:flex;align-items:center;justify-content:center}
 .md-root .air svg{width:150px;height:150px;transform:rotate(-90deg);margin-top:14px}
 .md-root .air .track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:9}
-.md-root .air .arc{fill:none;stroke:url(#ag);stroke-width:9;stroke-linecap:round;stroke-dasharray:314;stroke-dashoffset:314;animation:md-fill 2.4s cubic-bezier(.3,0,.2,1) forwards}
-@keyframes md-fill{to{stroke-dashoffset:226}}
+.md-root .air .arc{fill:none;stroke:url(#ag);stroke-width:9;stroke-linecap:round;stroke-dasharray:314;transition:stroke-dashoffset .9s cubic-bezier(.3,0,.2,1);animation:md-glow 2.8s ease-in-out infinite}
+@keyframes md-glow{0%,100%{filter:drop-shadow(0 0 3px rgba(95,208,138,.35))}50%{filter:drop-shadow(0 0 11px rgba(95,208,138,.7))}}
+.md-root .air .spin{fill:none;stroke:rgba(95,208,138,.4);stroke-width:1.5;stroke-dasharray:2 7;transform-origin:60px 60px;animation:md-spin 7s linear infinite}
+@keyframes md-spin{to{transform:rotate(360deg)}}
 .md-root .air .read{position:absolute;text-align:center;margin-top:14px}
 .md-root .air .read .n{font-size:30px;font-weight:300;color:#eafff2;letter-spacing:-.5px}
 .md-root .air .read .u{font-size:10px;letter-spacing:.14em;color:#8bbfa2;text-transform:uppercase;margin-top:2px}
@@ -163,6 +165,11 @@ const SecurityDoorX70 = () => {
   const openQuote = useQuoteStore((s) => s.openQuote);
 
   // HCHO live read-out for the Formaldehyde Sentinel tile, cleaned up on unmount.
+  const [pm25, setPm25] = useState(12);
+  useEffect(() => {
+    const id = setInterval(() => setPm25(9 + Math.floor(Math.random() * 8)), 2200);
+    return () => clearInterval(id);
+  }, []);
   const [hcho, setHcho] = useState("0.03");
   useEffect(() => {
     const id = setInterval(() => setHcho((0.02 + Math.random() * 0.02).toFixed(2)), 1600);
@@ -278,11 +285,12 @@ const SecurityDoorX70 = () => {
                     </linearGradient>
                   </defs>
                   <circle className="track" cx="60" cy="60" r="50" />
-                  <circle className="arc" cx="60" cy="60" r="50" />
+                  <circle className="spin" cx="60" cy="60" r="40" />
+                  <circle className="arc" cx="60" cy="60" r="50" style={{ strokeDashoffset: 314 * (1 - Math.min(0.9, 0.55 + (parseFloat(hcho) - 0.02) / 0.02 * 0.3)) }} />
                 </svg>
                 <div className="read"><div className="n">{hcho}</div><div className="u">HCHO mg/m3</div></div>
                 <div className="stat"><i />Good</div>
-                <div className="pm">PM2.5 12</div>
+                <div className="pm">PM2.5 {pm25}</div>
                 <div className="label"><h3>Formaldehyde Sentinel</h3></div>
               </div>
               <div className="tile wide">
