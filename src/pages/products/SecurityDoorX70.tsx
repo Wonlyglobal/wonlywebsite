@@ -48,6 +48,7 @@ const MD_CSS = `
 /* ===== SECTION 1 — BANNER ===== */
 .md-root .hero{position:relative;width:100%;aspect-ratio:1920/1000;max-height:100vh;overflow:hidden;display:flex;align-items:center;}
 .md-root .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;}
+.md-root .hero::before{content:"";position:absolute;left:0;right:0;bottom:0;height:240px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(12,11,10,0) 0%,rgba(12,11,10,.55) 62%,#0c0b0a 100%);}
 .md-root .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(90deg,rgba(236,228,214,.55) 0%,rgba(236,228,214,.12) 34%,rgba(236,228,214,0) 55%);}
 .md-root .tx{position:relative;z-index:2;padding:0 6vw;max-width:680px;}
