@@ -48,8 +48,7 @@ const MD_CSS = `
 /* ===== SECTION 1 — BANNER ===== */
 .md-root .hero{position:relative;width:100%;aspect-ratio:1920/1000;max-height:100vh;overflow:hidden;display:flex;align-items:center;}
 .md-root .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;}
-.md-root .hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(236,228,214,.55) 0%,rgba(236,228,214,.12) 34%,rgba(236,228,214,0) 55%);}
-.md-root .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:340px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(12,11,10,0) 0%,rgba(12,11,10,.55) 46%,#0c0b0a 78%,#0c0b0a 100%);}
+.md-root .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(236,228,214,.55) 0%,rgba(236,228,214,.12) 34%,rgba(236,228,214,0) 55%);}
 .md-root .tx{position:relative;z-index:2;padding:0 6vw;max-width:680px;}
 .md-root .hero .eyebrow{font-size:clamp(10px,.9vw,12px);letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:16px;}
 .md-root h1{font-size:clamp(32px,4.4vw,64px);font-weight:300;line-height:1.03;letter-spacing:-1.2px;color:#201c19;}
@@ -59,7 +58,7 @@ const MD_CSS = `
 .md-root .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:.2s;cursor:pointer;border:1px solid var(--ink);}
 .md-root .btn.solid{background:var(--ink);color:#fff;}.md-root .btn.solid:hover{gap:14px;}
 .md-root .btn.line{background:rgba(255,255,255,.35);color:var(--ink);backdrop-filter:blur(4px);}.md-root .btn.line:hover{background:var(--ink);color:#fff;}
-@media(max-width:760px){.md-root .hero{aspect-ratio:3/4;}.md-root .hero .bg{object-position:74% center;}.md-root .hero::before{background:linear-gradient(180deg,rgba(236,228,214,.82),rgba(236,228,214,.2) 46%,transparent 72%);}}
+@media(max-width:760px){.md-root .hero{aspect-ratio:3/4;}.md-root .hero .bg{object-position:74% center;}.md-root .hero::after{background:linear-gradient(180deg,rgba(236,228,214,.82),rgba(236,228,214,.2) 46%,rgba(236,228,214,.9));}}
 /* ===== SECTION 2 — SMART FEATURES (dark bento) ===== */
 .md-root .feat{background:var(--dink);color:#f4efe6;padding:92px 5vw;}
 .md-root .fhead{max-width:1320px;margin:0 auto 40px;}
