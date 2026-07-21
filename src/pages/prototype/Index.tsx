@@ -685,7 +685,7 @@ const Prototype = () => {
 
       {/* ══ 1 · Hero door video + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="metadata" aria-hidden="true" />
+        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="metadata" controlsList="nodownload nofullscreen noremoteplayback" onContextMenu={(e) => e.preventDefault()} aria-hidden="true" />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
 

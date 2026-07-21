@@ -127,7 +127,7 @@ function LazyVideo({ src }: { src: string }) {
     const el = ref.current;
     if (el) { el.muted = true; el.play?.().catch(() => {}); }
   }, [seen]);
-  return <video ref={ref} src={seen ? src : undefined} muted loop playsInline preload="none" />;
+  return <video ref={ref} src={seen ? src : undefined} muted loop playsInline preload="none" controlsList="nodownload nofullscreen noremoteplayback" onContextMenu={(e) => e.preventDefault()} />;
 }
 
 /* Full technical specifications */
