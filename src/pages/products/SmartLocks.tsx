@@ -4,8 +4,8 @@ import { ProductPage, type ProductPageData } from "@/lib/product-page";
 
 const data: ProductPageData = {
   seo: {
-    title: "Smart Locks — True-Sensing Biometric Door Locks | WONLY",
-    description: "WONLY smart locks: hands-free true-sensing entry, palm-vein and fingerprint biometrics, video guard, app control and encrypted, tamper-proof security for homes and businesses.",
+    title: "Smart Lock Manufacturer — Fingerprint & Biometric Locks | WONLY",
+    description: "WONLY smart lock manufacturer and OEM supplier: hands-free true-sensing entry, palm-vein and fingerprint biometrics, video guard, app control and encrypted, tamper-proof security — for distributors and projects worldwide.",
     path: "/products/smart-locks",
   },
   hero: {

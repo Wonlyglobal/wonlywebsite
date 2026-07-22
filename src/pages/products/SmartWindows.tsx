@@ -4,8 +4,8 @@ import { ProductPage, type ProductPageData } from "@/lib/product-page";
 
 const data: ProductPageData = {
   seo: {
-    title: "Smart Windows — Energy-Saving & Hurricane Aluminum Windows | WONLY",
-    description: "WONLY smart aluminum windows: insulation and acoustics that rival a wall, auto-close in wind and rain, 50,000+ slide cycles, app remote control, and a hurricane series.",
+    title: "Smart Window Supplier — Energy-Saving Aluminium Windows | WONLY",
+    description: "WONLY aluminium and smart window supplier: insulation and acoustics that rival a wall, auto-close in wind and rain, 50,000+ slide cycles, app control and a hurricane series — OEM for projects and distributors.",
     path: "/products/smart-windows",
   },
   hero: {

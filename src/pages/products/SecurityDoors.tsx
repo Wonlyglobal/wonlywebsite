@@ -64,9 +64,9 @@ const CERTS = ["ISO 9001", "ISO 14001", "CE", "UL", "EN 1634 Fire", "Class A Ant
 
 const SecurityDoors = () => {
   useSeo({
-    title: "Security Doors — Robotic, Fire-Rated & Engineering Series | WONLY",
+    title: "Security Door Manufacturer — Cast-Aluminium & Fire-Rated | WONLY",
     description:
-      "WONLY's security door lineup: robotic flagship doors, EN 1634 90-minute fire-rated engineering doors, medical-grade and artisan villa doors — Class A protection, certified worldwide.",
+      "WONLY security door manufacturer and OEM/ODM supplier: robotic flagship, EN 1634 90-minute fire-rated, medical-grade and artisan villa doors — Class A protection, certified worldwide, for distributors and projects.",
     path: "/products/security-doors",
     type: "website",
     jsonLd: {

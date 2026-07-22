@@ -4,8 +4,8 @@ import { ProductPage, type ProductPageData } from "@/lib/product-page";
 
 const data: ProductPageData = {
   seo: {
-    title: "Wooden Doors — Steel-Wood Anti-Warp Silent Doors | WONLY",
-    description: "WONLY steel-wood wooden doors: double the silence, a double-keel galvanized-steel frame that never sags or warps, moisture-proof and formaldehyde-free (ENF).",
+    title: "Wooden Door Supplier — Steel-Wood Anti-Warp Silent Doors | WONLY",
+    description: "WONLY wooden door manufacturer and supplier: steel-wood doors with double the silence, a double-keel galvanized-steel frame that never warps, moisture-proof and formaldehyde-free (ENF) — OEM/ODM for distributors.",
     path: "/products/wooden-doors",
   },
   hero: {

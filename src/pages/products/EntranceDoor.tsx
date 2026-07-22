@@ -4,7 +4,7 @@ import { ProductPage, type ProductPageData } from "@/lib/product-page";
 
 const data: ProductPageData = {
   seo: {
-    title: "Entrance Doors — Security Doors & Wooden Doors | WONLY",
+    title: "Entrance Door Manufacturer — Security & Wooden Doors | WONLY",
     description: "WONLY entrance doors: cast-aluminum security doors with autonomous locking and multi-vector intrusion sensing, and steel-wood silent interior doors — the whole building entry, made in-house.",
     path: "/products/entrance-door",
   },

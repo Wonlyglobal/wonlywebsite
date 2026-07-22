@@ -209,7 +209,7 @@ const SecurityDoorX70 = () => {
   }, []);
 
   useSeo({
-    title: "WONLY X70 Robotic Security Door | 3D Face Unlock & 90-Min Fire Rating",
+    title: "X70 Cast-Aluminium Robotic Security Door for Villas | WONLY",
     description:
       "The WONLY X70 flagship robotic security door: 3D facial recognition, 16-bolt autonomous locking, EN 1634 90-minute fire rating, and Class A protection for villas and premium homes.",
     path: PAGE_PATH,

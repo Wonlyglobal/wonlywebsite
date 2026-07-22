@@ -4,8 +4,8 @@ import { ProductPage, type ProductPageData } from "@/lib/product-page";
 
 const data: ProductPageData = {
   seo: {
-    title: "Whole-House Intelligence — WONLY Smart Home Ecosystem | WONLY",
-    description: "WONLY Whole-House Intelligence: starting at the smart front door, 28 categories of smart products, two systems and one central hub orchestrate AI security and smart-living scenes for the entire home.",
+    title: "Whole-House Smart Home System — Doors, Locks & Sensors | WONLY",
+    description: "WONLY whole-house smart home system: starting at the smart front door, 28 categories of smart products, two systems and one hub orchestrate AI security and smart-living scenes — OEM/ODM for global partners.",
     path: "/products/whole-house",
   },
   hero: {
