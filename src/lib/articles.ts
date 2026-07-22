@@ -32,7 +32,7 @@ export const ARTICLES: Article[] = [
     date: "2026-07-08",
     dateLabel: "8 July 2026",
     readMins: 6,
-    cover: `${BASE}images/hero-door.png`,
+    cover: `${BASE}images/door/gallery/g1-front.jpg`,
     excerpt: "A practical framework for distributors and project buyers — from certified security ratings to finishes, smart features and after-sales support.",
     keywords: ["security door buying guide", "how to choose a security door", "villa security door", "security door for distributors"],
     body: [
