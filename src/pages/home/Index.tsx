@@ -40,7 +40,7 @@ const NAV: { label: string; children?: { name: string; desc: string; path: strin
       { name: "Security Doors", desc: "Premium & fire-rated entry doors", path: "/products/security-doors", icon: Shield },
       { name: "Smart Locks", desc: "Biometric & app-controlled locks", path: "/products/smart-locks", icon: Lock },
       { name: "Wooden Doors", desc: "Crafted premium wooden entries", path: "/products/wooden-doors", icon: DoorOpen },
-      { name: "Aluminum Windows", desc: "Energy-saving smart windows", path: "/products/aluminum-windows", icon: Layers },
+      { name: "Aluminum Windows", desc: "Energy-saving smart windows", path: "/products/smart-windows", icon: Layers },
       { name: "Whole-House Intelligence", desc: "Integrated smart home ecosystem", path: "/products/whole-house", icon: Cpu },
     ],
   },
