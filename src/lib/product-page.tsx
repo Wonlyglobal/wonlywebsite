@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Check, type LucideIcon } from "lucide-react";
 import { useSeo } from "@/lib/seo";
 import { GOLD, GOLD_DEEP, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand, useQuoteStore } from "@/lib/site-ui";
+import { RelatedInsights } from "@/lib/related-insights";
 
 export type Feature = { icon: LucideIcon; t: string; d: string };
 export type Series = { name: string; tag?: string; d: string; img: string; path?: string };
@@ -172,6 +173,7 @@ export function ProductPage({ data }: { data: ProductPageData }) {
         </section>
       )}
 
+      <RelatedInsights />
       <CtaBand eyebrowText={data.cta.eyebrow} title={data.cta.title} sub={data.cta.sub} />
       <SiteFooter />
     </div>

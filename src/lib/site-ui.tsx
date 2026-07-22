@@ -57,6 +57,7 @@ const NAV: { label: string; href?: string; children?: { label: string; href: str
   { label: "Manufacturing & R&D", href: "/manufacturing-rd" },
   { label: "Global Strategy", href: "/global-strategy" },
   { label: "Partnership", href: "/partnership" },
+  { label: "News & Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -321,6 +322,7 @@ const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = [
     { l: "Manufacturing & R&D", href: "/manufacturing-rd" },
     { l: "Global Strategy", href: "/global-strategy" },
     { l: "Partnership", href: "/partnership" },
+    { l: "News & Insights", href: "/insights" },
     { l: "Contact", href: "/contact" },
   ] },
   { h: "Get in Touch", links: [

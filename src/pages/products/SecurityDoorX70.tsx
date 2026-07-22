@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronRight, ArrowRight, Award, Home, Check, Wind, Wifi } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, useQuoteStore } from "@/lib/site-ui";
+import { RelatedInsights } from "@/lib/related-insights";
 
 /* Silver-White-Gold palette */
 const GOLD = "#BFA06A";
@@ -498,6 +499,7 @@ const SecurityDoorX70 = () => {
         </section>
       </main>
 
+      <RelatedInsights />
       <CtaBand eyebrowText="Bring the X70 to Your Project" title="Get X70 Specs & Project Pricing" sub="Our engineering team replies within 24 hours with tailored specifications, compliance documentation and volume pricing for distributors and developers." />
       <SiteFooter />
 
