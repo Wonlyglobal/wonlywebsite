@@ -67,7 +67,12 @@ export function useSeo({
 }: SeoInput) {
   const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : "";
   useEffect(() => {
-    const url = SITE_URL + path;
+    // GitHub Pages serves each prerendered route as /<path>/index.html — i.e.
+    // with a trailing slash — and 301-redirects the no-slash form. Normalise the
+    // canonical + og:url to the trailing-slash form so the sitemap URL, the
+    // served URL and the canonical all match exactly (no redirect in between).
+    const normPath = path === "/" ? "/" : path.endsWith("/") ? path : path + "/";
+    const url = SITE_URL + normPath;
 
     document.title = title;
     document.documentElement.lang = "en";

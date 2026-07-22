@@ -41,6 +41,18 @@ jobs:
           VITE_BASE: ${{ vars.VITE_BASE || '/' }}
         run: npm run build
 
+      # Prerender each canonical route to a real static HTML file so GitHub
+      # Pages returns 200 (not 404) for deep links and crawlers see per-page
+      # <title>/<meta>/content. Playwright is installed here only (kept out of
+      # package.json so npm ci + the lockfile stay untouched for the build).
+      - name: Install Playwright (prerender)
+        run: |
+          npm i -D --no-save playwright@^1.48
+          npx playwright install --with-deps chromium
+
+      - name: Prerender routes to static HTML (SEO)
+        run: node scripts/prerender.mjs
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
