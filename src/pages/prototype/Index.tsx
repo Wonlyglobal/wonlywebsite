@@ -586,6 +586,7 @@ const Prototype = () => {
 
     let triggered = false;
     let done = false;
+    let capId = 0;
     const lock = () => { document.body.style.overflow = "hidden"; document.body.style.touchAction = "none"; };
     const unlock = () => { document.body.style.overflow = ""; document.body.style.touchAction = ""; };
     const removeIntent = () => { window.removeEventListener("wheel", onIntent); window.removeEventListener("touchmove", onIntent); window.removeEventListener("keydown", onKey); };
@@ -593,6 +594,7 @@ const Prototype = () => {
     const finish = () => {
       if (done) return;
       done = true;
+      if (capId) window.clearTimeout(capId);
       removeIntent();
       unlock();
       if (reveal.current) reveal.current.style.visibility = "visible";
@@ -605,7 +607,20 @@ const Prototype = () => {
       window.scrollTo(0, 0);
       if (title.current) { title.current.style.transition = "opacity 1.1s ease, transform 1.1s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-60px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity 1.4s ease"; scrim.current.style.opacity = "0"; }
-      if (v) v.play().catch(() => finish()); else finish();
+      if (!v) { finish(); return; }
+      // The page is scroll-locked while the door opens, so it must never stay
+      // locked longer than the clip. If playback stalls on a slow/cold connection
+      // or the `ended` event is missed, this hard cap unlocks anyway.
+      capId = window.setTimeout(finish, ((v.duration || VIDEO_FALLBACK_DURATION) * 1000) + 800);
+      // Only play the cinematic open when enough is buffered to run without a
+      // stall; otherwise jump straight to the open frame and reveal — a clean cut
+      // beats a frozen, half-open door. (readyState 3 = HAVE_FUTURE_DATA.)
+      if (v.readyState >= 3) {
+        v.play().catch(() => finish());
+      } else {
+        try { v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } catch { /* poster ok */ }
+        finish();
+      }
     };
     function onIntent(e: Event) { if (done) return; if (e.cancelable) e.preventDefault(); if (!triggered) startPlay(); }
     function onKey(e: KeyboardEvent) { if (done || triggered) return; if (["ArrowDown", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); startPlay(); } }
@@ -618,7 +633,7 @@ const Prototype = () => {
     const onEnded = () => finish();
     v?.addEventListener("ended", onEnded);
 
-    return () => { removeIntent(); v?.removeEventListener("ended", onEnded); unlock(); };
+    return () => { removeIntent(); v?.removeEventListener("ended", onEnded); if (capId) window.clearTimeout(capId); unlock(); };
   }, []);
 
   // Warm up the (heavy) hero video during browser idle time — after the critical
