@@ -372,6 +372,11 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
+          <div className="flex items-center justify-center gap-4 mb-3">
+            <Link to="/privacy" className="transition-colors hover:text-white" style={{ color: "rgba(245,241,234,0.55)" }}>Privacy Policy</Link>
+            <span style={{ color: "rgba(245,241,234,0.25)" }}>·</span>
+            <Link to="/terms" className="transition-colors hover:text-white" style={{ color: "rgba(245,241,234,0.55)" }}>Terms of Service</Link>
+          </div>
           © WONLY · SSE 605268 · Global Smart-Security Ecosystem Leader
         </div>
       </div>

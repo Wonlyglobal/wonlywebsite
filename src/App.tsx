@@ -91,6 +91,9 @@ const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
 // Unified placeholders for planned-but-unbuilt pages.
 const ProductComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").then((m) => ({ default: m.ProductComingSoon })));
 const SectionComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").then((m) => ({ default: m.SectionComingSoon })));
+// Legal pages (Privacy Policy + Terms of Service).
+const Privacy = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Privacy })));
+const Terms = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Terms })));
 
 const queryClient = new QueryClient();
 
@@ -148,6 +151,10 @@ const App = () => (
           <Route path="/insights/:slug" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><InsightArticle /></Suspense>} />
 
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
+
+          {/* Legal */}
+          <Route path="/privacy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Privacy /></Suspense>} />
+          <Route path="/terms" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Terms /></Suspense>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
