@@ -14,6 +14,7 @@ const MUTED = "#5f5a54";
 const BASE = import.meta.env.BASE_URL;
 const DOOR_VIDEO = `${BASE}videos/hero-door.mp4`;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
+const LOGO = `${BASE}images/logo-trim.webp`;
 const VIDEO_FALLBACK_DURATION = 3.5;
 const IMG = {
   interior: `${BASE}images/interior-bg.jpg`,
@@ -276,7 +277,7 @@ const Prototype = () => {
       {/* ══ Header ══ */}
       <header className={`fixed top-0 inset-x-0 z-[70] transition-all duration-500 ${solid ? "bg-[#F5F1EA]/80 backdrop-blur-xl shadow-[0_1px_0_rgba(34,31,32,0.06)]" : "bg-transparent"}`}>
         <div className="max-w-[1600px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
-          <button onClick={() => scrollToId("top")} className="text-xl font-bold tracking-[0.2em]" style={{ color: solid ? DARK : "#fff" }}>WONLY</button>
+          <button onClick={() => scrollToId("top")} aria-label="WONLY" className="flex items-center"><img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto transition-[filter] duration-500" style={{ filter: solid ? "none" : "brightness(0) invert(1)" }} /></button>
           <nav className="hidden lg:flex items-center gap-1">
             {NAV.map((n) => (
               <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(true)} onMouseLeave={() => setOpenDrop(false)}>
@@ -569,7 +570,7 @@ const Prototype = () => {
       <footer className="px-[7vw] pt-16 pb-10" style={{ background: "#1a1718" }}>
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <div className="text-xl font-bold tracking-[0.2em] text-white">WONLY</div>
+            <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
             <p className="mt-4 text-xs font-light leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
           </div>
           {FOOTER.map((col) => (
