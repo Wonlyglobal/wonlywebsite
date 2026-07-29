@@ -76,7 +76,7 @@ function startServer() {
 
 async function getRoutes() {
   const smPath = path.join(DIST, 'sitemap.xml');
-  const routes = new Set(['/']);
+  const routes = new Set();
   if (existsSync(smPath)) {
     const xml = await readFile(smPath, 'utf8');
     const locs = xml.match(/<loc>([^<]+)<\/loc>/g) || [];
@@ -90,6 +90,11 @@ async function getRoutes() {
       } catch { /* ignore malformed */ }
     }
   }
+  // Skip the homepage "/": it has an interactive first-load door-open intro that
+  // must run fresh on every visit. Prerendering it would bake in a post-intro
+  // DOM state and break the animation. The homepage is already indexed and its
+  // meta is set client-side, so it doesn't need prerendering.
+  routes.delete('/');
   return [...routes];
 }
 
