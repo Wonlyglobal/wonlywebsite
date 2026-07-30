@@ -53,7 +53,7 @@ async function getGsc() {
   // 机会词：排名 8–20（第2页附近）、展示较高、还没拿到多少点击 —— 优化后最可能冲进首页
   const opp = qRows.filter((r) => r.position >= 8 && r.position <= 20 && r.impressions >= 10)
     .sort((a, b) => b.impressions - a.impressions).slice(0, 5);
-  let smLine = '（无法获取）';
+  let smLine = '（无法获取）'; let smSubmitted = 0;
   if (sm && sm.sitemap) {
     let submitted = 0; let errs = 0; let warns = 0; let last = '';
     for (const s of sm.sitemap) {
@@ -61,6 +61,7 @@ async function getGsc() {
       errs += Number(s.errors || 0); warns += Number(s.warnings || 0);
       if (s.lastSubmitted && s.lastSubmitted > last) last = s.lastSubmitted;
     }
+    smSubmitted = submitted;
     smLine = `${sm.sitemap.length} 个 sitemap · 提交网址 ${submitted}` + (errs ? ` · ❗${errs}错` : '') + (warns ? ` · ⚠️${warns}警` : '');
   }
   return {
@@ -69,7 +70,7 @@ async function getGsc() {
     topPages: (pages.rows || []).slice(0, 8),
     device: (dev.rows || []).map((r) => `${r.keys[0]} ${r.clicks}点`),
     country: (ctry.rows || []).map((r) => `${r.keys[0]} ${r.clicks}点`),
-    sitemap: smLine,
+    sitemap: smLine, sitemapSubmitted: smSubmitted,
   };
 }
 
@@ -113,6 +114,47 @@ async function getGa4() {
     leadCur: leadC ? Number(leadC[0].value) : 0,
     leadPrev: leadP ? Number(leadP[0].value) : 0,
   };
+}
+
+// ---------------- 新站 SEO 建设阶段评估 ----------------
+// 依据 GSC/GA4 实时数据，把新站 SEO 进度定位到 5 个阶段之一，并给出下一步目标。
+const STAGES = [
+  { name: '收录期 Indexing', bar: '●○○○○', pct: 8,
+    plain: '站点刚上线，Google 仍在收录，几乎没有搜索展现——处于最早期，正常现象。',
+    next: '起量期', target: '周展示突破 100、有展示的页面 ≥ 10。',
+    focus: '确保收录（sitemap/预渲染正常、无抓取错误）、补齐基础页面与首批内容、修好技术 SEO。' },
+  { name: '起量期 Emerging', bar: '●●○○○', pct: 28,
+    plain: '已经有搜索展现，但排名普遍在第 2 页以后、点击很少——典型新站"沙盒/积累"期。',
+    next: '爬升期', target: '出现 ≥1 个第 2 页机会词（8–20 名）、平均排名进入 20 名内、周点击破 10。',
+    focus: '持续产出长尾主题内容、优化 title/H1/内链，围绕核心词搭建主题簇。' },
+  { name: '爬升期 Climbing', bar: '●●●○○', pct: 52,
+    plain: '部分关键词已冲到第 2 页、开始有零星点击——排名正在稳步爬升。',
+    next: '流量期', target: '机会词冲进首页（<10 名）、周点击稳定破 30、自然会话开始上量。',
+    focus: '针对机会词精修对应落地页、建高质量外链提升权重、扩展内容集群与内链。' },
+  { name: '流量期 Traffic', bar: '●●●●○', pct: 75,
+    plain: '关键词进入首页、自然点击/流量已成规模——进入收获前期。',
+    next: '成熟期', target: '自然流量稳定带来询盘、非品牌词首页数增多、整体 CTR 提升。',
+    focus: '优化标题/描述提 CTR、强化落地页转化与 CTA、放大表现好的主题。' },
+  { name: '成熟期 Converting', bar: '●●●●●', pct: 92,
+    plain: '自然流量稳定并已带来询盘——SEO 进入成熟变现期。',
+    next: '规模化', target: '维持排名的同时拓词、拓语言、建品牌与权威。',
+    focus: '提升转化率与客单、内容规模化、多市场/多语言扩展。' },
+];
+function stageAssess(g, a) {
+  const imp = g ? g.cur.impressions : 0;
+  const clk = g ? g.cur.clicks : 0;
+  const pos = g ? g.cur.position : 0;      // 越小越好；0 表示无展示
+  const pages = g ? g.pageCount : 0;
+  const opp = g && g.opp ? g.opp.length : 0;
+  const org = a ? a.orgCur : 0;
+  const lead = a ? a.leadCur : 0;
+  let idx;
+  if (lead > 0 && org >= 50 && clk >= 30) idx = 4;
+  else if ((clk >= 30 || org >= 30) && pos > 0 && pos < 15) idx = 3;
+  else if (opp >= 1 || clk >= 5 || (pos > 0 && pos <= 25 && imp >= 150)) idx = 2;
+  else if (imp >= 50 || pages >= 10) idx = 1;
+  else idx = 0;
+  return { idx, ...STAGES[idx] };
 }
 
 // ---------------- 规则化"今日建议" ----------------
@@ -166,12 +208,24 @@ async function main() {
       + `**自然流量 Top 国家：**\n${a.country.length ? a.country.map((x) => '· ' + x).join('\n') : '（暂无）'}`;
   } catch (e) { errors.push('GA4 ' + e.message); ga4Md = `**📊 GA4**：拉取失败\n${e.message}`; }
 
+  // 新站 SEO 阶段（放在最前面，作为"进度定位"）
+  const st = stageAssess(g, a);
+  const stageMd =
+    `**🧭 新站 SEO 建设阶段**\n`
+    + `当前：${st.bar}　**阶段 ${st.idx}/4 · ${st.name}**（约 ${st.pct}%）\n`
+    + `${st.plain}\n\n`
+    + `**判断依据**：展示 ${g ? g.cur.impressions : '—'} · 点击 ${g ? g.cur.clicks : '—'} · 平均排名 ${g ? g.cur.position.toFixed(1) : '—'} · 有展示页 ${g ? g.pageCount : '—'} · 机会词 ${g && g.opp ? g.opp.length : 0} · 自然会话 ${a ? a.orgCur : '—'}/周 · 询盘 ${a ? a.leadCur : '—'}\n`
+    + `**进入下一阶段（${st.next}）需**：${st.target}\n`
+    + `**本阶段重点**：${st.focus}`;
+
   const card = {
     msg_type: 'interactive',
     card: {
       config: { wide_screen_mode: true },
       header: { template: 'blue', title: { tag: 'plain_text', content: `WONLY SEO 日报 · ${today}` } },
       elements: [
+        { tag: 'div', text: { tag: 'lark_md', content: stageMd } },
+        { tag: 'hr' },
         { tag: 'div', text: { tag: 'lark_md', content: gscMd } },
         { tag: 'hr' },
         { tag: 'div', text: { tag: 'lark_md', content: ga4Md } },
