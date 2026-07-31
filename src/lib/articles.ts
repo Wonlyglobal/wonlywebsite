@@ -24,6 +24,41 @@ export interface Article {
 
 export const ARTICLES: Article[] = [
   {
+    slug: "fire-rated-doors-explained",
+    title: "Fire-Rated Doors Explained: EN 1634 and 60 vs 90 Minutes",
+    seoTitle: "Fire-Rated Doors Explained: EN 1634 & 60 vs 90 Minutes | WONLY",
+    description: "Fire-rated door ratings made simple \u2014 EN 1634 testing, integrity vs insulation, 30/60/90/120 minutes, where they are required, and how to specify the right one.",
+    category: "Technology",
+    date: "2026-07-31",
+    dateLabel: "31 July 2026",
+    readMins: 5,
+    cover: `${BASE}images/mfg-inspect.jpg`,
+    excerpt: "Fire door ratings decoded \u2014 EN 1634, integrity vs insulation, and how to choose between 60 and 90 minutes for your project.",
+    keywords: ["fire rated door ratings", "fire rated doors explained", "EN 1634", "60 vs 90 minute fire door"],
+    body: [
+      { type: "p", text: "A fire-rated door is a life-safety product: in a fire it must hold long enough for people to escape and for the fire to be contained. But fire-rated only means something when it is tied to a tested rating. This guide explains fire door ratings, the EN 1634 standard, and how to specify the right one." },
+      { type: "h2", text: "What a Fire Rating Actually Measures" },
+      { type: "p", text: "A fire door is tested to a recognised standard \u2014 EN 1634-1 in Europe and most export markets, UL 10C in North America \u2014 and rated by how many minutes it holds back fire. The common ratings are 30, 60, 90 and 120 minutes. The higher the number, the longer the door contains fire and smoke." },
+      { type: "h2", text: "Integrity vs Insulation: E and EI" },
+      { type: "ul", items: ["E (Integrity): the door stops flames and hot gases passing through for the rated time.", "I (Insulation): the door also limits heat transfer to the unexposed side, so the escape route stays usable."] },
+      { type: "p", text: "So a door rated EI 90 provides both integrity and insulation for 90 minutes, while an E 90 door provides integrity only. Escape corridors and compartment walls usually require EI ratings." },
+      { type: "h2", text: "60 vs 90 Minutes \u2014 Which Do You Need?" },
+      { type: "ul", items: ["30 minutes (EI 30): doors within dwellings and low-risk internal openings", "60 minutes (EI 60): apartment entrances, corridors and common areas", "90 minutes (EI 90): higher-risk compartments, commercial and institutional, and many export codes", "120 minutes (EI 120): critical separation such as plant rooms and high-rise cores"] },
+      { type: "p", text: "The exact requirement is set by local building code and the building's fire strategy, so confirm the specified rating for each opening before ordering. In many Gulf, SE Asian and Central Asian projects, 90-minute doors are the practical benchmark." },
+      { type: "h2", text: "Fire Rating Is Not a Security Rating" },
+      { type: "p", text: "A common mistake is assuming a fire door is also a security door. They are two separate tests: fire performance (EN 1634) and burglar resistance (EN 1627 or GB 17565). A well-engineered door can carry both, which is what entrances for hotels, hospitals and apartments should specify." },
+      { type: "h2", text: "How to Specify a Fire-Rated Door Correctly" },
+      { type: "ul", items: ["Confirm the rating per opening (E vs EI, and minutes) from the fire strategy", "Buy the certified doorset, not just the leaf \u2014 the rating applies to the tested set", "Use the tested intumescent seals and closers; substitutions void the rating", "Get the test certificate and matching hardware schedule", "Check destination-market approval for your project"] },
+      { type: "h2", text: "WONLY Fire-Rated Doors" },
+      { type: "p", text: "WONLY manufactures dedicated Engineering Fire Doors and Medical-Grade Doors alongside its security range, with EN 1634 fire ratings of 90-minute integrity compliant with Gulf, SE Asia and Central Asia codes. Applicable models also carry GB 17565 Class A security, so one door can be both fire-rated and burglar-resistant. All are cycle-tested to 200,000+ cycles and certified to ISO 9001, ISO 14001, CE, UL, CMA and CSPA, backed by 30 years of manufacturing and 1,000+ patents (listed, SSE 605268)." },
+      { type: "h2", text: "FAQ" },
+      { type: "p", text: "What does a 90-minute fire door mean? It has passed EN 1634 testing and holds back fire, and for an EI rating heat, for 90 minutes, giving time to evacuate and contain the fire." },
+      { type: "p", text: "What is the difference between E and EI fire doors? E rates integrity (stops flames and gases); EI rates integrity and insulation (also limits heat transfer). Escape routes usually require EI." },
+      { type: "p", text: "Can a door be both fire-rated and security-rated? Yes \u2014 a well-engineered doorset can carry an EN 1634 fire rating and an EN 1627 or GB 17565 security grade at the same time." },
+      { type: "p", text: "Specifying fire-rated doors for a hotel, hospital or apartment project? WONLY supplies certified fire-rated and dual-rated doors for export. Talk to our team for a recommendation." }
+    ]
+  },
+  {
     slug: "how-to-choose-security-door-for-projects",
     title: "How to Choose a Security Door for Villa and Residential Projects",
     seoTitle: "How to Choose a Security Door for Projects — Distributor Guide | WONLY",
