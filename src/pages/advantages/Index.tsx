@@ -2,24 +2,24 @@ import { SiteHeader, SiteFooter, CtaBand, GOLD, CHAMP, MUTED, BASE, eyebrow, Rev
 import { useSeo } from "@/lib/seo";
 
 const DOOR = {
-  img: "hero-door.png", eb: "Why WONLY Door", h: "Built to Defend, Everywhere",
-  p: "A cast-aluminium body over a honeycomb steel core — engineered to resist fire, force and the harshest climates, and certified to the standards export projects demand.",
+  img: "hero-door.png", eb: "Why WONLY Door", h: "The Body Built to Defend",
+  p: "The door is the fortress — a cast-aluminium shell over a honeycomb steel core, engineered to take fire, force and the harshest weather and keep standing, certified to the codes export projects demand.",
   li: [
-    "EN 1634 — 90-minute fire rating",
-    "Grade-A security · 16-bolt, 4-edge auto-locking",
-    "Cast-aluminium body — corrosion & weather resistant",
-    "Adapted to Middle East, Southeast Asia & Central Asia standards",
+    "Cast-aluminium shell over a honeycomb steel core — won't rust or warp",
+    "EN 1634 — 90-minute fire integrity",
+    "Grade-A forced-entry resistance · 16-bolt, 4-edge locking into the frame",
+    "Hurricane-rated (Wind Class 12) · STC 35+ acoustic · 200,000-cycle tested",
   ],
 };
 
 const LOCK = {
-  img: "lock-s80-render.webp", eb: "Why WONLY Lock", h: "Beyond the Mechanical Lock",
-  p: "Traditional locks trade convenience for security. WONLY smart locks deliver both — biometric, hands-free access with layered anti-intrusion protection, remote control and tamper alarms.",
+  img: "lock-s80-render.webp", eb: "Why WONLY Lock", h: "The Brain That Knows You",
+  p: "The lock is the intelligence — it recognises your family and opens as you approach, while a patented core and encrypted electronics defend against attack both physical and digital, and tie the entrance into your whole home.",
   li: [
-    "3D face · fingerprint · palm-vein · RFID · App · PIN",
-    "Hands-free, no-sense unlocking as you approach",
+    "3D face · fingerprint · palm-vein · RFID · App · PIN — plus hands-free approach unlock",
     "Patented cylindrical lock core — anti-drill, pick & bump, beyond top national grade",
-    "Remote App control, pry & tamper alarms, 200,000+ cycle tested",
+    "Encrypted remote App control with pry & tamper alarms",
+    "Integrates with WONLY whole-home smart control",
   ],
 };
 
@@ -82,7 +82,7 @@ export default function Advantages() {
       <section id="door-generations" className="bg-white scroll-mt-24">
         <div className="max-w-[1200px] mx-auto px-[6vw] py-[86px]">
           <Reveal>
-            <div className={eyebrow} style={{ color: GOLD }}>Why WONLY Door</div>
+            <div className={eyebrow} style={{ color: GOLD }}>The Smart-Door Generations</div>
             <h3 className="mt-3 font-light leading-[1.1] text-[clamp(26px,3vw,40px)]">Why &quot;Class A&quot; Doesn&apos;t Tell the Whole Story</h3>
             <p className="mt-4 text-[15px] leading-[1.75] max-w-[560px]" style={{ color: MUTED }}>
               Since the security-door standard was updated, most doors qualify as the top grade on paper — yet the gap between them is enormous. WONLY thinks in generations of the smart door, not just grades: each generation adds intelligence on top of the same certified Class-A core, so a range can run from value to flagship without ever dropping below the top security grade.
@@ -110,12 +110,12 @@ export default function Advantages() {
       </section>
 
       {/* Why Lock */}
-      <section id="why-wonly-lock" className="bg-white scroll-mt-24">
+      <section id="why-wonly-lock" className="scroll-mt-24">
         <div className="max-w-[1200px] mx-auto px-[6vw] py-[86px]"><Split d={LOCK} rev /></div>
       </section>
 
       {/* Innovation & Certifications */}
-      <section id="innovation-certifications" className="scroll-mt-24">
+      <section id="innovation-certifications" className="bg-white scroll-mt-24">
         <div className="max-w-[1200px] mx-auto px-[6vw] py-[86px]">
           <Reveal className="text-center">
             <div className={eyebrow} style={{ color: GOLD }}>Innovation &amp; Certifications</div>
