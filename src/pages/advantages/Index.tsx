@@ -18,7 +18,7 @@ const LOCK = {
   li: [
     "3D face · fingerprint · palm-vein · RFID · App · PIN",
     "Hands-free, no-sense unlocking as you approach",
-    "Anti-technical-opening — bump & pick resistant",
+    "Patented cylindrical lock core — anti-drill, pick & bump, beyond top national grade",
     "Remote App control, pry & tamper alarms, 200,000+ cycle tested",
   ],
 };
@@ -76,6 +76,37 @@ export default function Advantages() {
       {/* Why Door */}
       <section id="why-wonly-door" className="scroll-mt-24">
         <div className="max-w-[1200px] mx-auto px-[6vw] py-[86px]"><Split d={DOOR} /></div>
+      </section>
+
+      {/* Generations of the smart door — why "Class A" alone doesn't tell the whole story */}
+      <section id="door-generations" className="bg-white scroll-mt-24">
+        <div className="max-w-[1200px] mx-auto px-[6vw] py-[86px]">
+          <Reveal>
+            <div className={eyebrow} style={{ color: GOLD }}>Why WONLY Door</div>
+            <h3 className="mt-3 font-light leading-[1.1] text-[clamp(26px,3vw,40px)]">Why &quot;Class A&quot; Doesn&apos;t Tell the Whole Story</h3>
+            <p className="mt-4 text-[15px] leading-[1.75] max-w-[560px]" style={{ color: MUTED }}>
+              Since the security-door standard was updated, most doors qualify as the top grade on paper — yet the gap between them is enormous. WONLY thinks in generations of the smart door, not just grades: each generation adds intelligence on top of the same certified Class-A core, so a range can run from value to flagship without ever dropping below the top security grade.
+            </p>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { g: "Gen 1", t: "Foundation", d: "Certified Class-A security with mechanical self-locking. The dependable value tier — never below the top security grade." },
+              { g: "Gen 2–3", t: "Smart", d: "Embedded smart lock, biometric access, 10.1\" HD display, formaldehyde sentinel and dual power. The door becomes intelligent." },
+              { g: "Gen 5", t: "Robotic — Flagship X70", d: "The door opens and closes for you: remote-sensing auto entry, anti-pinch, perimeter monitoring and voice messaging." },
+            ].map((x, i) => (
+              <Reveal key={x.t} delay={i * 90}>
+                <div className="h-full rounded-2xl p-7 border" style={{ background: "#F5F1EA", borderColor: "#e9e2d4" }}>
+                  <div className="text-xs tracking-[0.2em] uppercase font-semibold" style={{ color: GOLD }}>{x.g}</div>
+                  <h4 className="mt-2 text-lg font-medium" style={{ color: "#221F20" }}>{x.t}</h4>
+                  <p className="mt-2.5 text-sm leading-relaxed" style={{ color: MUTED }}>{x.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-8 text-[13px] leading-[1.7] max-w-[620px]" style={{ color: MUTED }}>
+            Talk to us about where your market sits and we&apos;ll help you build a range that spans the generations — every model certified, differentiated by intelligence rather than by cutting corners on security.
+          </p>
+        </div>
       </section>
 
       {/* Why Lock */}

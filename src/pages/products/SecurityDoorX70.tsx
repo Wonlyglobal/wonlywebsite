@@ -139,6 +139,9 @@ const SPECS: { label: string; value: string }[] = [
   { label: "Door Body", value: "Cast Aluminum + Honeycomb Steel Core" },
   { label: "Locking Points", value: "16-bolt, 4-edge auto-lock" },
   { label: "Unlock Methods", value: "3D Face · Fingerprint · RFID · App · PIN · Key" },
+  { label: "Lock Core", value: "Patented cylindrical core (anti-drill / pick / bump)" },
+  { label: "Smart Display", value: "10.1\" HD · touch on Pro/Max" },
+  { label: "Door Camera", value: "Frame-mounted HD peephole · night vision · live stream" },
   { label: "Door Thickness", value: "90–120 mm" },
   { label: "Acoustic Rating", value: "STC 38" },
   { label: "Wind Resistance", value: "Class 12 (Hurricane-Rated)" },
@@ -290,7 +293,7 @@ const SecurityDoorX70 = () => {
           <section className="feat" id="features">
             <div className="fhead">
               <div className="eyebrow">Smart Technology</div>
-              <h2>Six Systems. <b>One Intelligent Door</b></h2>
+              <h2>Eight Systems. <b>One Intelligent Door</b></h2>
             </div>
             <div className="bento">
               <div className="tile big">
@@ -334,6 +337,20 @@ const SecurityDoorX70 = () => {
                 <LazyVideo src={media("Smart Voice Message2.mp4")} />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Voice Message</h3></div>
+              </div>
+              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 30% 15%, #1b1815, #0b0908)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ textAlign: "center", zIndex: 3 }}>
+                  <div style={{ fontSize: 46, fontWeight: 300, color: "#f4efe6", letterSpacing: "-1.5px", lineHeight: 1 }}>10.1<span style={{ fontSize: 22 }}>&quot;</span></div>
+                  <div style={{ fontSize: 10, letterSpacing: ".18em", textTransform: "uppercase", color: "#C9A15E", marginTop: 8 }}>HD · Touch on Pro / Max</div>
+                </div>
+                <div className="label"><h3>10.1&quot; Smart Display</h3></div>
+              </div>
+              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 70% 15%, #16221c, #0b120e)", display: "flex", alignItems: "flex-end", justifyContent: "center", paddingBottom: 26 }}>
+                <div style={{ textAlign: "center", zIndex: 3 }}>
+                  <div style={{ fontSize: 13, letterSpacing: ".12em", color: "#bfe8cf" }}>No sill · auto drop-seal</div>
+                  <div style={{ fontSize: 10, color: "rgba(180,225,200,0.6)", marginTop: 4 }}>wind · dust · insect sealed</div>
+                </div>
+                <div className="label"><h3>Barrier-Free Threshold</h3></div>
               </div>
             </div>
           </section>
@@ -382,12 +399,14 @@ const SecurityDoorX70 = () => {
               <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>Overview</div>
               <h2 className="text-[#221F20] text-4xl font-semibold mt-3 leading-tight">Security That Runs Itself — And Answers To You</h2>
               <p className="text-neutral-600 text-base mt-4 leading-relaxed">
-                The X70 is WONLY's flagship robotic security door: the instant it closes, sixteen hardened bolts drive home across all four edges — no turn of a key, no forgotten deadbolt. 3D facial recognition welcomes your family hands-free, while multi-vector sensors watch the frame for any attempt to force it. Behind the aesthetics sits a cast-aluminum body with an EN 1634 fire-rated core, tested to survive 200,000 cycles and three decades of WONLY engineering.
+                The X70 is WONLY's flagship robotic security door: the instant it closes, sixteen hardened bolts drive home across all four edges — mechanically, with no motor to wait on and no forgotten deadbolt: closing the door is locking it. 3D facial recognition welcomes your family hands-free, while multi-vector sensors watch the frame for any attempt to force it. Behind the aesthetics sits a cast-aluminum body with an EN 1634 fire-rated core, tested to survive 200,000 cycles and three decades of WONLY engineering.
               </p>
               <ul className="mt-6 space-y-3">
                 {[
                   "3D face unlock from up to 1.5 m — anti-spoofing, sub-second",
-                  "16-bolt autonomous locking on every close",
+                  "16-bolt mechanical self-locking on every close — no motor",
+                  "Patented cylindrical lock core — anti-drill, pick and bump",
+                  "10.1\" HD display and barrier-free threshold with auto drop-seal",
                   "EN 1634 90-minute fire integrity · Class A security",
                   "Full smart-home control with tamper and access alerts",
                 ].map((point) => (
@@ -407,6 +426,62 @@ const SecurityDoorX70 = () => {
                   Download Spec Sheet
                 </button>
               </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Lock Core — the industry-exclusive cylindrical core (V8 headline proof point) */}
+        <section className="mt-24 px-20">
+          <div className="grid grid-cols-2 gap-12 items-center">
+            <Reveal>
+              <div className="rounded-2xl border-2 p-10 flex flex-col items-center justify-center" style={{ borderColor: "rgba(191,160,106,0.3)", background: "radial-gradient(120% 100% at 50% 0%, #2a2627, #0d0d0d)", minHeight: 380 }}>
+                <svg width="340" height="180" viewBox="0 0 340 180" fill="none" aria-label="WONLY cylindrical lock core compared with a standard gourd cylinder">
+                  <defs>
+                    <linearGradient id="lc" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stopColor="#3a3021" />
+                      <stop offset="1" stopColor="#161311" />
+                    </linearGradient>
+                  </defs>
+                  <g opacity="0.6">
+                    <circle cx="82" cy="66" r="32" fill="#3a3633" stroke="#6b6560" strokeWidth="2" />
+                    <circle cx="82" cy="106" r="19" fill="#3a3633" stroke="#6b6560" strokeWidth="2" />
+                    <rect x="78" y="52" width="8" height="28" rx="4" fill="#0d0d0d" />
+                    <text x="82" y="150" fill="#9a938c" fontSize="11" textAnchor="middle" fontFamily="sans-serif">Standard &quot;gourd&quot; cylinder</text>
+                  </g>
+                  <g>
+                    <circle cx="252" cy="84" r="46" fill="url(#lc)" stroke="#BFA06A" strokeWidth="2.5" />
+                    <circle cx="252" cy="84" r="30" fill="none" stroke="#BFA06A" strokeWidth="1.5" opacity="0.55" />
+                    <rect x="247" y="58" width="10" height="34" rx="5" fill="#0d0d0d" />
+                    <text x="252" y="150" fill="#D4C4A0" fontSize="11" textAnchor="middle" fontFamily="sans-serif">WONLY cylindrical core</text>
+                  </g>
+                </svg>
+                <div style={{ marginTop: 22, textAlign: "center" }}>
+                  <div style={{ fontSize: 54, fontWeight: 300, color: GOLD, lineHeight: 1 }}>36&times;</div>
+                  <div style={{ fontSize: 10.5, letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(245,241,234,0.6)", marginTop: 8 }}>Anti-technical-opening vs top national grade</div>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>The Core, Reinvented</div>
+              <h2 className="text-[#221F20] text-4xl font-semibold mt-3 leading-tight">A Cylindrical Lock Core — Not the Cylinder Everyone Else Uses</h2>
+              <p className="text-neutral-600 text-base mt-4 leading-relaxed">
+                Almost every security door on the market — whatever the brand — is built around the same conventional figure-eight &quot;gourd&quot; cylinder: a soft brass shell, a rotating face and an exposed keyway that skilled attackers open in seconds. WONLY replaced it. Our patented cylindrical lock core is the only one of its kind in the industry, engineered so that non-destructive opening takes far longer than the highest national standard demands — and a drill will not bite into it.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {[
+                  "Patented cylindrical core — industry-exclusive, not a re-shelled standard cylinder",
+                  "Anti-technical-opening resistance exceeding the top national grade by up to 36×",
+                  "Drill-, pick- and bump-resistant hardened construction",
+                  "Full forced-entry and technical-opening test reports available on request",
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3">
+                    <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: `${GOLD}1a` }}>
+                      <Check size={13} style={{ color: GOLD }} />
+                    </span>
+                    <span className="text-neutral-700 text-sm">{point}</span>
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
         </section>
