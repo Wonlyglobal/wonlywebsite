@@ -1,10 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+﻿import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 
-/* ── Silver-White-Gold palette ─────────────────────────────── */
+/* 鈹€鈹€ Silver-White-Gold palette 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 const GOLD = "#BFA06A";
 const GOLD_DEEP = "#B08D4F"; // deeper, higher-contrast gold for uppercase kickers/eyebrows
 const CHAMP = "#D4C4A0";
@@ -39,13 +39,13 @@ const IMG = {
   wood1: `${BASE}images/wood-1.png`,
   wood2: `${BASE}images/wood-2.webp`,
   proj1: `${BASE}images/proj-1.webp`, // Hangzhou G20 Expo Center
-  proj2: `${BASE}images/landmark-daxing.webp`, // Daxing airport — major engineering/bulk project (text-free)
+  proj2: `${BASE}images/landmark-daxing.webp`, // Daxing airport 鈥?major engineering/bulk project (text-free)
   residential: `${BASE}images/landmark-metro.webp`, // aerial residential community (text-free)
-  publicInst: `${BASE}images/landmark-asiangames.webp`, // Olympic sports center — public institution (text-free)
+  publicInst: `${BASE}images/landmark-asiangames.webp`, // Olympic sports center 鈥?public institution (text-free)
   top500: `${BASE}images/top500-5.jpg`,
 };
 
-/* ── Navigation ────────────────────────────────────────────── */
+/* 鈹€鈹€ Navigation 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 type NavSubChild = { label: string; href: string; img?: string };
 type NavChild = { label: string; href?: string; to?: string; img?: string; children?: NavSubChild[] };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
@@ -70,19 +70,19 @@ const NAV: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-/* ── Section 2 · capacity stats ────────────────────────────── */
+/* 鈹€鈹€ Section 2 路 capacity stats 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per?: string; label: string }[] = [
-  { to: 1000000, comma: true, suffix: "+ m²", label: "Manufacturing Base" },
+  { to: 1000000, comma: true, suffix: "+ m虏", label: "Manufacturing Base" },
   { to: 6, suffix: "M", per: "/ year", label: "Annual Production Capacity" },
   { to: 60, suffix: "+", label: "Countries & Regions" },
 ];
 
-/* ── Section 3 · Why WONLY ─────────────────────────────────── */
-// Real project/landmark photo behind every stat — no more flat black cards.
+/* 鈹€鈹€ Section 3 路 Why WONLY 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
+// Real project/landmark photo behind every stat 鈥?no more flat black cards.
 const STAT_CARDS = [
-  { value: "30 Years", label: "Since 1996 · Yongkang", desc: "Three decades of continuous, vertically integrated manufacturing since our founding in Yongkang, Zhejiang.", img: `${BASE}images/landmark-daxing.webp` },
+  { value: "30 Years", label: "Since 1996 路 Yongkang", desc: "Three decades of continuous, vertically integrated manufacturing since our founding in Yongkang, Zhejiang.", img: `${BASE}images/landmark-daxing.webp` },
   { value: "Listed", label: "SSE 605268", desc: "The sector's first publicly listed company on the Shanghai Stock Exchange (2021).", img: `${BASE}images/landmark-asiangames.webp` },
-  { value: "No.1", label: "Smart Doors & Locks · 2024–2025", desc: "National sales leader in smart doors and smart locks two years running.", img: `${BASE}images/landmark-metro.webp` },
+  { value: "No.1", label: "Smart Doors & Locks 路 2024鈥?025", desc: "National sales leader in smart doors and smart locks two years running.", img: `${BASE}images/landmark-metro.webp` },
   { value: "5", label: "Production Bases", desc: "Five vertically integrated production bases across China.", img: `${BASE}images/proj-cairo-hotel.webp` },
   { value: "6", label: "R&D Centers", desc: "Six R&D centers driving continuous product innovation.", img: `${BASE}images/proj-egypt-cbd.webp` },
   { value: "1,000+", label: "Patents", desc: "Over 1,000 proprietary security and smart-lock patents.", img: `${BASE}images/proj-saudi-villa.webp` },
@@ -90,9 +90,9 @@ const STAT_CARDS = [
 ];
 // Manufacturing-strength cards under the Why headline. The "listed group" card uses
 // card-listed-group4.jpg (clean HQ building); card-listed-group.jpg is a factory shot
-// with burned-in Chinese "模芯立体库-1" text, excluded from the English site.
+// with burned-in Chinese "妯¤姱绔嬩綋搴?1" text, excluded from the English site.
 const WHY_FEATURES = [
-  { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof — full control over quality and lead time." },
+  { img: `${BASE}images/card-vertically-integrated.jpg`, t: "Vertically integrated", d: "Stamping, coating, foaming and assembly under one roof 鈥?full control over quality and lead time." },
   { img: `${BASE}images/card-robotic-precision.jpg`, t: "Robotic precision", d: "ABB automated welding and CNC lines hold the tolerances export projects depend on." },
   { img: `${BASE}images/card-listed-group4.jpg`, t: "Backed by a listed group", d: "A Shanghai-listed parent (SSE: 605268) stands behind every contract and warranty." },
 ];
@@ -103,23 +103,23 @@ const FOOTPRINT_STATS = [
   { to: 200, suffix: "M+", label: "Users Worldwide" },
 ];
 
-/* ── Section 4 · Products ──────────────────────────────────── */
-// Product gallery — doors first. Each card links to its /product/ route (see App.tsx).
+/* 鈹€鈹€ Section 4 路 Products 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
+// Product gallery 鈥?doors first. Each card links to its /product/ route (see App.tsx).
 const PRODUCTS_GALLERY = [
-  { name: "Door", href: "/product/door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Metal and wooden doors — the entire building entry, protection outside and quiet craft within." },
+  { name: "Door", href: "/product/door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Metal and wooden doors 鈥?the entire building entry, protection outside and quiet craft within." },
   { name: "Smart Lock", href: "/product/smart-lock", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
   { name: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
   { name: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
 ];
 
-/* ── Section 5 · Solutions ─────────────────────────────────── */
-/* ── Section 6 · Certifications & Honors ───────────────────── */
-// Real credentials only — no fabricated certifications on a live company site.
+/* 鈹€鈹€ Section 5 路 Solutions 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
+/* 鈹€鈹€ Section 6 路 Certifications & Honors 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
+// Real credentials only 鈥?no fabricated certifications on a live company site.
 // To use actual certificate BADGE IMAGES instead of these text pills, drop them
 // in public/images/certs/ and tell me the count; I'll switch the marquee to images.
-// Stylised colored badges (recognisable colored mark + label — not the trademarked artwork).
+// Stylised colored badges (recognisable colored mark + label 鈥?not the trademarked artwork).
 // Real logo artwork lives in public/images/{awards,certs}. Editorial grayscale
-// logo wall — brightens to full color on hover.
+// logo wall 鈥?brightens to full color on hover.
 const AWARD_LOGOS = [
   { f: "reddot.png", alt: "Red Dot Design Award" },
   { f: "forbes.png", alt: "Forbes" },
@@ -138,7 +138,7 @@ const CERT_LOGOS = [
   { f: "iecee.png", alt: "IECEE CB" },
 ];
 
-/* ── Section 7 · Partnership ───────────────────────────────── */
+/* 鈹€鈹€ Section 7 路 Partnership 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 const PARTNERSHIP = [
   { t: "Distributor Program", d: "Join a global network backed by 30 years of brand equity, full product training and regional marketing support.", cta: "Become a Distributor", biz: "Distributor / Dealer" },
   { t: "Project Cooperation", d: "Residential, commercial, medical, hotel, government and public projects.", cta: "Submit a Project", biz: "Project / Developer" },
@@ -146,19 +146,19 @@ const PARTNERSHIP = [
   { t: "Global Distribution Network", d: "Regional HQs, local offices and authorized partners across the Middle East, Southeast Asia and Central Asia.", cta: "Find a Local Partner", biz: "Distributor / Dealer" },
 ];
 
-/* ── Section 8 · Timeline ──────────────────────────────────── */
+/* 鈹€鈹€ Section 8 路 Timeline 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 const TIMELINE = [
   { y: "1996", m: "Brand founded in Yongkang, Zhejiang." },
-  { y: "2003", m: "Wins the 'Challenge the Lock-Picking Champion' — unopened 20+ years since." },
-  { y: "2005", m: "Named a China Well-Known Trademark — the sector's only dual certification." },
-  { y: "2016", m: "SAP go-live — the start of digital transformation." },
-  { y: "2021", m: "Listed on the Shanghai Stock Exchange (605268) — the industry's only main-board company." },
+  { y: "2003", m: "Wins the 'Challenge the Lock-Picking Champion' 鈥?unopened 20+ years since." },
+  { y: "2005", m: "Named a China Well-Known Trademark 鈥?the sector's only dual certification." },
+  { y: "2016", m: "SAP go-live 鈥?the start of digital transformation." },
+  { y: "2021", m: "Listed on the Shanghai Stock Exchange (605268) 鈥?the industry's only main-board company." },
   { y: "2024", m: "Opens the sector's only national-level 5G future factory." },
-  { y: "2026", m: "Our 30th anniversary — a new era begins. WONLY launches its global development strategy, taking premium smart-security to the world." },
+  { y: "2026", m: "Our 30th anniversary 鈥?a new era begins. WONLY launches its global development strategy, taking premium smart-security to the world." },
 ];
 
-/* ── Footer ────────────────────────────────────────────────── */
-/* Strategic collaborations (English names + year of agreement; ceremony photos omitted — Chinese banners) */
+/* 鈹€鈹€ Footer 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
+/* Strategic collaborations (English names + year of agreement; ceremony photos omitted 鈥?Chinese banners) */
 // Strategic-partner signing-ceremony photos (optimized from the source archive).
 const PARTNER_PHOTOS = [
   { img: `${BASE}images/partners-ceremony/partner-huawei.webp`, n: "Huawei", y: "2020" },
@@ -194,12 +194,12 @@ const FOOTER: { h: string; links: FooterLink[] }[] = [
     { l: "Contact", href: "/contact" },
   ] },
   { h: "Get in Touch", links: [
-    { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
+    { l: "inquiry@wonlyglobal.com", href: "mailto:inquiry@wonlyglobal.com" },
     { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
   ] },
 ];
 
-/* ── Helpers ───────────────────────────────────────────────── */
+/* 鈹€鈹€ Helpers 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [vis, setVis] = useState(false);
@@ -272,32 +272,32 @@ function WorldDots({ className = "" }: { className?: string }) {
       if (inLand(x, y)) dots.push([x, y]);
     }
   }
-  // Key target markets in gold — a dense, evenly spread global network across every
+  // Key target markets in gold 鈥?a dense, evenly spread global network across every
   // continent (60+ countries). `big` marks the China HQ. Coordinates sit on land.
   const markets: { x: number; y: number; big?: boolean }[] = [
-    // East Asia — China HQ (emphasis), Japan, Korea, N. China
+    // East Asia 鈥?China HQ (emphasis), Japan, Korea, N. China
     { x: 75, y: 16, big: true }, { x: 82, y: 15 }, { x: 80, y: 13.5 }, { x: 70, y: 12 },
-    // Southeast Asia — Vietnam, Thailand, Philippines, Malaysia, Indonesia, Singapore
+    // Southeast Asia 鈥?Vietnam, Thailand, Philippines, Malaysia, Indonesia, Singapore
     { x: 79, y: 21 }, { x: 77, y: 21.5 }, { x: 82.5, y: 23.5 }, { x: 80, y: 26.5 }, { x: 83, y: 27.5 }, { x: 80.5, y: 27.5 },
-    // Middle East — Saudi Arabia, UAE, Qatar, Egypt, Iran
+    // Middle East 鈥?Saudi Arabia, UAE, Qatar, Egypt, Iran
     { x: 56.5, y: 21.5 }, { x: 59, y: 22 }, { x: 58, y: 20.6 }, { x: 53.5, y: 23 }, { x: 60.5, y: 19 },
-    // Central Asia — Kazakhstan, Uzbekistan
+    // Central Asia 鈥?Kazakhstan, Uzbekistan
     { x: 63, y: 13 }, { x: 61, y: 15.5 },
-    // Africa — Morocco, Nigeria, Ethiopia, East Africa, Mozambique, South Africa
+    // Africa 鈥?Morocco, Nigeria, Ethiopia, East Africa, Mozambique, South Africa
     { x: 46, y: 21 }, { x: 48.5, y: 27 }, { x: 55, y: 26.5 }, { x: 54, y: 30.5 }, { x: 53, y: 34 }, { x: 51, y: 36 },
     // Europe
     { x: 48, y: 12 }, { x: 45.5, y: 13.5 }, { x: 50.5, y: 10 }, { x: 44, y: 11 },
-    // Northern belt — fill the upper landmasses (N. Canada, Scandinavia, W. Russia, Siberia, Mongolia)
+    // Northern belt 鈥?fill the upper landmasses (N. Canada, Scandinavia, W. Russia, Siberia, Mongolia)
     { x: 23, y: 7 }, { x: 27, y: 8 }, { x: 49, y: 8.5 }, { x: 58, y: 11 }, { x: 66, y: 9 }, { x: 72, y: 9.5 },
-    // North America — US: New York (key), Los Angeles, Chicago, Houston, Miami, Seattle
+    // North America 鈥?US: New York (key), Los Angeles, Chicago, Houston, Miami, Seattle
     { x: 20, y: 12, big: true }, { x: 9, y: 15 }, { x: 17, y: 11 }, { x: 15, y: 16 }, { x: 19, y: 17 }, { x: 9.5, y: 10.5 },
-    // Canada: Toronto, Vancouver · Mexico: Mexico City
+    // Canada: Toronto, Vancouver 路 Mexico: Mexico City
     { x: 19, y: 10 }, { x: 10, y: 9.5 }, { x: 14, y: 19 },
-    // South America — Colombia, Brazil (N/central/E), Peru, Argentina, Chile
+    // South America 鈥?Colombia, Brazil (N/central/E), Peru, Argentina, Chile
     { x: 26, y: 29 }, { x: 28, y: 33 }, { x: 30, y: 34.5 }, { x: 24.5, y: 36 }, { x: 26, y: 38 }, { x: 24, y: 42 }, { x: 26, y: 44 },
-    // Oceania — Australia (W & E), New Zealand
+    // Oceania 鈥?Australia (W & E), New Zealand
     { x: 84, y: 38 }, { x: 88, y: 39 }, { x: 92, y: 43 },
-    // Fill remaining gaps — South Asia (India, Sri Lanka), Central Asia, Myanmar,
+    // Fill remaining gaps 鈥?South Asia (India, Sri Lanka), Central Asia, Myanmar,
     // central/west/SW Africa, Greenland
     { x: 64, y: 22 }, { x: 65, y: 24.5 }, { x: 65, y: 16.5 }, { x: 76, y: 19 },
     { x: 50, y: 30 }, { x: 45, y: 24 }, { x: 48, y: 32 }, { x: 33, y: 6 },
@@ -323,7 +323,7 @@ function WorldDots({ className = "" }: { className?: string }) {
 }
 
 /* Auto-advancing flagship product rail (pauses on hover, wraps instantly) */
-/* Interactive company timeline — progress line fills, nodes pop, cards fade in on view */
+/* Interactive company timeline 鈥?progress line fills, nodes pop, cards fade in on view */
 function Timeline({ items }: { items: { y: string; m: string }[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(false);
@@ -374,7 +374,7 @@ function NumbersCoverflow() {
   const hovered = useRef(false);
 
   const stop = () => { if (timer.current) { clearInterval(timer.current); timer.current = null; } };
-  // Only run the interval while the coverflow is on-screen AND not hovered — so it
+  // Only run the interval while the coverflow is on-screen AND not hovered 鈥?so it
   // stops re-rendering/animating (and burning CPU/GPU) when the user is elsewhere.
   const sync = () => {
     if (visible.current && !hovered.current) {
@@ -433,7 +433,7 @@ function NumbersCoverflow() {
   );
 }
 
-/* Partners — paginated flat grid (4×2, 8 per page). Arrows slide the whole page
+/* Partners 鈥?paginated flat grid (4脳2, 8 per page). Arrows slide the whole page
    horizontally via translateX; they grey out at the first/last page. */
 function PartnersPager() {
   const PER = 8;
@@ -448,11 +448,11 @@ function PartnersPager() {
             <div key={p} className="w-full shrink-0 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 content-start">
               {group.map((pt) => (
                 <div key={pt.n} className="group relative rounded-xl overflow-hidden h-[150px] md:h-[190px] transition-transform duration-300 hover:-translate-y-1">
-                  <img src={pt.img} alt={`WONLY strategic partnership — ${pt.n}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                  <img src={pt.img} alt={`WONLY strategic partnership 鈥?${pt.n}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 40%, rgba(13,13,13,0.88) 100%)" }} />
                   <div className="absolute left-4 bottom-3 text-left">
                     <div className="text-white text-sm md:text-base font-semibold leading-tight">{pt.n}</div>
-                    <div className="mt-0.5 text-[9px] md:text-[10px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>Partner · {pt.y}</div>
+                    <div className="mt-0.5 text-[9px] md:text-[10px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>Partner 路 {pt.y}</div>
                   </div>
                 </div>
               ))}
@@ -475,16 +475,16 @@ function PartnersPager() {
   );
 }
 
-/* ── Homepage design-system tokens — one consistent visual rhythm ─────────── */
+/* 鈹€鈹€ Homepage design-system tokens 鈥?one consistent visual rhythm 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
 const eyebrow = "text-[11px] md:text-[12px] tracking-[0.3em] uppercase font-bold text-[#B08D4F]";
 const h2cls = "font-light leading-[1.1] tracking-[0.01em] text-[clamp(28px,3.4vw,46px)]";
-// Uniform section vertical rhythm: 60px mobile · 80px tablet · 110px desktop.
+// Uniform section vertical rhythm: 60px mobile 路 80px tablet 路 110px desktop.
 const SECTION = "py-[60px] md:py-20 lg:py-[110px]";
 // Uniform content container: capped width, centered, symmetric side padding.
 const CONTAINER = "max-w-[1400px] mx-auto px-[5vw] md:px-[6vw]";
 // Subtitle under an h2 (color applied inline: #6b655d).
 const SUBTITLE = "mt-[14px] max-w-[560px] text-[15px] leading-relaxed";
-// Primary CTA — gold solid pill, dark text (bg/color applied inline).
+// Primary CTA 鈥?gold solid pill, dark text (bg/color applied inline).
 const BTN_PRIMARY = "inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]";
 // Alternating section backgrounds + shared card treatment.
 const BG_CHAMP = "#F5F1EA";
@@ -532,9 +532,9 @@ const Prototype = () => {
   };
 
   useSeo({
-    title: "WONLY | Global Smart-Security Ecosystem Leader — Security Doors & Smart Locks Manufacturer",
+    title: "WONLY | Global Smart-Security Ecosystem Leader 鈥?Security Doors & Smart Locks Manufacturer",
     description:
-      "WONLY is a listed (SSE: 605268) manufacturer of premium security doors and smart locks — 1,000,000+ m² base, 6M doors & 3M locks a year, 1,000+ patents, serving distributors and projects in 60+ countries.",
+      "WONLY is a listed (SSE: 605268) manufacturer of premium security doors and smart locks 鈥?1,000,000+ m虏 base, 6M doors & 3M locks a year, 1,000+ patents, serving distributors and projects in 60+ countries.",
     path: "/",
     type: "website",
     jsonLd: {
@@ -545,7 +545,7 @@ const Prototype = () => {
       url: SITE_URL + "/",
       slogan: "Global Smart-Security Ecosystem Leader",
       foundingDate: "1996",
-      email: "wonlyglobal@wonly.net",
+      email: "inquiry@wonlyglobal.com",
     },
   });
 
@@ -563,7 +563,7 @@ const Prototype = () => {
     return () => clearTimeout(t);
   }, []);
 
-  // Hero: scroll once → autoplay the door open → reveal copy on the bright interior frame → release page.
+  // Hero: scroll once 鈫?autoplay the door open 鈫?reveal copy on the bright interior frame 鈫?release page.
   useLayoutEffect(() => {
     const v = doorVideo.current;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -613,7 +613,7 @@ const Prototype = () => {
       // or the `ended` event is missed, this hard cap unlocks anyway.
       capId = window.setTimeout(finish, ((v.duration || VIDEO_FALLBACK_DURATION) * 1000) + 800);
       // Only play the cinematic open when enough is buffered to run without a
-      // stall; otherwise jump straight to the open frame and reveal — a clean cut
+      // stall; otherwise jump straight to the open frame and reveal 鈥?a clean cut
       // beats a frozen, half-open door. (readyState 3 = HAVE_FUTURE_DATA.)
       if (v.readyState >= 3) {
         v.play().catch(() => finish());
@@ -636,8 +636,8 @@ const Prototype = () => {
     return () => { removeIntent(); v?.removeEventListener("ended", onEnded); if (capId) window.clearTimeout(capId); unlock(); };
   }, []);
 
-  // Warm up the (heavy) hero video during browser idle time — after the critical
-  // above-the-fold render — so it's buffered before the user scrolls, without
+  // Warm up the (heavy) hero video during browser idle time 鈥?after the critical
+  // above-the-fold render 鈥?so it's buffered before the user scrolls, without
   // the 3 MB fetch competing with the initial paint.
   useEffect(() => {
     const v = doorVideo.current;
@@ -651,11 +651,11 @@ const Prototype = () => {
 
   return (
     <div className="w-full text-[#221F20] font-sans antialiased overflow-x-hidden" style={{ background: CHAMP_BG }}>
-      {/* ══ Header ══ */}
+      {/* 鈺愨晲 Header 鈺愨晲 */}
       <header className={`fixed top-0 inset-x-0 z-[70] transition-[background-color,box-shadow] duration-500 ${solid ? "bg-[#F5F1EA]/90 backdrop-blur-md shadow-[0_1px_0_rgba(34,31,32,0.06)]" : "bg-transparent"}`}>
         {!solid && <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0))" }} />}
         <div className="relative max-w-[1600px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
-          <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
+          <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY 鈥?home">
             <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto transition-[filter] duration-500" style={{ filter: solid ? "none" : "brightness(0) invert(1)" }} />
           </button>
           <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
@@ -698,7 +698,7 @@ const Prototype = () => {
         </div>
       </header>
 
-      {/* ══ 1 · Hero door video + 2 · reveal on interior frame ══ */}
+      {/* 鈺愨晲 1 路 Hero door video + 2 路 reveal on interior frame 鈺愨晲 */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
         <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="metadata" controlsList="nodownload nofullscreen noremoteplayback" onContextMenu={(e) => e.preventDefault()} aria-hidden="true" />
 
@@ -706,22 +706,22 @@ const Prototype = () => {
 
         {/* Title over closed door */}
         <div ref={title} className="absolute inset-0 z-20 pointer-events-none" style={{ willChange: "opacity, transform", transform: "translateZ(0)" }}>
-          {/* Eyebrow + headline + sub + scroll cue — dead-centered in the viewport */}
+          {/* Eyebrow + headline + sub + scroll cue 鈥?dead-centered in the viewport */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-            <div className="text-[12px] sm:text-[13px] tracking-[0.4em] uppercase font-semibold mb-8" style={{ color: CHAMP, textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>Security Doors · Smart Locks · OEM/ODM Manufacturer</div>
+            <div className="text-[12px] sm:text-[13px] tracking-[0.4em] uppercase font-semibold mb-8" style={{ color: CHAMP, textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>Security Doors 路 Smart Locks 路 OEM/ODM Manufacturer</div>
             <h1 className="font-light uppercase text-white leading-[1.08] tracking-[0.08em] text-[38px] sm:text-[60px] md:text-[82px] lg:text-[92px]" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>
               Open the Door<br />to Your<br /><span style={{ color: CHAMP }}>Next Market</span>
             </h1>
-            <p className="mt-8 max-w-lg text-sm md:text-base font-normal leading-relaxed" style={{ color: "#efe9dd", textShadow: "0 1px 14px rgba(0,0,0,0.5)" }}>A trusted manufacturer of premium security doors and smart locks — supplying distributors and projects worldwide.</p>
-            {/* Scroll cue — directly below the sub copy */}
+            <p className="mt-8 max-w-lg text-sm md:text-base font-normal leading-relaxed" style={{ color: "#efe9dd", textShadow: "0 1px 14px rgba(0,0,0,0.5)" }}>A trusted manufacturer of premium security doors and smart locks 鈥?supplying distributors and projects worldwide.</p>
+            {/* Scroll cue 鈥?directly below the sub copy */}
             <div className="mt-12 flex flex-col items-center gap-3">
-              <span className="text-[11px] tracking-[0.5em] uppercase font-light" style={{ color: CHAMP_BG, textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>Scroll to Enter ↓</span>
+              <span className="text-[11px] tracking-[0.5em] uppercase font-light" style={{ color: CHAMP_BG, textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>Scroll to Enter 鈫?/span>
               <span className="block w-px h-12 animate-pulse" style={{ background: `linear-gradient(${GOLD}, transparent)` }} />
             </div>
           </div>
         </div>
 
-        {/* Reveal copy on interior end frame — no full overlay; per-stat glass panels keep copy readable */}
+        {/* Reveal copy on interior end frame 鈥?no full overlay; per-stat glass panels keep copy readable */}
         <div ref={reveal} className="absolute inset-0 z-30 flex flex-col items-center justify-center px-[7vw] pt-40 md:pt-52 pb-16 overflow-hidden">
           {/* subtle dark gradient so the white heading stays readable without a hard overlay */}
           <div className="absolute inset-x-0 top-0 h-[68%] pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.28) 45%, rgba(13,13,13,0) 100%)" }} />
@@ -740,28 +740,28 @@ const Prototype = () => {
                 ))}
               </div>
             </div>
-            <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light animate-pulse" style={{ color: "rgba(245,241,234,0.9)", textShadow: "0 1px 10px rgba(0,0,0,0.65)" }}>Scroll ↓</div>
+            <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light animate-pulse" style={{ color: "rgba(245,241,234,0.9)", textShadow: "0 1px 10px rgba(0,0,0,0.65)" }}>Scroll 鈫?/div>
           </div>
         </div>
 
       </section>
 
-      {/* ══ 3 · Why WONLY — headline → numbers coverflow → manufacturing strength ══ */}
+      {/* 鈺愨晲 3 路 Why WONLY 鈥?headline 鈫?numbers coverflow 鈫?manufacturing strength 鈺愨晲 */}
       <section id="why" className={SECTION} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
-          {/* Title area — centered, leads the section */}
+          {/* Title area 鈥?centered, leads the section */}
           <Reveal className="max-w-3xl mx-auto text-center">
             <div className={eyebrow}>Why WONLY</div>
             <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>A Partner Built For Scale, Trusted At The Top</h2>
-            <p className={SUBTITLE + " mx-auto"} style={{ color: SUB_COLOR }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
+            <p className={SUBTITLE + " mx-auto"} style={{ color: SUB_COLOR }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership 鈥?the numbers behind every WONLY door.</p>
           </Reveal>
 
-          {/* The numbers — 3D coverflow, centered with symmetric side whitespace */}
+          {/* The numbers 鈥?3D coverflow, centered with symmetric side whitespace */}
           <div className="mt-14 md:mt-20 mx-auto max-w-5xl">
             <NumbersCoverflow />
           </div>
 
-          {/* Manufacturing strength — a distinct sub-section of cards */}
+          {/* Manufacturing strength 鈥?a distinct sub-section of cards */}
           <div className="mt-20 md:mt-28">
             <Reveal className="text-center">
               <div className={eyebrow}>Manufacturing Strength</div>
@@ -786,7 +786,7 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ Full-bleed image band A ══ */}
+      {/* 鈺愨晲 Full-bleed image band A 鈺愨晲 */}
       <section className="relative h-[62vh] min-h-[420px] w-full overflow-hidden flex items-center justify-center">
         <img src={IMG.factoryLine} alt="WONLY 5G-connected smart factory production line" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.5), rgba(34,31,32,0.68))" }} />
@@ -800,7 +800,7 @@ const Prototype = () => {
         </Reveal>
       </section>
 
-      {/* ══ 4 · Products — expanding horizontal gallery ══ */}
+      {/* 鈺愨晲 4 路 Products 鈥?expanding horizontal gallery 鈺愨晲 */}
       <section id="products" className={SECTION} style={{ background: BG_LIGHT }}>
         <div className={CONTAINER}>
         <Reveal className="shrink-0">
@@ -830,7 +830,7 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ Full-bleed image band B ══ */}
+      {/* 鈺愨晲 Full-bleed image band B 鈺愨晲 */}
       <section className="relative h-[62vh] min-h-[420px] w-full overflow-hidden flex items-center justify-center">
         <img src={IMG.proj1} alt="WONLY doors installed in landmark projects" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.42), rgba(34,31,32,0.7))" }} />
@@ -840,7 +840,7 @@ const Prototype = () => {
         </Reveal>
       </section>
 
-      {/* ══ 6 · Certifications & Honors — real-logo wall (one screen, centered) ══ */}
+      {/* 鈺愨晲 6 路 Certifications & Honors 鈥?real-logo wall (one screen, centered) 鈺愨晲 */}
       <section id="certs" className={SECTION + " cv-auto"} style={{ background: BG_LIGHT }}>
         <div className={CONTAINER}>
         <Reveal className="max-w-3xl">
@@ -870,7 +870,7 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ 7 · Partnership (visual anchor — dark image background) ══ */}
+      {/* 鈺愨晲 7 路 Partnership (visual anchor 鈥?dark image background) 鈺愨晲 */}
       <section id="partnership" className={"relative overflow-hidden " + SECTION}>
         <img src={IMG.yizhai1} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "rgba(26,23,24,0.9)" }} />
@@ -896,7 +896,7 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ Company timeline ══ */}
+      {/* 鈺愨晲 Company timeline 鈺愨晲 */}
       <section className={SECTION} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
           <Reveal className="max-w-3xl">
@@ -907,7 +907,7 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ 8 · Global Footprint (one screen, centered) ══ */}
+      {/* 鈺愨晲 8 路 Global Footprint (one screen, centered) 鈺愨晲 */}
       <section id="footprint" className={SECTION + " cv-auto"} style={{ background: BG_LIGHT }}>
         <div className={CONTAINER}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
@@ -917,7 +917,7 @@ const Prototype = () => {
           <Reveal delay={120}>
             <div className={eyebrow}>Global Footprint</div>
             <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>We Spread Around The World</h2>
-            <p className={SUBTITLE} style={{ color: SUB_COLOR }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
+            <p className={SUBTITLE} style={{ color: SUB_COLOR }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions 鈥?backed by five manufacturing bases and six R&D centers.</p>
             <div className="mt-7 grid grid-cols-2 gap-4">
               {FOOTPRINT_STATS.map((s) => (
                 <div key={s.label} className="rounded-xl p-5" style={{ background: "#efeae0" }}>
@@ -932,20 +932,20 @@ const Prototype = () => {
       </section>
 
 
-      {/* ══ 9 · Partners (text, logos pending authorization) ══ */}
+      {/* 鈺愨晲 9 路 Partners (text, logos pending authorization) 鈺愨晲 */}
       <section id="partners" className={SECTION + " text-center cv-auto"} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
         <Reveal>
           <div className={eyebrow + " mb-[14px]"}>Trusted Across Industries</div>
           <h2 className={h2cls + " max-w-4xl mx-auto"} style={{ color: DARK }}>Trusted By Tech &amp; Real-Estate Leaders</h2>
-          {/* Paginated flat grid — 4×2, 8 per page; arrows slide whole pages */}
+          {/* Paginated flat grid 鈥?4脳2, 8 per page; arrows slide whole pages */}
           <PartnersPager />
 
           {/* Trusted by China's leading developers */}
           <div className="mt-12 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
         </Reveal>
         </div>
-        {/* full-bleed logo carousel — spans the whole section width */}
+        {/* full-bleed logo carousel 鈥?spans the whole section width */}
         <div className="mt-6 w-full overflow-hidden">
             <div className="flex flex-col gap-3">
               {[0, 1].map((row) => {
@@ -966,7 +966,7 @@ const Prototype = () => {
           </div>
       </section>
 
-      {/* ══ 10 · Contact / Inquiry ══ */}
+      {/* 鈺愨晲 10 路 Contact / Inquiry 鈺愨晲 */}
       <section id="contact" className={SECTION} style={{ background: DARK }}>
         <div className={CONTAINER}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-start">
@@ -974,20 +974,20 @@ const Prototype = () => {
             <div className={eyebrow} style={{ color: CHAMP }}>Get Solutions &amp; Quote</div>
             <h2 className={h2cls + " mt-[14px] text-white"}>Ready To Open<br />Your Market?</h2>
             <p className="mt-6 max-w-md text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>
-              Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
+              Tell us about your project or territory 鈥?our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
             </p>
             <div className="mt-10 space-y-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.85)" }}>
-              <a href="mailto:wonlyglobal@wonly.net" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> wonlyglobal@wonly.net</a>
+              <a href="mailto:inquiry@wonlyglobal.com" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> inquiry@wonlyglobal.com</a>
               <a href="https://wa.me/12052401832" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:underline"><MessageCircle size={16} style={{ color: GOLD }} /> WhatsApp +1 (205) 240-1832</a>
             </div>
           </Reveal>
 
-          {/* TODO: wire submission to a real endpoint (wonlyglobal@wonly.net or a form service) before launch */}
+          {/* TODO: wire submission to a real endpoint (inquiry@wonlyglobal.com or a form service) before launch */}
           <Reveal delay={120}>
             {sent ? (
               <div className="rounded-2xl border border-white/15 bg-white/5 p-10 md:p-14 text-center">
                 <div className="mx-auto w-12 h-12 rounded-full flex items-center justify-center" style={{ background: `${GOLD}22` }}><Check size={22} style={{ color: GOLD }} /></div>
-                <h3 className="mt-5 text-xl md:text-2xl font-light text-white">Thank you — your request has been received.</h3>
+                <h3 className="mt-5 text-xl md:text-2xl font-light text-white">Thank you 鈥?your request has been received.</h3>
                 <p className="mt-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.7)" }}>Our team will reply within 24 hours with tailored specifications, compliance documentation and pricing.</p>
               </div>
             ) : (
@@ -1002,7 +1002,7 @@ const Prototype = () => {
               <label className="block sm:col-span-2">
                 <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Interest <span style={{ color: "#e6928a" }}>*</span></span>
                 <select value={form.interest} onChange={(ev) => setField("interest", ev.target.value)} aria-invalid={!!errors.interest} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors.interest ? "#c0564a" : "rgba(255,255,255,0.15)", color: form.interest ? "#fff" : "rgba(255,255,255,0.3)" }}>
-                  <option value="" disabled className="text-black">Select an option…</option>
+                  <option value="" disabled className="text-black">Select an option鈥?/option>
                   <option className="text-black">Distributor</option>
                   <option className="text-black">Project</option>
                   <option className="text-black">OEM / ODM</option>
@@ -1022,7 +1022,7 @@ const Prototype = () => {
         </div>
       </section>
 
-      {/* ══ Footer ══ */}
+      {/* 鈺愨晲 Footer 鈺愨晲 */}
       <footer className="pt-16 pb-10" style={{ background: "#1a1718" }}>
         <div className={CONTAINER}>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
@@ -1054,12 +1054,12 @@ const Prototype = () => {
           ))}
         </div>
         <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
-          © WONLY · SSE 605268 · Global Smart-Security Ecosystem Leader
+          漏 WONLY 路 SSE 605268 路 Global Smart-Security Ecosystem Leader
         </div>
         </div>
       </footer>
 
-      {/* Factory-tour video lightbox — drop the real clip at public/videos/factory-tour.mp4 */}
+      {/* Factory-tour video lightbox 鈥?drop the real clip at public/videos/factory-tour.mp4 */}
       {videoOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{ background: "rgba(13,13,13,0.92)" }} onClick={() => setVideoOpen(false)}>
           <button onClick={() => setVideoOpen(false)} className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors" aria-label="Close video"><X size={30} /></button>
