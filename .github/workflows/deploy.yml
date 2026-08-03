@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Daily rebuild (01:23 UTC = 09:23 Beijing) so date-scheduled articles in
+    # src/lib/articles.ts go live automatically on their publish date.
+    # Off-peak minute — top-of-hour crons get dropped by GitHub under load.
+    - cron: '23 1 * * *'
 
 # Allow the workflow to publish to GitHub Pages
 permissions:
@@ -31,6 +36,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # Inject <url> entries into public/sitemap.xml for every article whose
+      # publish date has arrived (idempotent; runs before build so prerender
+      # picks the routes up). Future-dated articles stay out until their date.
+      - name: Sync scheduled articles into sitemap
+        run: node scripts/sync-article-sitemap.mjs
 
       - name: Build
         # Production build. VITE_BASE defaults to "/" (custom domain at root).
