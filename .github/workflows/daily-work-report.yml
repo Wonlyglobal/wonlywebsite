@@ -1,0 +1,30 @@
+name: Daily Work Report
+
+on:
+  schedule:
+    # 10:07 UTC = 18:07 Beijing — daily work summary to the Feishu group.
+    # Off-peak minute: top-of-hour crons get dropped by GitHub under load.
+    - cron: '7 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history for git log)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Send work report to Feishu
+        env:
+          FEISHU_WORK_WEBHOOK: ${{ secrets.FEISHU_WORK_WEBHOOK }}
+        run: node scripts/work-report.mjs
