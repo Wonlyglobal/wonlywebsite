@@ -11,7 +11,7 @@ const input = "mt-1.5 w-full rounded-lg px-4 py-2.5 text-sm text-[#221F20] bg-[#
 export default function Contact() {
   useSeo({
     title: "Contact | WONLY",
-    description: "Contact WONLY for distributor, project or OEM/ODM enquiries. Email wonlyglobal@wonly.net or message us on WhatsApp — replies within 24 hours.",
+    description: "Contact WONLY for distributor, project or OEM/ODM enquiries. Email inquiry@wonlyglobal.com or message us on WhatsApp — replies within 24 hours.",
     path: "/contact",
   });
 
@@ -57,9 +57,9 @@ export default function Contact() {
       });
       const data = await res.json();
       if (data.success) { setSent(true); trackLead({ form_location: "contact_page" }); }
-      else setErrors({ submit: data.message || "Submission failed. Please email wonlyglobal@wonly.net." });
+      else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
     } catch {
-      setErrors({ submit: "Network error. Please email wonlyglobal@wonly.net directly." });
+      setErrors({ submit: "Network error. Please email inquiry@wonlyglobal.com directly." });
     } finally {
       setSending(false);
     }
@@ -86,11 +86,11 @@ export default function Contact() {
         <div>
           <h2 className="text-[13px] tracking-[0.28em] uppercase font-bold mb-6" style={{ color: GOLD }}>Get in Touch</h2>
 
-          <a href="mailto:wonlyglobal@wonly.net" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+          <a href="mailto:inquiry@wonlyglobal.com" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><Mail size={19} style={{ color: GOLD }} /></span>
             <span>
               <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Email</span>
-              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">wonlyglobal@wonly.net</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">inquiry@wonlyglobal.com</span>
               <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Overseas sales &amp; partnership enquiries</span>
             </span>
           </a>
@@ -159,7 +159,7 @@ export default function Contact() {
                   <textarea className={input + " min-h-[110px] resize-y"} style={border("message")} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Products, quantities, target market, timeline…" />{errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.message}</span>}</label>
                 {errors.submit && <div className="mt-4 text-[13px] text-center" style={{ color: "#c0564a" }}>{errors.submit}</div>}
                 <button type="submit" disabled={sending} className="mt-5 w-full py-[15px] rounded-lg text-sm font-semibold text-white disabled:opacity-60" style={{ background: DARK }}>{sending ? "Sending…" : "Submit Enquiry →"}</button>
-                <div className="mt-3 text-[12px] text-center" style={{ color: MUTED }}>Or email us directly at wonlyglobal@wonly.net — we reply within 24 hours.</div>
+                <div className="mt-3 text-[12px] text-center" style={{ color: MUTED }}>Or email us directly at inquiry@wonlyglobal.com — we reply within 24 hours.</div>
               </form>
             )}
           </div>

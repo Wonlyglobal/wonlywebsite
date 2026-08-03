@@ -144,9 +144,9 @@ export function QuoteModal() {
       });
       const data = await res.json();
       if (data.success) { setSent(true); trackLead({ form_location: "quote_modal", business_type: form.biz || "" }); }
-      else setErrors({ submit: data.message || "Submission failed. Please email wonlyglobal@wonly.net." });
+      else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
     } catch {
-      setErrors({ submit: "Network error. Please email wonlyglobal@wonly.net directly." });
+      setErrors({ submit: "Network error. Please email inquiry@wonlyglobal.com directly." });
     } finally {
       setSending(false);
     }
@@ -325,7 +325,7 @@ const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = [
     { l: "Contact", href: "/contact" },
   ] },
   { h: "Get in Touch", links: [
-    { l: "wonlyglobal@wonly.net", href: "mailto:wonlyglobal@wonly.net" },
+    { l: "inquiry@wonlyglobal.com", href: "mailto:inquiry@wonlyglobal.com" },
     { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
   ] },
 ];
