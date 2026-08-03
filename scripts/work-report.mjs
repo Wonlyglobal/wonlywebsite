@@ -106,6 +106,15 @@ const next = scheduled[0];
 let urlCount = "?";
 try { urlCount = String((readFileSync("public/sitemap.xml", "utf8").match(/<loc>/g) || []).length); } catch { /* ignore */ }
 
+// ---- 4) 运营/分析工作日志(docs/worklog.md,当天条目) ----
+let opsToday = [];
+try {
+  opsToday = readFileSync("docs/worklog.md", "utf8")
+    .split("\n")
+    .filter((l) => l.startsWith(today + " |"))
+    .map((l) => "• " + l.slice(today.length + 2).trim());
+} catch { /* no worklog yet */ }
+
 // ---- 组卡片 ----
 const md = [];
 md.push(`**📅 ${today} · 网站工作日报**`);
@@ -129,6 +138,12 @@ if (catsWithWork.length) {
   }
 } else {
   md.push(`**🔧 今日建设工作**：无代码改动（内容按排期自动发布中）`);
+}
+if (opsToday.length) {
+  md.push("");
+  md.push(`**📋 运营与分析工作**`);
+  md.push(...opsToday.slice(0, 8));
+  if (opsToday.length > 8) md.push(`• …等共 ${opsToday.length} 项`);
 }
 md.push("");
 md.push(`**🗺️ Sitemap**：${urlCount} 个 URL`);
