@@ -593,6 +593,9 @@ const Prototype = () => {
     const reveal_ = () => {
       if (done) return;
       done = true;
+      // Land on the bright open-door end frame — if the clip stalled or errored,
+      // jumping to the end beats leaving copy over a dark closed door.
+      if (v) { try { if (!v.ended) { v.pause(); v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } } catch { /* poster ok */ } }
       if (title.current) { title.current.style.transition = "opacity 1.1s ease, transform 1.1s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-60px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity 1.4s ease"; scrim.current.style.opacity = "0"; }
       if (reveal.current) { reveal.current.style.visibility = "visible"; requestAnimationFrame(() => { if (reveal.current) reveal.current.style.opacity = "1"; }); }
