@@ -1,0 +1,44 @@
+name: Uptime Monitor
+
+# 官网可用性监控:每小时探测一次首页与文章列表页。
+# 连续 3 次(间隔 20 秒)都失败才告警,避免网络抖动误报。
+# 分钟取 37(错峰,整点 cron 在 GitHub 高峰期会被丢弃)。
+
+on:
+  schedule:
+    - cron: '37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe site
+        id: probe
+        run: |
+          check() {
+            for i in 1 2 3; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" -m 20 -L "$1") && [ "$code" = "200" ] && return 0
+              echo "attempt $i on $1 -> $code"; sleep 20
+            done
+            return 1
+          }
+          FAILED=""
+          check "https://www.wonlyglobal.com/" || FAILED="$FAILED 首页"
+          check "https://www.wonlyglobal.com/insights/" || FAILED="$FAILED 文章页"
+          if [ -n "$FAILED" ]; then
+            echo "failed_pages=$FAILED" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+      - name: Notify Feishu on downtime
+        if: failure()
+        env:
+          HOOK: ${{ secrets.FEISHU_WORK_WEBHOOK }}
+          PAGES: ${{ steps.probe.outputs.failed_pages }}
+        run: |
+          [ -n "$HOOK" ] && curl -s -m 10 -X POST "$HOOK" -H 'Content-Type: application/json' \
+            -d "{\"msg_type\":\"text\",\"content\":{\"text\":\"【官网告警】www.wonlyglobal.com 访问异常(${PAGES}),连续3次探测失败。请检查:1) https://www.githubstatus.com 看 GitHub Pages 是否故障 2) DNS 解析是否正常 3) Actions 最近部署是否成功。\"}}" || true

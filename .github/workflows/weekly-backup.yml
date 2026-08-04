@@ -1,0 +1,43 @@
+name: Weekly Repo Backup
+
+# 每周日 02:41 UTC(北京时间周日 10:41)把整个仓库(含全部历史)打包成
+# git bundle 存为 Actions 工件,保留 90 天。灾难恢复时用
+# `git clone wonlywebsite.bundle` 即可完整还原。
+# 建议每季度手动下载一份归档到公司内部存储。
+
+on:
+  schedule:
+    - cron: '41 2 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create git bundle
+        run: |
+          git bundle create wonlywebsite-$(date +%Y%m%d).bundle --all
+          ls -lh *.bundle
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo-backup-${{ github.run_number }}
+          path: "*.bundle"
+          retention-days: 90
+
+      - name: Notify Feishu on failure
+        if: failure()
+        env:
+          HOOK: ${{ secrets.FEISHU_WORK_WEBHOOK }}
+        run: |
+          [ -n "$HOOK" ] && curl -s -m 10 -X POST "$HOOK" -H 'Content-Type: application/json' \
+            -d '{"msg_type":"text","content":{"text":"【官网告警】每周仓库备份失败,请到 Actions 查看。"}}' || true

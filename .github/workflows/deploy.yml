@@ -69,6 +69,16 @@ jobs:
         with:
           path: dist
 
+      # 构建失败 → 立即告警到飞书工作群(复用日报 webhook)。没有这一步,
+      # 构建红了线上会一直停在旧版而无人知晓(2026-08-04 已发生过一次)。
+      - name: Notify Feishu on failure
+        if: failure()
+        env:
+          HOOK: ${{ secrets.FEISHU_WORK_WEBHOOK }}
+        run: |
+          [ -n "$HOOK" ] && curl -s -m 10 -X POST "$HOOK" -H 'Content-Type: application/json' \
+            -d "{\"msg_type\":\"text\",\"content\":{\"text\":\"【官网告警】构建/部署失败:${GITHUB_WORKFLOW} #${GITHUB_RUN_NUMBER}(commit ${GITHUB_SHA:0:7})。线上仍是旧版本,请尽快处理:https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}}" || true
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -79,3 +89,13 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # 构建失败 → 立即告警到飞书工作群(复用日报 webhook)。没有这一步,
+      # 构建红了线上会一直停在旧版而无人知晓(2026-08-04 已发生过一次)。
+      - name: Notify Feishu on failure
+        if: failure()
+        env:
+          HOOK: ${{ secrets.FEISHU_WORK_WEBHOOK }}
+        run: |
+          [ -n "$HOOK" ] && curl -s -m 10 -X POST "$HOOK" -H 'Content-Type: application/json' \
+            -d "{\"msg_type\":\"text\",\"content\":{\"text\":\"【官网告警】构建/部署失败:${GITHUB_WORKFLOW} #${GITHUB_RUN_NUMBER}(commit ${GITHUB_SHA:0:7})。线上仍是旧版本,请尽快处理:https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}}" || true
