@@ -8,7 +8,7 @@
 // Runs in GitHub Actions (daily-work-report.yml); needs fetch-depth: 0.
 
 import { execSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 
 const WEBHOOK = process.env.FEISHU_WORK_WEBHOOK;
 if (!WEBHOOK) { console.error("FEISHU_WORK_WEBHOOK not set"); process.exit(1); }
@@ -45,6 +45,8 @@ const PAGE_MAP = [
   [/src\/pages\/insights\//, "洞察文章模板页"],
   [/src\/pages\/legal\//, "法律条款页"],
   [/src\/lib\/articles\.ts/, "SEO 文章内容"],
+  [/content\/articles\//, "SEO 文章内容"],
+  [/public\/admin\//, "内容后台（CMS）"],
   [/src\/lib\/site-ui/, "全站组件（页头/页脚/询盘弹窗）"],
   [/src\/lib\/seo/, "SEO 组件"],
   [/src\/lib\//, "公共组件"],
@@ -93,10 +95,18 @@ try {
   }
 } catch { /* no git — leave empty */ }
 
-// ---- 2) 文章:今日上线 + 进度 ----
-const src = readFileSync("src/lib/articles.ts", "utf8");
-const arts = [...src.matchAll(/slug: "([^"]+)"[\s\S]*?title: "([^"]+)"[\s\S]*?date: "(\d{4}-\d{2}-\d{2})"/g)]
-  .map((m) => ({ slug: m[1], title: m[2], date: m[3] }));
+// ---- 2) 文章:今日上线 + 进度(从 content/articles/*.md 读取) ----
+const arts = readdirSync("content/articles")
+  .filter((f) => f.endsWith(".md"))
+  .map((f) => {
+    const s = readFileSync(`content/articles/${f}`, "utf8");
+    return {
+      slug: s.match(/^slug:\s*"?([^"\n]+)"?$/m)?.[1] || "",
+      title: (s.match(/^title:\s*"?(.+?)"?$/m)?.[1] || "").replace(/\\"/g, '"'),
+      date: s.match(/^date:\s*"?(\d{4}-\d{2}-\d{2})"?$/m)?.[1] || "",
+    };
+  })
+  .filter((a) => a.slug && a.date);
 const publishedToday = arts.filter((a) => a.date === today);
 const live = arts.filter((a) => a.date <= today);
 const scheduled = arts.filter((a) => a.date > today).sort((a, b) => (a.date < b.date ? -1 : 1));
@@ -148,7 +158,7 @@ if (opsToday.length) {
 md.push("");
 md.push(`**🗺️ Sitemap**：${urlCount} 个 URL`);
 md.push("");
-md.push(`[打开网站](https://www.wonlyglobal.com/) · [文章列表](https://www.wonlyglobal.com/insights/) · [Actions](https://github.com/chloe19980401/wonlywebsite/actions)`);
+md.push(`[打开网站](https://www.wonlyglobal.com/) · [文章列表](https://www.wonlyglobal.com/insights/) · [Actions](https://github.com/Wonlyglobal/wonlywebsite/actions)`);
 
 const card = {
   msg_type: "interactive",

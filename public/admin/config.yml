@@ -1,0 +1,38 @@
+# WONLY 内容后台配置(Sveltia/Decap CMS)
+backend:
+  name: github
+  repo: Wonlyglobal/wonlywebsite
+  branch: main
+
+media_folder: "public/images/uploads"   # 上传图片存放位置(仓库内)
+public_folder: "images/uploads"         # 文章里引用的路径(相对 images 根)
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: articles
+    label: "News & Insights 文章"
+    label_singular: "文章"
+    folder: "content/articles"
+    extension: "md"
+    format: "frontmatter"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    summary: "{{date}} · {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: slug, label: "URL Slug(英文短横线,创建后勿改)", widget: string, hint: "如 security-doors-for-hotels" }
+      - { name: title, label: "标题 Title", widget: string }
+      - { name: seoTitle, label: "SEO 标题(≤60字符,含 | WONLY)", widget: string }
+      - { name: description, label: "Meta 描述(≤155字符)", widget: text }
+      - { name: category, label: "分类", widget: select, options: ["Buying Guide", "Technology", "Market Insight", "Company"] }
+      - { name: date, label: "发布日期(未到期自动隐藏)", widget: string, hint: "格式 YYYY-MM-DD;填未来日期=定时发布" }
+      - { name: dateLabel, label: "日期显示文本", widget: string, hint: "如 5 August 2026" }
+      - { name: readMins, label: "阅读分钟数", widget: number, default: 6, value_type: int }
+      - { name: cover, label: "封面图路径(相对 images/,如 door/gallery/g1-front.jpg)", widget: string }
+      - { name: excerpt, label: "列表页摘要", widget: text }
+      - { name: keywords, label: "SEO 关键词", widget: list }
+      - { name: body, label: "正文(## 二级标题;- 列表;空行分段)", widget: markdown }

@@ -7,19 +7,24 @@
 // skipped, so unpublished URLs never leak into the sitemap or the prerender.
 // Idempotent — safe to run on every CI build.
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 
 const SITE = "https://www.wonlyglobal.com";
-const ARTICLES_TS = "src/lib/articles.ts";
+const CONTENT_DIR = "content/articles";
 const SITEMAP = "public/sitemap.xml";
 
-const src = readFileSync(ARTICLES_TS, "utf8");
 const today = new Date().toISOString().slice(0, 10);
 
-// Pair each slug with the first date that follows it (fields are adjacent in
-// every article object, so a joint scan keeps them correctly matched).
-const pairs = [...src.matchAll(/slug: "([^"]+)"[\s\S]*?date: "(\d{4}-\d{2}-\d{2})"/g)]
-  .map((m) => ({ slug: m[1], date: m[2] }));
+// One markdown file per article; slug + date live in the frontmatter.
+const pairs = readdirSync(CONTENT_DIR)
+  .filter((f) => f.endsWith(".md"))
+  .map((f) => {
+    const src = readFileSync(`${CONTENT_DIR}/${f}`, "utf8");
+    const slug = src.match(/^slug:\s*"?([^"\n]+)"?$/m)?.[1];
+    const date = src.match(/^date:\s*"?(\d{4}-\d{2}-\d{2})"?$/m)?.[1];
+    return slug && date ? { slug, date } : null;
+  })
+  .filter(Boolean);
 
 if (pairs.length === 0) {
   console.error("sync-article-sitemap: no articles found — aborting without changes");
