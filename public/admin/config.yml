@@ -12,6 +12,60 @@ slug:
   clean_accents: true
 
 collections:
+  - name: settings
+    label: "站点设置"
+    files:
+      - name: navigation
+        label: "导航栏 & 页脚"
+        file: "content/settings/navigation.json"
+        format: "json"
+        fields:
+          - name: nav
+            label: "顶部导航(增删/排序/改名)"
+            widget: list
+            fields:
+              - { name: label, label: "显示名", widget: string }
+              - { name: href, label: "链接(留空=仅作分组标题)", widget: string, required: false, default: "" }
+              - name: children
+                label: "下拉子项"
+                widget: list
+                required: false
+                fields:
+                  - { name: label, label: "显示名", widget: string }
+                  - { name: href, label: "链接", widget: string, required: false, default: "" }
+                  - { name: img, label: "缩略图(相对 images/,可留空)", widget: string, required: false, default: "" }
+                  - name: children
+                    label: "三级子项"
+                    widget: list
+                    required: false
+                    fields:
+                      - { name: label, label: "显示名", widget: string }
+                      - { name: href, label: "链接", widget: string, required: false, default: "" }
+                      - { name: img, label: "缩略图(可留空)", widget: string, required: false, default: "" }
+          - name: footer
+            label: "页脚栏目"
+            widget: list
+            fields:
+              - { name: h, label: "栏目标题", widget: string }
+              - name: links
+                label: "链接列表"
+                widget: list
+                fields:
+                  - { name: l, label: "显示文本", widget: string }
+                  - { name: href, label: "链接(mailto:/https:/站内路径均可)", widget: string, required: false, default: "" }
+      - name: tdk
+        label: "SEO TDK(标题/描述/关键词)"
+        file: "content/settings/tdk.json"
+        format: "json"
+        fields:
+          - name: pages
+            label: "页面 TDK 覆盖(留空=用默认;path 如 /advantages)"
+            widget: list
+            fields:
+              - { name: path, label: "页面路径", widget: string, hint: "如 / 或 /products/security-doors" }
+              - { name: title, label: "Title(≤60字符,留空用默认)", widget: string, required: false, default: "" }
+              - { name: description, label: "Description(≤155字符,留空用默认)", widget: text, required: false, default: "" }
+              - { name: keywords, label: "Keywords(逗号分隔,可留空)", widget: string, required: false, default: "" }
   - name: articles
     label: "News & Insights 文章"
     label_singular: "文章"

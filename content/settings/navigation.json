@@ -1,0 +1,48 @@
+{
+  "nav": [
+    { "label": "Product", "href": "", "children": [
+      { "label": "Door", "href": "/product/door", "img": "images/alu-k300max.webp", "children": [
+        { "label": "Metal Door", "href": "/products/door/metal-door", "img": "images/5products/nav-security-door.png" },
+        { "label": "Wooden Door", "href": "/product/door/wooden-door", "img": "images/5products/nav-wooden-door.png" }
+      ] },
+      { "label": "Smart Lock", "href": "/product/smart-lock", "img": "images/lock-s80.webp" },
+      { "label": "Smart Window", "href": "/product/smart-window", "img": "images/5products/dropdown-window.png" },
+      { "label": "Whole-House Intelligence", "href": "/product/whole-house", "img": "images/5products/dropdown-control.png" }
+    ] },
+    { "label": "Advantages", "href": "/advantages", "children": [
+      { "label": "Why Wonly Door", "href": "/advantages#why-wonly-door" },
+      { "label": "Why Wonly Lock", "href": "/advantages#why-wonly-lock" },
+      { "label": "Innovation & Certifications", "href": "/advantages#innovation-certifications" }
+    ] },
+    { "label": "Manufacturing & R&D", "href": "/manufacturing-rd" },
+    { "label": "Global Strategy", "href": "/global-strategy" },
+    { "label": "Partnership", "href": "/partnership" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "footer": [
+    { "h": "Product", "links": [
+      { "l": "Door", "href": "/product/door" },
+      { "l": "Metal Door", "href": "/products/door/metal-door" },
+      { "l": "Wooden Door", "href": "/product/door/wooden-door" },
+      { "l": "Smart Lock", "href": "/product/smart-lock" },
+      { "l": "Smart Window", "href": "/product/smart-window" },
+      { "l": "Whole-House Intelligence", "href": "/product/whole-house" }
+    ] },
+    { "h": "Advantages", "links": [
+      { "l": "Why Wonly Door", "href": "/advantages#why-wonly-door" },
+      { "l": "Why Wonly Lock", "href": "/advantages#why-wonly-lock" },
+      { "l": "Innovation & Certifications", "href": "/advantages#innovation-certifications" }
+    ] },
+    { "h": "Company", "links": [
+      { "l": "Manufacturing & R&D", "href": "/manufacturing-rd" },
+      { "l": "Global Strategy", "href": "/global-strategy" },
+      { "l": "Partnership", "href": "/partnership" },
+      { "l": "News & Insights", "href": "/insights" },
+      { "l": "Contact", "href": "/contact" }
+    ] },
+    { "h": "Get in Touch", "links": [
+      { "l": "inquiry@wonlyglobal.com", "href": "mailto:inquiry@wonlyglobal.com" },
+      { "l": "WhatsApp +1 (205) 240-1832", "href": "https://wa.me/12052401832" }
+    ] }
+  ]
+}

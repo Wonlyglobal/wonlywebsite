@@ -12,6 +12,16 @@ export const DEFAULT_OG_IMAGE =
 
 type JsonLd = Record<string, unknown>;
 
+/* ── CMS TDK overrides: content/settings/tdk.json (edited via /admin) ─────────
+   Each entry: { path, title, description, keywords }. A non-empty title or
+   description overrides the page's coded default; empty string = keep default.
+   keywords (non-empty) is injected as <meta name="keywords">. */
+const TDK_RAW = import.meta.glob("/content/settings/tdk.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const TDK_PAGES: { path: string; title?: string; description?: string; keywords?: string }[] =
+  (JSON.parse(Object.values(TDK_RAW)[0] || '{"pages":[]}') as { pages?: { path: string; title?: string; description?: string; keywords?: string }[] }).pages || [];
+const norm_ = (p: string) => (p === "/" ? "/" : p.replace(/\/+$/, ""));
+const tdkFor = (path: string) => TDK_PAGES.find((p) => norm_(p.path) === norm_(path));
+
 interface SeoInput {
   /** Full <title> text (include brand suffix). */
   title: string;
@@ -58,13 +68,18 @@ function upsertLink(rel: string, href: string) {
  * prerendering/SSG — tracked as a follow-up, see HANDOFF.md.
  */
 export function useSeo({
-  title,
-  description,
+  title: titleProp,
+  description: descriptionProp,
   path,
   image = DEFAULT_OG_IMAGE,
   type = "website",
   jsonLd,
 }: SeoInput) {
+  // CMS overrides (content/settings/tdk.json) beat the coded defaults.
+  const ov = tdkFor(path);
+  const title = ov?.title?.trim() ? ov.title.trim() : titleProp;
+  const description = ov?.description?.trim() ? ov.description.trim() : descriptionProp;
+  const keywords = ov?.keywords?.trim() || "";
   const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : "";
   useEffect(() => {
     // GitHub Pages serves each prerendered route as /<path>/index.html — i.e.
@@ -78,6 +93,7 @@ export function useSeo({
     document.documentElement.lang = "en";
 
     upsertMeta("name", "description", description);
+    if (keywords) upsertMeta("name", "keywords", keywords);
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", type);

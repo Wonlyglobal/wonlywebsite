@@ -39,26 +39,28 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 
 /* Full nav framework (mirrors the homepage). Section items link back to the
    homepage and scroll there via its hash handler; S80 + About are real pages. */
-const NAV: { label: string; href?: string; children?: { label: string; href: string; img?: string; children?: { label: string; href: string; img?: string }[] }[] }[] = [
-  { label: "Product", children: [
-    { label: "Door", href: "/product/door", img: `${BASE}images/alu-k300max.webp`, children: [
-      { label: "Metal Door", href: "/products/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
-      { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
-    ] },
-    { label: "Smart Lock", href: "/product/smart-lock", img: `${BASE}images/lock-s80.webp` },
-    { label: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/dropdown-window.png` },
-    { label: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
-  ] },
-  { label: "Advantages", href: "/advantages", children: [
-    { label: "Why Wonly Door", href: "/advantages#why-wonly-door" },
-    { label: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
-    { label: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
-  ] },
-  { label: "Manufacturing & R&D", href: "/manufacturing-rd" },
-  { label: "Global Strategy", href: "/global-strategy" },
-  { label: "Partnership", href: "/partnership" },
-  { label: "Contact", href: "/contact" },
-];
+/* ── Navigation & footer are CMS-editable: content/settings/navigation.json ──
+   Edited via /admin → 站点设置. Image paths in the JSON are relative to
+   public/images/ and get the BASE prefix here. Empty href = non-link label. */
+type NavChild = { label: string; href: string; img?: string; children?: { label: string; href: string; img?: string }[] };
+type NavItem = { label: string; href?: string; children?: NavChild[] };
+
+const NAV_RAW = import.meta.glob("/content/settings/navigation.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const SITE_NAV_DATA = JSON.parse(Object.values(NAV_RAW)[0] || '{"nav":[],"footer":[]}') as {
+  nav: { label: string; href?: string; children?: { label: string; href?: string; img?: string; children?: { label: string; href?: string; img?: string }[] }[] }[];
+  footer: { h: string; links: { l: string; href?: string }[] }[];
+};
+const img_ = (p?: string) => (p ? `${BASE}${p.replace(/^\//, "")}` : undefined);
+const NAV: NavItem[] = SITE_NAV_DATA.nav.map((n) => ({
+  label: n.label,
+  href: n.href || undefined,
+  children: n.children?.map((c) => ({
+    label: c.label,
+    href: c.href || "#",
+    img: img_(c.img),
+    children: c.children?.map((sc) => ({ label: sc.label, href: sc.href || "#", img: img_(sc.img) })),
+  })),
+}));
 
 /* Shared "Get a Quote" modal state (zustand) */
 export const useQuoteStore = create<{
@@ -303,32 +305,9 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
   );
 }
 
-const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = [
-  { h: "Product", links: [
-    { l: "Door", href: "/product/door" },
-    { l: "Metal Door", href: "/products/door/metal-door" },
-    { l: "Wooden Door", href: "/product/door/wooden-door" },
-    { l: "Smart Lock", href: "/product/smart-lock" },
-    { l: "Smart Window", href: "/product/smart-window" },
-    { l: "Whole-House Intelligence", href: "/product/whole-house" },
-  ] },
-  { h: "Advantages", links: [
-    { l: "Why Wonly Door", href: "/advantages#why-wonly-door" },
-    { l: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
-    { l: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
-  ] },
-  { h: "Company", links: [
-    { l: "Manufacturing & R&D", href: "/manufacturing-rd" },
-    { l: "Global Strategy", href: "/global-strategy" },
-    { l: "Partnership", href: "/partnership" },
-    { l: "News & Insights", href: "/insights" },
-    { l: "Contact", href: "/contact" },
-  ] },
-  { h: "Get in Touch", links: [
-    { l: "inquiry@wonlyglobal.com", href: "mailto:inquiry@wonlyglobal.com" },
-    { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
-  ] },
-];
+/* Footer columns come from the same CMS file (content/settings/navigation.json),
+   so header and footer stay in sync from one place in /admin. */
+const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = SITE_NAV_DATA.footer;
 
 export function SiteFooter() {
   return (
