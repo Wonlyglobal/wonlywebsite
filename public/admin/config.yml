@@ -71,6 +71,12 @@ collections:
               - { name: title, label: "Title(建议 ≤60 字符,含 | WONLY)", widget: string, required: false, default: "" }
               - { name: description, label: "Description(建议 ≤155 字符)", widget: text, required: false, default: "" }
               - { name: keywords, label: "Keywords(英文逗号分隔,可留空)", widget: string, required: false, default: "" }
+      - name: site
+        label: "站点图标 Favicon"
+        file: "content/settings/site.json"
+        format: "json"
+        fields:
+          - { name: favicon, label: "浏览器标签页图标(从图库选择或上传,建议 256×256 PNG;留空=用默认香槟底图标)", widget: image, required: false, default: "" }
       - name: homepage
         label: "首页 首屏文案"
         file: "content/settings/homepage.json"

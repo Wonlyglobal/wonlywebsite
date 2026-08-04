@@ -96,39 +96,66 @@ const MD_CSS = `
  .md-root .tile.big,.md-root .tile.wide,.md-root .tile.sm{grid-column:span 1;grid-row:span 1;}}
 `;
 
-// Viewport-gated video: the source is only attached once the tile nears the
-// viewport, and playback pauses when it scrolls away. This keeps all five
-// selling-point clips (~36 MB) off the initial download — the page opens with
-// just the banner, and each clip fetches only as its tile is scrolled to. The
-// videos themselves are unchanged. `muted` is forced on the DOM property before
-// play() because React does not reliably set it from the attribute, and browsers
-// block unmuted autoplay.
-function LazyVideo({ src }: { src: string }) {
+// Poster-first, queued viewport video. The previous version attached src and
+// called play() on all five clips at once; on a slow connection Chrome's media
+// pipeline sat "waiting for the first frame" on five stalled fetches, which
+// visibly froze the page and left the tiles black. Now every tile paints its
+// poster immediately, the clips download ONE at a time through a tiny queue as
+// tiles near the viewport, and a clip that cannot produce a frame in 8s falls
+// back to its poster for good.
+const vidQueue: (() => void)[] = [];
+let vidBusy = false;
+const vidPump = () => { if (vidBusy) return; const next = vidQueue.shift(); if (next) { vidBusy = true; next(); } };
+const vidDone = () => { vidBusy = false; vidPump(); };
+
+function LazyVideo({ src, poster }: { src: string; poster: string }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [seen, setSeen] = useState(false);
+  const [attach, setAttach] = useState(false); // our queue turn arrived - src goes on
+  const [dead, setDead] = useState(false);     // clip failed - poster only, forever
+  const seenRef = useRef(false);
+
+  // Near the viewport: enqueue this tile's download; pause/resume on later scrolls.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
       (es) => es.forEach((e) => {
-        if (e.isIntersecting) { setSeen(true); el.muted = true; el.play?.().catch(() => {}); }
-        else { el.pause?.(); }
+        if (e.isIntersecting) {
+          if (!seenRef.current) { seenRef.current = true; vidQueue.push(() => setAttach(true)); vidPump(); }
+          else { el.muted = true; el.play?.().catch(() => {}); }
+        } else { el.pause?.(); }
       }),
       { rootMargin: "200px" },
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
-  // The observer flips `seen` and calls play() in the same tick, before React has
-  // attached the src — and with preload="none" nothing loads until play() runs on
-  // a real source. So kick playback once more here, after the src is on the
-  // element. The observer still handles pausing/resuming on later scroll.
+
+  // Queue turn: play, then hand the queue on at first frame, error, or an 8s stall.
   useEffect(() => {
-    if (!seen) return;
+    if (!attach) return;
     const el = ref.current;
-    if (el) { el.muted = true; el.play?.().catch(() => {}); }
-  }, [seen]);
-  return <video ref={ref} src={seen ? src : undefined} muted loop playsInline preload="none" controlsList="nodownload nofullscreen noremoteplayback" onContextMenu={(e) => e.preventDefault()} />;
+    if (!el) { vidDone(); return; }
+    let tid = 0;
+    let settled = false;
+    const settle = (ok: boolean) => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(tid);
+      if (!ok) { try { el.pause(); el.removeAttribute("src"); el.load(); } catch { /* poster stays */ } setDead(true); }
+      vidDone();
+    };
+    const onFrame = () => settle(true);
+    const onError = () => settle(false);
+    el.addEventListener("loadeddata", onFrame);
+    el.addEventListener("error", onError);
+    tid = window.setTimeout(() => settle(false), 8000);
+    el.muted = true; // React does not reliably set muted from the attribute
+    el.play?.().catch(() => {});
+    return () => { el.removeEventListener("loadeddata", onFrame); el.removeEventListener("error", onError); window.clearTimeout(tid); };
+  }, [attach]);
+
+  return <video ref={ref} src={attach && !dead ? src : undefined} poster={poster} muted loop playsInline preload="none" controlsList="nodownload nofullscreen noremoteplayback" onContextMenu={(e) => e.preventDefault()} />;
 }
 
 /* Full technical specifications */
@@ -297,17 +324,17 @@ const SecurityDoorX70 = () => {
             </div>
             <div className="bento">
               <div className="tile big">
-                <LazyVideo src={media("Auto Open & Close.mp4")} />
+                <LazyVideo src={media("Auto Open & Close.mp4")} poster={media("Auto Open & Close-poster.jpg")} />
                 <div className="scrim" />
                 <div className="label"><h3>Auto Open &amp; Close</h3></div>
               </div>
               <div className="tile wide">
-                <LazyVideo src={media("Smart Anti-Pinch System.mp4")} />
+                <LazyVideo src={media("Smart Anti-Pinch System.mp4")} poster={media("Smart Anti-Pinch System-poster.jpg")} />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Anti-Pinch System</h3></div>
               </div>
               <div className="tile sm">
-                <LazyVideo src={media("power supply3.mp4")} />
+                <LazyVideo src={media("power supply3.mp4")} poster={media("power supply3-poster.jpg")} />
                 <div className="scrim" />
                 <div className="label"><h3>Dual Power Supply</h3></div>
               </div>
@@ -329,28 +356,55 @@ const SecurityDoorX70 = () => {
                 <div className="label"><h3>Formaldehyde Sentinel</h3></div>
               </div>
               <div className="tile wide">
-                <LazyVideo src={media("Smart Perimeter Monitoring.mp4")} />
+                <LazyVideo src={media("Smart Perimeter Monitoring.mp4")} poster={media("Smart Perimeter Monitoring-poster.jpg")} />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Perimeter Monitoring</h3></div>
               </div>
               <div className="tile wide">
-                <LazyVideo src={media("Smart Voice Message2.mp4")} />
+                <LazyVideo src={media("Smart Voice Message2.mp4")} poster={media("Smart Voice Message2-poster.jpg")} />
                 <div className="scrim" />
                 <div className="label"><h3>Smart Voice Message</h3></div>
               </div>
-              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 30% 15%, #1b1815, #0b0908)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ textAlign: "center", zIndex: 3 }}>
+              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 30% 15%, #1b1815, #0b0908)", display: "flex", alignItems: "center", justifyContent: "center", gap: 28 }}>
+                {/* stylised on-door screen */}
+                <div style={{ zIndex: 3, width: 148, height: 94, borderRadius: 10, border: "1px solid rgba(201,161,94,0.55)", background: "linear-gradient(135deg, #16130f, #262019)", boxShadow: "0 14px 34px rgba(0,0,0,0.55), inset 0 0 20px rgba(201,161,94,0.12)", padding: 10, display: "flex", flexDirection: "column", justifyContent: "space-between", flexShrink: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ width: 24, height: 4, borderRadius: 2, background: "rgba(201,161,94,0.85)" }} />
+                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#5fd08a", boxShadow: "0 0 6px #5fd08a" }} />
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 5 }}>
+                    <span style={{ height: 24, borderRadius: 4, background: "rgba(201,161,94,0.22)", border: "1px solid rgba(201,161,94,0.25)" }} />
+                    <span style={{ height: 24, borderRadius: 4, background: "rgba(244,239,230,0.10)", border: "1px solid rgba(244,239,230,0.08)" }} />
+                    <span style={{ height: 24, borderRadius: 4, background: "rgba(244,239,230,0.10)", border: "1px solid rgba(244,239,230,0.08)" }} />
+                  </div>
+                  <div style={{ height: 4, borderRadius: 2, background: "rgba(244,239,230,0.16)", width: "62%" }} />
+                </div>
+                <div style={{ textAlign: "left", zIndex: 3, maxWidth: 220 }}>
                   <div style={{ fontSize: 46, fontWeight: 300, color: "#f4efe6", letterSpacing: "-1.5px", lineHeight: 1 }}>10.1<span style={{ fontSize: 22 }}>&quot;</span></div>
                   <div style={{ fontSize: 10, letterSpacing: ".18em", textTransform: "uppercase", color: "#C9A15E", marginTop: 8 }}>HD · Touch on Pro / Max</div>
+                  <div style={{ fontSize: 11, color: "rgba(244,239,230,0.55)", marginTop: 8, lineHeight: 1.7 }}>Live door camera, visitor records and scene controls — right on the door.</div>
                 </div>
                 <div className="label"><h3>10.1&quot; Smart Display</h3></div>
               </div>
-              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 70% 15%, #16221c, #0b120e)", display: "flex", alignItems: "flex-end", justifyContent: "center", paddingBottom: 26 }}>
-                <div style={{ textAlign: "center", zIndex: 3 }}>
+              </div>
+              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 70% 15%, #16221c, #0b120e)", display: "flex", alignItems: "center", justifyContent: "center", gap: 26 }}>
+                {/* flat-entry cross-section: door leaf, drop-seal, glide arrows over a level floor */}
+                <svg viewBox="0 0 220 110" style={{ width: 180, flexShrink: 0, zIndex: 3 }} aria-hidden="true">
+                  <line x1="6" y1="94" x2="214" y2="94" stroke="rgba(191,232,207,0.55)" strokeWidth="2" strokeLinecap="round" />
+                  <rect x="97" y="10" width="16" height="70" rx="2" fill="rgba(244,239,230,0.14)" stroke="rgba(191,232,207,0.5)" />
+                  <line x1="105" y1="60" x2="105" y2="72" stroke="#5fd08a" strokeWidth="1.5" strokeDasharray="2 3" />
+                  <rect x="99" y="80" width="12" height="11" rx="1.5" fill="#5fd08a" opacity="0.85" />
+                  <line x1="26" y1="87" x2="80" y2="87" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" />
+                  <polyline points="72,81 82,87 72,93" fill="none" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <line x1="130" y1="87" x2="184" y2="87" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" />
+                  <polyline points="176,81 186,87 176,93" fill="none" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <div style={{ textAlign: "left", zIndex: 3, maxWidth: 200 }}>
                   <div style={{ fontSize: 13, letterSpacing: ".12em", color: "#bfe8cf" }}>No sill · auto drop-seal</div>
-                  <div style={{ fontSize: 10, color: "rgba(180,225,200,0.6)", marginTop: 4 }}>wind · dust · insect sealed</div>
+                  <div style={{ fontSize: 11, color: "rgba(180,225,200,0.6)", marginTop: 6, lineHeight: 1.7 }}>Sealed against wind, dust and insects — yet perfectly flat for strollers, luggage and wheelchairs.</div>
                 </div>
                 <div className="label"><h3>Barrier-Free Threshold</h3></div>
+              </div>
               </div>
             </div>
           </section>

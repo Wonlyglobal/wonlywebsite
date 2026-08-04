@@ -22,6 +22,22 @@ const TDK_PAGES: { path: string; title?: string; description?: string; keywords?
 const norm_ = (p: string) => (p === "/" ? "/" : p.replace(/\/+$/, ""));
 const tdkFor = (path: string) => TDK_PAGES.find((p) => norm_(p.path) === norm_(path));
 
+/* ── CMS 站点图标: content/settings/site.json (edited via /admin) ─────────────
+   A non-empty favicon (path relative to images/) replaces the default
+   browser-tab icon at runtime; empty = keep the shipped favicon files. */
+const SITE_RAW = import.meta.glob("/content/settings/site.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+try {
+  const fav_ = (JSON.parse(Object.values(SITE_RAW)[0] || "{}") as { favicon?: string }).favicon?.trim();
+  if (fav_ && typeof document !== "undefined") {
+    const href_ = (import.meta.env.BASE_URL || "/") + "images/" + fav_.replace(/^\/?(images\/)?/, "");
+    document.querySelectorAll('link[rel="icon"]').forEach((n) => n.remove());
+    const l_ = document.createElement("link");
+    l_.rel = "icon";
+    l_.href = href_;
+    document.head.appendChild(l_);
+  }
+} catch { /* default favicon stays */ }
+
 interface SeoInput {
   /** Full <title> text (include brand suffix). */
   title: string;
