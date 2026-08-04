@@ -320,7 +320,7 @@ const SecurityDoorX70 = () => {
           <section className="feat" id="features">
             <div className="fhead">
               <div className="eyebrow">Smart Technology</div>
-              <h2>Eight Systems. <b>One Intelligent Door</b></h2>
+              <h2>Six Systems. <b>One Intelligent Door</b></h2>
             </div>
             <div className="bento">
               <div className="tile big">
@@ -365,45 +365,8 @@ const SecurityDoorX70 = () => {
                 <div className="scrim" />
                 <div className="label"><h3>Smart Voice Message</h3></div>
               </div>
-              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 30% 15%, #1b1815, #0b0908)", display: "flex", alignItems: "center", justifyContent: "center", gap: 28 }}>
-                {/* stylised on-door screen */}
-                <div style={{ zIndex: 3, width: 148, height: 94, borderRadius: 10, border: "1px solid rgba(201,161,94,0.55)", background: "linear-gradient(135deg, #16130f, #262019)", boxShadow: "0 14px 34px rgba(0,0,0,0.55), inset 0 0 20px rgba(201,161,94,0.12)", padding: 10, display: "flex", flexDirection: "column", justifyContent: "space-between", flexShrink: 0 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ width: 24, height: 4, borderRadius: 2, background: "rgba(201,161,94,0.85)" }} />
-                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#5fd08a", boxShadow: "0 0 6px #5fd08a" }} />
-                  </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 5 }}>
-                    <span style={{ height: 24, borderRadius: 4, background: "rgba(201,161,94,0.22)", border: "1px solid rgba(201,161,94,0.25)" }} />
-                    <span style={{ height: 24, borderRadius: 4, background: "rgba(244,239,230,0.10)", border: "1px solid rgba(244,239,230,0.08)" }} />
-                    <span style={{ height: 24, borderRadius: 4, background: "rgba(244,239,230,0.10)", border: "1px solid rgba(244,239,230,0.08)" }} />
-                  </div>
-                  <div style={{ height: 4, borderRadius: 2, background: "rgba(244,239,230,0.16)", width: "62%" }} />
-                </div>
-                <div style={{ textAlign: "left", zIndex: 3, maxWidth: 220 }}>
-                  <div style={{ fontSize: 46, fontWeight: 300, color: "#f4efe6", letterSpacing: "-1.5px", lineHeight: 1 }}>10.1<span style={{ fontSize: 22 }}>&quot;</span></div>
-                  <div style={{ fontSize: 10, letterSpacing: ".18em", textTransform: "uppercase", color: "#C9A15E", marginTop: 8 }}>HD · Touch on Pro / Max</div>
-                  <div style={{ fontSize: 11, color: "rgba(244,239,230,0.55)", marginTop: 8, lineHeight: 1.7 }}>Live door camera, visitor records and scene controls — right on the door.</div>
-                </div>
-                <div className="label"><h3>10.1&quot; Smart Display</h3></div>
               </div>
               </div>
-              <div className="tile wide" style={{ background: "radial-gradient(120% 100% at 70% 15%, #16221c, #0b120e)", display: "flex", alignItems: "center", justifyContent: "center", gap: 26 }}>
-                {/* flat-entry cross-section: door leaf, drop-seal, glide arrows over a level floor */}
-                <svg viewBox="0 0 220 110" style={{ width: 180, flexShrink: 0, zIndex: 3 }} aria-hidden="true">
-                  <line x1="6" y1="94" x2="214" y2="94" stroke="rgba(191,232,207,0.55)" strokeWidth="2" strokeLinecap="round" />
-                  <rect x="97" y="10" width="16" height="70" rx="2" fill="rgba(244,239,230,0.14)" stroke="rgba(191,232,207,0.5)" />
-                  <line x1="105" y1="60" x2="105" y2="72" stroke="#5fd08a" strokeWidth="1.5" strokeDasharray="2 3" />
-                  <rect x="99" y="80" width="12" height="11" rx="1.5" fill="#5fd08a" opacity="0.85" />
-                  <line x1="26" y1="87" x2="80" y2="87" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" />
-                  <polyline points="72,81 82,87 72,93" fill="none" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <line x1="130" y1="87" x2="184" y2="87" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" />
-                  <polyline points="176,81 186,87 176,93" fill="none" stroke="#C9A15E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <div style={{ textAlign: "left", zIndex: 3, maxWidth: 200 }}>
-                  <div style={{ fontSize: 13, letterSpacing: ".12em", color: "#bfe8cf" }}>No sill · auto drop-seal</div>
-                  <div style={{ fontSize: 11, color: "rgba(180,225,200,0.6)", marginTop: 6, lineHeight: 1.7 }}>Sealed against wind, dust and insects — yet perfectly flat for strollers, luggage and wheelchairs.</div>
-                </div>
-                <div className="label"><h3>Barrier-Free Threshold</h3></div>
               </div>
               </div>
             </div>
