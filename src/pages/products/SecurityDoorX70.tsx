@@ -365,10 +365,6 @@ const SecurityDoorX70 = () => {
                 <div className="scrim" />
                 <div className="label"><h3>Smart Voice Message</h3></div>
               </div>
-              </div>
-              </div>
-              </div>
-              </div>
             </div>
           </section>
         </div>
