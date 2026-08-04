@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>WONLY 站点后台</title>
+<link rel="icon" href="/favicon.ico" />
+<link rel="cms-config-url" href="/admin/config.yml" type="application/yaml" />
+</head>
+<body>
+<script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+<script>
+  // 用官网字体/配色渲染正文预览(Sveltia 若不支持会安静跳过)
+  try { window.CMS && window.CMS.registerPreviewStyle && window.CMS.registerPreviewStyle("/admin/preview.css"); } catch (e) { /* noop */ }
+</script>
+</body>
+</html>

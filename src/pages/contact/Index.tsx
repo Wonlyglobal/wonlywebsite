@@ -5,6 +5,30 @@ import { trackLead } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
 
 const ACCESS_KEY = "5054e990-b5a3-47e9-a659-f8e4dd7e69c7";
+
+/* ── CMS 联系页文案: content/settings/contact.json（在 /admin 站点后台编辑）──
+   每个字段都有代码默认值兜底，JSON 缺失或留空不会让页面变空白。 */
+const C_RAW = import.meta.glob("/content/settings/contact.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const C_CMS = (() => { try { return JSON.parse(Object.values(C_RAW)[0] || "{}"); } catch { return {}; } })() as Record<string, any>;
+const C = {
+  eyebrow: C_CMS.hero?.eyebrow?.trim() || "Contact",
+  title: C_CMS.hero?.title?.trim() || "Let's Open Your Market",
+  titleHighlight: C_CMS.hero?.titleHighlight?.trim() || "Together",
+  subtitle: C_CMS.hero?.subtitle?.trim() || "Distributor, project or OEM/ODM enquiry — our overseas team replies within 24 hours with specifications, compliance documents and pricing.",
+  email: (C_CMS.email || "").trim() || "inquiry@wonlyglobal.com",
+  emailNote: (C_CMS.emailNote || "").trim() || "Overseas sales & partnership enquiries",
+  whatsapp: (C_CMS.whatsapp || "").trim() || "+1 (205) 240-1832",
+  whatsappLink: (C_CMS.whatsappLink || "").trim() || "https://wa.me/12052401832",
+  whatsappNote: (C_CMS.whatsappNote || "").trim() || "Fastest response — message us anytime",
+  hqTitle: (C_CMS.hqTitle || "").trim() || "Zhejiang, China",
+  hqNote: (C_CMS.hqNote || "").trim() || "WONLY · SSE: 605268",
+  prevSiteLabel: (C_CMS.prevSiteLabel || "").trim() || "en.wanglianfang.com",
+  prevSiteUrl: (C_CMS.prevSiteUrl || "").trim() || "http://en.wanglianfang.com/",
+  prevSiteNote: (C_CMS.prevSiteNote || "").trim() || "Full product library while the new site is being built",
+  regionsBold: (C_CMS.regionsBold || "").trim() || "Priority regions:",
+  regionsLine1: (C_CMS.regionsLine1 || "").trim() || "Middle East · Southeast Asia · Central Asia",
+  regionsLine2: (C_CMS.regionsLine2 || "").trim() || "Radiating to Africa, Latin America and Oceania.",
+};
 const label = "text-[11px] tracking-[0.12em] uppercase";
 const input = "mt-1.5 w-full rounded-lg px-4 py-2.5 text-sm text-[#221F20] bg-[#faf8f4] placeholder-black/25 focus:outline-none";
 
@@ -72,10 +96,10 @@ export default function Contact() {
       {/* Hero */}
       <section className="text-white px-[6vw] pt-[150px] pb-[90px]" style={{ background: "radial-gradient(120% 90% at 78% 20%, #2a2627 0%, #0d0d0d 72%)" }}>
         <div className="max-w-[1200px] mx-auto">
-          <div className="text-[12px] tracking-[0.3em] uppercase font-bold" style={{ color: CHAMP }}>Contact</div>
-          <h1 className="mt-4 font-light leading-[1.05] tracking-[-1px] text-[clamp(34px,5vw,64px)]">Let's Open Your Market <span style={{ color: CHAMP }}>Together</span></h1>
+          <div className="text-[12px] tracking-[0.3em] uppercase font-bold" style={{ color: CHAMP }}>{C.eyebrow}</div>
+          <h1 className="mt-4 font-light leading-[1.05] tracking-[-1px] text-[clamp(34px,5vw,64px)]">{C.title} <span style={{ color: CHAMP }}>{C.titleHighlight}</span></h1>
           <p className="mt-5 max-w-[520px] text-[15px] leading-[1.7]" style={{ color: "rgba(245,241,234,0.72)" }}>
-            Distributor, project or OEM/ODM enquiry — our overseas team replies within 24 hours with specifications, compliance documents and pricing.
+            {C.subtitle}
           </p>
         </div>
       </section>
@@ -86,21 +110,21 @@ export default function Contact() {
         <div>
           <h2 className="text-[13px] tracking-[0.28em] uppercase font-bold mb-6" style={{ color: GOLD }}>Get in Touch</h2>
 
-          <a href="mailto:inquiry@wonlyglobal.com" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+          <a href={`mailto:${C.email}`} className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><Mail size={19} style={{ color: GOLD }} /></span>
             <span>
               <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Email</span>
-              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">inquiry@wonlyglobal.com</span>
-              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Overseas sales &amp; partnership enquiries</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">{C.email}</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.emailNote}</span>
             </span>
           </a>
 
-          <a href="https://wa.me/12052401832" target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+          <a href={C.whatsappLink} target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><MessageCircle size={19} style={{ color: GOLD }} /></span>
             <span>
               <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>WhatsApp</span>
-              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">+1 (205) 240-1832</span>
-              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Fastest response — message us anytime</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">{C.whatsapp}</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.whatsappNote}</span>
             </span>
           </a>
 
@@ -108,23 +132,23 @@ export default function Contact() {
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><MapPin size={19} style={{ color: GOLD }} /></span>
             <span>
               <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Headquarters</span>
-              <span className="block text-[16px] font-semibold mt-0.5">Zhejiang, China</span>
-              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>WONLY · SSE: 605268</span>
+              <span className="block text-[16px] font-semibold mt-0.5">{C.hqTitle}</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.hqNote}</span>
             </span>
           </div>
 
-          <a href="http://en.wanglianfang.com/" target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+          <a href={C.prevSiteUrl} target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><ArrowUpRight size={19} style={{ color: GOLD }} /></span>
             <span>
               <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Previous Site</span>
-              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">en.wanglianfang.com</span>
-              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Full product library while the new site is being built</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">{C.prevSiteLabel}</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.prevSiteNote}</span>
             </span>
           </a>
 
           <div className="mt-8 text-[13px] leading-[1.9]" style={{ color: MUTED }}>
-            <b className="text-[#221F20]">Priority regions:</b> Middle East · Southeast Asia · Central Asia<br />
-            Radiating to Africa, Latin America and Oceania.
+            <b className="text-[#221F20]">{C.regionsBold}</b> {C.regionsLine1}<br />
+            {C.regionsLine2}
           </div>
         </div>
 

@@ -1,0 +1,24 @@
+/* WONLY — 后台正文预览样式:贴近官网文章页的字体与配色 */
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: #F5F1EA;
+  color: #221F20;
+  line-height: 1.85;
+  padding: 32px 40px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+h1, h2, h3 {
+  font-family: -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: #221F20;
+}
+h2 { font-size: 26px; margin: 2em 0 0.7em; border-bottom: 1px solid #e4ddcf; padding-bottom: 0.35em; }
+p { margin: 0.9em 0; font-size: 16px; }
+ul, ol { margin: 0.9em 0 0.9em 1.4em; }
+li { margin: 0.4em 0; }
+a { color: #BFA06A; }
+strong { color: #221F20; }
+blockquote { border-left: 3px solid #BFA06A; margin: 1.2em 0; padding: 0.2em 1.2em; color: #5f5a54; }
+img { max-width: 100%; border-radius: 12px; }

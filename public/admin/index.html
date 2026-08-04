@@ -1,15 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>WONLY 内容后台</title>
-  </head>
-  <body>
-    <!-- Sveltia CMS — Decap-compatible git-based CMS, no server required.
-         Sign in with a GitHub Personal Access Token (repo scope) or OAuth.
-         Content saves commit straight to main → GitHub Actions auto-deploys. -->
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
-  </body>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>WONLY 内容中心</title>
+<link rel="icon" href="/favicon.ico" />
+<style>
+  :root { --gold:#BFA06A; --champ:#D4C4A0; --bg:#F5F1EA; --dark:#221F20; --muted:#5f5a54; --line:#e4ddcf; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--dark); min-height:100vh; }
+  .hero { background:radial-gradient(120% 90% at 78% 20%, #2a2627 0%, #0d0d0d 72%); color:#fff; padding:56px 6vw 46px; }
+  .hero .inner, .main { max-width:1080px; margin:0 auto; }
+  .hero img.logo { height:26px; filter:brightness(0) invert(1); }
+  .hero .eb { margin-top:26px; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--champ); font-weight:700; }
+  .hero h1 { margin-top:10px; font-weight:300; font-size:clamp(26px,3.6vw,40px); letter-spacing:.02em; }
+  .hero p { margin-top:12px; font-size:14px; line-height:1.75; color:rgba(245,241,234,.72); max-width:560px; }
+  .main { padding:44px 6vw 70px; }
+  h2.sec { font-size:13px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); font-weight:700; margin:34px 0 16px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+  a.card { display:block; text-decoration:none; color:inherit; background:#fff; border:1px solid var(--line); border-radius:16px; padding:26px 26px 22px; transition:transform .18s ease, box-shadow .18s ease; box-shadow:0 20px 40px -34px rgba(34,31,32,.35); }
+  a.card:hover { transform:translateY(-3px); box-shadow:0 26px 48px -30px rgba(34,31,32,.4); }
+  .card .tag { display:inline-block; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); border-radius:99px; padding:3px 10px; }
+  .card h3 { margin-top:14px; font-size:19px; font-weight:600; }
+  .card h3 .arrow { color:var(--gold); font-weight:400; }
+  .card p { margin-top:8px; font-size:13px; line-height:1.8; color:var(--muted); }
+  .links { display:flex; flex-wrap:wrap; gap:10px; }
+  .links a { text-decoration:none; font-size:13px; color:var(--dark); background:#fff; border:1px solid var(--line); border-radius:99px; padding:9px 18px; transition:border-color .15s; }
+  .links a:hover { border-color:var(--gold); color:var(--gold); }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:13px; }
+  th,td { text-align:left; padding:9px 14px; border-bottom:1px solid var(--line); }
+  th { background:#faf8f4; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  tr:last-child td { border-bottom:none; }
+  td.date { white-space:nowrap; color:var(--gold); font-weight:600; }
+  .note { margin-top:14px; font-size:12.5px; line-height:1.9; color:var(--muted); }
+  .note b { color:var(--dark); }
+  details summary { cursor:pointer; font-size:13px; color:var(--muted); margin-bottom:12px; user-select:none; }
+  footer { text-align:center; padding:26px; font-size:12px; color:var(--muted); border-top:1px solid var(--line); }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="inner">
+      <img class="logo" src="/images/logo-trim.webp" alt="WONLY" onerror="this.style.display='none'" />
+      <div class="eb">WONLY Content Center</div>
+      <h1>王力海外官网 · 内容中心</h1>
+      <p>在这里编辑官网文章、导航、页面文案与 SEO 设置。保存即自动提交并发布,约 2–4 分钟后在 www.wonlyglobal.com 生效。</p>
+    </div>
+  </div>
+
+  <div class="main">
+    <h2 class="sec" style="margin-top:0">选择后台</h2>
+    <div class="cards">
+      <a class="card" href="/admin/content/">
+        <span class="tag">日常使用 · 推荐</span>
+        <h3>文章后台 <span class="arrow">→</span></h3>
+        <p>撰写和修改 News &amp; Insights 文章:标题、正文、封面图、SEO 关键词、定时发布日期。只包含文章,不会误碰站点结构,适合市场部同事日常使用。</p>
+      </a>
+      <a class="card" href="/admin/site/">
+        <span class="tag">站点管理 · 谨慎操作</span>
+        <h3>站点后台 <span class="arrow">→</span></h3>
+        <p>管理全站结构与文案:导航栏与页脚增减、各页面 SEO TDK、首页首屏大标题、联系页信息 —— 改动影响全站,请确认后再保存。</p>
+      </a>
+    </div>
+
+    <h2 class="sec">常用链接</h2>
+    <div class="links">
+      <a href="https://www.wonlyglobal.com" target="_blank" rel="noopener">查看官网 ↗</a>
+      <a href="https://www.wonlyglobal.com/insights/" target="_blank" rel="noopener">文章列表页 ↗</a>
+      <a href="https://github.com/Wonlyglobal/wonlywebsite/actions" target="_blank" rel="noopener">部署记录(Actions)↗</a>
+      <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google 收录后台 ↗</a>
+    </div>
+
+    <h2 class="sec">SEO 文章自动发布排期</h2>
+    <details>
+      <summary>展开查看 · 每周一 / 三 / 五上午 09:23 自动上线一篇(点击展开完整排期)</summary>
+      <table>
+        <tr><th>日期</th><th>文章标题</th></tr>
+        <tr><td class="date">08-05</td><td>GB 17565 Class A Explained: China's Top Security Door Standard</td></tr>
+        <tr><td class="date">08-07</td><td>The Anti-Theft Door Buyer's Checklist for Developers and Contractors</td></tr>
+        <tr><td class="date">08-10</td><td>Security Doors for Hotels: Specification and Compliance Guide</td></tr>
+        <tr><td class="date">08-12</td><td>Security Doors for Villas: Design and Protection in One Entrance</td></tr>
+        <tr><td class="date">08-14</td><td>Soundproof Security Doors: STC Ratings Explained</td></tr>
+        <tr><td class="date">08-17</td><td>Hurricane-Rated Entry Doors: What Wind Class 12 Means</td></tr>
+        <tr><td class="date">08-19</td><td>Why Cast-Aluminium Doors Win in Coastal and Humid Climates</td></tr>
+        <tr><td class="date">08-21</td><td>Cast-Aluminium Door Finishes and Customisation Options</td></tr>
+        <tr><td class="date">08-24</td><td>60 vs 90 vs 120 Minute Fire Doors: How to Specify the Right Rating</td></tr>
+        <tr><td class="date">08-26</td><td>Fire + Security Dual-Rated Doors for Hotels and Hospitals</td></tr>
+        <tr><td class="date">08-28</td><td>Fire Door Certifications: EN 1634, UL 10C and Local Codes</td></tr>
+        <tr><td class="date">08-31</td><td>3D Face Recognition Door Locks: How They Work</td></tr>
+        <tr><td class="date">09-02</td><td>Fingerprint vs Face vs Palm-Vein: Smart Lock Biometrics Compared</td></tr>
+        <tr><td class="date">09-04</td><td>Choosing Smart Locks for Apartment Projects: A Bulk Buyer's Guide</td></tr>
+        <tr><td class="date">09-07</td><td>Smart Lock Reliability: Battery Life, Backup Power and Durability Checks</td></tr>
+        <tr><td class="date">09-09</td><td>The Patented Cylindrical Lock Core vs Standard Cylinders</td></tr>
+        <tr><td class="date">09-11</td><td>The Security Door Market in Saudi Arabia and the UAE: 2026 Guide</td></tr>
+        <tr><td class="date">09-14</td><td>Sourcing Security Doors from China: An OEM/ODM Buyer's Guide</td></tr>
+        <tr><td class="date">09-16</td><td>Whole-Home Smart Security: Doors, Locks and Sensors Working Together</td></tr>
+      </table>
+    </details>
+    <div class="note">
+      <b>说明:</b>文章"发布日期"填未来日期即定时发布,到期当天上午自动上线并同步 sitemap;
+      改完任何内容点"保存"即自动发布,无需再操作 Git;
+      首次登录需要 GitHub 授权令牌(PAT),找管理员开通。
+    </div>
+  </div>
+
+  <footer>WONLY · Doors &amp; Locks — China's No.1 to the World's · 内容中心</footer>
+</body>
 </html>

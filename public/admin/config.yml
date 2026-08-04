@@ -1,11 +1,16 @@
-# WONLY 内容后台配置(Sveltia/Decap CMS)
+# WONLY 站点后台配置(Sveltia/Decap CMS)— 完整版:站点设置 + 页面文案 + 文章
 backend:
   name: github
   repo: Wonlyglobal/wonlywebsite
   branch: main
 
-media_folder: "public/images/uploads"   # 上传图片存放位置(仓库内)
-public_folder: "images/uploads"         # 文章里引用的路径(相对 images 根)
+site_url: https://www.wonlyglobal.com
+display_url: https://www.wonlyglobal.com
+logo_url: https://www.wonlyglobal.com/images/logo-trim.webp
+
+# 图库 = 整个 public/images 目录:封面图可直接从现有官网图片里选,也可上传新图
+media_folder: "public/images"
+public_folder: "images"
 
 slug:
   encoding: ascii
@@ -59,13 +64,62 @@ collections:
         format: "json"
         fields:
           - name: pages
-            label: "页面 TDK 覆盖(留空=用默认;path 如 /advantages)"
+            label: "各页面 TDK(已预填当前线上值,直接微调即可)"
             widget: list
             fields:
-              - { name: path, label: "页面路径", widget: string, hint: "如 / 或 /products/security-doors" }
-              - { name: title, label: "Title(≤60字符,留空用默认)", widget: string, required: false, default: "" }
-              - { name: description, label: "Description(≤155字符,留空用默认)", widget: text, required: false, default: "" }
-              - { name: keywords, label: "Keywords(逗号分隔,可留空)", widget: string, required: false, default: "" }
+              - { name: path, label: "页面路径", widget: string, hint: "如 / 或 /products/security-doors,勿改" }
+              - { name: title, label: "Title(建议 ≤60 字符,含 | WONLY)", widget: string, required: false, default: "" }
+              - { name: description, label: "Description(建议 ≤155 字符)", widget: text, required: false, default: "" }
+              - { name: keywords, label: "Keywords(英文逗号分隔,可留空)", widget: string, required: false, default: "" }
+      - name: homepage
+        label: "首页 首屏文案"
+        file: "content/settings/homepage.json"
+        format: "json"
+        fields:
+          - name: hero
+            label: "开门前(黑色大门画面)"
+            widget: object
+            fields:
+              - { name: eyebrow, label: "顶部小字(香槟金)", widget: string }
+              - { name: line1, label: "大标题 · 第一行", widget: string }
+              - { name: line2, label: "大标题 · 第二行", widget: string }
+              - { name: line3, label: "大标题 · 第三行(金色)", widget: string }
+              - { name: subtitle, label: "副标题", widget: text }
+              - { name: scrollLabel, label: "底部滚动提示", widget: string }
+          - name: reveal
+            label: "开门后(数据展示画面)"
+            widget: object
+            fields:
+              - { name: eyebrow, label: "小标题", widget: string }
+              - { name: line1, label: "标题 · 第一行", widget: string }
+              - { name: line2, label: "标题 · 第二行", widget: string }
+              - { name: note, label: "数据下方补充说明", widget: string }
+      - name: contact
+        label: "联系页 信息"
+        file: "content/settings/contact.json"
+        format: "json"
+        fields:
+          - name: hero
+            label: "页首"
+            widget: object
+            fields:
+              - { name: eyebrow, label: "顶部小字", widget: string }
+              - { name: title, label: "大标题(常规部分)", widget: string }
+              - { name: titleHighlight, label: "大标题(金色部分)", widget: string }
+              - { name: subtitle, label: "副标题", widget: text }
+          - { name: email, label: "联系邮箱", widget: string }
+          - { name: emailNote, label: "邮箱说明文字", widget: string }
+          - { name: whatsapp, label: "WhatsApp 显示号码", widget: string }
+          - { name: whatsappLink, label: "WhatsApp 链接(https://wa.me/…)", widget: string }
+          - { name: whatsappNote, label: "WhatsApp 说明文字", widget: string }
+          - { name: hqTitle, label: "总部所在地", widget: string }
+          - { name: hqNote, label: "总部说明(如 WONLY · SSE: 605268)", widget: string }
+          - { name: prevSiteLabel, label: "旧官网显示文本", widget: string }
+          - { name: prevSiteUrl, label: "旧官网链接", widget: string }
+          - { name: prevSiteNote, label: "旧官网说明文字", widget: string }
+          - { name: regionsBold, label: "重点区域 · 加粗前缀", widget: string }
+          - { name: regionsLine1, label: "重点区域 · 第一行", widget: string }
+          - { name: regionsLine2, label: "重点区域 · 第二行", widget: string }
   - name: articles
     label: "News & Insights 文章"
     label_singular: "文章"
@@ -77,16 +131,38 @@ collections:
     identifier_field: slug
     summary: "{{date}} · {{title}}"
     sortable_fields: [date, title]
+    view_groups:
+      - { label: "按分类", field: category }
     fields:
       - { name: slug, label: "URL Slug(英文短横线,创建后勿改)", widget: string, hint: "如 security-doors-for-hotels" }
       - { name: title, label: "标题 Title", widget: string }
       - { name: seoTitle, label: "SEO 标题(≤60字符,含 | WONLY)", widget: string }
       - { name: description, label: "Meta 描述(≤155字符)", widget: text }
       - { name: category, label: "分类", widget: select, options: ["Buying Guide", "Technology", "Market Insight", "Company"] }
-      - { name: date, label: "发布日期(未到期自动隐藏)", widget: string, hint: "格式 YYYY-MM-DD;填未来日期=定时发布" }
-      - { name: dateLabel, label: "日期显示文本", widget: string, hint: "如 5 August 2026" }
+      - { name: date, label: "发布日期(填未来日期=定时发布)", widget: string, pattern: ['^\d{4}-\d{2}-\d{2}$', "日期格式须为 YYYY-MM-DD,如 2026-08-20"], hint: "到期当天上午 09:23 自动上线" }
+      - { name: dateLabel, label: "日期显示文本(英文)", widget: string, hint: "如 5 August 2026" }
       - { name: readMins, label: "阅读分钟数", widget: number, default: 6, value_type: int }
-      - { name: cover, label: "封面图路径(相对 images/,如 door/gallery/g1-front.jpg)", widget: string }
+      - { name: cover, label: "封面图(点击从图库选择或上传)", widget: image, hint: "旧文章存的是相对路径(如 door/gallery/g1-front.jpg),两种格式都能正常显示" }
       - { name: excerpt, label: "列表页摘要", widget: text }
-      - { name: keywords, label: "SEO 关键词", widget: list }
-      - { name: body, label: "正文(## 二级标题;- 列表;空行分段)", widget: markdown }
+      - { name: keywords, label: "SEO 关键词(每行一个)", widget: list }
+      - name: body
+        label: "正文(## 二级标题;- 列表;空行分段)"
+        widget: markdown
+        default: |
+          Opening paragraph — state the buyer question this article answers and why WONLY is qualified to answer it.
+
+          ## First Key Point
+
+          Explain the first point in two or three sentences, with concrete numbers or certifications where possible.
+
+          - Supporting detail one
+          - Supporting detail two
+          - Supporting detail three
+
+          ## Second Key Point
+
+          Develop the second point. Reference standards (EN 1627, EN 1634, GB 17565) or WONLY capabilities (5 bases, 1,000+ patents) where relevant.
+
+          ## What This Means for Buyers
+
+          Close with a practical takeaway and a call to action: contact inquiry@wonlyglobal.com for specifications, compliance documents and pricing.
