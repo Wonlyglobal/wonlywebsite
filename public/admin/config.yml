@@ -90,10 +90,8 @@ collections:
             label: "开门后(数据展示画面)"
             widget: object
             fields:
-              - { name: eyebrow, label: "小标题", widget: string }
               - { name: line1, label: "标题 · 第一行", widget: string }
               - { name: line2, label: "标题 · 第二行", widget: string }
-              - { name: note, label: "数据下方补充说明", widget: string }
       - name: contact
         label: "联系页 信息"
         file: "content/settings/contact.json"
