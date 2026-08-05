@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import NotFound from "./pages/not-found/Index";
 import { initAnalytics, trackPageview } from "@/lib/analytics";
+import FloatingContact from "@/lib/floating-contact";
 
 // Take over scroll handling from the browser so lazy routes behave predictably.
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
@@ -158,6 +159,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <FloatingContact />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
