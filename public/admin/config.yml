@@ -79,6 +79,7 @@ collections:
           - { name: favicon, label: "浏览器标签页图标(从图库选择或上传,建议 256×256 PNG;留空=用默认)", widget: image, required: false, default: "" }
           - { name: whatsapp, label: "WhatsApp 悬浮按钮号码(留空=不显示按钮)", widget: string, required: false, default: "", hint: "如 +1 (205) 240-1832" }
           - { name: whatsappLabel, label: "WhatsApp 按钮悬停文字", widget: string, required: false, default: "Chat on WhatsApp" }
+          - { name: crispId, label: "Crisp 在线聊天 Website ID(推荐;留空=不加载)", widget: string, required: false, default: "", hint: "crisp.chat 注册后在 Settings → Website Settings 里复制 Website ID(一串 UUID)" }
           - { name: tawkId, label: "Tawk.to 在线聊天 ID(留空=不加载聊天窗)", widget: string, required: false, default: "", hint: "注册 tawk.to 后取 Direct Chat Link 里的两段 ID,格式 propertyId/widgetId" }
       - name: homepage
         label: "首页 首屏文案"

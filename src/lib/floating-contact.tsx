@@ -9,26 +9,34 @@ import { useEffect, useState } from "react";
 const SITE_RAW = import.meta.glob("/content/settings/site.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 const SITE_CFG = (() => {
   try { return JSON.parse(Object.values(SITE_RAW)[0] || "{}"); } catch { return {}; }
-})() as { whatsapp?: string; whatsappLabel?: string; tawkId?: string };
+})() as { whatsapp?: string; whatsappLabel?: string; tawkId?: string; crispId?: string };
 
 const WA_NUMBER = (SITE_CFG.whatsapp || "").replace(/\D/g, "");
 const WA_LABEL = SITE_CFG.whatsappLabel?.trim() || "Chat on WhatsApp";
 const TAWK_ID = (SITE_CFG.tawkId || "").trim();
+const CRISP_ID = (SITE_CFG.crispId || "").trim();
 
 export default function FloatingContact() {
   const [hover, setHover] = useState(false);
 
-  // Tawk.to:配置了 ID 才加载,且延迟到页面空闲后注入,不拖累首屏。
+  // 在线聊天:配了 crispId 加载 Crisp,否则配了 tawkId 加载 Tawk。
+  // 都延迟到页面空闲后注入,不拖累首屏;都留空则不加载任何第三方脚本。
   useEffect(() => {
-    if (!TAWK_ID) return;
-    if (document.getElementById("tawk-script")) return;
+    if (!CRISP_ID && !TAWK_ID) return;
+    if (document.getElementById("chat-script")) return;
     const load = () => {
       const s = document.createElement("script");
-      s.id = "tawk-script";
+      s.id = "chat-script";
       s.async = true;
-      s.src = `https://embed.tawk.to/${TAWK_ID}`;
-      s.charset = "UTF-8";
-      s.setAttribute("crossorigin", "*");
+      if (CRISP_ID) {
+        (window as unknown as { $crisp: unknown[] }).$crisp = [];
+        (window as unknown as { CRISP_WEBSITE_ID: string }).CRISP_WEBSITE_ID = CRISP_ID;
+        s.src = "https://client.crisp.chat/l.js";
+      } else {
+        s.src = `https://embed.tawk.to/${TAWK_ID}`;
+        s.charset = "UTF-8";
+        s.setAttribute("crossorigin", "*");
+      }
       document.body.appendChild(s);
     };
     const t = window.setTimeout(load, 3500);
@@ -37,8 +45,8 @@ export default function FloatingContact() {
 
   if (!WA_NUMBER) return null;
 
-  // Tawk 自带聊天气泡在右下角;有 Tawk 时 WhatsApp 按钮上移避让。
-  const bottom = TAWK_ID ? 96 : 24;
+  // 聊天气泡占用右下角;启用聊天时 WhatsApp 按钮上移避让。
+  const bottom = CRISP_ID || TAWK_ID ? 96 : 24;
 
   return (
     <a
