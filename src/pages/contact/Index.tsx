@@ -3,8 +3,7 @@ import { Mail, MessageCircle, MapPin, ArrowUpRight, Check } from "lucide-react";
 import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, MUTED } from "@/lib/site-ui";
 import { trackLead } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
-
-const ACCESS_KEY = "5054e990-b5a3-47e9-a659-f8e4dd7e69c7";
+import { submitEnquiry } from "@/lib/form-config";
 
 /* ── CMS 联系页文案: content/settings/contact.json（在 /admin 站点后台编辑）──
    每个字段都有代码默认值兜底，JSON 缺失或留空不会让页面变空白。 */
@@ -63,23 +62,16 @@ export default function Contact() {
     if (Object.keys(e).length > 0) return;
     setSending(true);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: ACCESS_KEY,
-          subject: "New WONLY Contact Enquiry",
-          from_name: "WONLY Website",
-          name: form.name,
-          company: form.company,
-          job_title: form.role,
-          country: form.country,
-          email: form.email,
-          phone: form.phone,
-          message: form.message,
-        }),
+      const data = await submitEnquiry({
+        subject: "New WONLY Contact Enquiry",
+        name: form.name,
+        company: form.company,
+        job_title: form.role,
+        country: form.country,
+        email: form.email,
+        phone: form.phone,
+        message: form.message,
       });
-      const data = await res.json();
       if (data.success) { setSent(true); trackLead({ form_location: "contact_page" }); }
       else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
     } catch {

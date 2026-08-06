@@ -45,7 +45,7 @@ function LegalPage({ eb, title, intro, blocks }: { eb: string; title: string; in
           <Reveal className="mt-12 pt-8 border-t" >
             <p className="text-[14px] leading-[1.8]" style={{ color: DARK }}>
               Questions about this page? Contact us at{" "}
-              <a href="mailto:wonlyglobal@wonly.net" style={{ color: GOLD, fontWeight: 600 }}>wonlyglobal@wonly.net</a>.
+              <a href="mailto:inquiry@wonlyglobal.com" style={{ color: GOLD, fontWeight: 600 }}>inquiry@wonlyglobal.com</a>.
             </p>
           </Reveal>
         </div>
@@ -72,7 +72,7 @@ export function Privacy() {
       blocks={[
         { h: "1. Who We Are", ps: [
           "This website (wonlyglobal.com) is operated by WONLY, a manufacturer of security doors, smart locks and whole-house smart-security systems serving distributors, projects and partners worldwide.",
-          "For any privacy-related request, you can reach us at wonlyglobal@wonly.net.",
+          "For any privacy-related request, you can reach us at inquiry@wonlyglobal.com.",
         ] },
         { h: "2. Information We Collect", ps: [
           "Information you provide directly: when you submit an enquiry or contact form, we collect the details you enter — such as your name, company, email address, phone number and the content of your message.",
@@ -99,7 +99,7 @@ export function Privacy() {
           "We retain enquiry information for as long as needed to respond to and follow up on your request, to maintain our business records, and to comply with legal obligations, after which it is deleted or anonymised.",
         ] },
         { h: "8. Your Rights", ps: [
-          "Depending on your location, you may have the right to access, correct, update or request deletion of your personal information, to object to or restrict certain processing, and to withdraw consent. To exercise any of these rights, email us at wonlyglobal@wonly.net and we will respond in line with applicable law.",
+          "Depending on your location, you may have the right to access, correct, update or request deletion of your personal information, to object to or restrict certain processing, and to withdraw consent. To exercise any of these rights, email us at inquiry@wonlyglobal.com and we will respond in line with applicable law.",
         ] },
         { h: "9. International Transfers", ps: [
           "As a global manufacturer, we may process information in countries other than your own. Where we do, we take steps to ensure your information remains protected in accordance with this policy and applicable law.",

@@ -36,8 +36,8 @@ function ComingSoon({ kind }: { kind: "product" | "section" }) {
             <a href="http://en.wanglianfang.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
               Visit Our Previous Site <ArrowUpRight size={16} />
             </a>
-            <a href="mailto:wonlyglobal@wonly.net" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium border transition-colors hover:bg-white/5" style={{ borderColor: "rgba(191,160,106,0.5)", color: CHAMP }}>
-              <Mail size={16} /> wonlyglobal@wonly.net
+            <a href="mailto:inquiry@wonlyglobal.com" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium border transition-colors hover:bg-white/5" style={{ borderColor: "rgba(191,160,106,0.5)", color: CHAMP }}>
+              <Mail size={16} /> inquiry@wonlyglobal.com
             </a>
             <Link to="/" className="inline-flex items-center gap-2 text-sm font-light transition-colors hover:text-white" style={{ color: CHAMP }}>
               <ArrowLeft size={15} /> Back to Home

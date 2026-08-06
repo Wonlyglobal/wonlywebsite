@@ -72,7 +72,7 @@ collections:
               - { name: description, label: "Description(建议 ≤155 字符)", widget: text, required: false, default: "" }
               - { name: keywords, label: "Keywords(英文逗号分隔,可留空)", widget: string, required: false, default: "" }
       - name: site
-        label: "站点通用(图标/客服)"
+        label: "站点通用(图标/客服/表单收件)"
         file: "content/settings/site.json"
         format: "json"
         fields:
@@ -81,6 +81,8 @@ collections:
           - { name: whatsappLabel, label: "WhatsApp 按钮悬停文字", widget: string, required: false, default: "Chat on WhatsApp" }
           - { name: crispId, label: "Crisp 在线聊天 Website ID(推荐;留空=不加载)", widget: string, required: false, default: "", hint: "crisp.chat 注册后在 Settings → Website Settings 里复制 Website ID(一串 UUID)" }
           - { name: tawkId, label: "Tawk.to 在线聊天 ID(留空=不加载聊天窗)", widget: string, required: false, default: "", hint: "注册 tawk.to 后取 Direct Chat Link 里的两段 ID,格式 propertyId/widgetId" }
+          - { name: formKey, label: "询盘表单收件 Access Key(决定表单发到哪个邮箱)", widget: string, required: false, default: "", hint: "在 web3forms.com 用 inquiry@wonlyglobal.com 免费领取 Access Key,粘贴到这里即可换收件邮箱;留空=沿用原邮箱" }
+          - { name: formCc, label: "询盘抄送邮箱(可留空,多个用英文逗号分隔)", widget: string, required: false, default: "", hint: "部分 Web3Forms 套餐才支持抄送;不确定就先留空" }
       - name: homepage
         label: "首页 首屏文案"
         file: "content/settings/homepage.json"

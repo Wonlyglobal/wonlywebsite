@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, ChevronRight, X, Check } from "lucide-react";
 import { create } from "zustand";
 import { trackLead } from "@/lib/analytics";
+import { submitEnquiry } from "@/lib/form-config";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
 export const GOLD = "#BFA06A";
@@ -124,27 +125,20 @@ export function QuoteModal() {
     if (Object.keys(e).length > 0) return;
     setSending(true);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: "5054e990-b5a3-47e9-a659-f8e4dd7e69c7",
-          subject: presetSubject ? `WONLY Enquiry \u2014 ${presetSubject}` : "New WONLY Website Enquiry",
-          from_name: "WONLY Website",
-          name: form.name,
-          company: form.company,
-          job_title: form.role,
-          country: form.country,
-          email: form.email,
-          phone: form.phone,
-          business_type: form.biz,
-          volume: form.volume,
-          timeline: form.timeline,
-          interests: picks.join(", "),
-          message: form.message,
-        }),
+      const data = await submitEnquiry({
+        subject: presetSubject ? `WONLY Enquiry \u2014 ${presetSubject}` : "New WONLY Website Enquiry",
+        name: form.name,
+        company: form.company,
+        job_title: form.role,
+        country: form.country,
+        email: form.email,
+        phone: form.phone,
+        business_type: form.biz,
+        volume: form.volume,
+        timeline: form.timeline,
+        interests: picks.join(", "),
+        message: form.message,
       });
-      const data = await res.json();
       if (data.success) { setSent(true); trackLead({ form_location: "quote_modal", business_type: form.biz || "" }); }
       else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
     } catch {
