@@ -4,7 +4,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail,
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
-import { homeCopy } from "@/lib/home-locales";
+import { homeCopy, homeProductDescription, homeSectionText } from "@/lib/home-locales";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -532,6 +532,7 @@ const Prototype = () => {
   const [videoOpen, setVideoOpen] = useState(false);
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, t } = useLocale();
+  const ht = (text: string) => homeSectionText(locale, text);
   const copy = homeCopy(locale, {
     hero: { ...HOME_HERO, scroll: HOME_HERO.scrollLabel },
     reveal: HOME_REVEAL,
@@ -797,11 +798,11 @@ const Prototype = () => {
         <img src={IMG.factoryLine} alt="WONLY 5G-connected smart factory production line" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.5), rgba(34,31,32,0.68))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
-          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Manufacturing</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Built In Our Own 5G-Connected Smart Factories</h2>
+          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>{ht("Manufacturing")}</div>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">{ht("Built In Our Own 5G-Connected Smart Factories")}</h2>
           <button onClick={() => setVideoOpen(true)} className="mt-9 inline-flex items-center gap-3 pl-3 pr-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
             <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: DARK }}><Play size={13} style={{ color: GOLD }} fill={GOLD} /></span>
-            Watch the Factory Tour
+            {ht("Watch the Factory Tour")}
           </button>
         </Reveal>
       </section>
@@ -812,22 +813,22 @@ const Prototype = () => {
         <Reveal className="shrink-0">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-5">
             <div>
-              <div className={eyebrow}>Our Products</div>
-              <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Built For Every Opening</h2>
+              <div className={eyebrow}>{ht("Our Products")}</div>
+              <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("Built For Every Opening")}</h2>
             </div>
-            <Link to="/product/door" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>Explore Products <ArrowRight size={15} /></Link>
+            <Link to="/product/door" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>{ht("Explore Products")} <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
         <div className="product-gallery mt-10 md:mt-12 flex flex-col md:flex-row gap-1.5 md:h-[520px]">
-          {PRODUCTS_GALLERY.map((p) => (
+          {PRODUCTS_GALLERY.map((p, productIndex) => (
             <Link key={p.name} to={p.href} className="product-card group relative block overflow-hidden rounded-2xl min-w-0 h-[320px] md:h-full">
               <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(12,10,9,.88), rgba(12,10,9,.12) 34%, transparent 50%)" }} />
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                 <h3 className="text-white text-lg md:text-xl font-semibold leading-tight">{p.name}</h3>
                 <div className="overflow-hidden transition-all duration-500 ease-out max-h-40 opacity-100 md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100">
-                  <p className="mt-2 text-[13px] leading-relaxed text-white/85 max-w-[16rem]">{p.d}</p>
-                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium" style={{ color: CHAMP }}>Discover <ArrowRight size={15} /></span>
+                  <p className="mt-2 text-[13px] leading-relaxed text-white/85 max-w-[16rem]">{homeProductDescription(locale, productIndex, p.d)}</p>
+                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium" style={{ color: CHAMP }}>{ht("Discover")} <ArrowRight size={15} /></span>
                 </div>
               </div>
             </Link>
@@ -841,8 +842,8 @@ const Prototype = () => {
         <img src={IMG.proj1} alt="WONLY doors installed in landmark projects" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.42), rgba(34,31,32,0.7))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
-          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Landmark Projects</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Chosen For The Projects That Cannot Fail</h2>
+          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>{ht("Landmark Projects")}</div>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">{ht("Chosen For The Projects That Cannot Fail")}</h2>
         </Reveal>
       </section>
 
@@ -850,12 +851,12 @@ const Prototype = () => {
       <section id="certs" className={SECTION + " cv-auto"} style={{ background: BG_LIGHT }}>
         <div className={CONTAINER}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow}>Certified &amp; Recognized</div>
-          <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Held To Standards, Honored At The Top</h2>
+          <div className={eyebrow}>{ht("Certified & Recognized")}</div>
+          <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("Held To Standards, Honored At The Top")}</h2>
         </Reveal>
 
         <Reveal className="mt-12">
-          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Design Awards</div>
+          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>{ht("Design Awards")}</div>
           <div className="flex flex-wrap items-center gap-x-14 gap-y-8">
             {AWARD_LOGOS.map((a) => (
               <img key={a.f} src={`${BASE}images/awards/${a.f}`} alt={a.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-[1.06]" />
@@ -865,7 +866,7 @@ const Prototype = () => {
 
         <Reveal className="mt-10">
           <div className="pt-10 border-t" style={{ borderColor: `${SILVER}55` }}>
-            <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Certifications</div>
+            <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>{ht("Certifications")}</div>
             <div className="flex flex-wrap items-center gap-x-12 gap-y-8">
               {CERT_LOGOS.map((c) => (
                 <img key={c.f} src={`${BASE}images/certs/${c.f}`} alt={c.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-[1.06]" />
