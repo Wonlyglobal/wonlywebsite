@@ -4,7 +4,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail,
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
-import { homeCopy, homeProductDescription, homeSectionText } from "@/lib/home-locales";
+import { homeCopy, homePartnership, homeProductDescription, homeSectionText } from "@/lib/home-locales";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -891,10 +891,10 @@ const Prototype = () => {
               <Reveal key={p.t}>
                 <button onClick={() => openQuote({ biz: p.biz, subject: p.t })} className="group w-full text-left grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-center py-7 md:py-9 border-b transition-colors duration-300 hover:bg-white/[0.05] px-2 md:px-6 -mx-2 md:-mx-6" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
                   <div className="md:col-span-2 text-5xl md:text-7xl font-light leading-none" style={{ color: GOLD }}>{`0${i + 1}`}</div>
-                  <h3 className="md:col-span-3 text-xl md:text-2xl font-light text-white">{p.t}</h3>
-                  <p className="md:col-span-4 text-sm font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.6)" }}>{p.d}</p>
+                  <h3 className="md:col-span-3 text-xl md:text-2xl font-light text-white">{homePartnership(locale, i, { title: p.t, description: p.d, cta: p.cta }).title}</h3>
+                  <p className="md:col-span-4 text-sm font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.6)" }}>{homePartnership(locale, i, { title: p.t, description: p.d, cta: p.cta }).description}</p>
                   <div className="md:col-span-3 md:text-right">
-                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white transition-all group-hover:gap-4">{p.cta} <ArrowUpRight size={16} style={{ color: GOLD }} /></span>
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white transition-all group-hover:gap-4">{homePartnership(locale, i, { title: p.t, description: p.d, cta: p.cta }).cta} <ArrowUpRight size={16} style={{ color: GOLD }} /></span>
                   </div>
                 </button>
               </Reveal>
@@ -907,8 +907,8 @@ const Prototype = () => {
       <section className={SECTION} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
           <Reveal className="max-w-3xl">
-            <div className={eyebrow}>Our Journey</div>
-            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>A Thirty-Year Journey</h2>
+            <div className={eyebrow}>{ht("Our Journey")}</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("A Thirty-Year Journey")}</h2>
           </Reveal>
           <Timeline items={TIMELINE} />
         </div>
@@ -922,14 +922,14 @@ const Prototype = () => {
             <WorldDots className="w-full h-auto" />
           </Reveal>
           <Reveal delay={120}>
-            <div className={eyebrow}>Global Footprint</div>
-            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>We Spread Around The World</h2>
-            <p className={SUBTITLE} style={{ color: SUB_COLOR }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
+            <div className={eyebrow}>{ht("Global Footprint")}</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("We Spread Around The World")}</h2>
+            <p className={SUBTITLE} style={{ color: SUB_COLOR }}>{ht("From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.")}</p>
             <div className="mt-7 grid grid-cols-2 gap-4">
               {FOOTPRINT_STATS.map((s) => (
                 <div key={s.label} className="rounded-xl p-5" style={{ background: "#efeae0" }}>
                   <div className="text-3xl md:text-4xl font-light leading-none" style={{ color: GOLD }}><CountUp to={s.to} suffix={s.suffix || ""} /></div>
-                  <div className="mt-2 text-[11px] tracking-[0.16em] uppercase font-medium" style={{ color: DARK }}>{s.label}</div>
+                  <div className="mt-2 text-[11px] tracking-[0.16em] uppercase font-medium" style={{ color: DARK }}>{ht(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -942,13 +942,13 @@ const Prototype = () => {
       <section id="partners" className={SECTION + " text-center cv-auto"} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
         <Reveal>
-          <div className={eyebrow + " mb-[14px]"}>Trusted Across Industries</div>
-          <h2 className={h2cls + " max-w-4xl mx-auto"} style={{ color: DARK }}>Trusted By Tech &amp; Real-Estate Leaders</h2>
+          <div className={eyebrow + " mb-[14px]"}>{ht("Trusted Across Industries")}</div>
+          <h2 className={h2cls + " max-w-4xl mx-auto"} style={{ color: DARK }}>{ht("Trusted By Tech & Real-Estate Leaders")}</h2>
           {/* Paginated flat grid — 4×2, 8 per page; arrows slide whole pages */}
           <PartnersPager />
 
           {/* Trusted by China's leading developers */}
-          <div className="mt-12 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
+          <div className="mt-12 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>{ht("Trusted by China's Leading Developers")}</div>
         </Reveal>
         </div>
         {/* full-bleed logo carousel — spans the whole section width */}

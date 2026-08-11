@@ -49,24 +49,28 @@ const SECTION_TEXT: Partial<Record<Locale, Record<string, string>>> = {
     "Our Products": "منتجاتنا", "Built For Every Opening": "حل لكل فتحة", "Explore Products": "استكشف المنتجات", Discover: "اكتشف",
     "Landmark Projects": "مشاريع بارزة", "Chosen For The Projects That Cannot Fail": "الخيار للمشاريع التي لا تحتمل الفشل",
     "Certified & Recognized": "معتمد ومعترف به", "Held To Standards, Honored At The Top": "ملتزم بالمعايير وحائز على أرفع الجوائز", "Design Awards": "جوائز التصميم", Certifications: "الشهادات",
+    "Our Journey": "مسيرتنا", "A Thirty-Year Journey": "مسيرة ثلاثين عاماً", "Global Footprint": "انتشار عالمي", "We Spread Around The World": "ننتشر حول العالم", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "من يونغكانغ في تشجيانغ إلى موزعين ومشاريع في أكثر من 60 دولة ومنطقة، بدعم من خمس قواعد تصنيع وستة مراكز للبحث والتطوير.", "Countries & Regions": "دول ومناطق", "Manufacturing Bases": "قواعد تصنيع", "R&D Centers": "مراكز بحث وتطوير", "Users Worldwide": "مستخدمون حول العالم", "Trusted Across Industries": "ثقة عبر القطاعات", "Trusted By Tech & Real-Estate Leaders": "موثوق لدى رواد التقنية والعقارات", "Trusted by China's Leading Developers": "موثوق لدى كبار المطورين في الصين",
   },
   fr: {
     Manufacturing: "Fabrication", "Built In Our Own 5G-Connected Smart Factories": "Fabriqué dans nos propres usines intelligentes connectées en 5G", "Watch the Factory Tour": "Visiter l’usine en vidéo",
     "Our Products": "Nos produits", "Built For Every Opening": "Une solution pour chaque ouverture", "Explore Products": "Découvrir les produits", Discover: "Découvrir",
     "Landmark Projects": "Projets emblématiques", "Chosen For The Projects That Cannot Fail": "Choisi pour les projets où l’échec n’est pas permis",
     "Certified & Recognized": "Certifié et reconnu", "Held To Standards, Honored At The Top": "Conforme aux normes, récompensé au plus haut niveau", "Design Awards": "Prix de design", Certifications: "Certifications",
+    "Our Journey": "Notre parcours", "A Thirty-Year Journey": "Trente ans de parcours", "Global Footprint": "Présence mondiale", "We Spread Around The World": "Une présence dans le monde entier", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "De Yongkang, dans le Zhejiang, à des distributeurs et projets dans plus de 60 pays et régions, avec cinq bases de production et six centres de R&D.", "Countries & Regions": "Pays et régions", "Manufacturing Bases": "Bases de production", "R&D Centers": "Centres de R&D", "Users Worldwide": "Utilisateurs dans le monde", "Trusted Across Industries": "La confiance de multiples secteurs", "Trusted By Tech & Real-Estate Leaders": "La confiance des leaders de la technologie et de l’immobilier", "Trusted by China's Leading Developers": "La confiance des principaux promoteurs chinois",
   },
   ru: {
     Manufacturing: "Производство", "Built In Our Own 5G-Connected Smart Factories": "Производство на собственных умных заводах с подключением 5G", "Watch the Factory Tour": "Посмотреть экскурсию по заводу",
     "Our Products": "Наша продукция", "Built For Every Opening": "Решение для каждого проёма", "Explore Products": "Смотреть продукцию", Discover: "Подробнее",
     "Landmark Projects": "Знаковые проекты", "Chosen For The Projects That Cannot Fail": "Выбор для проектов, где нельзя допустить ошибку",
     "Certified & Recognized": "Сертификация и признание", "Held To Standards, Honored At The Top": "Соответствие стандартам и высшие награды", "Design Awards": "Награды за дизайн", Certifications: "Сертификаты",
+    "Our Journey": "Наш путь", "A Thirty-Year Journey": "Тридцать лет развития", "Global Footprint": "Глобальное присутствие", "We Spread Around The World": "Мы работаем по всему миру", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "От Юнкана в провинции Чжэцзян до дистрибьюторов и проектов более чем в 60 странах и регионах при поддержке пяти производственных баз и шести центров НИОКР.", "Countries & Regions": "Страны и регионы", "Manufacturing Bases": "Производственные базы", "R&D Centers": "Центры НИОКР", "Users Worldwide": "Пользователи по всему миру", "Trusted Across Industries": "Нам доверяют разные отрасли", "Trusted By Tech & Real-Estate Leaders": "Нам доверяют лидеры технологий и недвижимости", "Trusted by China's Leading Developers": "Нам доверяют ведущие застройщики Китая",
   },
   es: {
     Manufacturing: "Fabricación", "Built In Our Own 5G-Connected Smart Factories": "Fabricado en nuestras propias fábricas inteligentes conectadas por 5G", "Watch the Factory Tour": "Ver recorrido de la fábrica",
     "Our Products": "Nuestros productos", "Built For Every Opening": "Una solución para cada abertura", "Explore Products": "Explorar productos", Discover: "Descubrir",
     "Landmark Projects": "Proyectos emblemáticos", "Chosen For The Projects That Cannot Fail": "Elegido para proyectos donde no se puede fallar",
     "Certified & Recognized": "Certificado y reconocido", "Held To Standards, Honored At The Top": "Cumplimos normas y recibimos el máximo reconocimiento", "Design Awards": "Premios de diseño", Certifications: "Certificaciones",
+    "Our Journey": "Nuestra trayectoria", "A Thirty-Year Journey": "Treinta años de trayectoria", "Global Footprint": "Presencia global", "We Spread Around The World": "Estamos presentes en todo el mundo", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "Desde Yongkang, Zhejiang, hasta distribuidores y proyectos en más de 60 países y regiones, respaldados por cinco bases de fabricación y seis centros de I+D.", "Countries & Regions": "Países y regiones", "Manufacturing Bases": "Bases de fabricación", "R&D Centers": "Centros de I+D", "Users Worldwide": "Usuarios en todo el mundo", "Trusted Across Industries": "Confianza en múltiples sectores", "Trusted By Tech & Real-Estate Leaders": "La confianza de líderes tecnológicos e inmobiliarios", "Trusted by China's Leading Developers": "La confianza de los principales promotores de China",
   },
 };
 
@@ -77,10 +81,42 @@ const PRODUCT_DESCRIPTIONS: Partial<Record<Locale, string[]>> = {
   es: ["Puertas metálicas y de madera que protegen la entrada y preservan el confort interior.", "Cerraduras biométricas con acceso manos libres y control de acceso cifrado.", "Sistemas de aluminio herméticos, aislantes y con cierre automático ante viento o lluvia.", "Un ecosistema que conecta puertas, cerraduras y ventanas en una sola capa de hogar inteligente."],
 };
 
+type PartnershipCopy = { title: string; description: string; cta: string };
+const PARTNERSHIP_COPY: Partial<Record<Locale, PartnershipCopy[]>> = {
+  ar: [
+    { title: "برنامج الموزعين", description: "انضم إلى شبكة عالمية مدعومة بخبرة علامة تمتد 30 عاماً وتدريب كامل ودعم تسويقي إقليمي.", cta: "كن موزعاً" },
+    { title: "التعاون في المشاريع", description: "حلول للمشاريع السكنية والتجارية والطبية والفندقية والحكومية والعامة.", cta: "قدّم مشروعاً" },
+    { title: "خدمات OEM / ODM", description: "استفد من مصانعنا الذكية وأكثر من 1,000 براءة اختراع لبناء خط أمان بعلامتك التجارية.", cta: "اطلب ملف OEM/ODM" },
+    { title: "شبكة توزيع عالمية", description: "مقار إقليمية ومكاتب محلية وشركاء معتمدون في الشرق الأوسط وجنوب شرق آسيا وآسيا الوسطى.", cta: "ابحث عن شريك محلي" },
+  ],
+  fr: [
+    { title: "Programme distributeurs", description: "Rejoignez un réseau mondial soutenu par 30 ans de marque, une formation complète et un appui marketing régional.", cta: "Devenir distributeur" },
+    { title: "Coopération projets", description: "Solutions pour les projets résidentiels, commerciaux, médicaux, hôteliers, publics et gouvernementaux.", cta: "Soumettre un projet" },
+    { title: "Services OEM / ODM", description: "Appuyez-vous sur nos usines intelligentes et plus de 1 000 brevets pour créer votre propre gamme de sécurité.", cta: "Demander le dossier OEM/ODM" },
+    { title: "Réseau mondial de distribution", description: "Sièges régionaux, bureaux locaux et partenaires agréés au Moyen-Orient, en Asie du Sud-Est et en Asie centrale.", cta: "Trouver un partenaire local" },
+  ],
+  ru: [
+    { title: "Дистрибьюторская программа", description: "Присоединяйтесь к глобальной сети с 30-летним брендом, обучением по продукции и региональной маркетинговой поддержкой.", cta: "Стать дистрибьютором" },
+    { title: "Проектное сотрудничество", description: "Решения для жилых, коммерческих, медицинских, гостиничных, государственных и общественных проектов.", cta: "Предложить проект" },
+    { title: "Услуги OEM / ODM", description: "Используйте наши умные заводы и более 1 000 патентов для создания собственной линейки безопасности.", cta: "Запросить материалы OEM/ODM" },
+    { title: "Глобальная сеть дистрибуции", description: "Региональные офисы и авторизованные партнёры на Ближнем Востоке, в Юго-Восточной и Центральной Азии.", cta: "Найти местного партнёра" },
+  ],
+  es: [
+    { title: "Programa de distribuidores", description: "Únase a una red global respaldada por 30 años de marca, formación de producto y apoyo de marketing regional.", cta: "Ser distribuidor" },
+    { title: "Cooperación en proyectos", description: "Soluciones para proyectos residenciales, comerciales, médicos, hoteleros, gubernamentales y públicos.", cta: "Presentar un proyecto" },
+    { title: "Servicios OEM / ODM", description: "Aproveche nuestras fábricas inteligentes y más de 1.000 patentes para crear su propia línea de seguridad.", cta: "Solicitar información OEM/ODM" },
+    { title: "Red global de distribución", description: "Sedes regionales, oficinas locales y socios autorizados en Oriente Medio, Sudeste Asiático y Asia Central.", cta: "Encontrar un socio local" },
+  ],
+};
+
 export function homeSectionText(locale: Locale, text: string): string {
   return SECTION_TEXT[locale]?.[text] ?? text;
 }
 
 export function homeProductDescription(locale: Locale, index: number, fallback: string): string {
   return PRODUCT_DESCRIPTIONS[locale]?.[index] ?? fallback;
+}
+
+export function homePartnership(locale: Locale, index: number, fallback: PartnershipCopy): PartnershipCopy {
+  return PARTNERSHIP_COPY[locale]?.[index] ?? fallback;
 }
