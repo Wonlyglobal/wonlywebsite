@@ -1,6 +1,8 @@
 import { Fingerprint, ScanFace, Camera, Wifi, KeyRound, ShieldCheck } from "lucide-react";
 import { BASE } from "@/lib/site-ui";
 import { ProductPage, type ProductPageData } from "@/lib/product-page";
+import { useLocale } from "@/lib/i18n";
+import { localizeSmartLocks } from "@/lib/product-locales";
 
 const data: ProductPageData = {
   seo: {
@@ -38,4 +40,7 @@ const data: ProductPageData = {
   cta: { title: "Bring WONLY Smart Locks To Your Market", sub: "Residential, hospitality or commercial — request the catalog, samples and pricing." },
 };
 
-export default function SmartLocks() { return <ProductPage data={data} />; }
+export default function SmartLocks() {
+  const { locale } = useLocale();
+  return <ProductPage data={localizeSmartLocks(data, locale)} />;
+}
