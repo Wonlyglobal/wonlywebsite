@@ -1,6 +1,8 @@
 import { DoorOpen, LayoutGrid, Cpu, Sparkles, ShieldCheck, Moon } from "lucide-react";
 import { BASE } from "@/lib/site-ui";
 import { ProductPage, type ProductPageData } from "@/lib/product-page";
+import { useLocale } from "@/lib/i18n";
+import { localizeWholeHouse } from "@/lib/product-locales";
 
 const data: ProductPageData = {
   seo: {
@@ -49,4 +51,7 @@ const data: ProductPageData = {
   cta: { title: "Bring WONLY Smart Living To Your Market", sub: "Ask about the ecosystem, integration and OEM/ODM options — we reply within 24 hours." },
 };
 
-export default function WholeHouse() { return <ProductPage data={data} />; }
+export default function WholeHouse() {
+  const { locale } = useLocale();
+  return <ProductPage data={localizeWholeHouse(data, locale)} />;
+}
