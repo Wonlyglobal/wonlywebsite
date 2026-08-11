@@ -99,7 +99,7 @@ const SecurityDoors = () => {
               {STATS.map((s) => (
                 <div key={s.label}>
                   <div className="font-light leading-none" style={{ color: GOLD }}><span className="text-[28px] md:text-[34px]">{s.v}</span><span className="text-base ml-0.5">{s.s}</span></div>
-                  <div className="mt-1.5 text-[10px] tracking-[0.2em] uppercase" style={{ color: "rgba(245,241,234,0.6)" }}>{s.label}</div>
+                  <div className="mt-1.5 text-[10px] tracking-[0.2em] uppercase" style={{ color: "rgba(245,241,234,0.6)" }}>{st(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -189,14 +189,14 @@ const SecurityDoors = () => {
           <Reveal>
             <div className={eyebrow} style={{ color: GOLD }}>{st("Specifications")}</div>
             <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{st("Technical Excellence, To Spec")}</h2>
-            <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>Every parameter meets or exceeds international security standards. Custom configurations are available for project-specific requirements — request the full spec sheet.</p>
-            <Link to="/#contact" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Request Full Spec Sheet <ArrowRight size={15} /></Link>
+            <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>{st("Spec Description")}</p>
+            <Link to="/#contact" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>{st("Request Full Spec Sheet")} <ArrowRight size={15} /></Link>
           </Reveal>
           <Reveal delay={120}>
             <div className="border-t" style={{ borderColor: `${SILVER}66` }}>
               {SPECS.map(([k, v]) => (
                 <div key={k} className="flex items-center justify-between gap-6 py-4 border-b" style={{ borderColor: `${SILVER}44` }}>
-                  <div className="text-sm" style={{ color: MUTED }}>{k}</div>
+                  <div className="text-sm" style={{ color: MUTED }}>{st(k)}</div>
                   <div className="text-sm font-medium text-right flex items-center gap-2" style={{ color: DARK }}><Check size={14} style={{ color: GOLD }} />{v}</div>
                 </div>
               ))}
@@ -241,7 +241,7 @@ const SecurityDoors = () => {
         </div>
       </section>
 
-      <CtaBand eyebrowText="Ready to Secure Your Project?" title="Custom Security-Door Solutions & Pricing" sub="Our engineering team replies within 24 hours with tailored specifications, compliance documentation and project pricing." />
+      <CtaBand eyebrowText={st("Ready to Secure Your Project?")} title={st("Custom Security-Door Solutions & Pricing")} sub={st("CTA Description")} />
       <SiteFooter />
     </div>
   );
