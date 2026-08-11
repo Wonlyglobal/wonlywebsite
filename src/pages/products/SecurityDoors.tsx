@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Shield, Flame, Lock, Wind, Volume2, Award, ArrowRight, Check, ShieldCheck, Home, Building2, Cross } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
+import { useLocale } from "@/lib/i18n";
+import { securityDoorText } from "@/lib/product-locales";
 
 const IMG = {
   hero: `${BASE}images/alu-k300max.webp`,
@@ -63,10 +65,11 @@ const APPLICATIONS = [
 const CERTS = ["ISO 9001", "ISO 14001", "CE", "UL", "EN 1634 Fire", "Class A Anti-Theft", "CMA", "CSPPA"];
 
 const SecurityDoors = () => {
+  const { locale, t } = useLocale();
+  const st = (text: string) => securityDoorText(locale, text);
   useSeo({
-    title: "Security Door Manufacturer — Cast-Aluminium & Fire-Rated | WONLY",
-    description:
-      "WONLY security door manufacturer and OEM/ODM supplier: robotic flagship, EN 1634 90-minute fire-rated, medical-grade and artisan villa doors — Class A protection, certified worldwide, for distributors and projects.",
+    title: st("SEO Title") === "SEO Title" ? "Security Door Manufacturer — Cast-Aluminium & Fire-Rated | WONLY" : st("SEO Title"),
+    description: st("SEO Description") === "SEO Description" ? "WONLY security door manufacturer and OEM/ODM supplier: robotic flagship, EN 1634 90-minute fire-rated, medical-grade and artisan villa doors — Class A protection, certified worldwide, for distributors and projects." : st("SEO Description"),
     path: "/products/security-doors",
     type: "website",
     jsonLd: {
@@ -85,12 +88,12 @@ const SecurityDoors = () => {
       <section className="relative min-h-[92vh] w-full overflow-hidden flex items-center" style={{ background: "radial-gradient(120% 90% at 78% 25%, #2a2627 0%, #0d0d0d 70%)" }}>
         <div className="relative z-10 w-full max-w-[1600px] mx-auto px-[7vw] grid grid-cols-1 md:grid-cols-2 gap-10 items-center pt-24 pb-16">
           <div>
-            <div className={eyebrow + " mb-6"} style={{ color: CHAMP }}>Security Doors · Since 1996</div>
-            <h1 className="font-light uppercase text-white leading-[1.07] tracking-[0.05em] text-[38px] md:text-[64px]">Engineered to<br /><span style={{ color: CHAMP }}>defend</span> every entry</h1>
-            <p className="mt-7 max-w-md text-base md:text-lg font-normal leading-relaxed" style={{ color: "#efe9dd" }}>From robotic flagship doors to fire-rated engineering series — certified, project-ready security for villas, commercial and institutional projects worldwide.</p>
+            <div className={eyebrow + " mb-6"} style={{ color: CHAMP }}>{st("Security Doors · Since 1996")}</div>
+            <h1 className="font-light uppercase text-white leading-[1.07] tracking-[0.05em] text-[38px] md:text-[64px]">{st("Engineered to")}<br /><span style={{ color: CHAMP }}>{st("defend")}</span> {st("every entry")}</h1>
+            <p className="mt-7 max-w-md text-base md:text-lg font-normal leading-relaxed" style={{ color: "#efe9dd" }}>{st("Hero Description")}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/#contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote <ArrowRight size={15} /></Link>
-              <a href="#series" className="inline-flex items-center px-7 py-3.5 rounded-full text-sm font-medium border transition-colors hover:bg-white/5" style={{ borderColor: "rgba(255,255,255,0.25)", color: "#fff" }}>View the Range</a>
+              <Link to="/#contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>{t("Get Solutions & Quote")} <ArrowRight size={15} /></Link>
+              <a href="#series" className="inline-flex items-center px-7 py-3.5 rounded-full text-sm font-medium border transition-colors hover:bg-white/5" style={{ borderColor: "rgba(255,255,255,0.25)", color: "#fff" }}>{st("View the Range")}</a>
             </div>
             <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
               {STATS.map((s) => (
@@ -112,9 +115,9 @@ const SecurityDoors = () => {
       {/* Product series */}
       <section id="series" className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>The Range</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Six Series. Every Grade And Scenario</h2>
-          <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>Covering every security grade, fire rating and application — all backed by 1,000+ patents and 30 years of engineering.</p>
+          <div className={eyebrow} style={{ color: GOLD }}>{st("The Range")}</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{st("Six Series. Every Grade And Scenario")}</h2>
+          <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed" style={{ color: MUTED }}>{st("Range Description")}</p>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERIES.map((p, i) => {
@@ -151,8 +154,8 @@ const SecurityDoors = () => {
       {/* Core technology */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Core Technology</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Six Layers Of Defense, In Every Door</h2>
+          <div className={eyebrow} style={{ color: GOLD }}>{st("Core Technology")}</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{st("Six Layers Of Defense, In Every Door")}</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f, i) => (
@@ -174,8 +177,8 @@ const SecurityDoors = () => {
         <img src={IMG.band} alt="WONLY security-door manufacturing" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.5), rgba(34,31,32,0.7))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
-          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Tested to Destruction</div>
-          <h2 className="font-light text-white leading-[1.1] text-[28px] md:text-[50px]">Certified In Our Own Labs Before It Ships</h2>
+          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>{st("Tested to Destruction")}</div>
+          <h2 className="font-light text-white leading-[1.1] text-[28px] md:text-[50px]">{st("Certified In Our Own Labs Before It Ships")}</h2>
         </Reveal>
       </section>
 
@@ -183,8 +186,8 @@ const SecurityDoors = () => {
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
           <Reveal>
-            <div className={eyebrow} style={{ color: GOLD }}>Specifications</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Technical Excellence, To Spec</h2>
+            <div className={eyebrow} style={{ color: GOLD }}>{st("Specifications")}</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{st("Technical Excellence, To Spec")}</h2>
             <p className="mt-6 text-base font-normal leading-relaxed" style={{ color: MUTED }}>Every parameter meets or exceeds international security standards. Custom configurations are available for project-specific requirements — request the full spec sheet.</p>
             <Link to="/#contact" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Request Full Spec Sheet <ArrowRight size={15} /></Link>
           </Reveal>
@@ -204,8 +207,8 @@ const SecurityDoors = () => {
       {/* Applications */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: CHAMP_BG }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>Applications</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>Built For Every Space</h2>
+          <div className={eyebrow} style={{ color: GOLD }}>{st("Applications")}</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{st("Built For Every Space")}</h2>
         </Reveal>
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
           {APPLICATIONS.map((s, i) => (
@@ -228,7 +231,7 @@ const SecurityDoors = () => {
       <section className="px-[7vw] py-20 md:py-24" style={{ background: DARK }}>
         <Reveal className="max-w-3xl">
           <div className="flex items-center gap-2.5 mb-5"><ShieldCheck size={18} style={{ color: CHAMP }} /><span className={eyebrow} style={{ color: CHAMP }}>Certified &amp; Recognized</span></div>
-          <h2 className="text-2xl md:text-4xl font-light text-white">Held To The Highest Security Standards</h2>
+          <h2 className="text-2xl md:text-4xl font-light text-white">{st("Held To The Highest Security Standards")}</h2>
         </Reveal>
         <div className="mt-10 flex flex-wrap gap-3">
           {CERTS.map((c) => (

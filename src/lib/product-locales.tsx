@@ -62,3 +62,30 @@ export function localizeEntranceDoor(data: ProductPageData, locale: Locale): Pro
     cta: { title: c.ctaTitle, sub: c.ctaSub },
   };
 }
+
+const SECURITY_TEXT: Partial<Record<Locale, Record<string, string>>> = {
+  ar: {
+    "SEO Title": "مصنّع أبواب أمان وأبواب مقاومة للحريق | WONLY", "SEO Description": "WONLY مصنّع ومورّد OEM/ODM لأبواب الأمان: أبواب روبوتية وأبواب EN 1634 مقاومة للحريق 90 دقيقة وأبواب طبية وفاخرة للموزعين والمشاريع.",
+    "Security Doors · Since 1996": "أبواب أمان · منذ 1996", "Engineered to": "مصممة من أجل", "defend": "حماية", "every entry": "كل مدخل", "Hero Description": "من الأبواب الروبوتية الرائدة إلى سلاسل المشاريع المقاومة للحريق، حماية معتمدة وجاهزة للمشاريع السكنية والتجارية والمؤسسية حول العالم.", "View the Range": "عرض المجموعة",
+    "The Range": "المجموعة", "Six Series. Every Grade And Scenario": "ست سلاسل لكل درجة وكل سيناريو", "Range Description": "تغطي درجات الأمان ومقاومة الحريق والتطبيقات المختلفة، بدعم أكثر من 1,000 براءة اختراع و30 عاماً من الهندسة.", "Core Technology": "التقنية الأساسية", "Six Layers Of Defense, In Every Door": "ست طبقات دفاع في كل باب", "Tested to Destruction": "اختبارات حتى أقصى الحدود", "Certified In Our Own Labs Before It Ships": "يُعتمد في مختبراتنا قبل الشحن", Specifications: "المواصفات", "Technical Excellence, To Spec": "تفوق تقني وفق المواصفات", Applications: "التطبيقات", "Built For Every Space": "مصمم لكل مساحة", "Held To The Highest Security Standards": "ملتزم بأعلى معايير الأمان",
+  },
+  fr: {
+    "SEO Title": "Fabricant de portes de sécurité et coupe-feu | WONLY", "SEO Description": "WONLY fabrique des portes de sécurité OEM/ODM : modèles robotisés, portes EN 1634 coupe-feu 90 minutes, médicales et haut de gamme pour distributeurs et projets.",
+    "Security Doors · Since 1996": "Portes de sécurité · Depuis 1996", "Engineered to": "Conçues pour", defend: "défendre", "every entry": "chaque entrée", "Hero Description": "Des portes robotisées phares aux séries techniques coupe-feu, une sécurité certifiée et prête pour les projets résidentiels, commerciaux et institutionnels.", "View the Range": "Voir la gamme",
+    "The Range": "La gamme", "Six Series. Every Grade And Scenario": "Six séries pour chaque niveau et chaque usage", "Range Description": "Toutes les classes de sécurité, résistances au feu et applications, soutenues par plus de 1 000 brevets et 30 ans d’ingénierie.", "Core Technology": "Technologie centrale", "Six Layers Of Defense, In Every Door": "Six couches de défense dans chaque porte", "Tested to Destruction": "Testé jusqu’aux limites", "Certified In Our Own Labs Before It Ships": "Certifié dans nos laboratoires avant expédition", Specifications: "Spécifications", "Technical Excellence, To Spec": "Excellence technique conforme au cahier des charges", Applications: "Applications", "Built For Every Space": "Conçu pour chaque espace", "Held To The Highest Security Standards": "Conforme aux normes de sécurité les plus élevées",
+  },
+  ru: {
+    "SEO Title": "Производитель защитных и противопожарных дверей | WONLY", "SEO Description": "WONLY производит защитные двери OEM/ODM: роботизированные модели, двери EN 1634 с огнестойкостью 90 минут, медицинские и премиальные серии для проектов.",
+    "Security Doors · Since 1996": "Защитные двери · С 1996 года", "Engineered to": "Созданы, чтобы", defend: "защищать", "every entry": "каждый вход", "Hero Description": "От флагманских роботизированных дверей до противопожарных инженерных серий — сертифицированная защита для жилых, коммерческих и общественных проектов.", "View the Range": "Смотреть серии",
+    "The Range": "Модельный ряд", "Six Series. Every Grade And Scenario": "Шесть серий для каждого класса и сценария", "Range Description": "Все классы безопасности, показатели огнестойкости и области применения — более 1 000 патентов и 30 лет инженерного опыта.", "Core Technology": "Ключевые технологии", "Six Layers Of Defense, In Every Door": "Шесть уровней защиты в каждой двери", "Tested to Destruction": "Испытано на пределе", "Certified In Our Own Labs Before It Ships": "Сертификация в собственных лабораториях до отгрузки", Specifications: "Характеристики", "Technical Excellence, To Spec": "Техническое совершенство по спецификации", Applications: "Применение", "Built For Every Space": "Для каждого пространства", "Held To The Highest Security Standards": "Соответствие высшим стандартам безопасности",
+  },
+  es: {
+    "SEO Title": "Fabricante de puertas de seguridad y cortafuego | WONLY", "SEO Description": "WONLY fabrica puertas de seguridad OEM/ODM: modelos robotizados, puertas EN 1634 resistentes al fuego 90 minutos, médicas y de lujo para distribuidores y proyectos.",
+    "Security Doors · Since 1996": "Puertas de seguridad · Desde 1996", "Engineered to": "Diseñadas para", defend: "proteger", "every entry": "cada entrada", "Hero Description": "Desde puertas robotizadas insignia hasta series técnicas cortafuego, seguridad certificada para proyectos residenciales, comerciales e institucionales.", "View the Range": "Ver la gama",
+    "The Range": "La gama", "Six Series. Every Grade And Scenario": "Seis series para cada nivel y escenario", "Range Description": "Todos los grados de seguridad, resistencias al fuego y aplicaciones, respaldados por más de 1.000 patentes y 30 años de ingeniería.", "Core Technology": "Tecnología central", "Six Layers Of Defense, In Every Door": "Seis capas de defensa en cada puerta", "Tested to Destruction": "Probado hasta el límite", "Certified In Our Own Labs Before It Ships": "Certificado en nuestros laboratorios antes del envío", Specifications: "Especificaciones", "Technical Excellence, To Spec": "Excelencia técnica según especificación", Applications: "Aplicaciones", "Built For Every Space": "Diseñado para cada espacio", "Held To The Highest Security Standards": "Conforme con los estándares de seguridad más exigentes",
+  },
+};
+
+export function securityDoorText(locale: Locale, text: string): string {
+  return SECURITY_TEXT[locale]?.[text] ?? text;
+}
