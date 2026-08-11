@@ -1,6 +1,8 @@
 import { Volume2, Shield, Ruler, Droplets, Lock, Leaf } from "lucide-react";
 import { BASE } from "@/lib/site-ui";
 import { ProductPage, type ProductPageData } from "@/lib/product-page";
+import { useLocale } from "@/lib/i18n";
+import { localizeWoodenDoor } from "@/lib/product-locales";
 
 const data: ProductPageData = {
   seo: {
@@ -37,4 +39,7 @@ const data: ProductPageData = {
   cta: { title: "Bring WONLY Wooden Doors To Your Market", sub: "Residential, commercial or custom interior — request the catalog, samples and pricing." },
 };
 
-export default function WoodenDoors() { return <ProductPage data={data} />; }
+export default function WoodenDoors() {
+  const { locale } = useLocale();
+  return <ProductPage data={localizeWoodenDoor(data, locale)} />;
+}
