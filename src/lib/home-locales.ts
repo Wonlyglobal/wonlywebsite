@@ -45,28 +45,28 @@ export function homeCopy(locale: Locale, english: HomeCopy): HomeCopy {
 
 const SECTION_TEXT: Partial<Record<Locale, Record<string, string>>> = {
   ar: {
-    Manufacturing: "التصنيع", "Built In Our Own 5G-Connected Smart Factories": "مصنّع في مصانعنا الذكية المتصلة بتقنية 5G", "Watch the Factory Tour": "شاهد جولة المصنع",
+    Manufacturing: "التصنيع", "Manufacturing Strength": "قوة التصنيع", "Built In Our Own 5G-Connected Smart Factories": "مصنّع في مصانعنا الذكية المتصلة بتقنية 5G", "Watch the Factory Tour": "شاهد جولة المصنع",
     "Our Products": "منتجاتنا", "Built For Every Opening": "حل لكل فتحة", "Explore Products": "استكشف المنتجات", Discover: "اكتشف",
     "Landmark Projects": "مشاريع بارزة", "Chosen For The Projects That Cannot Fail": "الخيار للمشاريع التي لا تحتمل الفشل",
     "Certified & Recognized": "معتمد ومعترف به", "Held To Standards, Honored At The Top": "ملتزم بالمعايير وحائز على أرفع الجوائز", "Design Awards": "جوائز التصميم", Certifications: "الشهادات",
     "Our Journey": "مسيرتنا", "A Thirty-Year Journey": "مسيرة ثلاثين عاماً", "Global Footprint": "انتشار عالمي", "We Spread Around The World": "ننتشر حول العالم", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "من يونغكانغ في تشجيانغ إلى موزعين ومشاريع في أكثر من 60 دولة ومنطقة، بدعم من خمس قواعد تصنيع وستة مراكز للبحث والتطوير.", "Countries & Regions": "دول ومناطق", "Manufacturing Bases": "قواعد تصنيع", "R&D Centers": "مراكز بحث وتطوير", "Users Worldwide": "مستخدمون حول العالم", "Trusted Across Industries": "ثقة عبر القطاعات", "Trusted By Tech & Real-Estate Leaders": "موثوق لدى رواد التقنية والعقارات", "Trusted by China's Leading Developers": "موثوق لدى كبار المطورين في الصين",
   },
   fr: {
-    Manufacturing: "Fabrication", "Built In Our Own 5G-Connected Smart Factories": "Fabriqué dans nos propres usines intelligentes connectées en 5G", "Watch the Factory Tour": "Visiter l’usine en vidéo",
+    Manufacturing: "Fabrication", "Manufacturing Strength": "Puissance industrielle", "Built In Our Own 5G-Connected Smart Factories": "Fabriqué dans nos propres usines intelligentes connectées en 5G", "Watch the Factory Tour": "Visiter l’usine en vidéo",
     "Our Products": "Nos produits", "Built For Every Opening": "Une solution pour chaque ouverture", "Explore Products": "Découvrir les produits", Discover: "Découvrir",
     "Landmark Projects": "Projets emblématiques", "Chosen For The Projects That Cannot Fail": "Choisi pour les projets où l’échec n’est pas permis",
     "Certified & Recognized": "Certifié et reconnu", "Held To Standards, Honored At The Top": "Conforme aux normes, récompensé au plus haut niveau", "Design Awards": "Prix de design", Certifications: "Certifications",
     "Our Journey": "Notre parcours", "A Thirty-Year Journey": "Trente ans de parcours", "Global Footprint": "Présence mondiale", "We Spread Around The World": "Une présence dans le monde entier", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "De Yongkang, dans le Zhejiang, à des distributeurs et projets dans plus de 60 pays et régions, avec cinq bases de production et six centres de R&D.", "Countries & Regions": "Pays et régions", "Manufacturing Bases": "Bases de production", "R&D Centers": "Centres de R&D", "Users Worldwide": "Utilisateurs dans le monde", "Trusted Across Industries": "La confiance de multiples secteurs", "Trusted By Tech & Real-Estate Leaders": "La confiance des leaders de la technologie et de l’immobilier", "Trusted by China's Leading Developers": "La confiance des principaux promoteurs chinois",
   },
   ru: {
-    Manufacturing: "Производство", "Built In Our Own 5G-Connected Smart Factories": "Производство на собственных умных заводах с подключением 5G", "Watch the Factory Tour": "Посмотреть экскурсию по заводу",
+    Manufacturing: "Производство", "Manufacturing Strength": "Производственный потенциал", "Built In Our Own 5G-Connected Smart Factories": "Производство на собственных умных заводах с подключением 5G", "Watch the Factory Tour": "Посмотреть экскурсию по заводу",
     "Our Products": "Наша продукция", "Built For Every Opening": "Решение для каждого проёма", "Explore Products": "Смотреть продукцию", Discover: "Подробнее",
     "Landmark Projects": "Знаковые проекты", "Chosen For The Projects That Cannot Fail": "Выбор для проектов, где нельзя допустить ошибку",
     "Certified & Recognized": "Сертификация и признание", "Held To Standards, Honored At The Top": "Соответствие стандартам и высшие награды", "Design Awards": "Награды за дизайн", Certifications: "Сертификаты",
     "Our Journey": "Наш путь", "A Thirty-Year Journey": "Тридцать лет развития", "Global Footprint": "Глобальное присутствие", "We Spread Around The World": "Мы работаем по всему миру", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "От Юнкана в провинции Чжэцзян до дистрибьюторов и проектов более чем в 60 странах и регионах при поддержке пяти производственных баз и шести центров НИОКР.", "Countries & Regions": "Страны и регионы", "Manufacturing Bases": "Производственные базы", "R&D Centers": "Центры НИОКР", "Users Worldwide": "Пользователи по всему миру", "Trusted Across Industries": "Нам доверяют разные отрасли", "Trusted By Tech & Real-Estate Leaders": "Нам доверяют лидеры технологий и недвижимости", "Trusted by China's Leading Developers": "Нам доверяют ведущие застройщики Китая",
   },
   es: {
-    Manufacturing: "Fabricación", "Built In Our Own 5G-Connected Smart Factories": "Fabricado en nuestras propias fábricas inteligentes conectadas por 5G", "Watch the Factory Tour": "Ver recorrido de la fábrica",
+    Manufacturing: "Fabricación", "Manufacturing Strength": "Capacidad industrial", "Built In Our Own 5G-Connected Smart Factories": "Fabricado en nuestras propias fábricas inteligentes conectadas por 5G", "Watch the Factory Tour": "Ver recorrido de la fábrica",
     "Our Products": "Nuestros productos", "Built For Every Opening": "Una solución para cada abertura", "Explore Products": "Explorar productos", Discover: "Descubrir",
     "Landmark Projects": "Proyectos emblemáticos", "Chosen For The Projects That Cannot Fail": "Elegido para proyectos donde no se puede fallar",
     "Certified & Recognized": "Certificado y reconocido", "Held To Standards, Honored At The Top": "Cumplimos normas y recibimos el máximo reconocimiento", "Design Awards": "Premios de diseño", Certifications: "Certificaciones",
@@ -109,6 +109,45 @@ const PARTNERSHIP_COPY: Partial<Record<Locale, PartnershipCopy[]>> = {
   ],
 };
 
+type FeatureCopy = { title: string; description: string };
+const FEATURE_COPY: Partial<Record<Locale, FeatureCopy[]>> = {
+  ar: [
+    { title: "تكامل رأسي", description: "الختم والطلاء والحقن والتجميع تحت سقف واحد للتحكم الكامل في الجودة وموعد التسليم." },
+    { title: "دقة روبوتية", description: "لحام ABB الآلي وخطوط CNC تحافظ على التفاوتات الدقيقة التي تعتمد عليها مشاريع التصدير." },
+    { title: "مدعوم بمجموعة مدرجة", description: "شركة أم مدرجة في بورصة شنغهاي (605268) تقف خلف كل عقد وضمان." },
+  ],
+  fr: [
+    { title: "Intégration verticale", description: "Emboutissage, revêtement, moussage et assemblage sous un même toit pour maîtriser qualité et délais." },
+    { title: "Précision robotisée", description: "Le soudage automatisé ABB et les lignes CNC garantissent les tolérances exigées par les projets export." },
+    { title: "Soutenu par un groupe coté", description: "Une société mère cotée à Shanghai (605268) garantit chaque contrat et chaque garantie." },
+  ],
+  ru: [
+    { title: "Вертикальная интеграция", description: "Штамповка, окраска, вспенивание и сборка под одной крышей для полного контроля качества и сроков." },
+    { title: "Роботизированная точность", description: "Автоматическая сварка ABB и линии CNC обеспечивают допуски, необходимые экспортным проектам." },
+    { title: "Поддержка биржевой группы", description: "Материнская компания, котирующаяся в Шанхае (605268), отвечает за каждый контракт и гарантию." },
+  ],
+  es: [
+    { title: "Integración vertical", description: "Estampado, revestimiento, espumado y montaje bajo un mismo techo para controlar calidad y plazos." },
+    { title: "Precisión robotizada", description: "La soldadura automatizada ABB y las líneas CNC mantienen las tolerancias exigidas por proyectos de exportación." },
+    { title: "Respaldo de un grupo cotizado", description: "Una matriz cotizada en Shanghái (605268) respalda cada contrato y garantía." },
+  ],
+};
+
+const TIMELINE_COPY: Partial<Record<Locale, string[]>> = {
+  ar: [
+    "تأسست العلامة في يونغكانغ، تشجيانغ.", "الفوز بتحدي بطل فتح الأقفال؛ ولم يُفتح القفل منذ أكثر من 20 عاماً.", "اختيارها علامة تجارية صينية مشهورة، بشهادة مزدوجة فريدة في القطاع.", "إطلاق نظام SAP وبداية التحول الرقمي.", "الإدراج في بورصة شنغهاي (605268)، الشركة الوحيدة في القطاع المدرجة في السوق الرئيسية.", "افتتاح مصنع المستقبل الوطني الوحيد في القطاع بتقنية 5G.", "الذكرى الثلاثون وبداية مرحلة جديدة؛ تطلق WONLY استراتيجيتها العالمية للأمن الذكي الفاخر.",
+  ],
+  fr: [
+    "Création de la marque à Yongkang, dans le Zhejiang.", "Victoire au défi du champion du crochetage ; la serrure demeure inviolée depuis plus de 20 ans.", "Reconnue comme marque chinoise renommée, avec la seule double certification du secteur.", "Mise en service de SAP et début de la transformation numérique.", "Introduction à la Bourse de Shanghai (605268), seule société du secteur cotée au marché principal.", "Ouverture de la seule usine du futur 5G de niveau national dans le secteur.", "Trentième anniversaire et nouvelle étape : WONLY lance sa stratégie mondiale de sécurité intelligente haut de gamme.",
+  ],
+  ru: [
+    "Основание бренда в Юнкане, провинция Чжэцзян.", "Победа в испытании чемпиона по вскрытию замков; замок остаётся невскрытым более 20 лет.", "Признание известной торговой маркой Китая с уникальной двойной сертификацией в отрасли.", "Запуск SAP и начало цифровой трансформации.", "Листинг на Шанхайской фондовой бирже (605268), единственная компания отрасли на основной площадке.", "Открытие единственного в отрасли национального завода будущего 5G.", "Тридцатилетие и новый этап: WONLY запускает глобальную стратегию премиальной умной безопасности.",
+  ],
+  es: [
+    "Fundación de la marca en Yongkang, Zhejiang.", "Victoria en el reto del campeón de ganzuado; la cerradura sigue sin abrirse más de 20 años después.", "Reconocida como marca china de prestigio, con la única doble certificación del sector.", "Puesta en marcha de SAP e inicio de la transformación digital.", "Salida a bolsa en Shanghái (605268), única empresa del sector en el mercado principal.", "Apertura de la única fábrica del futuro 5G de nivel nacional del sector.", "Trigésimo aniversario y nueva etapa: WONLY lanza su estrategia global de seguridad inteligente prémium.",
+  ],
+};
+
 export function homeSectionText(locale: Locale, text: string): string {
   return SECTION_TEXT[locale]?.[text] ?? text;
 }
@@ -119,4 +158,12 @@ export function homeProductDescription(locale: Locale, index: number, fallback: 
 
 export function homePartnership(locale: Locale, index: number, fallback: PartnershipCopy): PartnershipCopy {
   return PARTNERSHIP_COPY[locale]?.[index] ?? fallback;
+}
+
+export function homeFeature(locale: Locale, index: number, fallback: FeatureCopy): FeatureCopy {
+  return FEATURE_COPY[locale]?.[index] ?? fallback;
+}
+
+export function homeTimeline(locale: Locale, index: number, fallback: string): string {
+  return TIMELINE_COPY[locale]?.[index] ?? fallback;
 }

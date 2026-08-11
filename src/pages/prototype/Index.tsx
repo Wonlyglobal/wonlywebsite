@@ -4,7 +4,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail,
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
-import { homeCopy, homePartnership, homeProductDescription, homeSectionText } from "@/lib/home-locales";
+import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeTimeline } from "@/lib/home-locales";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -771,7 +771,7 @@ const Prototype = () => {
           {/* Manufacturing strength — a distinct sub-section of cards */}
           <div className="mt-20 md:mt-28">
             <Reveal className="text-center">
-              <div className={eyebrow}>Manufacturing Strength</div>
+              <div className={eyebrow}>{ht("Manufacturing Strength")}</div>
             </Reveal>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
               {WHY_FEATURES.map((f, i) => (
@@ -782,8 +782,8 @@ const Prototype = () => {
                       <img src={f.img} alt={f.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
                     </div>
                     <div className="flex-1 p-6 md:p-7">
-                      <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{f.t}</div>
-                      <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
+                      <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{homeFeature(locale, i, { title: f.t, description: f.d }).title}</div>
+                      <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{homeFeature(locale, i, { title: f.t, description: f.d }).description}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -910,7 +910,7 @@ const Prototype = () => {
             <div className={eyebrow}>{ht("Our Journey")}</div>
             <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("A Thirty-Year Journey")}</h2>
           </Reveal>
-          <Timeline items={TIMELINE} />
+          <Timeline items={TIMELINE.map((item, index) => ({ ...item, m: homeTimeline(locale, index, item.m) }))} />
         </div>
       </section>
 
