@@ -3,10 +3,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigationType } from "react-router-dom";
 import NotFound from "./pages/not-found/Index";
 import { initAnalytics, trackPageview } from "@/lib/analytics";
 import FloatingContact from "@/lib/floating-contact";
+import { LocaleDocument, localeFromPath } from "@/lib/i18n";
+import { FloatingLanguageSwitcher } from "@/lib/site-ui";
 
 // Take over scroll handling from the browser so lazy routes behave predictably.
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
@@ -90,7 +92,6 @@ const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"))
 const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
 const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
 // Unified placeholders for planned-but-unbuilt pages.
-const ProductComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").then((m) => ({ default: m.ProductComingSoon })));
 const SectionComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").then((m) => ({ default: m.SectionComingSoon })));
 // Legal pages (Privacy Policy + Terms of Service).
 const Privacy = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Privacy })));
@@ -100,7 +101,10 @@ const queryClient = new QueryClient();
 
 // Derived from Vite's `base` (see vite.config.ts). "/" for a custom domain at
 // root, "/<repo>" for a GitHub Pages project page — keeps routing correct in both.
-const basename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
+const buildBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+const initialLocale = typeof window === "undefined" ? "en" : localeFromPath(window.location.pathname);
+const localeBase = initialLocale === "en" ? "" : `/${initialLocale}`;
+const basename = `${buildBase}${localeBase}` || "/";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -109,6 +113,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter basename={basename}>
         <ScrollManager />
+        <LocaleDocument />
         <Routes>
           {/* The /prototype interactive page is now the official homepage. */}
           <Route path="/" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
@@ -123,7 +128,7 @@ const App = () => (
           <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
           {/* Metal Door — lands on the Security Doors series page; the X70 sub-page carries the
               Banner + Smart Features detail content. */}
-          <Route path="/products/door/metal-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
+          <Route path="/products/door/metal-door" element={<Navigate to="/products/security-doors" replace />} />
           <Route path="/products/smart-locks" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />
           <Route path="/products/smart-windows" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
           <Route path="/products/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
@@ -134,14 +139,14 @@ const App = () => (
           <Route path="/products/medical-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MedicalDoors /></Suspense>} />
           <Route path="/products/yizhai-yishu" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><YizhaiYishu /></Suspense>} />
 
-          {/* New IA — singular /product/* scheme (reuses existing pages; placeholders for the rest). */}
-          <Route path="/product/door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EntranceDoor /></Suspense>} />
-          <Route path="/product/door/metal-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
-          <Route path="/product/door/wooden-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
-          <Route path="/product/door/wpc-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><ProductComingSoon /></Suspense>} />
-          <Route path="/product/smart-lock" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />
-          <Route path="/product/smart-window" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
-          <Route path="/product/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
+          {/* Legacy singular /product/* URLs resolve to the canonical /products/* structure. */}
+          <Route path="/product/door" element={<Navigate to="/products/entrance-door" replace />} />
+          <Route path="/product/door/metal-door" element={<Navigate to="/products/security-doors" replace />} />
+          <Route path="/product/door/wooden-door" element={<Navigate to="/products/wooden-doors" replace />} />
+          <Route path="/product/door/wpc-door" element={<Navigate to="/products/entrance-door" replace />} />
+          <Route path="/product/smart-lock" element={<Navigate to="/products/smart-locks" replace />} />
+          <Route path="/product/smart-window" element={<Navigate to="/products/smart-windows" replace />} />
+          <Route path="/product/whole-house" element={<Navigate to="/products/whole-house" replace />} />
           {/* Sections not yet built → placeholder (hash anchors resolve within them). */}
           <Route path="/advantages" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Advantages /></Suspense>} />
           <Route path="/manufacturing-rd" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Manufacturing /></Suspense>} />
@@ -159,6 +164,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <FloatingLanguageSwitcher />
         <FloatingContact />
       </BrowserRouter>
     </TooltipProvider>

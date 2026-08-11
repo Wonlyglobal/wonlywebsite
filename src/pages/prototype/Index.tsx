@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
+import { useLocale } from "@/lib/i18n";
+import { homeCopy } from "@/lib/home-locales";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -529,6 +531,14 @@ const Prototype = () => {
   const [sent, setSent] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const openQuote = useQuoteStore((s) => s.openQuote);
+  const { locale, t } = useLocale();
+  const copy = homeCopy(locale, {
+    hero: { ...HOME_HERO, scroll: HOME_HERO.scrollLabel },
+    reveal: HOME_REVEAL,
+    why: { eyebrow: "Why WONLY", title: "A Partner Built For Scale, Trusted At The Top", subtitle: "Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door." },
+    partnership: { eyebrow: "Partner With WONLY", title: "Open The Door To Partnership" },
+    contact: { eyebrow: "Get Solutions & Quote", line1: "Ready To Open", line2: "Your Market?", subtitle: "Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing." },
+  });
   const [form, setForm] = useState({ name: "", company: "", country: "", email: "", interest: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const setField = (name: keyof typeof form, value: string) => {
@@ -657,9 +667,9 @@ const Prototype = () => {
             {NAV.map((n) => (
               <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
                 {n.href ? (
-                  <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</Link>
+                  <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</Link>
                 ) : (
-                  <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</span>
+                  <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
                 )}
                 {n.children && openDrop === n.label && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
@@ -667,7 +677,7 @@ const Prototype = () => {
                       <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
                         <Link to={c.href || "#"} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                           {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                          <span className="leading-tight whitespace-nowrap flex-1">{c.label}</span>
+                          <span className="leading-tight whitespace-nowrap flex-1">{t(c.label)}</span>
                           {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
                         </Link>
                         {c.children && openSub === c.label && (
@@ -675,7 +685,7 @@ const Prototype = () => {
                             {c.children.map((sc) => (
                               <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                                 {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                                <span className="leading-tight whitespace-nowrap">{sc.label}</span>
+                                <span className="leading-tight whitespace-nowrap">{t(sc.label)}</span>
                               </Link>
                             ))}
                           </div>
@@ -688,7 +698,7 @@ const Prototype = () => {
             ))}
           </nav>
           <button onClick={() => scrollToId("contact")} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
-            Get Solutions &amp; Quote
+            {t("Get Solutions & Quote")}
           </button>
         </div>
       </header>
@@ -703,14 +713,14 @@ const Prototype = () => {
         <div ref={title} className="absolute inset-0 z-20 pointer-events-none" style={{ willChange: "opacity, transform", transform: "translateZ(0)" }}>
           {/* Eyebrow + headline + sub + scroll cue — dead-centered in the viewport */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-            <div className="text-[12px] sm:text-[13px] tracking-[0.4em] uppercase font-semibold mb-8" style={{ color: CHAMP, textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>{HOME_HERO.eyebrow}</div>
+            <div className="text-[12px] sm:text-[13px] tracking-[0.4em] uppercase font-semibold mb-8" style={{ color: CHAMP, textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>{copy.hero.eyebrow}</div>
             <h1 className="font-light uppercase text-white leading-[1.08] tracking-[0.08em] text-[38px] sm:text-[60px] md:text-[82px] lg:text-[92px]" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>
-              {HOME_HERO.line1}<br />{HOME_HERO.line2}<br /><span style={{ color: CHAMP }}>{HOME_HERO.line3}</span>
+              {copy.hero.line1}<br />{copy.hero.line2}<br /><span style={{ color: CHAMP }}>{copy.hero.line3}</span>
             </h1>
-            <p className="mt-8 max-w-lg text-sm md:text-base font-normal leading-relaxed" style={{ color: "#efe9dd", textShadow: "0 1px 14px rgba(0,0,0,0.5)" }}>{HOME_HERO.subtitle}</p>
+            <p className="mt-8 max-w-lg text-sm md:text-base font-normal leading-relaxed" style={{ color: "#efe9dd", textShadow: "0 1px 14px rgba(0,0,0,0.5)" }}>{copy.hero.subtitle}</p>
             {/* Scroll cue — directly below the sub copy */}
             <div className="mt-12 flex flex-col items-center gap-3">
-              <span className="text-[11px] tracking-[0.5em] uppercase font-light" style={{ color: CHAMP_BG, textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>{HOME_HERO.scrollLabel}</span>
+              <span className="text-[11px] tracking-[0.5em] uppercase font-light" style={{ color: CHAMP_BG, textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>{copy.hero.scroll}</span>
               <span className="block w-px h-12 animate-pulse" style={{ background: `linear-gradient(${GOLD}, transparent)` }} />
             </div>
           </div>
@@ -721,7 +731,7 @@ const Prototype = () => {
           {/* subtle dark gradient so the white heading stays readable without a hard overlay */}
           <div className="absolute inset-x-0 top-0 h-[68%] pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.28) 45%, rgba(13,13,13,0) 100%)" }} />
           <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
-            <h2 className="font-semibold uppercase leading-[1.12] tracking-[0.08em] text-[36px] md:text-[64px] text-white" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.55)" }}>{HOME_REVEAL.line1}<br />{HOME_REVEAL.line2}</h2>
+            <h2 className="font-semibold uppercase leading-[1.12] tracking-[0.08em] text-[36px] md:text-[64px] text-white" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.55)" }}>{copy.reveal.line1}<br />{copy.reveal.line2}</h2>
             <div className="mt-12 md:mt-14 rounded-3xl px-6 py-9 md:px-12 md:py-11" style={{ background: "rgba(20,18,19,0.6)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 gap-x-8">
                 {STATS.map((s) => (
@@ -747,9 +757,9 @@ const Prototype = () => {
         <div className={CONTAINER}>
           {/* Title area — centered, leads the section */}
           <Reveal className="max-w-3xl mx-auto text-center">
-            <div className={eyebrow}>Why WONLY</div>
-            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>A Partner Built For Scale, Trusted At The Top</h2>
-            <p className={SUBTITLE + " mx-auto"} style={{ color: SUB_COLOR }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
+            <div className={eyebrow}>{copy.why.eyebrow}</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{copy.why.title}</h2>
+            <p className={SUBTITLE + " mx-auto"} style={{ color: SUB_COLOR }}>{copy.why.subtitle}</p>
           </Reveal>
 
           {/* The numbers — 3D coverflow, centered with symmetric side whitespace */}
@@ -872,8 +882,8 @@ const Prototype = () => {
         <div className="absolute inset-0" style={{ background: "rgba(26,23,24,0.9)" }} />
         <div className={"relative z-10 " + CONTAINER}>
           <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: CHAMP }}>Partner With WONLY</div>
-            <h2 className={h2cls + " mt-[14px] text-white"}>Open The Door To Partnership</h2>
+            <div className={eyebrow} style={{ color: CHAMP }}>{copy.partnership.eyebrow}</div>
+            <h2 className={h2cls + " mt-[14px] text-white"}>{copy.partnership.title}</h2>
           </Reveal>
           <div className="mt-14 border-t" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
             {PARTNERSHIP.map((p, i) => (
@@ -966,10 +976,10 @@ const Prototype = () => {
         <div className={CONTAINER}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-start">
           <Reveal>
-            <div className={eyebrow} style={{ color: CHAMP }}>Get Solutions &amp; Quote</div>
-            <h2 className={h2cls + " mt-[14px] text-white"}>Ready To Open<br />Your Market?</h2>
+            <div className={eyebrow} style={{ color: CHAMP }}>{copy.contact.eyebrow}</div>
+            <h2 className={h2cls + " mt-[14px] text-white"}>{copy.contact.line1}<br />{copy.contact.line2}</h2>
             <p className="mt-6 max-w-md text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>
-              Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
+              {copy.contact.subtitle}
             </p>
             <div className="mt-10 space-y-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.85)" }}>
               <a href="mailto:inquiry@wonlyglobal.com" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> inquiry@wonlyglobal.com</a>
@@ -987,10 +997,10 @@ const Prototype = () => {
               </div>
             ) : (
             <form noValidate onSubmit={onContactSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {([["name", "Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, t]) => (
+              {([["name", "Full Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country / Region", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, inputType]) => (
                 <label key={key} className="block">
-                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{l} <span style={{ color: "#e6928a" }}>*</span></span>
-                  <input type={t} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={ph} />
+                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} <span style={{ color: "#e6928a" }}>*</span></span>
+                  <input type={inputType} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={ph} />
                   {errors[key] && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors[key]}</span>}
                 </label>
               ))}
@@ -1005,11 +1015,11 @@ const Prototype = () => {
                 {errors.interest && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.interest}</span>}
               </label>
               <label className="block sm:col-span-2">
-                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Message <span style={{ color: "#e6928a" }}>*</span></span>
+                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Message")} <span style={{ color: "#e6928a" }}>*</span></span>
                 <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder="Tell us about your project or territory..." />
                 {errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.message}</span>}
               </label>
-              <button type="submit" className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote</button>
+              <button type="submit" className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02]" style={{ background: GOLD, color: DARK }}>{t("Get Solutions & Quote")}</button>
             </form>
             )}
           </Reveal>

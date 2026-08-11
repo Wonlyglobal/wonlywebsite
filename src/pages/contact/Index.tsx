@@ -4,6 +4,7 @@ import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, MUTED } from "@/lib/site-ui"
 import { trackLead } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
 import { submitEnquiry } from "@/lib/form-config";
+import { useLocale } from "@/lib/i18n";
 
 /* ── CMS 联系页文案: content/settings/contact.json（在 /admin 站点后台编辑）──
    每个字段都有代码默认值兜底，JSON 缺失或留空不会让页面变空白。 */
@@ -32,6 +33,7 @@ const label = "text-[11px] tracking-[0.12em] uppercase";
 const input = "mt-1.5 w-full rounded-lg px-4 py-2.5 text-sm text-[#221F20] bg-[#faf8f4] placeholder-black/25 focus:outline-none";
 
 export default function Contact() {
+  const { t } = useLocale();
   useSeo({
     title: "Contact | WONLY",
     description: "Contact WONLY for distributor, project or OEM/ODM enquiries. Email inquiry@wonlyglobal.com or message us on WhatsApp — replies within 24 hours.",
@@ -88,7 +90,7 @@ export default function Contact() {
       {/* Hero */}
       <section className="text-white px-[6vw] pt-[150px] pb-[90px]" style={{ background: "radial-gradient(120% 90% at 78% 20%, #2a2627 0%, #0d0d0d 72%)" }}>
         <div className="max-w-[1200px] mx-auto">
-          <div className="text-[12px] tracking-[0.3em] uppercase font-bold" style={{ color: CHAMP }}>{C.eyebrow}</div>
+          <div className="text-[12px] tracking-[0.3em] uppercase font-bold" style={{ color: CHAMP }}>{t(C.eyebrow)}</div>
           <h1 className="mt-4 font-light leading-[1.05] tracking-[-1px] text-[clamp(34px,5vw,64px)]">{C.title} <span style={{ color: CHAMP }}>{C.titleHighlight}</span></h1>
           <p className="mt-5 max-w-[520px] text-[15px] leading-[1.7]" style={{ color: "rgba(245,241,234,0.72)" }}>
             {C.subtitle}
@@ -100,12 +102,12 @@ export default function Contact() {
       <div className="max-w-[1200px] mx-auto px-[6vw] py-[70px] grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-[56px]">
         {/* Channels */}
         <div>
-          <h2 className="text-[13px] tracking-[0.28em] uppercase font-bold mb-6" style={{ color: GOLD }}>Get in Touch</h2>
+          <h2 className="text-[13px] tracking-[0.28em] uppercase font-bold mb-6" style={{ color: GOLD }}>{t("Get in Touch")}</h2>
 
           <a href={`mailto:${C.email}`} className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><Mail size={19} style={{ color: GOLD }} /></span>
             <span>
-              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Email</span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>{t("Email")}</span>
               <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">{C.email}</span>
               <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.emailNote}</span>
             </span>
@@ -123,7 +125,7 @@ export default function Contact() {
           <div className="flex gap-4 py-5 border-b border-[#e4ddcf]">
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><MapPin size={19} style={{ color: GOLD }} /></span>
             <span>
-              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Headquarters</span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>{t("Headquarters")}</span>
               <span className="block text-[16px] font-semibold mt-0.5">{C.hqTitle}</span>
               <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.hqNote}</span>
             </span>
@@ -132,7 +134,7 @@ export default function Contact() {
           <a href={C.prevSiteUrl} target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
             <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><ArrowUpRight size={19} style={{ color: GOLD }} /></span>
             <span>
-              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>Previous Site</span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>{t("Previous Site")}</span>
               <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">{C.prevSiteLabel}</span>
               <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.prevSiteNote}</span>
             </span>
@@ -155,26 +157,26 @@ export default function Contact() {
               </div>
             ) : (
               <form noValidate onSubmit={submit}>
-                <h3 className="text-[22px] font-normal">Send an Enquiry</h3>
+                <h3 className="text-[22px] font-normal">{t("Send an Enquiry")}</h3>
                 <p className="text-[13px] mt-1.5 mb-5" style={{ color: MUTED }}>Tell us about your project or territory. Fields marked <span style={{ color: "#c0564a" }}>*</span> are required.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <label className="block"><span className={label} style={{ color: MUTED }}>Full Name <span style={{ color: "#c0564a" }}>*</span></span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Full Name")} <span style={{ color: "#c0564a" }}>*</span></span>
                     <input className={input} style={border("name")} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your full name" />{errors.name && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.name}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>Company <span style={{ color: "#c0564a" }}>*</span></span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Company")} <span style={{ color: "#c0564a" }}>*</span></span>
                     <input className={input} style={border("company")} value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Company name" />{errors.company && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.company}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>Job Title</span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Job Title")}</span>
                     <input className={input} style={border("role")} value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. Purchasing Manager" /></label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>Country / Region <span style={{ color: "#c0564a" }}>*</span></span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Country / Region")} <span style={{ color: "#c0564a" }}>*</span></span>
                     <input className={input} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" />{errors.country && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.country}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>Email <span style={{ color: "#c0564a" }}>*</span></span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Email")} <span style={{ color: "#c0564a" }}>*</span></span>
                     <input type="email" className={input} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" />{errors.email && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.email}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>Phone / WhatsApp</span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Phone / WhatsApp")}</span>
                     <input className={input} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+.." /></label>
                 </div>
-                <label className="block mt-4"><span className={label} style={{ color: MUTED }}>Message <span style={{ color: "#c0564a" }}>*</span></span>
+                <label className="block mt-4"><span className={label} style={{ color: MUTED }}>{t("Message")} <span style={{ color: "#c0564a" }}>*</span></span>
                   <textarea className={input + " min-h-[110px] resize-y"} style={border("message")} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Products, quantities, target market, timeline…" />{errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.message}</span>}</label>
                 {errors.submit && <div className="mt-4 text-[13px] text-center" style={{ color: "#c0564a" }}>{errors.submit}</div>}
-                <button type="submit" disabled={sending} className="mt-5 w-full py-[15px] rounded-lg text-sm font-semibold text-white disabled:opacity-60" style={{ background: DARK }}>{sending ? "Sending…" : "Submit Enquiry →"}</button>
+                <button type="submit" disabled={sending} className="mt-5 w-full py-[15px] rounded-lg text-sm font-semibold text-white disabled:opacity-60" style={{ background: DARK }}>{sending ? t("Sending…") : `${t("Submit Enquiry")} →`}</button>
                 <div className="mt-3 text-[12px] text-center" style={{ color: MUTED }}>Or email us directly at inquiry@wonlyglobal.com — we reply within 24 hours.</div>
               </form>
             )}

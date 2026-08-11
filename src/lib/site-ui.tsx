@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, ChevronRight, X, Check } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, X, Check, Globe } from "lucide-react";
 import { create } from "zustand";
 import { trackLead } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
+import { LANGUAGES, pathForLocale, useLocale } from "@/lib/i18n";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
 export const GOLD = "#BFA06A";
@@ -226,6 +227,7 @@ export function SiteHeader() {
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const [openSub, setOpenSub] = useState<string | null>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
+  const { locale, language, pathname, t } = useLocale();
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     onScroll();
@@ -244,9 +246,9 @@ export function SiteHeader() {
           {NAV.map((n) => (
             <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
               {n.href ? (
-                <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</Link>
+                <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</Link>
               ) : (
-                <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</span>
+                <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
               )}
               {n.children && openDrop === n.label && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
@@ -254,7 +256,7 @@ export function SiteHeader() {
                     <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
                       <Link to={c.href} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                         {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                        <span className="leading-tight whitespace-nowrap flex-1">{c.label}</span>
+                        <span className="leading-tight whitespace-nowrap flex-1">{t(c.label)}</span>
                         {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
                       </Link>
                       {c.children && openSub === c.label && (
@@ -262,7 +264,7 @@ export function SiteHeader() {
                           {c.children.map((sc) => (
                             <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                               {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                              <span className="leading-tight whitespace-nowrap">{sc.label}</span>
+                              <span className="leading-tight whitespace-nowrap">{t(sc.label)}</span>
                             </Link>
                           ))}
                         </div>
@@ -274,7 +276,23 @@ export function SiteHeader() {
             </div>
           ))}
         </nav>
-        <button onClick={() => openQuote()} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote</button>
+        <div className="flex items-center gap-2">
+          <div className="relative hidden md:block" onMouseEnter={() => setOpenDrop("__language")} onMouseLeave={() => setOpenDrop(null)}>
+            <button aria-label={t("Select language")} className="h-10 px-3 rounded-full inline-flex items-center gap-2 text-xs border" style={{ color: solid ? DARK : "#fff", borderColor: solid ? "rgba(34,31,32,.18)" : "rgba(255,255,255,.35)" }}>
+              <Globe size={15} /><span>{language.nativeLabel}</span><ChevronDown size={12} />
+            </button>
+            {openDrop === "__language" && (
+              <div className="absolute top-full right-0 min-w-[170px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/5 p-2">
+                {LANGUAGES.map((item) => (
+                  <a key={item.code} href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.04]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
+                    <span>{item.nativeLabel}</span><span className="text-[10px] uppercase opacity-50">{item.code}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+          <button onClick={() => openQuote()} className="px-4 md:px-5 py-2.5 rounded-full text-[12px] md:text-[13px] font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>{t("Get Solutions & Quote")}</button>
+        </div>
       </div>
     </header>
     <QuoteModal />
@@ -304,6 +322,7 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
 const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = SITE_NAV_DATA.footer;
 
 export function SiteFooter() {
+  const { t } = useLocale();
   return (
     <footer className="pt-16 pb-10" style={{ background: "#1a1718" }}>
       <div className="max-w-[1400px] mx-auto px-[5vw] md:px-[6vw]">
@@ -325,7 +344,7 @@ export function SiteFooter() {
           </div>
           {FOOTER.map((col) => (
             <div key={col.h}>
-              <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{col.h}</h4>
+              <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{t(col.h)}</h4>
               <ul className="space-y-2.5">
                 {col.links.map((item) => {
                   const cls = "text-xs font-light transition-colors hover:text-white";
@@ -334,9 +353,9 @@ export function SiteFooter() {
                     <li key={item.l}>
                       {item.href
                         ? (/^(mailto:|tel:|https?:)/.test(item.href)
-                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{item.l}</a>
-                            : <Link to={item.href} className={cls} style={style}>{item.l}</Link>)
-                        : <span className="text-xs font-light" style={style}>{item.l}</span>}
+                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{t(item.l)}</a>
+                            : <Link to={item.href} className={cls} style={style}>{t(item.l)}</Link>)
+                        : <span className="text-xs font-light" style={style}>{t(item.l)}</span>}
                     </li>
                   );
                 })}
@@ -346,13 +365,35 @@ export function SiteFooter() {
         </div>
         <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
           <div className="flex items-center justify-center gap-4 mb-3">
-            <Link to="/privacy" className="transition-colors hover:text-white" style={{ color: "rgba(245,241,234,0.55)" }}>Privacy Policy</Link>
+            <Link to="/privacy" className="transition-colors hover:text-white" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Privacy Policy")}</Link>
             <span style={{ color: "rgba(245,241,234,0.25)" }}>·</span>
-            <Link to="/terms" className="transition-colors hover:text-white" style={{ color: "rgba(245,241,234,0.55)" }}>Terms of Service</Link>
+            <Link to="/terms" className="transition-colors hover:text-white" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Terms of Service")}</Link>
           </div>
           © WONLY · SSE 605268 · Global Smart-Security Ecosystem Leader
         </div>
       </div>
     </footer>
+  );
+}
+
+/** Always-available language control for legacy pages with bespoke headers. */
+export function FloatingLanguageSwitcher() {
+  const [open, setOpen] = useState(false);
+  const { locale, language, pathname, t } = useLocale();
+  return (
+    <div className="fixed bottom-5 left-5 z-[85]" onMouseLeave={() => setOpen(false)}>
+      {open && (
+        <div className="absolute bottom-12 left-0 min-w-[180px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/10 p-2 mb-2">
+          {LANGUAGES.map((item) => (
+            <a key={item.code} href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.05]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
+              <span>{item.nativeLabel}</span><span className="text-[10px] uppercase opacity-50">{item.code}</span>
+            </a>
+          ))}
+        </div>
+      )}
+      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={t("Select language")} className="h-11 px-4 rounded-full inline-flex items-center gap-2 shadow-xl border border-white/20" style={{ background: "rgba(26,23,24,.94)", color: "#fff" }}>
+        <Globe size={16} /><span className="text-xs">{language.nativeLabel}</span><ChevronDown size={12} />
+      </button>
+    </div>
   );
 }

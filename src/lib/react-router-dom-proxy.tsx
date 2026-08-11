@@ -8,6 +8,27 @@ import * as RRD from "react-router-dom-original";
 // @ts-expect-error - This is resolved at runtime by Vite alias
 export * from "react-router-dom-original";
 
+const LOCALE_PREFIXES = new Set(["ar", "fr", "ru", "es"]);
+function currentLocalePrefix(pathname: string) {
+  const first = pathname.split("/").filter(Boolean)[0];
+  return first && LOCALE_PREFIXES.has(first) ? `/${first}` : "";
+}
+function localizeDestination(to: React.ComponentProps<typeof RRD.Link>["to"], pathname: string) {
+  const prefix = currentLocalePrefix(pathname);
+  if (!prefix || typeof to !== "string" || !to.startsWith("/") || to.startsWith(prefix + "/") || to === prefix) return to;
+  return `${prefix}${to}`;
+}
+
+export function Link(props: React.ComponentProps<typeof RRD.Link>) {
+  const location = RRD.useLocation();
+  return <RRD.Link {...props} to={localizeDestination(props.to, location.pathname)} />;
+}
+
+export function Navigate(props: React.ComponentProps<typeof RRD.Navigate>) {
+  const location = RRD.useLocation();
+  return <RRD.Navigate {...props} to={localizeDestination(props.to, location.pathname)} />;
+}
+
 /** --------------------- Outbound: route list (once) --------------------- */
 let routesPosted = false;
 

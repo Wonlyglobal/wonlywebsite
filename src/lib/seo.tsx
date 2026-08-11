@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { localeFromPath, pathForLocale } from "./i18n";
+import { localizedSeo } from "./seo-locales";
 
 /**
  * Site-wide SEO constants.
@@ -73,6 +75,18 @@ function upsertLink(rel: string, href: string) {
   el.setAttribute("href", href);
 }
 
+function setAlternate(hreflang: string, href: string) {
+  let el = document.head.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${hreflang}"]`);
+  if (!el) {
+    el = document.createElement("link");
+    el.rel = "alternate";
+    el.hreflang = hreflang;
+    el.setAttribute("data-managed-hreflang", "true");
+    document.head.appendChild(el);
+  }
+  el.href = href;
+}
+
 /**
  * Dependency-free per-route SEO. Updates document title, meta description,
  * Open Graph / Twitter tags, the canonical link, and injects managed JSON-LD
@@ -93,8 +107,12 @@ export function useSeo({
 }: SeoInput) {
   // CMS overrides (content/settings/tdk.json) beat the coded defaults.
   const ov = tdkFor(path);
-  const title = ov?.title?.trim() ? ov.title.trim() : titleProp;
-  const description = ov?.description?.trim() ? ov.description.trim() : descriptionProp;
+  const defaultTitle = ov?.title?.trim() ? ov.title.trim() : titleProp;
+  const defaultDescription = ov?.description?.trim() ? ov.description.trim() : descriptionProp;
+  const locale = typeof window === "undefined" ? "en" : localeFromPath(window.location.pathname);
+  const localized = localizedSeo(locale, path, { title: defaultTitle, description: defaultDescription });
+  const title = localized.title;
+  const description = localized.description;
   const keywords = ov?.keywords?.trim() || "";
   const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : "";
   useEffect(() => {
@@ -102,14 +120,22 @@ export function useSeo({
     // with a trailing slash — and 301-redirects the no-slash form. Normalise the
     // canonical + og:url to the trailing-slash form so the sitemap URL, the
     // served URL and the canonical all match exactly (no redirect in between).
-    const normPath = path === "/" ? "/" : path.endsWith("/") ? path : path + "/";
+    const locale = localeFromPath(window.location.pathname);
+    const localizedPath = pathForLocale(path, locale);
+    const normPath = localizedPath === "/" ? "/" : localizedPath.endsWith("/") ? localizedPath : localizedPath + "/";
     const url = SITE_URL + normPath;
+    const englishPath = path === "/" ? "/" : path.endsWith("/") ? path : path + "/";
+    const englishUrl = SITE_URL + englishPath;
 
     document.title = title;
-    document.documentElement.lang = "en";
 
     upsertMeta("name", "description", description);
     if (keywords) upsertMeta("name", "keywords", keywords);
+    else document.head.querySelector('meta[name="keywords"]')?.remove();
+    // Localized shells are intentionally kept out of the index until their
+    // body copy has been professionally translated and reviewed. This avoids
+    // publishing four sets of duplicate English pages under language URLs.
+    upsertMeta("name", "robots", locale === "en" ? "index,follow" : "noindex,follow");
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", type);
@@ -122,6 +148,9 @@ export function useSeo({
     upsertMeta("name", "twitter:image", image);
 
     upsertLink("canonical", url);
+    document.head.querySelectorAll('link[data-managed-hreflang="true"]').forEach((node) => node.remove());
+    setAlternate("en", englishUrl);
+    setAlternate("x-default", englishUrl);
 
     const blocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     const nodes = blocks.map((block) => {
@@ -135,6 +164,7 @@ export function useSeo({
 
     return () => {
       nodes.forEach((node) => node.remove());
+      document.head.querySelectorAll('link[data-managed-hreflang="true"]').forEach((node) => node.remove());
     };
     // jsonLdKey captures deep changes to jsonLd without unstable identity.
     // eslint-disable-next-line react-hooks/exhaustive-deps

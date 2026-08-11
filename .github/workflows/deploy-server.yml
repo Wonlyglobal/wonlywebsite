@@ -1,0 +1,73 @@
+name: Build production dist package
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-dist-package
+  cancel-in-progress: true
+
+jobs:
+  build-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check TDK and routes
+        run: node scripts/check-tdk.mjs
+
+      - name: Sync published articles into sitemap
+        run: node scripts/sync-article-sitemap.mjs
+
+      - name: Build production dist
+        env:
+          VITE_BASE: /
+        run: npm run build
+
+      - name: Install Chromium for prerendering
+        run: |
+          npm install --no-save playwright@^1.48
+          npx playwright install --with-deps chromium
+
+      - name: Prerender canonical routes
+        run: node scripts/prerender.mjs
+
+      - name: Validate dist
+        run: |
+          test -f dist/index.html
+          test -f dist/robots.txt
+          test -f dist/sitemap.xml
+          test -d dist/assets
+
+      - name: Create dist.zip
+        run: cd dist && zip -r -9 ../dist.zip .
+
+      - name: Upload downloadable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: wonly-dist-${{ github.sha }}
+          path: dist.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Build summary
+        run: |
+          echo "### Production package ready" >> "$GITHUB_STEP_SUMMARY"
+          echo "Download the artifact named \`wonly-dist-${GITHUB_SHA}\`." >> "$GITHUB_STEP_SUMMARY"
+          echo "The archive contains only the final static site files from \`dist/\`." >> "$GITHUB_STEP_SUMMARY"
