@@ -3,7 +3,7 @@ import { Shield, Flame, Lock, Wind, Volume2, Award, ArrowRight, Check, ShieldChe
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
-import { securityDoorText } from "@/lib/product-locales";
+import { securityApplication, securityDoorText, securityFeature, securitySeries } from "@/lib/product-locales";
 
 const IMG = {
   hero: `${BASE}images/alu-k300max.webp`,
@@ -121,6 +121,7 @@ const SecurityDoors = () => {
         </Reveal>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERIES.map((p, i) => {
+            const localized = securitySeries(locale, i, { title: p.name, tag: p.tag, description: p.d });
             // Cards that have a detail page are clickable in full — the "View Details"
             // line is only the affordance, not the sole hit area.
             const card = (
@@ -130,12 +131,12 @@ const SecurityDoors = () => {
               >
                 <div className="relative h-[260px] overflow-hidden" style={{ background: "#ecebe7" }}>
                   <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{p.tag}</div>
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{localized.tag}</div>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <div className="text-xs font-light tracking-[0.2em]" style={{ color: GOLD }}>{p.n}</div>
-                  <h3 className="mt-2 text-lg font-medium leading-tight" style={{ color: DARK }}>{p.name}</h3>
-                  <p className="mt-2.5 text-sm font-normal leading-relaxed flex-1" style={{ color: MUTED }}>{p.d}</p>
+                  <h3 className="mt-2 text-lg font-medium leading-tight" style={{ color: DARK }}>{localized.title}</h3>
+                  <p className="mt-2.5 text-sm font-normal leading-relaxed flex-1" style={{ color: MUTED }}>{localized.description}</p>
                   {p.path && (
                     <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium transition-all group-hover:gap-3" style={{ color: GOLD }}>View Details <ArrowRight size={14} /></span>
                   )}
@@ -164,8 +165,8 @@ const SecurityDoors = () => {
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: GOLD }}>
                   <f.icon size={20} style={{ color: "#fff" }} />
                 </div>
-                <h3 className="mt-5 text-lg font-medium" style={{ color: DARK }}>{f.t}</h3>
-                <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
+                <h3 className="mt-5 text-lg font-medium" style={{ color: DARK }}>{securityFeature(locale, i, { title: f.t, description: f.d }).title}</h3>
+                <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{securityFeature(locale, i, { title: f.t, description: f.d }).description}</p>
               </div>
             </Reveal>
           ))}
@@ -218,8 +219,8 @@ const SecurityDoors = () => {
                 <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 35%, rgba(13,13,13,0.9))" }} />
                 <div className="absolute bottom-0 left-0 p-7">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: GOLD }}><s.icon size={18} style={{ color: "#fff" }} /></div>
-                  <h3 className="text-xl font-medium text-white">{s.t}</h3>
-                  <p className="mt-2 text-sm font-light leading-relaxed" style={{ color: "rgba(245,241,234,0.8)" }}>{s.d}</p>
+                  <h3 className="text-xl font-medium text-white">{securityApplication(locale, i, { title: s.t, description: s.d }).title}</h3>
+                  <p className="mt-2 text-sm font-light leading-relaxed" style={{ color: "rgba(245,241,234,0.8)" }}>{securityApplication(locale, i, { title: s.t, description: s.d }).description}</p>
                 </div>
               </div>
             </Reveal>
