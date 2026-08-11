@@ -66,6 +66,7 @@ export default function Contact() {
     try {
       const data = await submitEnquiry({
         subject: "New WONLY Contact Enquiry",
+        recipient: "inquiry@wonlyglobal.com",
         name: form.name,
         company: form.company,
         job_title: form.role,
@@ -73,6 +74,7 @@ export default function Contact() {
         email: form.email,
         phone: form.phone,
         message: form.message,
+        source: "contact_page",
       });
       if (data.success) { setSent(true); trackLead({ form_location: "contact_page" }); }
       else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });

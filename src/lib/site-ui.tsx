@@ -129,6 +129,7 @@ export function QuoteModal() {
     try {
       const data = await submitEnquiry({
         subject: presetSubject ? `WONLY Enquiry \u2014 ${presetSubject}` : "New WONLY Website Enquiry",
+        recipient: "inquiry@wonlyglobal.com",
         name: form.name,
         company: form.company,
         job_title: form.role,
@@ -140,6 +141,7 @@ export function QuoteModal() {
         timeline: form.timeline,
         interests: picks.join(", "),
         message: form.message,
+        source: "quote_modal",
       });
       if (data.success) { setSent(true); trackLead({ form_location: "quote_modal", business_type: form.biz || "" }); }
       else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });

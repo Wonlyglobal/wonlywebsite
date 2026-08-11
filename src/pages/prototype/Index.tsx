@@ -5,6 +5,8 @@ import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeTimeline } from "@/lib/home-locales";
+import { submitEnquiry } from "@/lib/form-config";
+import { trackLead } from "@/lib/analytics";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -529,6 +531,7 @@ const Prototype = () => {
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const [openSub, setOpenSub] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, t } = useLocale();
@@ -546,7 +549,7 @@ const Prototype = () => {
     setForm((f) => ({ ...f, [name]: value }));
     setErrors((er) => { if (!er[name]) return er; const n = { ...er }; delete n[name]; return n; });
   };
-  const onContactSubmit = (ev: React.FormEvent) => {
+  const onContactSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
@@ -557,7 +560,32 @@ const Prototype = () => {
     if (!form.interest) e.interest = "Please select an option.";
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
-    if (Object.keys(e).length === 0) setSent(true);
+    if (Object.keys(e).length > 0) return;
+    setSending(true);
+    try {
+      const data = await submitEnquiry({
+        subject: "New WONLY Homepage Enquiry",
+        recipient: "inquiry@wonlyglobal.com",
+        name: form.name,
+        company: form.company,
+        country: form.country,
+        email: form.email,
+        business_type: form.interest,
+        message: form.message,
+        language: locale,
+        source: "homepage_contact_form",
+      });
+      if (data.success) {
+        setSent(true);
+        trackLead({ form_location: "homepage_contact", business_type: form.interest });
+      } else {
+        setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
+      }
+    } catch {
+      setErrors({ submit: "Network error. Please email inquiry@wonlyglobal.com directly." });
+    } finally {
+      setSending(false);
+    }
   };
 
   useSeo({
@@ -988,7 +1016,6 @@ const Prototype = () => {
             </div>
           </Reveal>
 
-          {/* TODO: wire submission to a real endpoint (inquiry@wonlyglobal.com or a form service) before launch */}
           <Reveal delay={120}>
             {sent ? (
               <div className="rounded-2xl border border-white/15 bg-white/5 p-10 md:p-14 text-center">
@@ -1020,7 +1047,8 @@ const Prototype = () => {
                 <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder="Tell us about your project or territory..." />
                 {errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.message}</span>}
               </label>
-              <button type="submit" className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02]" style={{ background: GOLD, color: DARK }}>{t("Get Solutions & Quote")}</button>
+              {errors.submit && <div className="sm:col-span-2 text-center text-[12px]" style={{ color: "#e79b93" }}>{errors.submit}</div>}
+              <button type="submit" disabled={sending} className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100" style={{ background: GOLD, color: DARK }}>{sending ? t("Sending…") : t("Get Solutions & Quote")}</button>
             </form>
             )}
           </Reveal>
