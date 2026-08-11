@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronRight, ArrowRight, Award, Home, Check, Wind, Wifi } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, useQuoteStore } from "@/lib/site-ui";
+import { useLocale, type Locale } from "@/lib/i18n";
 import { RelatedInsights } from "@/lib/related-insights";
 
 /* Silver-White-Gold palette */
@@ -221,7 +222,16 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
 
 const PAGE_PATH = "/products/security-doors/x70";
 
+const X70_TOP: Partial<Record<Locale, Record<string, string>>> = {
+  ar: { seoTitle:"باب الأمان الروبوتي X70 من الألمنيوم المصبوب للفلل | WONLY",seoDescription:"باب WONLY X70 الروبوتي الرائد: تعرف ثلاثي الأبعاد على الوجه، وقفل ذاتي بـ16 مزلاجاً، ومقاومة حريق EN 1634 لمدة 90 دقيقة وحماية فئة A.",home:"الرئيسية",doors:"أبواب الأمان",pioneer:"رائد",robotic:"باب الأمان الروبوتي",hero:"أبواب من الألمنيوم المصبوب تفتح عند اقترابك — ثلاثون عاماً من الأمان برؤية جديدة.",quote:"اطلب عرض سعر",range:"استكشف المجموعة",smart:"تقنية ذكية",six:"ستة أنظمة.",one:"باب ذكي واحد",auto:"فتح وإغلاق تلقائي",pinch:"نظام ذكي مضاد للانحشار",power:"مصدر طاقة مزدوج",good:"جيد",air:"مراقبة الفورمالديهايد",perimeter:"مراقبة ذكية للمحيط",voice:"رسالة صوتية ذكية",bolts:"مزاليج القفل",fire:"مقاومة الحريق",acoustic:"العزل الصوتي",cycle:"اختبار الدورات" },
+  fr: { seoTitle:"Porte de sécurité robotisée X70 en aluminium moulé pour villas | WONLY",seoDescription:"Porte robotisée WONLY X70 : reconnaissance faciale 3D, verrouillage autonome à 16 pênes, résistance au feu EN 1634 de 90 minutes et protection classe A.",home:"Accueil",doors:"Portes de sécurité",pioneer:"Pionnier de la",robotic:"porte de sécurité robotisée",hero:"Des portes en aluminium moulé qui s’ouvrent à votre approche — 30 ans de sécurité réinventés.",quote:"Demander un devis",range:"Explorer la gamme",smart:"Technologie intelligente",six:"Six systèmes.",one:"Une porte intelligente",auto:"Ouverture et fermeture automatiques",pinch:"Système anti-pincement intelligent",power:"Double alimentation",good:"Bon",air:"Sentinelle du formaldéhyde",perimeter:"Surveillance intelligente du périmètre",voice:"Message vocal intelligent",bolts:"Pênes de verrouillage",fire:"Résistance au feu",acoustic:"Acoustique",cycle:"Essai de cycles" },
+  ru: { seoTitle:"Роботизированная защитная дверь X70 из литого алюминия для вилл | WONLY",seoDescription:"Флагманская дверь WONLY X70: 3D-распознавание лица, автономное запирание на 16 ригелей, огнестойкость EN 1634 90 минут и класс защиты A.",home:"Главная",doors:"Защитные двери",pioneer:"Первопроходец",robotic:"роботизированных защитных дверей",hero:"Двери из литого алюминия открываются при приближении — 30 лет опыта безопасности в новом воплощении.",quote:"Запросить цену",range:"Смотреть серию",smart:"Умные технологии",six:"Шесть систем.",one:"Одна умная дверь",auto:"Автоматическое открытие и закрытие",pinch:"Умная защита от защемления",power:"Двойное питание",good:"Норма",air:"Контроль формальдегида",perimeter:"Умный контроль периметра",voice:"Умное голосовое сообщение",bolts:"Ригели",fire:"Огнестойкость",acoustic:"Звукоизоляция",cycle:"Циклический тест" },
+  es: { seoTitle:"Puerta de seguridad robotizada X70 de aluminio fundido para villas | WONLY",seoDescription:"Puerta robotizada WONLY X70: reconocimiento facial 3D, cierre autónomo de 16 pernos, resistencia al fuego EN 1634 de 90 minutos y protección clase A.",home:"Inicio",doors:"Puertas de seguridad",pioneer:"Pionera de la",robotic:"puerta de seguridad robotizada",hero:"Puertas de aluminio fundido que se abren al acercarse: 30 años de seguridad reinventados.",quote:"Solicitar cotización",range:"Explorar la gama",smart:"Tecnología inteligente",six:"Seis sistemas.",one:"Una puerta inteligente",auto:"Apertura y cierre automáticos",pinch:"Sistema antipinzamiento inteligente",power:"Alimentación doble",good:"Bueno",air:"Monitor de formaldehído",perimeter:"Vigilancia inteligente del perímetro",voice:"Mensaje de voz inteligente",bolts:"Pernos de cierre",fire:"Resistencia al fuego",acoustic:"Acústica",cycle:"Prueba de ciclos" },
+};
+
 const SecurityDoorX70 = () => {
+  const { locale } = useLocale();
+  const tx = (key: string, fallback: string) => X70_TOP[locale]?.[key] ?? fallback;
   const [activeImg, setActiveImg] = useState(0);
   // Every "quote" button on the page drives the shared modal that SiteHeader renders.
   const openQuote = useQuoteStore((s) => s.openQuote);
@@ -239,9 +249,8 @@ const SecurityDoorX70 = () => {
   }, []);
 
   useSeo({
-    title: "X70 Cast-Aluminium Robotic Security Door for Villas | WONLY",
-    description:
-      "The WONLY X70 flagship robotic security door: 3D facial recognition, 16-bolt autonomous locking, EN 1634 90-minute fire rating, and Class A protection for villas and premium homes.",
+    title: tx("seoTitle", "X70 Cast-Aluminium Robotic Security Door for Villas | WONLY"),
+    description: tx("seoDescription", "The WONLY X70 flagship robotic security door: 3D facial recognition, 16-bolt autonomous locking, EN 1634 90-minute fire rating, and Class A protection for villas and premium homes."),
     path: PAGE_PATH,
     image: IMG.hero,
     type: "product",
@@ -300,18 +309,18 @@ const SecurityDoorX70 = () => {
             <div className="tx">
               <nav aria-label="Breadcrumb" className="mb-4">
               <ol className="flex items-center gap-2 text-xs tracking-wide" style={{ color: "#8a8378" }}>
-                <li><Link to="/" className="flex items-center gap-1 hover:text-[#BFA06A] transition-colors"><Home size={13} /> Home</Link></li>
+                <li><Link to="/" className="flex items-center gap-1 hover:text-[#BFA06A] transition-colors"><Home size={13} /> {tx("home", "Home")}</Link></li>
                 <li aria-hidden="true"><ChevronRight size={13} /></li>
-                <li><Link to="/products/security-doors" className="hover:text-[#BFA06A] transition-colors">Security Doors</Link></li>
+                <li><Link to="/products/security-doors" className="hover:text-[#BFA06A] transition-colors">{tx("doors", "Security Doors")}</Link></li>
                 <li aria-hidden="true"><ChevronRight size={13} /></li>
                 <li aria-current="page" className="font-semibold" style={{ color: GOLD }}>X70</li>
               </ol>
             </nav>
-              <h1>Pioneer of the<br /><b>Robotic Security Door</b></h1>
-              <p className="sub">Cast-aluminium doors that open as you approach — 30 years of security, reimagined.</p>
+              <h1>{tx("pioneer", "Pioneer of the")}<br /><b>{tx("robotic", "Robotic Security Door")}</b></h1>
+              <p className="sub">{tx("hero", "Cast-aluminium doors that open as you approach — 30 years of security, reimagined.")}</p>
               <div className="cta">
-                <a className="btn solid" onClick={() => openQuote({ subject: "X70 Robotic Security Door" })}>Get a Quote &rarr;</a>
-                <a className="btn line" href="#configurations">Explore the Range</a>
+                <a className="btn solid" onClick={() => openQuote({ subject: "X70 Robotic Security Door" })}>{tx("quote", "Get a Quote")} &rarr;</a>
+                <a className="btn line" href="#configurations">{tx("range", "Explore the Range")}</a>
               </div>
             </div>
           </section>
@@ -319,24 +328,24 @@ const SecurityDoorX70 = () => {
           {/* SECTION 2: SMART FEATURES */}
           <section className="feat" id="features">
             <div className="fhead">
-              <div className="eyebrow">Smart Technology</div>
-              <h2>Six Systems. <b>One Intelligent Door</b></h2>
+              <div className="eyebrow">{tx("smart", "Smart Technology")}</div>
+              <h2>{tx("six", "Six Systems.")} <b>{tx("one", "One Intelligent Door")}</b></h2>
             </div>
             <div className="bento">
               <div className="tile big">
                 <LazyVideo src={media("Auto Open & Close.mp4")} poster={media("Auto Open & Close-poster.jpg")} />
                 <div className="scrim" />
-                <div className="label"><h3>Auto Open &amp; Close</h3></div>
+                <div className="label"><h3>{tx("auto", "Auto Open & Close")}</h3></div>
               </div>
               <div className="tile wide">
                 <LazyVideo src={media("Smart Anti-Pinch System.mp4")} poster={media("Smart Anti-Pinch System-poster.jpg")} />
                 <div className="scrim" />
-                <div className="label"><h3>Smart Anti-Pinch System</h3></div>
+                <div className="label"><h3>{tx("pinch", "Smart Anti-Pinch System")}</h3></div>
               </div>
               <div className="tile sm">
                 <LazyVideo src={media("power supply3.mp4")} poster={media("power supply3-poster.jpg")} />
                 <div className="scrim" />
-                <div className="label"><h3>Dual Power Supply</h3></div>
+                <div className="label"><h3>{tx("power", "Dual Power Supply")}</h3></div>
               </div>
               <div className="tile sm air">
                 <svg viewBox="0 0 120 120">
@@ -351,19 +360,19 @@ const SecurityDoorX70 = () => {
                   <circle className="arc" cx="60" cy="60" r="50" style={{ strokeDashoffset: 314 * (1 - Math.min(0.9, 0.55 + (parseFloat(hcho) - 0.02) / 0.02 * 0.3)) }} />
                 </svg>
                 <div className="read"><div className="n">{hcho}</div><div className="u">HCHO mg/m3</div></div>
-                <div className="stat"><i />Good</div>
+                <div className="stat"><i />{tx("good", "Good")}</div>
                 <div className="pm">PM2.5 {pm25}</div>
-                <div className="label"><h3>Formaldehyde Sentinel</h3></div>
+                <div className="label"><h3>{tx("air", "Formaldehyde Sentinel")}</h3></div>
               </div>
               <div className="tile wide">
                 <LazyVideo src={media("Smart Perimeter Monitoring.mp4")} poster={media("Smart Perimeter Monitoring-poster.jpg")} />
                 <div className="scrim" />
-                <div className="label"><h3>Smart Perimeter Monitoring</h3></div>
+                <div className="label"><h3>{tx("perimeter", "Smart Perimeter Monitoring")}</h3></div>
               </div>
               <div className="tile wide">
                 <LazyVideo src={media("Smart Voice Message2.mp4")} poster={media("Smart Voice Message2-poster.jpg")} />
                 <div className="scrim" />
-                <div className="label"><h3>Smart Voice Message</h3></div>
+                <div className="label"><h3>{tx("voice", "Smart Voice Message")}</h3></div>
               </div>
             </div>
           </section>
@@ -373,10 +382,10 @@ const SecurityDoorX70 = () => {
         <section className="px-20 py-8 border-b border-gray-100">
           <div className="mt-6 flex items-center justify-center gap-16">
             {[
-              { v: <Counter to={16} />, l: "Locking Bolts" },
-              { v: <Counter to={90} suffix=" min" />, l: "Fire Rating" },
-              { v: <Counter to={38} suffix=" STC" />, l: "Acoustic" },
-              { v: <Counter to={200} suffix="K+" />, l: "Cycle Test" },
+              { v: <Counter to={16} />, l: tx("bolts", "Locking Bolts") },
+              { v: <Counter to={90} suffix=" min" />, l: tx("fire", "Fire Rating") },
+              { v: <Counter to={38} suffix=" STC" />, l: tx("acoustic", "Acoustic") },
+              { v: <Counter to={200} suffix="K+" />, l: tx("cycle", "Cycle Test") },
             ].map((s, i) => (
               <div key={i} className="text-center">
                 <div className="text-3xl font-bold" style={{ color: GOLD }}>{s.v}</div>
