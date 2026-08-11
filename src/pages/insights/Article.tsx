@@ -2,11 +2,14 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, Reveal, GOLD, GOLD_DEEP, DARK, MUTED, CHAMP_BG } from "@/lib/site-ui";
 import { getArticle, relatedArticles } from "@/lib/articles";
+import { useLocale, type Locale } from "@/lib/i18n";
 import { ChevronRight, ArrowRight } from "lucide-react";
+const UI:Partial<Record<Locale,Record<string,string>>>={ar:{home:"الرئيسية",insights:"الأخبار والرؤى",min:"دقائق قراءة",more:"المزيد من الأخبار والرؤى",read:"اقرأ"},fr:{home:"Accueil",insights:"Actualités et conseils",min:"min de lecture",more:"Plus d’actualités et de conseils",read:"Lire"},ru:{home:"Главная",insights:"Новости и аналитика",min:"мин чтения",more:"Другие материалы",read:"Читать"},es:{home:"Inicio",insights:"Noticias y análisis",min:"min de lectura",more:"Más noticias y análisis",read:"Leer"}};
 
 const ArticlePage = () => {
+  const {locale}=useLocale();const ui=UI[locale];const tr=(k:string,f:string)=>ui?.[k]??f;
   const { slug = "" } = useParams();
-  const article = getArticle(slug);
+  const article = getArticle(slug,locale);
 
   useSeo(
     article
@@ -40,7 +43,7 @@ const ArticlePage = () => {
 
   if (!article) return <Navigate to="/insights" replace />;
 
-  const related = relatedArticles(article.slug);
+  const related = relatedArticles(article.slug,3,locale);
 
   return (
     <div style={{ background: "#fff" }}>
@@ -49,16 +52,16 @@ const ArticlePage = () => {
       {/* Header */}
       <section className="px-[7vw] pt-36 pb-10" style={{ background: CHAMP_BG }}>
         <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1 text-[12px] mb-6" style={{ color: MUTED }}>
-          <Link to="/" className="hover:underline">Home</Link>
+          <Link to="/" className="hover:underline">{tr("home","Home")}</Link>
           <ChevronRight size={13} />
-          <Link to="/insights" className="hover:underline">News &amp; Insights</Link>
+          <Link to="/insights" className="hover:underline">{tr("insights","News & Insights")}</Link>
           <ChevronRight size={13} />
           <span style={{ color: DARK }}>{article.category}</span>
         </nav>
         <div className="max-w-3xl">
           <span className="text-[12px] font-semibold tracking-[0.14em] uppercase" style={{ color: GOLD_DEEP }}>{article.category}</span>
           <h1 className="mt-3 font-light leading-[1.1] tracking-[-0.5px] text-[30px] md:text-[48px]" style={{ color: DARK }}>{article.title}</h1>
-          <div className="mt-4 text-[13px]" style={{ color: MUTED }}>{article.dateLabel} · {article.readMins} min read · WONLY</div>
+          <div className="mt-4 text-[13px]" style={{ color: MUTED }}>{article.dateLabel} · {article.readMins} {tr("min","min read")} · WONLY</div>
         </div>
       </section>
 
@@ -101,7 +104,7 @@ const ArticlePage = () => {
       {/* Related */}
       {related.length > 0 && (
         <section className="px-[7vw] py-16 md:py-20" style={{ background: CHAMP_BG }}>
-          <h2 className="text-[13px] tracking-[0.2em] uppercase font-semibold mb-8" style={{ color: GOLD_DEEP }}>More From News &amp; Insights</h2>
+          <h2 className="text-[13px] tracking-[0.2em] uppercase font-semibold mb-8" style={{ color: GOLD_DEEP }}>{tr("more","More From News & Insights")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {related.map((a, i) => (
               <Reveal key={a.slug} delay={i * 60}>
@@ -113,7 +116,7 @@ const ArticlePage = () => {
                     <div className="text-[11px] font-semibold tracking-[0.08em] uppercase" style={{ color: GOLD_DEEP }}>{a.category}</div>
                     <h3 className="mt-2 text-[16px] font-semibold leading-snug" style={{ color: DARK }}>{a.title}</h3>
                     <div className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold" style={{ color: GOLD_DEEP }}>
-                      Read <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                      {tr("read","Read")} <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </Link>

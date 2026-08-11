@@ -2,16 +2,25 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, Reveal, eyebrow, GOLD_DEEP, CHAMP, DARK, MUTED, CHAMP_BG } from "@/lib/site-ui";
-import { ARTICLES, type ArticleCategory } from "@/lib/articles";
+import { articlesForLocale, type ArticleCategory } from "@/lib/articles";
+import { useLocale, type Locale } from "@/lib/i18n";
 import { ArrowRight } from "lucide-react";
 
 const CATEGORIES: (ArticleCategory | "All")[] = ["All", "Buying Guide", "Technology", "Market Insight", "Company"];
+const UI:Partial<Record<Locale,Record<string,string>>>={
+ ar:{seoTitle:"الأخبار والرؤى — أدلة أبواب الأمان والأقفال الذكية | WONLY",seoDescription:"أدلة عملية وتقنيات ورؤى سوقية للموزعين ومشتري مشاريع أبواب الأمان والأقفال الذكية.",eye:"الأخبار والرؤى",titleA:"أدلة وتقنية و",titleB:"رؤى السوق",intro:"معرفة عملية للموزعين ومشتري المشاريع والشركاء، من أدلة الاختيار إلى توقعات السوق.",All:"الكل","Buying Guide":"دليل شراء",Technology:"التقنية","Market Insight":"رؤى السوق",Company:"الشركة",min:"دقائق قراءة",read:"اقرأ المقال"},
+ fr:{seoTitle:"Actualités et conseils — Portes de sécurité et serrures intelligentes | WONLY",seoDescription:"Guides pratiques, technologies et analyses de marché pour distributeurs et acheteurs de portes et serrures intelligentes.",eye:"Actualités et conseils",titleA:"Guides, technologie et",titleB:"analyse de marché",intro:"Connaissances pratiques pour distributeurs, acheteurs de projets et partenaires, des guides de sélection aux perspectives marché.",All:"Tout","Buying Guide":"Guide d’achat",Technology:"Technologie","Market Insight":"Analyse marché",Company:"Entreprise",min:"min de lecture",read:"Lire l’article"},
+ ru:{seoTitle:"Новости и аналитика — Защитные двери и умные замки | WONLY",seoDescription:"Практические руководства, технологии и обзоры рынка для дистрибьюторов и проектных покупателей дверей и умных замков.",eye:"Новости и аналитика",titleA:"Руководства, технологии и",titleB:"рынок",intro:"Практические материалы для дистрибьюторов, проектных покупателей и партнёров — от выбора продукции до рыночных прогнозов.",All:"Все","Buying Guide":"Руководство",Technology:"Технологии","Market Insight":"Рынок",Company:"Компания",min:"мин чтения",read:"Читать"},
+ es:{seoTitle:"Noticias y análisis — Puertas de seguridad y cerraduras inteligentes | WONLY",seoDescription:"Guías prácticas, tecnología y análisis de mercado para distribuidores y compradores de puertas y cerraduras inteligentes.",eye:"Noticias y análisis",titleA:"Guías, tecnología y",titleB:"análisis de mercado",intro:"Conocimiento práctico para distribuidores, compradores de proyectos y socios, desde selección hasta perspectivas del mercado.",All:"Todo","Buying Guide":"Guía de compra",Technology:"Tecnología","Market Insight":"Mercado",Company:"Empresa",min:"min de lectura",read:"Leer artículo"}
+};
 
 const Insights = () => {
+  const {locale}=useLocale(); const ui=UI[locale]; const tr=(k:string,f:string)=>ui?.[k]??f;
+  const ARTICLES=articlesForLocale(locale).length?articlesForLocale(locale):articlesForLocale("en");
   const [cat, setCat] = useState<ArticleCategory | "All">("All");
   useSeo({
-    title: "News & Insights — Security Door & Smart Lock Guides | WONLY",
-    description: "WONLY News & Insights: buying guides, product technology, market outlooks and company updates for security door and smart lock distributors and project buyers.",
+    title: tr("seoTitle","News & Insights — Security Door & Smart Lock Guides | WONLY"),
+    description: tr("seoDescription","WONLY News & Insights: buying guides, product technology, market outlooks and company updates for security door and smart lock distributors and project buyers."),
     path: "/insights",
     type: "website",
     jsonLd: {
@@ -32,12 +41,12 @@ const Insights = () => {
       {/* Hero */}
       <section className="relative overflow-hidden px-[7vw] pt-40 pb-20" style={{ background: `radial-gradient(120% 90% at 78% 15%, #2a2627, #0d0d0d 72%)` }}>
         <Reveal>
-          <div className={eyebrow} style={{ color: CHAMP }}>News &amp; Insights</div>
+          <div className={eyebrow} style={{ color: CHAMP }}>{tr("eye","News & Insights")}</div>
           <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.5px] text-white text-[38px] md:text-[64px]">
-            Guides, Technology &amp; <span className="font-semibold" style={{ color: CHAMP }}>Market Insight</span>
+            {tr("titleA","Guides, Technology &")} <span className="font-semibold" style={{ color: CHAMP }}>{tr("titleB","Market Insight")}</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: "rgba(245,241,234,0.72)" }}>
-            Practical knowledge for security door and smart lock distributors, project buyers and partners — from selection guides to market outlooks.
+            {tr("intro","Practical knowledge for security door and smart lock distributors, project buyers and partners — from selection guides to market outlooks.")}
           </p>
         </Reveal>
       </section>
@@ -58,7 +67,7 @@ const Insights = () => {
                   border: `1px solid ${active ? DARK : "#e4ddcf"}`,
                 }}
               >
-                {c}
+                {tr(c,c)}
               </button>
             );
           })}
@@ -75,17 +84,17 @@ const Insights = () => {
                 <div className="relative h-[200px] overflow-hidden">
                   <img src={a.cover} alt={a.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-semibold tracking-[0.08em] uppercase" style={{ background: "rgba(255,255,255,0.92)", color: GOLD_DEEP }}>
-                    {a.category}
+                    {tr(a.category,a.category)}
                   </span>
                 </div>
                 <div className="p-6 flex flex-col h-[calc(100%-200px)]">
-                  <div className="text-[12px]" style={{ color: MUTED }}>{a.dateLabel} · {a.readMins} min read</div>
+                  <div className="text-[12px]" style={{ color: MUTED }}>{a.dateLabel} · {a.readMins} {tr("min","min read")}</div>
                   <h3 className="mt-2 text-[19px] font-semibold leading-snug transition-colors text-[#221F20] group-hover:text-[#B08D4F]">
                     {a.title}
                   </h3>
                   <p className="mt-3 text-[14px] leading-relaxed flex-1" style={{ color: MUTED }}>{a.excerpt}</p>
                   <div className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold" style={{ color: GOLD_DEEP }}>
-                    Read Article <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                    {tr("read","Read Article")} <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>

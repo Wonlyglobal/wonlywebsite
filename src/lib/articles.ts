@@ -1,4 +1,5 @@
 import { BASE } from "@/lib/site-ui";
+import type { Locale } from "@/lib/i18n";
 
 export type ArticleBlock =
   | { type: "p"; text: string }
@@ -27,7 +28,7 @@ export interface Article {
 // blank-line-separated text → p). Vite inlines every file at build time, so
 // the runtime bundle is identical in nature to the old hardcoded array.
 
-const RAW = import.meta.glob("/content/articles/*.md", {
+const RAW = import.meta.glob("/content/articles/**/*.md", {
   query: "?raw",
   import: "default",
   eager: true,
@@ -90,12 +91,13 @@ const mdToBlocks = (md: string): ArticleBlock[] => {
   return blocks;
 };
 
-const ALL_ARTICLES: Article[] = Object.values(RAW)
-  .map((raw): Article | null => {
+const ALL_ARTICLES: (Article & { locale: Locale })[] = Object.entries(RAW)
+  .map(([file, raw]): (Article & { locale: Locale }) | null => {
     const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
     if (!m) return null;
     const fm = parseFrontmatter(m[1]);
     const cover = String(fm.cover || "");
+    const localeMatch = file.match(/\/content\/articles\/(ar|fr|ru|es)\//);
     return {
       slug: String(fm.slug || ""),
       title: String(fm.title || ""),
@@ -109,6 +111,7 @@ const ALL_ARTICLES: Article[] = Object.values(RAW)
       excerpt: String(fm.excerpt || ""),
       keywords: Array.isArray(fm.keywords) ? fm.keywords : [],
       body: mdToBlocks(m[2].trim()),
+      locale: (localeMatch?.[1] as Locale | undefined) ?? "en",
     };
   })
   .filter((a): a is Article => !!a && !!a.slug && !!a.date);
@@ -117,12 +120,14 @@ const ALL_ARTICLES: Article[] = Object.values(RAW)
 // rebuild on/after that date. Dates compare as UTC ISO strings on both the CI
 // build and the client, so visibility is consistent everywhere.
 const TODAY = new Date().toISOString().slice(0, 10);
-export const ARTICLES: Article[] = ALL_ARTICLES
-  .filter((a) => a.date <= TODAY)
+export const articlesForLocale = (locale: Locale): Article[] => ALL_ARTICLES
+  .filter((a) => a.locale === locale && a.date <= TODAY)
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
-export const getArticle = (slug: string): Article | undefined =>
-  ARTICLES.find((a) => a.slug === slug);
+export const ARTICLES: Article[] = articlesForLocale("en");
 
-export const relatedArticles = (slug: string, n = 3): Article[] =>
-  ARTICLES.filter((a) => a.slug !== slug).slice(0, n);
+export const getArticle = (slug: string, locale: Locale = "en"): Article | undefined =>
+  articlesForLocale(locale).find((a) => a.slug === slug) ?? ARTICLES.find((a) => a.slug === slug);
+
+export const relatedArticles = (slug: string, n = 3, locale: Locale = "en"): Article[] =>
+  articlesForLocale(locale).filter((a) => a.slug !== slug).slice(0, n);
