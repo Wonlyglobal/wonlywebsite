@@ -1,6 +1,8 @@
 import { CloudRain, AlertTriangle, Thermometer, Smartphone, RefreshCw, Wind } from "lucide-react";
 import { BASE } from "@/lib/site-ui";
 import { ProductPage, type ProductPageData } from "@/lib/product-page";
+import { useLocale } from "@/lib/i18n";
+import { localizeSmartWindows } from "@/lib/product-locales";
 
 const data: ProductPageData = {
   seo: {
@@ -37,4 +39,7 @@ const data: ProductPageData = {
   cta: { title: "Bring WONLY Smart Windows To Your Market", sub: "Energy-saving, balcony/terrace or hurricane series — request specifications and pricing." },
 };
 
-export default function SmartWindows() { return <ProductPage data={data} />; }
+export default function SmartWindows() {
+  const { locale } = useLocale();
+  return <ProductPage data={localizeSmartWindows(data, locale)} />;
+}
