@@ -40,6 +40,7 @@ const UI: Record<Locale, Record<string, string>> = {
     "News & Insights": "المقالات والرؤى", "Privacy Policy": "سياسة الخصوصية", "Terms of Service": "شروط الاستخدام",
     "Get Solutions & Quote": "احصل على حل وعرض سعر", "Select language": "اختر اللغة",
     "Send an Enquiry": "أرسل استفساراً", "Full Name": "الاسم الكامل", "Job Title": "المسمى الوظيفي", "Country / Region": "الدولة / المنطقة", Email: "البريد الإلكتروني", "Phone / WhatsApp": "الهاتف / واتساب", Message: "الرسالة", "Submit Enquiry": "إرسال الاستفسار", "Sending…": "جارٍ الإرسال…", "Headquarters": "المقر الرئيسي", "Previous Site": "الموقع السابق",
+    "Business Type": "نوع النشاط", "Estimated Volume": "الكمية المتوقعة", "Target Timeline": "الجدول الزمني", "Products of Interest": "المنتجات المطلوبة", Select: "اختر", "Submit Request": "إرسال الطلب", Close: "إغلاق", "Request received": "تم استلام الطلب", "Tell us about your project": "أخبرنا عن مشروعك",
   },
   fr: {
     Product: "Produits", Door: "Portes", "Metal Door": "Portes métalliques", "Wooden Door": "Portes en bois",
@@ -49,6 +50,7 @@ const UI: Record<Locale, Record<string, string>> = {
     "News & Insights": "Ressources", "Privacy Policy": "Politique de confidentialité", "Terms of Service": "Conditions d’utilisation",
     "Get Solutions & Quote": "Demander une solution et un devis", "Select language": "Choisir la langue",
     "Send an Enquiry": "Envoyer une demande", "Full Name": "Nom complet", "Job Title": "Fonction", "Country / Region": "Pays / Région", Email: "E-mail", "Phone / WhatsApp": "Téléphone / WhatsApp", Message: "Message", "Submit Enquiry": "Envoyer la demande", "Sending…": "Envoi…", Headquarters: "Siège social", "Previous Site": "Ancien site",
+    "Business Type": "Type d’activité", "Estimated Volume": "Volume estimé", "Target Timeline": "Délai prévu", "Products of Interest": "Produits recherchés", Select: "Sélectionner", "Submit Request": "Envoyer la demande", Close: "Fermer", "Request received": "Demande reçue", "Tell us about your project": "Présentez-nous votre projet",
   },
   ru: {
     Product: "Продукция", Door: "Двери", "Metal Door": "Металлические двери", "Wooden Door": "Деревянные двери",
@@ -58,6 +60,7 @@ const UI: Record<Locale, Record<string, string>> = {
     "News & Insights": "Материалы", "Privacy Policy": "Политика конфиденциальности", "Terms of Service": "Условия использования",
     "Get Solutions & Quote": "Получить решение и предложение", "Select language": "Выбрать язык",
     "Send an Enquiry": "Отправить запрос", "Full Name": "Имя и фамилия", "Job Title": "Должность", "Country / Region": "Страна / регион", Email: "Эл. почта", "Phone / WhatsApp": "Телефон / WhatsApp", Message: "Сообщение", "Submit Enquiry": "Отправить запрос", "Sending…": "Отправка…", Headquarters: "Главный офис", "Previous Site": "Предыдущий сайт",
+    "Business Type": "Тип бизнеса", "Estimated Volume": "Ожидаемый объём", "Target Timeline": "Сроки", "Products of Interest": "Интересующие продукты", Select: "Выберите", "Submit Request": "Отправить запрос", Close: "Закрыть", "Request received": "Запрос получен", "Tell us about your project": "Расскажите о вашем проекте",
   },
   es: {
     Product: "Productos", Door: "Puertas", "Metal Door": "Puertas metálicas", "Wooden Door": "Puertas de madera",
@@ -67,6 +70,7 @@ const UI: Record<Locale, Record<string, string>> = {
     "News & Insights": "Recursos", "Privacy Policy": "Política de privacidad", "Terms of Service": "Términos de uso",
     "Get Solutions & Quote": "Solicitar solución y cotización", "Select language": "Seleccionar idioma",
     "Send an Enquiry": "Enviar una consulta", "Full Name": "Nombre completo", "Job Title": "Cargo", "Country / Region": "País / Región", Email: "Correo electrónico", "Phone / WhatsApp": "Teléfono / WhatsApp", Message: "Mensaje", "Submit Enquiry": "Enviar consulta", "Sending…": "Enviando…", Headquarters: "Sede central", "Previous Site": "Sitio anterior",
+    "Business Type": "Tipo de negocio", "Estimated Volume": "Volumen estimado", "Target Timeline": "Plazo previsto", "Products of Interest": "Productos de interés", Select: "Seleccionar", "Submit Request": "Enviar solicitud", Close: "Cerrar", "Request received": "Solicitud recibida", "Tell us about your project": "Cuéntenos sobre su proyecto",
   },
 };
 
