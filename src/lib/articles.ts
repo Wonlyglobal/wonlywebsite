@@ -46,7 +46,7 @@ const unq = (s: string): string => {
 const parseFrontmatter = (fm: string): Record<string, string | string[]> => {
   const out: Record<string, string | string[]> = {};
   let listKey: string | null = null;
-  for (const line of fm.split("\n")) {
+  for (const line of fm.split(/\r?\n/)) {
     const li = line.match(/^\s+-\s+(.*)$/);
     if (li && listKey) {
       (out[listKey] as string[]).push(unq(li[1]));
@@ -93,7 +93,10 @@ const mdToBlocks = (md: string): ArticleBlock[] => {
 
 const ALL_ARTICLES: (Article & { locale: Locale })[] = Object.entries(RAW)
   .map(([file, raw]): (Article & { locale: Locale }) | null => {
-    const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+    // Accept both LF (localized files created in Git) and CRLF (older English
+    // CMS files created on Windows). A strict LF-only parser silently dropped
+    // every English article while the translated copies continued to load.
+    const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
     if (!m) return null;
     const fm = parseFrontmatter(m[1]);
     const cover = String(fm.cover || "");

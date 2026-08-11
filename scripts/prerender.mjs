@@ -155,11 +155,11 @@ async function main() {
 
   console.log(`prerender: done — ${ok}/${routes.length} rendered, ${failed.length} failed`);
   if (failed.length) console.warn('prerender: failed routes:', failed.join(', '));
-  // Non-fatal: any route we did render now serves a proper 200 page; routes that
-  // failed simply keep the SPA 404-fallback behaviour. Only hard-fail if nothing
-  // rendered at all (indicates a setup/browser problem worth surfacing in CI).
-  if (ok === 0) {
-    console.error('prerender: nothing rendered — failing the build.');
+  // A missing localized static page is an SEO deployment defect. Fail CI if
+  // even one sitemap route could not be rendered, rather than shipping a mixed
+  // set where some crawler requests fall back to the generic SPA shell.
+  if (failed.length > 0) {
+    console.error('prerender: one or more sitemap routes failed — failing the build.');
     process.exit(1);
   }
 }

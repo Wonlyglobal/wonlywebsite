@@ -35,6 +35,9 @@ jobs:
       - name: Sync published articles into sitemap
         run: node scripts/sync-article-sitemap.mjs
 
+      - name: Check multilingual coverage and hreflang
+        run: node scripts/check-i18n.mjs
+
       - name: Build production dist
         env:
           VITE_BASE: /
@@ -47,6 +50,9 @@ jobs:
 
       - name: Prerender canonical routes
         run: node scripts/prerender.mjs
+
+      - name: Audit prerendered multilingual HTML
+        run: node scripts/audit-prerender.mjs
 
       - name: Validate dist
         run: |

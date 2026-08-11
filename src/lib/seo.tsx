@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { localeFromPath, pathForLocale } from "./i18n";
+import { LANGUAGES, localeFromPath, pathForLocale } from "./i18n";
 import { localizedSeo } from "./seo-locales";
 
 /**
@@ -53,6 +53,8 @@ interface SeoInput {
   type?: "website" | "article" | "product";
   /** One JSON-LD object or an array of them. */
   jsonLd?: JsonLd | JsonLd[];
+  /** Set false for pages whose body is intentionally available in English only. */
+  localized?: boolean;
 }
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
@@ -104,6 +106,7 @@ export function useSeo({
   image = DEFAULT_OG_IMAGE,
   type = "website",
   jsonLd,
+  localized: isLocalized = true,
 }: SeoInput) {
   // CMS overrides (content/settings/tdk.json) beat the coded defaults.
   const ov = tdkFor(path);
@@ -121,7 +124,7 @@ export function useSeo({
     // canonical + og:url to the trailing-slash form so the sitemap URL, the
     // served URL and the canonical all match exactly (no redirect in between).
     const locale = localeFromPath(window.location.pathname);
-    const localizedPath = pathForLocale(path, locale);
+    const localizedPath = isLocalized ? pathForLocale(path, locale) : path;
     const normPath = localizedPath === "/" ? "/" : localizedPath.endsWith("/") ? localizedPath : localizedPath + "/";
     const url = SITE_URL + normPath;
     const englishPath = path === "/" ? "/" : path.endsWith("/") ? path : path + "/";
@@ -132,10 +135,9 @@ export function useSeo({
     upsertMeta("name", "description", description);
     if (keywords) upsertMeta("name", "keywords", keywords);
     else document.head.querySelector('meta[name="keywords"]')?.remove();
-    // Localized shells are intentionally kept out of the index until their
-    // body copy has been professionally translated and reviewed. This avoids
-    // publishing four sets of duplicate English pages under language URLs.
-    upsertMeta("name", "robots", locale === "en" ? "index,follow" : "noindex,follow");
+    // Translated business and insight pages are independently indexable.
+    // English-only pages point back to English when opened under a locale URL.
+    upsertMeta("name", "robots", isLocalized || locale === "en" ? "index,follow" : "noindex,follow");
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", type);
@@ -149,7 +151,17 @@ export function useSeo({
 
     upsertLink("canonical", url);
     document.head.querySelectorAll('link[data-managed-hreflang="true"]').forEach((node) => node.remove());
-    setAlternate("en", englishUrl);
+    if (isLocalized) {
+      for (const language of LANGUAGES) {
+        const alternatePath = pathForLocale(path, language.code);
+        const normalizedAlternate = alternatePath === "/" || alternatePath.endsWith("/")
+          ? alternatePath
+          : `${alternatePath}/`;
+        setAlternate(language.code, SITE_URL + normalizedAlternate);
+      }
+    } else {
+      setAlternate("en", englishUrl);
+    }
     setAlternate("x-default", englishUrl);
 
     const blocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
@@ -168,5 +180,5 @@ export function useSeo({
     };
     // jsonLdKey captures deep changes to jsonLd without unstable identity.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title, description, path, image, type, jsonLdKey]);
+  }, [title, description, path, image, type, jsonLdKey, isLocalized]);
 }

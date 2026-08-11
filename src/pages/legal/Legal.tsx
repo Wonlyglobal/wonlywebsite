@@ -62,6 +62,7 @@ export function Privacy() {
     title: "Privacy Policy | WONLY",
     description: "How WONLY (wonlyglobal.com) collects, uses and protects the information you share through our website, contact forms and analytics.",
     path: "/privacy",
+    localized: false,
   });
 
   return (
@@ -120,6 +121,7 @@ export function Terms() {
     title: "Terms of Service | WONLY",
     description: "The terms governing your use of the WONLY website (wonlyglobal.com), including intellectual property, product information and liability.",
     path: "/terms",
+    localized: false,
   });
 
   return (

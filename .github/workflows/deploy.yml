@@ -36,6 +36,9 @@ jobs:
       - name: Sync scheduled articles into sitemap
         run: node scripts/sync-article-sitemap.mjs
 
+      - name: Check multilingual coverage and hreflang
+        run: node scripts/check-i18n.mjs
+
       - name: Build
         # Production build. VITE_BASE defaults to "/" (custom domain at root).
         # For a project page at https://<user>.github.io/<repo>/, set a repo
@@ -56,6 +59,9 @@ jobs:
 
       - name: Prerender routes to static HTML (SEO)
         run: node scripts/prerender.mjs
+
+      - name: Audit prerendered multilingual HTML
+        run: node scripts/audit-prerender.mjs
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
