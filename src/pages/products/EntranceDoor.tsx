@@ -1,6 +1,8 @@
 import { Shield, Flame, Lock, Volume2, Ruler, Leaf } from "lucide-react";
 import { BASE } from "@/lib/site-ui";
 import { ProductPage, type ProductPageData } from "@/lib/product-page";
+import { useLocale } from "@/lib/i18n";
+import { localizeEntranceDoor } from "@/lib/product-locales";
 
 const data: ProductPageData = {
   seo: {
@@ -36,4 +38,7 @@ const data: ProductPageData = {
   cta: { title: "Bring WONLY Entrance Doors To Your Market", sub: "Security or interior, residential or project — request the catalog, samples and pricing." },
 };
 
-export default function EntranceDoor() { return <ProductPage data={data} />; }
+export default function EntranceDoor() {
+  const { locale } = useLocale();
+  return <ProductPage data={localizeEntranceDoor(data, locale)} />;
+}
