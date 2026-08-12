@@ -106,6 +106,10 @@ uploaded_files/
 /*.png
 # Internal briefs & raw source assets — kept local (repo is public); optimized WebP copies live in public/images
 docs/
+!docs/
+docs/*
+!docs/worklog.md
+!docs/daily-report-standard.md
 public/项目案例/
 public/images/factory door.png
 # Raw source assets with burned-in Chinese text / internal docs — must NOT ship on the English B2B site
