@@ -10,8 +10,8 @@ const CFG = (() => {
   try { return JSON.parse(Object.values(RAW)[0] || "{}"); } catch { return {}; }
 })() as { formKey?: string; formCc?: string };
 
-/* 兜底 key(现有 key,历史收件邮箱)——CMS 里填了新 key 就自动切换 */
-const FALLBACK_KEY = "5054e990-b5a3-47e9-a659-f8e4dd7e69c7";
+/* WONLY Global Website 公开表单 key，绑定 inquiry@wonlyglobal.com。 */
+const FALLBACK_KEY = "0f0709cb-edc8-4112-be79-11ee3a633e20";
 
 export const FORM_ENDPOINT = "https://api.web3forms.com/submit";
 export const FORM_KEY = (CFG.formKey || "").trim() || FALLBACK_KEY;
