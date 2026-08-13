@@ -4,9 +4,10 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY dist.zip /tmp/
 
-RUN unzip -j /tmp/dist.zip \
-    -d /usr/share/nginx/html \
+RUN unzip  /tmp/dist.zip \
+    -d /usr/share/nginx/ \
     && rm /tmp/dist.zip
+    && mv /usr/share/nginx/dist /usr/share/nginx/html
 
 COPY nginx.conf \
     /etc/nginx/conf.d/default.conf 
