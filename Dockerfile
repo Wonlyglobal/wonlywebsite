@@ -6,7 +6,7 @@ COPY dist.zip /tmp/
 
 RUN unzip  /tmp/dist.zip \
     -d /usr/share/nginx/ \
-    && rm /tmp/dist.zip
+    && rm /tmp/dist.zip \
     && mv /usr/share/nginx/dist /usr/share/nginx/html
 
 COPY nginx.conf \
