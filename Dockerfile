@@ -9,6 +9,7 @@ RUN unzip /tmp/dist.zip \
     && rm /tmp/dist.zip
 
 COPY nginx.conf \
-    /etc/nginx/conf.d/default.conf
+    /etc/nginx/conf.d/default.conf 
+EXPOSE 8080    
 
 CMD ["nginx", "-g", "daemon off;"]
