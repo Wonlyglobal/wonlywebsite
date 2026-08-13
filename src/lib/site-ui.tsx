@@ -280,14 +280,14 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <div className="relative hidden md:block" onMouseEnter={() => setOpenDrop("__language")} onMouseLeave={() => setOpenDrop(null)}>
-            <button aria-label={t("Select language")} className="h-10 px-3 rounded-full inline-flex items-center gap-2 text-xs border" style={{ color: solid ? DARK : "#fff", borderColor: solid ? "rgba(34,31,32,.18)" : "rgba(255,255,255,.35)" }}>
+          <div className="relative hidden md:block" onMouseEnter={() => setOpenDrop("__language")} onMouseLeave={() => setOpenDrop((value) => value === "__language" ? null : value)}>
+            <button type="button" onClick={() => setOpenDrop((value) => value === "__language" ? null : "__language")} aria-expanded={openDrop === "__language"} aria-haspopup="menu" aria-label={t("Select language")} className="h-10 px-3 rounded-full inline-flex items-center gap-2 text-xs border" style={{ color: solid ? DARK : "#fff", borderColor: solid ? "rgba(34,31,32,.18)" : "rgba(255,255,255,.35)" }}>
               <Globe size={15} /><span>{language.nativeLabel}</span><ChevronDown size={12} />
             </button>
             {openDrop === "__language" && (
-              <div className="absolute top-full right-0 min-w-[170px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/5 p-2">
+              <div role="menu" className="absolute top-full right-0 min-w-[170px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/5 p-2">
                 {LANGUAGES.map((item) => (
-                  <a key={item.code} href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.04]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
+                  <a key={item.code} role="menuitem" href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} onClick={() => setOpenDrop(null)} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.04]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
                     <span>{item.nativeLabel}</span><span className="text-[10px] uppercase opacity-50">{item.code}</span>
                   </a>
                 ))}
@@ -384,17 +384,17 @@ export function FloatingLanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const { locale, language, pathname, t } = useLocale();
   return (
-    <div className="fixed bottom-5 left-5 z-[85]" onMouseLeave={() => setOpen(false)}>
+    <div className="fixed top-20 right-4 md:top-24 md:right-6 z-[85]" onMouseLeave={() => setOpen(false)}>
       {open && (
-        <div className="absolute bottom-12 left-0 min-w-[180px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/10 p-2 mb-2">
+        <div role="menu" className="absolute top-12 right-0 min-w-[180px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/10 p-2 mt-2">
           {LANGUAGES.map((item) => (
-            <a key={item.code} href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.05]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
+            <a key={item.code} role="menuitem" href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} onClick={() => setOpen(false)} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.05]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
               <span>{item.nativeLabel}</span><span className="text-[10px] uppercase opacity-50">{item.code}</span>
             </a>
           ))}
         </div>
       )}
-      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={t("Select language")} className="h-11 px-4 rounded-full inline-flex items-center gap-2 shadow-xl border border-white/20" style={{ background: "rgba(26,23,24,.94)", color: "#fff" }}>
+      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-haspopup="menu" aria-label={t("Select language")} className="h-11 px-4 rounded-full inline-flex items-center gap-2 shadow-xl border border-white/20" style={{ background: "rgba(26,23,24,.94)", color: "#fff" }}>
         <Globe size={16} /><span className="text-xs">{language.nativeLabel}</span><ChevronDown size={12} />
       </button>
     </div>
