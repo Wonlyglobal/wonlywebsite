@@ -4,7 +4,7 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY dist.zip /tmp/
 
-RUN unzip /tmp/dist.zip \
+RUN unzip -j /tmp/dist.zip \
     -d /usr/share/nginx/html \
     && rm /tmp/dist.zip
 
