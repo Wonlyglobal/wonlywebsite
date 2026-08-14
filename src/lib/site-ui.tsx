@@ -280,7 +280,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <div className="relative hidden md:block" onMouseEnter={() => setOpenDrop("__language")} onMouseLeave={() => setOpenDrop((value) => value === "__language" ? null : value)}>
+          <div className="relative hidden md:block">
             <button type="button" onClick={() => setOpenDrop((value) => value === "__language" ? null : "__language")} aria-expanded={openDrop === "__language"} aria-haspopup="menu" aria-label={t("Select language")} className="h-10 px-3 rounded-full inline-flex items-center gap-2 text-xs border" style={{ color: solid ? DARK : "#fff", borderColor: solid ? "rgba(34,31,32,.18)" : "rgba(255,255,255,.35)" }}>
               <Globe size={15} /><span>{language.nativeLabel}</span><ChevronDown size={12} />
             </button>
@@ -384,7 +384,7 @@ export function FloatingLanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const { locale, language, pathname, t } = useLocale();
   return (
-    <div className="fixed top-20 right-4 md:top-24 md:right-6 z-[85]" onMouseLeave={() => setOpen(false)}>
+    <div className="fixed top-20 right-4 md:top-24 md:right-6 z-[85]">
       {open && (
         <div role="menu" className="absolute top-12 right-0 min-w-[180px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/10 p-2 mt-2">
           {LANGUAGES.map((item) => (
