@@ -557,7 +557,7 @@ const Prototype = () => {
     if (!form.country.trim()) e.country = "Please enter your country or region.";
     if (!form.email.trim()) e.email = "Please enter your email.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
-    if (!form.interest) e.interest = "Please select an option.";
+    if (!form.interest) e.interest = t("Please select an option.");
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
     if (Object.keys(e).length > 0) return;
@@ -1033,18 +1033,18 @@ const Prototype = () => {
                 </label>
               ))}
               <label className="block sm:col-span-2">
-                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Interest <span style={{ color: "#e6928a" }}>*</span></span>
+                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Interest")} <span style={{ color: "#e6928a" }}>*</span></span>
                 <select value={form.interest} onChange={(ev) => setField("interest", ev.target.value)} aria-invalid={!!errors.interest} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors.interest ? "#c0564a" : "rgba(255,255,255,0.15)", color: form.interest ? "#fff" : "rgba(255,255,255,0.3)" }}>
-                  <option value="" disabled className="text-black">Select an option…</option>
-                  <option className="text-black">Distributor</option>
-                  <option className="text-black">Project</option>
-                  <option className="text-black">OEM / ODM</option>
+                  <option value="" disabled className="text-black">{t("Select an option…")}</option>
+                  <option value="Distributor" className="text-black">{t("Distributor")}</option>
+                  <option value="Project" className="text-black">{t("Project")}</option>
+                  <option value="OEM / ODM" className="text-black">{t("OEM / ODM")}</option>
                 </select>
                 {errors.interest && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.interest}</span>}
               </label>
               <label className="block sm:col-span-2">
                 <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Message")} <span style={{ color: "#e6928a" }}>*</span></span>
-                <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder="Tell us about your project or territory..." />
+                <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={t("Tell us about your project or territory...")} />
                 {errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.message}</span>}
               </label>
               {errors.submit && <div className="sm:col-span-2 text-center text-[12px]" style={{ color: "#e79b93" }}>{errors.submit}</div>}
