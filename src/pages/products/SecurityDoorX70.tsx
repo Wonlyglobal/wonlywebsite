@@ -16,13 +16,13 @@ const DARK = "#221F20";
 const BASE = import.meta.env.BASE_URL;
 
 const IMG = {
-  hero: "https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg",
-  lock1: "https://picture-search.tiangong.cn/image/rt/37df649adeceb5a6e298b9c079ca9832.jpg",
-  lock3: "https://picture-search.tiangong.cn/image/rt/f934bfc19ceac72bf7e72780c251bc7c.jpg",
-  lock4: "https://picture-search.tiangong.cn/image/rt/b6ea3d6292ee76a9c7725b407fa4b514.jpg",
-  factory2: "https://picture-search.tiangong.cn/image/rt/5d75fa99cd91354289665c7242112e13.jpg",
-  villa1: "https://picture-search.tiangong.cn/image/rt/449f44b1cf3e44f55f6bcab2ee518982.jpg",
-  commercial1: "https://picture-search.tiangong.cn/image/rt/571ffb7e8d819bc25651e98e64cab5a2.jpg",
+  hero: "/images/door/gallery/g1-front.jpg",
+  lock1: "/images/door/gallery/g3-detail.jpg",
+  lock3: "/images/door/gallery/g2-scene.jpg",
+  lock4: "/images/door/gallery/g4-factory.jpg",
+  factory2: "/images/mfg-line.jpg",
+  villa1: "/images/proj-saudi-villa.webp",
+  commercial1: "/images/proj-egypt-cbd.webp",
 };
 
 /* Product gallery */

@@ -16,21 +16,21 @@ const DARK = "#221F20";
 const SILVER = "#B8BFC8";
 
 const IMG = {
-  hero: "https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg",
-  lock1: "https://picture-search.tiangong.cn/image/rt/37df649adeceb5a6e298b9c079ca9832.jpg",
-  lock2: "https://picture-search.tiangong.cn/image/rt/c3b89bcb61c6165c652f5a3913ce6408.jpg",
-  lock3: "https://picture-search.tiangong.cn/image/rt/f934bfc19ceac72bf7e72780c251bc7c.jpg",
-  lock4: "https://picture-search.tiangong.cn/image/rt/b6ea3d6292ee76a9c7725b407fa4b514.jpg",
-  factory1: "https://picture-search.tiangong.cn/image/rt/d0623db57d13458b3b359d9532554337.jpg",
-  factory2: "https://picture-search.tiangong.cn/image/rt/5d75fa99cd91354289665c7242112e13.jpg",
-  factory3: "https://picture-search.tiangong.cn/image/rt/624ee8b0834b1bf4f3b39de5b48563d5.jpg",
-  commercial1: "https://picture-search.tiangong.cn/image/rt/571ffb7e8d819bc25651e98e64cab5a2.jpg",
-  commercial2: "https://picture-search.tiangong.cn/image/rt/c20a10b3d12180d86a87243b1f767bca.jpg",
-  villa1: "https://picture-search.tiangong.cn/image/rt/449f44b1cf3e44f55f6bcab2ee518982.jpg",
-  hospital1: "https://picture-search.tiangong.cn/image/rt/5cffc7b7ae7b3b5207c9df8e5d0108c1.jpg",
-  shake1: "https://picture-search.tiangong.cn/image/rt/fcbce1d1c42a06661429ab53cad0d025.jpg",
-  shake2: "https://picture-search.tiangong.cn/image/rt/7322155cabd3fe0e34d7ba8cb32402af.jpg",
-  shake3: "https://picture-search.tiangong.cn/image/rt/e9e59941a28e60e4928b6004b5876c9c.jpg",
+  hero: "/videos/hero-door-poster.jpg",
+  lock1: "/images/lock-s80.png",
+  lock2: "/images/lock-s80-alt.webp",
+  lock3: "/images/lock-s80-render.webp",
+  lock4: "/images/智能锁/S80-2.png",
+  factory1: "/images/mfg-hero.jpg",
+  factory2: "/images/mfg-line.jpg",
+  factory3: "/images/mfg-robot.jpg",
+  commercial1: "/images/proj-egypt-cbd.webp",
+  commercial2: "/images/landmark-daxing.webp",
+  villa1: "/images/proj-saudi-villa.webp",
+  hospital1: "/images/标杆项目/中央部委住宅.jpg",
+  shake1: "/images/sh-presence.jpg",
+  shake2: "/images/sh-light.jpg",
+  shake3: "/images/sh-air.jpg",
 };
 
 const NAV: { label: string; children?: { name: string; desc: string; path: string; icon: any }[] }[] = [
@@ -74,20 +74,20 @@ const PARTNERS_TECH = ["Huawei", "Alibaba Cloud", "Siemens", "Foxconn", "Hikvisi
 const PARTNERS_RE = ["Vanke", "Country Garden", "Poly", "CR Land", "China Overseas", "Merchants Shekou", "Shimao", "Greentown", "Gemdale", "CIFI", "Yuexiu", "C&D", "Huafa", "Jinke", "Zhongnan", "Yuzhou"];
 
 const TECH_LOGOS: Record<string, string> = {
-  "Huawei": "https://picture-search.tiangong.cn/image/rt/2f3898eb69a2852bccae54d6928b84fe.jpg",
-  "Alibaba Cloud": "https://picture-search.tiangong.cn/image/rt/d43ec1b354bf586cff0650fe43708ba3.jpg",
-  "Siemens": "https://picture-search.tiangong.cn/image/rt/420998cfcb41f257e86c565a20c37901.jpg",
-  "Foxconn": "https://picture-search.tiangong.cn/image/rt/4ca67905b4b6934a496010a86177ff38.jpg",
+  "Huawei": "/images/partners-ceremony/partner-huawei.webp",
+  "Alibaba Cloud": "/images/partners-ceremony/partner-alibaba.webp",
+  "Siemens": "/images/partners-ceremony/partner-siemens.webp",
+  "Foxconn": "/images/partners-ceremony/partner-foxconn.webp",
   "Hikvision": "https://skyagent-artifacts.tiangong.cn/router/agent/2026-07-07/prod_agent_019f3bd7-4123-7b80-ac8e-ed7498414be1/hikvision_logo_png_transparent_httpx_43095e10_1_afc4bb8d36cb4c2c86a7cb7fbba7026c.png",
-  "China Telecom": "https://picture-search.tiangong.cn/image/rt/7c3a2bfae4e3ed648ca1c4a8cf4dc369.jpg",
-  "China Mobile": "https://picture-search.tiangong.cn/image/rt/9e32fc52f7127cef21d94c6197a5aa90.jpg",
-  "China Unicom": "https://picture-search.tiangong.cn/image/rt/a1f8f366b7a6f3a60c9235024e5b1a91.jpg",
-  "Midea Remac Smart": "https://picture-search.tiangong.cn/image/rt/a217f44b78e00bf6bacf6ee169f9d894.jpg",
+  "China Telecom": "/images/partners-ceremony/partner-china-telecom.webp",
+  "China Mobile": "/images/partners-ceremony/partner-china-mobile.webp",
+  "China Unicom": "/images/房地产合作伙伴.png",
+  "Midea Remac Smart": "/images/partners-ceremony/partner-midea.webp",
 };
 const RE_LOGOS: Record<string, string> = {
   "Vanke": "https://skyagent-artifacts.tiangong.cn/router/agent/2026-07-07/prod_agent_019f3bd7-4123-7b80-ac8e-ed7498414be1/vanke_logo_png_transparent_httpx_95f3a745_1_fb01192eb43544dcae8fd8b85c380e44.png",
   "Country Garden": "https://skyagent-artifacts.tiangong.cn/router/agent/2026-07-07/prod_agent_019f3bd7-4123-7b80-ac8e-ed7498414be1/country_garden_logo_png_httpx_1e642746_1_d0d6d0583c66475eb9a6684b7c24b531.png",
-  "Poly": "https://picture-search.tiangong.cn/image/rt/570fa54f0ab148d95cd61e0a1ebc64c5.jpg",
+  "Poly": "/images/房地产合作伙伴.png",
   "CR Land": "https://skyagent-artifacts.tiangong.cn/router/agent/2026-07-07/prod_agent_019f3bd7-4123-7b80-ac8e-ed7498414be1/cr_land_china_resources_logo_png_httpx_e8f2b997_2_2b1ed357c91d472785b924b95717e6e0.png",
   "China Overseas": "https://skyagent-artifacts.tiangong.cn/router/agent/2026-07-07/prod_agent_019f3bd7-4123-7b80-ac8e-ed7498414be1/china_overseas_logo_png_httpx_48199d2c_1_c4c811f57ad34493b792eac89a1d8065.jpeg",
   "Merchants Shekou": "https://skyagent-artifacts.tiangong.cn/router/agent/2026-07-07/prod_agent_019f3bd7-4123-7b80-ac8e-ed7498414be1/china_merchants_shekou_logo_png_httpx_eecdf9f9_1_c3976c2adbba418e99c5571304edc49e.png",
@@ -317,7 +317,7 @@ const Index = () => {
 
       <main>
       {/* Hero */}
-      <section className="relative w-full h-[88vh] min-h-[600px] flex flex-col items-center justify-start bg-blend-multiply bg-[linear-gradient(to_bottom,rgba(191,160,106,0.3),rgba(34,31,32,0.82)),url(https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg)] bg-cover bg-center pt-24">
+      <section className="relative w-full h-[88vh] min-h-[600px] flex flex-col items-center justify-start bg-blend-multiply bg-[linear-gradient(to_bottom,rgba(191,160,106,0.3),rgba(34,31,32,0.82)),url('/videos/hero-door-poster.jpg')] bg-cover bg-center pt-24">
         <div className="flex flex-col justify-center items-center text-center px-4">
           <div className="text-[#D4C4A0] text-sm font-semibold tracking-[0.25em] uppercase mb-3">China's No.1 Security Door Brand</div>
           <h1 className="text-white text-4xl xl:text-6xl font-bold leading-[64px] max-w-[900px]">The Door to One-stop Home Security.</h1>
@@ -524,7 +524,7 @@ const Index = () => {
           <h2 className="text-[#221F20] text-5xl font-semibold mt-3">The Future Factory Behind Every WONLY</h2>
         </Reveal>
         <Reveal>
-          <div className="relative rounded-2xl overflow-hidden h-80 mb-8 bg-[linear-gradient(to_right,rgba(34,31,32,0.92),rgba(34,31,32,0.2)),url(https://picture-search.tiangong.cn/image/rt/d0623db57d13458b3b359d9532554337.jpg)] bg-cover bg-center">
+          <div className="relative rounded-2xl overflow-hidden h-80 mb-8 bg-[linear-gradient(to_right,rgba(34,31,32,0.92),rgba(34,31,32,0.2)),url('/images/mfg-hero.jpg')] bg-cover bg-center">
             <div className="p-12 max-w-xl">
               <h3 className="text-white text-3xl font-semibold mb-3">5G Fully-Connected Smart Factory</h3>
               <p className="text-white/80 text-sm leading-relaxed mb-5">Step inside our 5G fully-connected smart factory — where robotic flexible production lines craft every door and lock to micron precision. Real-time quality data flows from stamping to final assembly, setting a new global benchmark for intelligent production.</p>
@@ -607,7 +607,7 @@ const Index = () => {
 
       {/* Contact CTA */}
       <section className="px-20 mt-24">
-        <div className="relative rounded-2xl overflow-hidden h-80 flex items-center justify-center bg-[linear-gradient(to_bottom,rgba(191,160,106,0.85),rgba(34,31,32,0.85)),url(https://picture-search.tiangong.cn/image/rt/571ffb7e8d819bc25651e98e64cab5a2.jpg)] bg-cover bg-center">
+        <div className="relative rounded-2xl overflow-hidden h-80 flex items-center justify-center bg-[linear-gradient(to_bottom,rgba(191,160,106,0.85),rgba(34,31,32,0.85)),url('/images/proj-egypt-cbd.webp')] bg-cover bg-center">
           <div className="text-center px-4">
             <h2 className="text-white text-4xl font-semibold mb-4">Let's Build Safer Entries, Together</h2>
             <div className="flex justify-center gap-3 flex-wrap">
