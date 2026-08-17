@@ -10,7 +10,7 @@ import { localizedSeo } from "./seo-locales";
 export const SITE_URL = "https://www.wonlyglobal.com";
 export const SITE_NAME = "WONLY";
 export const DEFAULT_OG_IMAGE =
-  "https://picture-search.tiangong.cn/image/rt/85f08a10a5a0545fe837c5fde708f694.jpg";
+  `${SITE_URL}/og-wonly-factory.jpg`;
 
 type JsonLd = Record<string, unknown>;
 
