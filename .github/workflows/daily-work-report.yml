@@ -6,6 +6,11 @@ on:
     # Off-peak minute: top-of-hour crons get dropped by GitHub under load.
     - cron: '7 10 * * *'
   workflow_dispatch:
+    inputs:
+      report_date:
+        description: 'Optional report date for resending (YYYY-MM-DD)'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -27,4 +32,5 @@ jobs:
       - name: Send work report to Feishu
         env:
           FEISHU_WORK_WEBHOOK: ${{ secrets.FEISHU_WORK_WEBHOOK }}
+          REPORT_DATE: ${{ inputs.report_date }}
         run: node scripts/work-report.mjs
