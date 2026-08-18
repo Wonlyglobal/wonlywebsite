@@ -1,14 +1,14 @@
 ---
 slug: "gb-17565-class-a-security-door-standard"
-title: "GB 17565 Class A Explained: China's Top Security Door Standard"
-seoTitle: "GB 17565 Class A — China Security Door Standard Explained | WONLY"
-description: "What GB 17565 Class A means, how China's A/B/C/D door grades map to buyer expectations, and why importers should ask for it alongside EN 1627."
+title: "GB 17565 Class A Security Door Standard: Grades & Buyer Checks"
+seoTitle: "GB 17565 Class A Security Door Standard: Grades & Requirements | WONLY"
+description: "Understand GB 17565 Class A, China's highest security-door grade. Compare A/B/C/D grades and learn which certificates importers should verify."
 category: "Buying Guide"
 date: "2026-08-05"
 dateLabel: "5 August 2026"
 readMins: 5
 cover: "images/mfg-inspect.jpg"
-excerpt: "China's A/B/C/D security door grades decoded — what Class A certifies, how it compares to EN 1627, and what importers should request."
+excerpt: "A practical guide to China's GB 17565 security-door grades, Class A requirements and the documents importers should verify before ordering."
 keywords:
   - "GB 17565"
   - "Class A security door"
@@ -17,7 +17,7 @@ keywords:
   - "GB 17565 grades"
 ---
 
-Most of the world's security doors are manufactured in China, so the Chinese national standard — GB 17565 — matters to every importer, even ones who specify to EN 1627. This guide explains what the standard tests, what Class A means, and how to use it when sourcing.
+GB 17565 is China's national burglar-resistant security-door standard. Class A (甲) is its highest grade. Importers should use the grade to shortlist products, then verify that the certificate covers the exact door leaf, frame, lock and hardware being ordered. This guide explains the four grades, what Class A demonstrates and which documents to request alongside destination-market requirements such as EN 1627.
 
 ## The Four Grades: A, B, C, D
 
