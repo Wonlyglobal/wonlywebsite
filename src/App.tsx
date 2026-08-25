@@ -59,10 +59,17 @@ function ScrollManager() {
   // Analytics: initialise once, then send a page_view on every SPA route change.
   useEffect(() => { initAnalytics(); }, []);
   useEffect(() => {
+    if (location.pathname.startsWith("/cms")) return;
     trackPageview(location.pathname + location.search);
   }, [location.pathname, location.search]);
 
   return null;
+}
+
+function SiteFloaters() {
+  const location = useLocation();
+  if (location.pathname.startsWith("/cms")) return null;
+  return <><FloatingLanguageSwitcher /><FloatingContact /></>;
 }
 
 // Lazy-loaded so each route ships as its own chunk and never enters the initial
@@ -97,6 +104,8 @@ const SectionComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").th
 // Legal pages (Privacy Policy + Terms of Service).
 const Privacy = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Privacy })));
 const Terms = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Terms })));
+const CmsApp = lazy(() => import("./cms/CmsApp"));
+const PublishedVisualContent = lazy(() => import("./cms/PublishedVisualContent"));
 
 const queryClient = new QueryClient();
 
@@ -115,7 +124,9 @@ const App = () => (
       <BrowserRouter basename={basename}>
         <ScrollManager />
         <LocaleDocument />
+        <Suspense fallback={null}><PublishedVisualContent /></Suspense>
         <Routes>
+          <Route path="/cms/*" element={<Suspense fallback={<div className="min-h-screen" />}><CmsApp /></Suspense>} />
           {/* The /prototype interactive page is now the official homepage. */}
           <Route path="/" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
           {/* Previous homepage kept for reference (not linked). */}
@@ -174,8 +185,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <FloatingLanguageSwitcher />
-        <FloatingContact />
+        <SiteFloaters />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
