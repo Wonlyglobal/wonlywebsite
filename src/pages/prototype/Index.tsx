@@ -629,10 +629,39 @@ const Prototype = () => {
     const v = doorVideo.current;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let done = false;
+    let scrollLocked = false;
+    const root = document.documentElement;
+    const previousScrollStyles = {
+      rootOverflow: root.style.overflow,
+      rootOverscrollBehavior: root.style.overscrollBehavior,
+      bodyOverflow: document.body.style.overflow,
+      bodyTouchAction: document.body.style.touchAction,
+      bodyOverscrollBehavior: document.body.style.overscrollBehavior,
+    };
+
+    const unlockScroll = () => {
+      if (!scrollLocked) return;
+      scrollLocked = false;
+      root.style.overflow = previousScrollStyles.rootOverflow;
+      root.style.overscrollBehavior = previousScrollStyles.rootOverscrollBehavior;
+      document.body.style.overflow = previousScrollStyles.bodyOverflow;
+      document.body.style.touchAction = previousScrollStyles.bodyTouchAction;
+      document.body.style.overscrollBehavior = previousScrollStyles.bodyOverscrollBehavior;
+    };
+
+    const lockScroll = () => {
+      scrollLocked = true;
+      root.style.overflow = "hidden";
+      root.style.overscrollBehavior = "none";
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+      document.body.style.overscrollBehavior = "none";
+    };
 
     const reveal_ = () => {
       if (done) return;
       done = true;
+      unlockScroll();
       // Land on the bright open-door end frame — if the clip stalled or errored,
       // jumping to the end beats leaving copy over a dark closed door.
       if (v) { try { if (!v.ended) { v.pause(); v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } } catch { /* poster ok */ } }
@@ -655,6 +684,10 @@ const Prototype = () => {
       reveal_();
       return;
     }
+
+    // Keep the opening sequence pinned to the first viewport. Both the root and
+    // body are locked so wheel, trackpad and mobile touch scrolling behave alike.
+    lockScroll();
 
     // Force the browser to actually fetch the clip — Chrome ignores preload hints for a
     // non-autoplay <video>, which left readyState at 0 and the door never opening on live.
@@ -681,7 +714,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
+    return () => { unlockScroll(); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
   }, []);
 
   return (
