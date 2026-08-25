@@ -85,7 +85,7 @@ const GlobalStrategy = lazy(() => import("./pages/global-strategy/Index"));
 const Projects = lazy(() => import("./pages/projects/Index"));
 const Insights = lazy(() => import("./pages/insights/Index"));
 const InsightArticle = lazy(() => import("./pages/insights/Article"));
-const IntentLandingPage = lazy(() => import("./pages/seo/IntentLandingPage"));
+const IntentLandingPage = lazy(() => import("../IntentLandingPage"));
 // Product category pages (each lists the full series in its line)
 const EntranceDoor = lazy(() => import("./pages/products/EntranceDoor"));
 const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
