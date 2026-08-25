@@ -97,7 +97,7 @@ try {
 
 // ---- 2) 文章:今日上线 + 进度(从 content/articles/*.md 读取) ----
 const arts = readdirSync("content/articles")
-  .filter((f) => f.endsWith(".md"))
+  .filter((f) => /^[-a-z0-9]+\.md$/i.test(f))
   .map((f) => {
     const s = readFileSync(`content/articles/${f}`, "utf8");
     return {
@@ -143,15 +143,17 @@ if (catsWithWork.length) {
   md.push(`**🔧 今日建设工作**（${commitCount} 次提交）`);
   for (const c of catsWithWork) {
     md.push(`**${c}**`);
-    md.push(...workByCat[c]);
+    md.push(...workByCat[c].slice(0, 6));
+    if (workByCat[c].length > 6) md.push(`• …等共 ${workByCat[c].length} 项`);
   }
 } else {
   md.push(`**🔧 今日建设工作**：无代码改动（内容按排期自动发布中）`);
 }
 if (opsToday.length) {
   md.push("");
-  md.push(`**📋 沟通与实际工作汇总**`);
-  md.push(...opsToday);
+  md.push(`**📋 运营与分析工作**`);
+  md.push(...opsToday.slice(0, 8));
+  if (opsToday.length > 8) md.push(`• …等共 ${opsToday.length} 项`);
 }
 md.push("");
 md.push(`**🗺️ Sitemap**：${urlCount} 个 URL`);

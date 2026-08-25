@@ -19,24 +19,36 @@ const ArticlePage = () => {
           path: `/insights/${article.slug}`,
           image: article.cover,
           type: "article",
-          jsonLd: {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: article.title,
-            description: article.description,
-            image: `${SITE_URL}${article.cover.replace(/^\.?\//, "/")}`,
-            datePublished: article.date,
-            dateModified: article.date,
-            keywords: article.keywords.join(", "),
-            articleSection: article.category,
-            author: { "@type": "Organization", name: "WONLY" },
-            publisher: {
-              "@type": "Organization",
-              name: "WONLY",
-              logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon-256.png` },
+          jsonLd: [
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: article.title,
+              description: article.description,
+              image: `${SITE_URL}${article.cover.replace(/^\.?\//, "/")}`,
+              datePublished: article.date,
+              dateModified: article.date,
+              keywords: article.keywords.join(", "),
+              articleSection: article.category,
+              inLanguage: locale,
+              author: { "@type": "Organization", name: "WONLY" },
+              publisher: {
+                "@type": "Organization",
+                name: "WONLY",
+                logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon-256.png` },
+              },
+              mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}${locale === "en" ? "" : `/${locale}`}/insights/${article.slug}/` },
             },
-            mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/insights/${article.slug}` },
-          },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: tr("home", "Home"), item: `${SITE_URL}${locale === "en" ? "/" : `/${locale}/`}` },
+                { "@type": "ListItem", position: 2, name: tr("insights", "News & Insights"), item: `${SITE_URL}${locale === "en" ? "" : `/${locale}`}/insights/` },
+                { "@type": "ListItem", position: 3, name: article.title, item: `${SITE_URL}${locale === "en" ? "" : `/${locale}`}/insights/${article.slug}/` },
+              ],
+            },
+          ],
         }
       : { title: "News & Insights | WONLY", description: "WONLY News & Insights.", path: "/insights" }
   );

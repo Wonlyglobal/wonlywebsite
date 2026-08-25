@@ -34,6 +34,15 @@ const routes = [
   ["/insights/", "2026-08-11", "weekly", "0.7"],
 ];
 
+const englishOnlyRoutes = [
+  ["/products/security-doors/cast-aluminium/", "2026-08-25", "monthly", "0.8"],
+  ["/products/security-doors/fire-rated/", "2026-08-25", "monthly", "0.8"],
+  ["/solutions/hotel-security-doors/", "2026-08-25", "monthly", "0.8"],
+  ["/solutions/villa-security-doors/", "2026-08-25", "monthly", "0.8"],
+  ["/global/saudi-arabia/security-doors/", "2026-08-25", "monthly", "0.8"],
+  ["/global/uae/security-doors/", "2026-08-25", "monthly", "0.8"],
+];
+
 const localizedPath = (route, locale) => locale === "en"
   ? route
   : route === "/" ? `/${locale}/` : `/${locale}${route}`;
@@ -57,7 +66,7 @@ const entry = (route, lastmod, changefreq, priority, localized = true) => {
 };
 
 const articles = readdirSync(CONTENT_DIR)
-  .filter((file) => file.endsWith(".md"))
+  .filter((file) => /^[-a-z0-9]+\.md$/i.test(file))
   .map((file) => {
     const source = readFileSync(path.join(CONTENT_DIR, file), "utf8");
     const slug = source.match(/^slug:\s*"?([^"\n]+)"?$/m)?.[1]?.trim();
@@ -70,6 +79,7 @@ const articles = readdirSync(CONTENT_DIR)
 
 const body = [
   ...routes.map(([route, lastmod, changefreq, priority]) => entry(route, lastmod, changefreq, priority)),
+  ...englishOnlyRoutes.map(([route, lastmod, changefreq, priority]) => entry(route, lastmod, changefreq, priority, false)),
   entry("/privacy/", "2026-07-27", "yearly", "0.3", false),
   entry("/terms/", "2026-07-27", "yearly", "0.3", false),
   ...articles.map(({ slug, date }) => entry(`/insights/${slug}/`, date, "monthly", "0.6")),

@@ -1,174 +1,46 @@
-import { lazy, Suspense, useEffect, useLayoutEffect } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigationType } from "react-router-dom";
-import NotFound from "./pages/not-found/Index";
-import { initAnalytics, trackPageview } from "@/lib/analytics";
-import FloatingContact from "@/lib/floating-contact";
-import { LocaleDocument, localeFromPath } from "@/lib/i18n";
-import { FloatingLanguageSwitcher } from "@/lib/site-ui";
+# WONLY 官网工作日志
 
-// Take over scroll handling from the browser so lazy routes behave predictably.
-if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
-  window.history.scrollRestoration = "manual";
-}
+> 记录不体现在代码提交里的运营/分析/策划工作,供每日工作日报自动读取。
+> 格式:`YYYY-MM-DD | 工作内容`(一行一条,日期开头)。
 
-// Forward navigation (PUSH) opens a page at its banner; browser back/forward
-// (POP) restores the scroll position the user left that page at. Lazy pages get
-// a short retry loop so restoration waits for the content to finish mounting.
-function ScrollManager() {
-  const location = useLocation();
-  const navType = useNavigationType();
+2026-08-25 | 正式上线前核验:确认新服务器 43.153.252.64 已为 wonlyglobal.com 与 www.wonlyglobal.com 正确配置 TrustAsia OV TLS 证书，证书校验通过、有效期至 2027-03-11，两个域名经指定解析访问均返回 HTTPS 200；但 Google DNS 与 Cloudflare DNS 仍将根域指向 GitHub Pages IP、www 仍 CNAME 到 wonlyglobal.github.io，尚未切至新服务器。同时发现新服务器当前 Sitemap 为 172 URL，低于已验收测试版本 187 URL，需先将最新 test 版本发布到生产并验收，再切换 DNS
+2026-08-25 | 生产发布与验证:通过 Codeup 合并请求 #1 将已验收 test 版本合入 master（合并提交 8d555f3f），生产流水线 wonly-os-web_prod #12 构建成功（2分07秒）并完成 Docker 部署（1分18秒）；指定解析访问新服务器的首页、产品页、文章页和 Sitemap 均返回 HTTPS 200，正式 DNS 尚未切换
+2026-08-25 | Sitemap 异常定位与测试修复:发现生产构建中的 Sitemap 因历史在线编辑追加而拼接了两份 XML，表现为 358 个 URL 节点、187 个唯一地址及 2 个 urlset 结束标签；确认完整重建脚本已存在后，将干净 Sitemap（202 个 URL、202 个唯一地址、1 个结束标签）提交至 Codeup test@50617d24，文件由 312 KB/4283 行恢复为 178 KB/2415 行，测试流水线 #38 构建成功（2分11秒）并完成 Docker 部署（42秒），生产流水线保持 #12 未被触发；测试公网入口当前不可达，尚待合入 master 后在新服务器复验
+2026-08-25 | Sitemap 正式发布:通过 Codeup 合并请求 #2 将 test 修复合入 master@e96dcdab，生产流水线 wonly-os-web_prod #13 构建成功（2分14秒）并完成 Docker 部署（1分25秒）；绕过尚未切换的 DNS 直连新服务器验收，首页、产品页、文章页及 Sitemap 均返回 HTTPS 200，Sitemap 为 202 个 URL、202 个唯一地址且仅有 1 个 urlset 结束标签，重复拼接问题已修复上线
+2026-08-25 | 正式域名切换:在易名 DNS 删除根域 4 条 GitHub Pages A 记录及 www 的旧 CNAME，新增 wonlyglobal.com 与 www.wonlyglobal.com 指向 43.153.252.64 的 A 记录（TTL 600）；权威 DNS、Google DNS 和 Cloudflare DNS 均已返回新地址，阿里企业邮箱 3 条 MX、SPF 与 Google 站点验证 TXT 保持不变；正式域名首页、产品页、文章页和 202 URL Sitemap 均通过 HTTPS 200 验收
+2026-08-25 | 首屏交互修复:完成首页开门动画期间的滚动锁定，统一禁止桌面滚轮、触控板和移动端触摸滚动，并在视频结束、加载异常、9 秒兜底、点击跳过或离开页面时恢复原滚动状态；TypeScript 检查通过，本地 Vite 正式构建 1,769 个模块并完成 404 页面生成，修复已提交 Codeup test，测试流水线 #40 构建成功并完成 Docker 部署（39秒），生产流水线保持 #13 未触发
+2026-08-25 | 正式站功能盘点:核验正式首页已加载 Tawk 客服脚本、WhatsApp、GA4、GTM 与 Clarity，Tawk 窗口仅显示在线聊天和预设问候，未呈现 FAQ/知识库入口；阿拉伯语、法语、俄语、西班牙语首页均能访问并显示对应语言与 RTL/LTR，联系页和内容后台可访问；确认当前 test 相对 master 仅待发布首屏开门动画滚动锁定及日志同步，Tawk FAQ 属第三方后台展示配置而非本次代码发布，测试公网旧地址 106.54.236.81:30751 当前不可达
+2026-08-25 | 客服与测试环境方案:依据 Tawk 官方配置确认 FAQ 无需重新发布官网代码，应在当前 Property 的 Administration → Chat Widget → Widget Content 启用 Knowledge Base，并添加 KB Search 与 KB Article List 卡片，同时复核 12 条文章为 Published + Public；测试环境需由运维为内网 Kubernetes 服务恢复 Ingress/NodePort 公网入口并配置测试域名与 TLS，旧公网地址不可继续作为验收入口
+2026-08-25 | Tawk FAQ 配置准备:已打开 Tawk 管理后台准备检查当前官网 Property、12 条 FAQ 的 Published/Public 状态以及聊天窗口 Knowledge Base Cards；当前浏览器未登录且无已填写账号信息，配置因等待用户完成 Tawk 登录而暂停，尚未保存或发布任何第三方平台改动
+2026-08-25 | Tawk FAQ 正式上线:登录并核验 WONLY Property（已绑定 www.wonlyglobal.com），确认12条英文 FAQ 均为 Public、Knowledge Base 与 KB Search 已启用，但分类 Sales & Project Enquiries 计数为0且聊天首页缺少文章列表；经确认在正式 Widget 的 Online/Home 状态新增 KB Article List，展示报价、经销商、OEM/ODM、交期和 MOQ 5条高转化问题，保留搜索框覆盖全部12条文章；通过公开 Direct Chat 首页复验5条列表与搜索入口均已显示，无需重新部署官网代码
+2026-08-25 | 测试环境入口与首屏验收:确认新的测试公网地址 http://1.116.123.87:30751/ 可正常访问并加载 WONLY 最新首页；重新加载后在开门动画期间验证 html overflow=hidden、overscroll=none、touch-action=none，模拟滚轮滚动后页面仍保持 scrollY=0；动画结束后滚动样式自动恢复，模拟滚动可到 scrollY=700，首屏滚动锁定与释放逻辑通过测试环境验收
+2026-08-25 | 首屏修复正式发布:通过 Codeup 合并请求 #3 将已验收的首页开门动画滚动锁定从 test 合入 master（合并提交 038ce30b），生产流水线 wonly-os-web_prod #14 运行成功（Node.js 构建2分03秒、Docker部署1分22秒，总计3分27秒）；正式站 https://www.wonlyglobal.com/ 已恢复 HTTPS 访问，开门动画期间模拟滚动保持 scrollY=0、动画结束后页面可正常下滑，Tawk 正式 Widget 脚本仍正常加载。运维确认当前仅运行1个 Pod，本次重启存在短暂中断窗口，后续如需零停机发布应增加副本并配置滚动更新与就绪探针
+2026-08-25 | 正式站刷新落屏缺陷修复与复盘:复现正式首页在第二屏刷新后被开门动画锁定于 scrollY=966；根因是上一版仅限制新滚动、未处理浏览器自动恢复历史滚动位置，且全站平滑滚动会延迟回顶，上一轮验收只覆盖从顶部首次加载而遗漏“滚动后刷新”路径。现已在无锚点首页加载时将 history.scrollRestoration 临时设为 manual、立即关闭平滑滚动并在 pageshow 强制归零，动画结束后恢复原滚动策略；保留带 hash 的深链跳转。TypeScript 检查通过，Vite 正式构建1,769个模块成功；本地从 scrollY=966 刷新后700毫秒稳定回到0，动画结束后可滚至700。修复目前仅在本地，尚未提交测试或发布正式环境
+2026-08-25 | 正式站刷新落屏增强修复与发布:首版修复经 test@ec4cfe22、测试流水线#42和生产流水线#15发布后，测试环境“第二屏刷新”可从scrollY=966归零，但正式域名仍被浏览器更晚触发的滚动恢复拉回scrollY=700，确认不是静态资源缓存而是时序竞争；增强方案在开门期间持续监听并压回顶部，结合requestAnimationFrame与250毫秒重试，动画结束后移除保护并恢复滚动。增强提交test@c6ab3e52经测试流水线#43成功（构建2分06秒、部署47秒）并从scrollY=700刷新归零验收，通过合并请求#5进入master@cea8b45b；生产流水线wonly-os-web_prod #16运行成功（构建2分02秒、Docker部署1分26秒、总计3分30秒）。正式站实测第二屏scrollY=700刷新后700毫秒为0且开门期间锁定，动画结束后滚动样式恢复并可再次滚至700，缺陷已修复上线
+2026-08-25 | 内容与SEO:启动首批规模化SEO基础优化，将文章相关阅读由按发布时间随机推荐改为按分类、关键词与标题主题相关度排序，并为文章页补充Article与BreadcrumbList双结构化数据；同时隔离30篇规范文章之外的60个macOS/迁移副本，避免重复slug进入构建、Sitemap和日报统计。TypeScript及1,769模块独立目录正式构建通过，修改仅在本地，尚未提交测试或发布
+2026-08-25 | 内容与SEO:完成22个核心页面TDK审计，重写首页、About、Projects、13个产品/能力页及Advantages、Global Strategy、Partnership、Contact等高意向页面的标题与描述，消除28项长度、重复声明及可疑背书警告；补入10篇已到发布日期文章，Sitemap由32增至42个URL、文章URL由11增至21个，TDK检查无阻塞错误。修改仅在本地，尚未提交测试或发布
+2026-08-25 | 监控与证书诊断:核验正式首页、文章列表和GB 17565文章均为HTTPS 200，Google与Cloudflare DNS均指向43.153.252.64；定位三次官网告警的HTTP 000实际为GitHub Runner严格TLS校验报curl 60，生产443仅返回1张站点叶子证书、缺少TrustAsia OV TLS RSA CA 2024中间证书。已将监控升级为直连加独立公网节点二次复核并更新为当前服务器/Kubernetes排查指引，提交GitHub main@021e8dc1；手动运行Uptime Monitor #32812197052成功，公网复核首页与文章页均通过且未发送宕机误报。证书fullchain仍待运维补齐
+2026-08-25 | 多语言SEO基础:将迁移后分散在带(1)副本中的五语正式逻辑归并到构建读取文件，统一英语、阿语、法语、俄语、西语的语言路由、独立TDK、canonical、index/follow、完整hreflang与x-default、阿语RTL、文章本地化加载及静态预渲染；30篇英文文章的120篇译文完整校验通过，20个核心路由与20篇已发布文章形成五语闭环，Sitemap重建为202个唯一URL。修改仅在本地，尚未提交测试或发布
+2026-08-25 | 高意向SEO页面建设:新建6个英文采购落地页，覆盖铸铝防盗门、防火防盗门、酒店门、别墅门、沙特安全门和阿联酋安全门；每页配置独立TDK、约3300–3600字符采购内容、规格清单、项目流程、3条FAQ、3条主题内链及WebPage/FAQ/Breadcrumb结构化数据，新页暂不开放未审核翻译。Sitemap增至208个唯一URL；TypeScript、TDK、五语检查和1,893模块正式构建通过，浏览器验证6页无坏图且canonical/robots/结构化数据正确，207个非英语首页URL全部预渲染成功，208 URL静态SEO审计通过。修改仅在本地，尚未提交测试或发布
 
-  // Record the position while the page is still on screen. Saving it in a
-  // cleanup instead would always store 0: by the time a passive effect cleanup
-  // runs the outgoing page's DOM is gone and the browser has clamped scrollY to
-  // the (viewport-height) Suspense fallback. The listener is registered in a
-  // layout effect so it is detached before that teardown, and the clamp-to-zero
-  // scroll event it fires never lands on the outgoing page's key.
-  useLayoutEffect(() => {
-    const key = `scroll:${location.key}`;
-    // Only real scroll events are recorded — writing once on mount would clobber
-    // the stored position with 0 before the restore effect below gets to read it.
-    const onScroll = () => sessionStorage.setItem(key, String(window.scrollY));
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [location]);
-
-  useEffect(() => {
-    if (navType === "POP") {
-      const saved = sessionStorage.getItem(`scroll:${location.key}`);
-      if (saved !== null) {
-        const y = parseInt(saved, 10);
-        let tries = 0;
-        const restore = () => {
-          window.scrollTo(0, y);
-          if (Math.abs(window.scrollY - y) > 2 && tries++ < 20) {
-            requestAnimationFrame(restore);
-          }
-        };
-        requestAnimationFrame(restore);
-        return;
-      }
-    }
-    window.scrollTo(0, 0);
-  }, [location, navType]);
-
-  // Analytics: initialise once, then send a page_view on every SPA route change.
-  useEffect(() => { initAnalytics(); }, []);
-  useEffect(() => {
-    trackPageview(location.pathname + location.search);
-  }, [location.pathname, location.search]);
-
-  return null;
-}
-
-// Lazy-loaded so each route ships as its own chunk and never enters the initial
-// bundle the homepage visitor downloads.
-const Prototype = lazy(() => import("./pages/prototype/Index"));
-const Index = lazy(() => import("./pages/home/Index"));
-const About = lazy(() => import("./pages/about/Index"));
-const Contact = lazy(() => import("./pages/contact/Index"));
-const Manufacturing = lazy(() => import("./pages/manufacturing/Index"));
-const Partnership = lazy(() => import("./pages/partnership/Index"));
-const Advantages = lazy(() => import("./pages/advantages/Index"));
-const GlobalStrategy = lazy(() => import("./pages/global-strategy/Index"));
-const Projects = lazy(() => import("./pages/projects/Index"));
-const Insights = lazy(() => import("./pages/insights/Index"));
-const InsightArticle = lazy(() => import("./pages/insights/Article"));
-// Product category pages (each lists the full series in its line)
-const EntranceDoor = lazy(() => import("./pages/products/EntranceDoor"));
-const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
-const SmartLocks = lazy(() => import("./pages/products/SmartLocks"));
-const WoodenDoors = lazy(() => import("./pages/products/WoodenDoors"));
-const SmartWindows = lazy(() => import("./pages/products/SmartWindows"));
-const WholeHouse = lazy(() => import("./pages/products/WholeHouse"));
-// Detailed / sub-line pages
-const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
-const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
-const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
-const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
-const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
-// Unified placeholders for planned-but-unbuilt pages.
-const SectionComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").then((m) => ({ default: m.SectionComingSoon })));
-// Legal pages (Privacy Policy + Terms of Service).
-const Privacy = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Privacy })));
-const Terms = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Terms })));
-
-const queryClient = new QueryClient();
-
-// Derived from Vite's `base` (see vite.config.ts). "/" for a custom domain at
-// root, "/<repo>" for a GitHub Pages project page — keeps routing correct in both.
-const buildBase = import.meta.env.BASE_URL.replace(/\/$/, "");
-const initialLocale = typeof window === "undefined" ? "en" : localeFromPath(window.location.pathname);
-const localeBase = initialLocale === "en" ? "" : `/${initialLocale}`;
-const basename = `${buildBase}${localeBase}` || "/";
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter basename={basename}>
-        <ScrollManager />
-        <LocaleDocument />
-        <Routes>
-          {/* The /prototype interactive page is now the official homepage. */}
-          <Route path="/" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
-          {/* Previous homepage kept for reference (not linked). */}
-          <Route path="/home-old" element={<Index />} />
-          <Route path="/about" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><About /></Suspense>} />
-          {/* Full projects portfolio page. */}
-          <Route path="/projects" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Projects /></Suspense>} />
-          {/* Product-line category pages — each shows the full series in that line. */}
-          <Route path="/products/entrance-door" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EntranceDoor /></Suspense>} />
-          <Route path="/products/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoors /></Suspense>} />
-          <Route path="/products/wooden-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoors /></Suspense>} />
-          {/* Metal Door — lands on the Security Doors series page; the X70 sub-page carries the
-              Banner + Smart Features detail content. */}
-          <Route path="/products/door/metal-door" element={<Navigate to="/products/security-doors" replace />} />
-          <Route path="/products/smart-locks" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLocks /></Suspense>} />
-          <Route path="/products/smart-windows" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartWindows /></Suspense>} />
-          <Route path="/products/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
-          {/* Detailed sub-pages already built. */}
-          <Route path="/products/smart-locks/s80" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLockS80 /></Suspense>} />
-          <Route path="/products/security-doors/x70" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoorX70 /></Suspense>} />
-          <Route path="/products/engineering-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EngineeringDoors /></Suspense>} />
-          <Route path="/products/medical-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MedicalDoors /></Suspense>} />
-          <Route path="/products/yizhai-yishu" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><YizhaiYishu /></Suspense>} />
-
-          {/* Legacy singular /product/* URLs resolve to the canonical /products/* structure. */}
-          <Route path="/product/door" element={<Navigate to="/products/entrance-door" replace />} />
-          <Route path="/product/door/metal-door" element={<Navigate to="/products/security-doors" replace />} />
-          <Route path="/product/door/wooden-door" element={<Navigate to="/products/wooden-doors" replace />} />
-          <Route path="/product/door/wpc-door" element={<Navigate to="/products/entrance-door" replace />} />
-          <Route path="/product/smart-lock" element={<Navigate to="/products/smart-locks" replace />} />
-          <Route path="/product/smart-window" element={<Navigate to="/products/smart-windows" replace />} />
-          <Route path="/product/whole-house" element={<Navigate to="/products/whole-house" replace />} />
-          {/* Sections not yet built → placeholder (hash anchors resolve within them). */}
-          <Route path="/advantages" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Advantages /></Suspense>} />
-          <Route path="/manufacturing-rd" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Manufacturing /></Suspense>} />
-          <Route path="/global-strategy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><GlobalStrategy /></Suspense>} />
-          <Route path="/partnership" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Partnership /></Suspense>} />
-          <Route path="/contact" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Contact /></Suspense>} />
-          <Route path="/insights" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Insights /></Suspense>} />
-          <Route path="/insights/:slug" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><InsightArticle /></Suspense>} />
-
-          <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
-
-          {/* Legal */}
-          <Route path="/privacy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Privacy /></Suspense>} />
-          <Route path="/terms" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Terms /></Suspense>} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <FloatingLanguageSwitcher />
-        <FloatingContact />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-export default App;
+2026-08-04 | 关键词研究:基于王力产品线与出口市场,构建 4,784 个行业长尾词库(含 2,804 个 P1 高价值交易词),按主题簇/意图/优先级/漏斗分层,输出《WONLY-SEO行业长尾词库.xlsx》
+2026-08-04 | SEO 内容规划:制定第一批落地方案——15 个 P1 交易词映射到产品页/市场落地页(含 5 个建议新建的国家落地页),并排定 20 篇文章发布计划(每周一/三/五)
+2026-08-04 | 内容生产:撰写 20 篇面向海外经销商的英文 SEO 长尾文章(EN 1627 分级、GB 17565、防火门、智能锁、市场洞察等主题簇,均含真实王力资质数据与 FAQ)
+2026-08-04 | 自动化建设:上线"定时发文流水线"——文章按日期门控自动上架 + 每日 09:23 自动构建 + sitemap 自动注入,20 篇文章 8/3 起自动按排期发布
+2026-08-04 | 自动化建设:上线"每日工作日报"——每天 18:07 自动汇总当天页面优化/内容发布/SEO/自动化工作,推送飞书群
+2026-08-04 | SEO 运营:建立发文日 GSC 催收录半自动流程(每周一/三/五 10:00 自动核对文章上线并推送提交提醒);首篇文章《EN 1627 RC2 vs RC3 vs RC4》已上线并发起收录请求
+2026-08-17 | 内容与 SEO:完成网站社交分享缩略图修复，将 Open Graph、Twitter Card 和结构化数据中的第三方品牌图替换为 1200×630 WONLY 工厂实景图；TypeScript 检查与正式构建通过，相关优化已随 7b7faff 推送至 Codeup
+2026-08-17 | 素材与品牌:盘点首页及 X70 产品页 30 处天工外链图片，按门类、智能锁、工厂、项目案例、合作伙伴和智能家居场景替换为 WONLY 自有素材；测试环境已加载本地自有图片，正式环境未发布
+2026-08-17 | 自动化与日报:升级个人网站工作日报规范，覆盖代码、内容、SEO、素材、第三方平台、测试环境和部署工作；强制发布前全量回顾沟通并取消代码分类 6 条、工作日志 8 条的输出截断
+2026-08-17 | 验证与修复:对比测试环境 106.54.236.81:30751 与正式域名的实际功能；确认测试环境已使用 WONLY 工厂分享图并显示五语菜单，正式环境仍为旧分享图且无语言入口；实测阿拉伯语切换未跳转，尚未通过验收
+2026-08-17 | 部署与工程:确认提交 7b7faff 已推送至阿里云 Codeup master；完成测试流水线 wonly-os-web-test #29 验收，Node.js 构建与 Docker 部署均成功，测试地址已加载新构建 index-D4byyMwO.js、WONLY 工厂分享图和本地自有图片；未验收或发布正式环境
+2026-08-17 | 分支与发布管理:在 Codeup 从 master@7b7faff7 创建 test 测试分支，建立“test 验收通过后通过合并请求进入 master”的发布规范；发现测试和生产流水线均监听 test 后，在 Docker 部署前取消误触发的生产流水线 #5；流水线触发分支分离因缺少编辑权限待完成
+2026-08-18 | 日报管理:全量回顾 8 月 17 日项目沟通与可验证记录，按个人日报口径补录 6 类工作成果，覆盖代码、素材、SEO、测试环境、部署与分支治理；已推送至 GitHub main 并核验成功
+2026-08-18 | 自动化与日报:为手动日报增加指定日期重发能力，并将报告标题和口径调整为个人工作日报；已成功重发 2026-08-17 日报，GitHub Actions #32092777871 执行成功
+2026-08-18 | SEO 分析:基于 GSC/GA4 日报完成当前站点评估；近 7 天展示 45、点击 2、CTR 4.4%、平均排名 7.9，产生展示的页面 12 个，自然搜索会话 9、询盘 0；确认站点处于起量期，GB 17565 文章为 18 次展示、平均第 5.4 名但 0 点击的优先机会页
+2026-08-18 | 内容与技术 SEO:针对 GSC 机会页重写 GB 17565 英文文章的标题、搜索描述、摘要和首段，并在安全门核心产品页增加 3 条标准/采购指南内链；补入 3 篇到期文章及五语版本，Sitemap URL 由 172 增至 187，TDK、五语 hreflang、本地正式构建及 GitHub 构建包流水线 #60 均通过；已推送 GitHub main，正式站未发布
+2026-08-18 | 本地开发环境:修复 Windows 迁移依赖在 macOS ARM64 上缺少原生包的问题，按现有版本补齐 Rollup 4.55.1、esbuild 0.21.5、SWC 1.15.8、Lightning CSS 1.30.2 和 Tailwind Oxide 4.1.18；Rollup 及各原生绑定加载成功，Vite 完成 1,863 个模块的生产构建
+2026-08-18 | 测试与部署:将 GB 17565 搜索摘要、安全门 3 条上下文内链、187 URL 多语言 Sitemap 和 SEO 工作日志同步到 Codeup test，提交 0e6b1cd3、0a3d4c02、001ff785、8e6d29d2；首次测试流水线 #34 因网页编辑残留导致 SecurityDoors.tsx 第 261 行重复而失败，修复提交 38ebfedb 后测试流水线 #35 构建成功（1分59秒）并完成 Docker 部署（37秒，部署单 67919687）。同时确认生产流水线仍错误监听 test：#9 已在部署前取消，但 #10 被后续修复提交自动触发并完成生产部署；该结果属于非预期发布，待确认是否回滚及修正流水线触发规则
+2026-08-18 | 生产回滚与流水线治理:经确认将误触发的生产部署从 test@38ebfedb 回滚至上一正式版本 master@7b7faff7；生产部署记录 #7、部署单 67922390 已完成，目标主机 1/1 成功。尝试将 wonly-os-web_prod 触发分支限制为 master，但当前账号的流水线“编辑”按钮被禁用，Codeup 仓库侧无可用配置入口；触发规则修正因缺少流水线编辑权限阻塞，后续 test 提交前仍须先处理该权限/监听配置
+2026-08-18 | 流水线触发复验:向 Codeup test 提交仅含工作日志的验证提交 f92972cf；测试流水线 #36 构建成功（1分57秒）并完成 Docker 部署（36秒），但生产流水线 #11 仍被同一 test 提交自动触发，已在 Node.js 构建阶段取消，Docker 部署 0 秒。结论：生产触发器尚未排除 test，运维配置未生效
+2026-08-18 | 流水线二次复验:通过仅含工作日志的 test@6e6cb9c2 再次验证触发规则；仅生成测试流水线 #37，生产流水线保持在已取消的 #11、未生成 #12，确认生产分支过滤已生效。测试流水线构建成功（1分53秒）并完成 Docker 部署（37秒）

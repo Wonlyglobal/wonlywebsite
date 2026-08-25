@@ -2,123 +2,159 @@
   "pages": [
     {
       "path": "/",
-      "title": "Security Door & Smart Lock Manufacturer | WONLY",
-      "description": "WONLY manufactures security doors and smart locks for distributors, developers and global projects, with integrated production, R&D and OEM/ODM support.",
+      "title": "Security Door & Smart Lock Manufacturer | WONLY Global",
+      "description": "Source security doors and biometric smart locks from WONLY, a listed manufacturer offering OEM/ODM, project support and integrated production.",
       "keywords": ""
     },
     {
       "path": "/about",
-      "title": "About WONLY — Door & Smart Lock Manufacturer",
-      "description": "Learn about WONLY, a listed door and smart lock manufacturer founded in 1996, with integrated manufacturing, R&D and project supply across 60+ countries and regions.",
+      "title": "About WONLY | Listed Door & Smart Lock Manufacturer",
+      "description": "Meet WONLY (SSE: 605268), a security door and smart lock manufacturer founded in 1996 with integrated production, R&D and global project support.",
       "keywords": ""
     },
     {
       "path": "/projects",
-      "title": "Global Door & Smart Lock Projects | WONLY",
-      "description": "Explore selected WONLY door and smart lock projects across residential, commercial, government and infrastructure developments in global markets.",
+      "title": "Security Door & Smart Lock Projects Worldwide | WONLY",
+      "description": "Explore WONLY security door, smart lock and smart window projects for residential developments, public buildings, airports and other large-scale applications.",
       "keywords": ""
     },
     {
       "path": "/products/entrance-door",
-      "title": "Entrance Door Manufacturer & Supplier | WONLY",
-      "description": "Explore WONLY entrance doors for villas, apartments and commercial projects, with security, smart, fire-rated and customizable options.",
+      "title": "Entrance Door Manufacturer — Security & Wooden Doors | WONLY",
+      "description": "Source entrance doors from WONLY, including cast-aluminium security doors and steel-wood doors with custom sizes, finishes and project support.",
       "keywords": ""
     },
     {
       "path": "/products/security-doors",
-      "title": "Security Door Manufacturer & OEM Supplier | WONLY",
-      "description": "Explore WONLY security doors for villas, apartments and commercial projects, with cast-aluminium, smart, fire-rated and custom options.",
+      "title": "Security Door Manufacturer — Cast-Aluminium & Fire-Rated | WONLY",
+      "description": "WONLY manufactures cast-aluminium, steel and fire-rated security doors for distributors and projects, with OEM/ODM engineering and bulk supply support.",
       "keywords": ""
     },
     {
       "path": "/products/security-doors/x70",
-      "title": "X70 Smart Security Door for Villas | WONLY",
-      "description": "Explore the WONLY X70 smart security door with 3D face recognition, multi-point locking and customizable configurations for villas and premium residences.",
+      "title": "X70 Cast-Aluminium Robotic Security Door for Villas | WONLY",
+      "description": "Explore the WONLY X70 cast-aluminium security door with 3D face recognition, autonomous locking and premium villa customisation options.",
       "keywords": ""
     },
     {
       "path": "/products/wooden-doors",
-      "title": "Wooden Door Manufacturer for Projects & OEM | WONLY",
-      "description": "Explore wooden doors for hotels, apartments and residential projects, with customizable cores, finishes, sizes, hardware and private-label packaging.",
+      "title": "Wooden Door Supplier — Steel-Wood Anti-Warp Silent Doors | WONLY",
+      "description": "WONLY supplies steel-wood and interior wooden doors with custom finishes, acoustic options and OEM/ODM support for distributors, hotels and projects.",
       "keywords": ""
     },
     {
       "path": "/products/smart-locks",
-      "title": "Smart Lock Manufacturer & OEM Supplier | WONLY",
-      "description": "WONLY manufactures biometric smart locks for residential and project applications, with fingerprint, face, palm-vein and OEM options.",
+      "title": "Smart Lock Manufacturer — Fingerprint & Biometric Locks | WONLY",
+      "description": "Source biometric smart locks from WONLY with fingerprint, palm-vein, face recognition and app options for distributors, OEM brands and projects.",
       "keywords": ""
     },
     {
       "path": "/products/smart-locks/s80",
-      "title": "S80 Hands-Free Biometric Smart Lock | WONLY",
-      "description": "Explore the WONLY S80 smart lock with hands-free sensing, biometric access, app control and security features for residential and project applications.",
+      "title": "WONLY S80 Hands-Free Biometric Smart Lock",
+      "description": "Discover the WONLY S80 smart lock with hands-free sensing, biometric access, app control and tamper protection for premium residential entry doors.",
       "keywords": ""
     },
     {
       "path": "/products/smart-windows",
-      "title": "Smart Aluminium Window Manufacturer | WONLY",
-      "description": "Explore WONLY smart aluminium windows with automated control, weather sensing and customizable configurations for residential and project applications.",
+      "title": "Smart Window Supplier — Energy-Saving Aluminium Windows | WONLY",
+      "description": "WONLY supplies aluminium smart windows with automated wind and rain response, app control, acoustic insulation and project customisation.",
       "keywords": ""
     },
     {
       "path": "/products/whole-house",
-      "title": "Whole-House Smart Security Systems | WONLY",
-      "description": "Connect smart doors, locks, sensors and home controls through WONLY whole-house security solutions for residential developments and global partners.",
+      "title": "Whole-House Smart Home System — Doors, Locks & Sensors | WONLY",
+      "description": "Build integrated smart-home security with WONLY doors, locks, sensors and central control solutions for residential developments and global partners.",
       "keywords": ""
     },
     {
       "path": "/products/engineering-doors",
-      "title": "Engineering Door Manufacturer for Projects | WONLY",
-      "description": "Explore fire-rated, access-control and acoustic engineering door options for commercial, residential and public-building projects.",
+      "title": "Engineering Doors — Fire, Access-Control & Acoustic | WONLY",
+      "description": "Specify WONLY engineering doors for fire, access-control and acoustic applications, with technical documentation and bulk project delivery support.",
       "keywords": ""
     },
     {
       "path": "/products/medical-doors",
-      "title": "Medical & Hospital Door Manufacturer | WONLY",
-      "description": "Explore hermetic, automatic, operating-room and ward door solutions for hospitals, clean environments and healthcare construction projects.",
+      "title": "Medical Doors — Hermetic OR & Auto-Sensing Ward Doors | WONLY",
+      "description": "Source hermetic, touchless and automatic medical doors for operating rooms, wards and clean areas, with project engineering support from WONLY.",
       "keywords": ""
     },
     {
       "path": "/products/yizhai-yishu",
-      "title": "YIZHAI YISHU Custom Villa Doors | WONLY",
-      "description": "Discover the YIZHAI YISHU collection of customizable villa entrance doors combining architectural finishes, security and smart-entry options.",
+      "title": "YIZHAI YISHU — Artisan Ultra-Premium Villa Doors | WONLY",
+      "description": "Explore bespoke YIZHAI YISHU villa security doors combining artisan finishes, premium materials and integrated smart-entry options from WONLY.",
       "keywords": ""
     },
     {
       "path": "/advantages",
-      "title": "Why WONLY — Manufacturing, R&D & Project Support",
-      "description": "See how WONLY supports global door and smart lock buyers through integrated manufacturing, product development, quality control and project services.",
+      "title": "Why WONLY | Door Manufacturing & Technology Advantages",
+      "description": "Review WONLY's integrated manufacturing, product engineering, quality controls and project support for security doors, smart locks and windows.",
       "keywords": ""
     },
     {
       "path": "/manufacturing-rd",
-      "title": "Security Door & Smart Lock Manufacturing | WONLY",
-      "description": "See WONLY's integrated door and smart lock manufacturing, automated production, quality control, testing capabilities and OEM/ODM support.",
+      "title": "Manufacturing & R&D | WONLY",
+      "description": "Explore WONLY manufacturing and R&D capabilities, including integrated production, robotic lines, testing, engineering and quality-control processes.",
       "keywords": ""
     },
     {
       "path": "/global-strategy",
-      "title": "Global Door Supply & Distribution Network | WONLY",
-      "description": "Learn how WONLY supports distributors and project customers across 60+ countries and regions through manufacturing, export and market services.",
+      "title": "Global Security Door Supply & Market Strategy | WONLY",
+      "description": "Learn how WONLY supports global distributors and projects with security doors, smart locks, regional product planning and international delivery coordination.",
       "keywords": ""
     },
     {
       "path": "/partnership",
-      "title": "Distributor, Project & OEM Partnership | WONLY",
-      "description": "Partner with WONLY as a distributor, project buyer or private-label brand, with product training, engineering support and scalable manufacturing.",
+      "title": "Door Distributor, Project & OEM Partnership | WONLY",
+      "description": "Partner with WONLY through distributor programs, project cooperation or OEM/ODM services for security doors, smart locks and smart-entry products.",
       "keywords": ""
     },
     {
       "path": "/contact",
-      "title": "Contact WONLY — Project, Distributor & OEM Enquiries",
-      "description": "Contact WONLY for product quotations, project specifications, distributor cooperation, OEM/ODM requirements, samples and technical support.",
+      "title": "Contact WONLY | Door, Smart Lock & OEM Enquiries",
+      "description": "Contact WONLY for distributor, project or OEM/ODM enquiries. Email inquiry@wonlyglobal.com or message us on WhatsApp — replies within 24 hours.",
       "keywords": ""
     },
     {
       "path": "/insights",
-      "title": "Security Door & Smart Lock Resources | WONLY",
-      "description": "Read buying guides, product comparisons, standards explanations and market insights for security door and smart lock distributors and project buyers.",
+      "title": "News & Insights — Security Door & Smart Lock Guides | WONLY",
+      "description": "WONLY News & Insights: buying guides, product technology, market outlooks and company updates for security door and smart lock distributors and project buyers.",
       "keywords": ""
+    },
+    {
+      "path": "/products/security-doors/cast-aluminium",
+      "title": "Cast Aluminium Security Door Manufacturer & OEM | WONLY",
+      "description": "Source cast aluminium security doors for villas and premium projects with custom sizes, finishes, lock options and OEM engineering support from WONLY.",
+      "keywords": "cast aluminium security door manufacturer, cast aluminum door OEM"
+    },
+    {
+      "path": "/products/security-doors/fire-rated",
+      "title": "Fire-Rated Security Door Manufacturer for Projects | WONLY",
+      "description": "Specify fire-rated security doors for residential and commercial projects with documentation review, hardware coordination and bulk delivery support from WONLY.",
+      "keywords": "fire rated security door manufacturer, project fire doors"
+    },
+    {
+      "path": "/solutions/hotel-security-doors",
+      "title": "Hotel Security Doors & Smart Locks for Projects | WONLY",
+      "description": "Plan hotel guest-room and back-of-house doors with security, fire, acoustic, access-control and finish requirements coordinated by WONLY.",
+      "keywords": "hotel security doors, hotel smart locks, hotel door supplier"
+    },
+    {
+      "path": "/solutions/villa-security-doors",
+      "title": "Custom Villa Security Doors & Smart Entry | WONLY",
+      "description": "Design custom villa security doors with cast-aluminium finishes, smart locks, large openings and climate-specific options through WONLY project support.",
+      "keywords": "villa security doors, custom villa entrance doors, smart villa doors"
+    },
+    {
+      "path": "/global/saudi-arabia/security-doors",
+      "title": "Security Door Supplier for Saudi Arabia Projects | WONLY",
+      "description": "Source security doors, villa entrances and smart locks for Saudi Arabia with climate, documentation, customisation and project-delivery review from WONLY.",
+      "keywords": "security door supplier Saudi Arabia, villa doors Saudi Arabia"
+    },
+    {
+      "path": "/global/uae/security-doors",
+      "title": "Security Door Supplier for UAE Projects & Villas | WONLY",
+      "description": "Source security doors, hotel door packages and smart locks for UAE projects with finish, fire, access-control and delivery coordination from WONLY.",
+      "keywords": "security door supplier UAE, villa doors Dubai, project doors UAE"
     },
     {
       "path": "/privacy",

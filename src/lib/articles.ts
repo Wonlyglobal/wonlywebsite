@@ -91,7 +91,11 @@ const mdToBlocks = (md: string): ArticleBlock[] => {
   return blocks;
 };
 
+const isCanonicalArticlePath = (filePath: string): boolean =>
+  /\/[-a-z0-9]+\.md$/i.test(filePath);
+
 const ALL_ARTICLES: (Article & { locale: Locale })[] = Object.entries(RAW)
+  .filter(([filePath]) => isCanonicalArticlePath(filePath))
   .map(([file, raw]): (Article & { locale: Locale }) | null => {
     // Accept both LF (localized files created in Git) and CRLF (older English
     // CMS files created on Windows). A strict LF-only parser silently dropped
@@ -132,5 +136,33 @@ export const ARTICLES: Article[] = articlesForLocale("en");
 export const getArticle = (slug: string, locale: Locale = "en"): Article | undefined =>
   articlesForLocale(locale).find((a) => a.slug === slug) ?? ARTICLES.find((a) => a.slug === slug);
 
-export const relatedArticles = (slug: string, n = 3, locale: Locale = "en"): Article[] =>
-  articlesForLocale(locale).filter((a) => a.slug !== slug).slice(0, n);
+const topicTokens = (article: Article): Set<string> => {
+  const text = [article.title, article.category, ...article.keywords].join(" ").toLowerCase();
+  return new Set(
+    text
+      .replace(/[^a-z0-9]+/g, " ")
+      .split(/\s+/)
+      .filter((token) => token.length > 2 && !["and", "for", "the", "with", "from", "vs"].includes(token))
+  );
+};
+
+export const relatedArticles = (slug: string, n = 3, locale: Locale = "en"): Article[] => {
+  const pool = articlesForLocale(locale);
+  const current = pool.find((article) => article.slug === slug) ?? getArticle(slug, locale);
+  if (!current) return [];
+  const currentTokens = topicTokens(current);
+
+  return pool
+    .filter((article) => article.slug !== slug)
+    .map((article) => {
+      const overlap = [...topicTokens(article)].filter((token) => currentTokens.has(token)).length;
+      const sharedKeywords = article.keywords.filter((keyword) =>
+        current.keywords.some((candidate) => candidate.toLowerCase() === keyword.toLowerCase())
+      ).length;
+      const score = overlap * 2 + sharedKeywords * 5 + (article.category === current.category ? 3 : 0);
+      return { article, score };
+    })
+    .sort((a, b) => b.score - a.score || b.article.date.localeCompare(a.article.date))
+    .slice(0, n)
+    .map(({ article }) => article);
+};
