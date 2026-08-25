@@ -628,22 +628,38 @@ const Prototype = () => {
   useLayoutEffect(() => {
     const v = doorVideo.current;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hasHashTarget = Boolean(window.location.hash);
+    const previousScrollRestoration = window.history.scrollRestoration;
     let done = false;
     let scrollLocked = false;
     const root = document.documentElement;
     const previousScrollStyles = {
       rootOverflow: root.style.overflow,
       rootOverscrollBehavior: root.style.overscrollBehavior,
+      rootScrollBehavior: root.style.scrollBehavior,
       bodyOverflow: document.body.style.overflow,
       bodyTouchAction: document.body.style.touchAction,
       bodyOverscrollBehavior: document.body.style.overscrollBehavior,
     };
+
+    // Normal homepage refreshes restart at the door hero instead of restoring the previous section.
+    // Hash URLs keep their intentional deep-link destination.
+    const pinIntroToTop = () => {
+      if (!hasHashTarget) window.scrollTo(0, 0);
+    };
+    if (!hasHashTarget) {
+      window.history.scrollRestoration = "manual";
+      root.style.scrollBehavior = "auto";
+      pinIntroToTop();
+      window.addEventListener("pageshow", pinIntroToTop);
+    }
 
     const unlockScroll = () => {
       if (!scrollLocked) return;
       scrollLocked = false;
       root.style.overflow = previousScrollStyles.rootOverflow;
       root.style.overscrollBehavior = previousScrollStyles.rootOverscrollBehavior;
+      root.style.scrollBehavior = previousScrollStyles.rootScrollBehavior;
       document.body.style.overflow = previousScrollStyles.bodyOverflow;
       document.body.style.touchAction = previousScrollStyles.bodyTouchAction;
       document.body.style.overscrollBehavior = previousScrollStyles.bodyOverscrollBehavior;
@@ -653,6 +669,7 @@ const Prototype = () => {
       scrollLocked = true;
       root.style.overflow = "hidden";
       root.style.overscrollBehavior = "none";
+      root.style.scrollBehavior = "auto";
       document.body.style.overflow = "hidden";
       document.body.style.touchAction = "none";
       document.body.style.overscrollBehavior = "none";
@@ -673,7 +690,7 @@ const Prototype = () => {
 
     if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; reveal.current.style.transition = "opacity 1s ease"; }
 
-    if (reduced || window.location.hash) {
+    if (reduced || hasHashTarget) {
       if (v) {
         v.pause();
         const setOpen = () => { try { v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } catch { /* poster ok */ } };
@@ -682,7 +699,11 @@ const Prototype = () => {
       if (title.current) title.current.style.opacity = "0";
       if (scrim.current) scrim.current.style.opacity = "0";
       reveal_();
-      return;
+      return () => {
+        unlockScroll();
+        window.history.scrollRestoration = previousScrollRestoration;
+        window.removeEventListener("pageshow", pinIntroToTop);
+      };
     }
 
     // Keep the opening sequence pinned to the first viewport. Both the root and
@@ -714,7 +735,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
   }, []);
 
   return (
