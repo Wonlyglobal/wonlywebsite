@@ -78,6 +78,7 @@ const GlobalStrategy = lazy(() => import("./pages/global-strategy/Index"));
 const Projects = lazy(() => import("./pages/projects/Index"));
 const Insights = lazy(() => import("./pages/insights/Index"));
 const InsightArticle = lazy(() => import("./pages/insights/Article"));
+const IntentLandingPage = lazy(() => import("../IntentLandingPage"));
 // Product category pages (each lists the full series in its line)
 const EntranceDoor = lazy(() => import("./pages/products/EntranceDoor"));
 const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
@@ -138,6 +139,15 @@ const App = () => (
           <Route path="/products/engineering-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EngineeringDoors /></Suspense>} />
           <Route path="/products/medical-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MedicalDoors /></Suspense>} />
           <Route path="/products/yizhai-yishu" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><YizhaiYishu /></Suspense>} />
+          {/* High-intent English landing pages. They remain English-only until
+              market-reviewed translations are available, so localized copies
+              are not exposed to crawlers. */}
+          <Route path="/products/security-doors/cast-aluminium" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="cast-aluminium-security-doors" /></Suspense>} />
+          <Route path="/products/security-doors/fire-rated" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="fire-rated-security-doors" /></Suspense>} />
+          <Route path="/solutions/hotel-security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="hotel-security-doors" /></Suspense>} />
+          <Route path="/solutions/villa-security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="villa-security-doors" /></Suspense>} />
+          <Route path="/global/saudi-arabia/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="saudi-arabia-security-doors" /></Suspense>} />
+          <Route path="/global/uae/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="uae-security-doors" /></Suspense>} />
 
           {/* Legacy singular /product/* URLs resolve to the canonical /products/* structure. */}
           <Route path="/product/door" element={<Navigate to="/products/entrance-door" replace />} />

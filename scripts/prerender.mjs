@@ -15,9 +15,9 @@ import http from 'node:http';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { chromium } from 'playwright';
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 
-const DIST = path.resolve('dist');
+const DIST = path.resolve(process.env.PRERENDER_DIST || 'dist');
 const PORT = 4321;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
 
@@ -107,7 +107,10 @@ async function main() {
   const routes = await getRoutes();
   console.log(`prerender: ${routes.length} routes to render`);
   const server = await startServer();
-  const browser = await chromium.launch({ args: ['--no-sandbox'] });
+  const browser = await chromium.launch({
+    args: ['--no-sandbox'],
+    ...(process.env.PLAYWRIGHT_EXECUTABLE ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE } : {}),
+  });
 
   let ok = 0;
   const failed = [];
