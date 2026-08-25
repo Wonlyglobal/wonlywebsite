@@ -4,6 +4,7 @@ import { useSeo, SITE_URL } from "@/lib/seo";
 import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
 import { securityApplication, securityDoorText, securityFeature, securitySeries } from "@/lib/product-locales";
+import { RelatedInsights } from "@/lib/related-insights";
 
 const IMG = {
   hero: `${BASE}images/alu-k300max.webp`,
@@ -240,6 +241,15 @@ const SecurityDoors = () => {
           ))}
         </div>
       </section>
+
+      <RelatedInsights
+        title="Security Door Standards & Buyer Guides"
+        slugs={[
+          "gb-17565-class-a-security-door-standard",
+          "en-1627-rc2-rc3-rc4-security-door-grades",
+          "cast-aluminium-vs-steel-security-doors",
+        ]}
+      />
 
       <CtaBand eyebrowText={st("Ready to Secure Your Project?")} title={st("Custom Security-Door Solutions & Pricing")} sub={st("CTA Description")} />
       <SiteFooter />
