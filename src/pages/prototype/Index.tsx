@@ -632,6 +632,8 @@ const Prototype = () => {
     const previousScrollRestoration = window.history.scrollRestoration;
     let done = false;
     let scrollLocked = false;
+    let topPinFrame = 0;
+    let topPinTimer = 0;
     const root = document.documentElement;
     const previousScrollStyles = {
       rootOverflow: root.style.overflow,
@@ -645,13 +647,16 @@ const Prototype = () => {
     // Normal homepage refreshes restart at the door hero instead of restoring the previous section.
     // Hash URLs keep their intentional deep-link destination.
     const pinIntroToTop = () => {
-      if (!hasHashTarget) window.scrollTo(0, 0);
+      if (!hasHashTarget && window.scrollY !== 0) window.scrollTo(0, 0);
     };
     if (!hasHashTarget) {
       window.history.scrollRestoration = "manual";
       root.style.scrollBehavior = "auto";
       pinIntroToTop();
+      topPinFrame = window.requestAnimationFrame(pinIntroToTop);
+      topPinTimer = window.setTimeout(pinIntroToTop, 250);
       window.addEventListener("pageshow", pinIntroToTop);
+      window.addEventListener("scroll", pinIntroToTop, { passive: true });
     }
 
     const unlockScroll = () => {
@@ -663,6 +668,7 @@ const Prototype = () => {
       document.body.style.overflow = previousScrollStyles.bodyOverflow;
       document.body.style.touchAction = previousScrollStyles.bodyTouchAction;
       document.body.style.overscrollBehavior = previousScrollStyles.bodyOverscrollBehavior;
+      window.removeEventListener("scroll", pinIntroToTop);
     };
 
     const lockScroll = () => {
@@ -703,6 +709,9 @@ const Prototype = () => {
         unlockScroll();
         window.history.scrollRestoration = previousScrollRestoration;
         window.removeEventListener("pageshow", pinIntroToTop);
+        window.removeEventListener("scroll", pinIntroToTop);
+        window.cancelAnimationFrame(topPinFrame);
+        window.clearTimeout(topPinTimer);
       };
     }
 
@@ -735,7 +744,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
   }, []);
 
   return (
