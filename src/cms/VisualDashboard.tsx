@@ -93,7 +93,7 @@ export default function VisualDashboard({ session }: { session: Session }) {
     doc.querySelector("style[data-cms-editor]")?.remove();
     const style = doc.createElement("style");
     style.dataset.cmsEditor = "true";
-    style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{position:relative;outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected{outline:3px solid #2864ff!important;outline-offset:-3px}img.cms-editable,video.cms-editable,[data-cms-image].cms-editable{cursor:pointer!important}`;
+    style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{position:relative;outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected{outline:3px solid #2864ff!important;outline-offset:-3px}img.cms-editable,video.cms-editable,[data-cms-image].cms-editable{cursor:pointer!important}.cms-image-selected{outline:3px solid #2864ff!important;outline-offset:3px}.cms-image-action{position:absolute!important;z-index:2147483647!important;border:0!important;border-radius:8px!important;background:#1e5eff!important;color:#fff!important;padding:9px 13px!important;font:600 13px/1.2 Inter,Arial,sans-serif!important;box-shadow:0 6px 18px rgba(23,32,51,.28)!important;cursor:pointer!important}`;
     doc.head.appendChild(style);
     const importExistingSeo = () => {
       const detected = seoFromDocument(doc);
@@ -140,8 +140,20 @@ export default function VisualDashboard({ session }: { session: Session }) {
         const section = element.closest<HTMLElement>("[data-cms-section-key]");
         if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey);
         imageTarget.current = { element, key, target };
+        doc.querySelectorAll(".cms-image-selected").forEach(item => item.classList.remove("cms-image-selected"));
+        doc.querySelector(".cms-image-action")?.remove();
+        element.classList.add("cms-image-selected");
+        const action = doc.createElement("button");
+        action.type = "button";
+        action.className = "cms-image-action";
+        action.textContent = "替换图片";
+        const rect = element.getBoundingClientRect();
+        action.style.top = `${Math.max(8, rect.top + (doc.defaultView?.scrollY ?? 0) + 8)}px`;
+        action.style.left = `${Math.max(8, rect.right + (doc.defaultView?.scrollX ?? 0) - 104)}px`;
+        action.onclick = buttonEvent => { buttonEvent.preventDefault(); buttonEvent.stopPropagation(); fileRef.current?.click(); };
+        doc.body.appendChild(action);
         setSelectedImage({ key, value: imageSource(element), alt: isImageElement(element) ? element.alt : "", canEditAlt: isImageElement(element) });
-        setNotice("已选中图片；可在右侧图片编辑中从电脑替换");
+        setNotice("已选中图片；可直接点击图片上的“替换图片”");
       };
     });
     setNotice("完整页面已进入编辑模式；悬停会显示蓝色编辑框");

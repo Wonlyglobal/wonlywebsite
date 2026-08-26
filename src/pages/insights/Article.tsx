@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, Reveal, GOLD, GOLD_DEEP, DARK, MUTED, CHAMP_BG } from "@/lib/site-ui";
-import { getArticle, relatedArticles } from "@/lib/articles";
+import { getArticle, relatedArticles, type Article } from "@/lib/articles";
+import { cmsSupabase } from "@/cms/supabase";
 import { useLocale, type Locale } from "@/lib/i18n";
 import { ChevronRight, ArrowRight } from "lucide-react";
 const UI:Partial<Record<Locale,Record<string,string>>>={ar:{home:"الرئيسية",insights:"الأخبار والرؤى",min:"دقائق قراءة",more:"المزيد من الأخبار والرؤى",read:"اقرأ"},fr:{home:"Accueil",insights:"Actualités et conseils",min:"min de lecture",more:"Plus d’actualités et de conseils",read:"Lire"},ru:{home:"Главная",insights:"Новости и аналитика",min:"мин чтения",more:"Другие материалы",read:"Читать"},es:{home:"Inicio",insights:"Noticias y análisis",min:"min de lectura",more:"Más noticias y análisis",read:"Leer"}};
@@ -9,7 +11,9 @@ const UI:Partial<Record<Locale,Record<string,string>>>={ar:{home:"الرئيسي
 const ArticlePage = () => {
   const {locale}=useLocale();const ui=UI[locale];const tr=(k:string,f:string)=>ui?.[k]??f;
   const { slug = "" } = useParams();
-  const article = getArticle(slug,locale);
+  const baseArticle = getArticle(slug,locale);
+  const [article,setArticle]=useState<Article|undefined>(baseArticle);
+  useEffect(()=>{setArticle(baseArticle);if(!baseArticle||!cmsSupabase||locale!=="en")return;let active=true;void cmsSupabase.from("cms_published_pages").select("published_content").eq("page_key",`article:${baseArticle.slug}`).maybeSingle().then(({data})=>{if(active&&data?.published_content)setArticle({...baseArticle,...(data.published_content as Partial<Article>),slug:baseArticle.slug})});return()=>{active=false}},[baseArticle,locale]);
 
   useSeo(
     article

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, Reveal, eyebrow, GOLD_DEEP, CHAMP, DARK, MUTED, CHAMP_BG } from "@/lib/site-ui";
-import { articlesForLocale, type ArticleCategory } from "@/lib/articles";
+import { articlesForLocale, type Article, type ArticleCategory } from "@/lib/articles";
+import { cmsSupabase } from "@/cms/supabase";
 import { useLocale, type Locale } from "@/lib/i18n";
 import { ArrowRight } from "lucide-react";
 
@@ -16,7 +17,9 @@ const UI:Partial<Record<Locale,Record<string,string>>>={
 
 const Insights = () => {
   const {locale}=useLocale(); const ui=UI[locale]; const tr=(k:string,f:string)=>ui?.[k]??f;
-  const ARTICLES=articlesForLocale(locale).length?articlesForLocale(locale):articlesForLocale("en");
+  const sourceArticles=useMemo(()=>{const localized=articlesForLocale(locale);return localized.length?localized:articlesForLocale("en")},[locale]);
+  const [ARTICLES,setArticles]=useState<Article[]>(sourceArticles);
+  useEffect(()=>{setArticles(sourceArticles);if(!cmsSupabase||locale!=="en")return;let active=true;void cmsSupabase.from("cms_published_pages").select("page_key,published_content").like("page_key","article:%").then(({data})=>{if(!active||!data?.length)return;const overrides=new Map(data.map(row=>[row.page_key.replace(/^article:/,""),row.published_content as Partial<Article>]));setArticles(sourceArticles.map(article=>({...article,...(overrides.get(article.slug)??{}),slug:article.slug}))) });return()=>{active=false}},[locale,sourceArticles]);
   const [cat, setCat] = useState<ArticleCategory | "All">("All");
   useSeo({
     title: tr("seoTitle","News & Insights — Security Door & Smart Lock Guides | WONLY"),
