@@ -3,10 +3,40 @@ import type { Session } from "@supabase/supabase-js";
 import { CMS_PAGES } from "./pageDefinitions";
 import { cmsSupabase } from "./supabase";
 import { applyLayoutContent, editableImageElements, editableSections, editableTextElements, visualElementKey, type CmsSeo, type VisualContent, type VisualItem } from "./visualContent";
+import InquiryDashboard from "./InquiryDashboard";
+import CmsSidebar from "./CmsSidebar";
 
 type PageRow = { id: string; page_key: string; draft_content: VisualContent; published_content: (VisualContent & { translations?: Record<string, VisualContent> }) | null; translations: Record<string, VisualContent>; status: "draft" | "published" };
 const LANGUAGES = [["en", "English"], ["ar", "العربية"], ["fr", "Français"], ["ru", "Русский"], ["es", "Español"]] as const;
 const EMPTY_SEO: CmsSeo = { title: "", description: "", canonical: "", ogImage: "", robots: "index, follow" };
+
+function seoFromDocument(doc?: Document | null): CmsSeo {
+  if (!doc) return EMPTY_SEO;
+  const meta = (selector: string) => doc.head.querySelector<HTMLMetaElement>(selector)?.content?.trim() ?? "";
+  const robots = meta('meta[name="robots"]') || EMPTY_SEO.robots!;
+  return {
+    title: doc.title.trim(),
+    description: meta('meta[name="description"]'),
+    canonical: doc.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href?.trim() ?? "",
+    ogImage: meta('meta[property="og:image"]'),
+    robots: robots.replace(/\s*,\s*/g, ", "),
+  };
+}
+
+function mergeSeo(existing: CmsSeo | undefined, fallback: CmsSeo): CmsSeo {
+  const current = { ...EMPTY_SEO, ...(existing ?? {}) };
+  return Object.fromEntries(Object.entries(current).map(([key, value]) => [key, String(value ?? "").trim() || String(fallback[key as keyof CmsSeo] ?? "")])) as CmsSeo;
+}
+
+const isImageElement = (element: HTMLElement): element is HTMLImageElement => element.tagName === "IMG";
+const isVideoElement = (element: HTMLElement): element is HTMLVideoElement => element.tagName === "VIDEO";
+
+function imageSource(element: HTMLElement) {
+  if (isImageElement(element)) return element.currentSrc || element.src;
+  if (isVideoElement(element)) return element.poster;
+  const background = element.ownerDocument.defaultView?.getComputedStyle(element).backgroundImage ?? "";
+  return background.match(/url\(["']?(.*?)["']?\)/)?.[1] ?? "";
+}
 
 function changesBetween(current: VisualContent, published?: VisualContent | null) {
   const before = published ?? {};
@@ -24,6 +54,7 @@ function changesBetween(current: VisualContent, published?: VisualContent | null
 }
 
 export default function VisualDashboard({ session }: { session: Session }) {
+  const [workspace, setWorkspace] = useState<"pages" | "inquiries">("pages");
   const [page, setPage] = useState(CMS_PAGES[0]);
   const [language, setLanguage] = useState("en");
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
@@ -33,8 +64,11 @@ export default function VisualDashboard({ session }: { session: Session }) {
   const [notice, setNotice] = useState("点击页面中的文字、图片或板块即可编辑");
   const [busy, setBusy] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(true);
+  const [homeStage, setHomeStage] = useState<"intro" | "main">("intro");
+  const [selectedImage, setSelectedImage] = useState<{ key: string; value: string; alt: string; canEditAlt: boolean } | null>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const seoDefaultsRef = useRef<Record<string, CmsSeo>>({});
   const imageTarget = useRef<{ element: HTMLElement; key: string; target: "src" | "background" | "poster" } | null>(null);
 
   const load = useCallback(async () => {
@@ -44,8 +78,11 @@ export default function VisualDashboard({ session }: { session: Session }) {
     const next = data as PageRow | null;
     const localized = language === "en" ? next?.draft_content : next?.translations?.[language];
     setRow(next);
-    setContent({ visual: {}, seo: EMPTY_SEO, layout: {}, ...(localized ?? {}) });
+    const loaded = { visual: {}, seo: EMPTY_SEO, layout: {}, ...(localized ?? {}) } as VisualContent;
+    const fallback = seoDefaultsRef.current[`${page.key}:${language}`] ?? EMPTY_SEO;
+    setContent({ ...loaded, seo: mergeSeo(loaded.seo, fallback) });
     setSelectedSection(null);
+    setSelectedImage(null);
   }, [language, page.key]);
   useEffect(() => { void load(); }, [load]);
 
@@ -55,8 +92,15 @@ export default function VisualDashboard({ session }: { session: Session }) {
     doc.querySelector("style[data-cms-editor]")?.remove();
     const style = doc.createElement("style");
     style.dataset.cmsEditor = "true";
-    style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{position:relative;outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected{outline:3px solid #2864ff!important;outline-offset:-3px}img.cms-editable{cursor:pointer!important}`;
+    style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{position:relative;outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected{outline:3px solid #2864ff!important;outline-offset:-3px}img.cms-editable,video.cms-editable,[data-cms-image].cms-editable{cursor:pointer!important}`;
     doc.head.appendChild(style);
+    const importExistingSeo = () => {
+      const detected = seoFromDocument(doc);
+      seoDefaultsRef.current[`${page.key}:${language}`] = detected;
+      setContent(current => ({ ...current, seo: mergeSeo(current.seo, detected) }));
+    };
+    importExistingSeo();
+    window.setTimeout(importExistingSeo, 500);
     applyLayoutContent(doc, content.layout);
     const values = content.visual ?? {};
     editableSections(doc).forEach(section => {
@@ -83,16 +127,24 @@ export default function VisualDashboard({ session }: { session: Session }) {
     editableImageElements(doc).forEach(element => {
       const key = visualElementKey(element);
       element.classList.add("cms-editable");
-      const target = element instanceof HTMLImageElement ? "src" : element instanceof HTMLVideoElement ? "poster" : "background";
+      const target = isImageElement(element) ? "src" : isVideoElement(element) ? "poster" : "background";
       if (values[key]?.type === "image") {
-        if (element instanceof HTMLImageElement) { element.src = values[key].value; element.alt = values[key].alt ?? element.alt; }
-        else if (element instanceof HTMLVideoElement) element.poster = values[key].value;
+        if (isImageElement(element)) { element.src = values[key].value; element.alt = values[key].alt ?? element.alt; }
+        else if (isVideoElement(element)) element.poster = values[key].value;
         else element.style.backgroundImage = `url("${values[key].value}")`;
       }
-      element.onclick = event => { event.preventDefault(); event.stopPropagation(); const section = element.closest<HTMLElement>("[data-cms-section-key]"); if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey); imageTarget.current = { element, key, target }; fileRef.current?.click(); };
+      element.onclick = event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const section = element.closest<HTMLElement>("[data-cms-section-key]");
+        if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey);
+        imageTarget.current = { element, key, target };
+        setSelectedImage({ key, value: imageSource(element), alt: isImageElement(element) ? element.alt : "", canEditAlt: isImageElement(element) });
+        setNotice("已选中图片；可在右侧图片编辑中从电脑替换");
+      };
     });
     setNotice("完整页面已进入编辑模式；悬停会显示蓝色编辑框");
-  }, [content.layout, content.visual]);
+  }, [content.layout, content.visual, language, page.key]);
 
   const replaceImage = async (file: File) => {
     if (!cmsSupabase || !imageTarget.current) return;
@@ -103,11 +155,12 @@ export default function VisualDashboard({ session }: { session: Session }) {
     if (error) { setBusy(false); return setNotice(error.message); }
     const { data } = cmsSupabase.storage.from("website-assets").getPublicUrl(path);
     const target = imageTarget.current;
-    if (target.element instanceof HTMLImageElement) target.element.src = data.publicUrl;
-    else if (target.element instanceof HTMLVideoElement) target.element.poster = data.publicUrl;
+    if (isImageElement(target.element)) target.element.src = data.publicUrl;
+    else if (isVideoElement(target.element)) target.element.poster = data.publicUrl;
     else target.element.style.backgroundImage = `url("${data.publicUrl}")`;
-    const item: VisualItem = { type: "image", value: data.publicUrl, alt: target.element instanceof HTMLImageElement ? target.element.alt : "", target: target.target };
+    const item: VisualItem = { type: "image", value: data.publicUrl, alt: isImageElement(target.element) ? target.element.alt : "", target: target.target };
     setContent(current => ({ ...current, visual: { ...(current.visual ?? {}), [target.key]: item } }));
+    setSelectedImage(current => current ? { ...current, value: data.publicUrl } : current);
     await cmsSupabase.from("cms_assets").insert({ storage_path: path, public_url: data.publicUrl, original_name: file.name, mime_type: file.type, byte_size: file.size, uploaded_by: session.user.id });
     setNotice("图片已替换，请保存草稿");
     setBusy(false);
@@ -133,14 +186,17 @@ export default function VisualDashboard({ session }: { session: Session }) {
   const publishedForLanguage = () => language === "en" ? row?.published_content : row?.published_content?.translations?.[language];
   const persist = async (publish: boolean) => {
     if (!cmsSupabase) return;
+    const seo = mergeSeo(content.seo, seoFromDocument(frameRef.current?.contentDocument));
+    const nextContent = { ...content, seo };
     if (publish) {
-      const diff = changesBetween(content, publishedForLanguage());
+      if (!seo.title?.trim() || !seo.description?.trim()) return setNotice("发布已阻止：页面标题和页面描述不能为空");
+      const diff = changesBetween(nextContent, publishedForLanguage());
       if (!window.confirm(`即将发布 ${language.toUpperCase()}：\n文字 ${diff.text} 处，图片 ${diff.images} 处，SEO ${diff.seo ? "有修改" : "无修改"}，布局 ${diff.layout ? "有修改" : "无修改"}。\n\n确认更新到线上吗？`)) return;
     }
     setBusy(true);
-    const draftContent = language === "en" ? content : (row?.draft_content ?? {});
+    const draftContent = language === "en" ? nextContent : (row?.draft_content ?? {});
     const translations = { ...(row?.translations ?? {}) };
-    if (language !== "en") translations[language] = content;
+    if (language !== "en") translations[language] = nextContent;
     const publishedContent = { ...draftContent, translations };
     const payload = { page_key: page.key, page_type: page.type, route: page.route, title: page.title, source_locale: "en", draft_content: draftContent, translations, status: publish ? "published" : (row?.status ?? "draft"), updated_by: session.user.id, ...(publish ? { published_content: publishedContent, published_at: new Date().toISOString() } : {}) };
     const { data, error } = await cmsSupabase.from("cms_pages").upsert(payload, { onConflict: "page_key" }).select().single();
@@ -163,11 +219,22 @@ export default function VisualDashboard({ session }: { session: Session }) {
     setNotice("已复制英文内容作为翻译底稿；AI 自动翻译需配置模型接口后启用");
   };
   const setSeo = (key: keyof CmsSeo, value: string) => setContent(current => ({ ...current, seo: { ...EMPTY_SEO, ...(current.seo ?? {}), [key]: value } }));
+  const setImageAlt = (value: string) => {
+    const target = imageTarget.current;
+    if (!target || !isImageElement(target.element)) return;
+    target.element.alt = value;
+    const currentValue = imageSource(target.element);
+    setSelectedImage(current => current ? { ...current, alt: value } : current);
+    setContent(current => ({ ...current, visual: { ...(current.visual ?? {}), [target.key]: { type: "image", value: currentValue, alt: value, target: target.target } } }));
+  };
   const localizedRoute = language === "en" ? page.route : `/${language}${page.route === "/" ? "" : page.route}`;
+  const canvasRoute = `${localizedRoute}?cms_canvas=1${page.key === "home" ? `&cms_stage=${homeStage}` : ""}`;
 
-  return <main className="cms-root cms-visual-shell">
-    <header className="cms-visual-toolbar"><div className="cms-visual-brand"><strong>WONLY</strong><span>整页编辑</span></div><select aria-label="页面" value={page.key} onChange={event => setPage(CMS_PAGES.find(item => item.key === event.target.value) ?? CMS_PAGES[0])}>{CMS_PAGES.map(item => <option key={item.key} value={item.key}>{item.title}</option>)}</select><select aria-label="语言" value={language} onChange={event => setLanguage(event.target.value)}>{LANGUAGES.map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select><div className="cms-device-toggle"><button className={device === "desktop" ? "active" : ""} onClick={() => setDevice("desktop")}>电脑</button><button className={device === "mobile" ? "active" : ""} onClick={() => setDevice("mobile")}>手机</button></div><div className="cms-visual-actions"><button className="cms-button secondary" onClick={() => setToolsOpen(value => !value)}>{toolsOpen ? "收起工具" : "展开工具"}</button><button className="cms-button secondary" disabled={busy} onClick={() => void persist(false)}>保存草稿</button><button className="cms-button" disabled={busy} onClick={() => void persist(true)}>确认并发布</button><button className="cms-button secondary" onClick={() => cmsSupabase?.auth.signOut()}>退出</button></div></header>
-    <div className="cms-visual-status">{notice}</div><section className={`cms-visual-workspace ${toolsOpen ? "panel-open" : ""}`}><div className={`cms-site-canvas ${device}`}><iframe ref={frameRef} title={`${page.title}整页编辑`} src={`${localizedRoute}?cms_canvas=1`} onLoad={enableEditing}/></div>{toolsOpen ? <aside className="cms-visual-panel"><h2>页面工具</h2><p>当前：{page.title}</p><p>语言：{LANGUAGES.find(([code]) => code === language)?.[1]}</p><div className="cms-tool-card"><strong>板块布局</strong><p>{selectedSection ? "已选中一个板块" : "先点击页面中的板块"}</p><div className="cms-tool-actions"><button onClick={() => updateSection("up")}>上移</button><button onClick={() => updateSection("down")}>下移</button><button onClick={() => updateSection("hide")}>隐藏</button><button onClick={() => updateSection("show")}>恢复</button></div></div><div className="cms-tool-card"><strong>SEO 设置</strong><label>页面标题<input value={content.seo?.title ?? ""} onChange={event => setSeo("title", event.target.value)}/></label><label>页面描述<textarea value={content.seo?.description ?? ""} onChange={event => setSeo("description", event.target.value)}/></label><label>规范链接<input value={content.seo?.canonical ?? ""} onChange={event => setSeo("canonical", event.target.value)}/></label><label>分享图片<input value={content.seo?.ogImage ?? ""} onChange={event => setSeo("ogImage", event.target.value)}/></label><label>搜索引擎规则<select value={content.seo?.robots ?? "index, follow"} onChange={event => setSeo("robots", event.target.value)}><option>index, follow</option><option>noindex, nofollow</option></select></label></div>{language !== "en" ? <div className="cms-tool-card"><strong>多语言确认</strong><p>当前状态：{content.translationStatus === "confirmed" ? "已人工确认" : content.translationStatus === "ai_draft" ? "翻译底稿" : "待翻译"}</p><button className="cms-button secondary" onClick={copyEnglishDraft}>复制英文作翻译底稿</button><button className="cms-button secondary" onClick={() => setContent(current => ({ ...current, translationStatus: "confirmed" }))}>标记人工确认</button><p>AI 自动翻译将在配置模型接口后启用。</p></div> : null}<div className="cms-tool-card warning"><strong>发布规则</strong><p>保存草稿不会更新官网；发布前会显示差异，发布后自动核验内容库和页面访问。</p></div></aside> : null}</section>
+  if (workspace === "inquiries") return <InquiryDashboard onBack={() => setWorkspace("pages")} onSignOut={() => void cmsSupabase?.auth.signOut()} />;
+  const selectWorkspace = (next: "pages" | "inquiries" | "tools") => { if (next === "inquiries") setWorkspace("inquiries"); if (next === "tools") setToolsOpen(true); };
+  return <main className="cms-root cms-visual-shell"><CmsSidebar active="pages" onSelect={selectWorkspace}/>
+    <header className="cms-visual-toolbar"><div className="cms-visual-brand"><strong>WONLY</strong><span>整页编辑</span></div><select aria-label="页面" value={page.key} onChange={event => setPage(CMS_PAGES.find(item => item.key === event.target.value) ?? CMS_PAGES[0])}>{CMS_PAGES.map(item => <option key={item.key} value={item.key}>{item.title}</option>)}</select><select aria-label="语言" value={language} onChange={event => setLanguage(event.target.value)}>{LANGUAGES.map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select>{page.key === "home" ? <div className="cms-device-toggle"><button className={homeStage === "intro" ? "active" : ""} onClick={() => setHomeStage("intro")}>开门前</button><button className={homeStage === "main" ? "active" : ""} onClick={() => setHomeStage("main")}>开门后</button></div> : null}<div className="cms-device-toggle"><button className={device === "desktop" ? "active" : ""} onClick={() => setDevice("desktop")}>电脑</button><button className={device === "mobile" ? "active" : ""} onClick={() => setDevice("mobile")}>手机</button></div><div className="cms-visual-actions"><button className="cms-button secondary" onClick={() => setToolsOpen(value => !value)}>{toolsOpen ? "收起工具" : "展开工具"}</button><button className="cms-button secondary" disabled={busy} onClick={() => void persist(false)}>保存草稿</button><button className="cms-button" disabled={busy} onClick={() => void persist(true)}>确认并发布</button><button className="cms-button secondary" onClick={() => cmsSupabase?.auth.signOut()}>退出</button></div></header>
+    <div className="cms-visual-status">{notice}</div><section className={`cms-visual-workspace ${toolsOpen ? "panel-open" : ""}`}><div className={`cms-site-canvas ${device}`}><iframe key={canvasRoute} ref={frameRef} title={`${page.title}整页编辑`} src={canvasRoute} onLoad={enableEditing}/></div>{toolsOpen ? <aside className="cms-visual-panel"><h2>页面工具</h2><p>当前：{page.title}</p><p>语言：{LANGUAGES.find(([code]) => code === language)?.[1]}</p><div className="cms-tool-card"><strong>图片编辑</strong><p>{selectedImage ? "已选中图片，可从电脑替换" : "点击页面中的图片、背景图或视频封面"}</p>{selectedImage ? <><label>当前图片<input value={selectedImage.value} readOnly /></label>{selectedImage.canEditAlt ? <label>图片描述（Alt）<input value={selectedImage.alt} onChange={event => setImageAlt(event.target.value)} /></label> : null}</> : null}<button className="cms-button secondary" disabled={!selectedImage || busy} onClick={() => fileRef.current?.click()}>从电脑选择图片</button></div><div className="cms-tool-card"><strong>板块布局</strong><p>{selectedSection ? "已选中一个板块" : "先点击页面中的板块"}</p><div className="cms-tool-actions"><button onClick={() => updateSection("up")}>上移</button><button onClick={() => updateSection("down")}>下移</button><button onClick={() => updateSection("hide")}>隐藏</button><button onClick={() => updateSection("show")}>恢复</button></div></div><div className="cms-tool-card"><strong>SEO 设置</strong><label>页面标题<input value={content.seo?.title ?? ""} onChange={event => setSeo("title", event.target.value)}/></label><label>页面描述<textarea value={content.seo?.description ?? ""} onChange={event => setSeo("description", event.target.value)}/></label><label>规范链接<input value={content.seo?.canonical ?? ""} onChange={event => setSeo("canonical", event.target.value)}/></label><label>分享图片<input value={content.seo?.ogImage ?? ""} onChange={event => setSeo("ogImage", event.target.value)}/></label><label>搜索引擎规则<select value={content.seo?.robots ?? "index, follow"} onChange={event => setSeo("robots", event.target.value)}><option>index, follow</option><option>noindex, nofollow</option></select></label></div>{language !== "en" ? <div className="cms-tool-card"><strong>多语言确认</strong><p>当前状态：{content.translationStatus === "confirmed" ? "已人工确认" : content.translationStatus === "ai_draft" ? "翻译底稿" : "待翻译"}</p><button className="cms-button secondary" onClick={copyEnglishDraft}>复制英文作翻译底稿</button><button className="cms-button secondary" onClick={() => setContent(current => ({ ...current, translationStatus: "confirmed" }))}>标记人工确认</button><p>AI 自动翻译将在配置模型接口后启用。</p></div> : null}<div className="cms-tool-card warning"><strong>发布规则</strong><p>保存草稿不会更新官网；发布前会显示差异，发布后自动核验内容库和页面访问。</p></div></aside> : null}</section>
     <input ref={fileRef} hidden type="file" accept="image/jpeg,image/png,image/webp,image/avif" onChange={event => { const file = event.target.files?.[0]; if (file) void replaceImage(file); event.currentTarget.value = ""; }}/>
   </main>;
 }

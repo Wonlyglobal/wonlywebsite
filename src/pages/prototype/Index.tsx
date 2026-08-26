@@ -629,6 +629,9 @@ const Prototype = () => {
     const v = doorVideo.current;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hasHashTarget = Boolean(window.location.hash);
+    const cmsParams = new URLSearchParams(window.location.search);
+    const cmsCanvas = cmsParams.get("cms_canvas") === "1";
+    const cmsStage = cmsParams.get("cms_stage") === "main" ? "main" : "intro";
     const previousScrollRestoration = window.history.scrollRestoration;
     let done = false;
     let scrollLocked = false;
@@ -649,7 +652,7 @@ const Prototype = () => {
     const pinIntroToTop = () => {
       if (!hasHashTarget && window.scrollY !== 0) window.scrollTo(0, 0);
     };
-    if (!hasHashTarget) {
+    if (!hasHashTarget && !cmsCanvas) {
       window.history.scrollRestoration = "manual";
       root.style.scrollBehavior = "auto";
       pinIntroToTop();
@@ -695,6 +698,29 @@ const Prototype = () => {
     };
 
     if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; reveal.current.style.transition = "opacity 1s ease"; }
+
+    // CMS editor: keep the selected hero state stable while the public site keeps autoplay.
+    if (cmsCanvas) {
+      unlockScroll();
+      if (cmsStage === "main") {
+        if (title.current) title.current.style.opacity = "0";
+        if (scrim.current) scrim.current.style.opacity = "0";
+        reveal_();
+      } else {
+        try { if (v) { v.pause(); v.currentTime = 0; } } catch { /* poster is sufficient */ }
+        if (title.current) { title.current.style.opacity = "1"; title.current.style.transform = "translateZ(0)"; }
+        if (scrim.current) scrim.current.style.opacity = "1";
+        if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; }
+      }
+      return () => {
+        unlockScroll();
+        window.history.scrollRestoration = previousScrollRestoration;
+        window.removeEventListener("pageshow", pinIntroToTop);
+        window.removeEventListener("scroll", pinIntroToTop);
+        window.cancelAnimationFrame(topPinFrame);
+        window.clearTimeout(topPinTimer);
+      };
+    }
 
     if (reduced || hasHashTarget) {
       if (v) {
