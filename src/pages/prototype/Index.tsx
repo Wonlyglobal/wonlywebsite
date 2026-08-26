@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
-import { useLocale } from "@/lib/i18n";
-import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
-import { submitEnquiry } from "@/lib/form-config";
-import { trackLead } from "@/lib/analytics";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -382,7 +378,7 @@ function Timeline({ items }: { items: { y: string; m: string }[] }) {
 
 /* Real-photo door production line: doors ride a red monorail across a light workshop;
    the photo tiles seamlessly in an infinite marquee, with gold data nameplates over the floor. */
-function NumbersCoverflow({ locale }: { locale: Parameters<typeof homeSectionText>[0] }) {
+function NumbersCoverflow() {
   // 3D coverflow: the 7 stat cards ring past a focused center, auto-advancing every
   // 2.8s (paused on hover). Each card's 3D transform is derived from its ring-shortest
   // offset `o` to the active index, so first and last cards join into a loop.
@@ -424,7 +420,6 @@ function NumbersCoverflow({ locale }: { locale: Parameters<typeof homeSectionTex
     <div ref={stageRef} className="numbers-stage" onMouseEnter={() => { hovered.current = true; sync(); }} onMouseLeave={() => { hovered.current = false; sync(); }}>
       <div className="numbers-cf-track">
         {STAT_CARDS.map((c, i) => {
-          const localized = homeStatCard(locale, i, { value: c.value, label: c.label, description: c.desc });
           let o = i - active;
           if (o > n / 2) o -= n;
           if (o < -n / 2) o += n;
@@ -443,9 +438,9 @@ function NumbersCoverflow({ locale }: { locale: Parameters<typeof homeSectionTex
               <div className="numbers-cf-grad" />
               <span className="numbers-cf-dash" />
               <div className="numbers-cf-body">
-                <div className="numbers-cf-value">{localized.value}</div>
-                <div className="numbers-cf-label">{localized.label}</div>
-                <p className="numbers-cf-desc">{localized.description}</p>
+                <div className="numbers-cf-value">{c.value}</div>
+                <div className="numbers-cf-label">{c.label}</div>
+                <p className="numbers-cf-desc">{c.desc}</p>
               </div>
             </article>
           );
@@ -532,61 +527,26 @@ const Prototype = () => {
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const [openSub, setOpenSub] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const openQuote = useQuoteStore((s) => s.openQuote);
-  const { locale, t } = useLocale();
-  const ht = (text: string) => homeSectionText(locale, text);
-  const copy = homeCopy(locale, {
-    hero: { ...HOME_HERO, scroll: HOME_HERO.scrollLabel },
-    reveal: HOME_REVEAL,
-    why: { eyebrow: "Why WONLY", title: "A Partner Built For Scale, Trusted At The Top", subtitle: "Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door." },
-    partnership: { eyebrow: "Partner With WONLY", title: "Open The Door To Partnership" },
-    contact: { eyebrow: "Get Solutions & Quote", line1: "Ready To Open", line2: "Your Market?", subtitle: "Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing." },
-  });
   const [form, setForm] = useState({ name: "", company: "", country: "", email: "", interest: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const setField = (name: keyof typeof form, value: string) => {
     setForm((f) => ({ ...f, [name]: value }));
     setErrors((er) => { if (!er[name]) return er; const n = { ...er }; delete n[name]; return n; });
   };
-  const onContactSubmit = async (ev: React.FormEvent) => {
+  const onContactSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
     const e: Record<string, string> = {};
-    if (!form.name.trim()) e.name = t("Please enter your name.");
-    if (!form.company.trim()) e.company = t("Please enter your company name.");
-    if (!form.country.trim()) e.country = t("Please enter your country or region.");
-    if (!form.email.trim()) e.email = t("Please enter your email.");
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t("Please enter a valid email address.");
-    if (!form.interest) e.interest = t("Please select an option.");
+    if (!form.name.trim()) e.name = "Please enter your name.";
+    if (!form.company.trim()) e.company = "Please enter your company name.";
+    if (!form.country.trim()) e.country = "Please enter your country or region.";
+    if (!form.email.trim()) e.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
+    if (!form.interest) e.interest = "Please select an option.";
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
-    if (Object.keys(e).length > 0) return;
-    setSending(true);
-    try {
-      const data = await submitEnquiry({
-        subject: "New WONLY Homepage Enquiry",
-        recipient: "inquiry@wonlyglobal.com",
-        name: form.name,
-        company: form.company,
-        country: form.country,
-        email: form.email,
-        business_type: form.interest,
-        message: form.message,
-        language: locale,
-        source: "homepage_contact_form",
-      });
-      if (data.success) {
-        setSent(true);
-        trackLead({ form_location: "homepage_contact", business_type: form.interest });
-      } else {
-        setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
-      }
-    } catch {
-      setErrors({ submit: "Network error. Please email inquiry@wonlyglobal.com directly." });
-    } finally {
-      setSending(false);
-    }
+    if (Object.keys(e).length === 0) setSent(true);
   };
 
   useSeo({
@@ -629,6 +589,9 @@ const Prototype = () => {
     const v = doorVideo.current;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hasHashTarget = Boolean(window.location.hash);
+    const cmsParams = new URLSearchParams(window.location.search);
+    const cmsCanvas = cmsParams.get("cms_canvas") === "1";
+    const cmsStage = cmsParams.get("cms_stage") === "main" ? "main" : "intro";
     const previousScrollRestoration = window.history.scrollRestoration;
     let done = false;
     let scrollLocked = false;
@@ -644,12 +607,13 @@ const Prototype = () => {
       bodyOverscrollBehavior: document.body.style.overscrollBehavior,
     };
 
-    // Normal homepage refreshes restart at the door hero instead of restoring the previous section.
-    // Hash URLs keep their intentional deep-link destination.
+    // A normal homepage refresh must always restart at the closed-door hero. Browsers
+    // restore the previous scroll position after React has mounted, which otherwise
+    // locks the intro at the second screen. Hash URLs keep their intended section jump.
     const pinIntroToTop = () => {
       if (!hasHashTarget && window.scrollY !== 0) window.scrollTo(0, 0);
     };
-    if (!hasHashTarget) {
+    if (!hasHashTarget && !cmsCanvas) {
       window.history.scrollRestoration = "manual";
       root.style.scrollBehavior = "auto";
       pinIntroToTop();
@@ -695,6 +659,31 @@ const Prototype = () => {
     };
 
     if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; reveal.current.style.transition = "opacity 1s ease"; }
+
+    // The CMS needs deterministic hero states. The public homepage still runs the
+    // normal autoplay sequence, while the editor can keep either the closed-door
+    // copy or the opened-door copy visible long enough to edit it in place.
+    if (cmsCanvas) {
+      unlockScroll();
+      if (cmsStage === "main") {
+        if (title.current) title.current.style.opacity = "0";
+        if (scrim.current) scrim.current.style.opacity = "0";
+        reveal_();
+      } else {
+        try { if (v) { v.pause(); v.currentTime = 0; } } catch { /* poster is sufficient */ }
+        if (title.current) { title.current.style.opacity = "1"; title.current.style.transform = "translateZ(0)"; }
+        if (scrim.current) scrim.current.style.opacity = "1";
+        if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; }
+      }
+      return () => {
+        unlockScroll();
+        window.history.scrollRestoration = previousScrollRestoration;
+        window.removeEventListener("pageshow", pinIntroToTop);
+        window.removeEventListener("scroll", pinIntroToTop);
+        window.cancelAnimationFrame(topPinFrame);
+        window.clearTimeout(topPinTimer);
+      };
+    }
 
     if (reduced || hasHashTarget) {
       if (v) {
@@ -744,7 +733,18 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
+    return () => {
+      unlockScroll();
+      window.history.scrollRestoration = previousScrollRestoration;
+      window.removeEventListener("pageshow", pinIntroToTop);
+      window.removeEventListener("scroll", pinIntroToTop);
+      window.cancelAnimationFrame(topPinFrame);
+      window.clearTimeout(topPinTimer);
+      window.clearTimeout(playTimer);
+      window.clearTimeout(watchdog);
+      v?.removeEventListener("ended", onEnded);
+      v?.removeEventListener("error", onErr);
+    };
   }, []);
 
   return (
@@ -760,9 +760,9 @@ const Prototype = () => {
             {NAV.map((n) => (
               <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
                 {n.href ? (
-                  <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</Link>
+                  <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</Link>
                 ) : (
-                  <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
+                  <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{n.label}{n.children && <ChevronDown size={13} />}</span>
                 )}
                 {n.children && openDrop === n.label && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
@@ -770,7 +770,7 @@ const Prototype = () => {
                       <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
                         <Link to={c.href || "#"} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                           {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                          <span className="leading-tight whitespace-nowrap flex-1">{t(c.label)}</span>
+                          <span className="leading-tight whitespace-nowrap flex-1">{c.label}</span>
                           {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
                         </Link>
                         {c.children && openSub === c.label && (
@@ -778,7 +778,7 @@ const Prototype = () => {
                             {c.children.map((sc) => (
                               <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                                 {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                                <span className="leading-tight whitespace-nowrap">{t(sc.label)}</span>
+                                <span className="leading-tight whitespace-nowrap">{sc.label}</span>
                               </Link>
                             ))}
                           </div>
@@ -791,7 +791,7 @@ const Prototype = () => {
             ))}
           </nav>
           <button onClick={() => scrollToId("contact")} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
-            {t("Get Solutions & Quote")}
+            Get Solutions &amp; Quote
           </button>
         </div>
       </header>
@@ -806,14 +806,14 @@ const Prototype = () => {
         <div ref={title} className="absolute inset-0 z-20 pointer-events-none" style={{ willChange: "opacity, transform", transform: "translateZ(0)" }}>
           {/* Eyebrow + headline + sub + scroll cue — dead-centered in the viewport */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-            <div className="text-[12px] sm:text-[13px] tracking-[0.4em] uppercase font-semibold mb-8" style={{ color: CHAMP, textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>{copy.hero.eyebrow}</div>
+            <div className="text-[12px] sm:text-[13px] tracking-[0.4em] uppercase font-semibold mb-8" style={{ color: CHAMP, textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>{HOME_HERO.eyebrow}</div>
             <h1 className="font-light uppercase text-white leading-[1.08] tracking-[0.08em] text-[38px] sm:text-[60px] md:text-[82px] lg:text-[92px]" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>
-              {copy.hero.line1}<br />{copy.hero.line2}<br /><span style={{ color: CHAMP }}>{copy.hero.line3}</span>
+              {HOME_HERO.line1}<br />{HOME_HERO.line2}<br /><span style={{ color: CHAMP }}>{HOME_HERO.line3}</span>
             </h1>
-            <p className="mt-8 max-w-lg text-sm md:text-base font-normal leading-relaxed" style={{ color: "#efe9dd", textShadow: "0 1px 14px rgba(0,0,0,0.5)" }}>{copy.hero.subtitle}</p>
+            <p className="mt-8 max-w-lg text-sm md:text-base font-normal leading-relaxed" style={{ color: "#efe9dd", textShadow: "0 1px 14px rgba(0,0,0,0.5)" }}>{HOME_HERO.subtitle}</p>
             {/* Scroll cue — directly below the sub copy */}
             <div className="mt-12 flex flex-col items-center gap-3">
-              <span className="text-[11px] tracking-[0.5em] uppercase font-light" style={{ color: CHAMP_BG, textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>{copy.hero.scroll}</span>
+              <span className="text-[11px] tracking-[0.5em] uppercase font-light" style={{ color: CHAMP_BG, textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}>{HOME_HERO.scrollLabel}</span>
               <span className="block w-px h-12 animate-pulse" style={{ background: `linear-gradient(${GOLD}, transparent)` }} />
             </div>
           </div>
@@ -824,7 +824,7 @@ const Prototype = () => {
           {/* subtle dark gradient so the white heading stays readable without a hard overlay */}
           <div className="absolute inset-x-0 top-0 h-[68%] pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.28) 45%, rgba(13,13,13,0) 100%)" }} />
           <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
-            <h2 className="font-semibold uppercase leading-[1.12] tracking-[0.08em] text-[36px] md:text-[64px] text-white" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.55)" }}>{copy.reveal.line1}<br />{copy.reveal.line2}</h2>
+            <h2 className="font-semibold uppercase leading-[1.12] tracking-[0.08em] text-[36px] md:text-[64px] text-white" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.55)" }}>{HOME_REVEAL.line1}<br />{HOME_REVEAL.line2}</h2>
             <div className="mt-12 md:mt-14 rounded-3xl px-6 py-9 md:px-12 md:py-11" style={{ background: "rgba(20,18,19,0.6)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 gap-x-8">
                 {STATS.map((s) => (
@@ -833,16 +833,16 @@ const Prototype = () => {
                       <span className="text-[30px] md:text-[44px]">{s.text ? s.text : <CountUp to={s.to!} run={contentIn} comma={s.comma} suffix={s.suffix} />}</span>
                       {s.per && <span className="text-base md:text-lg ml-1 font-light">{s.per}</span>}
                     </div>
-                    <div className="mt-3 text-[11px] md:text-xs tracking-[0.22em] uppercase font-medium leading-snug" style={{ color: "rgba(245,241,234,0.9)" }}>{ht(s.label)}</div>
+                    <div className="mt-3 text-[11px] md:text-xs tracking-[0.22em] uppercase font-medium leading-snug" style={{ color: "rgba(245,241,234,0.9)" }}>{s.label}</div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light animate-pulse" style={{ color: "rgba(245,241,234,0.9)", textShadow: "0 1px 10px rgba(0,0,0,0.65)" }}>{ht("Scroll")} ↓</div>
+            <div className="mt-10 text-[11px] tracking-[0.4em] uppercase font-light animate-pulse" style={{ color: "rgba(245,241,234,0.9)", textShadow: "0 1px 10px rgba(0,0,0,0.65)" }}>Scroll ↓</div>
           </div>
         </div>
 
-        <button type="button" onClick={() => skipRef.current()} className="absolute bottom-6 right-6 z-40 text-[11px] tracking-[0.3em] uppercase font-light text-white/60 hover:text-white transition-colors mix-blend-difference">{ht("Skip")} ↓</button>
+        <button type="button" onClick={() => skipRef.current()} className="absolute bottom-6 right-6 z-40 text-[11px] tracking-[0.3em] uppercase font-light text-white/60 hover:text-white transition-colors mix-blend-difference">Skip ↓</button>
       </section>
 
       {/* ══ 3 · Why WONLY — headline → numbers coverflow → manufacturing strength ══ */}
@@ -850,20 +850,20 @@ const Prototype = () => {
         <div className={CONTAINER}>
           {/* Title area — centered, leads the section */}
           <Reveal className="max-w-3xl mx-auto text-center">
-            <div className={eyebrow}>{copy.why.eyebrow}</div>
-            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{copy.why.title}</h2>
-            <p className={SUBTITLE + " mx-auto"} style={{ color: SUB_COLOR }}>{copy.why.subtitle}</p>
+            <div className={eyebrow}>Why WONLY</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>A Partner Built For Scale, Trusted At The Top</h2>
+            <p className={SUBTITLE + " mx-auto"} style={{ color: SUB_COLOR }}>Three decades of manufacturing strength, public-market accountability and nationwide leadership — the numbers behind every WONLY door.</p>
           </Reveal>
 
           {/* The numbers — 3D coverflow, centered with symmetric side whitespace */}
           <div className="mt-14 md:mt-20 mx-auto max-w-5xl">
-            <NumbersCoverflow locale={locale} />
+            <NumbersCoverflow />
           </div>
 
           {/* Manufacturing strength — a distinct sub-section of cards */}
           <div className="mt-20 md:mt-28">
             <Reveal className="text-center">
-              <div className={eyebrow}>{ht("Manufacturing Strength")}</div>
+              <div className={eyebrow}>Manufacturing Strength</div>
             </Reveal>
             <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
               {WHY_FEATURES.map((f, i) => (
@@ -874,8 +874,8 @@ const Prototype = () => {
                       <img src={f.img} alt={f.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
                     </div>
                     <div className="flex-1 p-6 md:p-7">
-                      <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{homeFeature(locale, i, { title: f.t, description: f.d }).title}</div>
-                      <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{homeFeature(locale, i, { title: f.t, description: f.d }).description}</p>
+                      <div className="text-lg md:text-xl font-semibold" style={{ color: DARK }}>{f.t}</div>
+                      <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -890,11 +890,11 @@ const Prototype = () => {
         <img src={IMG.factoryLine} alt="WONLY 5G-connected smart factory production line" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.5), rgba(34,31,32,0.68))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
-          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>{ht("Manufacturing")}</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">{ht("Built In Our Own 5G-Connected Smart Factories")}</h2>
+          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Manufacturing</div>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Built In Our Own 5G-Connected Smart Factories</h2>
           <button onClick={() => setVideoOpen(true)} className="mt-9 inline-flex items-center gap-3 pl-3 pr-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
             <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: DARK }}><Play size={13} style={{ color: GOLD }} fill={GOLD} /></span>
-            {ht("Watch the Factory Tour")}
+            Watch the Factory Tour
           </button>
         </Reveal>
       </section>
@@ -905,22 +905,22 @@ const Prototype = () => {
         <Reveal className="shrink-0">
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-5">
             <div>
-              <div className={eyebrow}>{ht("Our Products")}</div>
-              <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("Built For Every Opening")}</h2>
+              <div className={eyebrow}>Our Products</div>
+              <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Built For Every Opening</h2>
             </div>
-            <Link to="/product/door" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>{ht("Explore Products")} <ArrowRight size={15} /></Link>
+            <Link to="/product/door" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>Explore Products <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
         <div className="product-gallery mt-10 md:mt-12 flex flex-col md:flex-row gap-1.5 md:h-[520px]">
-          {PRODUCTS_GALLERY.map((p, productIndex) => (
+          {PRODUCTS_GALLERY.map((p) => (
             <Link key={p.name} to={p.href} className="product-card group relative block overflow-hidden rounded-2xl min-w-0 h-[320px] md:h-full">
               <img src={p.img} alt={p.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(12,10,9,.88), rgba(12,10,9,.12) 34%, transparent 50%)" }} />
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
-                <h3 className="text-white text-lg md:text-xl font-semibold leading-tight">{ht(p.name)}</h3>
+                <h3 className="text-white text-lg md:text-xl font-semibold leading-tight">{p.name}</h3>
                 <div className="overflow-hidden transition-all duration-500 ease-out max-h-40 opacity-100 md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100">
-                  <p className="mt-2 text-[13px] leading-relaxed text-white/85 max-w-[16rem]">{homeProductDescription(locale, productIndex, p.d)}</p>
-                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium" style={{ color: CHAMP }}>{ht("Discover")} <ArrowRight size={15} /></span>
+                  <p className="mt-2 text-[13px] leading-relaxed text-white/85 max-w-[16rem]">{p.d}</p>
+                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium" style={{ color: CHAMP }}>Discover <ArrowRight size={15} /></span>
                 </div>
               </div>
             </Link>
@@ -934,8 +934,8 @@ const Prototype = () => {
         <img src={IMG.proj1} alt="WONLY doors installed in landmark projects" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(34,31,32,0.42), rgba(34,31,32,0.7))" }} />
         <Reveal className="relative z-10 text-center px-6 max-w-4xl">
-          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>{ht("Landmark Projects")}</div>
-          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">{ht("Chosen For The Projects That Cannot Fail")}</h2>
+          <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>Landmark Projects</div>
+          <h2 className="font-light text-white leading-[1.1] text-[30px] md:text-[54px]">Chosen For The Projects That Cannot Fail</h2>
         </Reveal>
       </section>
 
@@ -943,12 +943,12 @@ const Prototype = () => {
       <section id="certs" className={SECTION + " cv-auto"} style={{ background: BG_LIGHT }}>
         <div className={CONTAINER}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow}>{ht("Certified & Recognized")}</div>
-          <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("Held To Standards, Honored At The Top")}</h2>
+          <div className={eyebrow}>Certified &amp; Recognized</div>
+          <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>Held To Standards, Honored At The Top</h2>
         </Reveal>
 
         <Reveal className="mt-12">
-          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>{ht("Design Awards")}</div>
+          <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Design Awards</div>
           <div className="flex flex-wrap items-center gap-x-14 gap-y-8">
             {AWARD_LOGOS.map((a) => (
               <img key={a.f} src={`${BASE}images/awards/${a.f}`} alt={a.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-[1.06]" />
@@ -958,7 +958,7 @@ const Prototype = () => {
 
         <Reveal className="mt-10">
           <div className="pt-10 border-t" style={{ borderColor: `${SILVER}55` }}>
-            <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>{ht("Certifications")}</div>
+            <div className="text-[12px] tracking-[0.3em] uppercase font-semibold mb-6" style={{ color: GOLD_DEEP }}>Certifications</div>
             <div className="flex flex-wrap items-center gap-x-12 gap-y-8">
               {CERT_LOGOS.map((c) => (
                 <img key={c.f} src={`${BASE}images/certs/${c.f}`} alt={c.alt} loading="lazy" className="h-11 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-[1.06]" />
@@ -975,18 +975,18 @@ const Prototype = () => {
         <div className="absolute inset-0" style={{ background: "rgba(26,23,24,0.9)" }} />
         <div className={"relative z-10 " + CONTAINER}>
           <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: CHAMP }}>{copy.partnership.eyebrow}</div>
-            <h2 className={h2cls + " mt-[14px] text-white"}>{copy.partnership.title}</h2>
+            <div className={eyebrow} style={{ color: CHAMP }}>Partner With WONLY</div>
+            <h2 className={h2cls + " mt-[14px] text-white"}>Open The Door To Partnership</h2>
           </Reveal>
           <div className="mt-14 border-t" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
             {PARTNERSHIP.map((p, i) => (
               <Reveal key={p.t}>
                 <button onClick={() => openQuote({ biz: p.biz, subject: p.t })} className="group w-full text-left grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-center py-7 md:py-9 border-b transition-colors duration-300 hover:bg-white/[0.05] px-2 md:px-6 -mx-2 md:-mx-6" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
                   <div className="md:col-span-2 text-5xl md:text-7xl font-light leading-none" style={{ color: GOLD }}>{`0${i + 1}`}</div>
-                  <h3 className="md:col-span-3 text-xl md:text-2xl font-light text-white">{homePartnership(locale, i, { title: p.t, description: p.d, cta: p.cta }).title}</h3>
-                  <p className="md:col-span-4 text-sm font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.6)" }}>{homePartnership(locale, i, { title: p.t, description: p.d, cta: p.cta }).description}</p>
+                  <h3 className="md:col-span-3 text-xl md:text-2xl font-light text-white">{p.t}</h3>
+                  <p className="md:col-span-4 text-sm font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.6)" }}>{p.d}</p>
                   <div className="md:col-span-3 md:text-right">
-                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white transition-all group-hover:gap-4">{homePartnership(locale, i, { title: p.t, description: p.d, cta: p.cta }).cta} <ArrowUpRight size={16} style={{ color: GOLD }} /></span>
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white transition-all group-hover:gap-4">{p.cta} <ArrowUpRight size={16} style={{ color: GOLD }} /></span>
                   </div>
                 </button>
               </Reveal>
@@ -999,10 +999,10 @@ const Prototype = () => {
       <section className={SECTION} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
           <Reveal className="max-w-3xl">
-            <div className={eyebrow}>{ht("Our Journey")}</div>
-            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("A Thirty-Year Journey")}</h2>
+            <div className={eyebrow}>Our Journey</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>A Thirty-Year Journey</h2>
           </Reveal>
-          <Timeline items={TIMELINE.map((item, index) => ({ ...item, m: homeTimeline(locale, index, item.m) }))} />
+          <Timeline items={TIMELINE} />
         </div>
       </section>
 
@@ -1014,14 +1014,14 @@ const Prototype = () => {
             <WorldDots className="w-full h-auto" />
           </Reveal>
           <Reveal delay={120}>
-            <div className={eyebrow}>{ht("Global Footprint")}</div>
-            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("We Spread Around The World")}</h2>
-            <p className={SUBTITLE} style={{ color: SUB_COLOR }}>{ht("From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.")}</p>
+            <div className={eyebrow}>Global Footprint</div>
+            <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>We Spread Around The World</h2>
+            <p className={SUBTITLE} style={{ color: SUB_COLOR }}>From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.</p>
             <div className="mt-7 grid grid-cols-2 gap-4">
               {FOOTPRINT_STATS.map((s) => (
                 <div key={s.label} className="rounded-xl p-5" style={{ background: "#efeae0" }}>
                   <div className="text-3xl md:text-4xl font-light leading-none" style={{ color: GOLD }}><CountUp to={s.to} suffix={s.suffix || ""} /></div>
-                  <div className="mt-2 text-[11px] tracking-[0.16em] uppercase font-medium" style={{ color: DARK }}>{ht(s.label)}</div>
+                  <div className="mt-2 text-[11px] tracking-[0.16em] uppercase font-medium" style={{ color: DARK }}>{s.label}</div>
                 </div>
               ))}
             </div>
@@ -1034,13 +1034,13 @@ const Prototype = () => {
       <section id="partners" className={SECTION + " text-center cv-auto"} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>
         <Reveal>
-          <div className={eyebrow + " mb-[14px]"}>{ht("Trusted Across Industries")}</div>
-          <h2 className={h2cls + " max-w-4xl mx-auto"} style={{ color: DARK }}>{ht("Trusted By Tech & Real-Estate Leaders")}</h2>
+          <div className={eyebrow + " mb-[14px]"}>Trusted Across Industries</div>
+          <h2 className={h2cls + " max-w-4xl mx-auto"} style={{ color: DARK }}>Trusted By Tech &amp; Real-Estate Leaders</h2>
           {/* Paginated flat grid — 4×2, 8 per page; arrows slide whole pages */}
           <PartnersPager />
 
           {/* Trusted by China's leading developers */}
-          <div className="mt-12 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>{ht("Trusted by China's Leading Developers")}</div>
+          <div className="mt-12 text-[12px] tracking-[0.3em] uppercase font-semibold" style={{ color: GOLD_DEEP }}>Trusted by China&apos;s Leading Developers</div>
         </Reveal>
         </div>
         {/* full-bleed logo carousel — spans the whole section width */}
@@ -1069,10 +1069,10 @@ const Prototype = () => {
         <div className={CONTAINER}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-start">
           <Reveal>
-            <div className={eyebrow} style={{ color: CHAMP }}>{copy.contact.eyebrow}</div>
-            <h2 className={h2cls + " mt-[14px] text-white"}>{copy.contact.line1}<br />{copy.contact.line2}</h2>
+            <div className={eyebrow} style={{ color: CHAMP }}>Get Solutions &amp; Quote</div>
+            <h2 className={h2cls + " mt-[14px] text-white"}>Ready To Open<br />Your Market?</h2>
             <p className="mt-6 max-w-md text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>
-              {copy.contact.subtitle}
+              Tell us about your project or territory — our team replies within 24 hours with tailored specifications, compliance documentation and pricing.
             </p>
             <div className="mt-10 space-y-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.85)" }}>
               <a href="mailto:inquiry@wonlyglobal.com" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> inquiry@wonlyglobal.com</a>
@@ -1080,39 +1080,39 @@ const Prototype = () => {
             </div>
           </Reveal>
 
+          {/* TODO: wire submission to a real endpoint (inquiry@wonlyglobal.com or a form service) before launch */}
           <Reveal delay={120}>
             {sent ? (
               <div className="rounded-2xl border border-white/15 bg-white/5 p-10 md:p-14 text-center">
                 <div className="mx-auto w-12 h-12 rounded-full flex items-center justify-center" style={{ background: `${GOLD}22` }}><Check size={22} style={{ color: GOLD }} /></div>
-                <h3 className="mt-5 text-xl md:text-2xl font-light text-white">{ht("Thank you — your request has been received.")}</h3>
-                <p className="mt-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.7)" }}>{ht("Our team will reply within 24 hours with tailored specifications, compliance documentation and pricing.")}</p>
+                <h3 className="mt-5 text-xl md:text-2xl font-light text-white">Thank you — your request has been received.</h3>
+                <p className="mt-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.7)" }}>Our team will reply within 24 hours with tailored specifications, compliance documentation and pricing.</p>
               </div>
             ) : (
             <form noValidate onSubmit={onContactSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {([["name", "Full Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country / Region", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, inputType]) => (
+              {([["name", "Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, t]) => (
                 <label key={key} className="block">
-                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} <span style={{ color: "#e6928a" }}>*</span></span>
-                  <input type={inputType} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={t(ph)} />
+                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{l} <span style={{ color: "#e6928a" }}>*</span></span>
+                  <input type={t} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={ph} />
                   {errors[key] && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors[key]}</span>}
                 </label>
               ))}
               <label className="block sm:col-span-2">
-                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Interest")} <span style={{ color: "#e6928a" }}>*</span></span>
+                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Interest <span style={{ color: "#e6928a" }}>*</span></span>
                 <select value={form.interest} onChange={(ev) => setField("interest", ev.target.value)} aria-invalid={!!errors.interest} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors.interest ? "#c0564a" : "rgba(255,255,255,0.15)", color: form.interest ? "#fff" : "rgba(255,255,255,0.3)" }}>
-                  <option value="" disabled className="text-black">{t("Select an option…")}</option>
-                  <option value="Distributor" className="text-black">{t("Distributor")}</option>
-                  <option value="Project" className="text-black">{t("Project")}</option>
-                  <option value="OEM / ODM" className="text-black">{t("OEM / ODM")}</option>
+                  <option value="" disabled className="text-black">Select an option…</option>
+                  <option className="text-black">Distributor</option>
+                  <option className="text-black">Project</option>
+                  <option className="text-black">OEM / ODM</option>
                 </select>
                 {errors.interest && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.interest}</span>}
               </label>
               <label className="block sm:col-span-2">
-                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Message")} <span style={{ color: "#e6928a" }}>*</span></span>
-                <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={t("Tell us about your project or territory...")} />
+                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>Message <span style={{ color: "#e6928a" }}>*</span></span>
+                <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder="Tell us about your project or territory..." />
                 {errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.message}</span>}
               </label>
-              {errors.submit && <div className="sm:col-span-2 text-center text-[12px]" style={{ color: "#e79b93" }}>{errors.submit}</div>}
-              <button type="submit" disabled={sending} className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100" style={{ background: GOLD, color: DARK }}>{sending ? t("Sending…") : t("Get Solutions & Quote")}</button>
+              <button type="submit" className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02]" style={{ background: GOLD, color: DARK }}>Get Solutions &amp; Quote</button>
             </form>
             )}
           </Reveal>
