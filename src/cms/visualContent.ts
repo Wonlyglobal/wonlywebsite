@@ -1,5 +1,13 @@
 export type VisualItem = { type: "text" | "image"; value: string; alt?: string; target?: "src" | "background" | "poster" };
-export type VisualContent = { visual?: Record<string, VisualItem> };
+export type CmsSeo = { title?: string; description?: string; canonical?: string; ogImage?: string; robots?: string };
+export type CmsLayout = { order?: string[]; hidden?: string[] };
+export type TranslationStatus = "pending" | "ai_draft" | "confirmed";
+export type VisualContent = {
+  visual?: Record<string, VisualItem>;
+  seo?: CmsSeo;
+  layout?: CmsLayout;
+  translationStatus?: TranslationStatus;
+};
 
 export function visualElementKey(element: Element) {
   const parts: string[] = [];
@@ -27,6 +35,46 @@ export function editableImageElements(root: Document) {
     return background !== "none" && background.includes("url(");
   });
   return Array.from(new Set([...direct, ...backgrounds]));
+}
+
+export function editableSections(root: Document) {
+  const container = root.querySelector("main") ?? root.body;
+  const direct = Array.from(container.children).filter((element): element is HTMLElement =>
+    element instanceof HTMLElement && ["SECTION", "ARTICLE", "HEADER", "FOOTER"].includes(element.tagName),
+  );
+  return direct.length ? direct : Array.from(container.querySelectorAll<HTMLElement>(":scope > div"));
+}
+
+export function applyLayoutContent(root: Document, layout?: CmsLayout) {
+  const sections = editableSections(root);
+  sections.forEach(section => { section.dataset.cmsSectionKey ||= visualElementKey(section); });
+  const byKey = new Map(sections.map(section => [section.dataset.cmsSectionKey!, section]));
+  const hidden = new Set(layout?.hidden ?? []);
+  sections.forEach(section => { section.hidden = hidden.has(section.dataset.cmsSectionKey!); });
+  const desired = (layout?.order ?? []).map(key => byKey.get(key)).filter((section): section is HTMLElement => Boolean(section));
+  const current = sections.filter(section => desired.includes(section));
+  if (desired.length && desired.some((section, index) => current[index] !== section)) desired.forEach(section => section.parentElement?.appendChild(section));
+}
+
+export function applySeoContent(seo?: CmsSeo) {
+  if (!seo) return;
+  if (seo.title) document.title = seo.title;
+  const setMeta = (selector: string, attribute: "name" | "property", key: string, value?: string) => {
+    if (!value) return;
+    let element = document.head.querySelector<HTMLMetaElement>(selector);
+    if (!element) { element = document.createElement("meta"); element.setAttribute(attribute, key); document.head.appendChild(element); }
+    element.content = value;
+  };
+  setMeta('meta[name="description"]', "name", "description", seo.description);
+  setMeta('meta[name="robots"]', "name", "robots", seo.robots);
+  setMeta('meta[property="og:title"]', "property", "og:title", seo.title);
+  setMeta('meta[property="og:description"]', "property", "og:description", seo.description);
+  setMeta('meta[property="og:image"]', "property", "og:image", seo.ogImage);
+  if (seo.canonical) {
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = seo.canonical;
+  }
 }
 
 export function applyVisualContent(root: Document, values: Record<string, VisualItem>) {
