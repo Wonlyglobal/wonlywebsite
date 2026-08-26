@@ -10,6 +10,7 @@ import CmsModuleDashboard from "./CmsModuleDashboard";
 type PageRow = { id: string; page_key: string; draft_content: VisualContent; published_content: (VisualContent & { translations?: Record<string, VisualContent> }) | null; translations: Record<string, VisualContent>; status: "draft" | "published" };
 const LANGUAGES = [["en", "English"], ["ar", "العربية"], ["fr", "Français"], ["ru", "Русский"], ["es", "Español"]] as const;
 const EMPTY_SEO: CmsSeo = { title: "", description: "", canonical: "", ogImage: "", robots: "index, follow" };
+const imageCaptureHandlers = new WeakMap<Document, EventListener>();
 
 function seoFromDocument(doc?: Document | null): CmsSeo {
   if (!doc) return EMPTY_SEO;
@@ -125,10 +126,32 @@ export default function VisualDashboard({ session }: { session: Session }) {
       element.onclick = event => { event.preventDefault(); event.stopPropagation(); const section = element.closest<HTMLElement>("[data-cms-section-key]"); if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey); element.focus(); setNotice("正在原位编辑文字；所属板块已选中"); };
       element.onblur = () => setContent(current => ({ ...current, visual: { ...(current.visual ?? {}), [key]: { type: "text", value: element.textContent?.trim() ?? "" } } }));
     });
-    editableImageElements(doc).forEach(element => {
+    const imageElements = editableImageElements(doc);
+    const imageElementSet = new Set<HTMLElement>(imageElements);
+    const selectImage = (element: HTMLElement) => {
+      const key = visualElementKey(element);
+      const target = isImageElement(element) ? "src" : isVideoElement(element) ? "poster" : "background";
+      const section = element.closest<HTMLElement>("[data-cms-section-key]");
+      if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey);
+      imageTarget.current = { element, key, target };
+      doc.querySelectorAll(".cms-image-selected").forEach(item => item.classList.remove("cms-image-selected"));
+      doc.querySelector(".cms-image-action")?.remove();
+      element.classList.add("cms-image-selected");
+      const action = doc.createElement("button");
+      action.type = "button";
+      action.className = "cms-image-action";
+      action.textContent = "替换图片";
+      const rect = element.getBoundingClientRect();
+      action.style.top = `${Math.max(8, rect.top + (doc.defaultView?.scrollY ?? 0) + 8)}px`;
+      action.style.left = `${Math.max(8, rect.right + (doc.defaultView?.scrollX ?? 0) - 104)}px`;
+      action.onclick = buttonEvent => { buttonEvent.preventDefault(); buttonEvent.stopPropagation(); fileRef.current?.click(); };
+      doc.body.appendChild(action);
+      setSelectedImage({ key, value: imageSource(element), alt: isImageElement(element) ? element.alt : "", canEditAlt: isImageElement(element) });
+      setNotice("已选中图片；可直接点击图片上的“替换图片”");
+    };
+    imageElements.forEach(element => {
       const key = visualElementKey(element);
       element.classList.add("cms-editable");
-      const target = isImageElement(element) ? "src" : isVideoElement(element) ? "poster" : "background";
       if (values[key]?.type === "image") {
         if (isImageElement(element)) { element.src = values[key].value; element.alt = values[key].alt ?? element.alt; }
         else if (isVideoElement(element)) element.poster = values[key].value;
@@ -137,25 +160,24 @@ export default function VisualDashboard({ session }: { session: Session }) {
       element.onclick = event => {
         event.preventDefault();
         event.stopPropagation();
-        const section = element.closest<HTMLElement>("[data-cms-section-key]");
-        if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey);
-        imageTarget.current = { element, key, target };
-        doc.querySelectorAll(".cms-image-selected").forEach(item => item.classList.remove("cms-image-selected"));
-        doc.querySelector(".cms-image-action")?.remove();
-        element.classList.add("cms-image-selected");
-        const action = doc.createElement("button");
-        action.type = "button";
-        action.className = "cms-image-action";
-        action.textContent = "替换图片";
-        const rect = element.getBoundingClientRect();
-        action.style.top = `${Math.max(8, rect.top + (doc.defaultView?.scrollY ?? 0) + 8)}px`;
-        action.style.left = `${Math.max(8, rect.right + (doc.defaultView?.scrollX ?? 0) - 104)}px`;
-        action.onclick = buttonEvent => { buttonEvent.preventDefault(); buttonEvent.stopPropagation(); fileRef.current?.click(); };
-        doc.body.appendChild(action);
-        setSelectedImage({ key, value: imageSource(element), alt: isImageElement(element) ? element.alt : "", canEditAlt: isImageElement(element) });
-        setNotice("已选中图片；可直接点击图片上的“替换图片”");
+        selectImage(element);
       };
     });
+    const previousImageCapture = imageCaptureHandlers.get(doc);
+    if (previousImageCapture) doc.removeEventListener("click", previousImageCapture, true);
+    const imageCapture: EventListener = rawEvent => {
+      const event = rawEvent as MouseEvent;
+      const clicked = event.target instanceof Element ? event.target : null;
+      if (clicked?.closest(".cms-image-action,[contenteditable='true']")) return;
+      const target = doc.elementsFromPoint(event.clientX, event.clientY)
+        .find(candidate => candidate instanceof HTMLElement && imageElementSet.has(candidate));
+      if (!(target instanceof HTMLElement)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      selectImage(target);
+    };
+    imageCaptureHandlers.set(doc, imageCapture);
+    doc.addEventListener("click", imageCapture, true);
     setNotice("完整页面已进入编辑模式；悬停会显示蓝色编辑框");
   }, [content.layout, content.visual, language, page.key]);
 
