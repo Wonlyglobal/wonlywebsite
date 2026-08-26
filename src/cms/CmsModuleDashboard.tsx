@@ -3,6 +3,7 @@ import type {Session} from "@supabase/supabase-js";
 import CmsSidebar,{type CmsWorkspace} from "./CmsSidebar";
 import {CMS_PAGES,type CmsPageDefinition} from "./pageDefinitions";
 import {cmsSupabase} from "./supabase";
+import ArticleManager from "./ArticleManager";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;updated_at:string;published_at:string|null};
 type Asset={id:string;public_url:string;original_name:string;mime_type:string;byte_size:number;created_at:string};
@@ -22,7 +23,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
  const renderPages=(kind:"posts"|"products")=>{const list=kind==="posts"?CMS_PAGES.filter(p=>p.type==="content"):CMS_PAGES.filter(p=>p.type==="product"||p.type==="landing");return <div className="cms-module-grid">{list.map(page=>{const row=pages.find(p=>p.page_key===page.key);return <article className="cms-card cms-module-card" key={page.key}><div><span className={`cms-state ${row?.status==="published"?"published":"draft"}`}>{row?.status==="published"?"已发布":"待编辑"}</span><h3>{page.title}</h3><p>{page.route}</p></div><button className="cms-button secondary" onClick={()=>edit(page.key)}>整页编辑</button></article>})}</div>};
  const render=()=>{
   if(module==="media")return <div className="cms-media-grid">{assets.length?assets.map(asset=><article className="cms-card cms-media-card" key={asset.id}><img src={asset.public_url} alt={asset.original_name}/><strong>{asset.original_name}</strong><span>{asset.mime_type} · {size(asset.byte_size)}</span><button className="cms-button secondary" onClick={()=>void navigator.clipboard.writeText(asset.public_url)}>复制链接</button></article>):<div className="cms-module-empty">暂无已上传素材。请在页面编辑中选中图片后上传，素材会自动进入这里。</div>}</div>;
-  if(module==="posts")return <><div className="cms-module-callout"><strong>文章管理已独立</strong><span>文章中心页面可整页编辑；新文章将沿用草稿、预览、SEO与发布流程。</span></div>{renderPages("posts")}</>;
+  if(module==="posts")return <ArticleManager session={session}/>;
   if(module==="products")return renderPages("products");
   if(module==="seo")return <div className="cms-table-wrap"><table className="cms-table"><thead><tr><th>页面</th><th>SEO标题</th><th>描述</th><th>状态</th><th/></tr></thead><tbody>{CMS_PAGES.map(page=>{const row=pages.find(p=>p.page_key===page.key),seo=row?seoOf(row):{};return <tr key={page.key}><td><strong>{page.title}</strong><small>{page.route}</small></td><td>{seo.title||"使用官网现有设置"}</td><td className="cms-table-description">{seo.description||"使用官网现有设置"}</td><td>{row?.status==="published"?"已发布":"待保存"}</td><td><button onClick={()=>edit(page.key)}>编辑</button></td></tr>})}</tbody></table></div>;
   if(module==="languages")return <div className="cms-table-wrap"><table className="cms-table"><thead><tr><th>页面</th><th>EN</th><th>AR</th><th>FR</th><th>RU</th><th>ES</th><th/></tr></thead><tbody>{CMS_PAGES.map(page=>{const row=pages.find(p=>p.page_key===page.key),langs=row?.translations??{};return <tr key={page.key}><td>{page.title}</td><td>原文</td>{["ar","fr","ru","es"].map(lang=><td key={lang}>{langs[lang]?"已填写":"待确认"}</td>)}<td><button onClick={()=>edit(page.key)}>编辑</button></td></tr>})}</tbody></table></div>;
