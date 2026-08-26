@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { CMS_PAGES } from "./pageDefinitions";
 import { cmsSupabase } from "./supabase";
-import { applyVisualContent, type VisualContent } from "./visualContent";
+import { applyLayoutContent, applySeoContent, applyVisualContent, type VisualContent } from "./visualContent";
 
 export default function PublishedVisualContent() {
   const location = useLocation();
@@ -17,12 +17,14 @@ export default function PublishedVisualContent() {
       if (cancelled || error || !data) return;
       const content = data.published_content as (VisualContent & { translations?: Record<string, VisualContent> }) | null;
       const locale = document.documentElement.lang?.split("-")[0] || "en";
-      const values = locale === "en" ? (content?.visual ?? {}) : (content?.translations?.[locale]?.visual ?? {});
-      if (!Object.keys(values).length) return;
+      const localized = locale === "en" ? content : (content?.translations?.[locale] ?? content);
+      const values = localized?.visual ?? {};
       const apply = () => {
         if (applying) return;
         applying = true;
+        applyLayoutContent(document, localized?.layout);
         applyVisualContent(document, values);
+        applySeoContent(localized?.seo);
         queueMicrotask(() => { applying = false; });
       };
       apply();
