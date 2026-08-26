@@ -2,18 +2,35 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { CMS_PAGES } from "./pageDefinitions";
 import { cmsSupabase } from "./supabase";
-import { editableImageElements, editableTextElements, visualElementKey, type VisualContent, type VisualItem } from "./visualContent";
+import { applyLayoutContent, editableImageElements, editableSections, editableTextElements, visualElementKey, type CmsSeo, type VisualContent, type VisualItem } from "./visualContent";
 
-type PageRow = { id: string; page_key: string; draft_content: VisualContent; translations: Record<string, VisualContent>; status: "draft" | "published" };
+type PageRow = { id: string; page_key: string; draft_content: VisualContent; published_content: (VisualContent & { translations?: Record<string, VisualContent> }) | null; translations: Record<string, VisualContent>; status: "draft" | "published" };
 const LANGUAGES = [["en", "English"], ["ar", "العربية"], ["fr", "Français"], ["ru", "Русский"], ["es", "Español"]] as const;
+const EMPTY_SEO: CmsSeo = { title: "", description: "", canonical: "", ogImage: "", robots: "index, follow" };
+
+function changesBetween(current: VisualContent, published?: VisualContent | null) {
+  const before = published ?? {};
+  const currentVisual = current.visual ?? {};
+  const beforeVisual = before.visual ?? {};
+  const visual = new Set([...Object.keys(currentVisual), ...Object.keys(beforeVisual)]);
+  let text = 0;
+  let images = 0;
+  visual.forEach(key => {
+    if (JSON.stringify(currentVisual[key]) === JSON.stringify(beforeVisual[key])) return;
+    if (currentVisual[key]?.type === "image" || beforeVisual[key]?.type === "image") images += 1;
+    else text += 1;
+  });
+  return { text, images, seo: JSON.stringify(current.seo ?? {}) !== JSON.stringify(before.seo ?? {}), layout: JSON.stringify(current.layout ?? {}) !== JSON.stringify(before.layout ?? {}) };
+}
 
 export default function VisualDashboard({ session }: { session: Session }) {
   const [page, setPage] = useState(CMS_PAGES[0]);
   const [language, setLanguage] = useState("en");
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
-  const [values, setValues] = useState<Record<string, VisualItem>>({});
+  const [content, setContent] = useState<VisualContent>({ visual: {}, seo: EMPTY_SEO, layout: {} });
   const [row, setRow] = useState<PageRow | null>(null);
-  const [notice, setNotice] = useState("点击页面中的文字或图片即可编辑");
+  const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  const [notice, setNotice] = useState("点击页面中的文字、图片或板块即可编辑");
   const [busy, setBusy] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(true);
   const frameRef = useRef<HTMLIFrameElement>(null);
@@ -22,11 +39,13 @@ export default function VisualDashboard({ session }: { session: Session }) {
 
   const load = useCallback(async () => {
     if (!cmsSupabase) return;
-    const { data, error } = await cmsSupabase.from("cms_pages").select("id,page_key,draft_content,translations,status").eq("page_key", page.key).maybeSingle();
+    const { data, error } = await cmsSupabase.from("cms_pages").select("id,page_key,draft_content,published_content,translations,status").eq("page_key", page.key).maybeSingle();
     if (error) return setNotice(error.message);
     const next = data as PageRow | null;
+    const localized = language === "en" ? next?.draft_content : next?.translations?.[language];
     setRow(next);
-    setValues(language === "en" ? (next?.draft_content?.visual ?? {}) : (next?.translations?.[language]?.visual ?? {}));
+    setContent({ visual: {}, seo: EMPTY_SEO, layout: {}, ...(localized ?? {}) });
+    setSelectedSection(null);
   }, [language, page.key]);
   useEffect(() => { void load(); }, [load]);
 
@@ -36,28 +55,44 @@ export default function VisualDashboard({ session }: { session: Session }) {
     doc.querySelector("style[data-cms-editor]")?.remove();
     const style = doc.createElement("style");
     style.dataset.cmsEditor = "true";
-    style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}img.cms-editable{cursor:pointer!important}`;
+    style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{position:relative;outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected{outline:3px solid #2864ff!important;outline-offset:-3px}img.cms-editable{cursor:pointer!important}`;
     doc.head.appendChild(style);
-    const textNodes = editableTextElements(doc);
-    textNodes.forEach(element => {
+    applyLayoutContent(doc, content.layout);
+    const values = content.visual ?? {};
+    editableSections(doc).forEach(section => {
+      const key = section.dataset.cmsSectionKey ?? visualElementKey(section);
+      section.dataset.cmsSectionKey ||= key;
+      section.classList.add("cms-section-editable");
+      section.onclick = event => {
+        event.stopPropagation();
+        doc.querySelectorAll(".cms-section-selected").forEach(item => item.classList.remove("cms-section-selected"));
+        section.classList.add("cms-section-selected");
+        setSelectedSection(key);
+        setNotice("已选中板块，可在右侧调整顺序或隐藏");
+      };
+    });
+    editableTextElements(doc).forEach(element => {
       const key = visualElementKey(element);
       element.classList.add("cms-editable");
       element.contentEditable = "true";
       element.spellcheck = true;
       if (values[key]?.type === "text") element.textContent = values[key].value;
-      element.onclick = event => { event.preventDefault(); event.stopPropagation(); element.focus(); setNotice("正在原位编辑文字"); };
-      element.onblur = () => setValues(current => ({ ...current, [key]: { type: "text", value: element.textContent?.trim() ?? "" } }));
+      element.onclick = event => { event.preventDefault(); event.stopPropagation(); const section = element.closest<HTMLElement>("[data-cms-section-key]"); if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey); element.focus(); setNotice("正在原位编辑文字；所属板块已选中"); };
+      element.onblur = () => setContent(current => ({ ...current, visual: { ...(current.visual ?? {}), [key]: { type: "text", value: element.textContent?.trim() ?? "" } } }));
     });
-    const imageElements = editableImageElements(doc);
-    imageElements.forEach(element => {
+    editableImageElements(doc).forEach(element => {
       const key = visualElementKey(element);
       element.classList.add("cms-editable");
       const target = element instanceof HTMLImageElement ? "src" : element instanceof HTMLVideoElement ? "poster" : "background";
-      if (values[key]?.type === "image") { if (element instanceof HTMLImageElement) { element.src = values[key].value; element.alt = values[key].alt ?? element.alt; } else if (element instanceof HTMLVideoElement) element.poster = values[key].value; else element.style.backgroundImage = `url("${values[key].value}")`; }
-      element.onclick = event => { event.preventDefault(); event.stopPropagation(); imageTarget.current = { element, key, target }; fileRef.current?.click(); };
+      if (values[key]?.type === "image") {
+        if (element instanceof HTMLImageElement) { element.src = values[key].value; element.alt = values[key].alt ?? element.alt; }
+        else if (element instanceof HTMLVideoElement) element.poster = values[key].value;
+        else element.style.backgroundImage = `url("${values[key].value}")`;
+      }
+      element.onclick = event => { event.preventDefault(); event.stopPropagation(); const section = element.closest<HTMLElement>("[data-cms-section-key]"); if (section?.dataset.cmsSectionKey) setSelectedSection(section.dataset.cmsSectionKey); imageTarget.current = { element, key, target }; fileRef.current?.click(); };
     });
     setNotice("完整页面已进入编辑模式；悬停会显示蓝色编辑框");
-  }, [values]);
+  }, [content.layout, content.visual]);
 
   const replaceImage = async (file: File) => {
     if (!cmsSupabase || !imageTarget.current) return;
@@ -71,32 +106,68 @@ export default function VisualDashboard({ session }: { session: Session }) {
     if (target.element instanceof HTMLImageElement) target.element.src = data.publicUrl;
     else if (target.element instanceof HTMLVideoElement) target.element.poster = data.publicUrl;
     else target.element.style.backgroundImage = `url("${data.publicUrl}")`;
-    setValues(current => ({ ...current, [target.key]: { type: "image", value: data.publicUrl, alt: target.element instanceof HTMLImageElement ? target.element.alt : "", target: target.target } }));
+    const item: VisualItem = { type: "image", value: data.publicUrl, alt: target.element instanceof HTMLImageElement ? target.element.alt : "", target: target.target };
+    setContent(current => ({ ...current, visual: { ...(current.visual ?? {}), [target.key]: item } }));
     await cmsSupabase.from("cms_assets").insert({ storage_path: path, public_url: data.publicUrl, original_name: file.name, mime_type: file.type, byte_size: file.size, uploaded_by: session.user.id });
     setNotice("图片已替换，请保存草稿");
     setBusy(false);
   };
 
+  const updateSection = (action: "up" | "down" | "hide" | "show") => {
+    const doc = frameRef.current?.contentDocument;
+    if (!doc || !selectedSection) return setNotice("请先点击页面中的一个板块");
+    const sections = editableSections(doc);
+    const selected = sections.find(section => section.dataset.cmsSectionKey === selectedSection);
+    if (!selected) return setNotice("请重新选择板块");
+    if (action === "up" && selected.previousElementSibling) selected.parentElement?.insertBefore(selected, selected.previousElementSibling);
+    if (action === "down" && selected.nextElementSibling) selected.parentElement?.insertBefore(selected.nextElementSibling, selected);
+    if (action === "hide") selected.hidden = true;
+    if (action === "show") selected.hidden = false;
+    const currentSections = editableSections(doc);
+    const order = currentSections.map(section => section.dataset.cmsSectionKey ?? visualElementKey(section));
+    const hidden = currentSections.filter(section => section.hidden).map(section => section.dataset.cmsSectionKey ?? visualElementKey(section));
+    setContent(current => ({ ...current, layout: { order, hidden } }));
+    setNotice(action === "hide" ? "板块已隐藏，发布前仍可恢复" : action === "show" ? "板块已恢复" : "板块顺序已调整");
+  };
+
+  const publishedForLanguage = () => language === "en" ? row?.published_content : row?.published_content?.translations?.[language];
   const persist = async (publish: boolean) => {
     if (!cmsSupabase) return;
+    if (publish) {
+      const diff = changesBetween(content, publishedForLanguage());
+      if (!window.confirm(`即将发布 ${language.toUpperCase()}：\n文字 ${diff.text} 处，图片 ${diff.images} 处，SEO ${diff.seo ? "有修改" : "无修改"}，布局 ${diff.layout ? "有修改" : "无修改"}。\n\n确认更新到线上吗？`)) return;
+    }
     setBusy(true);
-    const draftContent = language === "en" ? { ...(row?.draft_content ?? {}), visual: values } : (row?.draft_content ?? {});
+    const draftContent = language === "en" ? content : (row?.draft_content ?? {});
     const translations = { ...(row?.translations ?? {}) };
-    if (language !== "en") translations[language] = { ...(translations[language] ?? {}), visual: values };
+    if (language !== "en") translations[language] = content;
     const publishedContent = { ...draftContent, translations };
     const payload = { page_key: page.key, page_type: page.type, route: page.route, title: page.title, source_locale: "en", draft_content: draftContent, translations, status: publish ? "published" : (row?.status ?? "draft"), updated_by: session.user.id, ...(publish ? { published_content: publishedContent, published_at: new Date().toISOString() } : {}) };
     const { data, error } = await cmsSupabase.from("cms_pages").upsert(payload, { onConflict: "page_key" }).select().single();
     if (error) { setBusy(false); return setNotice(error.message); }
     await cmsSupabase.from("cms_revisions").insert({ page_id: data.id, action: publish ? "published" : "draft_saved", snapshot: publishedContent, created_by: session.user.id });
-    setNotice(publish ? "已发布；重新打开该官网页面即可读取新内容" : "草稿已保存，并生成版本记录");
+    if (publish) {
+      const { data: verified, error: verifyError } = await cmsSupabase.from("cms_published_pages").select("published_content").eq("page_key", page.key).maybeSingle();
+      let routeOk = false;
+      try { routeOk = (await fetch(page.route, { method: "HEAD", cache: "no-store" })).ok; } catch { routeOk = false; }
+      const contentOk = !verifyError && JSON.stringify(verified?.published_content) === JSON.stringify(publishedContent);
+      setNotice(contentOk && routeOk ? "发布成功：内容库一致，官网页面访问正常" : `已发布，但自动验收未完全通过（内容库：${contentOk ? "正常" : "异常"}；页面：${routeOk ? "正常" : "异常"}）`);
+    } else setNotice("草稿已保存，并生成版本记录");
     await load();
     setBusy(false);
   };
 
+  const copyEnglishDraft = () => {
+    if (language === "en") return;
+    setContent({ ...(row?.draft_content ?? {}), translationStatus: "ai_draft" });
+    setNotice("已复制英文内容作为翻译底稿；AI 自动翻译需配置模型接口后启用");
+  };
+  const setSeo = (key: keyof CmsSeo, value: string) => setContent(current => ({ ...current, seo: { ...EMPTY_SEO, ...(current.seo ?? {}), [key]: value } }));
   const localizedRoute = language === "en" ? page.route : `/${language}${page.route === "/" ? "" : page.route}`;
+
   return <main className="cms-root cms-visual-shell">
     <header className="cms-visual-toolbar"><div className="cms-visual-brand"><strong>WONLY</strong><span>整页编辑</span></div><select aria-label="页面" value={page.key} onChange={event => setPage(CMS_PAGES.find(item => item.key === event.target.value) ?? CMS_PAGES[0])}>{CMS_PAGES.map(item => <option key={item.key} value={item.key}>{item.title}</option>)}</select><select aria-label="语言" value={language} onChange={event => setLanguage(event.target.value)}>{LANGUAGES.map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select><div className="cms-device-toggle"><button className={device === "desktop" ? "active" : ""} onClick={() => setDevice("desktop")}>电脑</button><button className={device === "mobile" ? "active" : ""} onClick={() => setDevice("mobile")}>手机</button></div><div className="cms-visual-actions"><button className="cms-button secondary" onClick={() => setToolsOpen(value => !value)}>{toolsOpen ? "收起工具" : "展开工具"}</button><button className="cms-button secondary" disabled={busy} onClick={() => void persist(false)}>保存草稿</button><button className="cms-button" disabled={busy} onClick={() => void persist(true)}>确认并发布</button><button className="cms-button secondary" onClick={() => cmsSupabase?.auth.signOut()}>退出</button></div></header>
-    <div className="cms-visual-status">{notice}</div><section className={`cms-visual-workspace ${toolsOpen ? "panel-open" : ""}`}><div className={`cms-site-canvas ${device}`}><iframe ref={frameRef} title={`${page.title}整页编辑`} src={`${localizedRoute}?cms_canvas=1`} onLoad={enableEditing}/></div>{toolsOpen ? <aside className="cms-visual-panel"><h2>页面工具</h2><p>当前：{page.title}</p><p>语言：{LANGUAGES.find(([code]) => code === language)?.[1]}</p><div className="cms-tool-card"><strong>直接编辑</strong><p>点击文字直接输入；点击图片、背景图或视频封面从电脑上传替换。</p></div><div className="cms-tool-card"><strong>稍后接入</strong><p>SEO、历史版本、导航与 AI 翻译会放在这里，不遮挡完整页面。</p></div><div className="cms-tool-card warning"><strong>发布规则</strong><p>各语言草稿独立保存，不会互相覆盖；只有“确认并发布”才更新网站读取的内容。</p></div></aside> : null}</section>
+    <div className="cms-visual-status">{notice}</div><section className={`cms-visual-workspace ${toolsOpen ? "panel-open" : ""}`}><div className={`cms-site-canvas ${device}`}><iframe ref={frameRef} title={`${page.title}整页编辑`} src={`${localizedRoute}?cms_canvas=1`} onLoad={enableEditing}/></div>{toolsOpen ? <aside className="cms-visual-panel"><h2>页面工具</h2><p>当前：{page.title}</p><p>语言：{LANGUAGES.find(([code]) => code === language)?.[1]}</p><div className="cms-tool-card"><strong>板块布局</strong><p>{selectedSection ? "已选中一个板块" : "先点击页面中的板块"}</p><div className="cms-tool-actions"><button onClick={() => updateSection("up")}>上移</button><button onClick={() => updateSection("down")}>下移</button><button onClick={() => updateSection("hide")}>隐藏</button><button onClick={() => updateSection("show")}>恢复</button></div></div><div className="cms-tool-card"><strong>SEO 设置</strong><label>页面标题<input value={content.seo?.title ?? ""} onChange={event => setSeo("title", event.target.value)}/></label><label>页面描述<textarea value={content.seo?.description ?? ""} onChange={event => setSeo("description", event.target.value)}/></label><label>规范链接<input value={content.seo?.canonical ?? ""} onChange={event => setSeo("canonical", event.target.value)}/></label><label>分享图片<input value={content.seo?.ogImage ?? ""} onChange={event => setSeo("ogImage", event.target.value)}/></label><label>搜索引擎规则<select value={content.seo?.robots ?? "index, follow"} onChange={event => setSeo("robots", event.target.value)}><option>index, follow</option><option>noindex, nofollow</option></select></label></div>{language !== "en" ? <div className="cms-tool-card"><strong>多语言确认</strong><p>当前状态：{content.translationStatus === "confirmed" ? "已人工确认" : content.translationStatus === "ai_draft" ? "翻译底稿" : "待翻译"}</p><button className="cms-button secondary" onClick={copyEnglishDraft}>复制英文作翻译底稿</button><button className="cms-button secondary" onClick={() => setContent(current => ({ ...current, translationStatus: "confirmed" }))}>标记人工确认</button><p>AI 自动翻译将在配置模型接口后启用。</p></div> : null}<div className="cms-tool-card warning"><strong>发布规则</strong><p>保存草稿不会更新官网；发布前会显示差异，发布后自动核验内容库和页面访问。</p></div></aside> : null}</section>
     <input ref={fileRef} hidden type="file" accept="image/jpeg,image/png,image/webp,image/avif" onChange={event => { const file = event.target.files?.[0]; if (file) void replaceImage(file); event.currentTarget.value = ""; }}/>
   </main>;
 }
