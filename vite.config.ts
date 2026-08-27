@@ -241,5 +241,20 @@ export default defineConfig(({ mode }) => {
           : process.env.VITE_ENABLE_ROUTE_MESSAGING !== 'false'
       ),
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) return;
+            if (id.includes("/react/") || id.includes("/react-dom/") || id.includes("/scheduler/")) {
+              return "vendor-react";
+            }
+            if (id.includes("react-router")) return "vendor-router";
+            if (id.includes("@supabase") || id.includes("/zustand/")) return "vendor-cms";
+            if (id.includes("lucide-react") || id.includes("@radix-ui")) return "vendor-ui";
+          },
+        },
+      },
+    },
   }
 });

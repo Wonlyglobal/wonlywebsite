@@ -1201,6 +1201,42 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.wonlyglobal.com/products/security-doors/cast-aluminium/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/security-doors/fire-rated/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/solutions/hotel-security-doors/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/solutions/villa-security-doors/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/global/saudi-arabia/security-doors/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/global/uae/security-doors/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.wonlyglobal.com/privacy/</loc>
     <lastmod>2026-07-27</lastmod>
     <changefreq>yearly</changefreq>
@@ -1629,6 +1665,66 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/en-1627-rc2-rc3-rc4-security-door-grades/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/en-1627-rc2-rc3-rc4-security-door-grades/" />
     <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/ar/insights/fire-and-security-dual-rated-doors/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/fr/insights/fire-and-security-dual-rated-doors/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/ru/insights/fire-and-security-dual-rated-doors/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/es/insights/fire-and-security-dual-rated-doors/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-and-security-dual-rated-doors/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
