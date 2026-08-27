@@ -1,42 +1,34 @@
 import { useEffect, useState } from "react";
 
-/* ── 全站悬浮客服:WhatsApp 按钮 + Tawk.to 在线聊天(在 /admin 站点后台配置)──
+/* ── 全站悬浮客服:WhatsApp 按钮 + Crisp 在线聊天(在 /admin 站点后台配置)──
    读取 content/settings/site.json:
      whatsapp   非空 → 显示右下角 WhatsApp 悬浮按钮(纯链接,零脚本)
-     tawkId     非空 → 注入 Tawk.to 聊天脚本(格式 propertyId/widgetId)
+     crispId    非空 → 注入 Crisp 在线聊天脚本
    两者都留空则本组件不渲染任何内容,也不加载任何第三方脚本。 */
 
 const SITE_RAW = import.meta.glob("/content/settings/site.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 const SITE_CFG = (() => {
   try { return JSON.parse(Object.values(SITE_RAW)[0] || "{}"); } catch { return {}; }
-})() as { whatsapp?: string; whatsappLabel?: string; tawkId?: string; crispId?: string };
+})() as { whatsapp?: string; whatsappLabel?: string; crispId?: string };
 
 const WA_NUMBER = (SITE_CFG.whatsapp || "").replace(/\D/g, "");
 const WA_LABEL = SITE_CFG.whatsappLabel?.trim() || "Chat on WhatsApp";
-const TAWK_ID = (SITE_CFG.tawkId || "").trim();
 const CRISP_ID = (SITE_CFG.crispId || "").trim();
 
 export default function FloatingContact() {
   const [hover, setHover] = useState(false);
 
-  // 在线聊天:配了 crispId 加载 Crisp,否则配了 tawkId 加载 Tawk。
-  // 都延迟到页面空闲后注入,不拖累首屏;都留空则不加载任何第三方脚本。
+  // 在线聊天仅保留 Crisp；延迟到页面空闲后注入，不拖累首屏。
   useEffect(() => {
-    if (!CRISP_ID && !TAWK_ID) return;
+    if (!CRISP_ID) return;
     if (document.getElementById("chat-script")) return;
     const load = () => {
       const s = document.createElement("script");
       s.id = "chat-script";
       s.async = true;
-      if (CRISP_ID) {
-        (window as unknown as { $crisp: unknown[] }).$crisp = [];
-        (window as unknown as { CRISP_WEBSITE_ID: string }).CRISP_WEBSITE_ID = CRISP_ID;
-        s.src = "https://client.crisp.chat/l.js";
-      } else {
-        s.src = `https://embed.tawk.to/${TAWK_ID}`;
-        s.charset = "UTF-8";
-        s.setAttribute("crossorigin", "*");
-      }
+      (window as unknown as { $crisp: unknown[] }).$crisp = [];
+      (window as unknown as { CRISP_WEBSITE_ID: string }).CRISP_WEBSITE_ID = CRISP_ID;
+      s.src = "https://client.crisp.chat/l.js";
       document.body.appendChild(s);
     };
     const t = window.setTimeout(load, 3500);
@@ -46,7 +38,7 @@ export default function FloatingContact() {
   if (!WA_NUMBER) return null;
 
   // 聊天气泡占用右下角;启用聊天时 WhatsApp 按钮上移避让。
-  const bottom = CRISP_ID || TAWK_ID ? 96 : 24;
+  const bottom = CRISP_ID ? 96 : 24;
 
   return (
     <a
