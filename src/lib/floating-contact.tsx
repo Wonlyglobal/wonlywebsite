@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useCmsSetting } from "@/lib/cms-site-settings";
 
 /* ── 全站悬浮客服:WhatsApp 按钮 + Crisp 在线聊天(在 /admin 站点后台配置)──
    读取 content/settings/site.json:
@@ -11,12 +12,14 @@ const SITE_CFG = (() => {
   try { return JSON.parse(Object.values(SITE_RAW)[0] || "{}"); } catch { return {}; }
 })() as { whatsapp?: string; whatsappLabel?: string; crispId?: string };
 
-const WA_NUMBER = (SITE_CFG.whatsapp || "").replace(/\D/g, "");
 const WA_LABEL = SITE_CFG.whatsappLabel?.trim() || "Chat on WhatsApp";
 const CRISP_ID = (SITE_CFG.crispId || "").trim();
 
 export default function FloatingContact() {
   const [hover, setHover] = useState(false);
+  const cmsSettings = useCmsSetting("settings");
+  const waNumber = (cmsSettings?.whatsapp || SITE_CFG.whatsapp || "").replace(/\D/g, "");
+  const waLabel = cmsSettings?.whatsappLabel?.trim() || WA_LABEL;
 
   // 在线聊天仅保留 Crisp；延迟到页面空闲后注入，不拖累首屏。
   useEffect(() => {
@@ -35,17 +38,17 @@ export default function FloatingContact() {
     return () => window.clearTimeout(t);
   }, []);
 
-  if (!WA_NUMBER) return null;
+  if (!waNumber) return null;
 
   // 聊天气泡占用右下角;启用聊天时 WhatsApp 按钮上移避让。
   const bottom = CRISP_ID ? 96 : 24;
 
   return (
     <a
-      href={`https://wa.me/${WA_NUMBER}`}
+      href={`https://wa.me/${waNumber}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={WA_LABEL}
+      aria-label={waLabel}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -71,7 +74,7 @@ export default function FloatingContact() {
             boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
           }}
         >
-          {WA_LABEL}
+          {waLabel}
         </span>
       )}
       <span
