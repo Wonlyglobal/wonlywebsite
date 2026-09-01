@@ -2,6 +2,7 @@ import { ArrowRight, Check, ShieldCheck, Sparkles, ScanFace, Hand, BatteryChargi
 import { Link } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { BASE, CHAMP, CHAMP_BG, DARK, GOLD, GOLD_DEEP, MUTED, SILVER, SiteFooter, SiteHeader, Reveal, eyebrow, h2cls, useQuoteStore } from "@/lib/site-ui";
+import { DoorModelSelector } from "@/lib/DoorModelSelector";
 
 type ProductKey = "s80-max" | "x50-pro" | "t200";
 
@@ -179,6 +180,8 @@ export default function CatalogProductDetail({ product }: { product: ProductKey 
       <section className="px-[6vw] py-20 md:py-28"><div className="max-w-5xl mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Specifications</div><h2 className={h2cls + " mt-4"}>Catalogue-Verified Details</h2><div className="mt-10 border-t" style={{ borderColor: `${SILVER}88` }}>{data.specs.map(([key, value]) => <div key={key} className="grid md:grid-cols-[0.38fr_0.62fr] gap-2 py-5 border-b" style={{ borderColor: `${SILVER}66` }}><div className="text-xs uppercase tracking-[0.15em] font-semibold" style={{ color: GOLD_DEEP }}>{key}</div><div>{value}</div></div>)}</div><p className="mt-5 text-xs leading-6" style={{ color: MUTED }}>Specifications shown are based on the current WONLY English catalogue. Availability and final configuration must be confirmed with the sales team.</p></div></section>
 
       <section className="px-[6vw] py-20 md:py-28 bg-white"><div className="max-w-4xl mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Buyer Questions</div><h2 className={h2cls + " mt-4"}>Frequently Asked Questions</h2><div className="mt-10 divide-y" style={{ borderColor: `${SILVER}66` }}>{data.faq.map((item) => <article key={item.q} className="py-6"><h3 className="text-lg font-medium">{item.q}</h3><p className="mt-3 leading-7" style={{ color: MUTED }}>{item.a}</p></article>)}</div></div></section>
+
+      {product !== "s80-max" && <DoorModelSelector group="security" currentPath={data.path} />}
 
       <section className="px-[6vw] py-24 text-center" style={{ background: DARK }}><div className="max-w-3xl mx-auto"><div className={eyebrow} style={{ color: CHAMP }}>Sales Consultation</div><h2 className="mt-5 text-white text-[34px] md:text-[54px] font-light leading-tight">Get {data.model} Specifications &amp; Quote</h2><p className="mt-5 text-white/65">Tell us your market or project requirements. The form will identify this product automatically for our sales team.</p><button onClick={quote} className="mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold" style={{ background: GOLD, color: DARK }}>Contact WONLY Sales <ArrowRight size={16} /></button></div></section>
     </main>

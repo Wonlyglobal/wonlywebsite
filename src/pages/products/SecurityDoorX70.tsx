@@ -5,6 +5,7 @@ import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, useQuoteStore } from "@/lib/site-ui";
 import { useLocale, type Locale } from "@/lib/i18n";
 import { RelatedInsights } from "@/lib/related-insights";
+import { DoorModelSelector } from "@/lib/DoorModelSelector";
 
 /* Silver-White-Gold palette */
 const GOLD = "#BFA06A";
@@ -638,6 +639,7 @@ const SecurityDoorX70 = () => {
         </section>
       </main>
 
+      <DoorModelSelector group="security" currentPath="/products/security-doors/x70" />
       <RelatedInsights />
       <CtaBand eyebrowText={bt("ctaEye", "Bring the X70 to Your Project")} title={bt("ctaTitle", "Get X70 Specs & Project Pricing")} sub={bt("ctaSub", "Our engineering team replies within 24 hours with tailored specifications, compliance documentation and volume pricing for distributors and developers.")} />
       <SiteFooter />

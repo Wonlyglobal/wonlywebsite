@@ -2,6 +2,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { BASE, CHAMP, CHAMP_BG, DARK, GOLD, GOLD_DEEP, MUTED, SiteFooter, SiteHeader, eyebrow, h2cls, useQuoteStore } from "@/lib/site-ui";
+import { DoorModelSelector } from "@/lib/DoorModelSelector";
 
 type SeriesKey = "custom" | "minimalist" | "pvc" | "solid-wood" | "aluminum-alloy";
 const SERIES: Record<SeriesKey, { name: string; path: string; image: string; description: string; models: string[]; focus: string[] }> = {
@@ -20,7 +21,7 @@ export default function WoodenDoorSeriesDetail({ series }: { series: SeriesKey }
   return <div className="font-sans" style={{ background: CHAMP_BG, color: DARK }}><SiteHeader /><main>
     <section className="relative min-h-[72vh] flex items-end overflow-hidden"><img src={data.image} alt={data.name} className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" /><div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10" /><div className="relative z-10 px-[7vw] pb-16 md:pb-24 max-w-5xl text-white"><nav className="text-xs text-white/70 mb-7"><Link to="/">Home</Link> / <Link to="/products/wooden-doors">Wooden Doors</Link> / {data.name}</nav><div className={eyebrow} style={{ color: CHAMP }}>Soundproof Wooden Doors</div><h1 className="mt-5 text-[40px] md:text-[68px] font-light leading-tight">{data.name}</h1><p className="mt-5 max-w-2xl text-lg text-white/80 leading-8">{data.description}</p><button onClick={() => openQuote({ subject: data.name })} className="mt-8 inline-flex gap-2 items-center rounded-full px-7 py-4 text-sm font-semibold" style={{ background: GOLD, color: DARK }}>Get Specifications &amp; Quote <ArrowRight size={16} /></button></div></section>
     <section className="px-[7vw] py-20 md:py-28 bg-white"><div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14"><div><div className={eyebrow} style={{ color: GOLD_DEEP }}>Series Overview</div><h2 className={h2cls + " mt-4"}>Models and Options</h2><div className="mt-8 space-y-4">{data.models.map((item) => <div className="flex gap-3" key={item}><Check size={18} style={{ color: GOLD }} /><span>{item}</span></div>)}</div></div><div><div className={eyebrow} style={{ color: GOLD_DEEP }}>Best Suited To</div><div className="mt-8 space-y-4">{data.focus.map((item) => <div className="rounded-xl p-5 flex gap-3" style={{ background: CHAMP_BG }} key={item}><Check size={18} style={{ color: GOLD }} /><span>{item}</span></div>)}</div></div></div></section>
+    <DoorModelSelector group="wooden" currentPath={data.path} />
     <section className="px-[7vw] py-24 text-center"><div className="max-w-3xl mx-auto"><h2 className={h2cls}>Specify the Right Door for Your Project</h2><p className="mt-5" style={{ color: MUTED }}>Share the required design direction, dimensions, quantity and application. WONLY sales will confirm the appropriate model, finish and project configuration.</p><button onClick={() => openQuote({ subject: data.name })} className="mt-8 inline-flex gap-2 items-center rounded-full px-8 py-4 text-sm font-semibold" style={{ background: GOLD, color: DARK }}>Contact WONLY Sales <ArrowRight size={16} /></button></div></section>
   </main><SiteFooter /></div>;
 }
-
