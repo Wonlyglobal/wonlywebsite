@@ -4,7 +4,9 @@ import { useSeo, SITE_URL } from "@/lib/seo";
 import { BASE, CHAMP, CHAMP_BG, DARK, GOLD, GOLD_DEEP, MUTED, SILVER, SiteFooter, SiteHeader, Reveal, eyebrow, h2cls, useQuoteStore } from "@/lib/site-ui";
 import { DoorModelSelector } from "@/lib/DoorModelSelector";
 
-type ProductKey = "s80-max" | "x50-pro" | "t200";
+export type ProductKey =
+  | "s80-max" | "s60-max" | "s60-pro" | "s50-pro" | "s58-pro" | "p10-pro" | "p15-pro" | "s922-max" | "s936" | "a5n"
+  | "x60-max" | "x60-pro" | "x50-max" | "x50-pro" | "t200";
 
 type ProductData = {
   model: string;
@@ -24,7 +26,76 @@ type ProductData = {
   faq: { q: string; a: string }[];
 };
 
+type CatalogueModel = {
+  key: ProductKey;
+  model: string;
+  family: "smart-lock" | "security-door";
+  type: string;
+  colour: string;
+  signature: string[];
+  access?: string;
+  dimensions?: string;
+  bestFor: string[];
+};
+
+const catalogueModel = ({ key, model, family, type, colour, signature, access, dimensions, bestFor }: CatalogueModel): ProductData => {
+  const lock = family === "smart-lock";
+  const category = lock ? "True Smart Locks" : "Smart Security Doors";
+  const categoryPath = lock ? "/products/smart-locks" : "/products/security-doors";
+  const image = `${BASE}images/catalog-2026/models/${key}.webp`;
+  const lead = signature.slice(0, 3).join(", ");
+  return {
+    model,
+    category,
+    categoryPath,
+    path: `${categoryPath}/${key}`,
+    title: `WONLY ${model} ${type}`,
+    description: `Explore the WONLY ${model} ${type.toLowerCase()} with ${lead}. Review verified catalogue features and request project compatibility and pricing.`,
+    hero: image,
+    intro: lock
+      ? `${model} brings the functions specified in WONLY's current international smart-lock catalogue into a focused entrance platform for residential and project use.`
+      : `${model} is a Smart Door 5.0 entrance platform combining powered operation, security construction and connected access in one project-ready system.`,
+    highlights: signature.slice(0, 3),
+    bestFor,
+    features: signature.map((item, index) => ({
+      icon: [ScanFace, Monitor, ShieldCheck, LockKeyhole, Hand, Sparkles][index % 6],
+      title: item,
+      text: lock
+        ? `${item} is part of the verified ${model} catalogue configuration. Final door, lock-body and market compatibility are confirmed for each order.`
+        : `${item} is integrated into the ${model} entrance system. Door size, handing, finish and project interfaces are confirmed by WONLY sales engineering.`,
+    })),
+    gallery: [{ image, alt: `WONLY ${model} installed product view`, title: `${model} in a Real Entrance`, text: `This original catalogue visual shows the product and its intended installation context. Product text remains separate, searchable and editable on the page.` }],
+    specs: [
+      ["Model", model], ["Product type", type], ["Colour", colour],
+      ...(access ? [["Standard access", access] as [string, string]] : []),
+      ...(dimensions ? [["Panel dimensions", dimensions] as [string, string]] : []),
+      ["Project configuration", "Size, handing, lock body, power and market compliance confirmed per order"],
+    ],
+    faq: [
+      { q: `What are the main functions of ${model}?`, a: `${model} is specified with ${signature.join(", ")}.` },
+      { q: `Which doors are compatible with ${model}?`, a: "Compatibility depends on the door profile, lock body, handing and project requirements. Send the door specification for confirmation." },
+      { q: `How can I get ${model} pricing?`, a: "Pricing, samples, lead time and regional availability are supplied by the WONLY sales team after the required configuration is confirmed." },
+    ],
+  };
+};
+
+const NEW_PRODUCTS = {
+  "s60-max": catalogueModel({ key: "s60-max", model: "S60 Max", family: "smart-lock", type: "Remote-Sensing True Smart Lock", colour: "Space Black", signature: ["Remote-sensing recognition", "3D face recognition", "Remote unlocking and video", "4.5-inch HD display", "Smart video door viewer", "Loitering snapshot", "Optional auto-open and 220 V supply"], access: "Fingerprint, passcode, encrypted M1 card, mechanical key and app", dimensions: "Front 425.2 × 84.7 × 54 mm; rear 425.2 × 84.7 × 75.2 mm", bestFor: ["Premium apartments", "Smart homes", "Residential developments", "Executive residences"] }),
+  "s60-pro": catalogueModel({ key: "s60-pro", model: "S60 Pro", family: "smart-lock", type: "Face Recognition Smart Lock", colour: "Space Black", signature: ["3D face recognition", "Remote unlocking and video", "4.5-inch HD display", "Smart video door viewer", "Loitering snapshot"], access: "Fingerprint, passcode, encrypted M1 card, mechanical key and app", dimensions: "Front 425.2 × 84.7 × 54 mm; rear 425.2 × 84.7 × 75.2 mm", bestFor: ["Apartments", "Villas", "Smart-home projects", "Residential developments"] }),
+  "s50-pro": catalogueModel({ key: "s50-pro", model: "S50 Pro", family: "smart-lock", type: "Face Recognition Smart Lock", colour: "Black", signature: ["3D face recognition", "Remote unlock and video", "Door viewer", "Loitering snapshot", "4.5-inch rear display"], access: "Fingerprint, passcode, mechanical key, encrypted M1 card and app", dimensions: "Front 415.5 × 85 × 52.9 mm; rear 424 × 85 × 71.8 mm", bestFor: ["Modern apartments", "Family homes", "Residential projects", "Renovation programmes"] }),
+  "s58-pro": catalogueModel({ key: "s58-pro", model: "S58 Pro", family: "smart-lock", type: "Face Recognition Smart Lock", colour: "Obsidian Black", signature: ["3D face recognition", "Video intercom", "4.5-inch rear display", "Remote unlocking", "Loitering snapshot"], access: "Fingerprint, passcode, mechanical key, M1 card and WeChat official account", dimensions: "Front 429.5 × 85 × 63.6 mm excluding handle; rear 430 × 85 × 71.9 mm", bestFor: ["Apartments", "Family residences", "Visitor-managed homes", "Residential projects"] }),
+  "p10-pro": catalogueModel({ key: "p10-pro", model: "P10 Pro", family: "smart-lock", type: "Face Recognition Smart Lock", colour: "Black", signature: ["3D face or palm-vein recognition", "Door viewer", "4.5-inch HD rear display", "Loitering snapshot"], access: "Fingerprint, passcode, mechanical key, encrypted M1 card and WeChat official account", dimensions: "Front 417 × 73 × 60 mm; rear 418.5 × 79 × 66 mm", bestFor: ["Biometric-first homes", "Apartments", "Villas", "Residential projects"] }),
+  "p15-pro": catalogueModel({ key: "p15-pro", model: "P15 Pro", family: "smart-lock", type: "Face Recognition Smart Lock", colour: "Black", signature: ["3D face or palm-vein recognition", "Door viewer", "4.5-inch HD rear display", "Loitering snapshot"], access: "Fingerprint, passcode, mechanical key, encrypted M1 card and WeChat official account", dimensions: "Front 415 × 73 × 19 mm excluding handle; rear 411 × 73 × 27 mm", bestFor: ["Slim-profile doors", "Apartments", "Modern homes", "Residential projects"] }),
+  "s922-max": catalogueModel({ key: "s922-max", model: "S922 Max", family: "smart-lock", type: "Face Recognition Smart Lock", colour: "Black", signature: ["3D face recognition", "Door viewer", "4-inch rear display", "Remote unlocking", "Loitering snapshot"], access: "Fingerprint, passcode, mechanical key, encrypted M1 card and WeChat official account", dimensions: "Front 398.5 × 78.5 × 66 mm; rear 414 × 79 × 66 mm including gasket", bestFor: ["Apartments", "Family homes", "Residential developments", "Upgrade projects"] }),
+  "s936": catalogueModel({ key: "s936", model: "S936", family: "smart-lock", type: "Retail Smart Lock", colour: "Black", signature: ["Grip-to-open operation", "Semi-automatic locking", "AI fingerprint access", "Anti-peep passcode"], access: "Fingerprint, passcode, mechanical key and encrypted M1 card", dimensions: "Front and rear 371.6 × 79.6 × 27 mm excluding handle", bestFor: ["Retail distribution", "Apartments", "Family homes", "Renovation projects"] }),
+  "a5n": catalogueModel({ key: "a5n", model: "A5N", family: "smart-lock", type: "Retail Smart Lock", colour: "Black", signature: ["Grip-to-open operation", "Semi-automatic locking", "Fingerprint access", "Anti-peep passcode"], access: "Fingerprint, passcode, mechanical key and encrypted M1 card", dimensions: "Front and rear 382 × 78 × 24 mm excluding handle", bestFor: ["Retail distribution", "Apartments", "Rental properties", "Renovation projects"] }),
+  "x60-max": catalogueModel({ key: "x60-max", model: "X60 Max", family: "security-door", type: "Smart Door 5.0", colour: "Project finish options", signature: ["Automatic opening and closing", "Remote sensing", "Anti-pinch protection", "Formaldehyde monitoring", "Threshold-free entrance"], bestFor: ["Premium residences", "Senior-friendly homes", "Smart villas", "Residential projects"] }),
+  "x60-pro": catalogueModel({ key: "x60-pro", model: "X60 Pro", family: "security-door", type: "Smart Door 5.0", colour: "Project finish options", signature: ["Automatic opening and closing", "Remote sensing", "Anti-pinch protection", "Whole-home ecosystem integration"], bestFor: ["Premium apartments", "Smart homes", "Villas", "Residential projects"] }),
+  "x50-max": catalogueModel({ key: "x50-max", model: "X50 Max", family: "security-door", type: "Smart Door 5.0", colour: "Project finish options", signature: ["Automatic opening and closing", "Remote sensing", "Physical anti-pinch protection", "Air-quality monitoring"], bestFor: ["Family residences", "Premium apartments", "Smart villas", "Residential projects"] }),
+} satisfies Partial<Record<ProductKey, ProductData>>;
+
 const PRODUCTS: Record<ProductKey, ProductData> = {
+  ...NEW_PRODUCTS,
   "s80-max": {
     model: "S80 Max",
     category: "True Smart Locks",
@@ -181,7 +252,7 @@ export default function CatalogProductDetail({ product }: { product: ProductKey 
 
       <section className="px-[6vw] py-20 md:py-28 bg-white"><div className="max-w-4xl mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Buyer Questions</div><h2 className={h2cls + " mt-4"}>Frequently Asked Questions</h2><div className="mt-10 divide-y" style={{ borderColor: `${SILVER}66` }}>{data.faq.map((item) => <article key={item.q} className="py-6"><h3 className="text-lg font-medium">{item.q}</h3><p className="mt-3 leading-7" style={{ color: MUTED }}>{item.a}</p></article>)}</div></div></section>
 
-      <DoorModelSelector group={product === "s80-max" ? "smart-lock" : "security"} currentPath={data.path} />
+      <DoorModelSelector group={data.categoryPath === "/products/smart-locks" ? "smart-lock" : "security"} currentPath={data.path} />
 
       <section className="px-[6vw] py-24 text-center" style={{ background: DARK }}><div className="max-w-3xl mx-auto"><div className={eyebrow} style={{ color: CHAMP }}>Sales Consultation</div><h2 className="mt-5 text-white text-[34px] md:text-[54px] font-light leading-tight">Get {data.model} Specifications &amp; Quote</h2><p className="mt-5 text-white/65">Tell us your market or project requirements. The form will identify this product automatically for our sales team.</p><button onClick={quote} className="mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold" style={{ background: GOLD, color: DARK }}>Contact WONLY Sales <ArrowRight size={16} /></button></div></section>
     </main>

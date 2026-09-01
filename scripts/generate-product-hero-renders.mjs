@@ -3,64 +3,56 @@ import path from "node:path";
 import sharp from "sharp";
 
 const root = process.cwd();
-const background = path.join(root, "public/images/catalog-2026/hero-renders/tapnow-unified-background.webp");
 const outputDir = path.join(root, "public/images/catalog-2026/hero-renders");
-
-const products = [
-  ["x70", "public/images/door/gallery/g1-front.jpg", "contain"],
-  ["x50-pro", "public/images/catalog-2026/x50.webp", "cover"],
-  ["t200", "public/images/catalog-2026/t200.webp", "contain"],
-  ["s80", "public/images/lock-s80.webp", "transparent"],
-  ["s80-max", "public/images/catalog-2026/s80.webp", "cover"],
-  ["wood-custom", "public/images/catalog-2026/wood-custom.webp", "cover"],
-  ["wood-minimalist", "public/images/catalog-2026/wood-minimalist.webp", "cover"],
-  ["wood-pvc", "public/images/catalog-2026/wood-pvc.webp", "cover"],
-  ["wood-solid", "public/images/catalog-2026/wood-solid.webp", "cover"],
-  ["wood-aluminum", "public/images/catalog-2026/wood-aluminum.webp", "cover"],
-];
+const sampleCutout = path.join(outputDir, "s80-max-cutout.png");
 
 await fs.mkdir(outputDir, { recursive: true });
 
 const width = 2400;
 const height = 1350;
-const panelWidth = 1120;
-const panelHeight = 1030;
-const panelLeft = 1160;
-const panelTop = 155;
-const radius = 42;
-const panelMask = Buffer.from(`<svg width="${panelWidth}" height="${panelHeight}"><rect width="100%" height="100%" rx="${radius}" fill="white"/></svg>`);
-const border = Buffer.from(`<svg width="${width}" height="${height}"><rect x="${panelLeft - 2}" y="${panelTop - 2}" width="${panelWidth + 4}" height="${panelHeight + 4}" rx="${radius + 2}" fill="none" stroke="rgba(218,183,116,.7)" stroke-width="4"/></svg>`);
 
-for (const [slug, input, mode] of products) {
-  const base = sharp(background).resize(width, height, { fit: "cover" }).modulate({ saturation: 0.92, brightness: 0.9 });
-  const overlays = [];
+// TapNow provides only the empty studio. Product pixels come from the
+// catalogue so controls, handles and mechanical details cannot be redrawn.
+const product = await sharp(sampleCutout)
+  // Keep only the two catalogue panels. The source PNG contains transparent
+  // canvas pixels which `trim` can misread as black edge rules.
+  .extract({ left: 185, top: 90, width: 320, height: 590 })
+  .resize(1050, 1240, {
+    fit: "contain",
+    background: { r: 0, g: 0, b: 0, alpha: 0 },
+  })
+  .sharpen({ sigma: 0.7 })
+  .png()
+  .toBuffer();
 
-  if (mode === "transparent") {
-    const product = await sharp(path.join(root, input))
-      .resize(980, 1120, { fit: "contain" })
-      .sharpen({ sigma: 0.8 })
-      .png()
-      .toBuffer();
-    overlays.push({ input: product, left: 1280, top: 100 });
-  } else {
-    const fitted = await sharp(path.join(root, input))
-      .resize(panelWidth, panelHeight, {
-        fit: mode === "cover" ? "cover" : "contain",
-        position: "centre",
-        background: { r: 243, g: 238, b: 229, alpha: 1 },
-      })
-      .sharpen({ sigma: 0.65 })
-      .png()
-      .composite([{ input: panelMask, blend: "dest-in" }])
-      .toBuffer();
-    overlays.push({ input: fitted, left: panelLeft, top: panelTop });
-    overlays.push({ input: border, left: 0, top: 0 });
-  }
+const studioGradient = Buffer.from(`
+  <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="studio" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eee8df"/>
+        <stop offset="0.72" stop-color="#e1d7ca"/>
+        <stop offset="1" stop-color="#cfc0ad"/>
+      </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#studio)"/>
+  </svg>
+`);
 
-  await base
-    .composite(overlays)
-    .webp({ quality: 91, effort: 5 })
-    .toFile(path.join(outputDir, `${slug}.webp`));
-}
+await sharp({
+  create: {
+    width,
+    height,
+    channels: 4,
+    background: { r: 238, g: 232, b: 223, alpha: 1 },
+  },
+})
+  .composite([
+    { input: studioGradient, blend: "over" },
+    // The hero image is a standalone card beside the page copy, so the real
+    // product—not unused negative space—must be the visual focal point.
+    { input: product, left: 675, top: 55 },
+  ])
+  .webp({ quality: 92, effort: 5 })
+  .toFile(path.join(outputDir, "s80-max.webp"));
 
-console.log(`Generated ${products.length} TapNow-based product hero renders in ${outputDir}`);
+console.log("Generated S80 Max approval sample with a neutral champagne studio gradient and exact catalogue product pixels.");

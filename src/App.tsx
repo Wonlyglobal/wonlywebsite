@@ -149,6 +149,18 @@ const App = () => (
           {/* Detailed sub-pages already built. */}
           <Route path="/products/smart-locks/s80" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLockS80 /></Suspense>} />
           <Route path="/products/smart-locks/s80-max" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><CatalogProductDetail product="s80-max" /></Suspense>} />
+          <Route path="/products/smart-locks/s60-max" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s60-max" /></Suspense>} />
+          <Route path="/products/smart-locks/s60-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s60-pro" /></Suspense>} />
+          <Route path="/products/smart-locks/s50-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s50-pro" /></Suspense>} />
+          <Route path="/products/smart-locks/s58-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s58-pro" /></Suspense>} />
+          <Route path="/products/smart-locks/p10-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="p10-pro" /></Suspense>} />
+          <Route path="/products/smart-locks/p15-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="p15-pro" /></Suspense>} />
+          <Route path="/products/smart-locks/s922-max" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s922-max" /></Suspense>} />
+          <Route path="/products/smart-locks/s936" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s936" /></Suspense>} />
+          <Route path="/products/smart-locks/a5n" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="a5n" /></Suspense>} />
+          <Route path="/products/security-doors/x60-max" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="x60-max" /></Suspense>} />
+          <Route path="/products/security-doors/x60-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="x60-pro" /></Suspense>} />
+          <Route path="/products/security-doors/x50-max" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="x50-max" /></Suspense>} />
           <Route path="/products/security-doors/x50-pro" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><CatalogProductDetail product="x50-pro" /></Suspense>} />
           <Route path="/products/security-doors/t200" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><CatalogProductDetail product="t200" /></Suspense>} />
           <Route path="/products/wooden-doors/custom" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoorSeriesDetail series="custom" /></Suspense>} />
