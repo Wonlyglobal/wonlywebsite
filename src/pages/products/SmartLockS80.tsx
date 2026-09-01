@@ -152,7 +152,7 @@ const SmartLockS80 = () => {
           </Reveal>
           <Reveal delay={100}>
             <div className="overflow-hidden rounded-3xl border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "#0d0d0d" }}>
-              <video className="block w-full aspect-video object-cover" autoPlay muted loop playsInline preload="metadata" poster={IMG.catalogProduct} aria-label="WONLY S80 product appearance video">
+              <video className="block w-full aspect-video object-cover" autoPlay muted loop playsInline preload="metadata" poster={IMG.catalogFrontBack} aria-label="WONLY S80 product appearance video">
                 <source src={IMG.productMotion} type="video/mp4" />
               </video>
             </div>
