@@ -1,19 +1,33 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Radar, Fingerprint, Smartphone, ShieldAlert, BatteryCharging, Bell, ArrowRight, Check, ScanFace, DoorOpen, Home, Building2, Hotel, KeyRound } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useLocale, type Locale } from "@/lib/i18n";
 import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
 import { DoorModelSelector } from "@/lib/DoorModelSelector";
+import { RelatedInsights } from "@/lib/related-insights";
 
 const IMG = {
   lock: `${BASE}images/lock-s80.webp`,
+  hero: `${BASE}images/catalog-2026/hero-renders/s80.webp`,
   render: `${BASE}images/lock-s80-render.webp`,
   band: `${BASE}images/factory-abb.webp`,
-  catalogProduct: `${BASE}images/catalog-2026/s80/remote-sensing-product.webp`,
   catalogFrontBack: `${BASE}images/catalog-2026/s80/front-back-catalog.webp`,
   familyVilla: `${BASE}images/catalog-2026/s80/family-villa.webp`,
   productMotion: `${BASE}images/catalog-2026/s80/product-detail-motion.mp4`,
+  tapnowApartment: `${BASE}images/catalog-2026/s80/tapnow-apartment-s80.webp`,
+  panels: `${BASE}images/catalog-2026/details/s80-panels.jpg`,
+  lifestyle: `${BASE}images/catalog-2026/details/s80-lifestyle.jpg`,
+  angle: `${BASE}images/catalog-2026/s80/product-angle.webp`,
+  ultra: `${BASE}images/catalog-2026/s80/product-panels-hd.webp`,
 };
+
+const GALLERY = [
+  { src: IMG.hero, alt: "WONLY S80 smart lock in the unified WONLY product presentation", fit: "cover" },
+  { src: IMG.tapnowApartment, alt: "WONLY S80 installed at a premium overseas apartment entrance", fit: "cover" },
+  { src: IMG.panels, alt: "WONLY S80 front and interior controls", fit: "contain" },
+  { src: IMG.angle, alt: "WONLY S80 front and rear three-quarter product view", fit: "contain" },
+] as const;
 
 const HIGHLIGHTS = [
   "Hands-free entry the moment you arrive",
@@ -61,6 +75,13 @@ const SPECS: [string, string][] = [
   ["Certification", "CE · FCC · RoHS · national smart-lock standard"],
 ];
 
+const FAQS = [
+  ["Which door types can use the S80?", "S80 is intended for compatible entrance doors within the supported thickness and mortise range. Send the door section, thickness and opening direction to WONLY sales for configuration confirmation."],
+  ["Can it be supplied for projects or distribution?", "Yes. Project, distributor and OEM/ODM enquiries are handled by the international sales team, including configuration, samples, documentation and quotation."],
+  ["What happens if electronic power is unavailable?", "The configuration includes emergency-power and mechanical-override provisions. Exact battery, backup and key arrangements should be confirmed for the selected market version."],
+  ["Can access be managed remotely?", "Supported configurations provide app-based access management, temporary permissions and entry records. Available integrations vary by market and should be confirmed before ordering."],
+];
+
 type Copy = { text: Record<string, string>; highlights: string[]; steps: { t: string; d: string }[]; features: { t: string; d: string }[]; design: string[]; scenarios: { t: string; d: string }[]; specs: string[] };
 const COPY: Partial<Record<Locale, Copy>> = {
   ar: { text: { seoTitle: "قفل WONLY S80 الذكي بالاستشعار الحقيقي | دخول بيومتري دون لمس", seoDescription: "قفل WONLY S80 باستشعار بعيد المدى ودخول متعدد القياسات الحيوية وتحكم بالتطبيق وهيكل مقاوم للعبث من مصنّع مدرج في بورصة شنغهاي.", eyebrow: "أقفال ذكية · الطراز الرائد", sensing: "استشعار حقيقي", hero: "اقترب وادخل. يستشعر S80 وصولك ويفتح دون استخدام اليدين، مع قياسات حيوية وتحكم بالتطبيق وحماية من العبث.", quote: "اطلب عرض سعر", view: "عرض المواصفات", how: "طريقة العمل", steps: "ثلاث خطوات في أقل من ثانيتين", engineered: "هندسة متكاملة", security: "أمان يعمل من دون أن تفكر فيه", design: "التصميم", angle: "مدروس من كل زاوية", designBody: "واجهة كاملة من الزجاج المقسّى تخفي الكاميرا ومستشعر الوجه ولوحة المفاتيح حتى تحتاج إليها. وتجمع اللوحة الداخلية الخروج بلمسة واحدة والتحكم بالصوت والتجاوز اليدوي في هيكل ألمنيوم مصبوب مقاوم للتآكل.", precision: "هندسة دقيقة", vault: "مصنوع وفق معايير أبواب الخزائن لدينا", fits: "مجالات الاستخدام", every: "قفل واحد لكل أنواع الأبواب", tech: "المواصفات التقنية", full: "كل التفاصيل", note: "المواصفات إرشادية وقد تختلف حسب السوق والتكوين.", order: "الطلب وOEM", cta: "قدّم S80 إلى سوقك", ctaSub: "اطلب الأسعار أو العينات أو تكوينات OEM/ODM؛ يرد فريقنا خلال 24 ساعة." }, highlights: ["دخول دون استخدام اليدين فور وصولك", "تشفير مؤسسي متكامل من طرف إلى طرف", "تشغيل صامت ومحكم ضد الطقس من ‎-25 إلى 70°م"], steps: [{t:"الاستشعار",d:"يكتشف رادار الموجات المليمترية اقترابك من مسافة مترين ويوقظ القفل دون زر أو لمس المقبض."},{t:"التحقق",d:"يتحقق الوجه ثلاثي الأبعاد وبصمة الإصبع خلال أقل من ثانية، مع كشف الحيوية لرفض الصور والأقنعة."},{t:"الدخول",d:"يتراجع المزلاج الآلي الصامت فور وصولك إلى الباب، حتى عندما تكون يداك مشغولتين."}], features: [{t:"استشعار حقيقي بعيد المدى",d:"يكتشف اقترابك ويفتح تلقائياً دون استخدام اليدين."},{t:"دخول متعدد القياسات الحيوية",d:"بصمة ووجه ورمز PIN مع خوارزميات مقاومة الانتحال."},{t:"التطبيق والتحكم عن بعد",d:"امنح الوصول وجدوله وألغِه مع سجلات فورية ورموز ضيوف."},{t:"بنية مقاومة للعبث",d:"كشف الخلع والحفر وكتم الإنذار مع تنبيهات فورية وقفل دفاعي."},{t:"بطارية 12 شهراً",d:"استشعار منخفض الطاقة وشحن طوارئ USB-C."},{t:"جاهز للمنزل الذكي",d:"يتكامل مع منظومة WONLY والمنصات الرئيسية للمشاهد والصوت."}], design:["واجهة لمس كاملة من الزجاج المقسّى","مزلاج آلي صامت","هيكل ألمنيوم مصبوب مقاوم للتآكل","خروج داخلي سريع بلمسة واحدة"], scenarios:[{t:"المنازل والشقق",d:"دخول يومي مريح للعائلة مع تصاريح ضيوف وسجل كامل."},{t:"الفلل والقصور",d:"يتكامل مع أبواب WONLY الأمنية ونظام المنزل الذكي."},{t:"الإيجار قصير المدة",d:"رموز محددة المدة تصدر وتلغى عن بعد دون تسليم مفاتيح."},{t:"المكاتب والمنشآت",d:"صلاحيات حسب الدور وسجلات تدقيق وربط بالإنذار."}], specs:["طرق الفتح","المستشعر","المادة","الاتصال","الطاقة","الإنذارات","التوافق","الشهادات"] },
@@ -71,6 +92,7 @@ const COPY: Partial<Record<Locale, Copy>> = {
 
 const SmartLockS80 = () => {
   const { locale } = useLocale();
+  const [activeImg, setActiveImg] = useState(0);
   const copy = COPY[locale];
   const t = (key: string, fallback: string) => copy?.text[key] ?? fallback;
   const highlights = copy?.highlights ?? HIGHLIGHTS;
@@ -82,15 +104,16 @@ const SmartLockS80 = () => {
     title: t("seoTitle", "WONLY S80 True-Sensing Smart Lock | Hands-Free Biometric Door Lock"),
     description: t("seoDescription", "The WONLY S80 smart lock: hands-free long-range sensing, multi-biometric entry, app control and tamper-proof architecture — engineered by a listed (SSE: 605268) manufacturer."),
     path: "/products/smart-locks/s80",
+    image: `${SITE_URL}/images/catalog-2026/hero-renders/s80.webp`,
     type: "product",
-    jsonLd: {
+    jsonLd: [{
       "@context": "https://schema.org",
       "@type": "Product",
       name: "WONLY S80 True-Sensing Smart Lock",
       brand: { "@type": "Brand", name: "WONLY" },
       category: "Smart Lock",
       url: SITE_URL + "/products/smart-locks/s80",
-    },
+    }, ...(locale === "en" ? [{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQS.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) }] : [])],
   });
 
   return (
@@ -110,67 +133,37 @@ const SmartLockS80 = () => {
             </div>
           </div>
           <Reveal className="relative">
-            <div className="relative mx-auto w-full max-w-[420px] aspect-[3/4] rounded-3xl overflow-hidden" style={{ background: "linear-gradient(160deg, rgba(212,196,160,0.14), rgba(255,255,255,0.02))", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <img src={IMG.lock} alt="WONLY S80 smart lock" className="absolute inset-0 w-full h-full object-contain p-8" />
+            <div className="relative mx-auto w-full max-w-[680px] aspect-[16/10] rounded-3xl overflow-hidden" style={{ background: "linear-gradient(160deg, rgba(212,196,160,0.14), rgba(255,255,255,0.02))", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <img src={IMG.hero} alt="WONLY S80 smart lock in the unified WONLY product presentation" className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Product evidence — keep catalog product views separate from HTML copy */}
+      {/* X70-style overview gallery: clean product assets, never a PDF half-page */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
-        <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>{t("productEvidence", "Product Views")}</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("seeS80", "See The S80 Clearly")}</h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed" style={{ color: MUTED }}>
-            {t("evidenceBody", "Front, interior and three-quarter product views are shown separately from the copy, so buyers can inspect the lock body, controls and finish without reading text embedded in an image.")}
-          </p>
-        </Reveal>
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-start">
           <Reveal>
-            <figure className="h-full rounded-3xl overflow-hidden border" style={{ background: "#f5f1ea", borderColor: `${SILVER}55` }}>
-              <img src={IMG.catalogProduct} alt="WONLY S80 smart lock exterior and interior product views" loading="lazy" className="w-full h-full min-h-[340px] md:min-h-[520px] object-contain" />
-            </figure>
-          </Reveal>
-          <Reveal delay={100}>
-            <figure className="h-full rounded-3xl overflow-hidden border flex items-center" style={{ background: "#f7f7f5", borderColor: `${SILVER}55` }}>
-              <img src={IMG.catalogFrontBack} alt="WONLY S80 front and rear panels in three-quarter view" loading="lazy" className="w-full h-auto object-contain p-5 md:p-8" />
-            </figure>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Deterministic product motion — real catalog image, no generated operation claim */}
-      <section className="px-[7vw] py-24 md:py-32" style={{ background: DARK }}>
-        <div className="grid grid-cols-1 lg:grid-cols-[0.72fr_1.28fr] gap-10 md:gap-16 items-center">
-          <Reveal>
-            <div className={eyebrow} style={{ color: CHAMP }}>{t("motionEyebrow", "Product Overview")}</div>
-            <h2 className={h2cls + " mt-5 text-white"}>{t("motionTitle", "S80 Design In Motion")}</h2>
-            <p className="mt-6 text-base leading-relaxed" style={{ color: "#d8d2c8" }}>
-              {t("motionBody", "A closer look at the S80 exterior and interior panels. The short loop is an appearance overview; access functions and final configuration should be confirmed with our sales team.")}
-            </p>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="overflow-hidden rounded-3xl border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "#0d0d0d" }}>
-              <video className="block w-full aspect-video object-cover" autoPlay muted loop playsInline preload="metadata" poster={IMG.catalogFrontBack} aria-label="WONLY S80 product appearance video">
-                <source src={IMG.productMotion} type="video/mp4" />
-              </video>
+            <div className="rounded-3xl overflow-hidden border-2" style={{ background: "#f5f1ea", borderColor: `${GOLD}44` }}>
+              <img src={GALLERY[activeImg].src} alt={GALLERY[activeImg].alt} className={`w-full h-[440px] md:h-[600px] ${GALLERY[activeImg].fit === "cover" ? "object-cover" : "object-contain p-6 md:p-10"}`} />
+            </div>
+            <div className="mt-4 grid grid-cols-4 gap-3">
+              {GALLERY.map((item, index) => (
+                <button key={item.src} onClick={() => setActiveImg(index)} aria-label={`Show S80 image ${index + 1}`} aria-pressed={activeImg === index} className="overflow-hidden rounded-xl border-2 h-20 md:h-24" style={{ borderColor: activeImg === index ? GOLD : "transparent", background: "#f5f1ea" }}>
+                  <img src={item.src} alt="" loading="lazy" className={`w-full h-full ${item.fit === "cover" ? "object-cover" : "object-contain p-1"}`} />
+                </button>
+              ))}
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* Overview highlights */}
-      <section className="px-[7vw] py-20 md:py-24" style={{ background: "#fff" }}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-          {highlights.map((h, i) => (
-            <Reveal key={h} delay={i * 90}>
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0" style={{ background: `${GOLD}1f` }}><Check size={14} style={{ color: GOLD }} /></span>
-                <span className="text-base font-normal leading-relaxed" style={{ color: DARK }}>{h}</span>
-              </div>
-            </Reveal>
-          ))}
+          <Reveal delay={100}>
+            <div className={eyebrow} style={{ color: GOLD }}>{t("productEvidence", "Overview")}</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("seeS80", "A True-Sensing Lock Built Around Arrival")}</h2>
+            <p className="mt-6 text-base leading-relaxed" style={{ color: MUTED }}>{t("evidenceBody", "The S80 combines long-range approach sensing, 3D facial recognition, fingerprint access and app control in one full-height lock. The gallery separates real product views from explanatory copy so buyers can inspect the exterior panel, interior controls, finish and installed scale clearly.")}</p>
+            <ul className="mt-7 space-y-3">
+              {highlights.map((point) => <li key={point} className="flex items-start gap-3"><span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: `${GOLD}22` }}><Check size={13} style={{ color: GOLD }} /></span><span className="text-sm leading-relaxed" style={{ color: DARK }}>{point}</span></li>)}
+            </ul>
+            <Link to="/#contact" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium" style={{ background: GOLD, color: DARK }}>{t("quote", "Get Solutions & Quote")} <ArrowRight size={15} /></Link>
+          </Reveal>
         </div>
       </section>
 
@@ -196,22 +189,33 @@ const SmartLockS80 = () => {
         </div>
       </section>
 
-      {/* Feature grid */}
-      <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
+      {/* Immersive feature story — media-led, with searchable HTML copy */}
+      <section className="px-[5vw] py-24 md:py-32" style={{ background: "#0d0c0b" }}>
         <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>{t("engineered", "Engineered In")}</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("security", "Security You Never Have To Think About")}</h2>
+          <div className={eyebrow} style={{ color: CHAMP }}>{t("engineered", "Smart Technology")}</div>
+          <h2 className={h2cls + " mt-5 text-white"}>{t("security", "One Lock. Every Arrival, Under Control")}</h2>
         </Reveal>
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((f, i) => (
-            <Reveal key={f.t} delay={(i % 3) * 80}>
-              <div className="group h-full rounded-2xl p-7 border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ background: "#f7f7f5", borderColor: `${SILVER}66` }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: GOLD }}>
-                  <f.icon size={20} style={{ color: "#fff" }} />
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[250px] gap-4">
+          <Reveal className="relative overflow-hidden rounded-3xl md:col-span-2 md:row-span-2 min-h-[420px]">
+            <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" poster={IMG.catalogFrontBack} aria-label="WONLY S80 exterior and interior product appearance">
+              <source src={IMG.productMotion} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30" />
+            <div className="absolute inset-x-0 bottom-0 p-7 md:p-9"><h3 className="text-2xl md:text-3xl text-white font-medium">{features[0].t}</h3><p className="mt-2 max-w-xl text-sm leading-relaxed text-white/75">{features[0].d}</p></div>
+          </Reveal>
+          <Reveal delay={80} className="relative overflow-hidden rounded-3xl md:col-span-2 min-h-[250px]">
+            <img src={IMG.tapnowApartment} alt="WONLY S80 installed at a premium overseas apartment entrance" loading="lazy" className="absolute inset-0 w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/20 to-transparent" />
+            <div className="absolute left-0 top-0 p-7 max-w-sm"><h3 className="text-xl text-white font-medium">{features[1].t}</h3><p className="mt-2 text-sm leading-relaxed text-white/75">{features[1].d}</p></div>
+          </Reveal>
+          {features.slice(2).map((f, i) => (
+            <Reveal key={f.t} delay={i * 70} className={`${i === 0 ? "md:col-span-2" : ""}`}>
+              <article className="h-full rounded-3xl p-7 border flex flex-col justify-between transition-transform hover:-translate-y-1" style={{ background: i === 0 ? "linear-gradient(135deg,#2b241b,#151311)" : "#171513", borderColor: "rgba(212,196,160,.16)" }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: GOLD }}>
+                  <f.icon size={20} style={{ color: DARK }} />
                 </div>
-                <h3 className="mt-5 text-lg font-medium" style={{ color: DARK }}>{f.t}</h3>
-                <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{f.d}</p>
-              </div>
+                <div><h3 className="mt-5 text-lg font-medium text-white">{f.t}</h3><p className="mt-2 text-sm leading-relaxed text-white/60">{f.d}</p></div>
+              </article>
             </Reveal>
           ))}
         </div>
@@ -296,7 +300,16 @@ const SmartLockS80 = () => {
         <p className="mt-6 text-xs font-light" style={{ color: MUTED }}>{t("note", "Specifications are indicative and may vary by market and configuration.")}</p>
       </section>
 
+      {/* Buyer questions: English copy and matching FAQ schema ship together. */}
+      {locale === "en" && <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
+          <Reveal className="max-w-3xl"><div className={eyebrow} style={{ color: GOLD }}>Buyer FAQ</div><h2 className={h2cls + " mt-5"}>Questions Buyers Ask Before Specifying S80</h2></Reveal>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0 border-t" style={{ borderColor: `${SILVER}55` }}>
+            {FAQS.map(([q, a]) => <Reveal key={q}><article className="py-7 border-b" style={{ borderColor: `${SILVER}44` }}><h3 className="text-lg font-medium" style={{ color: DARK }}>{q}</h3><p className="mt-3 text-sm leading-relaxed" style={{ color: MUTED }}>{a}</p></article></Reveal>)}
+          </div>
+        </section>}
+
       <DoorModelSelector group="smart-lock" currentPath="/products/smart-locks/s80" />
+      <RelatedInsights />
       <CtaBand eyebrowText={t("order", "Order & OEM")} title={t("cta", "Bring The S80 To Your Market")} sub={t("ctaSub", "Request pricing, samples or OEM/ODM configurations — our team replies within 24 hours.")} />
       <SiteFooter />
     </div>

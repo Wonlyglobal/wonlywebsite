@@ -17,7 +17,7 @@ const DARK = "#221F20";
 const BASE = import.meta.env.BASE_URL;
 
 const IMG = {
-  hero: "/images/door/gallery/g1-front.jpg",
+  hero: "/images/catalog-2026/hero-renders/x70.webp",
   lock1: "/images/door/gallery/g3-detail.jpg",
   lock3: "/images/door/gallery/g2-scene.jpg",
   lock4: "/images/door/gallery/g4-factory.jpg",
@@ -28,7 +28,7 @@ const IMG = {
 
 /* Product gallery */
 const GALLERY = [
-  { src: `${BASE}images/door/gallery/g1-front.jpg`, alt: "WONLY X70 robotic security door — front view with smart panel and lock" },
+  { src: `${BASE}images/catalog-2026/hero-renders/x70.webp`, alt: "WONLY X70 robotic security door in the unified WONLY product presentation" },
   { src: `${BASE}images/door/gallery/g2-scene.jpg`, alt: "WONLY X70 cast-aluminium door in a premium residential entrance" },
   { src: `${BASE}images/door/gallery/g3-detail.jpg`, alt: "WONLY X70 door body and smart-lock detail on the production line" },
   { src: `${BASE}images/door/gallery/g4-factory.jpg`, alt: "WONLY X70 security doors on the 5G smart-factory line" },
