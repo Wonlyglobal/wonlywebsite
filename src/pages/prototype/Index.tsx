@@ -815,24 +815,24 @@ const Prototype = () => {
                   <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
                 )}
                 {n.children && openDrop === n.label && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[360px] max-h-[78vh] overflow-y-auto overscroll-contain rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                  <div className={`absolute top-full rounded-2xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-3 ${n.label === "Product" ? "left-0 w-[min(960px,calc(100vw-32px))] max-h-[76vh] overflow-y-auto overscroll-contain grid grid-cols-1 md:grid-cols-2 gap-3" : "left-1/2 -translate-x-1/2 w-[360px] max-h-[78vh] overflow-y-auto overscroll-contain"}`}>
                     {n.children.map((c) => (
-                      <div key={c.label} className="relative">
-                        <Link to={c.href || "#"} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
-                          {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                          <span className="leading-tight whitespace-nowrap flex-1">{t(c.label)}</span>
+                      <div key={c.label} className={`relative ${n.label === "Product" ? "rounded-xl border border-black/[0.06] bg-white/45 p-2" : ""} ${(c.label === "Smart Window" || c.label === "Whole-House Intelligence") ? "md:col-span-1" : ""}`}>
+                        <Link to={c.href || "#"} className={`flex items-center gap-3 w-full px-3 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors ${n.label === "Product" ? "py-3" : "py-2.5"}`} style={{ color: DARK }}>
+                          {c.img && <span className={`${n.label === "Product" ? "w-[72px] h-[72px] rounded-xl" : "w-9 h-9 rounded-md"} shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]`}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+                          <span className={`leading-tight whitespace-nowrap flex-1 ${n.label === "Product" ? "text-base font-normal" : ""}`}>{t(c.label)}</span>
                           {c.children && <ChevronDown size={14} style={{ color: MUTED }} />}
                         </Link>
                         {c.children && (
-                          <div className="ml-[30px] pl-3 border-l border-black/10 pb-1">
+                          <div className={`${n.label === "Product" ? (c.label === "Door" ? "grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 pb-2" : "grid grid-cols-2 sm:grid-cols-3 gap-x-2 px-2 pb-2") : "ml-[30px] pl-3 border-l border-black/10 pb-1"}`}>
                             {c.children.map((sc) => (
-                              <div key={sc.label}>
-                                <Link to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
-                                  {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
+                              <div key={sc.label} className={sc.children ? "rounded-lg bg-white/55 p-1" : ""}>
+                                <Link to={sc.href} className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                                  {sc.img && <span className={`${n.label === "Product" ? "w-12 h-12 rounded-lg" : "w-7 h-7 rounded-md"} shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]`}><img src={sc.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
                                   <span className="leading-tight whitespace-nowrap flex-1">{t(sc.label)}</span>
                                   {sc.children && <ChevronDown size={12} style={{ color: MUTED }} />}
                                 </Link>
-                                {sc.children && <div className="ml-5 pl-3 border-l border-black/10 grid grid-cols-2 gap-x-1 pb-1">
+                                {sc.children && <div className="grid grid-cols-2 gap-x-1 px-1 pb-1">
                                   {sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{model.label}</Link>)}
                                 </div>}
                               </div>
