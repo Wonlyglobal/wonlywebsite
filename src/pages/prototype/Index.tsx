@@ -67,18 +67,43 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-type NavSubChild = { label: string; href: string; img?: string };
+type NavSubChild = { label: string; href: string; img?: string; children?: NavSubChild[] };
 type NavChild = { label: string; href?: string; to?: string; img?: string; children?: NavSubChild[] };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Product", children: [
-    { label: "Door", href: "/product/door", img: IMG.aluMax, children: [
-      { label: "Metal Door", href: "/product/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
-      { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
+    { label: "Door", href: "/products/entrance-door", img: `${BASE}images/category-renders/door.webp`, children: [
+      { label: "Metal Door", href: "/products/security-doors", img: `${BASE}images/category-renders/metal-door.webp`, children: [
+        { label: "X70", href: "/products/security-doors/x70" },
+        { label: "X60 Max", href: "/products/security-doors/x60-max" },
+        { label: "X60 Pro", href: "/products/security-doors/x60-pro" },
+        { label: "X50 Max", href: "/products/security-doors/x50-max" },
+        { label: "X50 Pro", href: "/products/security-doors/x50-pro" },
+        { label: "T200", href: "/products/security-doors/t200" },
+      ] },
+      { label: "Wooden Door", href: "/products/wooden-doors", img: `${BASE}images/category-renders/wooden-door.webp`, children: [
+        { label: "Custom", href: "/products/wooden-doors/custom" },
+        { label: "Minimalist", href: "/products/wooden-doors/minimalist" },
+        { label: "PVC", href: "/products/wooden-doors/pvc" },
+        { label: "Solid Wood", href: "/products/wooden-doors/solid-wood" },
+        { label: "Aluminum Alloy", href: "/products/wooden-doors/aluminum-alloy" },
+      ] },
     ] },
-    { label: "Smart Lock", href: "/product/smart-lock", img: IMG.lockS80 },
-    { label: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/dropdown-window.png` },
-    { label: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
+    { label: "Smart Lock", href: "/products/smart-locks", img: `${BASE}images/category-renders/smart-lock.webp`, children: [
+      { label: "S80", href: "/products/smart-locks/s80" },
+      { label: "S80 Max", href: "/products/smart-locks/s80-max" },
+      { label: "S60 Max", href: "/products/smart-locks/s60-max" },
+      { label: "S60 Pro", href: "/products/smart-locks/s60-pro" },
+      { label: "S50 Pro", href: "/products/smart-locks/s50-pro" },
+      { label: "S58 Pro", href: "/products/smart-locks/s58-pro" },
+      { label: "P10 Pro", href: "/products/smart-locks/p10-pro" },
+      { label: "P15 Pro", href: "/products/smart-locks/p15-pro" },
+      { label: "S922 Max", href: "/products/smart-locks/s922-max" },
+      { label: "S936", href: "/products/smart-locks/s936" },
+      { label: "A5N", href: "/products/smart-locks/a5n" },
+    ] },
+    { label: "Smart Window", href: "/products/smart-windows", img: `${BASE}images/category-renders/smart-window.webp` },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/category-renders/whole-house.webp` },
   ] },
   { label: "Advantages", href: "/advantages", children: [
     { label: "Why Wonly Door", href: "/advantages#why-wonly-door" },
@@ -790,7 +815,7 @@ const Prototype = () => {
                   <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
                 )}
                 {n.children && openDrop === n.label && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[360px] max-h-[78vh] overflow-y-auto overscroll-contain rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
                     {n.children.map((c) => (
                       <div key={c.label} className="relative">
                         <Link to={c.href || "#"} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
@@ -801,10 +826,16 @@ const Prototype = () => {
                         {c.children && (
                           <div className="ml-[30px] pl-3 border-l border-black/10 pb-1">
                             {c.children.map((sc) => (
-                              <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
-                                {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                                <span className="leading-tight whitespace-nowrap">{t(sc.label)}</span>
-                              </Link>
+                              <div key={sc.label}>
+                                <Link to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                                  {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
+                                  <span className="leading-tight whitespace-nowrap flex-1">{t(sc.label)}</span>
+                                  {sc.children && <ChevronDown size={12} style={{ color: MUTED }} />}
+                                </Link>
+                                {sc.children && <div className="ml-5 pl-3 border-l border-black/10 grid grid-cols-2 gap-x-1 pb-1">
+                                  {sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{model.label}</Link>)}
+                                </div>}
+                              </div>
                             ))}
                           </div>
                         )}
