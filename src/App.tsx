@@ -96,6 +96,8 @@ const WholeHouse = lazy(() => import("./pages/products/WholeHouse"));
 // Detailed / sub-line pages
 const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
 const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
+const CatalogProductDetail = lazy(() => import("./pages/products/CatalogProductDetail"));
+const WoodenDoorSeriesDetail = lazy(() => import("./pages/products/WoodenDoorSeriesDetail"));
 const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
 const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
 const YizhaiYishu = lazy(() => import("./pages/products/YizhaiYishu"));
@@ -146,6 +148,14 @@ const App = () => (
           <Route path="/products/whole-house" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WholeHouse /></Suspense>} />
           {/* Detailed sub-pages already built. */}
           <Route path="/products/smart-locks/s80" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SmartLockS80 /></Suspense>} />
+          <Route path="/products/smart-locks/s80-max" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><CatalogProductDetail product="s80-max" /></Suspense>} />
+          <Route path="/products/security-doors/x50-pro" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><CatalogProductDetail product="x50-pro" /></Suspense>} />
+          <Route path="/products/security-doors/t200" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><CatalogProductDetail product="t200" /></Suspense>} />
+          <Route path="/products/wooden-doors/custom" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoorSeriesDetail series="custom" /></Suspense>} />
+          <Route path="/products/wooden-doors/minimalist" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoorSeriesDetail series="minimalist" /></Suspense>} />
+          <Route path="/products/wooden-doors/pvc" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoorSeriesDetail series="pvc" /></Suspense>} />
+          <Route path="/products/wooden-doors/solid-wood" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoorSeriesDetail series="solid-wood" /></Suspense>} />
+          <Route path="/products/wooden-doors/aluminum-alloy" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><WoodenDoorSeriesDetail series="aluminum-alloy" /></Suspense>} />
           <Route path="/products/security-doors/x70" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><SecurityDoorX70 /></Suspense>} />
           <Route path="/products/engineering-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><EngineeringDoors /></Suspense>} />
           <Route path="/products/medical-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MedicalDoors /></Suspense>} />

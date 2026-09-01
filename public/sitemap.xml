@@ -1201,6 +1201,54 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.wonlyglobal.com/products/smart-locks/s80-max/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/security-doors/x50-pro/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/security-doors/t200/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/wooden-doors/custom/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/wooden-doors/minimalist/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/wooden-doors/pvc/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/wooden-doors/solid-wood/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/products/wooden-doors/aluminum-alloy/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.wonlyglobal.com/products/security-doors/cast-aluminium/</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -1247,6 +1295,66 @@
     <lastmod>2026-07-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/ar/insights/3d-face-recognition-door-locks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/fr/insights/3d-face-recognition-door-locks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/ru/insights/3d-face-recognition-door-locks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/es/insights/3d-face-recognition-door-locks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/3d-face-recognition-door-locks/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/3d-face-recognition-door-locks/" />
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.wonlyglobal.com/insights/60-90-120-minute-fire-doors/</loc>
@@ -1725,6 +1833,66 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-and-security-dual-rated-doors/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-and-security-dual-rated-doors/" />
     <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/ar/insights/fire-door-certifications-en-1634-ul-10c/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/fr/insights/fire-door-certifications-en-1634-ul-10c/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/ru/insights/fire-door-certifications-en-1634-ul-10c/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/es/insights/fire-door-certifications-en-1634-ul-10c/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.wonlyglobal.com/ar/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.wonlyglobal.com/fr/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.wonlyglobal.com/ru/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/insights/fire-door-certifications-en-1634-ul-10c/" />
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

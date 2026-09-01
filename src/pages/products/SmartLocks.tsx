@@ -21,7 +21,7 @@ const data: ProductPageData = {
   seriesEyebrow: "Lock Range",
   seriesTitle: "A Lock For Every Door",
   series: [
-    { name: "S80 True-Sensing Smart Lock", tag: "Flagship", d: "Hands-free long-range sensing with biometric and app control — the WONLY benchmark.", img: `${BASE}images/lock-s80.webp`, path: "/products/smart-locks/s80" },
+    { name: "S80 Max Remote-Sensing True Smart Lock", tag: "Flagship 4.0", d: "Hands-free approach recognition, 3D face access, anti-pinch protection and an integrated door viewer.", img: `${BASE}images/catalog-2026/s80.webp`, path: "/products/smart-locks/s80-max" },
     { name: "Palm-Vein Push-Pull Lock", tag: "Biometric", d: "Contactless palm-vein recognition with a one-motion push-pull handle.", img: `${BASE}images/5products/dropdown-control.png` },
     { name: "Video Guard Smart Lock", tag: "With Camera", d: "A built-in camera and motion alerts stream visitors straight to your phone.", img: `${BASE}images/5products/prod-smart-locks.jpg` },
     { name: "Commercial Access System", tag: "Enterprise", d: "RFID, PIN and app access control for offices, hotels and public buildings.", img: `${BASE}images/5products/prod-whole-house.jpg` },
