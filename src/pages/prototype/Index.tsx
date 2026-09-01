@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
-import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
+import { useQuoteStore, QuoteModal, ProductMegaMenu } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
@@ -814,7 +814,7 @@ const Prototype = () => {
                 ) : (
                   <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
                 )}
-                {n.children && openDrop === n.label && (
+                {n.children && openDrop === n.label && (n.label === "Product" ? <ProductMegaMenu /> : (
                   <div className={`absolute top-full rounded-2xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-3 ${n.label === "Product" ? "left-0 w-[min(960px,calc(100vw-32px))] max-h-[76vh] overflow-y-auto overscroll-contain grid grid-cols-1 md:grid-cols-2 gap-3" : "left-1/2 -translate-x-1/2 w-[360px] max-h-[78vh] overflow-y-auto overscroll-contain"}`}>
                     {n.children.map((c) => (
                       <div key={c.label} className={`relative ${n.label === "Product" ? "rounded-xl border border-black/[0.06] bg-white/45 p-2" : ""} ${(c.label === "Smart Window" || c.label === "Whole-House Intelligence") ? "md:col-span-1" : ""}`}>
@@ -842,7 +842,7 @@ const Prototype = () => {
                       </div>
                     ))}
                   </div>
-                )}
+                ))}
               </div>
             ))}
           </nav>

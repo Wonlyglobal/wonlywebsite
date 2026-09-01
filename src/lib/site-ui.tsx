@@ -45,25 +45,50 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 /* ── Navigation & footer are CMS-editable: content/settings/navigation.json ──
    Edited via /admin → 站点设置. Image paths in the JSON are relative to
    public/images/ and get the BASE prefix here. Empty href = non-link label. */
-type NavChild = { label: string; href: string; img?: string; children?: { label: string; href: string; img?: string }[] };
+export type NavChild = { label: string; href: string; img?: string; children?: NavChild[] };
 type NavItem = { label: string; href?: string; children?: NavChild[] };
 
 const NAV_RAW = import.meta.glob("/content/settings/navigation.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 const SITE_NAV_DATA = JSON.parse(Object.values(NAV_RAW)[0] || '{"nav":[],"footer":[]}') as {
-  nav: { label: string; href?: string; children?: { label: string; href?: string; img?: string; children?: { label: string; href?: string; img?: string }[] }[] }[];
+  nav: { label: string; href?: string; children?: NavChild[] }[];
   footer: { h: string; links: { l: string; href?: string }[] }[];
 };
 const img_ = (p?: string) => (p ? `${BASE}${p.replace(/^\//, "")}` : undefined);
+const mapChild = (c: NavChild): NavChild => ({
+  label: c.label,
+  href: c.href || "#",
+  img: img_(c.img),
+  children: c.children?.map(mapChild),
+});
 const NAV: NavItem[] = SITE_NAV_DATA.nav.map((n) => ({
   label: n.label,
   href: n.href || undefined,
-  children: n.children?.map((c) => ({
-    label: c.label,
-    href: c.href || "#",
-    img: img_(c.img),
-    children: c.children?.map((sc) => ({ label: sc.label, href: sc.href || "#", img: img_(sc.img) })),
-  })),
+  children: n.children?.map(mapChild),
 }));
+
+export function ProductMegaMenu({ className = "" }: { className?: string }) {
+  const { t } = useLocale();
+  const children = NAV.find((item) => item.label === "Product")?.children || [];
+  return <div className={`absolute top-full left-0 w-[min(880px,calc(100vw-32px))] max-h-[76vh] overflow-y-auto overscroll-contain rounded-2xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-3 grid grid-cols-1 md:grid-cols-2 gap-3 ${className}`}>
+    {children.map((c) => <div key={c.label} className="relative rounded-xl border border-black/[0.06] bg-white/45 p-2">
+      <Link to={c.href} className="flex items-center gap-3 w-full px-3 py-3 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+        {c.img && <span className="w-[72px] h-[72px] rounded-xl shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+        <span className="leading-tight whitespace-nowrap flex-1 text-base font-normal">{t(c.label)}</span>
+        {c.children && <ChevronDown size={14} style={{ color: MUTED }} />}
+      </Link>
+      {c.children && <div className={c.label === "Door" ? "grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 pb-2" : "mx-2 mb-2 rounded-lg bg-white/55 p-3 grid grid-cols-2 sm:grid-cols-3 gap-x-2"}>
+        {c.children.map((sc) => <div key={sc.label} className={sc.children ? "rounded-lg bg-white/55 p-1" : ""}>
+          <Link to={sc.href} className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+            {sc.img && <span className="w-12 h-12 rounded-lg shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={sc.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+            <span className="leading-tight whitespace-nowrap flex-1">{t(sc.label)}</span>
+            {sc.children && <ChevronDown size={12} style={{ color: MUTED }} />}
+          </Link>
+          {sc.children && <div className="grid grid-cols-2 gap-x-1 px-1 pb-1">{sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{model.label}</Link>)}</div>}
+        </div>)}
+      </div>}
+    </div>)}
+  </div>;
+}
 
 /* Shared "Get a Quote" modal state (zustand) */
 export const useQuoteStore = create<{
@@ -232,7 +257,7 @@ export function SiteHeader() {
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, language, pathname, t } = useLocale();
   const cmsNavigation = useCmsSetting("navigation");
-  const activeNav: NavItem[] = cmsNavigation?.items?.length ? cmsNavigation.items.map(item => ({ label: item.label, href: item.url })) : NAV;
+  const activeNav: NavItem[] = cmsNavigation?.items?.length ? cmsNavigation.items.map(item => ({ label: item.label, href: item.url, children: NAV.find((fallback) => fallback.label === item.label)?.children })) : NAV;
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     onScroll();
@@ -255,7 +280,7 @@ export function SiteHeader() {
               ) : (
                 <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
               )}
-              {n.children && openDrop === n.label && (
+              {n.children && openDrop === n.label && (n.label === "Product" ? <ProductMegaMenu /> :
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
                   {n.children.map((c) => (
                     <div key={c.label} className="relative">
