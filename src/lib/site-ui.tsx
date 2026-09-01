@@ -5,6 +5,7 @@ import { create } from "zustand";
 import { trackLead } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
 import { LANGUAGES, pathForLocale, useLocale } from "@/lib/i18n";
+import { useCmsSetting } from "@/lib/cms-site-settings";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
 export const GOLD = "#BFA06A";
@@ -230,6 +231,8 @@ export function SiteHeader() {
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, language, pathname, t } = useLocale();
+  const cmsNavigation = useCmsSetting("navigation");
+  const activeNav: NavItem[] = cmsNavigation?.items?.length ? cmsNavigation.items.map(item => ({ label: item.label, href: item.url })) : NAV;
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     onScroll();
@@ -245,7 +248,7 @@ export function SiteHeader() {
           <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
-          {NAV.map((n) => (
+          {activeNav.map((n) => (
             <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
               {n.href ? (
                 <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</Link>

@@ -17,7 +17,6 @@ type SettingMap = {
   redirects: { items?: CmsRedirectItem[] };
   settings: CmsSiteSettings;
 };
-
 const cache = new Map<keyof SettingMap, unknown>();
 const pending = new Map<keyof SettingMap, PromiseLike<unknown>>();
 

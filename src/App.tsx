@@ -9,6 +9,7 @@ import { initAnalytics, trackPageview } from "@/lib/analytics";
 import FloatingContact from "@/lib/floating-contact";
 import { LocaleDocument, localeFromPath } from "@/lib/i18n";
 import { FloatingLanguageSwitcher } from "@/lib/site-ui";
+import { getCmsSetting } from "@/lib/cms-site-settings";
 
 // Take over scroll handling from the browser so lazy routes behave predictably.
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
@@ -72,6 +73,23 @@ function SiteFloaters() {
   return <><FloatingLanguageSwitcher /><FloatingContact /></>;
 }
 
+function CmsRedirects() {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname.startsWith("/cms")) return;
+    let active = true;
+    void getCmsSetting("redirects").then(config => {
+      if (!active) return;
+      const rule = config?.items?.find(item => item.from === location.pathname);
+      if (!rule || rule.to === location.pathname) return;
+      if (/^https:\/\//i.test(rule.to)) window.location.replace(rule.to);
+      else window.location.replace(`${rule.to}${location.search}${location.hash}`);
+    });
+    return () => { active = false; };
+  }, [location.pathname, location.search, location.hash]);
+  return null;
+}
+
 // Lazy-loaded so each route ships as its own chunk and never enters the initial
 // bundle the homepage visitor downloads.
 const Prototype = lazy(() => import("./pages/prototype/Index"));
@@ -125,6 +143,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter basename={basename}>
         <ScrollManager />
+        <CmsRedirects />
         <LocaleDocument />
         <Suspense fallback={null}><PublishedVisualContent /></Suspense>
         <Routes>
