@@ -9,6 +9,10 @@ const IMG = {
   lock: `${BASE}images/lock-s80.webp`,
   render: `${BASE}images/lock-s80-render.webp`,
   band: `${BASE}images/factory-abb.webp`,
+  catalogProduct: `${BASE}images/catalog-2026/s80/remote-sensing-product.webp`,
+  catalogFrontBack: `${BASE}images/catalog-2026/s80/front-back-catalog.webp`,
+  familyVilla: `${BASE}images/catalog-2026/s80/family-villa.webp`,
+  productMotion: `${BASE}images/catalog-2026/s80/product-detail-motion.mp4`,
 };
 
 const HIGHLIGHTS = [
@@ -113,6 +117,49 @@ const SmartLockS80 = () => {
         </div>
       </section>
 
+      {/* Product evidence — keep catalog product views separate from HTML copy */}
+      <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
+        <Reveal className="max-w-3xl">
+          <div className={eyebrow} style={{ color: GOLD }}>{t("productEvidence", "Product Views")}</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("seeS80", "See The S80 Clearly")}</h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed" style={{ color: MUTED }}>
+            {t("evidenceBody", "Front, interior and three-quarter product views are shown separately from the copy, so buyers can inspect the lock body, controls and finish without reading text embedded in an image.")}
+          </p>
+        </Reveal>
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
+          <Reveal>
+            <figure className="h-full rounded-3xl overflow-hidden border" style={{ background: "#f5f1ea", borderColor: `${SILVER}55` }}>
+              <img src={IMG.catalogProduct} alt="WONLY S80 smart lock exterior and interior product views" loading="lazy" className="w-full h-full min-h-[340px] md:min-h-[520px] object-contain" />
+            </figure>
+          </Reveal>
+          <Reveal delay={100}>
+            <figure className="h-full rounded-3xl overflow-hidden border flex items-center" style={{ background: "#f7f7f5", borderColor: `${SILVER}55` }}>
+              <img src={IMG.catalogFrontBack} alt="WONLY S80 front and rear panels in three-quarter view" loading="lazy" className="w-full h-auto object-contain p-5 md:p-8" />
+            </figure>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Deterministic product motion — real catalog image, no generated operation claim */}
+      <section className="px-[7vw] py-24 md:py-32" style={{ background: DARK }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[0.72fr_1.28fr] gap-10 md:gap-16 items-center">
+          <Reveal>
+            <div className={eyebrow} style={{ color: CHAMP }}>{t("motionEyebrow", "Product Overview")}</div>
+            <h2 className={h2cls + " mt-5 text-white"}>{t("motionTitle", "S80 Design In Motion")}</h2>
+            <p className="mt-6 text-base leading-relaxed" style={{ color: "#d8d2c8" }}>
+              {t("motionBody", "A closer look at the S80 exterior and interior panels. The short loop is an appearance overview; access functions and final configuration should be confirmed with our sales team.")}
+            </p>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="overflow-hidden rounded-3xl border" style={{ borderColor: "rgba(255,255,255,0.16)", background: "#0d0d0d" }}>
+              <video className="block w-full aspect-video object-cover" autoPlay muted loop playsInline preload="metadata" poster={IMG.catalogProduct} aria-label="WONLY S80 product appearance video">
+                <source src={IMG.productMotion} type="video/mp4" />
+              </video>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Overview highlights */}
       <section className="px-[7vw] py-20 md:py-24" style={{ background: "#fff" }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
@@ -205,10 +252,18 @@ const SmartLockS80 = () => {
 
       {/* Where it fits */}
       <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
-        <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>{t("fits", "Where It Fits")}</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("every", "One Lock, Every Kind Of Door")}</h2>
-        </Reveal>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          <Reveal className="max-w-3xl">
+            <div className={eyebrow} style={{ color: GOLD }}>{t("fits", "Where It Fits")}</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("every", "One Lock, Every Kind Of Door")}</h2>
+            <p className="mt-6 text-base leading-relaxed" style={{ color: MUTED }}>{t("arrivalBody", "From family arrivals to managed properties, the S80 is designed for entrances where convenient access and accountable control matter every day.")}</p>
+          </Reveal>
+          <Reveal delay={100}>
+            <figure className="overflow-hidden rounded-3xl" style={{ background: "#f2ede5" }}>
+              <img src={IMG.familyVilla} alt="Family arriving at a contemporary villa entrance equipped with a WONLY S80 smart lock" loading="lazy" className="w-full aspect-[4/3] object-cover" />
+            </figure>
+          </Reveal>
+        </div>
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {scenarios.map((s, i) => (
             <Reveal key={s.t} delay={(i % 4) * 80}>
