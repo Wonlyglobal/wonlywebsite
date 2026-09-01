@@ -2,7 +2,7 @@
   "nav": [
     { "label": "Product", "href": "", "children": [
       { "label": "Door", "href": "/product/door", "img": "images/alu-k300max.webp", "children": [
-        { "label": "Metal Door", "href": "/products/door/metal-door", "img": "images/5products/nav-security-door.png" },
+        { "label": "Metal Door", "href": "/product/door/metal-door", "img": "images/5products/nav-security-door.png" },
         { "label": "Wooden Door", "href": "/product/door/wooden-door", "img": "images/5products/nav-wooden-door.png" }
       ] },
       { "label": "Smart Lock", "href": "/product/smart-lock", "img": "images/lock-s80.webp" },
@@ -22,7 +22,7 @@
   "footer": [
     { "h": "Product", "links": [
       { "l": "Door", "href": "/product/door" },
-      { "l": "Metal Door", "href": "/products/door/metal-door" },
+      { "l": "Metal Door", "href": "/product/door/metal-door" },
       { "l": "Wooden Door", "href": "/product/door/wooden-door" },
       { "l": "Smart Lock", "href": "/product/smart-lock" },
       { "l": "Smart Window", "href": "/product/smart-window" },

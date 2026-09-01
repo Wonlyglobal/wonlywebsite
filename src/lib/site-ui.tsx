@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, ChevronRight, X, Check, Globe } from "lucide-react";
+import { ArrowRight, ChevronDown, X, Check, Globe } from "lucide-react";
 import { create } from "zustand";
 import { trackLead } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
@@ -228,7 +228,6 @@ export function QuoteModal() {
 export function SiteHeader() {
   const [solid, setSolid] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
-  const [openSub, setOpenSub] = useState<string | null>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, language, pathname, t } = useLocale();
   useEffect(() => {
@@ -247,7 +246,7 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
           {NAV.map((n) => (
-            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
+            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
               {n.href ? (
                 <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</Link>
               ) : (
@@ -256,14 +255,14 @@ export function SiteHeader() {
               {n.children && openDrop === n.label && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
                   {n.children.map((c) => (
-                    <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
+                    <div key={c.label} className="relative">
                       <Link to={c.href} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                         {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
                         <span className="leading-tight whitespace-nowrap flex-1">{t(c.label)}</span>
-                        {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
+                        {c.children && <ChevronDown size={14} style={{ color: MUTED }} />}
                       </Link>
-                      {c.children && openSub === c.label && (
-                        <div className="absolute top-0 left-full w-[220px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                      {c.children && (
+                        <div className="ml-[30px] pl-3 border-l border-black/10 pb-1">
                           {c.children.map((sc) => (
                             <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                               {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}

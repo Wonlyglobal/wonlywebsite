@@ -3,6 +3,7 @@ import { Radar, Fingerprint, Smartphone, ShieldAlert, BatteryCharging, Bell, Arr
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useLocale, type Locale } from "@/lib/i18n";
 import { GOLD, CHAMP, SILVER, CHAMP_BG, DARK, MUTED, BASE, eyebrow, h2cls, Reveal, SiteHeader, SiteFooter, CtaBand } from "@/lib/site-ui";
+import { DoorModelSelector } from "@/lib/DoorModelSelector";
 
 const IMG = {
   lock: `${BASE}images/lock-s80.webp`,
@@ -240,6 +241,7 @@ const SmartLockS80 = () => {
         <p className="mt-6 text-xs font-light" style={{ color: MUTED }}>{t("note", "Specifications are indicative and may vary by market and configuration.")}</p>
       </section>
 
+      <DoorModelSelector group="smart-lock" currentPath="/products/smart-locks/s80" />
       <CtaBand eyebrowText={t("order", "Order & OEM")} title={t("cta", "Bring The S80 To Your Market")} sub={t("ctaSub", "Request pricing, samples or OEM/ODM configurations — our team replies within 24 hours.")} />
       <SiteFooter />
     </div>
