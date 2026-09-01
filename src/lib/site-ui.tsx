@@ -78,7 +78,7 @@ export function ProductMegaMenu({ className = "" }: { className?: string }) {
       </Link>
       {c.children && <div className={c.label === "Door" ? "grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 pb-2" : "mx-2 mb-2 rounded-lg bg-white/55 p-3 grid grid-cols-2 sm:grid-cols-3 gap-x-2"}>
         {c.children.map((sc) => <div key={sc.label} className={sc.children ? "rounded-lg bg-white/55 p-1" : ""}>
-          <Link to={sc.href} className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+          <Link to={sc.href} className={sc.children ? "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" : "block px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap"} style={{ color: sc.children ? DARK : MUTED }}>
             {sc.img && <span className="w-12 h-12 rounded-lg shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={sc.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
             <span className="leading-tight whitespace-nowrap flex-1">{t(sc.label)}</span>
             {sc.children && <ChevronDown size={12} style={{ color: MUTED }} />}
