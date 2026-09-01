@@ -779,7 +779,7 @@ const Prototype = () => {
         {!solid && <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0))" }} />}
         <div className="relative max-w-[1600px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
           <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
-            <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto transition-[filter] duration-500" style={{ filter: solid ? "none" : "brightness(0) invert(1)" }} />
+            <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto" />
           </button>
           <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
             {NAV.map((n) => (
@@ -1150,7 +1150,7 @@ const Prototype = () => {
         <div className={CONTAINER}>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+            <img src={LOGO} alt="WONLY" className="h-6 w-auto" />
             <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
           </div>
           {FOOTER.map((col) => (
