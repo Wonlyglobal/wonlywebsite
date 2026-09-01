@@ -130,11 +130,17 @@ async function main() {
       // domcontentloaded (not networkidle) — the real gate is the app-rendered
       // check below, which is independent of any long-lived analytics sockets.
       await page.goto(ORIGIN + route, { waitUntil: 'domcontentloaded', timeout: 45000 });
-      // Wait until the app has mounted and useSeo() has set a title.
-      await page.waitForFunction(() => {
+      // Wait until the route component has mounted and useSeo() has updated the
+      // canonical for this exact route. A title alone is insufficient because
+      // the SPA shell already contains the homepage title and can be captured
+      // before a lazy route finishes loading.
+      await page.waitForFunction((expectedRoute) => {
         const root = document.getElementById('root');
-        return !!root && root.children.length > 0 && !!document.title;
-      }, { timeout: 20000 });
+        const canonical = document.head.querySelector('link[rel="canonical"]')?.href;
+        if (!root || root.children.length === 0 || !document.title || !canonical) return false;
+        const normalize = (value) => value === '/' ? '/' : value.replace(/\/+$/, '');
+        return normalize(new URL(canonical).pathname) === normalize(expectedRoute);
+      }, route, { timeout: 20000 });
       // Give route-level useEffect (meta/canonical/jsonld) a beat to settle.
       await page.waitForTimeout(500);
 
