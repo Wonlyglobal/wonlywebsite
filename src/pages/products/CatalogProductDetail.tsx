@@ -17,6 +17,7 @@ type ProductData = {
   highlights: string[];
   bestFor: string[];
   features: { icon: typeof ShieldCheck; title: string; text: string }[];
+  gallery: { image: string; alt: string; title: string; text: string }[];
   specs: [string, string][];
   faq: { q: string; a: string }[];
 };
@@ -40,6 +41,10 @@ const PRODUCTS: Record<ProductKey, ProductData> = {
       { icon: ShieldCheck, title: "Triple-Protection Separation", text: "Capture, recognition and control are assigned to separate boards, reducing the risk that one compromised component controls the entire lock." },
       { icon: Monitor, title: "Sentinel Door Viewer", text: "A 5-inch HD display supports real-time monitoring, remote video, loitering snapshots and video door-viewer functions." },
       { icon: LockKeyhole, title: "Mechanical Security Backup", text: "Compatible WONLY high-security lock bodies and cylindrical electric lock cores retain a mechanical emergency path." },
+    ],
+    gallery: [
+      { image: `${BASE}images/catalog-2026/details/s80-lifestyle.jpg`, alt: "S80 Max installed on a premium entrance door", title: "Designed for a Natural Arrival", text: "The remote-sensing experience starts before the user reaches the door, reducing the need to stop, search for a key or touch the lock." },
+      { image: `${BASE}images/catalog-2026/details/s80-panels.jpg`, alt: "S80 Max front and rear smart lock panels", title: "A Complete Inside-and-Outside System", text: "Front recognition hardware, the indoor display and the automatic lock platform are engineered as one entrance solution." },
     ],
     specs: [
       ["Product type", "Remote-sensing true smart lock"], ["Version", "Max / Smart Lock 4.0"], ["Colour", "Xuanwu Gold"],
@@ -71,6 +76,10 @@ const PRODUCTS: Record<ProductKey, ProductData> = {
       { icon: ScanFace, title: "Flexible Unlocking", text: "Remote sensing, face recognition, PIN, CPU card, temporary PIN, mechanical key and app access cover daily and visitor use." },
       { icon: ShieldCheck, title: "Security Door Construction", text: "A 1.5 mm engraved steel door leaf, high-security lock body and patented cylindrical core form the physical security layer." },
       { icon: Sparkles, title: "Whole-Home Integration", text: "The entrance can align with the wider smart-home ecosystem instead of operating as an isolated connected device." },
+    ],
+    gallery: [
+      { image: `${BASE}images/catalog-2026/details/x50-exterior.jpg`, alt: "X50 Pro smart security door exterior", title: "A Statement Entrance", text: "The X50 Pro combines a full-height security door, integrated access hardware and premium surface finishing for high-end residential entrances." },
+      { image: `${BASE}images/catalog-2026/details/x50-interior.jpg`, alt: "X50 Pro interior panel and large display", title: "Control from the Interior", text: "The interior side brings together the large IPS display, door-viewer functions, power system and manual emergency controls." },
     ],
     specs: [
       ["Opening", "Automatic open and close"], ["Key features", "Remote sensing and physical anti-pinch"],
@@ -104,6 +113,10 @@ const PRODUCTS: Record<ProductKey, ProductData> = {
       { icon: BatteryCharging, title: "Dual Power", text: "A 220 V mains supply with battery backup keeps the door system operating during a power interruption." },
       { icon: LockKeyhole, title: "Patented Cylindrical Core", text: "The Class C cylindrical lock-core platform is presented with 360-minute manipulation resistance." },
       { icon: ShieldCheck, title: "Patented High-Security Lock Body", text: "The lock-body platform is designed around WONLY's security-door expertise and protected engineering." },
+    ],
+    gallery: [
+      { image: `${BASE}images/catalog-2026/details/t200-function-top.jpg`, alt: "T200 auto-open, anti-pinch, threshold seal and display functions", title: "Four Everyday Problems, Solved", text: "Automatic opening, 80 mm hand clearance, a retracting bottom seal and a large indoor display make daily entry easier for the whole family." },
+      { image: `${BASE}images/catalog-2026/details/t200-function-bottom.jpg`, alt: "T200 monitoring, lock core, lock body and dual-power features", title: "Security That Continues Behind the Surface", text: "Privacy-focused monitoring, patented mechanical security and backup power protect the entrance when convenience features are not enough." },
     ],
     specs: [
       ["Entrance concept", "Hands-free open, pinch-free close"], ["Handle clearance", "80 mm"],
@@ -145,7 +158,9 @@ export default function CatalogProductDetail({ product }: { product: ProductKey 
 
       <section className="px-[6vw] py-20 md:py-28"><div className="max-w-[1450px] mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Product Advantages</div><h2 className={h2cls + " mt-4 max-w-3xl"}>Built Around Real Entrance Needs</h2><div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">{data.features.map((feature, i) => <Reveal key={feature.title} delay={(i % 3) * 60}><article className="h-full rounded-2xl bg-white border p-7" style={{ borderColor: `${SILVER}55` }}><feature.icon size={25} style={{ color: GOLD }} /><h3 className="mt-5 text-xl font-medium">{feature.title}</h3><p className="mt-3 text-sm leading-7" style={{ color: MUTED }}>{feature.text}</p></article></Reveal>)}</div></div></section>
 
-      <section className="px-[6vw] py-20 md:py-28 bg-white"><div className="max-w-[1450px] mx-auto grid lg:grid-cols-[0.7fr_1.3fr] gap-12"><div><div className={eyebrow} style={{ color: GOLD_DEEP }}>Applications</div><h2 className={h2cls + " mt-4"}>Where {data.model} Fits</h2><p className="mt-5 leading-7" style={{ color: MUTED }}>Final product configuration is confirmed by WONLY sales engineering according to the market, door specification and project requirements.</p></div><div className="grid sm:grid-cols-2 gap-4">{data.bestFor.map((item) => <div key={item} className="rounded-2xl p-6 flex gap-3 items-center" style={{ background: CHAMP_BG }}><Check size={18} style={{ color: GOLD }} /><span className="font-medium">{item}</span></div>)}</div></div></section>
+      <section className="px-[6vw] py-20 md:py-28 bg-white"><div className="max-w-[1450px] mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>See the Difference</div><h2 className={h2cls + " mt-4 max-w-3xl"}>Functions You Can Understand at a Glance</h2><p className="mt-5 max-w-3xl leading-7" style={{ color: MUTED }}>These catalogue visuals show how the key functions work in real entrance situations—not just as a list of technical claims.</p><div className="mt-12 grid lg:grid-cols-2 gap-7">{data.gallery.map((item, index) => <Reveal key={item.title} delay={index * 80}><article className="h-full overflow-hidden rounded-3xl border" style={{ borderColor: `${SILVER}55`, background: CHAMP_BG }}><img src={item.image} alt={item.alt} className="w-full aspect-[16/10] object-cover bg-white" loading="lazy" /><div className="p-7 md:p-9"><h3 className="text-2xl font-medium">{item.title}</h3><p className="mt-3 leading-7" style={{ color: MUTED }}>{item.text}</p></div></article></Reveal>)}</div></div></section>
+
+      <section className="px-[6vw] py-20 md:py-28"><div className="max-w-[1450px] mx-auto grid lg:grid-cols-[0.7fr_1.3fr] gap-12"><div><div className={eyebrow} style={{ color: GOLD_DEEP }}>Applications</div><h2 className={h2cls + " mt-4"}>Where {data.model} Fits</h2><p className="mt-5 leading-7" style={{ color: MUTED }}>Final product configuration is confirmed by WONLY sales engineering according to the market, door specification and project requirements.</p></div><div className="grid sm:grid-cols-2 gap-4">{data.bestFor.map((item) => <div key={item} className="rounded-2xl p-6 flex gap-3 items-center bg-white"><Check size={18} style={{ color: GOLD }} /><span className="font-medium">{item}</span></div>)}</div></div></section>
 
       <section className="px-[6vw] py-20 md:py-28"><div className="max-w-5xl mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Specifications</div><h2 className={h2cls + " mt-4"}>Catalogue-Verified Details</h2><div className="mt-10 border-t" style={{ borderColor: `${SILVER}88` }}>{data.specs.map(([key, value]) => <div key={key} className="grid md:grid-cols-[0.38fr_0.62fr] gap-2 py-5 border-b" style={{ borderColor: `${SILVER}66` }}><div className="text-xs uppercase tracking-[0.15em] font-semibold" style={{ color: GOLD_DEEP }}>{key}</div><div>{value}</div></div>)}</div><p className="mt-5 text-xs leading-6" style={{ color: MUTED }}>Specifications shown are based on the current WONLY English catalogue. Availability and final configuration must be confirmed with the sales team.</p></div></section>
 
@@ -156,4 +171,3 @@ export default function CatalogProductDetail({ product }: { product: ProductKey 
     <SiteFooter />
   </div>;
 }
-
