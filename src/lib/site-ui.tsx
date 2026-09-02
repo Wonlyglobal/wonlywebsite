@@ -69,8 +69,11 @@ const NAV: NavItem[] = SITE_NAV_DATA.nav.map((n) => ({
 export function ProductMegaMenu({ className = "" }: { className?: string }) {
   const { t } = useLocale();
   const children = NAV.find((item) => item.label === "Product")?.children || [];
+  const compactLabels = new Set(["Smart Window", "Whole-House Intelligence"]);
+  const primaryChildren = children.filter((child) => !compactLabels.has(child.label));
+  const compactChildren = children.filter((child) => compactLabels.has(child.label));
   return <div className={`absolute top-full left-0 w-[min(880px,calc(100vw-32px))] max-h-[76vh] overflow-y-auto overscroll-contain rounded-2xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-3 grid grid-cols-1 md:grid-cols-2 gap-3 ${className}`}>
-    {children.map((c) => <div key={c.label} className="relative rounded-xl border border-black/[0.06] bg-white/45 p-2">
+    {primaryChildren.map((c) => <div key={c.label} className="relative rounded-xl border border-black/[0.06] bg-white/45 p-2">
       <Link to={c.href} className="flex items-center gap-3 w-full px-3 py-3 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
         {c.img && <span className="w-[72px] h-[72px] rounded-xl shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
         <span className="leading-tight whitespace-nowrap flex-1 text-base font-normal">{t(c.label)}</span>
@@ -85,6 +88,12 @@ export function ProductMegaMenu({ className = "" }: { className?: string }) {
           </Link>
           {sc.children && <div className="grid grid-cols-2 gap-x-1 px-1 pb-1">{sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{model.label}</Link>)}</div>}
         </div>)}
+      </div>}
+      {c.label === "Smart Lock" && compactChildren.length > 0 && <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 pb-2">
+        {compactChildren.map((item) => <Link key={item.label} to={item.href} className="flex items-center gap-3 min-w-0 rounded-lg bg-white/55 p-2 hover:bg-white/80 transition-colors" style={{ color: DARK }}>
+          {item.img && <span className="w-12 h-12 rounded-lg shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={item.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+          <span className="min-w-0 text-[12px] leading-tight font-normal">{t(item.label)}</span>
+        </Link>)}
       </div>}
     </div>)}
   </div>;

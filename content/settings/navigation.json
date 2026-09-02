@@ -8,7 +8,7 @@
           { "label": "2.0", "href": "/products/metal-doors/2-0" },
           { "label": "3.0", "href": "/products/metal-doors/3-0" }
         ] },
-        { "label": "Smart Door", "href": "/products/smart-doors/5-0", "img": "images/catalog-2026/hero-renders/x70.webp", "children": [
+        { "label": "Smart Door", "href": "/products/smart-doors/5-0", "img": "images/5products/nav-security-door.png", "children": [
           { "label": "3.0 Pro", "href": "/products/smart-doors/3-0-pro" },
           { "label": "3.0 Max", "href": "/products/smart-doors/3-0-max" },
           { "label": "4.0", "href": "/products/smart-doors/4-0" },
