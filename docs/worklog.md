@@ -134,3 +134,4 @@
 2026-09-02 | 首页开门卡死修复用户验收:提交728b307推送Codeup master后，用户在正式站重新验证并确认“现在没问题了”；开门动画不可见及滚动后卡住问题均已解除。正式环境已完成用户侧验收。
 2026-09-02 | 产品Mega Menu层级与素材优化:按用户截图反馈，将Smart Door缩略图由人物场景横幅替换为白底独立产品图；保持Smart Window与Whole-House Intelligence一级链接和原路由不变，将两者视觉收纳到Smart Lock栏目的型号列表下方，菜单主体由4张同级大卡精简为Door、Smart Lock两列。TypeScript及1,923模块生产构建通过，1,512×861桌面实测菜单完整显示、Smart Door白底产品图加载成功、两项一级入口均可访问且页面无横向溢出。当前待发布正式环境。
 2026-09-02 | 产品Mega Menu正式发布:官网提交374353d已推送Codeup master，包含Smart Door白底产品图及Smart Window、Whole-House Intelligence在Smart Lock栏下方的新版布局；正式部署已触发。连续5分钟公网轮询因当前代理/DNS通道无法取得官网HTML，故本轮发布状态为已推送正式分支、线上资源切换待外网恢复后复验，未将其误记为公网验收完成。
+2026-09-02 | 正式域名与发布监控修正:排查所谓代理/DNS异常后确认此前误用了非项目域名www.wonly.com.cn，该域名权威DNS确无www记录；项目正式域名为www.wonlyglobal.com，公共DNS正常解析至43.153.252.64，直连HTTPS返回200。改用正确域名监控后于16:17:21确认主资源切换为index-Ya-VZ8PJ.js，浏览器打开正式产品页亦加载同一资源；产品Mega Menu提交374353d已完成正式上线。后续发布验收统一以www.wonlyglobal.com为准。
