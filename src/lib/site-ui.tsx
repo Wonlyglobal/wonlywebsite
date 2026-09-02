@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, X, Check, Globe } from "lucide-react";
+import { ArrowRight, ChevronDown, X, Check, Globe, Menu } from "lucide-react";
 import { create } from "zustand";
 import { trackLead } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
@@ -251,11 +251,57 @@ export function QuoteModal() {
 }
 
 /* Sticky header — transparent over a dark hero, frosted once scrolled */
+export function MobileNavigation({ onQuote, solid = false }: { onQuote: () => void; solid?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const { t } = useLocale();
+
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => { document.body.style.overflow = previous; window.removeEventListener("keydown", onKeyDown); };
+  }, [open]);
+
+  const close = () => setOpen(false);
+  return <>
+    <button type="button" aria-label={t("Open navigation menu")} aria-expanded={open} aria-controls="mobile-site-navigation" onClick={() => setOpen(true)} className="lg:hidden w-10 h-10 rounded-full grid place-items-center border" style={{ color: solid ? DARK : "#fff", borderColor: solid ? "rgba(34,31,32,.18)" : "rgba(255,255,255,.35)" }}>
+      <Menu size={19} />
+    </button>
+    {open && <div id="mobile-site-navigation" role="dialog" aria-modal="true" aria-label={t("Mobile navigation")} className="fixed inset-0 z-[100] bg-[#F5F1EA] text-[#221F20] flex flex-col lg:hidden">
+      <div className="flex items-center justify-between px-6 py-5 border-b border-black/10">
+        <Link to="/" onClick={close} aria-label="WONLY — home"><img src={LOGO} alt="WONLY" className="h-6 w-auto" /></Link>
+        <button type="button" aria-label={t("Close navigation menu")} onClick={close} className="w-10 h-10 rounded-full grid place-items-center border border-black/15"><X size={20} /></button>
+      </div>
+      <nav aria-label={t("Mobile navigation")} className="flex-1 overflow-y-auto px-6 py-5">
+        {NAV.map((item) => <div key={item.label} className="border-b border-black/10 py-3">
+          {item.href ? <Link to={item.href} onClick={close} className="block py-2 text-lg font-medium">{t(item.label)}</Link> : <div className="py-2 text-lg font-medium">{t(item.label)}</div>}
+          {item.children && <div className="pl-3 pb-2 space-y-1">
+            {item.children.map((child) => <div key={child.label} className="py-1">
+              <Link to={child.href} onClick={close} className="block py-1.5 text-[15px] font-medium">{t(child.label)}</Link>
+              {child.children && <div className="pl-4 grid grid-cols-2 gap-x-3">
+                {child.children.map((grandchild) => <div key={grandchild.label} className="py-1">
+                  <Link to={grandchild.href} onClick={close} className="block py-1 text-[13px]" style={{ color: MUTED }}>{t(grandchild.label)}</Link>
+                  {grandchild.children && <div className="pl-3">
+                    {grandchild.children.map((model) => <Link key={model.href} to={model.href} onClick={close} className="block py-1 text-[12px]" style={{ color: MUTED }}>{model.label}</Link>)}
+                  </div>}
+                </div>)}
+              </div>}
+            </div>)}
+          </div>}
+        </div>)}
+      </nav>
+      <div className="p-6 border-t border-black/10"><button type="button" onClick={() => { close(); onQuote(); }} className="w-full px-5 py-3.5 rounded-full text-sm font-medium" style={{ background: GOLD, color: DARK }}>{t("Get Solutions & Quote")}</button></div>
+    </div>}
+  </>;
+}
+
 export function SiteHeader() {
   const [solid, setSolid] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
-  const { locale, language, pathname, t } = useLocale();
+  const { t } = useLocale();
   const cmsNavigation = useCmsSetting("navigation");
   const requiredNavigation = ["product", "advantages", "manufacturing & r&d", "global strategy", "partnership", "contact"];
   const cmsItems = cmsNavigation?.items ?? [];
@@ -325,21 +371,8 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <div className="relative hidden md:block">
-            <button type="button" onClick={() => setOpenDrop((value) => value === "__language" ? null : "__language")} aria-expanded={openDrop === "__language"} aria-haspopup="menu" aria-label={t("Select language")} className="h-10 px-3 rounded-full inline-flex items-center gap-2 text-xs border" style={{ color: solid ? DARK : "#fff", borderColor: solid ? "rgba(34,31,32,.18)" : "rgba(255,255,255,.35)" }}>
-              <Globe size={15} /><span>{language.nativeLabel}</span><ChevronDown size={12} />
-            </button>
-            {openDrop === "__language" && (
-              <div role="menu" className="absolute top-full right-0 min-w-[170px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/5 p-2">
-                {LANGUAGES.map((item) => (
-                  <a key={item.code} role="menuitem" href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} onClick={() => setOpenDrop(null)} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.04]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
-                    <span>{item.nativeLabel}</span><span className="text-[10px] uppercase opacity-50">{item.code}</span>
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-          <button onClick={() => openQuote()} className="px-4 md:px-5 py-2.5 rounded-full text-[12px] md:text-[13px] font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>{t("Get Solutions & Quote")}</button>
+          <MobileNavigation solid={solid} onQuote={() => openQuote()} />
+          <button onClick={() => openQuote()} className="hidden sm:block px-4 md:px-5 py-2.5 rounded-full text-[12px] md:text-[13px] font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>{t("Get Solutions & Quote")}</button>
         </div>
       </div>
     </header>

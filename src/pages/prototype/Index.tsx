@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
-import { useQuoteStore, QuoteModal, ProductMegaMenu } from "@/lib/site-ui";
+import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
@@ -846,9 +846,12 @@ const Prototype = () => {
               </div>
             ))}
           </nav>
-          <button onClick={() => scrollToId("contact")} className="px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
-            {t("Get Solutions & Quote")}
-          </button>
+          <div className="flex items-center gap-2">
+            <MobileNavigation solid={solid} onQuote={() => scrollToId("contact")} />
+            <button onClick={() => scrollToId("contact")} className="hidden sm:block px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
+              {t("Get Solutions & Quote")}
+            </button>
+          </div>
         </div>
       </header>
 

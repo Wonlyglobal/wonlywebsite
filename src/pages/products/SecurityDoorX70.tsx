@@ -349,7 +349,7 @@ const SecurityDoorX70 = () => {
   });
 
   return (
-    <div className="min-w-[1000px] bg-white text-[#221F20] font-sans">
+    <div className="w-full overflow-x-hidden bg-white text-[#221F20] font-sans">
       <SiteHeader />
 
       <main>
@@ -434,8 +434,8 @@ const SecurityDoorX70 = () => {
         </div>
 
         {/* Breadcrumb + key figures — the strip the old hero used to carry. */}
-        <section className="px-20 py-8 border-b border-gray-100">
-          <div className="mt-6 flex items-center justify-center gap-16">
+        <section className="px-5 md:px-20 py-8 border-b border-gray-100">
+          <div className="mt-6 grid grid-cols-2 md:flex items-center justify-center gap-8 md:gap-16">
             {[
               { v: <Counter to={16} />, l: tx("bolts", "Locking Bolts") },
               { v: <Counter to={90} suffix=" min" />, l: tx("fire", "Fire Rating") },
@@ -451,11 +451,11 @@ const SecurityDoorX70 = () => {
         </section>
 
         {/* Overview: gallery + summary */}
-        <section className="mt-20 px-20">
-          <div className="grid grid-cols-2 gap-12 items-start">
+        <section className="mt-14 md:mt-20 px-5 md:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-start">
             <Reveal>
               <div className="rounded-2xl overflow-hidden border-2" style={{ borderColor: "rgba(191,160,106,0.3)" }}>
-                <img className="w-full h-[460px] object-cover transition-all duration-500" src={GALLERY[activeImg].src} alt={GALLERY[activeImg].alt} loading="lazy" />
+                <img className="w-full h-[300px] md:h-[460px] object-cover transition-all duration-500" src={GALLERY[activeImg].src} alt={GALLERY[activeImg].alt} loading="lazy" />
               </div>
               <div className="grid grid-cols-4 gap-3 mt-4">
                 {GALLERY.map((g, i) => (
@@ -474,7 +474,7 @@ const SecurityDoorX70 = () => {
             </Reveal>
             <Reveal delay={120}>
               <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>{bt("overview", "Overview")}</div>
-              <h2 className="text-[#221F20] text-4xl font-semibold mt-3 leading-tight">{bt("overviewTitle", "Security That Runs Itself — And Answers To You")}</h2>
+              <h2 className="text-[#221F20] text-3xl md:text-4xl font-semibold mt-3 leading-tight">{bt("overviewTitle", "Security That Runs Itself — And Answers To You")}</h2>
               <p className="text-neutral-600 text-base mt-4 leading-relaxed">
                 {bt("overviewBody", "The X70 is WONLY's flagship robotic security door: the instant it closes, sixteen hardened bolts drive home across all four edges — mechanically, with no motor to wait on and no forgotten deadbolt: closing the door is locking it. 3D facial recognition welcomes your family hands-free, while multi-vector sensors watch the frame for any attempt to force it. Behind the aesthetics sits a cast-aluminum body with an EN 1634 fire-rated core, tested to survive 200,000 cycles and three decades of WONLY engineering.")}
               </p>
@@ -488,7 +488,7 @@ const SecurityDoorX70 = () => {
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 flex items-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <button className="px-6 py-3 rounded-full cursor-pointer hover:scale-105 transition-all duration-300 flex items-center gap-2" style={{ background: GOLD }} onClick={() => openQuote({ subject: "X70 Robotic Security Door" })}>
                   <span className="text-[#221F20] text-sm font-semibold">{bt("solutions", "Get Solutions & Quote")}</span><ArrowRight className="text-[#221F20]" size={16} />
                 </button>
@@ -501,11 +501,11 @@ const SecurityDoorX70 = () => {
         </section>
 
         {/* Lock Core — the industry-exclusive cylindrical core (V8 headline proof point) */}
-        <section className="mt-24 px-20">
-          <div className="grid grid-cols-2 gap-12 items-center">
+        <section className="mt-16 md:mt-24 px-5 md:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
             <Reveal>
-              <div className="rounded-2xl border-2 p-10 flex flex-col items-center justify-center" style={{ borderColor: "rgba(191,160,106,0.3)", background: "radial-gradient(120% 100% at 50% 0%, #2a2627, #0d0d0d)", minHeight: 380 }}>
-                <svg width="340" height="180" viewBox="0 0 340 180" fill="none" aria-label="WONLY cylindrical lock core compared with a standard gourd cylinder">
+              <div className="rounded-2xl border-2 p-6 md:p-10 flex flex-col items-center justify-center" style={{ borderColor: "rgba(191,160,106,0.3)", background: "radial-gradient(120% 100% at 50% 0%, #2a2627, #0d0d0d)", minHeight: 380 }}>
+                <svg className="w-full max-w-[340px] h-auto" width="340" height="180" viewBox="0 0 340 180" fill="none" aria-label="WONLY cylindrical lock core compared with a standard gourd cylinder">
                   <defs>
                     <linearGradient id="lc" x1="0" y1="0" x2="1" y2="1">
                       <stop offset="0" stopColor="#3a3021" />
@@ -533,7 +533,7 @@ const SecurityDoorX70 = () => {
             </Reveal>
             <Reveal delay={120}>
               <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>{bt("coreEyebrow", "The Core, Reinvented")}</div>
-              <h2 className="text-[#221F20] text-4xl font-semibold mt-3 leading-tight">{bt("coreTitle", "A Cylindrical Lock Core — Not the Cylinder Everyone Else Uses")}</h2>
+              <h2 className="text-[#221F20] text-3xl md:text-4xl font-semibold mt-3 leading-tight">{bt("coreTitle", "A Cylindrical Lock Core — Not the Cylinder Everyone Else Uses")}</h2>
               <p className="text-neutral-600 text-base mt-4 leading-relaxed">
                 {bt("coreBody", "Almost every security door on the market is built around the same conventional figure-eight cylinder. WONLY replaced it with a patented cylindrical lock core engineered to exceed the highest national standard and resist drilling.")}
               </p>
@@ -552,11 +552,11 @@ const SecurityDoorX70 = () => {
         </section>
 
         {/* Technical Specifications */}
-        <section className="mt-24 px-20">
-          <div className="grid grid-cols-2 gap-12 items-start">
+        <section className="mt-16 md:mt-24 px-5 md:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-start">
             <Reveal>
               <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>{bt("specs", "Specifications")}</div>
-              <h2 className="text-[#221F20] text-5xl font-semibold mt-3">{bt("specTitle", "Every Parameter, Documented")}</h2>
+              <h2 className="text-[#221F20] text-3xl md:text-5xl font-semibold mt-3">{bt("specTitle", "Every Parameter, Documented")}</h2>
               <p className="text-neutral-500 text-base mt-3">{bt("specBody", "The X70 meets or exceeds international security, fire, and acoustic standards. Custom sizes, finishes, and hardware are available for project-specific requirements.")}</p>
               <div className="mt-6 grid grid-cols-3 gap-4">
                 {[
@@ -590,13 +590,13 @@ const SecurityDoorX70 = () => {
         </section>
 
         {/* Configurations */}
-        <section id="configurations" className="mt-24 px-20 scroll-mt-24">
+        <section id="configurations" className="mt-16 md:mt-24 px-5 md:px-20 scroll-mt-24">
           <Reveal className="text-center mb-10">
             <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>{bt("configurations", "Configurations")}</div>
-            <h2 className="text-[#221F20] text-5xl font-semibold mt-3">{bt("choose", "Choose Your X70")}</h2>
+            <h2 className="text-[#221F20] text-3xl md:text-5xl font-semibold mt-3">{bt("choose", "Choose Your X70")}</h2>
             <p className="text-neutral-500 text-base mt-3 max-w-2xl mx-auto">{bt("configBody", "Three configurations share the same robotic core — scale up to palm-vein security or a double-leaf villa entrance.")}</p>
           </Reveal>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {variants.map((v, i) => (
               <Reveal key={v.name} delay={i * 100}>
                 <div
@@ -618,15 +618,15 @@ const SecurityDoorX70 = () => {
         </section>
 
         {/* In application */}
-        <section className="mt-24 pb-28 px-20">
+        <section className="mt-16 md:mt-24 pb-20 md:pb-28 px-5 md:px-20">
           <Reveal className="text-center mb-10">
             <div className="text-sm font-semibold tracking-[0.25em] uppercase" style={{ color: GOLD }}>{bt("application", "In Application")}</div>
-            <h2 className="text-[#221F20] text-5xl font-semibold mt-3">{bt("belongs", "Where The X70 Belongs")}</h2>
+            <h2 className="text-[#221F20] text-3xl md:text-5xl font-semibold mt-3">{bt("belongs", "Where The X70 Belongs")}</h2>
           </Reveal>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {scenarios.map((s, i) => (
               <Reveal key={s.t} delay={i * 120}>
-                <div className="group relative rounded-2xl overflow-hidden h-[420px] cursor-pointer">
+                <div className="group relative rounded-2xl overflow-hidden h-[320px] md:h-[420px] cursor-pointer">
                   <img className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500" src={s.img} alt={`WONLY X70 security door installed for ${s.t.toLowerCase()}`} loading="lazy" />
                   <div className="absolute inset-x-0 bottom-0 p-7 bg-gradient-to-t from-[#221F20] via-[#221F20]/95 to-[#221F20]/0">
                     <h3 className="text-2xl font-semibold mb-2" style={{ color: CHAMP }}>{s.t}</h3>
