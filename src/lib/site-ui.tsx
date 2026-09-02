@@ -266,9 +266,14 @@ export function SiteHeader() {
   const activeNav: NavItem[] = completeCmsNavigation
     ? cmsItems.map(item => {
         const original = NAV.find(nav => normalizeNavLabel(nav.label) === normalizeNavLabel(item.label));
+        const cmsChildren = item.children?.map(child => ({
+          label: child.label,
+          href: child.url || "#",
+          children: child.children?.map(grandchild => ({ label: grandchild.label, href: grandchild.url || "#" })),
+        }));
         return original
-          ? { ...original, label: item.label.trim() || original.label, href: original.children?.length ? original.href : item.url }
-          : { label: item.label, href: item.url };
+          ? { ...original, label: item.label.trim() || original.label, href: item.url || original.href, children: cmsChildren?.length ? cmsChildren : original.children }
+          : { label: item.label, href: item.url, children: cmsChildren };
       })
     : NAV;
   useEffect(() => {

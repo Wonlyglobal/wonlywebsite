@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { cmsSupabase } from "@/cms/supabase";
 
-export type CmsNavigationItem = { label: string; url: string };
+export type CmsNavigationItem = { label: string; url: string; children?: CmsNavigationItem[] };
 export type CmsRedirectItem = { from: string; to: string; status: "301" | "302" };
 export type CmsSiteSettings = {
   siteName?: string;
