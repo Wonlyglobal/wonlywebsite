@@ -233,7 +233,20 @@ export function SiteHeader() {
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, language, pathname, t } = useLocale();
   const cmsNavigation = useCmsSetting("navigation");
-  const activeNav: NavItem[] = cmsNavigation?.items?.length ? cmsNavigation.items.map(item => ({ label: item.label, href: item.url })) : NAV;
+  const requiredNavigation = ["product", "advantages", "manufacturing & r&d", "global strategy", "partnership", "contact"];
+  const cmsItems = cmsNavigation?.items ?? [];
+  const completeCmsNavigation = requiredNavigation.every(required =>
+    cmsItems.some(item => item.label.trim().toLowerCase().replace(/products$/, "product") === required),
+  );
+  const activeNav: NavItem[] = completeCmsNavigation
+    ? cmsItems.map(item => {
+        const normalized = item.label.trim().toLowerCase().replace(/products$/, "product");
+        const original = NAV.find(nav => nav.label.trim().toLowerCase() === normalized);
+        return original
+          ? { ...original, label: item.label.trim() || original.label, href: original.children?.length ? original.href : item.url }
+          : { label: item.label, href: item.url };
+      })
+    : NAV;
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     onScroll();
