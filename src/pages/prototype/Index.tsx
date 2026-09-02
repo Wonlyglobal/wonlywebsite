@@ -776,8 +776,8 @@ const Prototype = () => {
     try { if (v) { v.preload = "auto"; v.load(); } } catch { /* ignore */ }
 
     // Keep the closed-door title visible until the visitor expresses navigation intent.
-    // Once triggered, the faster playback rate keeps the physical door motion legible
-    // without trapping visitors on the first screen for several seconds.
+    // Once triggered, keep the optimized short clip visibly legible. A 2x rate made
+    // the physical opening look like an abrupt scene cut on high-refresh trackpads.
     let openingStarted = false;
     let watchdog = 0;
     const startOpening = () => {
@@ -787,7 +787,7 @@ const Prototype = () => {
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
       if (v) {
         v.muted = true;
-        v.playbackRate = 2;
+        v.playbackRate = 1.35;
         v.play().catch(() => reveal_());
       } else reveal_();
       // Only start the failure fallback after the visitor has initiated the sequence.
