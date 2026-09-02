@@ -140,3 +140,4 @@
 2026-09-02 | 产品Mega Menu尺寸与缩略图正式验收:菜单等宽三门卡、两行Smart Window/Whole-House入口及门体比例统一最终提交dc3f177已推送Codeup master；正确正式域名www.wonlyglobal.com于16:32:30切换至目标主资源index-CNzS3zGM.js，浏览器复核正式产品页加载同一资源且0横向溢出。正式环境已发布并完成资源验收。
 2026-09-02 | 产品Mega Menu左右对称调整:按用户最新要求，将Smart Window从Smart Lock栏移至Door栏下方，Whole-House Intelligence保留在Smart Lock栏下方；统一左右两列上半区最小高度166像素，使两张全宽一级入口卡同一水平线、同宽同高。TypeScript及1,923模块生产构建通过，1,512×861展开菜单实测左右对齐、三张门体缩略图比例一致且0横向溢出。当前待发布正式环境。
 2026-09-02 | 产品Mega Menu左右对称正式发布:最终提交99cebbb已推送Codeup master，正式域名www.wonlyglobal.com于16:37:48切换至目标主资源index-im7O2CXI.js；Smart Window位于Door栏下方、Whole-House Intelligence位于Smart Lock栏下方的同水平线布局已上线。正式环境已完成资源验收。
+2026-09-02 | 首页视频未加载完成时开门修复:用户反馈网站未加载完即滚动时开门仍会故障，定位为readyState不足时直接调用play且900毫秒启动兜底过早，慢网下会丢失动画。改为先记录用户开门意图，视频达到canplay/HAVE_FUTURE_DATA后才调用play；资源等待上限5秒、canplay后解码等待上限2.5秒，仍保留playing后3秒结束兜底和失败解锁。TypeScript及1,923模块生产构建通过，真实浏览器在触发时readyState=0/视频暂停，2.2秒后已自动播放至1.57秒，最终完整播放至2.79秒并恢复根节点滚动。当前待发布正式环境。

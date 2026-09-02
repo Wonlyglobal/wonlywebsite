@@ -779,28 +779,44 @@ const Prototype = () => {
     // Once triggered, keep the optimized short clip visibly legible. A 2x rate made
     // the physical opening look like an abrupt scene cut on high-refresh trackpads.
     let openingStarted = false;
+    let playAttempted = false;
     let playbackStarted = false;
+    let readinessWatchdog = 0;
     let startupWatchdog = 0;
     let watchdog = 0;
     const showOpening = () => {
       if (playbackStarted || done) return;
       playbackStarted = true;
+      window.clearTimeout(readinessWatchdog);
       window.clearTimeout(startupWatchdog);
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
       watchdog = window.setTimeout(reveal_, 3000);
     };
+    const playDoor = () => {
+      if (!v || playAttempted || done) return;
+      playAttempted = true;
+      window.clearTimeout(readinessWatchdog);
+      v.muted = true;
+      v.playbackRate = 1.35;
+      // At this point the browser has reported CAN_PLAY. Allow decoding a short
+      // grace period, but never leave the document locked if playback still fails.
+      startupWatchdog = window.setTimeout(reveal_, 2500);
+      v.play().catch(() => reveal_());
+    };
     const startOpening = () => {
       if (openingStarted || done) return;
       openingStarted = true;
-      // Never hide the closed-door composition until the browser confirms actual playback.
-      // If decoding/autoplay fails on a device, release the page promptly instead of
-      // leaving the visitor behind an invisible, scroll-locked video layer.
-      startupWatchdog = window.setTimeout(reveal_, 900);
       if (v) {
         v.muted = true;
         v.playbackRate = 1.35;
-        v.play().catch(() => reveal_());
+        // A visitor can scroll before the clip has buffered. Preserve that intent and
+        // wait for CAN_PLAY instead of calling play() against an unready media element.
+        if (v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) playDoor();
+        else {
+          try { v.load(); } catch { /* ignore */ }
+          readinessWatchdog = window.setTimeout(reveal_, 5000);
+        }
       } else reveal_();
     };
     const onIntroKey = (event: KeyboardEvent) => {
@@ -814,9 +830,11 @@ const Prototype = () => {
     const onEnded = () => reveal_();
     const onErr = () => reveal_();
     const onPlaying = () => showOpening();
+    const onCanPlay = () => { if (openingStarted) playDoor(); };
     v?.addEventListener("ended", onEnded);
     v?.addEventListener("error", onErr);
     v?.addEventListener("playing", onPlaying);
+    v?.addEventListener("canplay", onCanPlay);
 
     // Let the visitor skip the intro at any time.
     skipRef.current = () => {
@@ -824,7 +842,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(startupWatchdog); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); v?.removeEventListener("playing", onPlaying); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(startupWatchdog); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); v?.removeEventListener("playing", onPlaying); v?.removeEventListener("canplay", onCanPlay); };
   }, []);
 
   return (
