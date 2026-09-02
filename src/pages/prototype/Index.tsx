@@ -550,6 +550,7 @@ const scrollToId = (id: string) => {
 
 const Prototype = () => {
   const doorVideo = useRef<HTMLVideoElement>(null);
+  const openFrame = useRef<HTMLImageElement>(null);
   const title = useRef<HTMLDivElement>(null);
   const scrim = useRef<HTMLDivElement>(null);
   const reveal = useRef<HTMLDivElement>(null);
@@ -720,6 +721,10 @@ const Prototype = () => {
       // Land on the bright open-door end frame — if the clip stalled or errored,
       // jumping to the end beats leaving copy over a dark closed door.
       if (v) { try { if (!v.ended) { v.pause(); v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } } catch { /* poster ok */ } }
+      // The media element cannot seek to its end frame before metadata exists.
+      // Always place the matching open-door still above it before revealing copy,
+      // so a slow or failed clip never leaves the second screen over the closed poster.
+      if (openFrame.current) openFrame.current.style.opacity = "1";
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
       if (reveal.current) { reveal.current.style.visibility = "visible"; requestAnimationFrame(() => { if (reveal.current) reveal.current.style.opacity = "1"; }); }
@@ -910,6 +915,7 @@ const Prototype = () => {
       {/* ══ 1 · Hero door video + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
         <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="auto" controlsList="nodownload nofullscreen noremoteplayback" onContextMenu={(e) => e.preventDefault()} aria-hidden="true" />
+        <img ref={openFrame} src={IMG.interior} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-[1] w-full h-full object-cover object-center pointer-events-none" style={{ opacity: 0, transition: "opacity .35s ease", transform: "translateZ(0)" }} />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
 
