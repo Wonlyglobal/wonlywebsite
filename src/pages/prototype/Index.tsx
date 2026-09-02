@@ -647,9 +647,9 @@ const Prototype = () => {
     return () => clearTimeout(t);
   }, []);
 
-  // Hero: the door plays open automatically on load (muted autoplay — no gesture or scroll-lock),
-  // then reveals the interior copy. A watchdog guarantees the copy is revealed even if the clip
-  // never loads, so the hero can never get "stuck closed" again. This replaced a fragile
+  // Hero: the door waits for wheel, touch or keyboard intent, then plays open and reveals
+  // the interior copy. A post-trigger watchdog guarantees the copy is revealed if the clip
+  // never loads, so the hero cannot get stuck after the visitor starts the sequence. This replaced a fragile
   // scroll-lock + wait-for-gesture version whose door often failed to open on live.
   useLayoutEffect(() => {
     const v = doorVideo.current;
@@ -775,15 +775,14 @@ const Prototype = () => {
     // non-autoplay <video>, which left readyState at 0 and the door never opening on live.
     try { if (v) { v.preload = "auto"; v.load(); } } catch { /* ignore */ }
 
-    // Start quickly on normal load; wheel/touch/keyboard intent starts immediately.
-    // A slightly faster playback rate keeps the physical door motion legible without
-    // trapping visitors on the first screen for several seconds.
+    // Keep the closed-door title visible until the visitor expresses navigation intent.
+    // Once triggered, the faster playback rate keeps the physical door motion legible
+    // without trapping visitors on the first screen for several seconds.
     let openingStarted = false;
-    let playTimer = 0;
+    let watchdog = 0;
     const startOpening = () => {
       if (openingStarted || done) return;
       openingStarted = true;
-      window.clearTimeout(playTimer);
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
       if (v) {
@@ -791,6 +790,8 @@ const Prototype = () => {
         v.playbackRate = 2;
         v.play().catch(() => reveal_());
       } else reveal_();
+      // Only start the failure fallback after the visitor has initiated the sequence.
+      watchdog = window.setTimeout(reveal_, 5000);
     };
     const onIntroKey = (event: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
@@ -798,15 +799,11 @@ const Prototype = () => {
     window.addEventListener("wheel", startOpening, { passive: true });
     window.addEventListener("touchstart", startOpening, { passive: true });
     window.addEventListener("keydown", onIntroKey);
-    playTimer = window.setTimeout(startOpening, 450);
 
     const onEnded = () => reveal_();
     const onErr = () => reveal_();
     v?.addEventListener("ended", onEnded);
     v?.addEventListener("error", onErr);
-
-    // Watchdog: never sit closed forever — reveal after a hard cap even if the clip stalls.
-    const watchdog = window.setTimeout(reveal_, 5000);
 
     // Let the visitor skip the intro at any time.
     skipRef.current = () => {
@@ -814,7 +811,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); window.removeEventListener("wheel", startOpening); window.removeEventListener("touchstart", startOpening); window.removeEventListener("keydown", onIntroKey); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); window.removeEventListener("wheel", startOpening); window.removeEventListener("touchstart", startOpening); window.removeEventListener("keydown", onIntroKey); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
   }, []);
 
   return (
