@@ -791,14 +791,15 @@ const Prototype = () => {
         v.play().catch(() => reveal_());
       } else reveal_();
       // Only start the failure fallback after the visitor has initiated the sequence.
-      watchdog = window.setTimeout(reveal_, 5000);
+      watchdog = window.setTimeout(reveal_, 3000);
     };
     const onIntroKey = (event: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
     };
-    window.addEventListener("wheel", startOpening, { passive: true });
-    window.addEventListener("touchstart", startOpening, { passive: true });
-    window.addEventListener("keydown", onIntroKey);
+    // Capture the intent before widgets or nested elements can consume it.
+    document.addEventListener("wheel", startOpening, { capture: true, passive: true });
+    document.addEventListener("touchstart", startOpening, { capture: true, passive: true });
+    window.addEventListener("keydown", onIntroKey, true);
 
     const onEnded = () => reveal_();
     const onErr = () => reveal_();
@@ -811,7 +812,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); window.removeEventListener("wheel", startOpening); window.removeEventListener("touchstart", startOpening); window.removeEventListener("keydown", onIntroKey); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
   }, []);
 
   return (

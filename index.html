@@ -33,8 +33,8 @@
     <!-- Preload self-hosted fonts (used on every page) -->
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Preload the hero-video poster (LCP) only on the homepage, where it's used -->
-    <script>if(location.pathname==="/"){var l=document.createElement("link");l.rel="preload";l.as="image";l.href="/videos/hero-door-poster.webp";document.head.appendChild(l);}</script>
+    <!-- Start fetching the homepage poster and short door clip before the app bundle executes. -->
+    <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var v=document.createElement("link");v.rel="preload";v.as="video";v.type="video/mp4";v.href="/videos/hero-door.mp4";document.head.appendChild(v);}</script>
 
     <!-- Brand favicon (WONLY logo) -->
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png" />
