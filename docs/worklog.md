@@ -139,3 +139,4 @@
 2026-09-02 | 门类白底缩略图比例统一:用户进一步要求白底缩略图内门体尺寸也与Smart Door一致；针对Metal Door和Wooden Door源图留白较多的问题分别应用2.2倍与2.4倍视觉缩放，并保留48×48像素白底容器和object-contain，避免改变原图文件或裁切菜单布局。1,512×861展开菜单实测三张门体可见高度已基本一致，三列卡片与右侧两行入口保持完整。当前随菜单尺寸优化待正式发布。
 2026-09-02 | 产品Mega Menu尺寸与缩略图正式验收:菜单等宽三门卡、两行Smart Window/Whole-House入口及门体比例统一最终提交dc3f177已推送Codeup master；正确正式域名www.wonlyglobal.com于16:32:30切换至目标主资源index-CNzS3zGM.js，浏览器复核正式产品页加载同一资源且0横向溢出。正式环境已发布并完成资源验收。
 2026-09-02 | 产品Mega Menu左右对称调整:按用户最新要求，将Smart Window从Smart Lock栏移至Door栏下方，Whole-House Intelligence保留在Smart Lock栏下方；统一左右两列上半区最小高度166像素，使两张全宽一级入口卡同一水平线、同宽同高。TypeScript及1,923模块生产构建通过，1,512×861展开菜单实测左右对齐、三张门体缩略图比例一致且0横向溢出。当前待发布正式环境。
+2026-09-02 | 产品Mega Menu左右对称正式发布:最终提交99cebbb已推送Codeup master，正式域名www.wonlyglobal.com于16:37:48切换至目标主资源index-im7O2CXI.js；Smart Window位于Door栏下方、Whole-House Intelligence位于Smart Lock栏下方的同水平线布局已上线。正式环境已完成资源验收。
