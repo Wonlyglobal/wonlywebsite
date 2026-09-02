@@ -35,6 +35,23 @@
     <link rel="preload" href="/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Start fetching the homepage poster and short door clip before the app bundle executes. -->
     <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var v=document.createElement("link");v.rel="preload";v.as="video";v.type="video/mp4";v.href="/videos/hero-door.mp4";document.head.appendChild(v);}</script>
+    <!-- Preserve an intro gesture made before the React bundle has mounted. -->
+    <script>
+      if (location.pathname === "/" && !location.hash) {
+        window.__wonlyEarlyIntroIntent = false;
+        window.__wonlyEarlyIntroMark = function (event) {
+          if (!event || event.type !== "keydown" || ["ArrowDown", "PageDown", " "].indexOf(event.key) !== -1) window.__wonlyEarlyIntroIntent = true;
+        };
+        document.addEventListener("wheel", window.__wonlyEarlyIntroMark, { capture: true, passive: true });
+        document.addEventListener("touchstart", window.__wonlyEarlyIntroMark, { capture: true, passive: true });
+        window.addEventListener("keydown", window.__wonlyEarlyIntroMark, true);
+        window.__wonlyEarlyIntroCleanup = function () {
+          document.removeEventListener("wheel", window.__wonlyEarlyIntroMark, true);
+          document.removeEventListener("touchstart", window.__wonlyEarlyIntroMark, true);
+          window.removeEventListener("keydown", window.__wonlyEarlyIntroMark, true);
+        };
+      }
+    </script>
 
     <!-- Brand favicon (WONLY logo) -->
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png" />

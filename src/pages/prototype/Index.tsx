@@ -658,6 +658,9 @@ const Prototype = () => {
     const cmsParams = new URLSearchParams(window.location.search);
     const cmsCanvas = cmsParams.get("cms_canvas") === "1";
     const cmsStage = cmsParams.get("cms_stage") === "main" ? "main" : "intro";
+    const earlyWindow = window as Window & { __wonlyEarlyIntroIntent?: boolean; __wonlyEarlyIntroCleanup?: () => void };
+    const hadEarlyIntroIntent = earlyWindow.__wonlyEarlyIntroIntent === true;
+    earlyWindow.__wonlyEarlyIntroCleanup?.();
     const previousScrollRestoration = window.history.scrollRestoration;
     let done = false;
     let scrollLocked = false;
@@ -835,6 +838,7 @@ const Prototype = () => {
     v?.addEventListener("error", onErr);
     v?.addEventListener("playing", onPlaying);
     v?.addEventListener("canplay", onCanPlay);
+    if (hadEarlyIntroIntent) startOpening();
 
     // Let the visitor skip the intro at any time.
     skipRef.current = () => {
