@@ -29,10 +29,8 @@ const SMART_LOCK_MODELS = [
   { name: "S50 Pro", path: "/products/smart-locks/s50-pro", image: `${BASE}images/catalog-2026/models/s50-pro.webp`, label: "Connected video", description: "Face recognition, remote unlock, video viewing and a 4.5-inch rear display." },
   { name: "S58 Pro", path: "/products/smart-locks/s58-pro", image: `${BASE}images/catalog-2026/models/s58-pro.webp`, label: "Video intercom", description: "Face recognition with video intercom, remote unlocking and loitering snapshots." },
   { name: "P10 Pro", path: "/products/smart-locks/p10-pro", image: `${BASE}images/catalog-2026/models/p10-pro.webp`, label: "Palm vein option", description: "Face or palm-vein recognition with door viewer and indoor display." },
-  { name: "P15 Pro", path: "/products/smart-locks/p15-pro", image: `${BASE}images/catalog-2026/models/p15-pro.webp`, label: "Slim biometric", description: "A slimmer face or palm-vein model with door viewer and indoor display." },
   { name: "S922 Max", path: "/products/smart-locks/s922-max", image: `${BASE}images/catalog-2026/models/s922-max.webp`, label: "Compact video", description: "Face recognition, remote unlocking, door viewer and a 4-inch indoor display." },
   { name: "S936", path: "/products/smart-locks/s936", image: `${BASE}images/catalog-2026/models/s936.webp`, label: "Retail fingerprint", description: "Grip-to-open semi-automatic model with fingerprint, PIN, card and key access." },
-  { name: "A5N", path: "/products/smart-locks/a5n", image: `${BASE}images/catalog-2026/models/a5n.webp`, label: "Retail essential", description: "A practical semi-automatic lock for distribution and renovation programmes." },
 ];
 
 export function DoorModelSelector({ group, currentPath }: { group: SelectorGroup; currentPath: string }) {

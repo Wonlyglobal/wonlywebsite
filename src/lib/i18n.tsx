@@ -33,7 +33,7 @@ export function pathForLocale(pathname: string, locale: Locale): string {
 const UI: Record<Locale, Record<string, string>> = {
   en: {},
   ar: {
-    Product: "المنتجات", Door: "الأبواب", "Metal Door": "الأبواب المعدنية", "Wooden Door": "الأبواب الخشبية",
+    Product: "المنتجات", Door: "الأبواب", "Metal Door": "الأبواب المعدنية", "Smart Door": "الأبواب الذكية", "Wooden Door": "الأبواب الخشبية",
     "Smart Lock": "الأقفال الذكية", "Smart Window": "النوافذ الذكية", "Whole-House Intelligence": "حلول المنزل الذكي",
     Advantages: "المزايا", "Manufacturing & R&D": "التصنيع والبحث والتطوير", "Global Strategy": "الانتشار العالمي",
     Partnership: "الشراكة", Contact: "اتصل بنا", "Get in Touch": "تواصل معنا",
@@ -43,7 +43,7 @@ const UI: Record<Locale, Record<string, string>> = {
     "Business Type": "نوع النشاط", "Estimated Volume": "الكمية المتوقعة", "Target Timeline": "الجدول الزمني", "Products of Interest": "المنتجات المطلوبة", Select: "اختر", Interest: "مجال الاهتمام", "Select an option…": "اختر خياراً…", Distributor: "موزع", Project: "مشروع", "OEM / ODM": "OEM / ODM", "Submit Request": "إرسال الطلب", Close: "إغلاق", "Request received": "تم استلام الطلب", "Tell us about your project": "أخبرنا عن مشروعك", "Tell us about your project or territory...": "أخبرنا عن مشروعك أو منطقتك...", "Please select an option.": "يرجى اختيار أحد الخيارات.",
   },
   fr: {
-    Product: "Produits", Door: "Portes", "Metal Door": "Portes métalliques", "Wooden Door": "Portes en bois",
+    Product: "Produits", Door: "Portes", "Metal Door": "Portes métalliques", "Smart Door": "Portes intelligentes", "Wooden Door": "Portes en bois",
     "Smart Lock": "Serrures intelligentes", "Smart Window": "Fenêtres intelligentes", "Whole-House Intelligence": "Maison intelligente",
     Advantages: "Avantages", "Manufacturing & R&D": "Fabrication et R&D", "Global Strategy": "Présence mondiale",
     Partnership: "Partenariat", Contact: "Contact", "Get in Touch": "Nous contacter",
@@ -53,7 +53,7 @@ const UI: Record<Locale, Record<string, string>> = {
     "Business Type": "Type d’activité", "Estimated Volume": "Volume estimé", "Target Timeline": "Délai prévu", "Products of Interest": "Produits recherchés", Select: "Sélectionner", Interest: "Intérêt", "Select an option…": "Sélectionnez une option…", Distributor: "Distributeur", Project: "Projet", "OEM / ODM": "OEM / ODM", "Submit Request": "Envoyer la demande", Close: "Fermer", "Request received": "Demande reçue", "Tell us about your project": "Présentez-nous votre projet", "Tell us about your project or territory...": "Présentez votre projet ou votre territoire...", "Please select an option.": "Veuillez sélectionner une option.",
   },
   ru: {
-    Product: "Продукция", Door: "Двери", "Metal Door": "Металлические двери", "Wooden Door": "Деревянные двери",
+    Product: "Продукция", Door: "Двери", "Metal Door": "Металлические двери", "Smart Door": "Умные двери", "Wooden Door": "Деревянные двери",
     "Smart Lock": "Умные замки", "Smart Window": "Умные окна", "Whole-House Intelligence": "Умный дом",
     Advantages: "Преимущества", "Manufacturing & R&D": "Производство и НИОКР", "Global Strategy": "Глобальное присутствие",
     Partnership: "Партнёрство", Contact: "Контакты", "Get in Touch": "Связаться с нами",
@@ -63,7 +63,7 @@ const UI: Record<Locale, Record<string, string>> = {
     "Business Type": "Тип бизнеса", "Estimated Volume": "Ожидаемый объём", "Target Timeline": "Сроки", "Products of Interest": "Интересующие продукты", Select: "Выберите", Interest: "Направление", "Select an option…": "Выберите вариант…", Distributor: "Дистрибьютор", Project: "Проект", "OEM / ODM": "OEM / ODM", "Submit Request": "Отправить запрос", Close: "Закрыть", "Request received": "Запрос получен", "Tell us about your project": "Расскажите о вашем проекте", "Tell us about your project or territory...": "Расскажите о проекте или регионе...", "Please select an option.": "Выберите один из вариантов.",
   },
   es: {
-    Product: "Productos", Door: "Puertas", "Metal Door": "Puertas metálicas", "Wooden Door": "Puertas de madera",
+    Product: "Productos", Door: "Puertas", "Metal Door": "Puertas metálicas", "Smart Door": "Puertas inteligentes", "Wooden Door": "Puertas de madera",
     "Smart Lock": "Cerraduras inteligentes", "Smart Window": "Ventanas inteligentes", "Whole-House Intelligence": "Hogar inteligente",
     Advantages: "Ventajas", "Manufacturing & R&D": "Fabricación e I+D", "Global Strategy": "Presencia global",
     Partnership: "Colaboración", Contact: "Contacto", "Get in Touch": "Contáctenos",

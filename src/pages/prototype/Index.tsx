@@ -73,13 +73,17 @@ type NavItem = { label: string; to?: string; href?: string; children?: NavChild[
 const NAV: NavItem[] = [
   { label: "Product", children: [
     { label: "Door", href: "/products/entrance-door", img: `${BASE}images/category-renders/door.webp`, children: [
-      { label: "Metal Door", href: "/products/security-doors", img: `${BASE}images/category-renders/metal-door.webp`, children: [
-        { label: "X70", href: "/products/security-doors/x70" },
-        { label: "X60 Max", href: "/products/security-doors/x60-max" },
-        { label: "X60 Pro", href: "/products/security-doors/x60-pro" },
-        { label: "X50 Max", href: "/products/security-doors/x50-max" },
-        { label: "X50 Pro", href: "/products/security-doors/x50-pro" },
-        { label: "T200", href: "/products/security-doors/t200" },
+      { label: "Metal Door", href: "/products/metal-doors/3-0", img: `${BASE}images/category-renders/metal-door.webp`, children: [
+        { label: "1.0", href: "/products/metal-doors/1-0" },
+        { label: "1.0 Pro", href: "/products/metal-doors/1-0-pro" },
+        { label: "2.0", href: "/products/metal-doors/2-0" },
+        { label: "3.0", href: "/products/metal-doors/3-0" },
+      ] },
+      { label: "Smart Door", href: "/products/smart-doors/5-0", img: `${BASE}images/catalog-2026/hero-renders/x70.webp`, children: [
+        { label: "3.0 Pro", href: "/products/smart-doors/3-0-pro" },
+        { label: "3.0 Max", href: "/products/smart-doors/3-0-max" },
+        { label: "4.0", href: "/products/smart-doors/4-0" },
+        { label: "5.0", href: "/products/smart-doors/5-0" },
       ] },
       { label: "Wooden Door", href: "/products/wooden-doors", img: `${BASE}images/category-renders/wooden-door.webp`, children: [
         { label: "Custom", href: "/products/wooden-doors/custom" },
@@ -97,10 +101,8 @@ const NAV: NavItem[] = [
       { label: "S50 Pro", href: "/products/smart-locks/s50-pro" },
       { label: "S58 Pro", href: "/products/smart-locks/s58-pro" },
       { label: "P10 Pro", href: "/products/smart-locks/p10-pro" },
-      { label: "P15 Pro", href: "/products/smart-locks/p15-pro" },
       { label: "S922 Max", href: "/products/smart-locks/s922-max" },
       { label: "S936", href: "/products/smart-locks/s936" },
-      { label: "A5N", href: "/products/smart-locks/a5n" },
     ] },
     { label: "Smart Window", href: "/products/smart-windows", img: `${BASE}images/category-renders/smart-window.webp` },
     { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/category-renders/whole-house.webp` },

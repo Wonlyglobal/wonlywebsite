@@ -115,6 +115,7 @@ const WholeHouse = lazy(() => import("./pages/products/WholeHouse"));
 const SecurityDoorX70 = lazy(() => import("./pages/products/SecurityDoorX70"));
 const SmartLockS80 = lazy(() => import("./pages/products/SmartLockS80"));
 const CatalogProductDetail = lazy(() => import("./pages/products/CatalogProductDetail"));
+const DoorGradePage = lazy(() => import("./pages/products/DoorGradePage"));
 const WoodenDoorSeriesDetail = lazy(() => import("./pages/products/WoodenDoorSeriesDetail"));
 const EngineeringDoors = lazy(() => import("./pages/products/EngineeringDoors"));
 const MedicalDoors = lazy(() => import("./pages/products/MedicalDoors"));
@@ -173,10 +174,16 @@ const App = () => (
           <Route path="/products/smart-locks/s50-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s50-pro" /></Suspense>} />
           <Route path="/products/smart-locks/s58-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s58-pro" /></Suspense>} />
           <Route path="/products/smart-locks/p10-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="p10-pro" /></Suspense>} />
-          <Route path="/products/smart-locks/p15-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="p15-pro" /></Suspense>} />
           <Route path="/products/smart-locks/s922-max" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s922-max" /></Suspense>} />
           <Route path="/products/smart-locks/s936" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="s936" /></Suspense>} />
-          <Route path="/products/smart-locks/a5n" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="a5n" /></Suspense>} />
+          <Route path="/products/metal-doors/1-0" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="metal-1-0" /></Suspense>} />
+          <Route path="/products/metal-doors/1-0-pro" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="metal-1-0-pro" /></Suspense>} />
+          <Route path="/products/metal-doors/2-0" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="metal-2-0" /></Suspense>} />
+          <Route path="/products/metal-doors/3-0" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="metal-3-0" /></Suspense>} />
+          <Route path="/products/smart-doors/3-0-pro" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="smart-3-0-pro" /></Suspense>} />
+          <Route path="/products/smart-doors/3-0-max" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="smart-3-0-max" /></Suspense>} />
+          <Route path="/products/smart-doors/4-0" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="smart-4-0" /></Suspense>} />
+          <Route path="/products/smart-doors/5-0" element={<Suspense fallback={<div className="min-h-screen" />}><DoorGradePage grade="smart-5-0" /></Suspense>} />
           <Route path="/products/security-doors/x60-max" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="x60-max" /></Suspense>} />
           <Route path="/products/security-doors/x60-pro" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="x60-pro" /></Suspense>} />
           <Route path="/products/security-doors/x50-max" element={<Suspense fallback={<div className="min-h-screen" />}><CatalogProductDetail product="x50-max" /></Suspense>} />
@@ -203,7 +210,7 @@ const App = () => (
 
           {/* Legacy singular /product/* URLs resolve to the canonical /products/* structure. */}
           <Route path="/product/door" element={<Navigate to="/products/entrance-door" replace />} />
-          <Route path="/product/door/metal-door" element={<Navigate to="/products/security-doors" replace />} />
+          <Route path="/product/door/metal-door" element={<Navigate to="/products/metal-doors/3-0" replace />} />
           <Route path="/product/door/wooden-door" element={<Navigate to="/products/wooden-doors" replace />} />
           <Route path="/product/door/wpc-door" element={<Navigate to="/products/entrance-door" replace />} />
           <Route path="/product/smart-lock" element={<Navigate to="/products/smart-locks" replace />} />
