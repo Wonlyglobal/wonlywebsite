@@ -717,13 +717,13 @@ const Prototype = () => {
       // Land on the bright open-door end frame — if the clip stalled or errored,
       // jumping to the end beats leaving copy over a dark closed door.
       if (v) { try { if (!v.ended) { v.pause(); v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } } catch { /* poster ok */ } }
-      if (title.current) { title.current.style.transition = "opacity 1.1s ease, transform 1.1s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-60px)"; }
-      if (scrim.current) { scrim.current.style.transition = "opacity 1.4s ease"; scrim.current.style.opacity = "0"; }
+      if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
+      if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
       if (reveal.current) { reveal.current.style.visibility = "visible"; requestAnimationFrame(() => { if (reveal.current) reveal.current.style.opacity = "1"; }); }
       setContentIn(true);
     };
 
-    if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; reveal.current.style.transition = "opacity 1s ease"; }
+    if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; reveal.current.style.transition = "opacity .55s ease"; }
 
     // CMS editor: keep the selected hero state stable while the public site keeps autoplay.
     if (cmsCanvas) {
@@ -775,12 +775,30 @@ const Prototype = () => {
     // non-autoplay <video>, which left readyState at 0 and the door never opening on live.
     try { if (v) { v.preload = "auto"; v.load(); } } catch { /* ignore */ }
 
-    // Autoplay the door open after a short beat so the closed-door headline reads first.
-    const playTimer = window.setTimeout(() => {
-      if (title.current) { title.current.style.transition = "opacity 1.1s ease, transform 1.1s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-60px)"; }
-      if (scrim.current) { scrim.current.style.transition = "opacity 1.4s ease"; scrim.current.style.opacity = "0"; }
-      if (v) { v.muted = true; v.play().catch(() => reveal_()); } else { reveal_(); }
-    }, 1400);
+    // Start quickly on normal load; wheel/touch/keyboard intent starts immediately.
+    // A slightly faster playback rate keeps the physical door motion legible without
+    // trapping visitors on the first screen for several seconds.
+    let openingStarted = false;
+    let playTimer = 0;
+    const startOpening = () => {
+      if (openingStarted || done) return;
+      openingStarted = true;
+      window.clearTimeout(playTimer);
+      if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
+      if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
+      if (v) {
+        v.muted = true;
+        v.playbackRate = 2;
+        v.play().catch(() => reveal_());
+      } else reveal_();
+    };
+    const onIntroKey = (event: KeyboardEvent) => {
+      if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
+    };
+    window.addEventListener("wheel", startOpening, { passive: true });
+    window.addEventListener("touchstart", startOpening, { passive: true });
+    window.addEventListener("keydown", onIntroKey);
+    playTimer = window.setTimeout(startOpening, 450);
 
     const onEnded = () => reveal_();
     const onErr = () => reveal_();
@@ -788,7 +806,7 @@ const Prototype = () => {
     v?.addEventListener("error", onErr);
 
     // Watchdog: never sit closed forever — reveal after a hard cap even if the clip stalls.
-    const watchdog = window.setTimeout(reveal_, 9000);
+    const watchdog = window.setTimeout(reveal_, 5000);
 
     // Let the visitor skip the intro at any time.
     skipRef.current = () => {
@@ -796,7 +814,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); window.removeEventListener("wheel", startOpening); window.removeEventListener("touchstart", startOpening); window.removeEventListener("keydown", onIntroKey); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(playTimer); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); };
   }, []);
 
   return (
