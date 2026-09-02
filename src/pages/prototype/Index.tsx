@@ -18,10 +18,10 @@ const DARK = "#221F20";
 const MUTED = "#5f5a54";
 
 const BASE = import.meta.env.BASE_URL;
-const DOOR_VIDEO = `${BASE}videos/hero-door.mp4`;
+const DOOR_ANIMATION = `${BASE}videos/hero-door-open.webp`;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
 const LOGO = `${BASE}images/logo-trim.webp`;
-const VIDEO_FALLBACK_DURATION = 3.5;
+const DOOR_ANIMATION_DURATION = 2800;
 
 /* ── CMS 首屏文案: content/settings/homepage.json（在 /admin 站点后台编辑）──
    每个字段都有代码默认值兜底，JSON 缺失或留空也不会让首屏变空白。 */
@@ -549,7 +549,7 @@ const scrollToId = (id: string) => {
 };
 
 const Prototype = () => {
-  const doorVideo = useRef<HTMLVideoElement>(null);
+  const doorAnimation = useRef<HTMLImageElement>(null);
   const openFrame = useRef<HTMLImageElement>(null);
   const title = useRef<HTMLDivElement>(null);
   const scrim = useRef<HTMLDivElement>(null);
@@ -653,13 +653,13 @@ const Prototype = () => {
   // never loads, so the hero cannot get stuck after the visitor starts the sequence. This replaced a fragile
   // scroll-lock + wait-for-gesture version whose door often failed to open on live.
   useLayoutEffect(() => {
-    const v = doorVideo.current;
+    const door = doorAnimation.current;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hasHashTarget = Boolean(window.location.hash);
     const cmsParams = new URLSearchParams(window.location.search);
     const cmsCanvas = cmsParams.get("cms_canvas") === "1";
     const cmsStage = cmsParams.get("cms_stage") === "main" ? "main" : "intro";
-    const earlyWindow = window as Window & { __wonlyEarlyIntroIntent?: boolean; __wonlyEarlyIntroCleanup?: () => void };
+    const earlyWindow = window as Window & { __wonlyEarlyIntroIntent?: boolean; __wonlyEarlyIntroCleanup?: () => void; __wonlyDoorAnimationBlob?: Promise<Blob> };
     const hadEarlyIntroIntent = earlyWindow.__wonlyEarlyIntroIntent === true;
     earlyWindow.__wonlyEarlyIntroCleanup?.();
     const previousScrollRestoration = window.history.scrollRestoration;
@@ -718,12 +718,7 @@ const Prototype = () => {
       if (done) return;
       done = true;
       unlockScroll();
-      // Land on the bright open-door end frame — if the clip stalled or errored,
-      // jumping to the end beats leaving copy over a dark closed door.
-      if (v) { try { if (!v.ended) { v.pause(); v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } } catch { /* poster ok */ } }
-      // The media element cannot seek to its end frame before metadata exists.
-      // Always place the matching open-door still above it before revealing copy,
-      // so a slow or failed clip never leaves the second screen over the closed poster.
+      // Always land on the matching open-door still before revealing the second screen.
       if (openFrame.current) openFrame.current.style.opacity = "1";
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
@@ -741,7 +736,7 @@ const Prototype = () => {
         if (scrim.current) scrim.current.style.opacity = "0";
         reveal_();
       } else {
-        try { if (v) { v.pause(); v.currentTime = 0; } } catch { /* poster is sufficient */ }
+        if (door) door.src = DOOR_POSTER;
         if (title.current) { title.current.style.opacity = "1"; title.current.style.transform = "translateZ(0)"; }
         if (scrim.current) scrim.current.style.opacity = "1";
         if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; }
@@ -757,11 +752,6 @@ const Prototype = () => {
     }
 
     if (reduced || hasHashTarget) {
-      if (v) {
-        v.pause();
-        const setOpen = () => { try { v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } catch { /* poster ok */ } };
-        if (v.readyState >= 1) setOpen(); else v.addEventListener("loadedmetadata", setOpen, { once: true });
-      }
       if (title.current) title.current.style.opacity = "0";
       if (scrim.current) scrim.current.style.opacity = "0";
       reveal_();
@@ -779,53 +769,28 @@ const Prototype = () => {
     // body are locked so wheel, trackpad and mobile touch scrolling behave alike.
     lockScroll();
 
-    // Force the browser to actually fetch the clip — Chrome ignores preload hints for a
-    // non-autoplay <video>, which left readyState at 0 and the door never opening on live.
-    try { if (v) { v.preload = "auto"; v.load(); } } catch { /* ignore */ }
-
-    // Keep the closed-door title visible until the visitor expresses navigation intent.
-    // Once triggered, keep the optimized short clip visibly legible. A 2x rate made
-    // the physical opening look like an abrupt scene cut on high-refresh trackpads.
+    // Download the complete animation before displaying it. A fresh object URL prevents
+    // browsers from reusing the end state of a separately preloaded animated image.
     let openingStarted = false;
-    let playAttempted = false;
-    let playbackStarted = false;
+    let animationUrl = "";
     let readinessWatchdog = 0;
-    let startupWatchdog = 0;
     let watchdog = 0;
-    const showOpening = () => {
-      if (playbackStarted || done) return;
-      playbackStarted = true;
+    const playDoor = () => {
+      if (!door || done || !openingStarted || !animationUrl) return;
       window.clearTimeout(readinessWatchdog);
-      window.clearTimeout(startupWatchdog);
+      // Reset to the poster first so repeat mounts never inherit an animation at its end.
+      door.src = DOOR_POSTER;
+      void door.offsetWidth;
+      door.src = animationUrl;
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
-      watchdog = window.setTimeout(reveal_, 3000);
-    };
-    const playDoor = () => {
-      if (!v || playAttempted || done) return;
-      playAttempted = true;
-      window.clearTimeout(readinessWatchdog);
-      v.muted = true;
-      v.playbackRate = 1.35;
-      // At this point the browser has reported CAN_PLAY. Allow decoding a short
-      // grace period, but never leave the document locked if playback still fails.
-      startupWatchdog = window.setTimeout(reveal_, 2500);
-      v.play().catch(() => reveal_());
+      watchdog = window.setTimeout(reveal_, DOOR_ANIMATION_DURATION + 120);
     };
     const startOpening = () => {
       if (openingStarted || done) return;
       openingStarted = true;
-      if (v) {
-        v.muted = true;
-        v.playbackRate = 1.35;
-        // A visitor can scroll before the clip has buffered. Preserve that intent and
-        // wait for CAN_PLAY instead of calling play() against an unready media element.
-        if (v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) playDoor();
-        else {
-          try { v.load(); } catch { /* ignore */ }
-          readinessWatchdog = window.setTimeout(reveal_, 5000);
-        }
-      } else reveal_();
+      if (animationUrl) playDoor();
+      else readinessWatchdog = window.setTimeout(reveal_, 8000);
     };
     const onIntroKey = (event: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
@@ -835,23 +800,23 @@ const Prototype = () => {
     document.addEventListener("touchstart", startOpening, { capture: true, passive: true });
     window.addEventListener("keydown", onIntroKey, true);
 
-    const onEnded = () => reveal_();
-    const onErr = () => reveal_();
-    const onPlaying = () => showOpening();
-    const onCanPlay = () => { if (openingStarted) playDoor(); };
-    v?.addEventListener("ended", onEnded);
-    v?.addEventListener("error", onErr);
-    v?.addEventListener("playing", onPlaying);
-    v?.addEventListener("canplay", onCanPlay);
+    const animationBlob = earlyWindow.__wonlyDoorAnimationBlob || fetch(DOOR_ANIMATION, { cache: "force-cache" }).then((response) => {
+      if (!response.ok) throw new Error(`Door animation ${response.status}`);
+      return response.blob();
+    });
+    animationBlob.then((blob) => {
+      if (done) return;
+      animationUrl = URL.createObjectURL(blob);
+      if (openingStarted) playDoor();
+    }).catch(() => { if (openingStarted) reveal_(); });
     if (hadEarlyIntroIntent) startOpening();
 
     // Let the visitor skip the intro at any time.
     skipRef.current = () => {
-      if (v) { try { v.pause(); v.currentTime = v.duration || VIDEO_FALLBACK_DURATION; } catch { /* ignore */ } }
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(startupWatchdog); window.clearTimeout(watchdog); v?.removeEventListener("ended", onEnded); v?.removeEventListener("error", onErr); v?.removeEventListener("playing", onPlaying); v?.removeEventListener("canplay", onCanPlay); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(watchdog); if (animationUrl) URL.revokeObjectURL(animationUrl); };
   }, []);
 
   return (
@@ -912,9 +877,9 @@ const Prototype = () => {
         </div>
       </header>
 
-      {/* ══ 1 · Hero door video + 2 · reveal on interior frame ══ */}
+      {/* ══ 1 · Hero door animation + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <video ref={doorVideo} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} src={DOOR_VIDEO} poster={DOOR_POSTER} muted playsInline preload="auto" controlsList="nodownload nofullscreen noremoteplayback" onContextMenu={(e) => e.preventDefault()} aria-hidden="true" />
+        <img ref={doorAnimation} src={DOOR_POSTER} alt="" aria-hidden="true" draggable={false} className="absolute top-0 left-0 z-0 object-cover object-center" style={{ width: "100vw", height: "100dvh", transform: "translateZ(0)", willChange: "transform", backfaceVisibility: "hidden" }} />
         <img ref={openFrame} src={IMG.interior} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-[1] w-full h-full object-cover object-center pointer-events-none" style={{ opacity: 0, transition: "opacity .35s ease", transform: "translateZ(0)" }} />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
