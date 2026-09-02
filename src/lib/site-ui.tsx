@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, ChevronRight, X, Check, Globe } from "lucide-react";
+import { ArrowRight, ChevronDown, X, Check, Globe } from "lucide-react";
 import { create } from "zustand";
 import { trackLead } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
@@ -45,25 +45,50 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
 /* ── Navigation & footer are CMS-editable: content/settings/navigation.json ──
    Edited via /admin → 站点设置. Image paths in the JSON are relative to
    public/images/ and get the BASE prefix here. Empty href = non-link label. */
-type NavChild = { label: string; href: string; img?: string; children?: { label: string; href: string; img?: string }[] };
+export type NavChild = { label: string; href: string; img?: string; children?: NavChild[] };
 type NavItem = { label: string; href?: string; children?: NavChild[] };
 
 const NAV_RAW = import.meta.glob("/content/settings/navigation.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 const SITE_NAV_DATA = JSON.parse(Object.values(NAV_RAW)[0] || '{"nav":[],"footer":[]}') as {
-  nav: { label: string; href?: string; children?: { label: string; href?: string; img?: string; children?: { label: string; href?: string; img?: string }[] }[] }[];
+  nav: { label: string; href?: string; children?: NavChild[] }[];
   footer: { h: string; links: { l: string; href?: string }[] }[];
 };
 const img_ = (p?: string) => (p ? `${BASE}${p.replace(/^\//, "")}` : undefined);
+const mapChild = (c: NavChild): NavChild => ({
+  label: c.label,
+  href: c.href || "#",
+  img: img_(c.img),
+  children: c.children?.map(mapChild),
+});
 const NAV: NavItem[] = SITE_NAV_DATA.nav.map((n) => ({
   label: n.label,
   href: n.href || undefined,
-  children: n.children?.map((c) => ({
-    label: c.label,
-    href: c.href || "#",
-    img: img_(c.img),
-    children: c.children?.map((sc) => ({ label: sc.label, href: sc.href || "#", img: img_(sc.img) })),
-  })),
+  children: n.children?.map(mapChild),
 }));
+
+export function ProductMegaMenu({ className = "" }: { className?: string }) {
+  const { t } = useLocale();
+  const children = NAV.find((item) => item.label === "Product")?.children || [];
+  return <div className={`absolute top-full left-0 w-[min(880px,calc(100vw-32px))] max-h-[76vh] overflow-y-auto overscroll-contain rounded-2xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-3 grid grid-cols-1 md:grid-cols-2 gap-3 ${className}`}>
+    {children.map((c) => <div key={c.label} className="relative rounded-xl border border-black/[0.06] bg-white/45 p-2">
+      <Link to={c.href} className="flex items-center gap-3 w-full px-3 py-3 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+        {c.img && <span className="w-[72px] h-[72px] rounded-xl shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+        <span className="leading-tight whitespace-nowrap flex-1 text-base font-normal">{t(c.label)}</span>
+        {c.children && <ChevronDown size={14} style={{ color: MUTED }} />}
+      </Link>
+      {c.children && <div className={c.label === "Door" ? "grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 pb-2" : "mx-2 mb-2 rounded-lg bg-white/55 p-3 grid grid-cols-2 sm:grid-cols-3 gap-x-2"}>
+        {c.children.map((sc) => <div key={sc.label} className={sc.children ? "rounded-lg bg-white/55 p-1" : ""}>
+          <Link to={sc.href} className={sc.children ? "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" : "block px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap"} style={{ color: sc.children ? DARK : MUTED }}>
+            {sc.img && <span className="w-12 h-12 rounded-lg shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={sc.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+            <span className="leading-tight whitespace-nowrap flex-1">{t(sc.label)}</span>
+            {sc.children && <ChevronDown size={12} style={{ color: MUTED }} />}
+          </Link>
+          {sc.children && <div className="grid grid-cols-2 gap-x-1 px-1 pb-1">{sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{model.label}</Link>)}</div>}
+        </div>)}
+      </div>}
+    </div>)}
+  </div>;
+}
 
 /* Shared "Get a Quote" modal state (zustand) */
 export const useQuoteStore = create<{
@@ -229,11 +254,23 @@ export function QuoteModal() {
 export function SiteHeader() {
   const [solid, setSolid] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
-  const [openSub, setOpenSub] = useState<string | null>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, language, pathname, t } = useLocale();
   const cmsNavigation = useCmsSetting("navigation");
-  const activeNav: NavItem[] = cmsNavigation?.items?.length ? cmsNavigation.items.map(item => ({ label: item.label, href: item.url })) : NAV;
+  const requiredNavigation = ["product", "advantages", "manufacturing & r&d", "global strategy", "partnership", "contact"];
+  const cmsItems = cmsNavigation?.items ?? [];
+  const normalizeNavLabel = (label: string) => label.trim().toLowerCase().replace(/products$/, "product");
+  const completeCmsNavigation = requiredNavigation.every(required =>
+    cmsItems.some(item => normalizeNavLabel(item.label) === required),
+  );
+  const activeNav: NavItem[] = completeCmsNavigation
+    ? cmsItems.map(item => {
+        const original = NAV.find(nav => normalizeNavLabel(nav.label) === normalizeNavLabel(item.label));
+        return original
+          ? { ...original, label: item.label.trim() || original.label, href: original.children?.length ? original.href : item.url }
+          : { label: item.label, href: item.url };
+      })
+    : NAV;
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     onScroll();
@@ -246,27 +283,27 @@ export function SiteHeader() {
       {!solid && <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0))" }} />}
       <div className="relative max-w-[1600px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
         <Link to="/" className="shrink-0" aria-label="WONLY — home">
-          <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto transition-[filter] duration-500" style={{ filter: solid ? "none" : "brightness(0) invert(1)" }} />
+          <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
           {activeNav.map((n) => (
-            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
+            <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
               {n.href ? (
                 <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</Link>
               ) : (
                 <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
               )}
-              {n.children && openDrop === n.label && (
+              {n.children && openDrop === n.label && (n.label === "Product" ? <ProductMegaMenu /> :
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
                   {n.children.map((c) => (
-                    <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
+                    <div key={c.label} className="relative">
                       <Link to={c.href} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                         {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
                         <span className="leading-tight whitespace-nowrap flex-1">{t(c.label)}</span>
-                        {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
+                        {c.children && <ChevronDown size={14} style={{ color: MUTED }} />}
                       </Link>
-                      {c.children && openSub === c.label && (
-                        <div className="absolute top-0 left-full w-[220px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                      {c.children && (
+                        <div className="ml-[30px] pl-3 border-l border-black/10 pb-1">
                           {c.children.map((sc) => (
                             <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
                               {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
@@ -334,7 +371,7 @@ export function SiteFooter() {
       <div className="max-w-[1400px] mx-auto px-[5vw] md:px-[6vw]">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+            <img src={LOGO} alt="WONLY" className="h-6 w-auto" />
             <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
             <div className="mt-5 flex items-center gap-2.5">
               <a href="https://www.tiktok.com/@wonlyglobal" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 grid place-items-center rounded-full border border-white/15 text-white/60 hover:text-white hover:border-white/40 transition-colors">

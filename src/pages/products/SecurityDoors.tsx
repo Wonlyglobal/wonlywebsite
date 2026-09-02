@@ -27,6 +27,11 @@ const STATS = [
 ];
 
 const SERIES = [
+  { n: "00X", name: "X60 Max Smart Door 5.0", tag: "Max", d: "Automatic opening, remote sensing, anti-pinch protection, formaldehyde monitoring and a threshold-free entrance.", img: `${BASE}images/catalog-2026/models/x60-max.webp`, path: "/products/security-doors/x60-max" },
+  { n: "00Y", name: "X60 Pro Smart Door 5.0", tag: "Connected", d: "Automatic remote-sensing entry with anti-pinch protection and whole-home ecosystem integration.", img: `${BASE}images/catalog-2026/models/x60-pro.webp`, path: "/products/security-doors/x60-pro" },
+  { n: "00Z", name: "X50 Max Smart Door 5.0", tag: "Air Quality", d: "Automatic entry, physical anti-pinch protection and air-quality monitoring for premium homes.", img: `${BASE}images/catalog-2026/models/x50-max.webp`, path: "/products/security-doors/x50-max" },
+  { n: "00", name: "X50 Pro Smart Door 5.0", tag: "New Flagship", d: "Automatic opening, remote sensing, physical anti-pinch protection and whole-home integration in one complete entrance system.", img: `${BASE}images/catalog-2026/x50.webp`, path: "/products/security-doors/x50-pro" },
+  { n: "00A", name: "T200 Security Door", tag: "People-First", d: "Hands-free opening, 80 mm pinch-free clearance, a threshold-free seal and dual-power protection for easier everyday access.", img: `${BASE}images/catalog-2026/t200.webp`, path: "/products/security-doors/t200" },
   { n: "01", name: "Robotic Security Door X70", tag: "Flagship", d: "Autonomous locking, multi-vector intrusion sensing and a premium cast-aluminum build — the flagship for villas and executive residences.", img: IMG.x70, path: "/products/security-doors/x70" },
   { n: "02", name: "4.0 Global Series", tag: "Best Seller", d: "International universal models — fire-rated, anti-theft and climate-adapted to global standards.", img: IMG.global40 },
   { n: "03", name: "K300 Pro Robotic Door", tag: "Smart", d: "AI-powered entry with facial recognition and app management, built for new-quality housing.", img: IMG.k300pro },

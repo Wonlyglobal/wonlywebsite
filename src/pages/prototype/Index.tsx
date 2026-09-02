@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
-import { useQuoteStore, QuoteModal } from "@/lib/site-ui";
+import { useQuoteStore, QuoteModal, ProductMegaMenu } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
@@ -67,18 +67,43 @@ const IMG = {
 };
 
 /* ── Navigation ────────────────────────────────────────────── */
-type NavSubChild = { label: string; href: string; img?: string };
+type NavSubChild = { label: string; href: string; img?: string; children?: NavSubChild[] };
 type NavChild = { label: string; href?: string; to?: string; img?: string; children?: NavSubChild[] };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
 const NAV: NavItem[] = [
   { label: "Product", children: [
-    { label: "Door", href: "/product/door", img: IMG.aluMax, children: [
-      { label: "Metal Door", href: "/product/door/metal-door", img: `${BASE}images/5products/nav-security-door.png` },
-      { label: "Wooden Door", href: "/product/door/wooden-door", img: `${BASE}images/5products/nav-wooden-door.png` },
+    { label: "Door", href: "/products/entrance-door", img: `${BASE}images/category-renders/door.webp`, children: [
+      { label: "Metal Door", href: "/products/security-doors", img: `${BASE}images/category-renders/metal-door.webp`, children: [
+        { label: "X70", href: "/products/security-doors/x70" },
+        { label: "X60 Max", href: "/products/security-doors/x60-max" },
+        { label: "X60 Pro", href: "/products/security-doors/x60-pro" },
+        { label: "X50 Max", href: "/products/security-doors/x50-max" },
+        { label: "X50 Pro", href: "/products/security-doors/x50-pro" },
+        { label: "T200", href: "/products/security-doors/t200" },
+      ] },
+      { label: "Wooden Door", href: "/products/wooden-doors", img: `${BASE}images/category-renders/wooden-door.webp`, children: [
+        { label: "Custom", href: "/products/wooden-doors/custom" },
+        { label: "Minimalist", href: "/products/wooden-doors/minimalist" },
+        { label: "PVC", href: "/products/wooden-doors/pvc" },
+        { label: "Solid Wood", href: "/products/wooden-doors/solid-wood" },
+        { label: "Aluminum Alloy", href: "/products/wooden-doors/aluminum-alloy" },
+      ] },
     ] },
-    { label: "Smart Lock", href: "/product/smart-lock", img: IMG.lockS80 },
-    { label: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/dropdown-window.png` },
-    { label: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/dropdown-control.png` },
+    { label: "Smart Lock", href: "/products/smart-locks", img: `${BASE}images/category-renders/smart-lock.webp`, children: [
+      { label: "S80", href: "/products/smart-locks/s80" },
+      { label: "S80 Max", href: "/products/smart-locks/s80-max" },
+      { label: "S60 Max", href: "/products/smart-locks/s60-max" },
+      { label: "S60 Pro", href: "/products/smart-locks/s60-pro" },
+      { label: "S50 Pro", href: "/products/smart-locks/s50-pro" },
+      { label: "S58 Pro", href: "/products/smart-locks/s58-pro" },
+      { label: "P10 Pro", href: "/products/smart-locks/p10-pro" },
+      { label: "P15 Pro", href: "/products/smart-locks/p15-pro" },
+      { label: "S922 Max", href: "/products/smart-locks/s922-max" },
+      { label: "S936", href: "/products/smart-locks/s936" },
+      { label: "A5N", href: "/products/smart-locks/a5n" },
+    ] },
+    { label: "Smart Window", href: "/products/smart-windows", img: `${BASE}images/category-renders/smart-window.webp` },
+    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/category-renders/whole-house.webp` },
   ] },
   { label: "Advantages", href: "/advantages", children: [
     { label: "Why Wonly Door", href: "/advantages#why-wonly-door" },
@@ -530,7 +555,6 @@ const Prototype = () => {
   const [contentIn, setContentIn] = useState(false);
   const [solid, setSolid] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
-  const [openSub, setOpenSub] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
@@ -780,39 +804,45 @@ const Prototype = () => {
         {!solid && <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0))" }} />}
         <div className="relative max-w-[1600px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
           <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
-            <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto transition-[filter] duration-500" style={{ filter: solid ? "none" : "brightness(0) invert(1)" }} />
+            <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto" />
           </button>
           <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
             {NAV.map((n) => (
-              <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => { setOpenDrop(null); setOpenSub(null); }}>
+              <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
                 {n.href ? (
                   <Link to={n.href} className="px-3.5 py-2 text-sm font-light flex items-center gap-1 transition-colors" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</Link>
                 ) : (
                   <span className="px-3.5 py-2 text-sm font-light flex items-center gap-1 cursor-default select-none" style={{ color: solid ? DARK : "rgba(255,255,255,0.95)" }}>{t(n.label)}{n.children && <ChevronDown size={13} />}</span>
                 )}
-                {n.children && openDrop === n.label && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                {n.children && openDrop === n.label && (n.label === "Product" ? <ProductMegaMenu /> : (
+                  <div className={`absolute top-full rounded-2xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-3 ${n.label === "Product" ? "left-0 w-[min(960px,calc(100vw-32px))] max-h-[76vh] overflow-y-auto overscroll-contain grid grid-cols-1 md:grid-cols-2 gap-3" : "left-1/2 -translate-x-1/2 w-[360px] max-h-[78vh] overflow-y-auto overscroll-contain"}`}>
                     {n.children.map((c) => (
-                      <div key={c.label} className="relative" onMouseEnter={() => setOpenSub(c.children ? c.label : null)}>
-                        <Link to={c.href || "#"} className="flex items-center gap-3 w-full px-3 py-2.5 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
-                          {c.img && <span className="w-9 h-9 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={c.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                          <span className="leading-tight whitespace-nowrap flex-1">{t(c.label)}</span>
-                          {c.children && <ChevronRight size={14} style={{ color: MUTED }} />}
+                      <div key={c.label} className={`relative ${n.label === "Product" ? "rounded-xl border border-black/[0.06] bg-white/45 p-2" : ""} ${(c.label === "Smart Window" || c.label === "Whole-House Intelligence") ? "md:col-span-1" : ""}`}>
+                        <Link to={c.href || "#"} className={`flex items-center gap-3 w-full px-3 text-sm font-light rounded-lg hover:bg-black/[0.04] transition-colors ${n.label === "Product" ? "py-3" : "py-2.5"}`} style={{ color: DARK }}>
+                          {c.img && <span className={`${n.label === "Product" ? "w-[72px] h-[72px] rounded-xl" : "w-9 h-9 rounded-md"} shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]`}><img src={c.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+                          <span className={`leading-tight whitespace-nowrap flex-1 ${n.label === "Product" ? "text-base font-normal" : ""}`}>{t(c.label)}</span>
+                          {c.children && <ChevronDown size={14} style={{ color: MUTED }} />}
                         </Link>
-                        {c.children && openSub === c.label && (
-                          <div className="absolute top-0 left-full w-[220px] rounded-xl bg-[#F5F1EA]/95 backdrop-blur-md shadow-2xl border border-black/5 p-2">
+                        {c.children && (
+                          <div className={`${n.label === "Product" ? (c.label === "Door" ? "grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 pb-2" : "grid grid-cols-2 sm:grid-cols-3 gap-x-2 px-2 pb-2") : "ml-[30px] pl-3 border-l border-black/10 pb-1"}`}>
                             {c.children.map((sc) => (
-                              <Link key={sc.label} to={sc.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
-                                {sc.img && <span className="w-7 h-7 rounded-md shrink-0 overflow-hidden flex items-center justify-center p-1 bg-white"><img src={sc.img} alt="" loading="lazy" className="max-w-full max-h-full object-contain" /></span>}
-                                <span className="leading-tight whitespace-nowrap">{t(sc.label)}</span>
-                              </Link>
+                              <div key={sc.label} className={sc.children ? "rounded-lg bg-white/55 p-1" : ""}>
+                                <Link to={sc.href} className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" style={{ color: DARK }}>
+                                  {sc.img && <span className={`${n.label === "Product" ? "w-12 h-12 rounded-lg" : "w-7 h-7 rounded-md"} shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]`}><img src={sc.img} alt="" loading="lazy" className="w-full h-full object-contain" /></span>}
+                                  <span className="leading-tight whitespace-nowrap flex-1">{t(sc.label)}</span>
+                                  {sc.children && <ChevronDown size={12} style={{ color: MUTED }} />}
+                                </Link>
+                                {sc.children && <div className="grid grid-cols-2 gap-x-1 px-1 pb-1">
+                                  {sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{model.label}</Link>)}
+                                </div>}
+                              </div>
                             ))}
                           </div>
                         )}
                       </div>
                     ))}
                   </div>
-                )}
+                ))}
               </div>
             ))}
           </nav>
@@ -1151,7 +1181,7 @@ const Prototype = () => {
         <div className={CONTAINER}>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <img src={LOGO} alt="WONLY" className="h-6 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+            <img src={LOGO} alt="WONLY" className="h-6 w-auto" />
             <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
           </div>
           {FOOTER.map((col) => (

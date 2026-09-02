@@ -35,6 +35,16 @@ const routes = [
 ];
 
 const englishOnlyRoutes = [
+  ["/products/smart-locks/s80-max/", "2026-09-01", "monthly", "0.9"],
+  ...["s60-max", "s60-pro", "s50-pro", "s58-pro", "p10-pro", "p15-pro", "s922-max", "s936", "a5n"].map((model) => [`/products/smart-locks/${model}/`, "2026-09-01", "monthly", "0.8"]),
+  ...["x60-max", "x60-pro", "x50-max"].map((model) => [`/products/security-doors/${model}/`, "2026-09-01", "monthly", "0.9"]),
+  ["/products/security-doors/x50-pro/", "2026-09-01", "monthly", "0.9"],
+  ["/products/security-doors/t200/", "2026-09-01", "monthly", "0.9"],
+  ["/products/wooden-doors/custom/", "2026-09-01", "monthly", "0.8"],
+  ["/products/wooden-doors/minimalist/", "2026-09-01", "monthly", "0.8"],
+  ["/products/wooden-doors/pvc/", "2026-09-01", "monthly", "0.8"],
+  ["/products/wooden-doors/solid-wood/", "2026-09-01", "monthly", "0.8"],
+  ["/products/wooden-doors/aluminum-alloy/", "2026-09-01", "monthly", "0.8"],
   ["/products/security-doors/cast-aluminium/", "2026-08-25", "monthly", "0.8"],
   ["/products/security-doors/fire-rated/", "2026-08-25", "monthly", "0.8"],
   ["/solutions/hotel-security-doors/", "2026-08-25", "monthly", "0.8"],
