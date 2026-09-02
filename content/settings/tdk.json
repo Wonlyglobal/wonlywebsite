@@ -55,6 +55,54 @@
       "keywords": ""
     },
     {
+      "path": "/products/smart-locks/s80-max",
+      "title": "WONLY S80 Max Remote-Sensing Smart Lock",
+      "description": "Explore the WONLY S80 Max with approach recognition, 3D face access, anti-pinch operation and an integrated video viewer for premium residential entrances.",
+      "keywords": "S80 Max smart lock, remote sensing smart lock, 3D face recognition lock"
+    },
+    {
+      "path": "/products/smart-locks/s60-max",
+      "title": "WONLY S60 Max Remote-Sensing Smart Lock",
+      "description": "Review the WONLY S60 Max smart lock with remote-sensing recognition, 3D face access, remote video and optional automatic opening for residential projects.",
+      "keywords": "S60 Max smart lock, remote sensing door lock, face recognition lock"
+    },
+    {
+      "path": "/products/smart-locks/s60-pro",
+      "title": "WONLY S60 Pro Face Recognition Smart Lock",
+      "description": "Discover the WONLY S60 Pro with 3D face recognition, remote unlocking and video, a smart door viewer and a 4.5-inch indoor display for modern homes.",
+      "keywords": "S60 Pro smart lock, face recognition door lock, video smart lock"
+    },
+    {
+      "path": "/products/smart-locks/s50-pro",
+      "title": "WONLY S50 Pro Video Face Recognition Lock",
+      "description": "Explore the WONLY S50 Pro smart lock with 3D face recognition, remote access, doorway video and a 4.5-inch rear display for apartments and projects.",
+      "keywords": "S50 Pro smart lock, video door lock, face recognition lock"
+    },
+    {
+      "path": "/products/smart-locks/s58-pro",
+      "title": "WONLY S58 Pro Video Intercom Smart Lock",
+      "description": "Review the WONLY S58 Pro with 3D face access, video intercom, remote unlocking, loitering snapshots and a 4.5-inch display for residential entrances.",
+      "keywords": "S58 Pro smart lock, video intercom door lock, biometric smart lock"
+    },
+    {
+      "path": "/products/smart-locks/p10-pro",
+      "title": "WONLY P10 Pro Palm-Vein & Face Smart Lock",
+      "description": "Discover the WONLY P10 Pro with face or palm-vein recognition, a video door viewer, indoor HD display and multi-method access for biometric-first homes.",
+      "keywords": "P10 Pro smart lock, palm vein smart lock, face recognition door lock"
+    },
+    {
+      "path": "/products/smart-locks/s922-max",
+      "title": "WONLY S922 Max Face Recognition Smart Lock",
+      "description": "Explore the WONLY S922 Max with 3D face recognition, remote unlocking, doorway video, loitering snapshots and a compact indoor display for residences.",
+      "keywords": "S922 Max smart lock, face recognition smart lock, video door lock"
+    },
+    {
+      "path": "/products/smart-locks/s936",
+      "title": "WONLY S936 Fingerprint Smart Lock for Retail",
+      "description": "Review the WONLY S936 grip-to-open smart lock with semi-automatic locking, AI fingerprint access, anti-peep PIN, card and mechanical key options.",
+      "keywords": "S936 smart lock, fingerprint door lock, retail smart lock"
+    },
+    {
       "path": "/products/smart-windows",
       "title": "Smart Window Supplier — Energy-Saving Aluminium Windows | WONLY",
       "description": "WONLY supplies aluminium smart windows with automated wind and rain response, app control, acoustic insulation and project customisation.",
@@ -71,6 +119,114 @@
       "title": "Engineering Doors — Fire, Access-Control & Acoustic | WONLY",
       "description": "Specify WONLY engineering doors for fire, access-control and acoustic applications, with technical documentation and bulk project delivery support.",
       "keywords": ""
+    },
+    {
+      "path": "/products/metal-doors/1-0",
+      "title": "Metal Door 1.0 Security Entrance Range | WONLY",
+      "description": "Explore WONLY Metal Door 1.0 as the conventional security entrance baseline, with project size, opening direction and finish confirmed for each market.",
+      "keywords": "metal security door, entrance door supplier, project metal doors"
+    },
+    {
+      "path": "/products/metal-doors/1-0-pro",
+      "title": "Metal Door 1.0 Pro Models & Features | WONLY",
+      "description": "Compare WONLY Metal Door 1.0 Pro models with upgraded structure, finishes and project configuration support for residential and development entrances.",
+      "keywords": "metal door 1.0 pro, security entrance door, residential metal doors"
+    },
+    {
+      "path": "/products/metal-doors/2-0",
+      "title": "Metal Door 2.0 Smart-Ready Range | WONLY",
+      "description": "Explore WONLY Metal Door 2.0 models designed for upgraded security, coordinated access hardware and project-specific sizes, handing and finishes.",
+      "keywords": "metal door 2.0, smart ready security door, project entrance doors"
+    },
+    {
+      "path": "/products/metal-doors/3-0",
+      "title": "Metal Door 3.0 Integrated Entrance Range | WONLY",
+      "description": "Compare WONLY Metal Door 3.0 models with integrated smart-entry capabilities, premium finishes and specification support for modern residential projects.",
+      "keywords": "metal door 3.0, integrated security door, smart entrance system"
+    },
+    {
+      "path": "/products/smart-doors/3-0-pro",
+      "title": "Smart Door 3.0 Pro Models & Capabilities | WONLY",
+      "description": "Explore WONLY Smart Door 3.0 Pro models with integrated access, visual control and project-ready entrance configurations for premium residential use.",
+      "keywords": "smart door 3.0 pro, intelligent security door, residential smart entrance"
+    },
+    {
+      "path": "/products/smart-doors/3-0-max",
+      "title": "Smart Door 3.0 Max Models & Capabilities | WONLY",
+      "description": "Compare WONLY Smart Door 3.0 Max models with expanded display, monitoring and connected-entry functions for villas and residential developments.",
+      "keywords": "smart door 3.0 max, connected security door, villa smart door"
+    },
+    {
+      "path": "/products/smart-doors/4-0",
+      "title": "Smart Door 4.0 Models & Entrance Features | WONLY",
+      "description": "Explore WONLY Smart Door 4.0 models with integrated display, air monitoring, privacy-masked monitoring and threshold-free access for modern homes.",
+      "keywords": "smart door 4.0, threshold free security door, intelligent entrance door"
+    },
+    {
+      "path": "/products/smart-doors/5-0",
+      "title": "Smart Door 5.0 Automatic Entrance Models | WONLY",
+      "description": "Compare WONLY Smart Door 5.0 models with automatic opening, arrival sensing, anti-pinch protection and connected-home integration for premium projects.",
+      "keywords": "smart door 5.0, automatic security door, remote sensing entrance door"
+    },
+    {
+      "path": "/products/security-doors/x60-max",
+      "title": "WONLY X60 Max Automatic Smart Security Door",
+      "description": "Explore the WONLY X60 Max with automatic opening, remote sensing, anti-pinch protection, air monitoring and threshold-free access for premium residences.",
+      "keywords": "X60 Max smart door, automatic security door, threshold free entrance"
+    },
+    {
+      "path": "/products/security-doors/x60-pro",
+      "title": "WONLY X60 Pro Connected Smart Security Door",
+      "description": "Review the WONLY X60 Pro with remote-sensing automatic entry, anti-pinch protection and connected-home integration for apartments, villas and projects.",
+      "keywords": "X60 Pro smart door, connected security door, automatic entrance door"
+    },
+    {
+      "path": "/products/security-doors/x50-max",
+      "title": "WONLY X50 Max Air-Monitoring Smart Door",
+      "description": "Discover the WONLY X50 Max with automatic entry, remote sensing, physical anti-pinch protection and entrance air-quality monitoring for modern residences.",
+      "keywords": "X50 Max smart door, air monitoring security door, automatic smart entrance"
+    },
+    {
+      "path": "/products/security-doors/x50-pro",
+      "title": "WONLY X50 Pro Smart Security Door 5.0",
+      "description": "Explore the WONLY X50 Pro with automatic opening, remote sensing, physical anti-pinch protection, a large display and connected-home integration.",
+      "keywords": "X50 Pro smart security door, automatic door, smart door 5.0"
+    },
+    {
+      "path": "/products/security-doors/t200",
+      "title": "WONLY T200 Hands-Free Accessible Security Door",
+      "description": "Discover the WONLY T200 with hands-free opening, 80 mm pinch-free clearance, threshold-free sealing, privacy monitoring and dual-power protection.",
+      "keywords": "T200 security door, accessible entrance door, threshold free smart door"
+    },
+    {
+      "path": "/products/wooden-doors/custom",
+      "title": "Custom Wooden Door Series for Projects | WONLY",
+      "description": "Specify WONLY custom wooden doors around the room concept, finish direction, dimensions and project requirements for residential and hospitality interiors.",
+      "keywords": "custom wooden doors, bespoke interior doors, project wooden door supplier"
+    },
+    {
+      "path": "/products/wooden-doors/minimalist",
+      "title": "Minimalist Wooden Door Series Supplier | WONLY",
+      "description": "Explore clean-lined WONLY minimalist wooden doors with catalogue finishes and sound-conscious options for apartments, villas and commercial interiors.",
+      "keywords": "minimalist wooden doors, modern interior doors, soundproof wooden door"
+    },
+    {
+      "path": "/products/wooden-doors/pvc",
+      "title": "PVC Wooden Door Series for Volume Projects | WONLY",
+      "description": "Review WONLY PVC-finished wooden doors with easy-care surfaces, repeatable specifications and multiple catalogue colours for volume interior programmes.",
+      "keywords": "PVC wooden doors, interior door supplier, volume project doors"
+    },
+    {
+      "path": "/products/wooden-doors/solid-wood",
+      "title": "Solid Wood Door Series for Premium Interiors | WONLY",
+      "description": "Explore WONLY solid wood doors with natural visual depth, classic and contemporary designs and coordinated options for premium whole-home interiors.",
+      "keywords": "solid wood doors, premium interior doors, whole home wooden doors"
+    },
+    {
+      "path": "/products/wooden-doors/aluminum-alloy",
+      "title": "Aluminum Alloy Interior Door Series | WONLY",
+      "description": "Discover slim WONLY aluminum-alloy framed doors with glass, finish and hardware options for kitchens, studies and visually connected living spaces.",
+      "keywords": "aluminum alloy interior doors, slim frame glass doors, kitchen glass door"
     },
     {
       "path": "/products/medical-doors",

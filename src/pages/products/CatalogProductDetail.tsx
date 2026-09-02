@@ -16,6 +16,7 @@ type ProductData = {
   title: string;
   description: string;
   hero: string;
+  heroFit?: "cover" | "contain";
   intro: string;
   highlights: string[];
   bestFor: string[];
@@ -52,6 +53,7 @@ const catalogueModel = ({ key, model, family, type, colour, signature, access, d
     title: `WONLY ${model} ${type}`,
     description: `Explore the WONLY ${model} ${type.toLowerCase()} with ${lead}. Review verified catalogue features and request project compatibility and pricing.`,
     hero: image,
+    heroFit: "contain",
     intro: lock
       ? `${model} brings the functions specified in WONLY's current international smart-lock catalogue into a focused entrance platform for residential and project use.`
       : `${model} is a Smart Door 5.0 entrance platform combining powered operation, security construction and connected access in one project-ready system.`,
@@ -64,7 +66,7 @@ const catalogueModel = ({ key, model, family, type, colour, signature, access, d
         ? `${item} is part of the verified ${model} catalogue configuration. Final door, lock-body and market compatibility are confirmed for each order.`
         : `${item} is integrated into the ${model} entrance system. Door size, handing, finish and project interfaces are confirmed by WONLY sales engineering.`,
     })),
-    gallery: [{ image, alt: `WONLY ${model} installed product view`, title: `${model} in a Real Entrance`, text: `This original catalogue visual shows the product and its intended installation context. Product text remains separate, searchable and editable on the page.` }],
+    gallery: [{ image, alt: `WONLY ${model} catalogue product view`, title: `${model} Catalogue Product View`, text: `This original catalogue visual shows the verified product appearance. Product claims remain separate, searchable and editable on the page.` }],
     specs: [
       ["Model", model], ["Product type", type], ["Colour", colour],
       ...(access ? [["Standard access", access] as [string, string]] : []),
@@ -220,11 +222,11 @@ export default function CatalogProductDetail({ product }: { product: ProductKey 
   const data = PRODUCTS[product];
   const openQuote = useQuoteStore((s) => s.openQuote);
   const jsonLd = [
-    { "@context": "https://schema.org", "@type": "Product", name: data.title, model: data.model, brand: { "@type": "Brand", name: "WONLY" }, description: data.description, image: `${SITE_URL}${data.hero.replace(BASE, "/")}`, url: `${SITE_URL}${data.path}/` },
+    { "@context": "https://schema.org", "@type": "Product", name: data.title, model: data.model, category: data.category, brand: { "@type": "Brand", name: "WONLY" }, manufacturer: { "@type": "Organization", name: "WONLY" }, description: data.description, image: `${SITE_URL}${data.hero.replace(BASE, "/")}`, url: `${SITE_URL}${data.path}/` },
     { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Products", item: `${SITE_URL}/products/` }, { "@type": "ListItem", position: 2, name: data.category, item: `${SITE_URL}${data.categoryPath}/` }, { "@type": "ListItem", position: 3, name: data.model, item: `${SITE_URL}${data.path}/` }] },
     { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: data.faq.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) },
   ];
-  useSeo({ title: `${data.title} | WONLY`, description: data.description, path: data.path, image: `${SITE_URL}${data.hero.replace(BASE, "/")}`, type: "product", localized: false, jsonLd });
+  useSeo({ title: data.title, description: data.description, path: data.path, image: `${SITE_URL}${data.hero.replace(BASE, "/")}`, type: "product", localized: false, jsonLd });
   const quote = () => openQuote({ subject: `${data.model} specifications and quotation` });
 
   return <div className="min-h-screen font-sans" style={{ background: CHAMP_BG, color: DARK }}>
@@ -234,8 +236,8 @@ export default function CatalogProductDetail({ product }: { product: ProductKey 
         <div className="max-w-[1450px] mx-auto">
           <nav aria-label="Breadcrumb" className="text-xs mb-8" style={{ color: MUTED }}><Link to="/">Home</Link><span className="mx-2">/</span><Link to={data.categoryPath}>{data.category}</Link><span className="mx-2">/</span><span>{data.model}</span></nav>
           <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
-            <Reveal><div className={eyebrow} style={{ color: GOLD_DEEP }}>{data.category} · Flagship Model</div><h1 className="mt-5 text-[42px] md:text-[68px] font-light leading-[1.04] tracking-[-0.03em]">{data.model}</h1><p className="mt-6 max-w-xl text-lg leading-relaxed" style={{ color: MUTED }}>{data.intro}</p><div className="mt-7 space-y-2.5">{data.highlights.map((item) => <div key={item} className="flex gap-3 items-start"><Check size={18} className="mt-1 shrink-0" style={{ color: GOLD }} /><span>{item}</span></div>)}</div><button onClick={quote} className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold" style={{ background: GOLD, color: DARK }}>Get Specifications &amp; Quote <ArrowRight size={16} /></button></Reveal>
-            <Reveal className="rounded-3xl overflow-hidden bg-[#ebe7df]" delay={80}><img src={data.hero} alt={`${data.model} ${data.category}`} className="w-full aspect-[4/3] object-cover" fetchPriority="high" /></Reveal>
+            <Reveal><div className={eyebrow} style={{ color: GOLD_DEEP }}>{data.category} · 2026 Catalogue Model</div><h1 className="mt-5 text-[42px] md:text-[68px] font-light leading-[1.04] tracking-[-0.03em]">{data.model}</h1><p className="mt-6 max-w-xl text-lg leading-relaxed" style={{ color: MUTED }}>{data.intro}</p><div className="mt-7 space-y-2.5">{data.highlights.map((item) => <div key={item} className="flex gap-3 items-start"><Check size={18} className="mt-1 shrink-0" style={{ color: GOLD }} /><span>{item}</span></div>)}</div><button onClick={quote} className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold" style={{ background: GOLD, color: DARK }}>Get Specifications &amp; Quote <ArrowRight size={16} /></button></Reveal>
+            <Reveal className="rounded-3xl overflow-hidden bg-[#ebe7df]" delay={80}><img src={data.hero} alt={`${data.model} ${data.category}`} className={`w-full aspect-[4/3] ${data.heroFit === "contain" ? "object-contain p-5 md:p-8" : "object-cover"}`} fetchPriority="high" /></Reveal>
           </div>
         </div>
       </section>

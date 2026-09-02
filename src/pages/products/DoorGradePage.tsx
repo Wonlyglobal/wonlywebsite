@@ -148,6 +148,6 @@ export default function DoorGradePage({ grade }: { grade: DoorGrade }) {
         </div>
       </section>
     </main>
-    <CtaBand /><SiteFooter />
+    <CtaBand title={`Get ${data.title} Models & Project Pricing`} sub="Share your market, opening size, quantity and required functions. WONLY sales engineering will recommend the right model and configuration." subject={`${data.title} model recommendation and quotation`} /><SiteFooter />
   </div>;
 }

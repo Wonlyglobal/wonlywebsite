@@ -124,7 +124,15 @@ export function QuoteModal() {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") setOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
       setForm((f) => ({ ...f, biz: presetBiz || f.biz, message: presetSubject && !f.message ? `I'm interested in WONLY's ${presetSubject}. ` : f.message }));
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "";
+      };
     } else {
       document.body.style.overflow = "";
     }
@@ -143,11 +151,9 @@ export function QuoteModal() {
     ev.preventDefault();
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
-    if (!form.company.trim()) e.company = "Please enter your company.";
     if (!form.country.trim()) e.country = "Please enter your country or region.";
     if (!form.email.trim()) e.email = "Please enter your email.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
-    if (!form.biz) e.biz = "Please select a business type.";
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
     if (Object.keys(e).length > 0) return;
@@ -182,12 +188,12 @@ export function QuoteModal() {
   const Err = ({ k }: { k: string }) => errors[k] ? <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors[k]}</span> : null;
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-start md:items-center justify-center p-4 overflow-y-auto" style={{ background: "rgba(13,13,13,0.75)" }} onClick={close}>
+    <div className="fixed inset-0 z-[120] flex items-start md:items-center justify-center p-4 overflow-y-auto" style={{ background: "rgba(13,13,13,0.75)" }} onClick={close} role="dialog" aria-modal="true" aria-labelledby="quote-dialog-title">
       <div className="relative w-full max-w-2xl my-6 rounded-2xl overflow-hidden shadow-2xl" style={{ background: "#fff" }} onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between px-6 md:px-8 py-5" style={{ background: DARK }}>
           <div>
             <div className={eyebrow} style={{ color: CHAMP }}>{t("Get Solutions & Quote")}</div>
-            <div className="mt-1 text-white text-lg font-light">{sent ? t("Request received") : t("Tell us about your project")}</div>
+            <div id="quote-dialog-title" className="mt-1 text-white text-lg font-light">{sent ? t("Request received") : t("Tell us about your project")}</div>
           </div>
           <button onClick={close} aria-label="Close" className="text-white/70 hover:text-white transition-colors"><X size={22} /></button>
         </div>
@@ -203,18 +209,18 @@ export function QuoteModal() {
           <form noValidate onSubmit={submit} className="p-6 md:p-8 max-h-[72vh] overflow-y-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Full Name")} <span style={{ color: "#c0564a" }}>*</span></span>
-                <input className={qInput} style={border("name")} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your full name" /><Err k="name" /></label>
-              <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Company")} <span style={{ color: "#c0564a" }}>*</span></span>
-                <input className={qInput} style={border("company")} value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Company name" /><Err k="company" /></label>
+                <input autoComplete="name" className={qInput} style={border("name")} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your full name" /><Err k="name" /></label>
+              <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Company")} <span className="normal-case tracking-normal">({t("Optional")})</span></span>
+                <input autoComplete="organization" className={qInput} style={border("company")} value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Company name" /></label>
               <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Job Title")}</span>
                 <input className={qInput} style={border("role")} value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. Purchasing Manager" /></label>
               <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Country / Region")} <span style={{ color: "#c0564a" }}>*</span></span>
-                <input className={qInput} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" /><Err k="country" /></label>
+                <input autoComplete="country-name" className={qInput} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" /><Err k="country" /></label>
               <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Email")} <span style={{ color: "#c0564a" }}>*</span></span>
-                <input type="email" className={qInput} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" /><Err k="email" /></label>
+                <input type="email" inputMode="email" autoComplete="email" className={qInput} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" /><Err k="email" /></label>
               <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Phone / WhatsApp")}</span>
-                <input className={qInput} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+1 ..." /></label>
-              <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Business Type")} <span style={{ color: "#c0564a" }}>*</span></span>
+                <input type="tel" inputMode="tel" autoComplete="tel" className={qInput} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+1 ..." /></label>
+              <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Business Type")} <span className="normal-case tracking-normal">({t("Optional")})</span></span>
                 <select className={qInput} style={{ ...border("biz"), color: form.biz ? "#221F20" : "rgba(34,31,32,0.4)" }} value={form.biz} onChange={(e) => set("biz", e.target.value)}>
                   <option value="" disabled>{t("Select")}…</option>{BIZ_TYPES.map((b) => <option key={b} value={b}>{t(b)}</option>)}
                 </select><Err k="biz" /></label>
@@ -382,7 +388,7 @@ export function SiteHeader() {
 }
 
 /* Closing CTA band shared by subpages */
-export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready To Open Your Market?", sub = "Tell us about your project or territory — our team replies within 24 hours." }: { eyebrowText?: string; title?: string; sub?: string }) {
+export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready To Open Your Market?", sub = "Tell us about your project or territory — our team replies within 24 hours.", subject }: { eyebrowText?: string; title?: string; sub?: string; subject?: string }) {
   const openQuote = useQuoteStore((s) => s.openQuote);
   return (
     <section className="px-[7vw] py-24 md:py-32 text-center" style={{ background: DARK }}>
@@ -390,7 +396,7 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
         <div className={eyebrow} style={{ color: CHAMP }}>{eyebrowText}</div>
         <h2 className="mt-5 font-light leading-[1.1] text-[32px] md:text-[56px] text-white">{title}</h2>
         <p className="mt-6 max-w-xl mx-auto text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>{sub}</p>
-        <button onClick={() => openQuote()} className="mt-9 inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
+        <button onClick={() => openQuote(subject ? { subject } : undefined)} className="mt-9 inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
           Get Solutions &amp; Quote <ArrowRight size={15} />
         </button>
       </Reveal>
