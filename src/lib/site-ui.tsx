@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, X, Check, Globe, Menu } from "lucide-react";
 import { create } from "zustand";
-import { trackFormEvent, trackLead, trackQuoteOpen } from "@/lib/analytics";
+import { getJourneySession, serializeInquiryJourney, trackFormEvent, trackLead, trackQuoteOpen } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
 import { LANGUAGES, pathForLocale, useLocale } from "@/lib/i18n";
 import { useCmsSetting } from "@/lib/cms-site-settings";
@@ -205,6 +205,8 @@ export function QuoteModal() {
         interests: picks.join(", "),
         message: form.message,
         source: "quote_modal",
+        journey_session: getJourneySession(),
+        journey_events: serializeInquiryJourney("quote_modal"),
       });
       if (data.success) { sentRef.current = true; setSent(true); trackLead({ form_location: "quote_modal", business_type: form.biz || "", product_context: presetSubject || "" }); }
       else { trackFormEvent("form_error", "quote_modal", { error_type: "submission" }); setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." }); }

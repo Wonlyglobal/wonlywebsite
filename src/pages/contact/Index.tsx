@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Mail, MessageCircle, MapPin, ArrowUpRight, Check } from "lucide-react";
 import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, MUTED } from "@/lib/site-ui";
-import { trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
+import { getJourneySession, serializeInquiryJourney, trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
 import { submitEnquiry } from "@/lib/form-config";
 import { useLocale } from "@/lib/i18n";
@@ -101,6 +101,8 @@ export default function Contact() {
         phone: form.phone,
         message: form.message,
         source: "contact_page",
+        journey_session: getJourneySession(),
+        journey_events: serializeInquiryJourney("contact_page"),
       });
       if (data.success) { submittedRef.current = true; setSent(true); trackLead({ form_location: "contact_page" }); }
       else { trackFormEvent("form_error", "contact_page", { error_type: "submission" }); setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." }); }

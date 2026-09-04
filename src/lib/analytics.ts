@@ -9,6 +9,32 @@ type AnalyticsValue = string | number | boolean;
 type AnalyticsParams = Record<string, AnalyticsValue>;
 type ClickContext = { cta_name: string; source_section: string; destination?: string; captured_at: number };
 let lastClick: ClickContext | null = null;
+const JOURNEY_SESSION_KEY = "wonly_inquiry_journey_session";
+const JOURNEY_EVENT_NAMES = new Set(["cta_click", "form_open", "form_start", "form_submit", "form_error", "form_abandon", "contact_click"]);
+type JourneyEvent = {
+  event_name: string; event_at: string; session_ref: string; form_id?: string;
+  page_path: string; page_title: string; cta_name?: string; section_name?: string;
+  language?: string; product_context?: string; error_type?: string;
+};
+const journeyEvents: JourneyEvent[] = [];
+
+export function getJourneySession(): string {
+  if (typeof window === "undefined") return "";
+  try {
+    let value = window.sessionStorage.getItem(JOURNEY_SESSION_KEY) || "";
+    if (!value) {
+      value = typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `journey-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      window.sessionStorage.setItem(JOURNEY_SESSION_KEY, value);
+    }
+    return value;
+  } catch { return `journey-${Date.now()}`; }
+}
+
+export function serializeInquiryJourney(formId: string): string {
+  return JSON.stringify(journeyEvents.filter((event) => event.form_id === formId).slice(-99));
+}
 
 const pageContext = (): AnalyticsParams => ({
   source_page: window.location.pathname + window.location.search,
@@ -75,6 +101,25 @@ export function trackEvent(name: string, params: AnalyticsParams = {}): void {
   if (typeof window === "undefined") return;
   const w = window as any;
   const payload = { ...pageContext(), ...(name === "form_abandon" ? { transport_type: "beacon" } : {}), ...params };
+  if (JOURNEY_EVENT_NAMES.has(name)) {
+    const formId = typeof payload.form_id === "string"
+      ? payload.form_id
+      : payload.destination === "homepage_contact" ? "homepage_contact" : undefined;
+    journeyEvents.push({
+      event_name: name,
+      event_at: new Date().toISOString(),
+      session_ref: getJourneySession(),
+      form_id: formId,
+      page_path: String(payload.source_page || window.location.pathname).slice(0, 300),
+      page_title: String(payload.page_title || document.title).slice(0, 160),
+      cta_name: typeof payload.cta_name === "string" ? payload.cta_name.slice(0, 120) : undefined,
+      section_name: typeof payload.source_section === "string" ? payload.source_section.slice(0, 120) : undefined,
+      language: typeof payload.language === "string" ? payload.language.slice(0, 20) : undefined,
+      product_context: typeof payload.product_context === "string" ? payload.product_context.slice(0, 160) : undefined,
+      error_type: name === "form_error" && typeof payload.error_type === "string" ? payload.error_type.slice(0, 80) : undefined,
+    });
+    if (journeyEvents.length > 300) journeyEvents.splice(0, journeyEvents.length - 300);
+  }
   if (GA_MEASUREMENT_ID && w.gtag) w.gtag("event", name, payload);
   if (CLARITY_PROJECT_ID && w.clarity) w.clarity("event", name);
 }
@@ -82,7 +127,7 @@ export function trackEvent(name: string, params: AnalyticsParams = {}): void {
 export function trackQuoteOpen(params: AnalyticsParams = {}): void {
   const click = lastClick && Date.now() - lastClick.captured_at < 1500 ? lastClick : null;
   const context = click ? { cta_name: click.cta_name, source_section: click.source_section, destination: click.destination || "quote_modal" } : {};
-  trackEvent("cta_click", { ...context, ...params, destination: "quote_modal" });
+  trackEvent("cta_click", { ...context, ...params, destination: "quote_modal", form_id: "quote_modal" });
   trackEvent("form_open", { ...context, ...params, form_id: "quote_modal" });
 }
 

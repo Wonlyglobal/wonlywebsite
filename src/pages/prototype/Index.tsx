@@ -6,7 +6,7 @@ import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation } from "@/
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
-import { trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
+import { getJourneySession, serializeInquiryJourney, trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -611,6 +611,8 @@ const Prototype = () => {
         message: form.message,
         language: locale,
         source: "homepage_contact_form",
+        journey_session: getJourneySession(),
+        journey_events: serializeInquiryJourney("homepage_contact"),
       });
       if (data.success) {
         contactSubmitted.current = true;
