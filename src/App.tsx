@@ -125,8 +125,17 @@ const SectionComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").th
 // Legal pages (Privacy Policy + Terms of Service).
 const Privacy = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Privacy })));
 const Terms = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Terms })));
-const CmsApp = lazy(() => import("./cms/CmsApp"));
 const PublishedVisualContent = lazy(() => import("./cms/PublishedVisualContent"));
+
+function LegacyCmsRedirect() {
+  useEffect(() => {
+    const target = `https://cms.wonlyglobal.com/${window.location.search}${window.location.hash}`;
+    window.location.replace(target);
+  }, []);
+  return <main className="min-h-screen grid place-items-center bg-slate-950 text-white">
+    <p>正在前往 WONLY 网站管理后台… <a className="underline" href="https://cms.wonlyglobal.com/">立即打开</a></p>
+  </main>;
+}
 
 const queryClient = new QueryClient();
 
@@ -148,7 +157,7 @@ const App = () => (
         <LocaleDocument />
         <Suspense fallback={null}><PublishedVisualContent /></Suspense>
         <Routes>
-          <Route path="/cms/*" element={<Suspense fallback={<div className="min-h-screen" />}><CmsApp /></Suspense>} />
+          <Route path="/cms/*" element={<LegacyCmsRedirect />} />
           {/* The /prototype interactive page is now the official homepage. */}
           <Route path="/" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
           {/* Previous homepage kept for reference (not linked). */}
