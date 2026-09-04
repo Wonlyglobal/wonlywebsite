@@ -33,15 +33,18 @@
     <!-- Preload self-hosted fonts (used on every page) -->
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Fetch all homepage door states before the app bundle executes. The complete
-         one-shot WebP is decoded before display, so a cold-start gesture cannot outrun it. -->
-    <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var o=document.createElement("link");o.rel="preload";o.as="image";o.href="/images/interior-bg.jpg";document.head.appendChild(o);window.__wonlyDoorAnimationBlob=fetch("/videos/hero-door-open.webp",{cache:"force-cache"}).then(function(r){if(!r.ok)throw new Error("door animation "+r.status);return r.blob();});}</script>
+    <!-- Keep the first paint lightweight. Mobile never downloads the 1 MB animated
+         WebP; desktop warms it only after window.load so it cannot block the app. -->
+    <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var o=document.createElement("link");o.rel="preload";o.as="image";o.href="/images/interior-bg.jpg";document.head.appendChild(o);window.__wonlyLoadDoorAnimation=function(){return window.__wonlyDoorAnimationBlob||(window.__wonlyDoorAnimationBlob=fetch("/videos/hero-door-open.webp",{cache:"force-cache"}).then(function(r){if(!r.ok)throw new Error("door animation "+r.status);return r.blob();}));};if(matchMedia("(min-width: 768px) and (pointer: fine)").matches){addEventListener("load",function(){var run=function(){window.__wonlyLoadDoorAnimation();};window.requestIdleCallback?requestIdleCallback(run,{timeout:2500}):setTimeout(run,800);},{once:true});}}</script>
     <!-- Preserve an intro gesture made before the React bundle has mounted. -->
     <script>
       if (location.pathname === "/" && !location.hash) {
         window.__wonlyEarlyIntroIntent = false;
         window.__wonlyEarlyIntroMark = function (event) {
-          if (!event || event.type !== "keydown" || ["ArrowDown", "PageDown", " "].indexOf(event.key) !== -1) window.__wonlyEarlyIntroIntent = true;
+          if (!event || event.type !== "keydown" || ["ArrowDown", "PageDown", " "].indexOf(event.key) !== -1) {
+            window.__wonlyEarlyIntroIntent = true;
+            if (window.__wonlyLoadDoorAnimation && matchMedia("(min-width: 768px) and (pointer: fine)").matches) window.__wonlyLoadDoorAnimation();
+          }
         };
         document.addEventListener("wheel", window.__wonlyEarlyIntroMark, { capture: true, passive: true });
         document.addEventListener("touchstart", window.__wonlyEarlyIntroMark, { capture: true, passive: true });

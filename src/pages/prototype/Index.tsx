@@ -691,8 +691,9 @@ const Prototype = () => {
     const cmsParams = new URLSearchParams(window.location.search);
     const cmsCanvas = cmsParams.get("cms_canvas") === "1";
     const cmsStage = cmsParams.get("cms_stage") === "main" ? "main" : "intro";
-    const earlyWindow = window as Window & { __wonlyEarlyIntroIntent?: boolean; __wonlyEarlyIntroCleanup?: () => void; __wonlyDoorAnimationBlob?: Promise<Blob> };
+    const earlyWindow = window as Window & { __wonlyEarlyIntroIntent?: boolean; __wonlyEarlyIntroCleanup?: () => void; __wonlyDoorAnimationBlob?: Promise<Blob>; __wonlyLoadDoorAnimation?: () => Promise<Blob> };
     const hadEarlyIntroIntent = earlyWindow.__wonlyEarlyIntroIntent === true;
+    const lightweightMobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
     earlyWindow.__wonlyEarlyIntroCleanup?.();
     const previousScrollRestoration = window.history.scrollRestoration;
     let done = false;
@@ -805,6 +806,7 @@ const Prototype = () => {
     // browsers from reusing the end state of a separately preloaded animated image.
     let openingStarted = false;
     let animationUrl = "";
+    let animationRequested = false;
     let readinessWatchdog = 0;
     let watchdog = 0;
     const playDoor = () => {
@@ -821,6 +823,11 @@ const Prototype = () => {
     const startOpening = () => {
       if (openingStarted || done) return;
       openingStarted = true;
+      if (lightweightMobile) {
+        window.setTimeout(reveal_, 180);
+        return;
+      }
+      requestAnimation();
       if (animationUrl) playDoor();
       else readinessWatchdog = window.setTimeout(reveal_, 8000);
     };
@@ -832,15 +839,19 @@ const Prototype = () => {
     document.addEventListener("touchstart", startOpening, { capture: true, passive: true });
     window.addEventListener("keydown", onIntroKey, true);
 
-    const animationBlob = earlyWindow.__wonlyDoorAnimationBlob || fetch(DOOR_ANIMATION, { cache: "force-cache" }).then((response) => {
-      if (!response.ok) throw new Error(`Door animation ${response.status}`);
-      return response.blob();
-    });
-    animationBlob.then((blob) => {
-      if (done) return;
-      animationUrl = URL.createObjectURL(blob);
-      if (openingStarted) playDoor();
-    }).catch(() => { if (openingStarted) reveal_(); });
+    function requestAnimation() {
+      if (animationRequested || lightweightMobile) return;
+      animationRequested = true;
+      const animationBlob = earlyWindow.__wonlyDoorAnimationBlob || earlyWindow.__wonlyLoadDoorAnimation?.() || fetch(DOOR_ANIMATION, { cache: "force-cache" }).then((response) => {
+        if (!response.ok) throw new Error(`Door animation ${response.status}`);
+        return response.blob();
+      });
+      animationBlob.then((blob) => {
+        if (done) return;
+        animationUrl = URL.createObjectURL(blob);
+        if (openingStarted) playDoor();
+      }).catch(() => { if (openingStarted) reveal_(); });
+    }
     if (hadEarlyIntroIntent) startOpening();
 
     // Let the visitor skip the intro at any time.
