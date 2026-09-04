@@ -18,7 +18,9 @@ async function verify() {
   if (health.text.trim() !== "ok") throw new Error("/healthz returned an unexpected body");
 
   const home = await fetchText("/");
-  if (!home.text.includes("Open the Door")) throw new Error("homepage is missing expected hero content");
+  if (!home.text.includes("<title>WONLY | Security Doors & Smart Locks</title>") || !home.text.includes('id="root"')) {
+    throw new Error("homepage is missing its expected title or application root");
+  }
   const paths = new Set(
     [...home.text.matchAll(/(?:src|href)="([^"]+\.(?:js|css))"/g)].map(match => match[1])
   );
