@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, X, Check, Globe, Menu } from "lucide-react";
 import { create } from "zustand";
-import { trackLead } from "@/lib/analytics";
+import { trackFormEvent, trackLead, trackQuoteOpen } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
 import { LANGUAGES, pathForLocale, useLocale } from "@/lib/i18n";
 import { useCmsSetting } from "@/lib/cms-site-settings";
@@ -110,7 +110,10 @@ export const useQuoteStore = create<{
   presetBiz: "",
   presetSubject: "",
   setOpen: (v) => set({ open: v }),
-  openQuote: (opts) => set({ open: true, presetBiz: opts?.biz || "", presetSubject: opts?.subject || "" }),
+  openQuote: (opts) => {
+    trackQuoteOpen({ business_type: opts?.biz || "", product_context: opts?.subject || "" });
+    set({ open: true, presetBiz: opts?.biz || "", presetSubject: opts?.subject || "" });
+  },
 }));
 
 const QUOTE_PRODUCTS = ["Security Doors", "Smart Locks", "Wooden Doors", "Aluminum Windows", "Whole-House Intelligence", "Medical Doors"];
@@ -130,12 +133,19 @@ export function QuoteModal() {
   const [picks, setPicks] = useState<string[]>([]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
+  const startedRef = useRef(false);
+  const sentRef = useRef(false);
 
   useEffect(() => {
     if (open) {
+      startedRef.current = false;
+      sentRef.current = false;
       document.body.style.overflow = "hidden";
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === "Escape") setOpen(false);
+        if (event.key === "Escape") {
+          if (startedRef.current && !sentRef.current) trackFormEvent("form_abandon", "quote_modal", { product_context: presetSubject || "" });
+          setOpen(false);
+        }
       };
       window.addEventListener("keydown", handleKeyDown);
       setForm((f) => ({ ...f, biz: presetBiz || f.biz, message: presetSubject && !f.message ? `I'm interested in WONLY's ${presetSubject}. ` : f.message }));
@@ -151,14 +161,24 @@ export function QuoteModal() {
 
   if (!open) return null;
 
+  const markStarted = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackFormEvent("form_start", "quote_modal", { product_context: presetSubject || "", business_type: presetBiz || "" });
+  };
   const set = (k: keyof typeof form, v: string) => {
+    markStarted();
     setForm((f) => ({ ...f, [k]: v }));
     setErrors((e) => { if (!e[k]) return e; const n = { ...e }; delete n[k]; return n; });
   };
-  const togglePick = (p: string) => setPicks((ps) => ps.includes(p) ? ps.filter((x) => x !== p) : [...ps, p]);
-  const close = () => { setOpen(false); setTimeout(() => setSent(false), 300); };
+  const togglePick = (p: string) => { markStarted(); setPicks((ps) => ps.includes(p) ? ps.filter((x) => x !== p) : [...ps, p]); };
+  const close = () => {
+    if (startedRef.current && !sentRef.current) trackFormEvent("form_abandon", "quote_modal", { product_context: presetSubject || "" });
+    setOpen(false); setTimeout(() => setSent(false), 300);
+  };
   const submit = async (ev: React.FormEvent) => {
     ev.preventDefault();
+    markStarted();
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
     if (!form.country.trim()) e.country = "Please enter your country or region.";
@@ -166,7 +186,8 @@ export function QuoteModal() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
-    if (Object.keys(e).length > 0) return;
+    if (Object.keys(e).length > 0) { trackFormEvent("form_error", "quote_modal", { error_type: "validation", error_fields: Object.keys(e).join(",") }); return; }
+    trackFormEvent("form_submit", "quote_modal", { product_context: presetSubject || "", business_type: form.biz || "" });
     setSending(true);
     try {
       const data = await submitEnquiry({
@@ -185,9 +206,10 @@ export function QuoteModal() {
         message: form.message,
         source: "quote_modal",
       });
-      if (data.success) { setSent(true); trackLead({ form_location: "quote_modal", business_type: form.biz || "" }); }
-      else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
+      if (data.success) { sentRef.current = true; setSent(true); trackLead({ form_location: "quote_modal", business_type: form.biz || "", product_context: presetSubject || "" }); }
+      else { trackFormEvent("form_error", "quote_modal", { error_type: "submission" }); setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." }); }
     } catch {
+      trackFormEvent("form_error", "quote_modal", { error_type: "network" });
       setErrors({ submit: "Network error. Please email inquiry@wonlyglobal.com directly." });
     } finally {
       setSending(false);

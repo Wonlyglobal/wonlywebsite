@@ -6,7 +6,7 @@ import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation } from "@/
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
-import { trackLead } from "@/lib/analytics";
+import { trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -561,6 +561,9 @@ const Prototype = () => {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const contactStarted = useRef(false);
+  const contactSubmitted = useRef(false);
+  const contactFormRef = useRef<HTMLFormElement>(null);
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { locale, t } = useLocale();
   const ht = (text: string) => homeSectionText(locale, text);
@@ -574,11 +577,16 @@ const Prototype = () => {
   const [form, setForm] = useState({ name: "", company: "", country: "", email: "", interest: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const setField = (name: keyof typeof form, value: string) => {
+    if (!contactStarted.current) {
+      contactStarted.current = true;
+      trackFormEvent("form_start", "homepage_contact");
+    }
     setForm((f) => ({ ...f, [name]: value }));
     setErrors((er) => { if (!er[name]) return er; const n = { ...er }; delete n[name]; return n; });
   };
   const onContactSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
+    if (!contactStarted.current) { contactStarted.current = true; trackFormEvent("form_start", "homepage_contact"); }
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = t("Please enter your name.");
     if (!form.company.trim()) e.company = t("Please enter your company name.");
@@ -588,7 +596,8 @@ const Prototype = () => {
     if (!form.interest) e.interest = t("Please select an option.");
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
-    if (Object.keys(e).length > 0) return;
+    if (Object.keys(e).length > 0) { trackFormEvent("form_error", "homepage_contact", { error_type: "validation", error_fields: Object.keys(e).join(",") }); return; }
+    trackFormEvent("form_submit", "homepage_contact", { business_type: form.interest || "" });
     setSending(true);
     try {
       const data = await submitEnquiry({
@@ -604,12 +613,15 @@ const Prototype = () => {
         source: "homepage_contact_form",
       });
       if (data.success) {
+        contactSubmitted.current = true;
         setSent(true);
         trackLead({ form_location: "homepage_contact", business_type: form.interest });
       } else {
+        trackFormEvent("form_error", "homepage_contact", { error_type: "submission" });
         setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
       }
     } catch {
+      trackFormEvent("form_error", "homepage_contact", { error_type: "network" });
       setErrors({ submit: "Network error. Please email inquiry@wonlyglobal.com directly." });
     } finally {
       setSending(false);
@@ -638,6 +650,26 @@ const Prototype = () => {
     const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.6);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onPageHide = () => {
+      if (contactStarted.current && !contactSubmitted.current) trackFormEvent("form_abandon", "homepage_contact");
+    };
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
+  }, []);
+
+  useEffect(() => {
+    const formElement = contactFormRef.current;
+    if (!formElement) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      trackEvent("form_open", { form_id: "homepage_contact", source_section: "contact" });
+      observer.disconnect();
+    }, { threshold: 0.25 });
+    observer.observe(formElement);
+    return () => observer.disconnect();
   }, []);
 
   // Arriving at /#contact (etc.) from another page: jump to that section.
@@ -869,8 +901,8 @@ const Prototype = () => {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <MobileNavigation solid={solid} onQuote={() => scrollToId("contact")} />
-            <button onClick={() => scrollToId("contact")} className="hidden sm:block px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
+            <MobileNavigation solid={solid} onQuote={() => { trackEvent("cta_click", { cta_name: "Get Solutions & Quote", source_section: "homepage_mobile_navigation", destination: "homepage_contact" }); scrollToId("contact"); }} />
+            <button onClick={() => { trackEvent("cta_click", { cta_name: "Get Solutions & Quote", source_section: "homepage_header", destination: "homepage_contact" }); scrollToId("contact"); }} className="hidden sm:block px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-700 hover:scale-[1.03]" style={{ background: GOLD, color: DARK, opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
               {t("Get Solutions & Quote")}
             </button>
           </div>
@@ -1170,7 +1202,7 @@ const Prototype = () => {
                 <p className="mt-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.7)" }}>{ht("Our team will reply within 24 hours with tailored specifications, compliance documentation and pricing.")}</p>
               </div>
             ) : (
-            <form noValidate onSubmit={onContactSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form ref={contactFormRef} noValidate onSubmit={onContactSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {([["name", "Full Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country / Region", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, inputType]) => (
                 <label key={key} className="block">
                   <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} <span style={{ color: "#e6928a" }}>*</span></span>

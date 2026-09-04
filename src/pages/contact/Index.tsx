@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mail, MessageCircle, MapPin, ArrowUpRight, Check } from "lucide-react";
 import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, MUTED } from "@/lib/site-ui";
-import { trackLead } from "@/lib/analytics";
+import { trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
 import { submitEnquiry } from "@/lib/form-config";
 import { useLocale } from "@/lib/i18n";
@@ -44,8 +44,32 @@ export default function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const startedRef = useRef(false);
+  const submittedRef = useRef(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const formElement = formRef.current;
+    if (!formElement) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      trackEvent("form_open", { form_id: "contact_page", source_section: "contact_form" });
+      observer.disconnect();
+    }, { threshold: 0.25 });
+    observer.observe(formElement);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onPageHide = () => {
+      if (startedRef.current && !submittedRef.current) trackFormEvent("form_abandon", "contact_page");
+    };
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
+  }, []);
 
   const set = (k: keyof typeof form, v: string) => {
+    if (!startedRef.current) { startedRef.current = true; trackFormEvent("form_start", "contact_page"); }
     setForm((f) => ({ ...f, [k]: v }));
     setErrors((e) => { if (!e[k]) return e; const n = { ...e }; delete n[k]; return n; });
   };
@@ -53,6 +77,7 @@ export default function Contact() {
 
   const submit = async (ev: React.FormEvent) => {
     ev.preventDefault();
+    if (!startedRef.current) { startedRef.current = true; trackFormEvent("form_start", "contact_page"); }
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
     if (!form.company.trim()) e.company = "Please enter your company.";
@@ -61,7 +86,8 @@ export default function Contact() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
     if (!form.message.trim()) e.message = "Please tell us about your enquiry.";
     setErrors(e);
-    if (Object.keys(e).length > 0) return;
+    if (Object.keys(e).length > 0) { trackFormEvent("form_error", "contact_page", { error_type: "validation", error_fields: Object.keys(e).join(",") }); return; }
+    trackFormEvent("form_submit", "contact_page");
     setSending(true);
     try {
       const data = await submitEnquiry({
@@ -76,9 +102,10 @@ export default function Contact() {
         message: form.message,
         source: "contact_page",
       });
-      if (data.success) { setSent(true); trackLead({ form_location: "contact_page" }); }
-      else setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." });
+      if (data.success) { submittedRef.current = true; setSent(true); trackLead({ form_location: "contact_page" }); }
+      else { trackFormEvent("form_error", "contact_page", { error_type: "submission" }); setErrors({ submit: data.message || "Submission failed. Please email inquiry@wonlyglobal.com." }); }
     } catch {
+      trackFormEvent("form_error", "contact_page", { error_type: "network" });
       setErrors({ submit: "Network error. Please email inquiry@wonlyglobal.com directly." });
     } finally {
       setSending(false);
@@ -158,7 +185,7 @@ export default function Contact() {
                 <p className="mt-3 text-sm font-light" style={{ color: MUTED }}>Your enquiry has been sent to our overseas team.</p>
               </div>
             ) : (
-              <form noValidate onSubmit={submit}>
+              <form ref={formRef} noValidate onSubmit={submit}>
                 <h3 className="text-[22px] font-normal">{t("Send an Enquiry")}</h3>
                 <p className="text-[13px] mt-1.5 mb-5" style={{ color: MUTED }}>Tell us about your project or territory. Fields marked <span style={{ color: "#c0564a" }}>*</span> are required.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

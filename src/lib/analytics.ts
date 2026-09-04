@@ -5,6 +5,22 @@ export const GA_MEASUREMENT_ID = "G-PV49HRLD18"; // e.g. "G-XXXXXXXXXX"  (Google
 export const CLARITY_PROJECT_ID = "xptk0qka3l"; // e.g. "abcdefghij"    (Microsoft Clarity)
 
 let started = false;
+type AnalyticsValue = string | number | boolean;
+type AnalyticsParams = Record<string, AnalyticsValue>;
+type ClickContext = { cta_name: string; source_section: string; destination?: string; captured_at: number };
+let lastClick: ClickContext | null = null;
+
+const pageContext = (): AnalyticsParams => ({
+  source_page: window.location.pathname + window.location.search,
+  page_location: window.location.href,
+  page_title: document.title,
+  language: document.documentElement.lang || "en",
+});
+
+const sectionName = (element: Element) => {
+  const section = element.closest("section, header, footer");
+  return section?.id || section?.tagName.toLowerCase() || "unknown";
+};
 
 /** Inject the analytics scripts once. Safe to call on every mount. */
 export function initAnalytics(): void {
@@ -36,6 +52,42 @@ export function initAnalytics(): void {
       y.parentNode!.insertBefore(t, y);
     })(w, document, "clarity", "script", CLARITY_PROJECT_ID);
   }
+
+  // Remember the exact element that initiated a conversion. Quote-modal calls can
+  // consume this context even when their React handlers live in shared components.
+  document.addEventListener("click", (event) => {
+    const element = (event.target as Element | null)?.closest("button, a");
+    if (!element) return;
+    const ctaName = (element.textContent || element.getAttribute("aria-label") || "").replace(/\s+/g, " ").trim().slice(0, 120);
+    const href = element instanceof HTMLAnchorElement ? element.href : "";
+    lastClick = { cta_name: ctaName || element.tagName.toLowerCase(), source_section: sectionName(element), destination: href || undefined, captured_at: Date.now() };
+    if (/^mailto:/i.test(element.getAttribute("href") || "")) trackEvent("contact_click", { channel: "email", cta_name: ctaName, source_section: sectionName(element), destination: element.getAttribute("href") || "" });
+    else if (/^tel:/i.test(element.getAttribute("href") || "")) trackEvent("contact_click", { channel: "phone", cta_name: ctaName, source_section: sectionName(element), destination: element.getAttribute("href") || "" });
+    else if (/wa\.me\//i.test(href)) trackEvent("contact_click", { channel: "whatsapp", cta_name: ctaName, source_section: sectionName(element), destination: href });
+    else if ((element.getAttribute("href") || "").includes("#contact")) {
+      trackEvent("cta_click", { cta_name: ctaName, source_section: sectionName(element), destination: "homepage_contact" });
+    }
+  }, true);
+}
+
+/** Send a structured GA4 event and a matching Clarity session marker. */
+export function trackEvent(name: string, params: AnalyticsParams = {}): void {
+  if (typeof window === "undefined") return;
+  const w = window as any;
+  const payload = { ...pageContext(), ...(name === "form_abandon" ? { transport_type: "beacon" } : {}), ...params };
+  if (GA_MEASUREMENT_ID && w.gtag) w.gtag("event", name, payload);
+  if (CLARITY_PROJECT_ID && w.clarity) w.clarity("event", name);
+}
+
+export function trackQuoteOpen(params: AnalyticsParams = {}): void {
+  const click = lastClick && Date.now() - lastClick.captured_at < 1500 ? lastClick : null;
+  const context = click ? { cta_name: click.cta_name, source_section: click.source_section, destination: click.destination || "quote_modal" } : {};
+  trackEvent("cta_click", { ...context, ...params, destination: "quote_modal" });
+  trackEvent("form_open", { ...context, ...params, form_id: "quote_modal" });
+}
+
+export function trackFormEvent(name: "form_start" | "form_submit" | "form_error" | "form_abandon", formId: string, params: AnalyticsParams = {}): void {
+  trackEvent(name, { form_id: formId, ...params });
 }
 
 /** Report a virtual page view to GA4 after a client-side route change. */
@@ -53,9 +105,5 @@ export function trackPageview(path: string): void {
 
 /** GA4 lead-generation conversion — fire on a successful enquiry submit. */
 export function trackLead(params: Record<string, string> = {}): void {
-  if (typeof window === "undefined") return;
-  const w = window as any;
-  if (GA_MEASUREMENT_ID && w.gtag) {
-    w.gtag("event", "generate_lead", { currency: "USD", value: 0, ...params });
-  }
+  trackEvent("generate_lead", { currency: "USD", value: 0, ...params });
 }
