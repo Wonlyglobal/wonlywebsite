@@ -29,7 +29,7 @@ export function editableTextElements(root: ParentNode = document) {
 }
 
 export function editableImageElements(root: Document) {
-  const direct = Array.from(root.querySelectorAll<HTMLElement>("img,video,[data-cms-image]"));
+  const direct = Array.from(root.querySelectorAll<HTMLElement>("img,video[poster],[data-cms-image]"));
   const backgrounds = Array.from(root.querySelectorAll<HTMLElement>("body *")).filter(element => {
     const background = root.defaultView?.getComputedStyle(element).backgroundImage ?? "none";
     return background !== "none" && background.includes("url(");
@@ -39,10 +39,11 @@ export function editableImageElements(root: Document) {
 
 export function editableSections(root: Document) {
   const container = root.querySelector("main") ?? root.body;
-  const direct = Array.from(container.children).filter((element): element is HTMLElement =>
-    ["SECTION", "ARTICLE", "HEADER", "FOOTER"].includes(element.tagName),
+  const semantic = Array.from(container.querySelectorAll<HTMLElement>("section,article")).filter(element =>
+    !element.parentElement?.closest("section,article"),
   );
-  return direct.length ? direct : Array.from(container.querySelectorAll<HTMLElement>(":scope > div"));
+  if (semantic.length > 1) return semantic;
+  return Array.from(container.children).filter((element): element is HTMLElement => element instanceof HTMLElement);
 }
 
 export function applyLayoutContent(root: Document, layout?: CmsLayout) {
@@ -85,7 +86,15 @@ export function applyVisualContent(root: Document, values: Record<string, Visual
   editableImageElements(root).forEach(element => {
     const item = values[visualElementKey(element)];
     if (item?.type !== "image") return;
-    if (element.tagName === "IMG") { const image = element as HTMLImageElement; if (image.src !== item.value) image.src = item.value; if (item.alt !== undefined) image.alt = item.alt; }
+    if (element.tagName === "IMG") {
+      const image = element as HTMLImageElement;
+      image.closest("picture")?.querySelectorAll("source").forEach(source => { source.srcset = ""; });
+      image.srcset = "";
+      image.removeAttribute("data-src");
+      image.removeAttribute("data-srcset");
+      if (image.src !== item.value) image.src = item.value;
+      if (item.alt !== undefined) image.alt = item.alt;
+    }
     else if (element.tagName === "VIDEO") (element as HTMLVideoElement).poster = item.value;
     else element.style.backgroundImage = `url("${item.value.replace(/"/g, "%22")}")`;
   });
