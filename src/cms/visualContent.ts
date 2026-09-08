@@ -24,7 +24,7 @@ export function visualElementKey(element: Element) {
 
 export function editableTextElements(root: ParentNode = document) {
   const candidates = Array.from(root.querySelectorAll<HTMLElement>("h1,h2,h3,h4,h5,h6,p,li,button,label,figcaption,a,span")).filter(element =>
-    Array.from(element.childNodes).some(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim()),
+    !element.closest(".cms-section-drag,.cms-image-replace") && Array.from(element.childNodes).some(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim()),
   );
   return candidates.filter(element => !candidates.some(parent => parent !== element && parent.contains(element)));
 }
@@ -44,6 +44,11 @@ export function editableSections(root: Document) {
     !element.parentElement?.closest("section,article"),
   );
   if (semantic.length > 1) return semantic;
+  const appRoot = root.querySelector<HTMLElement>("#root");
+  const visualContainer = appRoot && Array.from(appRoot.querySelectorAll<HTMLElement>(":scope > div"))
+    .filter(element => element.children.length >= 3)
+    .sort((a, b) => b.children.length - a.children.length)[0];
+  if (visualContainer) return Array.from(visualContainer.children).filter((element): element is HTMLElement => element instanceof HTMLElement && !element.matches("script,style"));
   return Array.from(container.children).filter((element): element is HTMLElement => element instanceof HTMLElement);
 }
 
