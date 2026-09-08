@@ -50,7 +50,12 @@ function activate(content: VisualContent = {}) {
     const key = visualElementKey(element);
     element.classList.add("cms-editable", "cms-text-editable"); element.contentEditable = "true"; element.spellcheck = true;
     element.onclick = event => { event.preventDefault(); event.stopPropagation(); element.focus(); };
-    element.onblur = () => send("ITEM_CHANGED", { key, item: { type: "text", value: element.textContent?.trim() ?? "" } satisfies VisualItem });
+    let editingValue = element.textContent ?? "";
+    let hasLocalEdit = false;
+    const emitText = () => { editingValue = element.textContent ?? ""; hasLocalEdit = true; send("ITEM_CHANGED", { key, item: { type: "text", value: editingValue.trim() } satisfies VisualItem }); };
+    element.oninput = emitText;
+    element.onblur = emitText;
+    new MutationObserver(() => { if (hasLocalEdit && element.textContent !== editingValue) element.textContent = editingValue; }).observe(element, { childList: true, characterData: true, subtree: true });
   });
   const imageButtons: Array<{ element: HTMLElement; button: HTMLButtonElement }> = [];
   const selectImage = (element: HTMLElement, replace = false) => {

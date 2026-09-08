@@ -23,9 +23,10 @@ export function visualElementKey(element: Element) {
 }
 
 export function editableTextElements(root: ParentNode = document) {
-  return Array.from(root.querySelectorAll<HTMLElement>("h1,h2,h3,h4,h5,h6,p,li,button,label,figcaption,a,span")).filter(element =>
+  const candidates = Array.from(root.querySelectorAll<HTMLElement>("h1,h2,h3,h4,h5,h6,p,li,button,label,figcaption,a,span")).filter(element =>
     Array.from(element.childNodes).some(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim()),
   );
+  return candidates.filter(element => !candidates.some(parent => parent !== element && parent.contains(element)));
 }
 
 export function editableImageElements(root: Document) {
