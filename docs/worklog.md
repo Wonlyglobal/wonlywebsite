@@ -161,3 +161,4 @@
 2026-09-08 | 板块拖动兼容修复:复核发现原实现仅依赖HTML5 drag/drop，在嵌入式画布、触控板与触屏环境可能无法触发；新增Pointer Events拖动、指针捕获、实时换位及松手后统一回传排序，同时保留桌面原生拖放兼容，待正式发布后做无保存交互验收。
 2026-09-08 | 板块拖动生产复核修正:流水线#77发布后在正式CMS检查到拖动按钮被通用文字扫描误克隆，导致外观存在但事件丢失；同时首页无main/section语义标签时仅识别到根节点。排除CMS控件的文字接管，并从React根节点自动识别包含13个直接子板块的主视觉容器，重新进入构建与正式验收。
 2026-09-08 | SEO到期文章发布修复:基于Codeup最新master@38004a9隔离生成截至当日的正式Sitemap，将9月4日Smart Locks for Apartment Projects与9月7日Smart Lock Battery Backup Reliability共2篇、10个五语URL加入发布范围，9月9日及以后文章保持未提前曝光；TypeScript检查和1,917模块生产构建通过，263/263路由预渲染成功、264个Sitemap URL静态HTML审计全部通过。当前为待提交的正式发布包，尚未推送或上线。
+2026-09-08 | SEO生产预渲染链路修复:首次发布后正式Sitemap已出现两篇到期文章，但四个代表深链接仍返回首页title、英文lang与首页canonical，确认Codeup生产任务未将独立Chromium预渲染产物打入镜像。将到期文章静态HTML生成直接并入npm postbuild，并在构建结束重新同步Sitemap；无需生产环境安装浏览器即可为截至当日26篇文章生成130个五语HTML。TypeScript、1,917模块生产构建、30篇×4译文检查、130个页面title/canonical/lang/H1/静态正文及资源和JSON-LD引用检查均通过；当前待二次正式发布与线上复验。
