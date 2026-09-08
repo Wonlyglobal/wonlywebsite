@@ -7,7 +7,7 @@ category: "Технологии"
 date: "2026-09-09"
 dateLabel: "9 сентября 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/cylindrical-lock-core-comparison.webp"
 excerpt: "Цилиндр часто атакуют первым: геометрия, материал и испытания важнее торгового названия."
 keywords:
   - "цилиндрический сердечник замка"

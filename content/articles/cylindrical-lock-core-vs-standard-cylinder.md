@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-09-09"
 dateLabel: "9 September 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/cylindrical-lock-core-comparison.webp"
 excerpt: "Almost every brand uses the same gourd-shaped cylinder — and it is the weakest point of the door. Here is the engineering that replaced it."
 keywords:
   - "cylindrical lock core"

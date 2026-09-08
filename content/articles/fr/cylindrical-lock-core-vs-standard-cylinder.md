@@ -7,7 +7,7 @@ category: "Technologie"
 date: "2026-09-09"
 dateLabel: "9 septembre 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/cylindrical-lock-core-comparison.webp"
 excerpt: "Le cylindre est souvent le premier point attaqué : géométrie, matériaux et essais comptent plus que le nom commercial."
 keywords:
   - "noyau de serrure cylindrique"

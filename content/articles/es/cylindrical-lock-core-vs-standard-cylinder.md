@@ -7,7 +7,7 @@ category: "Tecnología"
 date: "2026-09-09"
 dateLabel: "9 de septiembre de 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/cylindrical-lock-core-comparison.webp"
 excerpt: "El cilindro suele ser el primer punto atacado: geometría, material y ensayos importan más que el nombre comercial."
 keywords:
   - "núcleo cilíndrico de cerradura"
