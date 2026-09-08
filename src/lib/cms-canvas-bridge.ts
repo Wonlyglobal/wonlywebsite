@@ -23,17 +23,28 @@ function seo() {
 
 function activate(content: VisualContent = {}) {
   document.querySelectorAll(".cms-image-replace").forEach(element => element.remove());
+  document.querySelectorAll(".cms-section-drag").forEach(element => element.remove());
   document.querySelector("style[data-cms-bridge]")?.remove();
   const style = document.createElement("style");
   style.dataset.cmsBridge = "true";
-  style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-text-editable{pointer-events:auto!important;cursor:text!important;position:relative!important;z-index:2!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected,.cms-image-selected{outline:3px solid #2864ff!important;outline-offset:3px}.cms-section-moving{animation:cms-section-pulse .55s ease}.cms-image-replace{position:absolute!important;z-index:2147483647!important;display:grid!important;place-items:center!important;width:34px!important;height:34px!important;padding:0!important;border:2px solid #fff!important;border-radius:50%!important;background:#2864ff!important;color:#fff!important;box-shadow:0 5px 16px #17203366!important;cursor:pointer!important;font:700 18px/1 Arial,sans-serif!important}.cms-image-replace:hover,.cms-image-replace:focus{transform:scale(1.08)!important;background:#174bd1!important}@keyframes cms-section-pulse{50%{outline:7px solid #2864ff55}}`;
+  style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-text-editable{pointer-events:auto!important;cursor:text!important;position:relative!important;z-index:2!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected,.cms-image-selected{outline:3px solid #2864ff!important;outline-offset:3px}.cms-section-moving{animation:cms-section-pulse .55s ease}.cms-section-drop-before{box-shadow:inset 0 5px #2864ff!important}.cms-section-drop-after{box-shadow:inset 0 -5px #2864ff!important}.cms-section-drag{position:absolute!important;z-index:2147483646!important;display:grid!important;place-items:center!important;width:38px!important;height:28px!important;padding:0!important;border:2px solid #fff!important;border-radius:8px!important;background:#172033!important;color:#fff!important;box-shadow:0 5px 16px #17203355!important;cursor:grab!important;font:700 16px/1 Arial,sans-serif!important;letter-spacing:-2px!important}.cms-section-drag:active{cursor:grabbing!important}.cms-image-replace{position:absolute!important;z-index:2147483647!important;display:grid!important;place-items:center!important;width:34px!important;height:34px!important;padding:0!important;border:2px solid #fff!important;border-radius:50%!important;background:#2864ff!important;color:#fff!important;box-shadow:0 5px 16px #17203366!important;cursor:pointer!important;font:700 18px/1 Arial,sans-serif!important}.cms-image-replace:hover,.cms-image-replace:focus{transform:scale(1.08)!important;background:#174bd1!important}@keyframes cms-section-pulse{50%{outline:7px solid #2864ff55}}`;
   document.head.appendChild(style);
   applyVisualContent(document, content.visual ?? {});
   applyLayoutContent(document, content.layout);
+  const sectionEntries: Array<{ section: HTMLElement; handle: HTMLButtonElement }> = [];
+  const sendLayout = () => { const current = editableSections(document); send("LAYOUT_CHANGED", { layout: { order: current.map(section => section.dataset.cmsSectionKey ||= visualElementKey(section)), hidden: current.filter(section => section.hidden).map(section => section.dataset.cmsSectionKey!) } satisfies CmsLayout }); };
+  let draggedSection: HTMLElement | null = null;
   editableSections(document).forEach(section => {
     const key = section.dataset.cmsSectionKey ||= visualElementKey(section);
     section.classList.add("cms-section-editable");
     section.onclick = event => { event.stopPropagation(); document.querySelectorAll(".cms-section-selected").forEach(item => item.classList.remove("cms-section-selected")); section.classList.add("cms-section-selected"); send("SECTION_SELECTED", { key }); };
+    section.ondragover = event => { if (!draggedSection || draggedSection === section || draggedSection.parentElement !== section.parentElement) return; event.preventDefault(); const after = event.clientY > section.getBoundingClientRect().top + section.getBoundingClientRect().height / 2; section.classList.toggle("cms-section-drop-before", !after); section.classList.toggle("cms-section-drop-after", after); };
+    section.ondragleave = () => section.classList.remove("cms-section-drop-before", "cms-section-drop-after");
+    section.ondrop = event => { event.preventDefault(); section.classList.remove("cms-section-drop-before", "cms-section-drop-after"); if (!draggedSection || draggedSection === section || draggedSection.parentElement !== section.parentElement) return; const after = event.clientY > section.getBoundingClientRect().top + section.getBoundingClientRect().height / 2; section.parentElement?.insertBefore(draggedSection, after ? section.nextSibling : section); draggedSection.classList.add("cms-section-moving"); sendLayout(); };
+    const handle = document.createElement("button"); handle.type = "button"; handle.className = "cms-section-drag"; handle.textContent = "⋮⋮"; handle.title = "拖动板块排序"; handle.setAttribute("aria-label", "拖动板块排序"); handle.draggable = true;
+    handle.ondragstart = event => { draggedSection = section; event.dataTransfer?.setData("text/plain", key); event.dataTransfer?.setDragImage(section, 20, 20); };
+    handle.ondragend = () => { draggedSection = null; document.querySelectorAll(".cms-section-drop-before,.cms-section-drop-after").forEach(item => item.classList.remove("cms-section-drop-before", "cms-section-drop-after")); };
+    document.body.appendChild(handle); sectionEntries.push({ section, handle });
   });
   editableTextElements(document).forEach(element => {
     const key = visualElementKey(element);
@@ -48,19 +59,20 @@ function activate(content: VisualContent = {}) {
     element.classList.add("cms-image-selected");
     send(replace ? "IMAGE_REPLACE_REQUESTED" : "IMAGE_SELECTED", { key, value: imageSource(element), alt: element instanceof HTMLImageElement ? element.alt : "", target: imageTarget(element) });
   };
-  const positionButtons = () => imageButtons.forEach(({ element, button }) => {
+  const positionButtons = () => { imageButtons.forEach(({ element, button }) => {
     const rect = element.getBoundingClientRect();
     const visible = rect.width >= 24 && rect.height >= 24 && rect.bottom > 0 && rect.top < innerHeight;
     button.hidden = !visible;
     if (!visible) return;
     button.style.left = `${Math.max(6, rect.left + scrollX + 8)}px`;
     button.style.top = `${Math.max(6, rect.bottom + scrollY - 42)}px`;
-  });
+  }); sectionEntries.forEach(({ section, handle }) => { const rect = section.getBoundingClientRect(); const visible = rect.width > 80 && rect.height > 40 && rect.bottom > 0 && rect.top < innerHeight; handle.hidden = !visible; if (visible) { handle.style.left = `${Math.max(6, rect.left + scrollX + 8)}px`; handle.style.top = `${Math.max(6, rect.top + scrollY + 8)}px`; } }); };
   editableImageElements(document).forEach(element => {
     element.classList.add("cms-editable");
     element.onclick = event => { event.preventDefault(); event.stopPropagation(); selectImage(element); };
     const button = document.createElement("button");
-    button.type = "button"; button.className = "cms-image-replace"; button.textContent = "↻";
+    button.type = "button"; button.className = "cms-image-replace";
+    button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 20h4l11-11-4-4L4 16v4Zm2-3.2 9-9 1.2 1.2-9 9H6v-1.2ZM17.1 3 19 4.9 17.8 6.1 15.9 4.2 17.1 3Z" fill="currentColor"/></svg>';
     button.title = "替换这张图片"; button.setAttribute("aria-label", "替换这张图片");
     button.onclick = event => { event.preventDefault(); event.stopPropagation(); selectImage(element, true); };
     document.body.appendChild(button); imageButtons.push({ element, button });
