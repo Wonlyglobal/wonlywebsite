@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-04-29"
 dateLabel: "29 de abril de 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-access-methods.webp"
 excerpt: "Biometría, aplicación cifrada y alternativas de emergencia dentro de las cerraduras inteligentes."
 keywords:
   - "cómo funcionan cerraduras inteligentes"

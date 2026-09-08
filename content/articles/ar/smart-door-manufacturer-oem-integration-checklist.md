@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-23"
 dateLabel: "23 سبتمبر 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/smart-door-oem-integration.webp"
 excerpt: "حدد الواجهات والمسؤوليات واختبارات القبول قبل توريد نظام باب ذكي OEM."
 keywords:
   - "مصنع أبواب ذكية"

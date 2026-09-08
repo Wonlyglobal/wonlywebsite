@@ -7,7 +7,7 @@ category: "Обзор рынка"
 date: "2026-09-11"
 dateLabel: "11 сентября 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/gulf-security-door-market.webp"
 excerpt: "Выбор зависит от признанных документов, экспозиции, монтажа и сегмента, а не только от цены."
 keywords:
   - "поставщик защитных дверей ОАЭ"

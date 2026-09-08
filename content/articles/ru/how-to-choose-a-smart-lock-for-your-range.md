@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-05-13"
 dateLabel: "13 мая 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-range-selection.webp"
 excerpt: "Практический чек-лист выбора продаваемых и надёжных замков: доступ, защита, питание, климат и интеграция."
 keywords:
   - "руководство по выбору умного замка"

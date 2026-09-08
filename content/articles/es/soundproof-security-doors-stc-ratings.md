@@ -7,7 +7,7 @@ category: "Tecnología"
 date: "2026-08-14"
 dateLabel: "14 de agosto de 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/soundproof-security-door.webp"
 excerpt: "Convierta una petición vaga de insonorización en una prestación medible del conjunto instalado."
 keywords:
   - "puerta seguridad acústica"

@@ -7,7 +7,7 @@ category: "دليل الشراء"
 date: "2026-09-04"
 dateLabel: "4 سبتمبر 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/apartment-smart-lock-project.webp"
 excerpt: "في مشروع من 500 وحدة تصبح المنصة والصيانة والطاقة وقطع الغيار أهم من قائمة الوظائف."
 keywords:
   - "قفل ذكي للشقق"

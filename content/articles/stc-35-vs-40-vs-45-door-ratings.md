@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-09-28"
 dateLabel: "28 September 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/stc-door-rating-lab.webp"
 excerpt: "Choose an acoustic doorset by room target, tested assembly and site interfaces—not by a leaf rating alone."
 keywords:
   - "stc rating for doors"

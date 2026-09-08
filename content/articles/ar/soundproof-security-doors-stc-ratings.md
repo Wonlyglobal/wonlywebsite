@@ -7,7 +7,7 @@ category: "التقنية"
 date: "2026-08-14"
 dateLabel: "14 أغسطس 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/soundproof-security-door.webp"
 excerpt: "حوّل طلب العزل الصوتي العام إلى أداء قابل للقياس لمجموعة الباب المركبة."
 keywords:
   - "باب أمان عازل للصوت"

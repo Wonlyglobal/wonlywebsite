@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-25"
 dateLabel: "25 September 2026"
 readMins: 7
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-oem-development.webp"
 excerpt: "Define the product, software, compliance and support responsibilities before approving an OEM or ODM smart lock programme."
 keywords:
   - "smart lock OEM"

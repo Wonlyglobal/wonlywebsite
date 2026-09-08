@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-21"
 dateLabel: "21 septembre 2026"
 readMins: 7
-cover: "images/mfg-inspect.jpg"
+cover: "images/articles/steel-emergency-exit-door.webp"
 excerpt: "Checklist projet pour coordonner portes acier, barres antipanique, exigences feu, contrôle d'accès et réception."
 keywords:
   - "portes de sortie de secours en acier"

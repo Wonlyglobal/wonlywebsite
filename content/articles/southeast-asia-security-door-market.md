@@ -7,7 +7,7 @@ category: "Market Insight"
 date: "2026-04-15"
 dateLabel: "15 April 2026"
 readMins: 5
-cover: "images/gs-barbados.jpg"
+cover: "images/articles/southeast-asia-security-door.webp"
 excerpt: "Urbanisation, condo and villa development and a humid tropical climate are shaping demand for corrosion-resistant doors and smart locks across the region."
 keywords:
   - "Southeast Asia security door market"

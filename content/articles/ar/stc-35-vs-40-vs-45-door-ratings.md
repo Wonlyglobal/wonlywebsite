@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-09-28"
 dateLabel: "28 سبتمبر 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/stc-door-rating-lab.webp"
 excerpt: "اختر مجموعة باب صوتية وفق الغرفة والعينة المختبرة وواجهات الموقع، لا رقم الضلفة وحده."
 keywords:
   - "تصنيف STC للأبواب"

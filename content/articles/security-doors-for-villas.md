@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-08-12"
 dateLabel: "12 August 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/villa-security-door.webp"
 excerpt: "Certified protection, coastal durability and estate-grade design — what to demand from a villa entrance door before you order."
 keywords:
   - "villa security door"

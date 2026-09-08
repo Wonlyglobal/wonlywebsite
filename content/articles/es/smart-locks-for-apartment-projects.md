@@ -7,7 +7,7 @@ category: "Guía de compra"
 date: "2026-09-04"
 dateLabel: "4 de septiembre de 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/apartment-smart-lock-project.webp"
 excerpt: "En 500 viviendas importan la plataforma, el mantenimiento, las baterías y los repuestos, no solo las funciones."
 keywords:
   - "cerradura inteligente apartamento"

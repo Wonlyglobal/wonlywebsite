@@ -7,7 +7,7 @@ category: "Empresa"
 date: "2026-05-27"
 dateLabel: "27 de mayo de 2026"
 readMins: 5
-cover: "images/mfg-hero.jpg"
+cover: "images/articles/oem-odm-door-factory.webp"
 excerpt: "Del requisito al prototipo y la serie: pruebas y hitos para controlar una colaboración industrial."
 keywords:
   - "fabricante OEM puertas seguridad"

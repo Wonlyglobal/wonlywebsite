@@ -7,7 +7,7 @@ category: "Analyse de marché"
 date: "2026-09-11"
 dateLabel: "11 septembre 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/gulf-security-door-market.webp"
 excerpt: "La sélection dépend des documents acceptés, de l'exposition réelle, de la pose locale et du segment, pas seulement du prix."
 keywords:
   - "fournisseur porte sécurité EAU"

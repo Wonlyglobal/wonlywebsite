@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-21"
 dateLabel: "21 سبتمبر 2026"
 readMins: 7
-cover: "images/mfg-inspect.jpg"
+cover: "images/articles/steel-emergency-exit-door.webp"
 excerpt: "قائمة للمشاريع لتنسيق الباب الفولاذي وعتاد الذعر والحريق والتحكم بالدخول والاستلام."
 keywords:
   - "أبواب مخارج طوارئ فولاذية"

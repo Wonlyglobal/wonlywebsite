@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-07-08"
 dateLabel: "8 juillet 2026"
 readMins: 7
-cover: "images/door/gallery/g1-front.jpg"
+cover: "images/articles/security-door-selection.webp"
 excerpt: "Méthode pas à pas pour adapter sécurité, matériau, feu, certification et fournisseur à votre marché."
 keywords:
   - "comment choisir une porte de sécurité"

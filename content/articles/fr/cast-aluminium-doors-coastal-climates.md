@@ -7,7 +7,7 @@ category: "Technologie"
 date: "2026-08-19"
 dateLabel: "19 août 2026"
 readMins: 5
-cover: "images/door/alu-k300max.webp"
+cover: "images/alu-k300max.webp"
 excerpt: "La résistance côtière dépend du système complet, pas seulement du métal du panneau extérieur."
 keywords:
   - "porte sécurité anticorrosion"

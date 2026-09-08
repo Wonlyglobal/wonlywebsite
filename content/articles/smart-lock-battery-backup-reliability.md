@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-09-07"
 dateLabel: "7 September 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-battery-backup.webp"
 excerpt: "Locked out by a dead battery is the failure buyers remember — the battery, backup and durability checks that prevent it."
 keywords:
   - "smart lock battery life"

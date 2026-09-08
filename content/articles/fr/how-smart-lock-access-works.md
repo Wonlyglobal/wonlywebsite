@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-04-29"
 dateLabel: "29 avril 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-access-methods.webp"
 excerpt: "Biométrie, commande chiffrée et solutions de secours au cœur des serrures intelligentes modernes."
 keywords:
   - "fonctionnement serrure intelligente"

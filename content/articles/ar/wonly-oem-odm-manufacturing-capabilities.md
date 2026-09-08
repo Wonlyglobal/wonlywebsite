@@ -7,7 +7,7 @@ category: "الشركة"
 date: "2026-05-27"
 dateLabel: "27 مايو 2026"
 readMins: 5
-cover: "images/mfg-hero.jpg"
+cover: "images/articles/oem-odm-door-factory.webp"
 excerpt: "من المتطلبات إلى النموذج والإنتاج: الأدلة والمراحل لشراكة صناعية قابلة للإدارة."
 keywords:
   - "مصنع OEM لأبواب الأمان"

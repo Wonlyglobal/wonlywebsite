@@ -7,7 +7,7 @@ category: "التقنية"
 date: "2026-09-07"
 dateLabel: "7 سبتمبر 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-battery-backup.webp"
 excerpt: "يجب ألا تترك البطارية الفارغة المستخدم خارج الباب: تحقق من التنبيه والنسخ الاحتياطي وأدلة الاختبار."
 keywords:
   - "عمر بطارية القفل الذكي"

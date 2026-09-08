@@ -7,7 +7,7 @@ category: "Technologie"
 date: "2026-08-14"
 dateLabel: "14 août 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/soundproof-security-door.webp"
 excerpt: "Transformez une demande vague de porte insonorisée en performance mesurable du bloc-porte installé."
 keywords:
   - "porte sécurité acoustique"

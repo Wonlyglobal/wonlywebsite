@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-05-13"
 dateLabel: "13 مايو 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-range-selection.webp"
 excerpt: "قائمة عملية لاختيار أقفال ذكية تبيع جيداً وتدوم: الدخول والأمان والطاقة والمناخ والتكامل."
 keywords:
   - "دليل شراء القفل الذكي"

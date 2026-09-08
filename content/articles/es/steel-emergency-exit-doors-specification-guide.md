@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-21"
 dateLabel: "21 de septiembre de 2026"
 readMins: 7
-cover: "images/mfg-inspect.jpg"
+cover: "images/articles/steel-emergency-exit-door.webp"
 excerpt: "Checklist para coordinar puertas de acero, barras antipánico, requisitos de fuego, control de acceso y recepción."
 keywords:
   - "puertas de salida de emergencia de acero"

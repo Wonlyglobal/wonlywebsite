@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-05-13"
 dateLabel: "13 May 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-range-selection.webp"
 excerpt: "Access methods, security, battery life, durability and smart-home integration — a practical checklist for selecting smart locks that sell and last."
 keywords:
   - "smart lock buying guide"

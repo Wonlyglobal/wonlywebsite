@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-09-28"
 dateLabel: "28 septembre 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/stc-door-rating-lab.webp"
 excerpt: "Choisissez un bloc-porte acoustique selon le local, l'essai complet et les interfaces de chantier."
 keywords:
   - "indice STC porte"

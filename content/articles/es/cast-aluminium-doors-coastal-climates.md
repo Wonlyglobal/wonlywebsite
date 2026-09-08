@@ -7,7 +7,7 @@ category: "Tecnología"
 date: "2026-08-19"
 dateLabel: "19 de agosto de 2026"
 readMins: 5
-cover: "images/door/alu-k300max.webp"
+cover: "images/alu-k300max.webp"
 excerpt: "La resistencia costera depende del sistema completo, no solo del metal del panel exterior."
 keywords:
   - "puerta seguridad anticorrosión"

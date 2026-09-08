@@ -7,7 +7,7 @@ category: "Guide d'achat"
 date: "2026-09-04"
 dateLabel: "4 septembre 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/apartment-smart-lock-project.webp"
 excerpt: "À l'échelle de 500 logements, plateforme, maintenance, batterie et pièces comptent davantage qu'une simple liste de fonctions."
 keywords:
   - "serrure intelligente appartement"

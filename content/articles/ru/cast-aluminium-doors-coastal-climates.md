@@ -7,7 +7,7 @@ category: "Технологии"
 date: "2026-08-19"
 dateLabel: "19 августа 2026"
 readMins: 5
-cover: "images/door/alu-k300max.webp"
+cover: "images/alu-k300max.webp"
 excerpt: "Стойкость на побережье определяется всей системой, а не только металлом наружной панели."
 keywords:
   - "антикоррозионная защитная дверь"

@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-05-13"
 dateLabel: "13 de mayo de 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-range-selection.webp"
 excerpt: "Lista práctica para elegir cerraduras que venden y duran: acceso, seguridad, energía, clima e integración."
 keywords:
   - "guía compra cerradura inteligente"

@@ -7,7 +7,7 @@ category: "Компания"
 date: "2026-05-27"
 dateLabel: "27 мая 2026"
 readMins: 5
-cover: "images/mfg-hero.jpg"
+cover: "images/articles/oem-odm-door-factory.webp"
 excerpt: "От требований к прототипу и серии: доказательства и этапы управляемого производственного партнёрства."
 keywords:
   - "OEM производитель защитных дверей"

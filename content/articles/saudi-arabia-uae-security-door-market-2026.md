@@ -7,7 +7,7 @@ category: "Market Insight"
 date: "2026-09-11"
 dateLabel: "11 September 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/gulf-security-door-market.webp"
 excerpt: "Giga-project pipelines, villa culture, civil-defence codes and salt-air climate — the 2026 playbook for door suppliers in KSA and the UAE."
 keywords:
   - "security door supplier UAE"

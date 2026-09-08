@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-08-14"
 dateLabel: "14 August 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/soundproof-security-door.webp"
 excerpt: "How STC ratings work, what STC 35+ blocks in practice, and the core, seals and threshold engineering behind a quiet entrance."
 keywords:
   - "soundproof security door"

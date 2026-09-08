@@ -7,7 +7,7 @@ category: "Analyse de marché"
 date: "2026-04-15"
 dateLabel: "15 avril 2026"
 readMins: 5
-cover: "images/gs-barbados.jpg"
+cover: "images/articles/southeast-asia-security-door.webp"
 excerpt: "Condominiums, maisons individuelles, climat tropical et adoption mobile exigent des gammes et services différents selon chaque pays."
 keywords:
   - "marché porte sécurité Asie du Sud-Est"

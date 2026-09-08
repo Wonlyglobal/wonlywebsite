@@ -7,7 +7,7 @@ category: "Company"
 date: "2026-05-27"
 dateLabel: "27 May 2026"
 readMins: 5
-cover: "images/mfg-hero.jpg"
+cover: "images/articles/oem-odm-door-factory.webp"
 excerpt: "Five manufacturing bases, robotic production lines and full OEM/ODM flexibility — how WONLY supports distributors and private-label partners worldwide."
 keywords:
   - "security door OEM manufacturer"

@@ -7,7 +7,7 @@ category: "Technologie"
 date: "2026-09-07"
 dateLabel: "7 septembre 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-battery-backup.webp"
 excerpt: "Une batterie vide ne doit jamais bloquer l'utilisateur : vérifiez alertes, secours et preuves d'endurance avant l'achat."
 keywords:
   - "autonomie serrure intelligente"

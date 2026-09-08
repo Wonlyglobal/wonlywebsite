@@ -7,7 +7,7 @@ category: "Guide d'achat"
 date: "2026-08-12"
 dateLabel: "12 août 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/villa-security-door.webp"
 excerpt: "Classe de résistance, environnement, accès intelligent et personnalisation : les quatre décisions d'une entrée de villa."
 keywords:
   - "porte sécurité villa"

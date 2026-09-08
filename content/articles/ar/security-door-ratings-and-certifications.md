@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-04-02"
 dateLabel: "2 أبريل 2026"
 readMins: 7
-cover: "images/mfg-inspect.jpg"
+cover: "images/articles/security-door-rating-test.webp"
 excerpt: "شرح EN 1627 RC2–RC6 وGB 17565 وتصنيفات الحريق للمستوردين ومشتري المشاريع."
 keywords:
   - "تصنيفات أبواب الأمان"

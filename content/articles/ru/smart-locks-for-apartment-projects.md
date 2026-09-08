@@ -7,7 +7,7 @@ category: "Руководство покупателя"
 date: "2026-09-04"
 dateLabel: "4 сентября 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/apartment-smart-lock-project.webp"
 excerpt: "В проекте на 500 квартир платформа, обслуживание, питание и запчасти важнее длинного списка функций."
 keywords:
   - "умный замок для квартиры"

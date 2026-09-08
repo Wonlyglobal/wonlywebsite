@@ -7,7 +7,7 @@ category: "دليل الشراء"
 date: "2026-08-24"
 dateLabel: "24 أغسطس 2026"
 readMins: 5
-cover: "images/door/alu-t200.webp"
+cover: "images/articles/fire-door-duration-test.webp"
 excerpt: "حدد المدة من استراتيجية الحريق لكل فتحة لتجنب التكلفة الزائدة أو رفض الفحص."
 keywords:
   - "باب حريق 90 دقيقة"

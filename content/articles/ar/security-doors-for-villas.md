@@ -7,7 +7,7 @@ category: "دليل الشراء"
 date: "2026-08-12"
 dateLabel: "12 أغسطس 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/villa-security-door.webp"
 excerpt: "فئة المقاومة والبيئة والدخول الذكي والتخصيص: أربعة قرارات لمدخل الفيلا."
 keywords:
   - "باب أمان للفيلا"

@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-08-19"
 dateLabel: "19 August 2026"
 readMins: 5
-cover: "images/door/alu-k300max.webp"
+cover: "images/alu-k300max.webp"
 excerpt: "Salt air finds every coating flaw in steel. Why cast aluminium keeps its finish for decades on the coast — and what to specify."
 keywords:
   - "corrosion resistant security door"

@@ -7,7 +7,7 @@ category: "Технологии"
 date: "2026-09-07"
 dateLabel: "7 сентября 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-battery-backup.webp"
 excerpt: "Разряженная батарея не должна оставлять владельца снаружи: проверяем предупреждения, резерв и протоколы испытаний."
 keywords:
   - "батарея умного замка"

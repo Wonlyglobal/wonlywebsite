@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-25"
 dateLabel: "25 сентября 2026"
 readMins: 7
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-oem-development.webp"
 excerpt: "Определите ответственность за продукт, ПО, соответствие и поддержку до утверждения программы OEM/ODM."
 keywords:
   - "умный замок OEM"

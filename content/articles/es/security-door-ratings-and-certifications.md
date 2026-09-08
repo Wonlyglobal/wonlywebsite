@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-04-02"
 dateLabel: "2 de abril de 2026"
 readMins: 7
-cover: "images/mfg-inspect.jpg"
+cover: "images/articles/security-door-rating-test.webp"
 excerpt: "EN 1627 RC2–RC6, GB 17565 y resistencia al fuego explicados para importadores y compradores de proyectos."
 keywords:
   - "grados puertas de seguridad"

@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-07-08"
 dateLabel: "8 July 2026"
 readMins: 7
-cover: "images/door/gallery/g1-front.jpg"
+cover: "images/articles/security-door-selection.webp"
 excerpt: "A step-by-step B2B buyer's guide — matching security rating, material, fire, certification and supplier reliability to your market."
 keywords:
   - "how to choose a security door"

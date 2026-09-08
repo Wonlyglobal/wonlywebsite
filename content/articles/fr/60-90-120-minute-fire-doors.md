@@ -7,7 +7,7 @@ category: "Guide d'achat"
 date: "2026-08-24"
 dateLabel: "24 août 2026"
 readMins: 5
-cover: "images/door/alu-t200.webp"
+cover: "images/articles/fire-door-duration-test.webp"
 excerpt: "Choisissez la durée selon la stratégie incendie de chaque ouverture, sans surdimensionnement ni échec au contrôle."
 keywords:
   - "porte coupe-feu 90 minutes"

@@ -7,7 +7,7 @@ category: "Руководство покупателя"
 date: "2026-08-12"
 dateLabel: "12 августа 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/villa-security-door.webp"
 excerpt: "Класс защиты, климат, умный доступ и персонализация — четыре решения для входа виллы."
 keywords:
   - "защитная дверь для виллы"

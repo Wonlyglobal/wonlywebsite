@@ -7,7 +7,7 @@ category: "تحليل السوق"
 date: "2026-04-15"
 dateLabel: "15 أبريل 2026"
 readMins: 5
-cover: "images/gs-barbados.jpg"
+cover: "images/articles/southeast-asia-security-door.webp"
 excerpt: "تحتاج الشقق والمنازل والمناخ المداري والخدمات المحمولة إلى تشكيلة وخدمة لكل دولة."
 keywords:
   - "سوق أبواب الأمان جنوب شرق آسيا"

@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-23"
 dateLabel: "23 septembre 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/smart-door-oem-integration.webp"
 excerpt: "Définissez interfaces, responsabilités et essais avant de sourcer un système de porte intelligente OEM."
 keywords:
   - "fabricant de portes intelligentes"

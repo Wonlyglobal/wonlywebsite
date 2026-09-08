@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-04-29"
 dateLabel: "29 April 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-access-methods.webp"
 excerpt: "A clear look at the technologies inside modern smart locks — biometrics, encrypted app control and the fallbacks that keep users safe."
 keywords:
   - "how smart locks work"

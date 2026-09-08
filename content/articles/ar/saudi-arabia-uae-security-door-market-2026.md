@@ -7,7 +7,7 @@ category: "تحليل السوق"
 date: "2026-09-11"
 dateLabel: "11 سبتمبر 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/gulf-security-door-market.webp"
 excerpt: "يعتمد الاختيار على الوثائق المقبولة والتعرض والتركيب والقطاع، لا السعر وحده."
 keywords:
   - "مورد أبواب أمان الإمارات"

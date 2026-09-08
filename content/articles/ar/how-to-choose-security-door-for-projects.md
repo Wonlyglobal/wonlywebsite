@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-07-08"
 dateLabel: "8 يوليو 2026"
 readMins: 7
-cover: "images/door/gallery/g1-front.jpg"
+cover: "images/articles/security-door-selection.webp"
 excerpt: "خطوات مطابقة تصنيف الأمان والمادة والحريق والشهادات وموثوقية المورد مع متطلبات سوقك."
 keywords:
   - "كيفية اختيار باب أمان"

@@ -7,7 +7,7 @@ category: "Обзор рынка"
 date: "2026-04-15"
 dateLabel: "15 апреля 2026"
 readMins: 5
-cover: "images/gs-barbados.jpg"
+cover: "images/articles/southeast-asia-security-door.webp"
 excerpt: "Кондоминиумы, дома, тропический климат и мобильные сервисы требуют отдельной линейки по каждой стране."
 keywords:
   - "рынок защитных дверей Юго Восточная Азия"

@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-09-28"
 dateLabel: "28 de septiembre de 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/stc-door-rating-lab.webp"
 excerpt: "Elija el conjunto acústico según la sala, el ensayo completo y las interfaces de obra."
 keywords:
   - "clasificación STC para puertas"

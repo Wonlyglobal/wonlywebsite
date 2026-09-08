@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-21"
 dateLabel: "21 сентября 2026"
 readMins: 7
-cover: "images/mfg-inspect.jpg"
+cover: "images/articles/steel-emergency-exit-door.webp"
 excerpt: "Чек-лист координации стальной двери, антипаники, пожарных требований, СКУД и приёмки."
 keywords:
   - "стальные двери аварийного выхода"

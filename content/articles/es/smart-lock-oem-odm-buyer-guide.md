@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-25"
 dateLabel: "25 de septiembre de 2026"
 readMins: 7
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-oem-development.webp"
 excerpt: "Defina responsabilidades de producto, software, cumplimiento y soporte antes de aprobar un programa OEM/ODM."
 keywords:
   - "cerradura inteligente OEM"

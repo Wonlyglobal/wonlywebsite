@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-04-29"
 dateLabel: "29 أبريل 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-access-methods.webp"
 excerpt: "نظرة واضحة إلى القياسات الحيوية والتحكم المشفر ووسائل الطوارئ داخل الأقفال الذكية."
 keywords:
   - "كيف تعمل الأقفال الذكية"

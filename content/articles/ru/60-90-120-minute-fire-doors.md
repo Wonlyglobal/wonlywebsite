@@ -7,7 +7,7 @@ category: "Руководство покупателя"
 date: "2026-08-24"
 dateLabel: "24 августа 2026"
 readMins: 5
-cover: "images/door/alu-t200.webp"
+cover: "images/articles/fire-door-duration-test.webp"
 excerpt: "Назначайте предел по пожарной стратегии каждого проёма, избегая лишних затрат и отказа при приёмке."
 keywords:
   - "противопожарная дверь 90 минут"

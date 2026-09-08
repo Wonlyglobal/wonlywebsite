@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-23"
 dateLabel: "23 сентября 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/smart-door-oem-integration.webp"
 excerpt: "Определите интерфейсы, ответственность и приёмочные тесты до закупки OEM-системы умной двери."
 keywords:
   - "производитель умных дверей"

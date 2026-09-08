@@ -7,7 +7,7 @@ category: "Технологии"
 date: "2026-08-14"
 dateLabel: "14 августа 2026"
 readMins: 5
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/soundproof-security-door.webp"
 excerpt: "Замените расплывчатое слово «шумоизоляция» измеримой характеристикой установленного дверного блока."
 keywords:
   - "звукоизоляционная защитная дверь"

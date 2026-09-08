@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-05-13"
 dateLabel: "13 mai 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-range-selection.webp"
 excerpt: "Checklist pratique pour choisir des serrures fiables et vendables : accès, sécurité, énergie, climat et intégration."
 keywords:
   - "guide achat serrure intelligente"

@@ -7,7 +7,7 @@ category: "Análisis de mercado"
 date: "2026-09-11"
 dateLabel: "11 de septiembre de 2026"
 readMins: 6
-cover: "images/gs-saudi-villa.jpg"
+cover: "images/articles/gulf-security-door-market.webp"
 excerpt: "La selección depende de documentos aceptados, exposición, instalación y segmento, no solo del precio."
 keywords:
   - "proveedor puertas seguridad EAU"

@@ -7,7 +7,7 @@ category: "Tecnología"
 date: "2026-09-07"
 dateLabel: "7 de septiembre de 2026"
 readMins: 5
-cover: "images/lock-s80.webp"
+cover: "images/articles/smart-lock-battery-backup.webp"
 excerpt: "Una batería agotada nunca debería dejar al usuario fuera: compruebe alertas, respaldo y pruebas antes de comprar."
 keywords:
   - "batería cerradura inteligente"

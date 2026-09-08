@@ -7,7 +7,7 @@ category: "Entreprise"
 date: "2026-05-27"
 dateLabel: "27 mai 2026"
 readMins: 5
-cover: "images/mfg-hero.jpg"
+cover: "images/articles/oem-odm-door-factory.webp"
 excerpt: "De la définition du marché à l'échantillon puis à la série : les preuves et jalons d'un partenariat industriel contrôlable."
 keywords:
   - "fabricant OEM porte sécurité"

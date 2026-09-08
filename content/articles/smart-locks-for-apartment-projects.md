@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-04"
 dateLabel: "4 September 2026"
 readMins: 6
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/apartment-smart-lock-project.webp"
 excerpt: "Specifying at 500-unit scale is a different job — management platforms, battery logistics, spare parts and the checks that protect the developer."
 keywords:
   - "smart lock for apartments"

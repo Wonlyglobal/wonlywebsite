@@ -7,7 +7,7 @@ category: "Technology"
 date: "2026-09-28"
 dateLabel: "28 сентября 2026"
 readMins: 7
-cover: "images/door/gallery/g3-detail.jpg"
+cover: "images/articles/stc-door-rating-lab.webp"
 excerpt: "Выбирайте акустический дверной блок по помещению, полному испытанию и узлам монтажа."
 keywords:
   - "рейтинг STC для дверей"

@@ -7,7 +7,7 @@ category: "التقنية"
 date: "2026-08-19"
 dateLabel: "19 أغسطس 2026"
 readMins: 5
-cover: "images/door/alu-k300max.webp"
+cover: "images/alu-k300max.webp"
 excerpt: "تعتمد مقاومة الساحل على النظام كاملاً، لا على معدن اللوح الخارجي فقط."
 keywords:
   - "باب أمان مقاوم للتآكل"

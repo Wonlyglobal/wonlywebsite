@@ -7,7 +7,7 @@ category: "Guía de compra"
 date: "2026-08-24"
 dateLabel: "24 de agosto de 2026"
 readMins: 5
-cover: "images/door/alu-t200.webp"
+cover: "images/articles/fire-door-duration-test.webp"
 excerpt: "Defina los minutos según la estrategia contra incendios de cada hueco y evite sobrecostes o rechazos de inspección."
 keywords:
   - "puerta cortafuego 90 minutos"

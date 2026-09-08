@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-08-24"
 dateLabel: "24 August 2026"
 readMins: 5
-cover: "images/door/alu-t200.webp"
+cover: "images/articles/fire-door-duration-test.webp"
 excerpt: "A practical map of where EI 60, EI 90 and EI 120 each belong — and the specification process that avoids expensive retrofits."
 keywords:
   - "90 minute fire door"

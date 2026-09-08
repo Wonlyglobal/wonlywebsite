@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-04-02"
 dateLabel: "2 апреля 2026"
 readMins: 7
-cover: "images/mfg-inspect.jpg"
+cover: "images/articles/security-door-rating-test.webp"
 excerpt: "EN 1627 RC2–RC6, GB 17565 и огнестойкость для импортёров, девелоперов и проектных покупателей."
 keywords:
   - "классы защитных дверей"

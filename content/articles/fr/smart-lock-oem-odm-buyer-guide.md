@@ -7,7 +7,7 @@ category: "Buying Guide"
 date: "2026-09-25"
 dateLabel: "25 septembre 2026"
 readMins: 7
-cover: "images/lock-s80-render.webp"
+cover: "images/articles/smart-lock-oem-development.webp"
 excerpt: "Définissez produit, logiciel, conformité et support avant d'approuver un programme OEM ou ODM."
 keywords:
   - "serrure intelligente OEM"
