@@ -46,7 +46,12 @@ function activate(content: VisualContent = {}) {
     handle.ondragend = () => { draggedSection = null; document.querySelectorAll(".cms-section-drop-before,.cms-section-drop-after").forEach(item => item.classList.remove("cms-section-drop-before", "cms-section-drop-after")); };
     document.body.appendChild(handle); sectionEntries.push({ section, handle });
   });
-  editableTextElements(document).forEach(element => {
+  const editableTexts = editableTextElements(document).map(element => {
+    const clone = element.cloneNode(true) as HTMLElement;
+    element.replaceWith(clone);
+    return clone;
+  });
+  editableTexts.forEach(element => {
     const key = visualElementKey(element);
     element.classList.add("cms-editable", "cms-text-editable"); element.contentEditable = "true"; element.spellcheck = true;
     element.onclick = event => { event.preventDefault(); event.stopPropagation(); element.focus(); };
