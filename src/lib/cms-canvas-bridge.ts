@@ -26,7 +26,7 @@ function activate(content: VisualContent = {}) {
   document.querySelector("style[data-cms-bridge]")?.remove();
   const style = document.createElement("style");
   style.dataset.cmsBridge = "true";
-  style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected,.cms-image-selected{outline:3px solid #2864ff!important;outline-offset:3px}.cms-section-moving{animation:cms-section-pulse .55s ease}.cms-image-replace{position:absolute!important;z-index:2147483647!important;display:grid!important;place-items:center!important;width:34px!important;height:34px!important;padding:0!important;border:2px solid #fff!important;border-radius:50%!important;background:#2864ff!important;color:#fff!important;box-shadow:0 5px 16px #17203366!important;cursor:pointer!important;font:700 18px/1 Arial,sans-serif!important}.cms-image-replace:hover,.cms-image-replace:focus{transform:scale(1.08)!important;background:#174bd1!important}@keyframes cms-section-pulse{50%{outline:7px solid #2864ff55}}`;
+  style.textContent = `.cms-editable{outline:1px dashed transparent;outline-offset:4px;cursor:text!important}.cms-text-editable{pointer-events:auto!important;cursor:text!important;position:relative!important;z-index:2!important}.cms-editable:hover,.cms-editable:focus{outline:2px solid #2864ff!important;background:rgba(40,100,255,.09)!important}.cms-section-editable{outline:1px dashed rgba(40,100,255,.35);outline-offset:-2px}.cms-section-selected,.cms-image-selected{outline:3px solid #2864ff!important;outline-offset:3px}.cms-section-moving{animation:cms-section-pulse .55s ease}.cms-image-replace{position:absolute!important;z-index:2147483647!important;display:grid!important;place-items:center!important;width:34px!important;height:34px!important;padding:0!important;border:2px solid #fff!important;border-radius:50%!important;background:#2864ff!important;color:#fff!important;box-shadow:0 5px 16px #17203366!important;cursor:pointer!important;font:700 18px/1 Arial,sans-serif!important}.cms-image-replace:hover,.cms-image-replace:focus{transform:scale(1.08)!important;background:#174bd1!important}@keyframes cms-section-pulse{50%{outline:7px solid #2864ff55}}`;
   document.head.appendChild(style);
   applyVisualContent(document, content.visual ?? {});
   applyLayoutContent(document, content.layout);
@@ -37,7 +37,7 @@ function activate(content: VisualContent = {}) {
   });
   editableTextElements(document).forEach(element => {
     const key = visualElementKey(element);
-    element.classList.add("cms-editable"); element.contentEditable = "true"; element.spellcheck = true;
+    element.classList.add("cms-editable", "cms-text-editable"); element.contentEditable = "true"; element.spellcheck = true;
     element.onclick = event => { event.preventDefault(); event.stopPropagation(); element.focus(); };
     element.onblur = () => send("ITEM_CHANGED", { key, item: { type: "text", value: element.textContent?.trim() ?? "" } satisfies VisualItem });
   });
