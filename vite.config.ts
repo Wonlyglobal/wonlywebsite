@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 import tailwindcss from '@tailwindcss/vite';
 import fs from 'node:fs/promises';
 import nodePath from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { componentTagger } from 'lovable-tagger';
 import path from "path";
 
@@ -205,6 +206,19 @@ function cdnPrefixImages(): Plugin {
   };
 }
 
+function scheduledArticleHtml(): Plugin {
+  return {
+    name: 'scheduled-article-html',
+    apply: 'build',
+    closeBundle() {
+      // Codeup may invoke Vite directly instead of npm lifecycle scripts. Run
+      // the browser-free article postbuild from the Vite lifecycle as well so
+      // the production dist always contains crawlable article deep links.
+      execFileSync(process.execPath, ['scripts/postbuild.mjs'], { stdio: 'inherit' });
+    },
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
@@ -221,6 +235,7 @@ export default defineConfig(({ mode }) => {
       mode === 'development' &&
       componentTagger(),
       cdnPrefixImages(),
+      scheduledArticleHtml(),
     ].filter(Boolean),
     resolve: {
       alias: {
