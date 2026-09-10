@@ -7,7 +7,7 @@ category: "التقنية"
 date: "2026-09-09"
 dateLabel: "9 سبتمبر 2026"
 readMins: 5
-cover: "images/articles/cylindrical-lock-core-comparison.webp"
+cover: "images/articles/euro-profile-cylinder-cutaway-v2.webp"
 excerpt: "تكون الأسطوانة غالباً أول نقطة للهجوم؛ الهندسة والمواد والاختبارات أهم من الاسم التجاري."
 keywords:
   - "قلب قفل أسطواني"
