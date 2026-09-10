@@ -104,7 +104,7 @@ const ALL_ARTICLES: (Article & { locale: Locale })[] = Object.entries(RAW)
     if (!m) return null;
     const fm = parseFrontmatter(m[1]);
     const cover = String(fm.cover || "");
-    const localeMatch = file.match(/\/content\/articles\/(ar|fr|ru|es)\//);
+    const localeMatch = file.match(/\/content\/articles\/(ar|fr|ru|es|pt)\//);
     return {
       slug: String(fm.slug || ""),
       title: String(fm.title || ""),

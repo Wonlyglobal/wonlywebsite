@@ -3,7 +3,7 @@ import path from "node:path";
 
 const SITE = "https://www.wonlyglobal.com";
 const DIST = process.env.PRERENDER_DIST || "dist";
-const LOCALES = ["en", "ar", "fr", "ru", "es"];
+const LOCALES = ["en", "ar", "fr", "ru", "es", "pt"];
 const xml = fs.readFileSync(path.join(DIST, "sitemap.xml"), "utf8");
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapBlocks = [...xml.matchAll(/<url>[\s\S]*?<\/url>/g)].map((match) => match[0]);
@@ -16,7 +16,7 @@ const fileForRoute = (route) => route === "/"
 const localeForRoute = (route) => LOCALES.includes(route.split("/").filter(Boolean)[0])
   ? route.split("/").filter(Boolean)[0]
   : "en";
-const baseRoute = (route) => route.replace(/^\/(ar|fr|ru|es)(?=\/|$)/, "") || "/";
+const baseRoute = (route) => route.replace(/^\/(ar|fr|ru|es|pt)(?=\/|$)/, "") || "/";
 const localUrl = (base, locale) => locale === "en"
   ? `${SITE}${base}`
   : `${SITE}/${locale}${base === "/" ? "/" : base}`;

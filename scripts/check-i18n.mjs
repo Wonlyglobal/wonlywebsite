@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const SITE = "https://www.wonlyglobal.com";
-const LOCALES = ["ar", "fr", "ru", "es"];
+const LOCALES = ["ar", "fr", "ru", "es", "pt"];
+const ARTICLE_LOCALES = ["ar", "fr", "ru", "es", "pt"];
 const ARTICLE_ROOT = "content/articles";
 const errors = [];
 const PUBLIC_ROUTES = [
@@ -26,7 +27,7 @@ for (const file of englishFiles) {
 }
 for (const file of englishFiles) {
   const english = frontmatter(path.join(ARTICLE_ROOT, file));
-  for (const locale of LOCALES) {
+  for (const locale of ARTICLE_LOCALES) {
     const localizedFile = path.join(ARTICLE_ROOT, locale, file);
     if (!fs.existsSync(localizedFile)) { errors.push(`${locale}/${file}: missing localized article`); continue; }
     const localized = frontmatter(localizedFile);
@@ -58,4 +59,4 @@ if (errors.length) {
   errors.forEach((error) => console.error(`- ${error}`));
   process.exit(1);
 }
-console.log(`i18n QA passed: ${englishFiles.length} articles × ${LOCALES.length} translations, sitemap and hreflang checks passed.`);
+console.log(`i18n QA passed: ${englishFiles.length} articles × ${ARTICLE_LOCALES.length} translations, ${LOCALES.length} core-site locales, sitemap and hreflang checks passed.`);

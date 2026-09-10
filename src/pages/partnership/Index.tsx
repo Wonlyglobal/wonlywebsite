@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { SiteHeader, SiteFooter, CtaBand, GOLD, CHAMP, MUTED, BASE, eyebrow, Reveal, useQuoteStore } from "@/lib/site-ui";
 import { useSeo } from "@/lib/seo";
@@ -74,6 +75,13 @@ export default function Partnership() {
             </Reveal>
           ))}
         </div>
+        {locale === "en" && <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {[["Security Door Manufacturing", "/security-door-manufacturer"], ["Smart Door Manufacturing", "/smart-door-manufacturer"], ["Smart Lock OEM & ODM", "/smart-lock-oem-odm"]].map(([label, href]) => (
+            <Link key={href} to={href} className="flex items-center justify-between rounded-xl border bg-white p-5 text-sm font-semibold hover:bg-[#faf8f3]" style={{ borderColor: "#e4ddcf" }}>
+              {label}<ArrowRight size={15} style={{ color: GOLD }}/>
+            </Link>
+          ))}
+        </div>}
       </section>
 
       {/* Strategic partners — ceremony photos */}

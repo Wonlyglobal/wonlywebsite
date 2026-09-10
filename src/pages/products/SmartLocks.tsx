@@ -30,6 +30,7 @@ const data: ProductPageData = {
     { name: "P10 Pro Biometric Smart Lock", tag: "Palm Vein", d: "Face or palm-vein recognition with a door viewer and 4.5-inch display.", img: `${BASE}images/catalog-2026/models/p10-pro.webp`, path: "/products/smart-locks/p10-pro" },
     { name: "S922 Max Face Recognition Smart Lock", tag: "Compact Max", d: "Face recognition, door viewer, remote unlocking and a 4-inch display.", img: `${BASE}images/catalog-2026/models/s922-max.webp`, path: "/products/smart-locks/s922-max" },
     { name: "S936 Retail Smart Lock", tag: "Retail", d: "Grip-to-open fingerprint, passcode, encrypted card and key access.", img: `${BASE}images/catalog-2026/models/s936.webp`, path: "/products/smart-locks/s936" },
+    { name: "Smart Lock OEM & ODM", tag: "Private Label", d: "Develop a branded smart-lock range with platform selection, mechanical fit, sampling, packaging and scalable production support.", img: `${BASE}images/lock-s80.webp`, path: "/smart-lock-oem-odm" },
   ],
   featuresEyebrow: "Engineered In",
   featuresTitle: "Security You Never Have To Think About",

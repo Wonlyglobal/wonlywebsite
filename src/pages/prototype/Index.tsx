@@ -485,6 +485,7 @@ function NumbersCoverflow({ locale }: { locale: Parameters<typeof homeSectionTex
 /* Partners — paginated flat grid (4×2, 8 per page). Arrows slide the whole page
    horizontally via translateX; they grey out at the first/last page. */
 function PartnersPager() {
+  const { t } = useLocale();
   const PER = 8;
   const pageCount = Math.ceil(PARTNER_PHOTOS.length / PER);
   const pages = Array.from({ length: pageCount }, (_, p) => PARTNER_PHOTOS.slice(p * PER, p * PER + PER));
@@ -501,7 +502,7 @@ function PartnersPager() {
                   <div className="absolute inset-0" style={{ background: "linear-gradient(rgba(0,0,0,0) 40%, rgba(13,13,13,0.88) 100%)" }} />
                   <div className="absolute left-4 bottom-3 text-left">
                     <div className="text-white text-sm md:text-base font-semibold leading-tight">{pt.n}</div>
-                    <div className="mt-0.5 text-[9px] md:text-[10px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>Partner · {pt.y}</div>
+                    <div className="mt-0.5 text-[9px] md:text-[10px] tracking-[0.14em] uppercase" style={{ color: CHAMP }}>{t("Partner")} · {pt.y}</div>
                   </div>
                 </div>
               ))}
@@ -511,11 +512,11 @@ function PartnersPager() {
       </div>
       {pageCount > 1 && (
         <div className="mt-8 flex items-center justify-center gap-6">
-          <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0} aria-label="Previous partners" className="w-11 h-11 rounded-full flex items-center justify-center border transition-colors disabled:opacity-25 disabled:cursor-not-allowed hover:bg-[#F5F1EA]" style={{ borderColor: `${SILVER}66`, color: DARK }}>
+          <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0} aria-label={t("Previous partners")} className="w-11 h-11 rounded-full flex items-center justify-center border transition-colors disabled:opacity-25 disabled:cursor-not-allowed hover:bg-[#F5F1EA]" style={{ borderColor: `${SILVER}66`, color: DARK }}>
             <ChevronLeft size={18} />
           </button>
           <div className="text-sm tracking-[0.2em] tabular-nums" style={{ color: DARK }}>{page + 1}/{pageCount}</div>
-          <button onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))} disabled={page === pageCount - 1} aria-label="Next partners" className="w-11 h-11 rounded-full flex items-center justify-center border transition-colors disabled:opacity-25 disabled:cursor-not-allowed hover:bg-[#F5F1EA]" style={{ borderColor: `${SILVER}66`, color: DARK }}>
+          <button onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))} disabled={page === pageCount - 1} aria-label={t("Next partners")} className="w-11 h-11 rounded-full flex items-center justify-center border transition-colors disabled:opacity-25 disabled:cursor-not-allowed hover:bg-[#F5F1EA]" style={{ borderColor: `${SILVER}66`, color: DARK }}>
             <ChevronRight size={18} />
           </button>
         </div>
@@ -1253,11 +1254,11 @@ const Prototype = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
             <img src={LOGO} alt="WONLY" className="h-6 w-auto" />
-            <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
+            <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>{t("Global Smart-Security Ecosystem Leader. SSE: 605268.")}</p>
           </div>
           {FOOTER.map((col) => (
             <div key={col.h}>
-              <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{col.h}</h4>
+              <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{t(col.h)}</h4>
               <ul className="space-y-2.5">
                 {col.links.map((item) => {
                   const cls = "text-xs font-light transition-colors hover:text-white";
@@ -1266,11 +1267,11 @@ const Prototype = () => {
                     <li key={item.l}>
                       {item.href
                         ? (/^(mailto:|tel:|https?:)/.test(item.href)
-                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{item.l}</a>
-                            : <Link to={item.href} className={cls} style={style}>{item.l}</Link>)
+                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{t(item.l)}</a>
+                            : <Link to={item.href} className={cls} style={style}>{t(item.l)}</Link>)
                         : item.to
-                          ? <button onClick={() => scrollToId(item.to!)} className={cls + " text-left"} style={style}>{item.l}</button>
-                          : <span className="text-xs font-light" style={style}>{item.l}</span>}
+                          ? <button onClick={() => scrollToId(item.to!)} className={cls + " text-left"} style={style}>{t(item.l)}</button>
+                          : <span className="text-xs font-light" style={style}>{t(item.l)}</span>}
                     </li>
                   );
                 })}
@@ -1279,7 +1280,7 @@ const Prototype = () => {
           ))}
         </div>
         <div className="mt-14 pt-6 border-t text-center text-[11px] font-light" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(245,241,234,0.4)" }}>
-          © WONLY · SSE 605268 · Global Smart-Security Ecosystem Leader
+          © WONLY · SSE 605268 · {t("Global Smart-Security Ecosystem Leader")}
         </div>
         </div>
       </footer>

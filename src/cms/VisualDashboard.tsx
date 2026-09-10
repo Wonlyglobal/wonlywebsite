@@ -8,7 +8,7 @@ import CmsSidebar, { type CmsWorkspace } from "./CmsSidebar";
 import CmsModuleDashboard from "./CmsModuleDashboard";
 
 type PageRow = { id: string; page_key: string; draft_content: VisualContent; published_content: (VisualContent & { translations?: Record<string, VisualContent> }) | null; translations: Record<string, VisualContent>; status: "draft" | "published" };
-const LANGUAGES = [["en", "English"], ["ar", "العربية"], ["fr", "Français"], ["ru", "Русский"], ["es", "Español"]] as const;
+const LANGUAGES = [["en", "English"], ["ar", "العربية"], ["fr", "Français"], ["ru", "Русский"], ["es", "Español"], ["pt", "Português"]] as const;
 const EMPTY_SEO: CmsSeo = { title: "", description: "", canonical: "", ogImage: "", robots: "index, follow" };
 const imageCaptureHandlers = new WeakMap<Document, EventListener>();
 

@@ -104,7 +104,14 @@ function outFileFor(route) {
 }
 
 async function main() {
-  const routes = await getRoutes();
+  const allRoutes = await getRoutes();
+  const requestedRoutes = (process.env.PRERENDER_ROUTES || "")
+    .split(",")
+    .map((route) => route.trim())
+    .filter(Boolean);
+  const routes = requestedRoutes.length
+    ? allRoutes.filter((route) => requestedRoutes.includes(route))
+    : allRoutes;
   console.log(`prerender: ${routes.length} routes to render`);
   const server = await startServer();
   const browser = await chromium.launch({

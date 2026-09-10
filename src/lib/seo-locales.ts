@@ -91,6 +91,28 @@ const SEO: Partial<Record<Locale, Record<string, LocalizedSeo>>> = {
     "/contact": { title: "Contacto y solicitud de cotización | WONLY", description: "Contacte con WONLY para distribución, proyectos y OEM/ODM. Nuestro equipo internacional responde en 24 horas." },
     "/insights": { title: "Guías de puertas de seguridad y cerraduras | WONLY", description: "Guías de compra, tecnología, normas y análisis de mercado para distribuidores, promotores y compradores de puertas y cerraduras inteligentes." },
   },
+  pt: {
+    "/": { title: "Fabricante de portas de segurança e fechaduras inteligentes | WONLY", description: "Fabricante chinês listado de portas de segurança e fechaduras inteligentes, com serviços OEM/ODM para distribuidores e projetos internacionais." },
+    "/about": { title: "Sobre a WONLY | Fabricante de portas e fechaduras", description: "Conheça os 30 anos de experiência da WONLY, suas fábricas, P&D e capacidade global em portas de segurança e fechaduras inteligentes." },
+    "/projects": { title: "Projetos globais de portas e fechaduras | WONLY", description: "Conheça projetos residenciais, hoteleiros e comerciais da WONLY, com soluções sob medida para incorporadoras, construtoras e distribuidores." },
+    "/products/entrance-door": { title: "Fabricante e fornecedor de portas de entrada | WONLY", description: "Portas de entrada WONLY para casas, apartamentos e projetos, com estruturas seguras, acabamentos personalizados e serviços OEM/ODM." },
+    "/products/security-doors": { title: "Fabricante de portas de segurança e OEM | WONLY", description: "Portas de aço e alumínio fundido resistentes ao fogo e à intrusão, com medidas, acabamentos e fechaduras personalizáveis para projetos." },
+    "/products/security-doors/x70": { title: "Porta de segurança robótica X70 para residências | WONLY", description: "WONLY X70: reconhecimento facial 3D, travamento autônomo de 16 pinos, resistência ao fogo por 90 minutos e proteção premium." },
+    "/products/wooden-doors": { title: "Fabricante de portas de madeira para projetos | WONLY", description: "Portas de madeira e aço-madeira WONLY, estáveis, acústicas e personalizáveis para projetos, distribuidores e programas OEM." },
+    "/products/smart-locks": { title: "Fabricante de fechaduras inteligentes OEM | WONLY", description: "Fechaduras WONLY com impressão digital, rosto, veias da palma e aplicativo para distribuidores, projetos e soluções OEM/ODM." },
+    "/products/smart-locks/s80": { title: "Fechadura biométrica sem contato WONLY S80", description: "A S80 oferece detecção de longo alcance, acesso multibiométrico, aplicativo e arquitetura antiviolação para residências e projetos." },
+    "/products/smart-windows": { title: "Fabricante de janelas inteligentes de alumínio | WONLY", description: "Janelas inteligentes com isolamento térmico e acústico, fechamento automático com vento e chuva e controle por aplicativo." },
+    "/products/whole-house": { title: "Sistemas de segurança para casa inteligente | WONLY", description: "Da porta inteligente a 28 categorias conectadas, a WONLY integra segurança, cenas e controle central para projetos residenciais." },
+    "/products/engineering-doors": { title: "Fabricante de portas técnicas para projetos | WONLY", description: "Portas corta-fogo, acústicas e anti-intrusão para hotéis e edifícios, com suporte de especificação, personalização e entrega." },
+    "/products/medical-doors": { title: "Fabricante de portas médicas e hospitalares | WONLY", description: "Portas higiênicas para hospitais, clínicas e centros cirúrgicos, com opções automáticas, herméticas e corta-fogo para cada projeto." },
+    "/products/yizhai-yishu": { title: "Portas personalizadas para residências YIZHAI YISHU | WONLY", description: "A coleção YIZHAI YISHU combina portas esculturais sob medida, segurança inteligente e acabamentos exclusivos para cada residência." },
+    "/advantages": { title: "Vantagens das portas e fechaduras WONLY", description: "Engenharia, testes, certificações e inovação WONLY: mais de 1.000 patentes e soluções para projetos internacionais." },
+    "/manufacturing-rd": { title: "Fabricação e P&D de portas e fechaduras | WONLY", description: "Conheça fábricas, centros de P&D, controle de qualidade e capacidade OEM/ODM da WONLY, do projeto à produção e entrega." },
+    "/global-strategy": { title: "Fornecimento e distribuição global de portas | WONLY", description: "A estratégia global da WONLY apoia distribuidores, incorporadoras e projetos por meio de fabricação, P&D e suporte local." },
+    "/partnership": { title: "Parcerias de distribuição, projetos e OEM | WONLY", description: "Seja distribuidor, parceiro de projeto ou OEM/ODM da WONLY com suporte de produto, personalização, conformidade, marketing e entrega." },
+    "/contact": { title: "Contato e solicitação de orçamento | WONLY", description: "Fale com a WONLY sobre distribuição, projetos e OEM/ODM. Nossa equipe internacional responde em até 24 horas." },
+    "/insights": { title: "Guias de portas de segurança e fechaduras | WONLY", description: "Guias de compra, tecnologia, normas e análises de mercado para distribuidores e compradores de portas e fechaduras inteligentes." },
+  },
 };
 
 export function localizedSeo(locale: Locale, path: string, fallback: LocalizedSeo): LocalizedSeo {

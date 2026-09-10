@@ -8,7 +8,7 @@ import * as RRD from "react-router-dom-original";
 // @ts-expect-error - This is resolved at runtime by Vite alias
 export * from "react-router-dom-original";
 
-const LOCALE_PREFIXES = new Set(["ar", "fr", "ru", "es"]);
+const LOCALE_PREFIXES = new Set(["ar", "fr", "ru", "es", "pt"]);
 function currentLocalePrefix(pathname: string) {
   const first = pathname.split("/").filter(Boolean)[0];
   return first && LOCALE_PREFIXES.has(first) ? `/${first}` : "";

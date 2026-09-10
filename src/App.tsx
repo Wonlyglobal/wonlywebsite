@@ -225,6 +225,9 @@ const App = () => (
           <Route path="/product/smart-lock" element={<Navigate to="/products/smart-locks" replace />} />
           <Route path="/product/smart-window" element={<Navigate to="/products/smart-windows" replace />} />
           <Route path="/product/whole-house" element={<Navigate to="/products/whole-house" replace />} />
+          <Route path="/security-door-manufacturer" element={<Navigate to="/products/security-doors" replace />} />
+          <Route path="/smart-door-manufacturer" element={<Navigate to="/products/security-doors" replace />} />
+          <Route path="/smart-lock-oem-odm" element={<Navigate to="/products/smart-locks" replace />} />
           {/* Sections not yet built → placeholder (hash anchors resolve within them). */}
           <Route path="/advantages" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Advantages /></Suspense>} />
           <Route path="/manufacturing-rd" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Manufacturing /></Suspense>} />

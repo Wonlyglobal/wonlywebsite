@@ -8,7 +8,8 @@ import path from "node:path";
 const SITE = "https://www.wonlyglobal.com";
 const CONTENT_DIR = "content/articles";
 const SITEMAP = "public/sitemap.xml";
-const LOCALES = ["en", "ar", "fr", "ru", "es"];
+const LOCALES = ["en", "ar", "fr", "ru", "es", "pt"];
+const ARTICLE_LOCALES = ["en", "ar", "fr", "ru", "es", "pt"];
 const today = new Date().toISOString().slice(0, 10);
 
 const routes = [
@@ -59,17 +60,16 @@ const localizedPath = (route, locale) => locale === "en"
   ? route
   : route === "/" ? `/${locale}/` : `/${locale}${route}`;
 
-const alternates = (route) => [
-  ...LOCALES.map((locale) => `    <xhtml:link rel="alternate" hreflang="${locale}" href="${SITE}${localizedPath(route, locale)}" />`),
+const alternates = (route, localeSet = LOCALES) => [
+  ...localeSet.map((locale) => `    <xhtml:link rel="alternate" hreflang="${locale}" href="${SITE}${localizedPath(route, locale)}" />`),
   `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${route}" />`,
 ].join("\n");
 
-const entry = (route, lastmod, changefreq, priority, localized = true) => {
-  const localeSet = localized ? LOCALES : ["en"];
+const entry = (route, lastmod, changefreq, priority, localized = true, localeSet = localized ? LOCALES : ["en"]) => {
   return localeSet.map((locale) => [
     "  <url>",
     `    <loc>${SITE}${localizedPath(route, locale)}</loc>`,
-    localized ? alternates(route) : "",
+    localized ? alternates(route, localeSet) : "",
     `    <lastmod>${lastmod}</lastmod>`,
     `    <changefreq>${changefreq}</changefreq>`,
     `    <priority>${priority}</priority>`,
@@ -94,7 +94,7 @@ const body = [
   ...englishOnlyRoutes.map(([route, lastmod, changefreq, priority]) => entry(route, lastmod, changefreq, priority, false)),
   entry("/privacy/", "2026-07-27", "yearly", "0.3", false),
   entry("/terms/", "2026-07-27", "yearly", "0.3", false),
-  ...articles.map(({ slug, date }) => entry(`/insights/${slug}/`, date, "monthly", "0.6")),
+  ...articles.map(({ slug, date }) => entry(`/insights/${slug}/`, date, "monthly", "0.6", true, ARTICLE_LOCALES)),
 ].join("\n");
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${body}\n</urlset>\n`;

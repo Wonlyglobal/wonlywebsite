@@ -7,10 +7,11 @@ export const LANGUAGES = [
   { code: "fr", label: "French", nativeLabel: "Français", dir: "ltr" },
   { code: "ru", label: "Russian", nativeLabel: "Русский", dir: "ltr" },
   { code: "es", label: "Spanish", nativeLabel: "Español", dir: "ltr" },
+  { code: "pt", label: "Portuguese", nativeLabel: "Português", dir: "ltr" },
 ] as const;
 
 export type Locale = (typeof LANGUAGES)[number]["code"];
-export const LOCALIZED_LOCALES: Locale[] = ["ar", "fr", "ru", "es"];
+export const LOCALIZED_LOCALES: Locale[] = ["ar", "fr", "ru", "es", "pt"];
 
 export function localeFromPath(pathname: string): Locale {
   const code = pathname.split("/").filter(Boolean)[0] as Locale | undefined;
@@ -71,6 +72,23 @@ const UI: Record<Locale, Record<string, string>> = {
     "Get Solutions & Quote": "Solicitar solución y cotización", "Select language": "Seleccionar idioma", "Your full name": "Su nombre completo", Company: "Empresa", "Company name": "Nombre de la empresa", "Country / region": "País / región", "Please enter your name.": "Introduzca su nombre.", "Please enter your company name.": "Introduzca el nombre de la empresa.", "Please enter your country or region.": "Introduzca su país o región.", "Please enter your email.": "Introduzca su correo electrónico.", "Please enter a valid email address.": "Introduzca un correo electrónico válido.",
     "Send an Enquiry": "Enviar una consulta", "Full Name": "Nombre completo", "Job Title": "Cargo", "Country / Region": "País / Región", Email: "Correo electrónico", "Phone / WhatsApp": "Teléfono / WhatsApp", Message: "Mensaje", "Submit Enquiry": "Enviar consulta", "Sending…": "Enviando…", Headquarters: "Sede central", "Previous Site": "Sitio anterior",
     "Business Type": "Tipo de negocio", "Estimated Volume": "Volumen estimado", "Target Timeline": "Plazo previsto", "Products of Interest": "Productos de interés", Select: "Seleccionar", Interest: "Interés", "Select an option…": "Seleccione una opción…", Distributor: "Distribuidor", Project: "Proyecto", "OEM / ODM": "OEM / ODM", "Submit Request": "Enviar solicitud", Close: "Cerrar", "Request received": "Solicitud recibida", "Tell us about your project": "Cuéntenos sobre su proyecto", "Tell us about your project or territory...": "Cuéntenos sobre su proyecto o territorio...", "Please select an option.": "Seleccione una opción.",
+  },
+  pt: {
+    Product: "Produtos", Door: "Portas", "Metal Door": "Portas metálicas", "Smart Door": "Portas inteligentes", "Wooden Door": "Portas de madeira",
+    "Smart Lock": "Fechaduras inteligentes", "Smart Window": "Janelas inteligentes", "Whole-House Intelligence": "Casa inteligente",
+    Advantages: "Vantagens", "Manufacturing & R&D": "Fabricação e P&D", "Global Strategy": "Presença global",
+    Partnership: "Parcerias", Contact: "Contato", "Get in Touch": "Entre em contato",
+    "News & Insights": "Notícias e insights", "Privacy Policy": "Política de privacidade", "Terms of Service": "Termos de uso",
+    "Get Solutions & Quote": "Solicitar solução e orçamento", "Select language": "Selecionar idioma", "Your full name": "Seu nome completo", Company: "Empresa", "Company name": "Nome da empresa", "Country / region": "País / região", "Please enter your name.": "Informe seu nome.", "Please enter your company name.": "Informe o nome da empresa.", "Please enter your country or region.": "Informe seu país ou região.", "Please enter your email.": "Informe seu e-mail.", "Please enter a valid email address.": "Informe um endereço de e-mail válido.",
+    "Send an Enquiry": "Enviar uma consulta", "Full Name": "Nome completo", "Job Title": "Cargo", "Country / Region": "País / Região", Email: "E-mail", "Phone / WhatsApp": "Telefone / WhatsApp", Message: "Mensagem", "Submit Enquiry": "Enviar consulta", "Sending…": "Enviando…", Headquarters: "Sede", "Previous Site": "Site anterior",
+    "Business Type": "Tipo de negócio", "Estimated Volume": "Volume estimado", "Target Timeline": "Prazo previsto", "Products of Interest": "Produtos de interesse", Select: "Selecionar", Interest: "Interesse", "Select an option…": "Selecione uma opção…", Distributor: "Distribuidor", Project: "Projeto", "OEM / ODM": "OEM / ODM", "Submit Request": "Enviar solicitação", Close: "Fechar", "Request received": "Solicitação recebida", "Tell us about your project": "Conte-nos sobre seu projeto", "Tell us about your project or territory...": "Conte-nos sobre seu projeto ou território...", "Please select an option.": "Selecione uma opção.",
+    "Global Smart-Security Ecosystem Leader. SSE: 605268.": "Líder global em ecossistemas de segurança inteligente. SSE: 605268.",
+    "Global Smart-Security Ecosystem Leader": "Líder global em ecossistemas de segurança inteligente",
+    "Why Wonly Door": "Por que escolher as portas WONLY", "Why Wonly Lock": "Por que escolher as fechaduras WONLY", "Innovation & Certifications": "Inovação e certificações",
+    "Security Doors": "Portas de segurança", "Smart Locks": "Fechaduras inteligentes", "Wooden Doors": "Portas de madeira", "Aluminum Windows": "Janelas de alumínio", "Medical Doors": "Portas médicas",
+    Custom: "Personalizadas", Minimalist: "Minimalistas", "Solid Wood": "Madeira maciça", "Aluminum Alloy": "Liga de alumínio",
+    Partner: "Parceiro", "Previous partners": "Parceiros anteriores", "Next partners": "Próximos parceiros",
+    "Ready To Open Your Market?": "Pronto para abrir seu mercado?", "Tell us about your project or territory — our team replies within 24 hours.": "Conte-nos sobre seu projeto ou território; nossa equipe responde em até 24 horas.",
   },
 };
 

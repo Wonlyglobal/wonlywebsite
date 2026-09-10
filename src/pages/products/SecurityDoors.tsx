@@ -246,6 +246,23 @@ const SecurityDoors = () => {
         </div>
       </section>
 
+      {locale === "en" && <section className="px-[7vw] py-16" style={{ background: "#fff" }}>
+        <div className="mx-auto max-w-6xl grid gap-4 md:grid-cols-2">
+          <Link to="/security-door-manufacturer" className="group rounded-2xl border border-[#ded6c8] p-6 hover:bg-[#f8f5ee]">
+            <div className={eyebrow} style={{ color: GOLD }}>Manufacturer &amp; OEM</div>
+            <h2 className="mt-3 text-xl font-semibold">Security Door Manufacturing for Global Projects</h2>
+            <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>Review production scope, project specifications, customisation and export delivery.</p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Manufacturer capabilities <ArrowRight size={15}/></span>
+          </Link>
+          <Link to="/smart-door-manufacturer" className="group rounded-2xl border border-[#ded6c8] p-6 hover:bg-[#f8f5ee]">
+            <div className={eyebrow} style={{ color: GOLD }}>Integrated Smart Entry</div>
+            <h2 className="mt-3 text-xl font-semibold">Smart Door Manufacturing &amp; System Integration</h2>
+            <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>Coordinate the door, sensing, lock, power, safety and connected-home experience.</p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Explore smart-door OEM <ArrowRight size={15}/></span>
+          </Link>
+        </div>
+      </section>}
+
       <CtaBand eyebrowText={st("Ready to Secure Your Project?")} title={st("Custom Security-Door Solutions & Pricing")} sub={st("CTA Description")} />
       <SiteFooter />
     </div>

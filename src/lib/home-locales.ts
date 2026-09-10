@@ -37,6 +37,13 @@ const COPY: Partial<Record<Locale, HomeCopy>> = {
     partnership: { eyebrow: "Asóciese con WONLY", title: "Abra la puerta a una alianza" },
     contact: { eyebrow: "Soluciones y cotización", line1: "¿Listo para abrir", line2: "su mercado?", subtitle: "Cuéntenos sobre su proyecto o territorio; nuestro equipo responde en 24 horas con especificaciones, documentación y precios adaptados." },
   },
+  pt: {
+    hero: { eyebrow: "Portas de segurança · Fechaduras inteligentes · OEM/ODM", line1: "Abra a porta", line2: "para o seu", line3: "próximo mercado", subtitle: "Fabricante confiável de portas de segurança premium e fechaduras inteligentes para distribuidores e projetos em todo o mundo.", scroll: "Role para entrar" },
+    reveal: { line1: "Ecossistema global", line2: "de segurança inteligente" },
+    why: { eyebrow: "Por que WONLY", title: "Um parceiro preparado para crescer e respaldado no mais alto nível", subtitle: "Três décadas de capacidade industrial, responsabilidade de companhia listada e liderança nacional respaldam cada porta WONLY." },
+    partnership: { eyebrow: "Seja parceiro da WONLY", title: "Abra a porta para uma parceria" },
+    contact: { eyebrow: "Soluções e orçamento", line1: "Pronto para abrir", line2: "seu mercado?", subtitle: "Conte-nos sobre seu projeto ou território; nossa equipe responde em até 24 horas com especificações, documentação e preços personalizados." },
+  },
 };
 
 export function homeCopy(locale: Locale, english: HomeCopy): HomeCopy {
@@ -76,6 +83,14 @@ const SECTION_TEXT: Partial<Record<Locale, Record<string, string>>> = {
     "Certified & Recognized": "Certificado y reconocido", "Held To Standards, Honored At The Top": "Cumplimos normas y recibimos el máximo reconocimiento", "Design Awards": "Premios de diseño", Certifications: "Certificaciones",
     "Our Journey": "Nuestra trayectoria", "A Thirty-Year Journey": "Treinta años de trayectoria", "Global Footprint": "Presencia global", "We Spread Around The World": "Estamos presentes en todo el mundo", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "Desde Yongkang, Zhejiang, hasta distribuidores y proyectos en más de 60 países y regiones, respaldados por cinco bases de fabricación y seis centros de I+D.", "Countries & Regions": "Países y regiones", "Manufacturing Bases": "Bases de fabricación", "R&D Centers": "Centros de I+D", "Users Worldwide": "Usuarios en todo el mundo", "Trusted Across Industries": "Confianza en múltiples sectores", "Trusted By Tech & Real-Estate Leaders": "La confianza de líderes tecnológicos e inmobiliarios", "Trusted by China's Leading Developers": "La confianza de los principales promotores de China",
   },
+  pt: {
+    "Manufacturing Base": "Área industrial", "Annual Production Capacity": "Capacidade anual de produção", Scroll: "Rolar", Skip: "Pular", Door: "Portas", "Smart Lock": "Fechaduras inteligentes", "Smart Window": "Janelas inteligentes", "Whole-House Intelligence": "Inteligência para toda a casa", "30 Years": "30 anos", "Since 1996 · Yongkang": "Desde 1996 · Yongkang", Listed: "Empresa listada", "Production Bases": "Bases de produção", Patents: "Patentes", "Users Protected": "Usuários protegidos", "Thank you — your request has been received.": "Obrigado — recebemos sua solicitação.", "Our team will reply within 24 hours with tailored specifications, compliance documentation and pricing.": "Nossa equipe responderá em até 24 horas com especificações, documentos de conformidade e preços personalizados.",
+    Manufacturing: "Fabricação", "Manufacturing Strength": "Capacidade industrial", "Built In Our Own 5G-Connected Smart Factories": "Fabricado em nossas próprias fábricas inteligentes conectadas por 5G", "Watch the Factory Tour": "Assistir ao tour da fábrica",
+    "Our Products": "Nossos produtos", "Built For Every Opening": "Uma solução para cada abertura", "Explore Products": "Explorar produtos", Discover: "Descobrir",
+    "Landmark Projects": "Projetos emblemáticos", "Chosen For The Projects That Cannot Fail": "Escolhida para projetos em que falhar não é uma opção",
+    "Certified & Recognized": "Certificada e reconhecida", "Held To Standards, Honored At The Top": "Conforme às normas e reconhecida no mais alto nível", "Design Awards": "Prêmios de design", Certifications: "Certificações",
+    "Our Journey": "Nossa trajetória", "A Thirty-Year Journey": "Uma trajetória de trinta anos", "Global Footprint": "Presença global", "We Spread Around The World": "Estamos presentes em todo o mundo", "From Yongkang, Zhejiang to distributors and projects in 60+ countries and regions — backed by five manufacturing bases and six R&D centers.": "De Yongkang, Zhejiang, a distribuidores e projetos em mais de 60 países e regiões, com cinco bases de fabricação e seis centros de P&D.", "Countries & Regions": "Países e regiões", "Manufacturing Bases": "Bases de fabricação", "R&D Centers": "Centros de P&D", "Users Worldwide": "Usuários no mundo", "Trusted Across Industries": "Confiança em vários setores", "Trusted By Tech & Real-Estate Leaders": "A confiança de líderes de tecnologia e imobiliário", "Trusted by China's Leading Developers": "A confiança das principais incorporadoras da China",
+  },
 };
 
 const PRODUCT_DESCRIPTIONS: Partial<Record<Locale, string[]>> = {
@@ -83,6 +98,7 @@ const PRODUCT_DESCRIPTIONS: Partial<Record<Locale, string[]>> = {
   fr: ["Portes métalliques et en bois pour protéger chaque entrée tout en préservant le calme intérieur.", "Serrures biométriques intelligentes avec accès mains libres et contrôle chiffré.", "Systèmes aluminium étanches, isolants et capables de se fermer automatiquement par vent ou pluie.", "Un écosystème reliant portes, serrures et fenêtres dans une couche domotique unique."],
   ru: ["Металлические и деревянные двери для защиты входа и комфорта внутри здания.", "Биометрические замки с бесконтактным входом и зашифрованным контролем доступа.", "Герметичные алюминиевые системы с теплоизоляцией и автозакрытием при ветре и дожде.", "Единая экосистема, объединяющая двери, замки и окна в систему умного дома."],
   es: ["Puertas metálicas y de madera que protegen la entrada y preservan el confort interior.", "Cerraduras biométricas con acceso manos libres y control de acceso cifrado.", "Sistemas de aluminio herméticos, aislantes y con cierre automático ante viento o lluvia.", "Un ecosistema que conecta puertas, cerraduras y ventanas en una sola capa de hogar inteligente."],
+  pt: ["Portas metálicas e de madeira que protegem cada entrada e preservam o conforto interno.", "Fechaduras biométricas com acesso sem as mãos e controle criptografado.", "Sistemas de alumínio vedados, isolantes e com fechamento automático em caso de vento ou chuva.", "Um ecossistema que conecta portas, fechaduras e janelas em uma única plataforma de casa inteligente."],
 };
 
 type PartnershipCopy = { title: string; description: string; cta: string };
@@ -111,6 +127,12 @@ const PARTNERSHIP_COPY: Partial<Record<Locale, PartnershipCopy[]>> = {
     { title: "Servicios OEM / ODM", description: "Aproveche nuestras fábricas inteligentes y más de 1.000 patentes para crear su propia línea de seguridad.", cta: "Solicitar información OEM/ODM" },
     { title: "Red global de distribución", description: "Sedes regionales, oficinas locales y socios autorizados en Oriente Medio, Sudeste Asiático y Asia Central.", cta: "Encontrar un socio local" },
   ],
+  pt: [
+    { title: "Programa de distribuidores", description: "Participe de uma rede global respaldada por 30 anos de marca, treinamento de produto e apoio de marketing regional.", cta: "Ser distribuidor" },
+    { title: "Cooperação em projetos", description: "Soluções para projetos residenciais, comerciais, médicos, hoteleiros, governamentais e públicos.", cta: "Apresentar um projeto" },
+    { title: "Serviços OEM / ODM", description: "Use nossas fábricas inteligentes e mais de 1.000 patentes para criar sua própria linha de segurança.", cta: "Solicitar informações OEM/ODM" },
+    { title: "Rede global de distribuição", description: "Sedes regionais, escritórios locais e parceiros autorizados no Oriente Médio, Sudeste Asiático e Ásia Central.", cta: "Encontrar um parceiro local" },
+  ],
 };
 
 type FeatureCopy = { title: string; description: string };
@@ -135,6 +157,11 @@ const FEATURE_COPY: Partial<Record<Locale, FeatureCopy[]>> = {
     { title: "Precisión robotizada", description: "La soldadura automatizada ABB y las líneas CNC mantienen las tolerancias exigidas por proyectos de exportación." },
     { title: "Respaldo de un grupo cotizado", description: "Una matriz cotizada en Shanghái (605268) respalda cada contrato y garantía." },
   ],
+  pt: [
+    { title: "Integração vertical", description: "Estampagem, revestimento, injeção e montagem sob o mesmo teto para controlar qualidade e prazos." },
+    { title: "Precisão robotizada", description: "Soldagem automatizada ABB e linhas CNC mantêm as tolerâncias exigidas por projetos de exportação." },
+    { title: "Respaldo de um grupo listado", description: "Uma controladora listada em Xangai (605268) respalda cada contrato e garantia." },
+  ],
 };
 
 const TIMELINE_COPY: Partial<Record<Locale, string[]>> = {
@@ -149,6 +176,9 @@ const TIMELINE_COPY: Partial<Record<Locale, string[]>> = {
   ],
   es: [
     "Fundación de la marca en Yongkang, Zhejiang.", "Victoria en el reto del campeón de ganzuado; la cerradura sigue sin abrirse más de 20 años después.", "Reconocida como marca china de prestigio, con la única doble certificación del sector.", "Puesta en marcha de SAP e inicio de la transformación digital.", "Salida a bolsa en Shanghái (605268), única empresa del sector en el mercado principal.", "Apertura de la única fábrica del futuro 5G de nivel nacional del sector.", "Trigésimo aniversario y nueva etapa: WONLY lanza su estrategia global de seguridad inteligente prémium.",
+  ],
+  pt: [
+    "Fundação da marca em Yongkang, Zhejiang.", "Vitória no desafio do campeão de abertura de fechaduras; a fechadura permanece inviolada há mais de 20 anos.", "Reconhecida como marca chinesa de prestígio, com a única dupla certificação do setor.", "Implantação do SAP e início da transformação digital.", "Listagem na Bolsa de Xangai (605268), única empresa do setor no mercado principal.", "Abertura da única fábrica do futuro 5G de nível nacional do setor.", "Trigésimo aniversário e nova etapa: a WONLY lança sua estratégia global de segurança inteligente premium.",
   ],
 };
 
@@ -165,6 +195,9 @@ const STAT_CARD_COPY: Partial<Record<Locale, StatCardCopy[]>> = {
   ],
   es: [
     {value:"30 años",label:"Desde 1996 · Yongkang",description:"Tres décadas de fabricación continua y verticalmente integrada desde nuestra fundación en Yongkang, Zhejiang."},{value:"Cotizada",label:"Bolsa de Shanghái 605268",description:"Primera empresa cotizada del sector en la Bolsa de Shanghái desde 2021."},{value:"N.º 1",label:"Puertas y cerraduras inteligentes · 2024–2025",description:"Líder nacional en ventas de puertas y cerraduras inteligentes durante dos años consecutivos."},{value:"5",label:"Bases de producción",description:"Cinco bases de producción verticalmente integradas en China."},{value:"6",label:"Centros de I+D",description:"Seis centros impulsan la innovación continua de productos."},{value:"1.000+",label:"Patentes",description:"Más de mil patentes propias de seguridad y cerraduras inteligentes."},{value:"200 M+",label:"Usuarios protegidos",description:"Más de 200 millones de usuarios protegidos en todo el mundo."}
+  ]
+  ,pt: [
+    {value:"30 anos",label:"Desde 1996 · Yongkang",description:"Três décadas de fabricação contínua e verticalmente integrada desde nossa fundação em Yongkang, Zhejiang."},{value:"Listada",label:"Bolsa de Xangai 605268",description:"Primeira empresa listada do setor na Bolsa de Xangai desde 2021."},{value:"N.º 1",label:"Portas e fechaduras inteligentes · 2024–2025",description:"Líder nacional em vendas de portas e fechaduras inteligentes por dois anos consecutivos."},{value:"5",label:"Bases de produção",description:"Cinco bases de produção verticalmente integradas na China."},{value:"6",label:"Centros de P&D",description:"Seis centros impulsionam a inovação contínua de produtos."},{value:"1.000+",label:"Patentes",description:"Mais de mil patentes próprias em segurança e fechaduras inteligentes."},{value:"200 M+",label:"Usuários protegidos",description:"Mais de 200 milhões de usuários protegidos em todo o mundo."}
   ]
 };
 

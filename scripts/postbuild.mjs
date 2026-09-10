@@ -33,7 +33,7 @@ copyFileSync('public/sitemap.xml', 'dist/sitemap.xml');
 
 const SITE = 'https://www.wonlyglobal.com';
 const ARTICLE_DIR = 'content/articles';
-const LOCALES = ['en', 'ar', 'fr', 'ru', 'es'];
+const LOCALES = ['en', 'ar', 'fr', 'ru', 'es', 'pt'];
 const RTL = new Set(['ar']);
 const TODAY = new Date().toISOString().slice(0, 10);
 const shell = readFileSync(src, 'utf8');

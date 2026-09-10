@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown, X, Check, Globe, Menu } from "lucide-react";
 import { create } from "zustand";
 import { getJourneySession, serializeInquiryJourney, trackFormEvent, trackLead, trackQuoteOpen } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
-import { LANGUAGES, pathForLocale, useLocale } from "@/lib/i18n";
+import { LANGUAGES, localeFromPath, pathForLocale, useLocale } from "@/lib/i18n";
 import { useCmsSetting } from "@/lib/cms-site-settings";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
@@ -66,8 +66,18 @@ const NAV: NavItem[] = SITE_NAV_DATA.nav.map((n) => ({
   children: n.children?.map(mapChild),
 }));
 
+const productMenuText = (locale: string, label: string, t: (text: string) => string) => {
+  if (locale !== "pt") return t(label);
+  return ({
+    Custom: "Personalizadas",
+    Minimalist: "Minimalistas",
+    "Solid Wood": "Madeira maciça",
+    "Aluminum Alloy": "Liga de alumínio",
+  } as Record<string, string>)[label] || t(label);
+};
+
 export function ProductMegaMenu({ className = "" }: { className?: string }) {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const children = NAV.find((item) => item.label === "Product")?.children || [];
   const compactLabels = new Set(["Smart Window", "Whole-House Intelligence"]);
   const primaryChildren = children.filter((child) => !compactLabels.has(child.label));
@@ -84,10 +94,10 @@ export function ProductMegaMenu({ className = "" }: { className?: string }) {
         {c.children.map((sc) => <div key={sc.label} className={sc.children ? "rounded-lg bg-white/55 p-1" : ""}>
           <Link to={sc.href} className={sc.children ? "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] font-light hover:bg-black/[0.04] transition-colors" : "block px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap"} style={{ color: sc.children ? DARK : MUTED }}>
             {sc.img && <span className="w-12 h-12 rounded-lg shrink-0 overflow-hidden flex items-center justify-center bg-white border border-black/[0.04]"><img src={sc.img} alt="" loading="lazy" className={`w-full h-full object-contain ${sc.label === "Metal Door" ? "scale-[2.2]" : sc.label === "Wooden Door" ? "scale-[2.4]" : ""}`} /></span>}
-            <span className="leading-tight whitespace-nowrap flex-1">{t(sc.label)}</span>
+            <span className="leading-tight whitespace-nowrap flex-1">{productMenuText(locale, sc.label, t)}</span>
             {sc.children && <ChevronDown size={12} style={{ color: MUTED }} />}
           </Link>
-          {sc.children && <div className="grid grid-cols-2 gap-x-1 px-1 pb-1">{sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{model.label}</Link>)}</div>}
+          {sc.children && <div className="grid grid-cols-2 gap-x-1 px-1 pb-1">{sc.children.map((model) => <Link key={model.href} to={model.href} className="px-2.5 py-1.5 rounded-md text-[12px] font-light hover:bg-black/[0.04] transition-colors whitespace-nowrap" style={{ color: MUTED }}>{productMenuText(locale, model.label, t)}</Link>)}</div>}
         </div>)}
       </div>}
       {compactForColumn(c.label).length > 0 && <div className="grid grid-cols-1 gap-2 px-2 pb-2">
@@ -293,7 +303,7 @@ export function QuoteModal() {
 /* Sticky header — transparent over a dark hero, frosted once scrolled */
 export function MobileNavigation({ onQuote, solid = false }: { onQuote: () => void; solid?: boolean }) {
   const [open, setOpen] = useState(false);
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
 
   useEffect(() => {
     if (!open) return;
@@ -322,9 +332,9 @@ export function MobileNavigation({ onQuote, solid = false }: { onQuote: () => vo
               <Link to={child.href} onClick={close} className="block py-1.5 text-[15px] font-medium">{t(child.label)}</Link>
               {child.children && <div className="pl-4 grid grid-cols-2 gap-x-3">
                 {child.children.map((grandchild) => <div key={grandchild.label} className="py-1">
-                  <Link to={grandchild.href} onClick={close} className="block py-1 text-[13px]" style={{ color: MUTED }}>{t(grandchild.label)}</Link>
+                  <Link to={grandchild.href} onClick={close} className="block py-1 text-[13px]" style={{ color: MUTED }}>{productMenuText(locale, grandchild.label, t)}</Link>
                   {grandchild.children && <div className="pl-3">
-                    {grandchild.children.map((model) => <Link key={model.href} to={model.href} onClick={close} className="block py-1 text-[12px]" style={{ color: MUTED }}>{model.label}</Link>)}
+                    {grandchild.children.map((model) => <Link key={model.href} to={model.href} onClick={close} className="block py-1 text-[12px]" style={{ color: MUTED }}>{productMenuText(locale, model.label, t)}</Link>)}
                   </div>}
                 </div>)}
               </div>}
@@ -424,14 +434,15 @@ export function SiteHeader() {
 /* Closing CTA band shared by subpages */
 export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready To Open Your Market?", sub = "Tell us about your project or territory — our team replies within 24 hours.", subject }: { eyebrowText?: string; title?: string; sub?: string; subject?: string }) {
   const openQuote = useQuoteStore((s) => s.openQuote);
+  const { t } = useLocale();
   return (
     <section className="px-[7vw] py-24 md:py-32 text-center" style={{ background: DARK }}>
       <Reveal className="max-w-3xl mx-auto">
-        <div className={eyebrow} style={{ color: CHAMP }}>{eyebrowText}</div>
-        <h2 className="mt-5 font-light leading-[1.1] text-[32px] md:text-[56px] text-white">{title}</h2>
-        <p className="mt-6 max-w-xl mx-auto text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>{sub}</p>
+        <div className={eyebrow} style={{ color: CHAMP }}>{t(eyebrowText)}</div>
+        <h2 className="mt-5 font-light leading-[1.1] text-[32px] md:text-[56px] text-white">{t(title)}</h2>
+        <p className="mt-6 max-w-xl mx-auto text-base font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.7)" }}>{t(sub)}</p>
         <button onClick={() => openQuote(subject ? { subject } : undefined)} className="mt-9 inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.03]" style={{ background: GOLD, color: DARK }}>
-          Get Solutions &amp; Quote <ArrowRight size={15} />
+          {t("Get Solutions & Quote")} <ArrowRight size={15} />
         </button>
       </Reveal>
     </section>
@@ -443,14 +454,37 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
 const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = SITE_NAV_DATA.footer;
 
 export function SiteFooter() {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
+  const footerLocale = typeof window === "undefined" ? locale : localeFromPath(window.location.pathname);
+  const ptFooter: Record<string, string> = {
+    Product: "Produtos",
+    Door: "Portas",
+    "Metal Door": "Portas metálicas",
+    "Smart Door": "Portas inteligentes",
+    "Wooden Door": "Portas de madeira",
+    "Smart Lock": "Fechaduras inteligentes",
+    "Smart Window": "Janelas inteligentes",
+    "Whole-House Intelligence": "Casa inteligente",
+    Advantages: "Vantagens",
+    "Why Wonly Door": "Por que escolher as portas WONLY",
+    "Why Wonly Lock": "Por que escolher as fechaduras WONLY",
+    "Innovation & Certifications": "Inovação e certificações",
+    Company: "Empresa",
+    "Manufacturing & R&D": "Fabricação e P&D",
+    "Global Strategy": "Presença global",
+    Partnership: "Parcerias",
+    "News & Insights": "Notícias e insights",
+    Contact: "Contato",
+    "Get in Touch": "Entre em contato",
+  };
+  const footerText = (text: string) => footerLocale === "pt" ? (ptFooter[text] || t(text)) : t(text);
   return (
     <footer className="pt-16 pb-10" style={{ background: "#1a1718" }}>
       <div className="max-w-[1400px] mx-auto px-[5vw] md:px-[6vw]">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
             <img src={LOGO} alt="WONLY" className="h-6 w-auto" />
-            <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>Global Smart-Security Ecosystem Leader. SSE: 605268.</p>
+            <p className="mt-4 text-xs font-normal leading-relaxed" style={{ color: "rgba(245,241,234,0.5)" }}>{t("Global Smart-Security Ecosystem Leader. SSE: 605268.")}</p>
             <div className="mt-5 flex items-center gap-2.5">
               <a href="https://www.tiktok.com/@wonlyglobal" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 grid place-items-center rounded-full border border-white/15 text-white/60 hover:text-white hover:border-white/40 transition-colors">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-[17px] h-[17px]"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.6c.27 0 .53.04.78.12V9.66a5.7 5.7 0 0 0-.78-.05 5.7 5.7 0 1 0 5.7 5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.26-1.48z"/></svg>
@@ -465,7 +499,7 @@ export function SiteFooter() {
           </div>
           {FOOTER.map((col) => (
             <div key={col.h}>
-              <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{t(col.h)}</h4>
+              <h4 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: CHAMP }}>{footerText(col.h)}</h4>
               <ul className="space-y-2.5">
                 {col.links.map((item) => {
                   const cls = "text-xs font-light transition-colors hover:text-white";
@@ -474,9 +508,9 @@ export function SiteFooter() {
                     <li key={item.l}>
                       {item.href
                         ? (/^(mailto:|tel:|https?:)/.test(item.href)
-                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{t(item.l)}</a>
-                            : <Link to={item.href} className={cls} style={style}>{t(item.l)}</Link>)
-                        : <span className="text-xs font-light" style={style}>{t(item.l)}</span>}
+                            ? <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className={cls} style={style}>{footerText(item.l)}</a>
+                            : <Link to={item.href} className={cls} style={style}>{footerText(item.l)}</Link>)
+                        : <span className="text-xs font-light" style={style}>{footerText(item.l)}</span>}
                     </li>
                   );
                 })}
@@ -490,7 +524,7 @@ export function SiteFooter() {
             <span style={{ color: "rgba(245,241,234,0.25)" }}>·</span>
             <Link to="/terms" className="transition-colors hover:text-white" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Terms of Service")}</Link>
           </div>
-          © WONLY · SSE 605268 · Global Smart-Security Ecosystem Leader
+          © WONLY · SSE 605268 · {t("Global Smart-Security Ecosystem Leader")}
         </div>
       </div>
     </footer>
