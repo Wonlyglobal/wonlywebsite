@@ -93,6 +93,42 @@ function replaceTag(html, pattern, replacement) {
   return pattern.test(html) ? html.replace(pattern, replacement) : html;
 }
 
+// The production pipeline packages the Vite build without running Chromium.
+// Articles already get static HTML below; give every Portuguese core route an
+// equivalent crawler-facing shell so it never falls back to the English home
+// canonical before React boots.
+function renderPortugueseCorePages() {
+  const seoSource = readFileSync('src/lib/seo-locales.ts', 'utf8');
+  const ptBlock = seoSource.match(/\n\s*pt:\s*\{([\s\S]*?)\n\s*\},\n\};/)?.[1];
+  if (!ptBlock) throw new Error('postbuild: Portuguese SEO map not found');
+  const entries = [...ptBlock.matchAll(/"([^"]+)":\s*\{\s*title:\s*"([^"]+)",\s*description:\s*"([^"]+)"\s*\}/g)];
+  if (entries.length !== 20) throw new Error(`postbuild: expected 20 Portuguese core SEO entries, found ${entries.length}`);
+
+  for (const [, baseRoute, title, description] of entries) {
+    const normalizedBase = baseRoute === '/' ? '/' : `${baseRoute}/`;
+    const route = baseRoute === '/' ? '/pt/' : `/pt${normalizedBase}`;
+    const canonical = `${SITE}${route}`;
+    const alternates = [
+      ...LOCALES.map((locale) => `<link rel="alternate" hreflang="${locale}" href="${SITE}${locale === 'en' ? normalizedBase : `/${locale}${normalizedBase}`}" />`),
+      `<link rel="alternate" hreflang="x-default" href="${SITE}${normalizedBase}" />`,
+    ].join('\n');
+    let html = shell
+      .replace(/<html\b[^>]*>/i, '<html lang="pt" dir="ltr">')
+      .replace(/<link\s+rel="alternate"[^>]*>\s*/gi, '')
+      .replace('</head>', `${alternates}\n</head>`);
+    html = replaceTag(html, /<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+    html = replaceTag(html, /<meta\s+name="description"[^>]*>/i, `<meta name="description" content="${escapeHtml(description)}" />`);
+    html = replaceTag(html, /<link\s+rel="canonical"[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
+    html = replaceTag(html, /<meta\s+property="og:title"[^>]*>/i, `<meta property="og:title" content="${escapeHtml(title)}" />`);
+    html = replaceTag(html, /<meta\s+property="og:description"[^>]*>/i, `<meta property="og:description" content="${escapeHtml(description)}" />`);
+    html = replaceTag(html, /<meta\s+property="og:url"[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
+    const output = path.join('dist', route.replace(/^\//, ''), 'index.html');
+    mkdirSync(path.dirname(output), { recursive: true });
+    writeFileSync(output, html, 'utf8');
+  }
+  console.log(`postbuild: generated ${entries.length} Portuguese core route shells`);
+}
+
 function renderArticle(article, locale) {
   const { meta } = article;
   const prefix = locale === 'en' ? '' : `/${locale}`;
@@ -151,3 +187,4 @@ for (const locale of LOCALES) {
 }
 
 console.log(`postbuild: generated ${rendered} scheduled article HTML files through ${TODAY}`);
+renderPortugueseCorePages();
