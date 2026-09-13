@@ -38,7 +38,12 @@ for (const route of staticRoutes) {
   if (!seenPaths.has(route)) warnings.push(`${route}: route has no CMS TDK entry`);
 }
 
-const today = new Date().toISOString().slice(0, 10);
+const today = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
 for (const file of fs.readdirSync("content/articles").filter((name) => name.endsWith(".md"))) {
   const source = fs.readFileSync(path.join("content/articles", file), "utf8");
   const field = (name) => source.match(new RegExp(`^${name}:\\s*"?([^"\\n]+)"?$`, "m"))?.[1]?.trim() || "";

@@ -10,7 +10,12 @@ const CONTENT_DIR = "content/articles";
 const SITEMAP = "public/sitemap.xml";
 const LOCALES = ["en", "ar", "fr", "ru", "es", "pt"];
 const ARTICLE_LOCALES = ["en", "ar", "fr", "ru", "es", "pt"];
-const today = new Date().toISOString().slice(0, 10);
+const today = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
 
 const routes = [
   ["/", "2026-08-11", "weekly", "1.0"],

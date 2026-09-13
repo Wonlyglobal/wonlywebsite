@@ -35,7 +35,12 @@ const SITE = 'https://www.wonlyglobal.com';
 const ARTICLE_DIR = 'content/articles';
 const LOCALES = ['en', 'ar', 'fr', 'ru', 'es', 'pt'];
 const RTL = new Set(['ar']);
-const TODAY = new Date().toISOString().slice(0, 10);
+const TODAY = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
 const shell = readFileSync(src, 'utf8');
 
 const escapeHtml = (value = '') => String(value)
