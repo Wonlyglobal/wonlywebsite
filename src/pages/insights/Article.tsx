@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, Reveal, GOLD, GOLD_DEEP, DARK, MUTED, CHAMP_BG } from "@/lib/site-ui";
@@ -7,6 +7,31 @@ import { cmsSupabase } from "@/cms/supabase";
 import { useLocale, type Locale } from "@/lib/i18n";
 import { ChevronRight, ArrowRight } from "lucide-react";
 const UI:Partial<Record<Locale,Record<string,string>>>={ar:{home:"الرئيسية",insights:"الأخبار والرؤى",min:"دقائق قراءة",more:"المزيد من الأخبار والرؤى",read:"اقرأ"},fr:{home:"Accueil",insights:"Actualités et conseils",min:"min de lecture",more:"Plus d’actualités et de conseils",read:"Lire"},ru:{home:"Главная",insights:"Новости и аналитика",min:"мин чтения",more:"Другие материалы",read:"Читать"},es:{home:"Inicio",insights:"Noticias y análisis",min:"min de lectura",more:"Más noticias y análisis",read:"Leer"},pt:{home:"Início",insights:"Notícias e insights",min:"min de leitura",more:"Mais notícias e insights",read:"Ler"}};
+
+const renderInline = (text: string): ReactNode[] => {
+  const nodes: ReactNode[] = [];
+  const token = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  let cursor = 0;
+  for (const match of text.matchAll(token)) {
+    const index = match.index ?? 0;
+    if (index > cursor) nodes.push(text.slice(cursor, index));
+    const value = match[0];
+    const link = value.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (link) {
+      const [, label, href] = link;
+      nodes.push(href.startsWith("/")
+        ? <Link key={`${index}-${href}`} to={href} className="underline underline-offset-2 hover:no-underline">{label}</Link>
+        : <a key={`${index}-${href}`} href={href} className="underline underline-offset-2 hover:no-underline" rel="noopener noreferrer">{label}</a>);
+    } else if (value.startsWith("**")) {
+      nodes.push(<strong key={index} className="font-semibold">{value.slice(2, -2)}</strong>);
+    } else {
+      nodes.push(<em key={index}>{value.slice(1, -1)}</em>);
+    }
+    cursor = index + value.length;
+  }
+  if (cursor < text.length) nodes.push(text.slice(cursor));
+  return nodes;
+};
 
 const ArticlePage = () => {
   const {locale}=useLocale();const ui=UI[locale];const tr=(k:string,f:string)=>ui?.[k]??f;
@@ -100,12 +125,12 @@ const ArticlePage = () => {
                   {b.items.map((it, j) => (
                     <li key={j} className="flex gap-3 text-[16px] leading-relaxed" style={{ color: "#3a3632" }}>
                       <span className="mt-2.5 h-1.5 w-1.5 rounded-full flex-none" style={{ background: GOLD }} />
-                      <span>{it}</span>
+                      <span>{renderInline(it)}</span>
                     </li>
                   ))}
                 </ul>
               );
-            return <p key={i} className="my-4 text-[16px] leading-[1.8]" style={{ color: "#3a3632" }}>{b.text}</p>;
+            return <p key={i} className="my-4 text-[16px] leading-[1.8]" style={{ color: "#3a3632" }}>{renderInline(b.text)}</p>;
           })}
 
           {/* Keyword chips */}

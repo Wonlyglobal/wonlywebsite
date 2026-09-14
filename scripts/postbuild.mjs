@@ -50,6 +50,30 @@ const escapeHtml = (value = '') => String(value)
   .replace(/"/g, '&quot;')
   .replace(/'/g, '&#39;');
 
+const renderInline = (value = '') => {
+  const text = String(value);
+  const token = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  let html = '';
+  let cursor = 0;
+  for (const match of text.matchAll(token)) {
+    const index = match.index ?? 0;
+    html += escapeHtml(text.slice(cursor, index));
+    const part = match[0];
+    const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (link) {
+      const [, label, href] = link;
+      const safeHref = /^(?:\/|https?:\/\/)/.test(href) ? href : '#';
+      html += `<a href="${escapeHtml(safeHref)}">${escapeHtml(label)}</a>`;
+    } else if (part.startsWith('**')) {
+      html += `<strong>${escapeHtml(part.slice(2, -2))}</strong>`;
+    } else {
+      html += `<em>${escapeHtml(part.slice(1, -1))}</em>`;
+    }
+    cursor = index + part.length;
+  }
+  return html + escapeHtml(text.slice(cursor));
+};
+
 const unquote = (value = '') => {
   const trimmed = value.trim();
   return trimmed.startsWith('"') && trimmed.endsWith('"')
@@ -74,7 +98,7 @@ function articleBody(article) {
   let list = [];
   const flush = () => {
     if (!list.length) return;
-    blocks.push(`<ul>${list.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`);
+    blocks.push(`<ul>${list.map((item) => `<li>${renderInline(item)}</li>`).join('')}</ul>`);
     list = [];
   };
   for (const rawLine of article.body.split(/\r?\n/)) {
@@ -87,7 +111,7 @@ function articleBody(article) {
       list.push(line.replace(/^[-*]\s+/, ''));
     } else {
       flush();
-      blocks.push(`<p>${escapeHtml(line)}</p>`);
+      blocks.push(`<p>${renderInline(line)}</p>`);
     }
   }
   flush();
