@@ -40,7 +40,7 @@ A 2D system matches a flat camera image — and a flat image is exactly what a p
 
 ## How WONLY Implements It
 
-WONLY smart locks and the X70 robotic door use 3D face recognition with anti-spoofing, sub-second matching from up to 1.5 m, layered with fingerprint, palm-vein, RFID, PIN and app access, local encrypted storage, pry and tamper alarms, and 200,000+ cycle-tested hardware — engineered as the certified doorset's access layer, not a bolt-on gadget.
+WONLY smart locks and the X70 robotic door use 3D face recognition with anti-spoofing, sub-second matching from up to 1.5 m, layered with fingerprint, palm-vein, RFID, PIN and app access, local encrypted storage, pry and tamper alarms, and 200,000+ cycle-tested hardware — engineered as the certified doorset's access layer, not a bolt-on gadget. Project teams can review the wider [smart door manufacturer integration scope](/smart-door-manufacturer) for door structure, sensing, power and service responsibilities.
 
 ## FAQ
 

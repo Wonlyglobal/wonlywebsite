@@ -19,6 +19,8 @@ keywords:
 
 An OEM/ODM smart lock programme combines mechanical hardware, electronics, firmware, credentials, mobile software, cloud services, packaging and after-sales support. Buyers should approve the complete operating system, not only the appearance of a sample.
 
+Start with the [WONLY smart lock OEM/ODM programme overview](/smart-lock-oem-odm) to define the target segment, door compatibility, credential mix, branding, compliance and service scope before sampling.
+
 ## Define OEM and ODM Scope
 
 - Record which existing platform, housing and lock body will be used

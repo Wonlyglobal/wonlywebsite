@@ -19,6 +19,8 @@ keywords:
 
 Nobody reviews a smart lock for the 9,999 times it opened correctly — they review the one morning it didn't. Reliability is the entire product, and it comes down to three engineering questions: how the lock is powered, what happens as power fades, and how the mechanism wears.
 
+For a private-label range, these checks should become part of the approved sample and test plan in the [WONLY smart lock OEM/ODM programme](/smart-lock-oem-odm).
+
 ## Battery Life: Read the Assumptions
 
 Spec-sheet battery life assumes a set number of unlocks per day at room temperature; heavy-traffic doors, face-recognition wake-ups and cold climates all shorten it. Ask for the assumption behind the number, then expect real life at 60–70% of it. What matters more than the headline months is the warning system: staged low-battery alerts on the lock and in the app, weeks before failure.

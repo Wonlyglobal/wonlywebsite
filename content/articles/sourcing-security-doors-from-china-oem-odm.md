@@ -19,6 +19,8 @@ keywords:
 
 China manufactures most of the world's security doors, which means the sourcing question is never “whether” but “which factory, on what terms”. The gap between a good and bad Chinese supplier is enormous — and almost entirely detectable before you pay a deposit, if you know what to check.
 
+Buyers preparing an RFQ can first review WONLY's [security door manufacturer and OEM capabilities](/security-door-manufacturer) to structure quantities, performance targets, finishes, hardware and delivery requirements.
+
 ## Factory vs Trader: The First Filter
 
 - Ask for the manufacturing licence and the factory address — then verify they match the company you're paying

@@ -19,6 +19,8 @@ keywords:
 
 A smart door is a coordinated entrance system, not a conventional door with a connected lock added at the end. Door structure, locking, power, sensors, controls, software and installation must work together through normal use, power loss, network interruption and emergency conditions. Buyers should define these interfaces before selecting a smart door manufacturer.
 
+WONLY's [smart door manufacturer overview](/smart-door-manufacturer) provides the corresponding project brief for door construction, access methods, power, connectivity, safety and after-sales responsibility.
+
 ## Freeze the Use Case First
 
 - Identify villa, apartment, hotel, office or mixed-use applications

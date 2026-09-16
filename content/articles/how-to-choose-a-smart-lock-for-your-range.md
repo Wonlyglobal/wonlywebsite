@@ -18,6 +18,8 @@ keywords:
 
 A smart lock is often the first smart-home product a customer buys, so it shapes their impression of your whole range. Choosing the right models means looking past the feature list to how the lock performs day after day. Here is the checklist our partners use.
 
+Private-label buyers can pair this checklist with WONLY's [smart lock OEM/ODM manufacturing programme](/smart-lock-oem-odm) to define compatibility, branding, compliance and production support.
+
 ## Access Methods Buyers Expect
 
 The best-selling locks give users several ways in, plus a reliable backup.

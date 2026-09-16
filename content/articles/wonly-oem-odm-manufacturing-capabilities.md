@@ -18,6 +18,8 @@ keywords:
 
 Behind every WONLY door and lock is a vertically integrated manufacturing base built for scale and consistency. For partners choosing a long-term supplier, here is what that means in practice.
 
+Explore the detailed procurement paths for [security door manufacturing](/security-door-manufacturer), [integrated smart door manufacturing](/smart-door-manufacturer) and [smart lock OEM/ODM](/smart-lock-oem-odm) before preparing a project or private-label brief.
+
 ## Scale You Can Rely On
 
 With multiple manufacturing bases and robotic production lines, WONLY produces millions of steel doors, wooden doors and smart locks each year. That capacity keeps lead times predictable and lets us support project-scale orders without quality drift.

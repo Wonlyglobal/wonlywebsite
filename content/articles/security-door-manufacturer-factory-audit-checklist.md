@@ -19,6 +19,8 @@ keywords:
 
 A polished catalogue does not prove that a factory can repeat the same doorset across hundreds of openings. Project buyers need evidence that links the approved sample to incoming materials, production controls, testing, packing and delivery. This checklist helps procurement teams compare security door manufacturers on verifiable capability rather than presentation alone.
 
+Use the checklist alongside WONLY's [security door manufacturer capability overview](/security-door-manufacturer), which maps the information needed for project specification, OEM review and export delivery.
+
 ## Confirm the Manufacturer and Project Scope
 
 - Verify the legal company name, factory address and whether production is owned, subcontracted or mixed

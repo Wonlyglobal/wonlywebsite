@@ -19,6 +19,8 @@ keywords:
 
 A smart lock that doesn't talk to the alarm, a camera that doesn't know the door opened, a gas sensor that alerts a phone nobody checks — standalone gadgets create notification noise, not security. The real product is the ecosystem: devices that share context and act together, with the entrance door as its first and most important node.
 
+For project teams specifying that entrance as a coordinated system, the [WONLY smart door manufacturer guide](/smart-door-manufacturer) defines the door, lock, sensing, power and service interfaces that should be agreed before procurement.
+
 ## Why the Door Is the Hub Moment
 
 Almost every meaningful home event passes the entrance: arrivals, departures, deliveries, attempted intrusions. An intelligent door — identity-aware through 3D face and fingerprint unlock, monitored by a frame camera, always powered — is the natural trigger for everything else: disarm on recognised entry, arm on departure, lights and climate to home mode, alerts when the door reports tampering.
