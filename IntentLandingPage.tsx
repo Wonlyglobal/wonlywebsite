@@ -4,6 +4,9 @@ import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, Reveal, GOLD, GOLD_DEEP, DARK, MUTED, CHAMP_BG, eyebrow, h2cls } from "@/lib/site-ui";
 
 type PageKey =
+  | "security-door-manufacturer"
+  | "smart-door-manufacturer"
+  | "smart-lock-oem-odm"
   | "cast-aluminium-security-doors"
   | "fire-rated-security-doors"
   | "hotel-security-doors"
@@ -29,6 +32,66 @@ type PageData = {
 };
 
 const PAGES: Record<PageKey, PageData> = {
+  "security-door-manufacturer": {
+    path: "/security-door-manufacturer",
+    title: "Security Door Manufacturer & OEM Supplier | WONLY",
+    description: "Source steel, cast-aluminium and fire-rated security doors from WONLY for distribution, residential and commercial projects with OEM/ODM support.",
+    eyebrow: "Manufacturer & OEM",
+    h1: "Security Door Manufacturer for Global Projects",
+    lead: "Work directly with a security door manufacturer covering engineered doorsets, custom finishes, smart-lock integration, project documentation and export delivery.",
+    image: "/images/factory-2.webp",
+    audience: "For distributors, developers, contractors, architects and private-label brands",
+    overviewTitle: "A Manufacturing Partner From Specification to Delivery",
+    overview: [
+      "WONLY manufactures security doors for residential, hospitality, commercial and institutional projects. The range covers steel and cast-aluminium entrance doors, fire-rated configurations, smart doors and coordinated lock options.",
+      "For project and OEM enquiries, the useful starting point is a complete brief: destination market, opening schedule, quantity, performance target, finish, hardware and delivery plan. Our team then identifies the applicable configuration and evidence instead of offering an unverified generic claim.",
+    ],
+    requirements: [
+      ["Door schedule", "Provide quantities, finished openings, handing, wall conditions and required delivery batches."],
+      ["Security target", "Define the required anti-burglary performance, locking points and evidence for the destination market."],
+      ["Fire and acoustic needs", "State the applicable standard, rated duration and acoustic target for the complete doorset."],
+      ["Finish and branding", "Confirm colour, surface, handle, packaging and private-label requirements before sampling."],
+      ["Smart-lock integration", "Coordinate cut-outs, wiring, credentials, backup access and commissioning responsibility early."],
+      ["Export delivery", "Align documentation, inspection, packaging, Incoterm, port and site receiving constraints."],
+    ],
+    process: [["01", "Send the market, opening schedule, quantity and performance requirements."], ["02", "Review the proposed doorset, drawings, compliance scope and commercial options."], ["03", "Approve samples, finishes and a reference specification before batch production."], ["04", "Inspect, package and deliver with installation and handover documentation."]],
+    faq: [["Does WONLY support OEM and private-label security doors?", "Yes. Branding, finish, configuration and packaging can be reviewed against production, certification and minimum-order requirements."], ["Which security door types can be supplied?", "The portfolio includes steel and cast-aluminium security doors, smart doors, fire-rated project doors and application-specific entrance solutions."], ["What is needed for a project quotation?", "Send destination, quantities, opening sizes, performance targets, finish, lock and delivery schedule so the correct configuration can be assessed."]],
+    related: [["Security Door Range", "/products/security-doors"], ["Fire-Rated Security Doors", "/products/security-doors/fire-rated"], ["OEM / ODM Partnership", "/partnership"]],
+  },
+  "smart-door-manufacturer": {
+    path: "/smart-door-manufacturer",
+    title: "Smart Door Manufacturer for Projects & Distribution | WONLY",
+    description: "Source integrated smart doors with biometric entry, sensing, automatic opening and project engineering from WONLY, a global smart door manufacturer.",
+    eyebrow: "Integrated Smart Entry",
+    h1: "Smart Door Manufacturer for Connected Entrances",
+    lead: "Specify the door, lock, sensors, power, emergency access and whole-home connectivity as one coordinated entrance system.",
+    image: "/images/catalog-2026/x50.webp",
+    audience: "For smart-home brands, distributors, developers and premium residential projects",
+    overviewTitle: "Smart Entry Works Best as One Engineered System",
+    overview: ["A smart door is more than a conventional leaf fitted with an electronic lock. Structure, sensing distance, motorised opening, anti-pinch protection, power backup, network behaviour and mechanical emergency access must work together.", "WONLY supports integrated product selection and OEM/ODM review across multiple smart-door levels, helping buyers match functionality, user experience and service responsibility to the intended market."],
+    requirements: [["User journey", "Define who enters, credential preferences, accessibility needs and expected hands-free behaviour."], ["Door construction", "Coordinate leaf weight, frame, hinges, threshold, seals and opening direction with automation."], ["Access methods", "Select face, fingerprint, palm-vein, PIN, card, app and mechanical backup based on risk."], ["Power and connectivity", "Confirm mains supply, batteries, backup operation, Wi-Fi or ecosystem integration."], ["Safety", "Review obstacle sensing, anti-pinch clearances, emergency release and manual operation."], ["Service model", "Agree commissioning, app ownership, software support, spare parts and local maintenance."],
+    ],
+    process: [["01", "Share the target market, entrance scenario, quantities and required smart functions."], ["02", "Select a platform and confirm the door, lock, sensor, power and integration boundary."], ["03", "Approve a working sample or reference unit, finish and user-flow tests."], ["04", "Plan batch production, commissioning materials, spares and after-sales handover."]],
+    faq: [["Can WONLY supply a complete smart door rather than only a lock?", "Yes. WONLY coordinates the physical doorset and smart-entry functions as one product platform."], ["Are OEM/ODM smart-door programmes available?", "OEM/ODM options can be reviewed for branding, finish, feature configuration, packaging and market requirements."], ["How is access retained during a power or network failure?", "The specified configuration should include documented battery, backup-power and mechanical emergency-access paths."]],
+    related: [["Smart Door 5.0", "/products/smart-doors/5-0"], ["Security Door Range", "/products/security-doors"], ["Whole-House Intelligence", "/products/whole-house"]],
+  },
+  "smart-lock-oem-odm": {
+    path: "/smart-lock-oem-odm",
+    title: "Smart Lock OEM & ODM Manufacturer | WONLY",
+    description: "Build a private-label fingerprint, face or palm-vein smart lock range with WONLY OEM/ODM engineering, sampling, production and export support.",
+    eyebrow: "Private Label Programme",
+    h1: "Smart Lock OEM & ODM Manufacturing",
+    lead: "Develop a market-ready smart-lock line with verified hardware, biometric options, branding, packaging and scalable production support.",
+    image: "/images/lock-s80.webp",
+    audience: "For lock brands, door manufacturers, distributors, developers and system integrators",
+    overviewTitle: "Define the Market Before Selecting the Lock",
+    overview: ["A reliable OEM/ODM programme starts with the door type, target price band, user flow, climate, credentials, connectivity and local service model—not a cosmetic logo change at the end.", "WONLY reviews product platform, mechanical compatibility, biometric functions, firmware scope, finish, packaging, compliance evidence and quality control before sampling and commercial release."],
+    requirements: [["Target segment", "Define residential, hospitality, project or retail use, target market and expected annual volume."], ["Door compatibility", "Provide door material, thickness, handing, mortise, backset and installation constraints."], ["Credential mix", "Choose fingerprint, face, palm vein, PIN, card, app and key backup for the actual users."], ["Brand package", "Confirm logo placement, colours, manuals, cartons, labels and market-facing language."], ["Compliance and privacy", "Identify radio, electrical, battery, biometric-data and market approval requirements."], ["Quality and service", "Agree samples, validation, inspection, spare parts, warranty boundary and technical support."],
+    ],
+    process: [["01", "Submit the market brief, door specification, functions, branding and volume forecast."], ["02", "Select the base platform and confirm engineering, compliance and commercial scope."], ["03", "Validate samples for fit, credentials, user flow, finish, packaging and reliability."], ["04", "Release production with inspection criteria, spare-parts plan and support documents."]],
+    faq: [["What can be customised in an OEM smart lock?", "Depending on the platform, options may include logo, colour, access methods, mortise preparation, packaging, manuals and selected software settings."], ["Can WONLY match a smart lock to an existing door range?", "Yes. Door thickness, preparation, mortise, handing, wiring and installation details must be reviewed before selection."], ["What information is needed to start?", "Share the target country, application, door specification, required functions, branding, forecast volume and desired launch date."]],
+    related: [["Smart Lock Range", "/products/smart-locks"], ["S80 Smart Lock", "/products/smart-locks/s80"], ["OEM / ODM Partnership", "/partnership"]],
+  },
   "cast-aluminium-security-doors": {
     path: "/products/security-doors/cast-aluminium",
     title: "Cast Aluminium Security Door Manufacturer & OEM | WONLY",

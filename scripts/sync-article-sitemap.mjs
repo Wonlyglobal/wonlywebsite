@@ -41,6 +41,9 @@ const routes = [
 ];
 
 const englishOnlyRoutes = [
+  ["/security-door-manufacturer/", "2026-09-07", "monthly", "0.9"],
+  ["/smart-door-manufacturer/", "2026-09-07", "monthly", "0.9"],
+  ["/smart-lock-oem-odm/", "2026-09-07", "monthly", "0.9"],
   ["/products/smart-locks/s80-max/", "2026-09-01", "monthly", "0.9"],
   ...["s60-max", "s60-pro", "s50-pro", "s58-pro", "p10-pro", "s922-max", "s936"].map((model) => [`/products/smart-locks/${model}/`, "2026-09-01", "monthly", "0.8"]),
   ...["1-0", "1-0-pro", "2-0", "3-0"].map((level) => [`/products/metal-doors/${level}/`, "2026-09-02", "monthly", "0.9"]),

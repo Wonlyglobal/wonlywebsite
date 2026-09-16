@@ -210,6 +210,9 @@ const App = () => (
           {/* High-intent English landing pages. They remain English-only until
               market-reviewed translations are available, so localized copies
               are not exposed to crawlers. */}
+          <Route path="/security-door-manufacturer" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="security-door-manufacturer" /></Suspense>} />
+          <Route path="/smart-door-manufacturer" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="smart-door-manufacturer" /></Suspense>} />
+          <Route path="/smart-lock-oem-odm" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="smart-lock-oem-odm" /></Suspense>} />
           <Route path="/products/security-doors/cast-aluminium" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="cast-aluminium-security-doors" /></Suspense>} />
           <Route path="/products/security-doors/fire-rated" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="fire-rated-security-doors" /></Suspense>} />
           <Route path="/solutions/hotel-security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="hotel-security-doors" /></Suspense>} />
@@ -225,9 +228,6 @@ const App = () => (
           <Route path="/product/smart-lock" element={<Navigate to="/products/smart-locks" replace />} />
           <Route path="/product/smart-window" element={<Navigate to="/products/smart-windows" replace />} />
           <Route path="/product/whole-house" element={<Navigate to="/products/whole-house" replace />} />
-          <Route path="/security-door-manufacturer" element={<Navigate to="/products/security-doors" replace />} />
-          <Route path="/smart-door-manufacturer" element={<Navigate to="/products/security-doors" replace />} />
-          <Route path="/smart-lock-oem-odm" element={<Navigate to="/products/smart-locks" replace />} />
           {/* Sections not yet built → placeholder (hash anchors resolve within them). */}
           <Route path="/advantages" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Advantages /></Suspense>} />
           <Route path="/manufacturing-rd" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Manufacturing /></Suspense>} />
