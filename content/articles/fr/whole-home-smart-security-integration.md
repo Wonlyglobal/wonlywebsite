@@ -7,7 +7,7 @@ category: "Technologie"
 date: "2026-09-16"
 dateLabel: "16 septembre 2026"
 readMins: 5
-cover: "images/interior-bg.jpg"
+cover: "images/articles/whole-home-smart-security-integration.webp"
 excerpt: "Une sécurité utile coordonne les appareils et conserve ses fonctions critiques même sans Internet."
 keywords:
   - "sécurité maison intelligente"
@@ -37,3 +37,7 @@ Arrivées, départs, livraisons et tentatives d'intrusion passent par l'entrée.
 - Couverture des risques pièce par pièce et politique de confidentialité claire.
 
 WONLY regroupe portes robotisées, serrures multibiométriques, fenêtres intelligentes et commande globale. Pour un projet, validez l'interopérabilité, la propriété des données, les scénarios hors ligne et la matrice de garantie sur un prototype installé.
+
+Découvrez la [gamme de serrures intelligentes](/fr/products/smart-locks/), la [plateforme d'intelligence pour toute la maison](/fr/product/whole-house) et l'[assistance aux projets internationaux](/fr/contact/) de WONLY.
+
+*Responsabilité éditoriale : équipe Projets internationaux WONLY. Relecture technique : ingénierie de la sécurité intelligente WONLY.*

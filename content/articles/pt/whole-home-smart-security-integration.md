@@ -7,7 +7,7 @@ category: "Tecnologia"
 date: "2026-09-16"
 dateLabel: "16 de Setembro de 2026"
 readMins: 5
-cover: "images/interior-bg.jpg"
+cover: "images/articles/whole-home-smart-security-integration.webp"
 excerpt: "Uma porta que conversa com os sensores, um alarme que sabe quem chegou em casa — por que a segurança inteligente integrada vence uma coleção de gadgets."
 keywords:
   - "sistema de segurança inteligente para casa"
@@ -43,3 +43,7 @@ A WONLY constrói toda a pilha — portas inteligentes robóticas, fechaduras mu
 ## Perguntas frequentes
 
 A segurança inteligente para toda a casa pode ser retrofitada? Sim — comece com a porta e as fechaduras, adicione sensores sem fio por cômodo; uma arquitetura baseada em hub evita a relocação de fiação.
+
+Explore o [portfólio de fechaduras inteligentes](/pt/products/smart-locks/), a [plataforma de inteligência residencial completa](/pt/product/whole-house) e o [suporte a projetos internacionais](/pt/contact/) da WONLY.
+
+*Responsabilidade editorial: equipe de Projetos Internacionais da WONLY. Revisão técnica: engenharia de segurança inteligente da WONLY.*
