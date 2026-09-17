@@ -36,6 +36,9 @@
 - `wonly-cms-webhook.service`：常驻Webhook投递worker。
 - `nginx-cms-api.conf`：七条固定HTTPS反代路径；不接受任意上游URL。
 - `env.example`：仅列变量名和占位符，不能把填入密钥的副本提交Git。
+- `install-cms-services`：由运维一次性安装到`/usr/local/sbin`的root只读安装器；只接受GitHub远端当前`main`的精确提交。
+
+选择自托管GitHub Runner自动部署时，首次接入、最小sudo授权、环境文件、Nginx include、审批与验收流程见`docs/cms-github-runner-ops.md`。生产工作流使用`cms-production` Environment，任何自动或手动运行都必须经过Required reviewer批准。
 
 恢复任务固定使用`pg_restore --single-transaction --exit-on-error`，任一步失败都必须由PostgreSQL回滚；发布健康检查必须在服务器环境映射中显式配置`health_origin`，不得以数据库中的地址自动建立允许来源。
 

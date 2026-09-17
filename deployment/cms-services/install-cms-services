@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Install a reviewed WONLY CMS checkout. This file must be copied once to
+# /usr/local/sbin by operations, owned by root and not writable by the runner.
+
+if [[ ${EUID} -ne 0 ]]; then
+  echo "run as root" >&2
+  exit 1
+fi
+
+source_dir=${1:-}
+revision=${2:-}
+[[ -d "$source_dir/.git" || -f "$source_dir/.git" ]] || { echo "invalid checkout" >&2; exit 1; }
+[[ "$revision" =~ ^[0-9a-f]{40}$ ]] || { echo "revision must be a full commit SHA" >&2; exit 1; }
+actual_revision=$(/usr/bin/git -C "$source_dir" rev-parse HEAD)
+[[ "$actual_revision" == "$revision" ]] || { echo "checkout does not match revision" >&2; exit 1; }
+/usr/bin/git -C "$source_dir" diff-index --quiet HEAD -- || { echo "checkout has tracked changes" >&2; exit 1; }
+[[ -z "$(/usr/bin/git -C "$source_dir" ls-files --others --exclude-standard)" ]] || { echo "checkout has untracked files" >&2; exit 1; }
+remote_main=$(/usr/bin/git ls-remote https://github.com/Wonlyglobal/wonlywebsite.git refs/heads/main | /usr/bin/awk '{print $1}')
+[[ "$remote_main" == "$revision" ]] || { echo "revision is not the current trusted main commit" >&2; exit 1; }
+
+install_root=/opt/wonly-cms
+release_dir="$install_root/releases/$revision"
+current_link="$install_root/current"
+state_dir=/var/lib/wonly-cms
+env_dir=/etc/wonly-cms
+nginx_snippet=/etc/nginx/snippets/wonly-cms-api.conf
+required_envs=(admin analytics health backup ai quality deploy publish-schedules webhook)
+api_services=(admin analytics health backup ai quality deploy)
+
+id wonly-cms >/dev/null 2>&1 || useradd --system --home-dir "$state_dir" --shell /usr/sbin/nologin wonly-cms
+install -d -o root -g root -m 0755 "$install_root" "$install_root/releases"
+install -d -o wonly-cms -g wonly-cms -m 0750 "$state_dir"
+install -d -o root -g wonly-cms -m 0750 "$env_dir"
+
+for name in "${required_envs[@]}"; do
+  file="$env_dir/$name.env"
+  [[ -s "$file" ]] || { echo "missing $file" >&2; exit 1; }
+  chown root:wonly-cms "$file"
+  chmod 0640 "$file"
+done
+
+if ! grep -RqsF 'include /etc/nginx/snippets/wonly-cms-api.conf;' /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null; then
+  echo "CMS Nginx snippet is not included inside the HTTPS cms.wonlyglobal.com server block" >&2
+  exit 1
+fi
+
+previous_target=$(readlink -f "$current_link" 2>/dev/null || true)
+nginx_backup=$(mktemp)
+nginx_existed=false
+if [[ -f "$nginx_snippet" ]]; then
+  cp -a "$nginx_snippet" "$nginx_backup"
+  nginx_existed=true
+fi
+rollback() {
+  status=$?
+  trap - EXIT
+  if [[ $status -ne 0 && -n "$previous_target" && -d "$previous_target" ]]; then
+    ln -sfn "$previous_target" "$current_link"
+    systemctl daemon-reload
+    for name in "${api_services[@]}"; do systemctl try-restart "wonly-cms@$name.service" || true; done
+    systemctl try-restart wonly-cms-webhook.service || true
+  fi
+  if [[ $status -ne 0 ]]; then
+    if [[ "$nginx_existed" == true ]]; then cp -a "$nginx_backup" "$nginx_snippet"; else rm -f "$nginx_snippet"; fi
+    nginx -t >/dev/null 2>&1 && systemctl reload nginx || true
+  fi
+  rm -f "$nginx_backup"
+  exit "$status"
+}
+trap rollback EXIT
+
+if [[ -d "$release_dir" && ! -f "$release_dir/.installed" ]]; then
+  rm -rf "$release_dir"
+fi
+if [[ ! -d "$release_dir" ]]; then
+  install -d -o wonly-cms -g wonly-cms -m 0750 "$release_dir"
+  /usr/bin/tar -C "$source_dir" --exclude=.git --exclude=node_modules --exclude=dist -cf - . | /usr/bin/tar -C "$release_dir" -xf -
+  chown -R wonly-cms:wonly-cms "$release_dir"
+  sudo -u wonly-cms /usr/bin/npm --prefix "$release_dir" ci --omit=dev --ignore-scripts
+  touch "$release_dir/.installed"
+  chown -R root:root "$release_dir"
+  chmod -R go-w "$release_dir"
+fi
+
+install -o root -g root -m 0644 "$release_dir/deployment/cms-services/wonly-cms@.service" /etc/systemd/system/wonly-cms@.service
+install -o root -g root -m 0644 "$release_dir/deployment/cms-services/wonly-cms-publish-schedules.service" /etc/systemd/system/wonly-cms-publish-schedules.service
+install -o root -g root -m 0644 "$release_dir/deployment/cms-services/wonly-cms-publish-schedules.timer" /etc/systemd/system/wonly-cms-publish-schedules.timer
+install -o root -g root -m 0644 "$release_dir/deployment/cms-services/wonly-cms-webhook.service" /etc/systemd/system/wonly-cms-webhook.service
+install -o root -g root -m 0644 "$release_dir/deployment/cms-services/nginx-cms-api.conf" "$nginx_snippet"
+
+ln -sfn "$release_dir" "$current_link"
+systemctl daemon-reload
+for name in "${api_services[@]}"; do systemctl enable --now "wonly-cms@$name.service"; done
+systemctl enable --now wonly-cms-publish-schedules.timer wonly-cms-webhook.service
+
+nginx -t
+systemctl reload nginx
+
+for name in "${api_services[@]}"; do systemctl --quiet is-active "wonly-cms@$name.service"; done
+systemctl --quiet is-active wonly-cms-publish-schedules.timer
+systemctl --quiet is-active wonly-cms-webhook.service
+
+printf '%s\n' "$revision" > "$state_dir/deployed-revision"
+chown wonly-cms:wonly-cms "$state_dir/deployed-revision"
+chmod 0644 "$state_dir/deployed-revision"
+rm -f "$nginx_backup"
+trap - EXIT
+echo "WONLY CMS services enabled at $revision"

@@ -1,0 +1,82 @@
+name: Deploy CMS services to self-hosted server
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/run-cms-*.mjs'
+      - 'scripts/verify-cms-governance.mjs'
+      - 'deployment/cms-services/**'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: Full 40-character commit SHA already merged into main
+        required: true
+        type: string
+      confirmation:
+        description: Type DEPLOY-CMS-PRODUCTION
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cms-services-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name == 'push' || inputs.confirmation == 'DEPLOY-CMS-PRODUCTION'
+    runs-on: [self-hosted, linux, x64, wonly-cms-production]
+    environment: cms-production
+    timeout-minutes: 30
+    steps:
+      - name: Checkout requested revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'push' && github.sha || inputs.commit_sha }}
+          fetch-depth: 0
+          clean: true
+
+      - name: Require immutable SHA from main
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          deploy_sha="${{ github.event_name == 'push' && github.sha || inputs.commit_sha }}"
+          [[ "$deploy_sha" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$deploy_sha"
+          git fetch --no-tags origin main
+          git merge-base --is-ancestor "$deploy_sha" origin/main
+
+      - name: Verify deployment package
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node scripts/verify-cms-governance.mjs
+          for file in scripts/run-cms-*.mjs; do node --check "$file"; done
+          test -f deployment/cms-services/nginx-cms-api.conf
+          test -f deployment/cms-services/wonly-cms@.service
+          test -f deployment/cms-services/wonly-cms-publish-schedules.timer
+          test -f deployment/cms-services/wonly-cms-webhook.service
+
+      - name: Install and enable reviewed services
+        shell: bash
+        run: sudo -n /usr/local/sbin/install-wonly-cms-services "$GITHUB_WORKSPACE" "${{ github.event_name == 'push' && github.sha || inputs.commit_sha }}"
+
+      - name: Collect non-secret acceptance evidence
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          for name in admin analytics health backup ai quality deploy; do
+            systemctl --quiet is-active "wonly-cms@$name.service"
+            echo "wonly-cms@$name.service: active"
+          done
+          systemctl --quiet is-active wonly-cms-publish-schedules.timer
+          systemctl --quiet is-active wonly-cms-webhook.service
+          deploy_sha="${{ github.event_name == 'push' && github.sha || inputs.commit_sha }}"
+          test "$(cat /var/lib/wonly-cms/deployed-revision)" = "$deploy_sha"
+          curl --fail --silent --show-error --max-time 15 https://cms.wonlyglobal.com/ >/dev/null
+          echo "CMS services deployed: $deploy_sha" >> "$GITHUB_STEP_SUMMARY"
