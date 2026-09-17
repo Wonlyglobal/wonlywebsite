@@ -5,6 +5,8 @@ const article=fs.readFileSync("src/cms/ArticleManager.tsx","utf8");
 const calendarMigration=fs.readFileSync("supabase/migrations/20260917130000_cms_publish_calendar.sql","utf8");
 const calendar=fs.readFileSync("src/cms/PublishCalendar.tsx","utf8");
 const scheduler=fs.readFileSync("scripts/run-cms-publish-schedules.mjs","utf8");
+const templateMigration=fs.readFileSync("supabase/migrations/20260917150000_cms_page_templates.sql","utf8");
+const templates=fs.readFileSync("src/cms/PageTemplateLibrary.tsx","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -14,4 +16,6 @@ if(!fs.existsSync("src/cms/BlockEditor.tsx")||!fs.existsSync("src/cms/VersionDif
 for(const token of ["cms_publish_schedules","cms_schedule_publish","cms_cancel_schedule","cms_run_due_publications","approved_snapshot_required","service_role_required"])if(!calendarMigration.includes(token))throw new Error(`Publishing calendar migration missing ${token}`);
 if(!calendar.includes('rpc("cms_schedule_publish"')||!calendar.includes('rpc("cms_cancel_schedule"')||!calendar.includes('timeZone:ZONE'))throw new Error("Publishing calendar UI is not wired to governed scheduling RPCs and timezone display");
 if(!scheduler.includes("CMS_SUPABASE_SERVICE_ROLE_KEY")||!scheduler.includes("cms_run_due_publications"))throw new Error("Self-hosted schedule runner is not wired to the service-role RPC");
+for(const token of ["cms_page_templates","cms_create_template","cms_apply_template","version_conflict","content_changed_after_scheduling"])if(!templateMigration.includes(token))throw new Error(`Page template migration missing ${token}`);
+if(!templates.includes('rpc("cms_create_template"')||!templates.includes('rpc("cms_apply_template"')||!templates.includes("正式内容未改变"))throw new Error("Page template UI bypasses governed template RPCs");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
