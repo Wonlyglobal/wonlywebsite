@@ -23,6 +23,9 @@ const formRuntime=fs.readFileSync("src/lib/form-config.ts","utf8");
 const productMigration=fs.readFileSync("supabase/migrations/20260918050000_cms_product_management.sql","utf8");
 const productManager=fs.readFileSync("src/cms/ProductManager.tsx","utf8");
 const productRuntime=fs.readFileSync("src/lib/cms-products.ts","utf8");
+const navMigration=fs.readFileSync("supabase/migrations/20260918070000_cms_navigation_management.sql","utf8");
+const navManager=fs.readFileSync("src/cms/NavigationManager.tsx","utf8");
+const navRuntime=fs.readFileSync("src/lib/cms-site-settings.ts","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -49,4 +52,6 @@ if(!formBuilder.includes("cms_save_form")||!formBuilder.includes("cms_publish_fo
 if(!formRuntime.includes('from("cms_published_forms")')||!formRuntime.includes("USER_FIELDS")||!formRuntime.includes("is required"))throw new Error("Published form schema is not enforced by the existing enquiry delivery path");
 for(const token of ["cms_products","cms_validate_product_data","cms_save_product","cms_set_product_review","cms_publish_product","self_approval_or_invalid_status","cms_published_products"])if(!productMigration.includes(token))throw new Error(`Product management migration missing ${token}`);
 if(!productManager.includes("cms_save_product")||!productManager.includes("cms_publish_product")||!productRuntime.includes("cms_published_products"))throw new Error("Product management is not connected from governed CMS to published runtime");
+for(const token of ["cms_navigation","cms_validate_navigation_items","p_depth>3","cms_save_navigation","cms_publish_navigation","cms_published_navigation","self_approval_or_version_conflict"])if(!navMigration.includes(token))throw new Error(`Navigation migration missing ${token}`);
+if(!navManager.includes("draggable")||!navManager.includes("L{depth}")||!navManager.includes("cms_save_navigation")||!navRuntime.includes("cms_published_navigation"))throw new Error("Visual navigation tree is missing hierarchy, ordering, governed save, or runtime connection");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");

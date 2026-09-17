@@ -24,6 +24,14 @@ async function readSetting<K extends keyof SettingMap>(key: K): Promise<SettingM
   if (cache.has(key)) return cache.get(key) as SettingMap[K];
   if (!cmsSupabase) return undefined;
   if (!pending.has(key)) {
+    if (key === "navigation") {
+      pending.set(key, cmsSupabase.from("cms_published_navigation").select("items").eq("navigation_key", "primary").maybeSingle().then(async ({ data, error }) => {
+        if (!error && data?.items) return { items: data.items };
+        const fallback = await cmsSupabase.from("cms_published_pages").select("published_content").eq("page_key", `setting:${key}`).maybeSingle();
+        return fallback.error ? undefined : fallback.data?.published_content;
+      }).then(value => { pending.delete(key); if (!value) return undefined; cache.set(key, value); return value; }));
+      return Promise.resolve(pending.get(key) as PromiseLike<SettingMap[K] | undefined>);
+    }
     pending.set(key, cmsSupabase.from("cms_published_pages").select("published_content").eq("page_key", `setting:${key}`).maybeSingle()
       .then(async ({ data, error }) => {
         if (!error && data?.published_content) return data.published_content;
