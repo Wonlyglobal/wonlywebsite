@@ -1,0 +1,2 @@
+import{diffJson}from"./cmsGovernance";
+export default function VersionDiff({before,after}:{before:unknown;after:unknown}){const changes=diffJson(before,after);return <div className="cms-version-diff"><strong>版本差异（{changes.length} 项）</strong>{changes.length?changes.slice(0,100).map((item,index)=><div className={`cms-diff-row ${item.kind}`} key={`${item.path}-${index}`}><code>{item.path}</code><del>{item.before===undefined?"—":JSON.stringify(item.before)}</del><ins>{item.after===undefined?"—":JSON.stringify(item.after)}</ins></div>):<p>两个版本内容一致。</p>}</div>}

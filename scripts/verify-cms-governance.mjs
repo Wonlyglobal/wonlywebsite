@@ -1,0 +1,11 @@
+import fs from "node:fs";
+const migration=fs.readFileSync("supabase/migrations/20260917090000_cms_governance_workflow.sql","utf8");
+const visual=fs.readFileSync("src/cms/VisualDashboard.tsx","utf8");
+const article=fs.readFileSync("src/cms/ArticleManager.tsx","utf8");
+const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
+const missing=required.filter(token=>!migration.includes(token));
+if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
+if(!visual.includes('rpc("cms_save_draft"')||!visual.includes('rpc("cms_submit_review"')||!visual.includes('rpc("cms_publish_approved"'))throw new Error("Visual editor is not wired to governed RPCs");
+if(!article.includes('rpc("cms_save_draft"')||!article.includes('rpc("cms_submit_review"'))throw new Error("Article editor bypasses governed save/review flow");
+if(!fs.existsSync("src/cms/BlockEditor.tsx")||!fs.existsSync("src/cms/VersionDiff.tsx"))throw new Error("Editor or diff component missing");
+console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");

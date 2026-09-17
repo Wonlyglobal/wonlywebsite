@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { CMS_PAGES } from "./pageDefinitions";
 import { cmsSupabase } from "./supabase";
-import { applyLayoutContent, applySeoContent, applyVisualContent, type VisualContent } from "./visualContent";
+import { applyLayoutContent, applyManagedSections, applySeoContent, applyVisualContent, type VisualContent } from "./visualContent";
 
 export default function PublishedVisualContent() {
   const location = useLocation();
@@ -24,6 +24,7 @@ export default function PublishedVisualContent() {
         applying = true;
         applyLayoutContent(document, localized?.layout);
         applyVisualContent(document, values);
+        applyManagedSections(document,localized?.sections);
         applySeoContent(localized?.seo);
         queueMicrotask(() => { applying = false; });
       };

@@ -1,13 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { CMS_PAGES } from "./pageDefinitions";
 import { cmsSupabase } from "./supabase";
-import { applyLayoutContent, editableImageElements, editableSections, editableTextElements, visualElementKey, type CmsSeo, type VisualContent, type VisualItem } from "./visualContent";
+import { applyLayoutContent, applyManagedSections, editableImageElements, editableSections, editableTextElements, visualElementKey, type CmsSeo, type VisualContent, type VisualItem } from "./visualContent";
 import InquiryDashboard from "./InquiryDashboard";
 import CmsSidebar, { type CmsWorkspace } from "./CmsSidebar";
 import CmsModuleDashboard from "./CmsModuleDashboard";
+import BlockEditor from "./BlockEditor";
+import { can, type CmsRole, type CmsSection, type WorkflowStatus } from "./cmsGovernance";
+import { useCmsAutosave } from "./useCmsAutosave";
 
-type PageRow = { id: string; page_key: string; draft_content: VisualContent; published_content: (VisualContent & { translations?: Record<string, VisualContent> }) | null; translations: Record<string, VisualContent>; status: "draft" | "published" };
+type PageRow = { id: string; page_key: string; draft_content: VisualContent & { sections?: CmsSection[] }; published_content: (VisualContent & { translations?: Record<string, VisualContent>; sections?: CmsSection[] }) | null; translations: Record<string, VisualContent>; status: "draft" | "published"; content_version:number; workflow_status:WorkflowStatus };
 const LANGUAGES = [["en", "English"], ["ar", "العربية"], ["fr", "Français"], ["ru", "Русский"], ["es", "Español"], ["pt", "Português"]] as const;
 const EMPTY_SEO: CmsSeo = { title: "", description: "", canonical: "", ogImage: "", robots: "index, follow" };
 const imageCaptureHandlers = new WeakMap<Document, EventListener>();
@@ -67,6 +70,11 @@ export default function VisualDashboard({ session }: { session: Session }) {
   const [busy, setBusy] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(true);
   const [homeStage, setHomeStage] = useState<"intro" | "main">("intro");
+  const [role,setRole]=useState<CmsRole>("viewer");
+  const [contentVersion,setContentVersion]=useState(1);
+  const [workflowStatus,setWorkflowStatus]=useState<WorkflowStatus>("draft");
+  const [sections,setSections]=useState<CmsSection[]>([]);
+  const [reviewId,setReviewId]=useState<string|null>(null);
   const [selectedImage, setSelectedImage] = useState<{ key: string; value: string; alt: string; canEditAlt: boolean } | null>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -75,18 +83,26 @@ export default function VisualDashboard({ session }: { session: Session }) {
 
   const load = useCallback(async () => {
     if (!cmsSupabase) return;
-    const { data, error } = await cmsSupabase.from("cms_pages").select("id,page_key,draft_content,published_content,translations,status").eq("page_key", page.key).maybeSingle();
+    const { data, error } = await cmsSupabase.from("cms_pages").select("id,page_key,draft_content,published_content,translations,status,content_version,workflow_status").eq("page_key", page.key).maybeSingle();
     if (error) return setNotice(error.message);
     const next = data as PageRow | null;
     const localized = language === "en" ? next?.draft_content : next?.translations?.[language];
     setRow(next);
+    setContentVersion(next?.content_version??1);
+    setWorkflowStatus(next?.workflow_status??"draft");
+    if(next?.id){const{data:pending}=await cmsSupabase.from("cms_review_requests").select("id").eq("page_id",next.id).eq("status","pending").order("created_at",{ascending:false}).limit(1).maybeSingle();setReviewId(pending?.id??null)}else setReviewId(null);
     const loaded = { visual: {}, seo: EMPTY_SEO, layout: {}, ...(localized ?? {}) } as VisualContent;
     const fallback = seoDefaultsRef.current[`${page.key}:${language}`] ?? EMPTY_SEO;
     setContent({ ...loaded, seo: mergeSeo(loaded.seo, fallback) });
+    setSections((loaded as VisualContent & {sections?:CmsSection[]}).sections??[]);
     setSelectedSection(null);
     setSelectedImage(null);
   }, [language, page.key]);
   useEffect(() => { void load(); }, [load]);
+  useEffect(()=>{void cmsSupabase?.from("cms_admins").select("role").eq("user_id",session.user.id).maybeSingle().then(({data})=>setRole((data?.role as CmsRole)??"viewer"))},[session.user.id]);
+  useEffect(()=>{const doc=frameRef.current?.contentDocument;if(doc)applyManagedSections(doc,sections)},[sections]);
+  const autosaveContent=useMemo(()=>({...content,sections}),[content,sections]);
+  const autosaveState=useCmsAutosave({client:cmsSupabase,pageId:row?.id,content:autosaveContent,version:contentVersion,locale:language,enabled:Boolean(row)&&can(role,"edit")&&workflowStatus!=="in_review",onSaved:setContentVersion});
 
   const enableEditing = useCallback(() => {
     const doc = frameRef.current?.contentDocument;
@@ -104,6 +120,7 @@ export default function VisualDashboard({ session }: { session: Session }) {
     importExistingSeo();
     window.setTimeout(importExistingSeo, 500);
     applyLayoutContent(doc, content.layout);
+    applyManagedSections(doc,sections);
     const values = content.visual ?? {};
     editableSections(doc).forEach(section => {
       const key = section.dataset.cmsSectionKey ?? visualElementKey(section);
@@ -179,7 +196,7 @@ export default function VisualDashboard({ session }: { session: Session }) {
     imageCaptureHandlers.set(doc, imageCapture);
     doc.addEventListener("click", imageCapture, true);
     setNotice("完整页面已进入编辑模式；悬停会显示蓝色编辑框");
-  }, [content.layout, content.visual, language, page.key]);
+  }, [content.layout, content.visual, language, page.key, sections]);
 
   const replaceImage = async (file: File) => {
     if (!cmsSupabase || !imageTarget.current) return;
@@ -222,31 +239,25 @@ export default function VisualDashboard({ session }: { session: Session }) {
   const persist = async (publish: boolean) => {
     if (!cmsSupabase) return;
     const seo = mergeSeo(content.seo, seoFromDocument(frameRef.current?.contentDocument));
-    const nextContent = { ...content, seo };
-    if (publish) {
-      if (!seo.title?.trim() || !seo.description?.trim()) return setNotice("发布已阻止：页面标题和页面描述不能为空");
-      const diff = changesBetween(nextContent, publishedForLanguage());
-      if (!window.confirm(`即将发布 ${language.toUpperCase()}：\n文字 ${diff.text} 处，图片 ${diff.images} 处，SEO ${diff.seo ? "有修改" : "无修改"}，布局 ${diff.layout ? "有修改" : "无修改"}。\n\n确认更新到线上吗？`)) return;
-    }
+    const nextContent = { ...content, seo, sections };
+    if(publish)return setNotice("发布必须先提交审核，并由审核人批准后执行");
     setBusy(true);
+    if(row){const{data,error}=await cmsSupabase.rpc("cms_save_draft",{p_page_id:row.id,p_content:nextContent,p_expected_version:contentVersion,p_action:"draft_saved",p_locale:language});if(error){setBusy(false);setNotice(error.message.includes("version_conflict")?"保存冲突：页面已被其他人更新，请刷新后合并差异":error.message);return}const saved=Array.isArray(data)?data[0]:data;setContentVersion(Number(saved?.content_version??contentVersion+1));setWorkflowStatus("draft");setNotice("草稿已保存，并生成版本记录");await load();setBusy(false);return}
     const draftContent = language === "en" ? nextContent : (row?.draft_content ?? {});
     const translations = { ...(row?.translations ?? {}) };
     if (language !== "en") translations[language] = nextContent;
     const publishedContent = { ...draftContent, translations };
-    const payload = { page_key: page.key, page_type: page.type, route: page.route, title: page.title, source_locale: "en", draft_content: draftContent, translations, status: publish ? "published" : (row?.status ?? "draft"), updated_by: session.user.id, ...(publish ? { published_content: publishedContent, published_at: new Date().toISOString() } : {}) };
-    const { data, error } = await cmsSupabase.from("cms_pages").upsert(payload, { onConflict: "page_key" }).select().single();
+    const payload = { page_key: page.key, page_type: page.type, route: page.route, title: page.title, source_locale: "en", draft_content: draftContent, translations, status:"draft",workflow_status:"draft",content_version:1, updated_by: session.user.id };
+    const { data, error } = await cmsSupabase.rpc("cms_create_page",{p_page_key:payload.page_key,p_page_type:payload.page_type,p_route:payload.route,p_title:payload.title,p_content:draftContent});
     if (error) { setBusy(false); return setNotice(error.message); }
-    await cmsSupabase.from("cms_revisions").insert({ page_id: data.id, action: publish ? "published" : "draft_saved", snapshot: publishedContent, created_by: session.user.id });
-    if (publish) {
-      const { data: verified, error: verifyError } = await cmsSupabase.from("cms_published_pages").select("published_content").eq("page_key", page.key).maybeSingle();
-      let routeOk = false;
-      try { routeOk = (await fetch(page.route, { method: "HEAD", cache: "no-store" })).ok; } catch { routeOk = false; }
-      const contentOk = !verifyError && JSON.stringify(verified?.published_content) === JSON.stringify(publishedContent);
-      setNotice(contentOk && routeOk ? "发布成功：内容库一致，官网页面访问正常" : `已发布，但自动验收未完全通过（内容库：${contentOk ? "正常" : "异常"}；页面：${routeOk ? "正常" : "异常"}）`);
-    } else setNotice("草稿已保存，并生成版本记录");
+    setNotice("草稿已保存，并生成版本记录");
     await load();
     setBusy(false);
   };
+
+  const submitReview=async()=>{if(!cmsSupabase||!row)return;setBusy(true);const{data,error}=await cmsSupabase.rpc("cms_submit_review",{p_page_id:row.id,p_expected_version:contentVersion});setBusy(false);if(error)return setNotice(error.message);const request=Array.isArray(data)?data[0]:data;setReviewId(request?.id??null);setWorkflowStatus("in_review");setNotice("已提交审核；审批绑定当前版本，后续编辑会自动使审批失效")};
+  const review=async(decision:"approved"|"rejected")=>{if(!cmsSupabase||!reviewId)return;const comment=window.prompt(decision==="approved"?"审批意见（可留空）":"请填写退回原因")??"";if(decision==="rejected"&&!comment.trim())return setNotice("退回必须填写原因");setBusy(true);const{error}=await cmsSupabase.rpc("cms_review",{p_request_id:reviewId,p_decision:decision,p_comment:comment});setBusy(false);if(error)return setNotice(error.message);setWorkflowStatus(decision==="approved"?"approved":"changes_requested");setNotice(decision==="approved"?"审核已通过，可由审核人发布":"已退回修改")};
+  const publishApproved=async()=>{if(!cmsSupabase||!row)return;if(!window.confirm("确认发布已审批的固定版本到官网内容库？"))return;setBusy(true);const{error}=await cmsSupabase.rpc("cms_publish_approved",{p_page_id:row.id});setBusy(false);if(error)return setNotice(error.message);setWorkflowStatus("published");setNotice("已发布审批版本；请继续执行线上页面验收")};
 
   const copyEnglishDraft = () => {
     if (language === "en") return;
@@ -269,8 +280,8 @@ export default function VisualDashboard({ session }: { session: Session }) {
   if (workspace !== "pages") return <CmsModuleDashboard module={workspace} session={session} onNavigate={setWorkspace} onEditPage={next=>{setPage(next);setWorkspace("pages")}} onSignOut={() => void cmsSupabase?.auth.signOut()} />;
   const selectWorkspace = (next: CmsWorkspace) => setWorkspace(next);
   return <main className="cms-root cms-visual-shell"><CmsSidebar active="pages" onSelect={selectWorkspace}/>
-    <header className="cms-visual-toolbar"><div className="cms-visual-brand"><strong>WONLY</strong><span>整页编辑</span></div><select aria-label="页面" value={page.key} onChange={event => setPage(CMS_PAGES.find(item => item.key === event.target.value) ?? CMS_PAGES[0])}>{CMS_PAGES.map(item => <option key={item.key} value={item.key}>{item.title}</option>)}</select><select aria-label="语言" value={language} onChange={event => setLanguage(event.target.value)}>{LANGUAGES.map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select>{page.key === "home" ? <div className="cms-device-toggle"><button className={homeStage === "intro" ? "active" : ""} onClick={() => setHomeStage("intro")}>开门前</button><button className={homeStage === "main" ? "active" : ""} onClick={() => setHomeStage("main")}>开门后</button></div> : null}<div className="cms-device-toggle"><button className={device === "desktop" ? "active" : ""} onClick={() => setDevice("desktop")}>电脑</button><button className={device === "mobile" ? "active" : ""} onClick={() => setDevice("mobile")}>手机</button></div><div className="cms-visual-actions"><button className="cms-button secondary" onClick={() => setToolsOpen(value => !value)}>{toolsOpen ? "收起工具" : "展开工具"}</button><button className="cms-button secondary" disabled={busy} onClick={() => void persist(false)}>保存草稿</button><button className="cms-button" disabled={busy} onClick={() => void persist(true)}>确认并发布</button><button className="cms-button secondary" onClick={() => cmsSupabase?.auth.signOut()}>退出</button></div></header>
-    <div className="cms-visual-status">{notice}</div><section className={`cms-visual-workspace ${toolsOpen ? "panel-open" : ""}`}><div className={`cms-site-canvas ${device}`}><iframe key={canvasRoute} ref={frameRef} title={`${page.title}整页编辑`} src={canvasRoute} onLoad={enableEditing}/></div>{toolsOpen ? <aside className="cms-visual-panel"><h2>页面工具</h2><p>当前：{page.title}</p><p>语言：{LANGUAGES.find(([code]) => code === language)?.[1]}</p><div className="cms-tool-card"><strong>图片编辑</strong><p>{selectedImage ? "已选中图片，可从电脑替换" : "点击页面中的图片、背景图或视频封面"}</p>{selectedImage ? <><label>当前图片<input value={selectedImage.value} readOnly /></label>{selectedImage.canEditAlt ? <label>图片描述（Alt）<input value={selectedImage.alt} onChange={event => setImageAlt(event.target.value)} /></label> : null}</> : null}<button className="cms-button secondary" disabled={!selectedImage || busy} onClick={() => fileRef.current?.click()}>从电脑选择图片</button></div><div className="cms-tool-card"><strong>板块布局</strong><p>{selectedSection ? "已选中一个板块" : "先点击页面中的板块"}</p><div className="cms-tool-actions"><button onClick={() => updateSection("up")}>上移</button><button onClick={() => updateSection("down")}>下移</button><button onClick={() => updateSection("hide")}>隐藏</button><button onClick={() => updateSection("show")}>恢复</button></div></div><div className="cms-tool-card"><strong>SEO 设置</strong><label>页面标题<input value={content.seo?.title ?? ""} onChange={event => setSeo("title", event.target.value)}/></label><label>页面描述<textarea value={content.seo?.description ?? ""} onChange={event => setSeo("description", event.target.value)}/></label><label>规范链接<input value={content.seo?.canonical ?? ""} onChange={event => setSeo("canonical", event.target.value)}/></label><label>分享图片<input value={content.seo?.ogImage ?? ""} onChange={event => setSeo("ogImage", event.target.value)}/></label><label>搜索引擎规则<select value={content.seo?.robots ?? "index, follow"} onChange={event => setSeo("robots", event.target.value)}><option>index, follow</option><option>noindex, nofollow</option></select></label></div>{language !== "en" ? <div className="cms-tool-card"><strong>多语言确认</strong><p>当前状态：{content.translationStatus === "confirmed" ? "已人工确认" : content.translationStatus === "ai_draft" ? "翻译底稿" : "待翻译"}</p><button className="cms-button secondary" onClick={copyEnglishDraft}>复制英文作翻译底稿</button><button className="cms-button secondary" onClick={() => setContent(current => ({ ...current, translationStatus: "confirmed" }))}>标记人工确认</button><p>AI 自动翻译将在配置模型接口后启用。</p></div> : null}<div className="cms-tool-card warning"><strong>发布规则</strong><p>保存草稿不会更新官网；发布前会显示差异，发布后自动核验内容库和页面访问。</p></div></aside> : null}</section>
+    <header className="cms-visual-toolbar"><div className="cms-visual-brand"><strong>WONLY</strong><span>整页编辑 · {role}</span></div><select aria-label="页面" value={page.key} onChange={event => setPage(CMS_PAGES.find(item => item.key === event.target.value) ?? CMS_PAGES[0])}>{CMS_PAGES.map(item => <option key={item.key} value={item.key}>{item.title}</option>)}</select><select aria-label="语言" value={language} onChange={event => setLanguage(event.target.value)}>{LANGUAGES.map(([code, label]) => <option key={code} value={code}>{label}</option>)}</select>{page.key === "home" ? <div className="cms-device-toggle"><button className={homeStage === "intro" ? "active" : ""} onClick={() => setHomeStage("intro")}>开门前</button><button className={homeStage === "main" ? "active" : ""} onClick={() => setHomeStage("main")}>开门后</button></div> : null}<div className="cms-device-toggle"><button className={device === "desktop" ? "active" : ""} onClick={() => setDevice("desktop")}>电脑</button><button className={device === "mobile" ? "active" : ""} onClick={() => setDevice("mobile")}>手机</button></div><span className={`cms-save-state ${autosaveState}`}>{autosaveState==="saving"?"自动保存中…":autosaveState==="saved"?"已自动保存":autosaveState==="conflict"?"版本冲突":autosaveState==="failed"?"自动保存失败":`v${contentVersion} · ${workflowStatus}`}</span><div className="cms-visual-actions"><button className="cms-button secondary" onClick={() => setToolsOpen(value => !value)}>{toolsOpen ? "收起工具" : "展开工具"}</button><button className="cms-button secondary" disabled={busy||!can(role,"edit")} onClick={() => void persist(false)}>保存草稿</button><button className="cms-button" disabled={busy||!can(role,"submit")||workflowStatus==="in_review"} onClick={()=>void submitReview()}>提交审核</button>{can(role,"review")&&workflowStatus==="in_review"?<><button className="cms-button secondary" onClick={()=>void review("rejected")}>退回</button><button className="cms-button" onClick={()=>void review("approved")}>批准</button></>:null}{can(role,"publish")&&workflowStatus==="approved"?<button className="cms-button" onClick={()=>void publishApproved()}>发布已审批版</button>:null}<button className="cms-button secondary" onClick={() => cmsSupabase?.auth.signOut()}>退出</button></div></header>
+    <div className="cms-visual-status">{notice}</div><section className={`cms-visual-workspace ${toolsOpen ? "panel-open" : ""}`}><div className={`cms-site-canvas ${device}`}><iframe key={canvasRoute} ref={frameRef} title={`${page.title}整页编辑`} src={canvasRoute} onLoad={enableEditing}/></div>{toolsOpen ? <aside className="cms-visual-panel"><h2>页面工具</h2><p>当前：{page.title}</p><p>语言：{LANGUAGES.find(([code]) => code === language)?.[1]}</p><div className="cms-tool-card workflow"><strong>发布流程</strong><p>状态：{workflowStatus} · 内容版本 v{contentVersion}</p><p>编辑后自动保存；提交审核后冻结当前快照；只有批准的同一版本可以发布。</p></div><BlockEditor sections={sections} onChange={setSections}/><div className="cms-tool-card"><strong>图片编辑</strong><p>{selectedImage ? "已选中图片，可从电脑替换" : "点击页面中的图片、背景图或视频封面"}</p>{selectedImage ? <><label>当前图片<input value={selectedImage.value} readOnly /></label>{selectedImage.canEditAlt ? <label>图片描述（Alt）<input value={selectedImage.alt} onChange={event => setImageAlt(event.target.value)} /></label> : null}</> : null}<button className="cms-button secondary" disabled={!selectedImage || busy} onClick={() => fileRef.current?.click()}>从电脑选择图片</button></div><div className="cms-tool-card"><strong>板块布局</strong><p>{selectedSection ? "已选中一个板块" : "先点击页面中的板块"}</p><div className="cms-tool-actions"><button onClick={() => updateSection("up")}>上移</button><button onClick={() => updateSection("down")}>下移</button><button onClick={() => updateSection("hide")}>隐藏</button><button onClick={() => updateSection("show")}>恢复</button></div></div><div className="cms-tool-card"><strong>SEO 设置</strong><label>页面标题<input value={content.seo?.title ?? ""} onChange={event => setSeo("title", event.target.value)}/></label><label>页面描述<textarea value={content.seo?.description ?? ""} onChange={event => setSeo("description", event.target.value)}/></label><label>规范链接<input value={content.seo?.canonical ?? ""} onChange={event => setSeo("canonical", event.target.value)}/></label><label>分享图片<input value={content.seo?.ogImage ?? ""} onChange={event => setSeo("ogImage", event.target.value)}/></label><label>搜索引擎规则<select value={content.seo?.robots ?? "index, follow"} onChange={event => setSeo("robots", event.target.value)}><option>index, follow</option><option>noindex, nofollow</option></select></label></div>{language !== "en" ? <div className="cms-tool-card"><strong>多语言确认</strong><p>当前状态：{content.translationStatus === "confirmed" ? "已人工确认" : content.translationStatus === "ai_draft" ? "翻译底稿" : "待翻译"}</p><button className="cms-button secondary" onClick={copyEnglishDraft}>复制英文作翻译底稿</button><button className="cms-button secondary" onClick={() => setContent(current => ({ ...current, translationStatus: "confirmed" }))}>标记人工确认</button><p>AI 自动翻译将在配置模型接口后启用。</p></div> : null}<div className="cms-tool-card warning"><strong>发布规则</strong><p>编辑人与审核人分离；审批绑定当前版本，任何后续修改都会使旧审批失效。</p></div></aside> : null}</section>
     <input ref={fileRef} hidden type="file" accept="image/jpeg,image/png,image/webp,image/avif" onChange={event => { const file = event.target.files?.[0]; if (file) void replaceImage(file); event.currentTarget.value = ""; }}/>
   </main>;
 }

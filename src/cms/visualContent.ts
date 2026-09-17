@@ -2,11 +2,14 @@ export type VisualItem = { type: "text" | "image"; value: string; alt?: string; 
 export type CmsSeo = { title?: string; description?: string; canonical?: string; ogImage?: string; robots?: string };
 export type CmsLayout = { order?: string[]; hidden?: string[] };
 export type TranslationStatus = "pending" | "ai_draft" | "confirmed";
+export type ManagedBlock = { id:string;type:"text"|"image"|"button"|"video"|"product"|"faq"|"form"|"spacer";hidden?:boolean;content:Record<string,unknown> };
+export type ManagedSection = { id:string;label:string;hidden?:boolean;blocks:ManagedBlock[] };
 export type VisualContent = {
   visual?: Record<string, VisualItem>;
   seo?: CmsSeo;
   layout?: CmsLayout;
   translationStatus?: TranslationStatus;
+  sections?: ManagedSection[];
 };
 
 export function visualElementKey(element: Element) {
@@ -20,6 +23,18 @@ export function visualElementKey(element: Element) {
     current = parent;
   }
   return parts.join(">");
+}
+
+export function applyManagedSections(root:Document,sections?:ManagedSection[]){
+  const existing=root.querySelector<HTMLElement>("[data-cms-managed-sections]");
+  if(!sections?.length){existing?.remove();return}
+  const signature=JSON.stringify(sections);
+  if(existing?.dataset.signature===signature)return;
+  const container=existing??root.createElement("div");
+  container.dataset.cmsManagedSections="true";container.dataset.signature=signature;container.className="cms-managed-sections";container.replaceChildren();
+  if(!root.querySelector("style[data-cms-managed-style]")){const style=root.createElement("style");style.dataset.cmsManagedStyle="true";style.textContent=".cms-managed-sections{max-width:1280px;margin:0 auto;padding:56px 5%;font-family:inherit}.cms-managed-section{padding:32px 0;border-top:1px solid #ddd}.cms-managed-section h2{margin:0 0 22px}.cms-managed-block{margin:14px 0;line-height:1.7}.cms-managed-block img,.cms-managed-block video{display:block;max-width:100%;height:auto}.cms-managed-button{display:inline-block;padding:11px 18px;border:1px solid currentColor;color:inherit;text-decoration:none}";root.head.appendChild(style)}
+  sections.filter(section=>!section.hidden).forEach(section=>{const sectionEl=root.createElement("section");sectionEl.className="cms-managed-section";sectionEl.dataset.cmsBlockSection=section.id;const title=root.createElement("h2");title.textContent=section.label;sectionEl.appendChild(title);section.blocks.filter(block=>!block.hidden).forEach(block=>{const wrap=root.createElement("div");wrap.className="cms-managed-block";wrap.dataset.cmsBlock=block.id;if(block.type==="text"){const p=root.createElement("p");p.textContent=String(block.content.text??"");wrap.appendChild(p)}else if(block.type==="image"){const img=root.createElement("img");img.src=String(block.content.src??"");img.alt=String(block.content.alt??"");wrap.appendChild(img)}else if(block.type==="button"){const a=root.createElement("a");a.className="cms-managed-button";a.href=String(block.content.url??"#");a.textContent=String(block.content.label??"了解更多");wrap.appendChild(a)}else if(block.type==="video"){const video=root.createElement("video");video.controls=true;video.src=String(block.content.src??"");wrap.appendChild(video)}else if(block.type==="spacer"){wrap.style.height=`${Number(block.content.height??40)}px`}else{wrap.textContent=String(block.content.text??block.content.title??block.type)}sectionEl.appendChild(wrap)});container.appendChild(sectionEl)});
+  if(!existing)(root.querySelector("main")??root.body).appendChild(container);
 }
 
 export function editableTextElements(root: ParentNode = document) {
