@@ -25,14 +25,15 @@ begin
  insert into public.cms_audit_logs(actor_id,action,resource_type,resource_id,metadata) values(auth.uid(),'admin_role_updated','cms_admin',p_user_id::text,jsonb_build_object('before_role',v_before.role,'before_active',v_before.is_active,'role',p_role,'is_active',p_is_active));
 end $$;
 
-create or replace function public.cms_register_invited_admin(p_user_id uuid,p_role text)
+create or replace function public.cms_register_invited_admin(p_user_id uuid,p_email text,p_role text)
 returns void language plpgsql security definer set search_path=public as $$
 begin
  if auth.role()<>'service_role' then raise exception 'service_role_required'; end if;
  if p_role not in ('super_admin','editor','seo','translator','sales','reviewer','viewer') then raise exception 'invalid_role'; end if;
- insert into public.cms_admins(user_id,role,is_active,updated_at) values(p_user_id,p_role,true,now()) on conflict(user_id) do update set role=excluded.role,is_active=true,updated_at=now();
+ if nullif(trim(p_email),'') is null then raise exception 'email_required'; end if;
+ insert into public.cms_admins(user_id,email,role,is_active,updated_at) values(p_user_id,lower(trim(p_email)),p_role,true,now()) on conflict(user_id) do update set email=excluded.email,role=excluded.role,is_active=true,updated_at=now();
 end $$;
 
-revoke execute on function public.cms_list_admins(),public.cms_set_admin_role(uuid,text,boolean),public.cms_register_invited_admin(uuid,text) from public,anon;
+revoke execute on function public.cms_list_admins(),public.cms_set_admin_role(uuid,text,boolean),public.cms_register_invited_admin(uuid,text,text) from public,anon;
 grant execute on function public.cms_list_admins(),public.cms_set_admin_role(uuid,text,boolean) to authenticated;
-grant execute on function public.cms_register_invited_admin(uuid,text) to service_role;
+grant execute on function public.cms_register_invited_admin(uuid,text,text) to service_role;

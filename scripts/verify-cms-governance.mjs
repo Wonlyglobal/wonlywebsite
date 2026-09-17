@@ -1,4 +1,5 @@
 import fs from "node:fs";
+for(const file of ["20260825090000_cms_foundation_baseline.sql","20260825110000_cms_public_published_view.sql","20260826090000_cms_inquiries_baseline.sql","20260826110000_cms_site_settings_baseline.sql"]){if(!fs.existsSync(`supabase/migrations/${file}`))throw new Error(`Rebuildable CMS baseline missing ${file}`)}
 const migration=fs.readFileSync("supabase/migrations/20260917090000_cms_governance_workflow.sql","utf8");
 const visual=fs.readFileSync("src/cms/VisualDashboard.tsx","utf8");
 const article=fs.readFileSync("src/cms/ArticleManager.tsx","utf8");
@@ -82,7 +83,7 @@ for(const token of ["cms_environments","cms_releases","cms_request_release","cms
 if(!releases.includes("VITE_CMS_DEPLOY_API_URL")||!releases.includes("release_id:release.id")||!releases.includes("状态以服务端回执为准"))throw new Error("Release manager bypasses the self-hosted, server-confirmed deployment flow");
 for(const token of ["cms_quality_runs","cms_quality_issues","cms_request_quality_run","cms_record_quality_run","service_role_required","quality_run_not_mutable"])if(!qualityMigration.includes(token))throw new Error(`Page quality migration missing ${token}`);
 if(!quality.includes("VITE_CMS_QUALITY_API_URL")||!quality.includes("run_id:run.id")||!quality.includes("不显示估算分数"))throw new Error("Quality dashboard does not require a fixed run id and real server evidence");
-for(const token of ["cms_list_admins","cms_set_admin_role","cms_register_invited_admin","last_super_admin_protected","admin_role_updated","service_role_required"])if(!roleMigration.includes(token))throw new Error(`Role administration migration missing ${token}`);
+for(const token of ["cms_list_admins","cms_set_admin_role","cms_register_invited_admin","p_email text","last_super_admin_protected","admin_role_updated","service_role_required"])if(!roleMigration.includes(token))throw new Error(`Role administration migration missing ${token}`);
 if(!roleAdmin.includes("VITE_CMS_ADMIN_API_URL")||!roleAdmin.includes('rpc("cms_set_admin_role"')||!roleAdmin.includes("最后一个启用中的超级管理员"))throw new Error("Role administration UI bypasses the self-hosted invite or governed update flow");
 for(const token of ["CMS_SUPABASE_SERVICE_ROLE_KEY","CMS_ADMIN_ALLOWED_ORIGIN","inviteUserByEmail","cms_register_invited_admin","admin_invited"])if(!roleApi.includes(token))throw new Error(`Role administration API missing ${token}`);
 for(const token of ["cms_list_audit_logs","permission_denied","invalid_pagination","count(*) over()","audit_logs_are_immutable"])if(!auditMigration.includes(token))throw new Error(`Audit center migration missing ${token}`);

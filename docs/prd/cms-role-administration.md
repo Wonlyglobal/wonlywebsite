@@ -14,7 +14,7 @@
 
 请求头为 `Authorization: Bearer <Supabase access token>`；请求体为 `{ "email": "name@company.com", "role": "editor", "redirectTo": "https://cms.wonlyglobal.com/cms" }`。
 
-服务端必须验证 JWT，确认调用者为启用中的超级管理员，使用 Auth Admin API 发送邀请，调用 `cms_register_invited_admin(user_id, role)`，写入审计记录，并设置精确 CORS 白名单。
+服务端必须验证 JWT，确认调用者为启用中的超级管理员，使用 Auth Admin API 发送邀请，调用 `cms_register_invited_admin(user_id, email, role)`，写入审计记录，并设置精确 CORS 白名单。
 
 仓库提供 `scripts/run-cms-admin-api.mjs`。服务器需设置 `CMS_SUPABASE_URL`、`CMS_SUPABASE_SERVICE_ROLE_KEY`、`CMS_ADMIN_ALLOWED_ORIGIN=https://cms.wonlyglobal.com` 和可选 `PORT`；前端设置 `VITE_CMS_ADMIN_API_URL`。
 
