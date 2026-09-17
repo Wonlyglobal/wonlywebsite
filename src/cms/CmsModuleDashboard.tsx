@@ -5,6 +5,7 @@ import {CMS_PAGES,type CmsPageDefinition} from "./pageDefinitions";
 import {cmsSupabase} from "./supabase";
 import ArticleManager from "./ArticleManager";
 import VersionDiff from "./VersionDiff";
+import PublishCalendar from "./PublishCalendar";
 import type{CmsRole}from"./cmsGovernance";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;updated_at:string;published_at:string|null};
@@ -12,7 +13,7 @@ type Asset={id:string;public_url:string;original_name:string;mime_type:string;by
 type Revision={id:string;action:string;revision_no:number;created_at:string;snapshot:Record<string,unknown>;page_id:string;cms_pages:{title?:string;page_key?:string}|null};
 type Audit={id:string;action:string;resource_type:string;resource_id:string|null;created_at:string;metadata:Record<string,unknown>};
 type SettingValue=Record<string,unknown>|unknown[];
-const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",media:"媒体库",posts:"文章管理",products:"产品管理",seo:"SEO 设置",languages:"多语言",navigation:"导航菜单",redirects:"重定向",versions:"版本与发布",settings:"站点设置",account:"管理员账号"};
+const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",media:"媒体库",posts:"文章管理",products:"产品管理",calendar:"发布日历",seo:"SEO 设置",languages:"多语言",navigation:"导航菜单",redirects:"重定向",versions:"版本与发布",settings:"站点设置",account:"管理员账号"};
 const defaults:Record<string,SettingValue>={navigation:{items:[{label:"Products",url:"/products/entrance-door"},{label:"About",url:"/about"},{label:"Insights",url:"/insights"},{label:"Contact",url:"/contact"}]},redirects:{items:[]},settings:{siteName:"WONLY Global",contactEmail:"inquiry@wonlyglobal.com",whatsapp:"+1 (205) 240-1832",defaultLanguage:"en",timezone:"Asia/Shanghai"}};
 const size=(bytes:number)=>bytes>1048576?`${(bytes/1048576).toFixed(1)} MB`:`${Math.ceil(bytes/1024)} KB`;
 const seoOf=(row:PageRow)=>((row.draft_content?.seo??{}) as Record<string,string>);
@@ -27,6 +28,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
  const render=()=>{
   if(module==="media")return <div className="cms-media-grid">{assets.length?assets.map(asset=><article className="cms-card cms-media-card" key={asset.id}><img src={asset.public_url} alt={asset.original_name}/><strong>{asset.original_name}</strong><span>{asset.mime_type} · {size(asset.byte_size)}</span><button className="cms-button secondary" onClick={()=>void navigator.clipboard.writeText(asset.public_url)}>复制链接</button></article>):<div className="cms-module-empty">暂无已上传素材。请在页面编辑中选中图片后上传，素材会自动进入这里。</div>}</div>;
   if(module==="posts")return <ArticleManager session={session}/>;
+  if(module==="calendar")return <PublishCalendar role={role}/>;
   if(module==="products")return renderPages("products");
   if(module==="seo")return <div className="cms-table-wrap"><table className="cms-table"><thead><tr><th>页面</th><th>SEO标题</th><th>描述</th><th>状态</th><th/></tr></thead><tbody>{CMS_PAGES.map(page=>{const row=pages.find(p=>p.page_key===page.key),seo=row?seoOf(row):{};return <tr key={page.key}><td><strong>{page.title}</strong><small>{page.route}</small></td><td>{seo.title||"使用官网现有设置"}</td><td className="cms-table-description">{seo.description||"使用官网现有设置"}</td><td>{row?.status==="published"?"已发布":"待保存"}</td><td><button onClick={()=>edit(page.key)}>编辑</button></td></tr>})}</tbody></table></div>;
   if(module==="languages")return <div className="cms-table-wrap"><table className="cms-table"><thead><tr><th>页面</th><th>EN</th><th>AR</th><th>FR</th><th>RU</th><th>ES</th><th/></tr></thead><tbody>{CMS_PAGES.map(page=>{const row=pages.find(p=>p.page_key===page.key),langs=row?.translations??{};return <tr key={page.key}><td>{page.title}</td><td>原文</td>{["ar","fr","ru","es"].map(lang=><td key={lang}>{langs[lang]?"已填写":"待确认"}</td>)}<td><button onClick={()=>edit(page.key)}>编辑</button></td></tr>})}</tbody></table></div>;
