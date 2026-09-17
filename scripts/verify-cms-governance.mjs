@@ -47,6 +47,9 @@ const healthApi=fs.readFileSync("scripts/run-cms-integration-health-api.mjs","ut
 const backupMigration=fs.readFileSync("supabase/migrations/20260919010000_cms_backup_restore.sql","utf8");
 const backupUi=fs.readFileSync("src/cms/BackupManager.tsx","utf8");
 const backupApi=fs.readFileSync("scripts/run-cms-backup-api.mjs","utf8");
+const webhookMigration=fs.readFileSync("supabase/migrations/20260919030000_cms_webhook_automation.sql","utf8");
+const webhookUi=fs.readFileSync("src/cms/WebhookAutomation.tsx","utf8");
+const webhookWorker=fs.readFileSync("scripts/run-cms-webhook-worker.mjs","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -98,4 +101,7 @@ for(const token of ["cms_backup_jobs","cms_request_backup","cms_request_restore"
 if(!backupUi.includes("VITE_CMS_BACKUP_API_URL")||!backupUi.includes("另一名")||!backupUi.includes("不提供直接下载"))throw new Error("Backup UI lacks self-hosted execution, approval, or data-exposure safeguard");
 for(const token of ["pg_dump","pg_restore","backup_checksum_mismatch","pre_restore_backup_key","PGPASSWORD"])if(!backupApi.includes(token))throw new Error(`Backup API missing ${token}`);
 if(backupApi.includes("shell:true")||backupApi.includes("shell: true"))throw new Error("Backup API must never execute database tools through a shell");
+for(const token of ["cms_webhook_automations","cms_webhook_deliveries","cms_audit_webhook_outbox","cms_inquiry_webhook_outbox","cms_claim_webhook_deliveries","skip locked","cms_record_webhook_delivery","service_role_required"])if(!webhookMigration.toLowerCase().includes(token))throw new Error(`Webhook automation migration missing ${token}`);
+if(!webhookUi.includes("endpoint_ref")||!webhookUi.includes("cms_test_webhook_automation")||!webhookUi.includes("签名密钥"))throw new Error("Webhook automation UI exposes unsafe endpoint configuration or lacks test queue");
+for(const token of ["CMS_WEBHOOK_ENDPOINTS","createHmac","x-wonly-signature","endpoint_not_configured","cms_claim_webhook_deliveries"])if(!webhookWorker.includes(token))throw new Error(`Webhook worker missing ${token}`);
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
