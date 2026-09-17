@@ -26,6 +26,8 @@ const productRuntime=fs.readFileSync("src/lib/cms-products.ts","utf8");
 const navMigration=fs.readFileSync("supabase/migrations/20260918070000_cms_navigation_management.sql","utf8");
 const navManager=fs.readFileSync("src/cms/NavigationManager.tsx","utf8");
 const navRuntime=fs.readFileSync("src/lib/cms-site-settings.ts","utf8");
+const releaseMigration=fs.readFileSync("supabase/migrations/20260918090000_cms_release_environments.sql","utf8");
+const releases=fs.readFileSync("src/cms/ReleaseManager.tsx","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -54,4 +56,6 @@ for(const token of ["cms_products","cms_validate_product_data","cms_save_product
 if(!productManager.includes("cms_save_product")||!productManager.includes("cms_publish_product")||!productRuntime.includes("cms_published_products"))throw new Error("Product management is not connected from governed CMS to published runtime");
 for(const token of ["cms_navigation","cms_validate_navigation_items","p_depth>3","cms_save_navigation","cms_publish_navigation","cms_published_navigation","self_approval_or_version_conflict"])if(!navMigration.includes(token))throw new Error(`Navigation migration missing ${token}`);
 if(!navManager.includes("draggable")||!navManager.includes("L{depth}")||!navManager.includes("cms_save_navigation")||!navRuntime.includes("cms_published_navigation"))throw new Error("Visual navigation tree is missing hierarchy, ordering, governed save, or runtime connection");
+for(const token of ["cms_environments","cms_releases","cms_request_release","cms_approve_release","cms_record_release_status","service_role_required","self_approval_or_invalid_status"])if(!releaseMigration.includes(token))throw new Error(`Release environment migration missing ${token}`);
+if(!releases.includes("VITE_CMS_DEPLOY_API_URL")||!releases.includes("release_id:release.id")||!releases.includes("状态以服务端回执为准"))throw new Error("Release manager bypasses the self-hosted, server-confirmed deployment flow");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");

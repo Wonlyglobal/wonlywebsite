@@ -15,6 +15,7 @@ import SearchManager from "./SearchManager";
 import FormBuilder from "./FormBuilder";
 import ProductManager from "./ProductManager";
 import NavigationManager from "./NavigationManager";
+import ReleaseManager from "./ReleaseManager";
 import type{CmsRole}from"./cmsGovernance";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;updated_at:string;published_at:string|null};
@@ -22,7 +23,7 @@ type Asset={id:string;public_url:string;original_name:string;mime_type:string;by
 type Revision={id:string;action:string;revision_no:number;created_at:string;snapshot:Record<string,unknown>;page_id:string;cms_pages:{title?:string;page_key?:string}|null};
 type Audit={id:string;action:string;resource_type:string;resource_id:string|null;created_at:string;metadata:Record<string,unknown>};
 type SettingValue=Record<string,unknown>|unknown[];
-const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",forms:"表单构建器",media:"媒体库",posts:"文章管理",products:"产品管理",templates:"页面模板",calendar:"发布日历",seo:"SEO 设置",search:"全站搜索",languages:"多语言",navigation:"导航菜单",redirects:"重定向",versions:"版本与发布",settings:"站点设置",account:"管理员账号"};
+const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",forms:"表单构建器",media:"媒体库",posts:"文章管理",products:"产品管理",templates:"页面模板",calendar:"发布日历",seo:"SEO 设置",search:"全站搜索",languages:"多语言",navigation:"导航菜单",redirects:"重定向",environments:"发布环境",versions:"版本与发布",settings:"站点设置",account:"管理员账号"};
 const defaults:Record<string,SettingValue>={navigation:{items:[{label:"Products",url:"/products/entrance-door"},{label:"About",url:"/about"},{label:"Insights",url:"/insights"},{label:"Contact",url:"/contact"}]},redirects:{items:[]},settings:{siteName:"WONLY Global",contactEmail:"inquiry@wonlyglobal.com",whatsapp:"+1 (205) 240-1832",defaultLanguage:"en",timezone:"Asia/Shanghai"}};
 const size=(bytes:number)=>bytes>1048576?`${(bytes/1048576).toFixed(1)} MB`:`${Math.ceil(bytes/1024)} KB`;
 export default function CmsModuleDashboard({module,session,onNavigate,onEditPage,onSignOut}:{module:CmsWorkspace;session:Session;onNavigate:(value:CmsWorkspace)=>void;onEditPage:(page:CmsPageDefinition)=>void;onSignOut:()=>void}){
@@ -45,6 +46,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
   if(module==="versions")return <div className="cms-version-layout"><div className="cms-table-wrap"><table className="cms-table"><thead><tr><th>页面</th><th>操作</th><th>版本</th><th>时间</th><th/></tr></thead><tbody>{revisions.map(row=><tr key={row.id}><td>{row.cms_pages?.title||row.cms_pages?.page_key||"页面"}</td><td>{row.action}</td><td>#{row.revision_no}</td><td>{new Date(row.created_at).toLocaleString("zh-CN")}</td><td><button onClick={()=>setSelectedRevision(row)}>查看差异</button></td></tr>)}</tbody></table></div>{selectedRevision?<div className="cms-card cms-version-panel"><h2>{selectedRevision.cms_pages?.title} · #{selectedRevision.revision_no}</h2><VersionDiff before={revisions.find(item=>item.page_id===selectedRevision.page_id&&item.revision_no===selectedRevision.revision_no-1)?.snapshot??{}} after={selectedRevision.snapshot}/><p className="cms-muted">恢复版本只会创建新草稿，不会直接改动线上内容。</p></div>:<div className="cms-card cms-version-panel"><p>选择一个版本查看字段级差异。</p></div>}</div>;
   if(module==="navigation")return <NavigationManager role={role}/>;
   if(module==="redirects")return <RedirectManager role={role}/>;
+  if(module==="environments")return <ReleaseManager role={role}/>;
   if(module==="settings")return <SettingsEditor value={setting} setValue={setSetting}/>;
   if(module==="account")return <div className="cms-account-layout"><div className="cms-card cms-account-card"><h2>账号与权限</h2><dl><dt>登录邮箱</dt><dd>{session.user.email}</dd><dt>角色</dt><dd><strong>{role}</strong></dd><dt>账号 ID</dt><dd>{session.user.id}</dd><dt>最近登录</dt><dd>{session.user.last_sign_in_at?new Date(session.user.last_sign_in_at).toLocaleString("zh-CN"):"—"}</dd></dl><button className="cms-button secondary" onClick={()=>void cmsSupabase?.auth.resetPasswordForEmail(session.user.email??"",{redirectTo:`${location.origin}/cms`}).then(({error})=>setNotice(error?error.message:"密码重置邮件已发送"))}>发送密码重置邮件</button></div><div className="cms-card cms-audit-card"><h2>最近审计记录</h2>{audits.length?audits.map(log=><div className="cms-audit-row" key={log.id}><strong>{log.action}</strong><span>{log.resource_type} {log.resource_id?.slice(0,8)}</span><time>{new Date(log.created_at).toLocaleString("zh-CN")}</time></div>):<p className="cms-muted">暂无审计记录；数据库迁移完成后保存、审核和发布会自动记录。</p>}</div></div>;
   return null;
