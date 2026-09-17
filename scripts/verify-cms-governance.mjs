@@ -9,6 +9,8 @@ const templateMigration=fs.readFileSync("supabase/migrations/20260917150000_cms_
 const templates=fs.readFileSync("src/cms/PageTemplateLibrary.tsx","utf8");
 const seoMigration=fs.readFileSync("supabase/migrations/20260917170000_cms_bulk_seo.sql","utf8");
 const bulkSeo=fs.readFileSync("src/cms/BulkSeoManager.tsx","utf8");
+const redirectMigration=fs.readFileSync("supabase/migrations/20260917190000_cms_redirect_rules.sql","utf8");
+const redirects=fs.readFileSync("src/cms/RedirectManager.tsx","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -22,4 +24,6 @@ for(const token of ["cms_page_templates","cms_create_template","cms_apply_templa
 if(!templates.includes('rpc("cms_create_template"')||!templates.includes('rpc("cms_apply_template"')||!templates.includes("正式内容未改变"))throw new Error("Page template UI bypasses governed template RPCs");
 for(const token of ["cms_bulk_update_seo","updates_count_out_of_range","invalid_seo_fields","version_conflict","bulk_seo_updated","content_changed_after_scheduling"])if(!seoMigration.includes(token))throw new Error(`Bulk SEO migration missing ${token}`);
 if(!bulkSeo.includes('rpc("cms_bulk_update_seo"')||!bulkSeo.includes('can(role,"editSeo")')||!bulkSeo.includes("尚未发布"))throw new Error("Bulk SEO UI bypasses governed RPC or role restriction");
+for(const token of ["cms_redirect_rules","cms_save_redirect","cms_set_redirect_status","self_redirect_forbidden","redirect_loop_detected","version_conflict","cms_active_redirects"])if(!redirectMigration.includes(token))throw new Error(`Redirect migration missing ${token}`);
+if(!redirects.includes('rpc("cms_save_redirect"')||!redirects.includes('rpc("cms_set_redirect_status"')||!redirects.includes("等待生产网关同步"))throw new Error("Redirect UI bypasses governed draft/activation flow");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
