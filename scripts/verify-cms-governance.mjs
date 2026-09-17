@@ -30,6 +30,9 @@ const releaseMigration=fs.readFileSync("supabase/migrations/20260918090000_cms_r
 const releases=fs.readFileSync("src/cms/ReleaseManager.tsx","utf8");
 const qualityMigration=fs.readFileSync("supabase/migrations/20260918110000_cms_page_quality.sql","utf8");
 const quality=fs.readFileSync("src/cms/QualityDashboard.tsx","utf8");
+const roleMigration=fs.readFileSync("supabase/migrations/20260918130000_cms_role_administration.sql","utf8");
+const roleAdmin=fs.readFileSync("src/cms/RoleAdmin.tsx","utf8");
+const roleApi=fs.readFileSync("scripts/run-cms-admin-api.mjs","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -62,4 +65,7 @@ for(const token of ["cms_environments","cms_releases","cms_request_release","cms
 if(!releases.includes("VITE_CMS_DEPLOY_API_URL")||!releases.includes("release_id:release.id")||!releases.includes("状态以服务端回执为准"))throw new Error("Release manager bypasses the self-hosted, server-confirmed deployment flow");
 for(const token of ["cms_quality_runs","cms_quality_issues","cms_request_quality_run","cms_record_quality_run","service_role_required","quality_run_not_mutable"])if(!qualityMigration.includes(token))throw new Error(`Page quality migration missing ${token}`);
 if(!quality.includes("VITE_CMS_QUALITY_API_URL")||!quality.includes("run_id:run.id")||!quality.includes("不显示估算分数"))throw new Error("Quality dashboard does not require a fixed run id and real server evidence");
+for(const token of ["cms_list_admins","cms_set_admin_role","cms_register_invited_admin","last_super_admin_protected","admin_role_updated","service_role_required"])if(!roleMigration.includes(token))throw new Error(`Role administration migration missing ${token}`);
+if(!roleAdmin.includes("VITE_CMS_ADMIN_API_URL")||!roleAdmin.includes('rpc("cms_set_admin_role"')||!roleAdmin.includes("最后一个启用中的超级管理员"))throw new Error("Role administration UI bypasses the self-hosted invite or governed update flow");
+for(const token of ["CMS_SUPABASE_SERVICE_ROLE_KEY","CMS_ADMIN_ALLOWED_ORIGIN","inviteUserByEmail","cms_register_invited_admin","admin_invited"])if(!roleApi.includes(token))throw new Error(`Role administration API missing ${token}`);
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
