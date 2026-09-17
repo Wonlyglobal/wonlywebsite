@@ -12,6 +12,7 @@ import RedirectManager from "./RedirectManager";
 import TranslationWorkflow from "./TranslationWorkflow";
 import MediaManager from "./MediaManager";
 import SearchManager from "./SearchManager";
+import FormBuilder from "./FormBuilder";
 import type{CmsRole}from"./cmsGovernance";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;updated_at:string;published_at:string|null};
@@ -19,7 +20,7 @@ type Asset={id:string;public_url:string;original_name:string;mime_type:string;by
 type Revision={id:string;action:string;revision_no:number;created_at:string;snapshot:Record<string,unknown>;page_id:string;cms_pages:{title?:string;page_key?:string}|null};
 type Audit={id:string;action:string;resource_type:string;resource_id:string|null;created_at:string;metadata:Record<string,unknown>};
 type SettingValue=Record<string,unknown>|unknown[];
-const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",media:"媒体库",posts:"文章管理",products:"产品管理",templates:"页面模板",calendar:"发布日历",seo:"SEO 设置",search:"全站搜索",languages:"多语言",navigation:"导航菜单",redirects:"重定向",versions:"版本与发布",settings:"站点设置",account:"管理员账号"};
+const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",forms:"表单构建器",media:"媒体库",posts:"文章管理",products:"产品管理",templates:"页面模板",calendar:"发布日历",seo:"SEO 设置",search:"全站搜索",languages:"多语言",navigation:"导航菜单",redirects:"重定向",versions:"版本与发布",settings:"站点设置",account:"管理员账号"};
 const defaults:Record<string,SettingValue>={navigation:{items:[{label:"Products",url:"/products/entrance-door"},{label:"About",url:"/about"},{label:"Insights",url:"/insights"},{label:"Contact",url:"/contact"}]},redirects:{items:[]},settings:{siteName:"WONLY Global",contactEmail:"inquiry@wonlyglobal.com",whatsapp:"+1 (205) 240-1832",defaultLanguage:"en",timezone:"Asia/Shanghai"}};
 const size=(bytes:number)=>bytes>1048576?`${(bytes/1048576).toFixed(1)} MB`:`${Math.ceil(bytes/1024)} KB`;
 export default function CmsModuleDashboard({module,session,onNavigate,onEditPage,onSignOut}:{module:CmsWorkspace;session:Session;onNavigate:(value:CmsWorkspace)=>void;onEditPage:(page:CmsPageDefinition)=>void;onSignOut:()=>void}){
@@ -31,6 +32,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
  const renderPages=(kind:"posts"|"products")=>{const list=kind==="posts"?CMS_PAGES.filter(p=>p.type==="content"):CMS_PAGES.filter(p=>p.type==="product"||p.type==="landing");return <div className="cms-module-grid">{list.map(page=>{const row=pages.find(p=>p.page_key===page.key);return <article className="cms-card cms-module-card" key={page.key}><div><span className={`cms-state ${row?.status==="published"?"published":"draft"}`}>{row?.status==="published"?"已发布":"待编辑"}</span><h3>{page.title}</h3><p>{page.route}</p></div><button className="cms-button secondary" onClick={()=>edit(page.key)}>整页编辑</button></article>})}</div>};
  const render=()=>{
   if(module==="media")return <MediaManager role={role} session={session}/>;
+  if(module==="forms")return <FormBuilder role={role}/>;
   if(module==="posts")return <ArticleManager session={session}/>;
   if(module==="calendar")return <PublishCalendar role={role}/>;
   if(module==="templates")return <PageTemplateLibrary role={role}/>;

@@ -19,8 +19,30 @@ export const FORM_ENDPOINT = "https://api.web3forms.com/submit";
 export const FORM_KEY = (CFG.formKey || "").trim() || FALLBACK_KEY;
 export const FORM_CC = (CFG.formCc || "").trim();
 
+type PublishedField = { key: string; required?: boolean };
+type PublishedForm = { schema?: { fields?: PublishedField[] }; success_message?: string };
+const formCache = new Map<string, PublishedForm | null>();
+const USER_FIELDS = new Set(["name", "company", "job_title", "country", "email", "phone", "business_type", "message", "consent"]);
+
+async function getPublishedForm(formKey: string): Promise<PublishedForm | null> {
+  if (!cmsSupabase || !formKey) return null;
+  if (formCache.has(formKey)) return formCache.get(formKey) ?? null;
+  const { data, error } = await cmsSupabase.from("cms_published_forms").select("schema,success_message").eq("form_key", formKey).maybeSingle();
+  const value = error ? null : data as PublishedForm | null;
+  formCache.set(formKey, value);
+  return value;
+}
+
 /* 统一投递:自动带上 access_key / 抄送 / 回复地址,页面只传业务字段 */
 export async function submitEnquiry(payload: Record<string, string>): Promise<{ success: boolean; message?: string }> {
+  const definition = await getPublishedForm(payload.source || "");
+  const fields = definition?.schema?.fields;
+  if (fields?.length) {
+    const allowed = new Set(fields.map(field => field.key));
+    const missing = fields.find(field => field.required && !payload[field.key]?.trim());
+    if (missing) return { success: false, message: `${missing.key} is required.` };
+    payload = Object.fromEntries(Object.entries(payload).filter(([key]) => !USER_FIELDS.has(key) || allowed.has(key)));
+  }
   const body: Record<string, string> = {
     access_key: FORM_KEY,
     from_name: "WONLY Website",
@@ -43,5 +65,6 @@ export async function submitEnquiry(payload: Record<string, string>): Promise<{ 
     });
     if (error) console.error("Failed to archive website enquiry", error.message);
   }
+  if (result.success && definition?.success_message) result.message = definition.success_message;
   return result;
 }

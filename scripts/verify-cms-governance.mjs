@@ -17,6 +17,9 @@ const mediaMigration=fs.readFileSync("supabase/migrations/20260917230000_cms_med
 const media=fs.readFileSync("src/cms/MediaManager.tsx","utf8");
 const searchMigration=fs.readFileSync("supabase/migrations/20260918010000_cms_site_search.sql","utf8");
 const siteSearch=fs.readFileSync("src/pages/search/Index.tsx","utf8");
+const formMigration=fs.readFileSync("supabase/migrations/20260918030000_cms_form_builder.sql","utf8");
+const formBuilder=fs.readFileSync("src/cms/FormBuilder.tsx","utf8");
+const formRuntime=fs.readFileSync("src/lib/form-config.ts","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -38,4 +41,7 @@ for(const token of ["cms_update_asset_metadata","cms_replace_asset","same_asset_
 if(!media.includes("cms_replace_asset")||!media.includes("cms_update_asset_metadata")||!media.includes("图片无法加载")||!media.includes("cms-media-replace"))throw new Error("Media manager is missing governed replacement, metadata, or broken-image handling");
 for(const token of ["cms_search_site","status='published'","published_content is not null","websearch_to_tsquery","grant execute on function public.cms_search_site(text,text,integer) to anon,authenticated"])if(!searchMigration.includes(token))throw new Error(`Site search migration missing ${token}`);
 if(!siteSearch.includes("cms_search_site")||!siteSearch.includes("Search is temporarily unavailable")||!siteSearch.includes("No results"))throw new Error("Public search page is missing real RPC, failure, or empty states");
+for(const token of ["cms_forms","cms_validate_form_schema","cms_save_form","cms_publish_form","cms_published_forms","status='published'"])if(!formMigration.includes(token))throw new Error(`Form builder migration missing ${token}`);
+if(!formBuilder.includes("cms_save_form")||!formBuilder.includes("cms_publish_form")||!formBuilder.includes("draggable"))throw new Error("Form builder is missing governed save/publish or field ordering");
+if(!formRuntime.includes('from("cms_published_forms")')||!formRuntime.includes("USER_FIELDS")||!formRuntime.includes("is required"))throw new Error("Published form schema is not enforced by the existing enquiry delivery path");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
