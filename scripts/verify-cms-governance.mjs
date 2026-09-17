@@ -13,6 +13,8 @@ const redirectMigration=fs.readFileSync("supabase/migrations/20260917190000_cms_
 const redirects=fs.readFileSync("src/cms/RedirectManager.tsx","utf8");
 const translationMigration=fs.readFileSync("supabase/migrations/20260917210000_cms_translation_workflow.sql","utf8");
 const translations=fs.readFileSync("src/cms/TranslationWorkflow.tsx","utf8");
+const mediaMigration=fs.readFileSync("supabase/migrations/20260917230000_cms_media_enhancements.sql","utf8");
+const media=fs.readFileSync("src/cms/MediaManager.tsx","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -30,4 +32,6 @@ for(const token of ["cms_redirect_rules","cms_save_redirect","cms_set_redirect_s
 if(!redirects.includes('rpc("cms_save_redirect"')||!redirects.includes('rpc("cms_set_redirect_status"')||!redirects.includes("等待生产网关同步"))throw new Error("Redirect UI bypasses governed draft/activation flow");
 for(const token of ["cms_translation_jobs","cms_assign_translation","cms_save_translation","cms_submit_translation","cms_review_translation","source_changed_reassign_required","self_review_or_invalid_status"])if(!translationMigration.includes(token))throw new Error(`Translation workflow migration missing ${token}`);
 if(!translations.includes("VITE_CMS_AI_API_URL")||!translations.includes("page_id:page.id,locale")||!translations.includes("AI 结果仅供预览，尚未保存")||!translations.includes("cms_save_translation"))throw new Error("Translation UI violates fixed-page AI preview or governed save requirements");
+for(const token of ["cms_update_asset_metadata","cms_replace_asset","same_asset_forbidden","draft_pages_updated","published_content_changed',false"])if(!mediaMigration.includes(token))throw new Error(`Media migration missing ${token}`);
+if(!media.includes("cms_replace_asset")||!media.includes("cms_update_asset_metadata")||!media.includes("图片无法加载")||!media.includes("cms-media-replace"))throw new Error("Media manager is missing governed replacement, metadata, or broken-image handling");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");

@@ -10,6 +10,7 @@ import PageTemplateLibrary from "./PageTemplateLibrary";
 import BulkSeoManager from "./BulkSeoManager";
 import RedirectManager from "./RedirectManager";
 import TranslationWorkflow from "./TranslationWorkflow";
+import MediaManager from "./MediaManager";
 import type{CmsRole}from"./cmsGovernance";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;updated_at:string;published_at:string|null};
@@ -28,7 +29,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
  const pageMap=useMemo(()=>new Map(CMS_PAGES.map(p=>[p.key,p])),[]); const edit=(key:string)=>{const page=pageMap.get(key);if(page)onEditPage(page)};
  const renderPages=(kind:"posts"|"products")=>{const list=kind==="posts"?CMS_PAGES.filter(p=>p.type==="content"):CMS_PAGES.filter(p=>p.type==="product"||p.type==="landing");return <div className="cms-module-grid">{list.map(page=>{const row=pages.find(p=>p.page_key===page.key);return <article className="cms-card cms-module-card" key={page.key}><div><span className={`cms-state ${row?.status==="published"?"published":"draft"}`}>{row?.status==="published"?"已发布":"待编辑"}</span><h3>{page.title}</h3><p>{page.route}</p></div><button className="cms-button secondary" onClick={()=>edit(page.key)}>整页编辑</button></article>})}</div>};
  const render=()=>{
-  if(module==="media")return <div className="cms-media-grid">{assets.length?assets.map(asset=><article className="cms-card cms-media-card" key={asset.id}><img src={asset.public_url} alt={asset.original_name}/><strong>{asset.original_name}</strong><span>{asset.mime_type} · {size(asset.byte_size)}</span><button className="cms-button secondary" onClick={()=>void navigator.clipboard.writeText(asset.public_url)}>复制链接</button></article>):<div className="cms-module-empty">暂无已上传素材。请在页面编辑中选中图片后上传，素材会自动进入这里。</div>}</div>;
+  if(module==="media")return <MediaManager role={role} session={session}/>;
   if(module==="posts")return <ArticleManager session={session}/>;
   if(module==="calendar")return <PublishCalendar role={role}/>;
   if(module==="templates")return <PageTemplateLibrary role={role}/>;

@@ -5,11 +5,12 @@ export type CmsBlock={id:string;type:BlockType;hidden?:boolean;content:Record<st
 export type CmsSection={id:string;label:string;hidden?:boolean;blocks:CmsBlock[]};
 export type DiffEntry={path:string;before:unknown;after:unknown;kind:"added"|"removed"|"changed"};
 
-export const can=(role:CmsRole,capability:"edit"|"editSeo"|"editTranslation"|"submit"|"review"|"publish")=>{
+export const can=(role:CmsRole,capability:"edit"|"editSeo"|"editTranslation"|"assets"|"submit"|"review"|"publish")=>{
   if(role==="super_admin")return true;
   if(capability==="edit")return role==="editor";
   if(capability==="editSeo")return role==="editor"||role==="seo";
   if(capability==="editTranslation")return role==="editor"||role==="translator";
+  if(capability==="assets")return role==="editor";
   if(capability==="submit")return ["editor","seo","translator"].includes(role);
   if(capability==="review"||capability==="publish")return role==="reviewer";
   return false;
