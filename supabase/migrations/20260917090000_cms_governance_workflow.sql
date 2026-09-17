@@ -18,7 +18,7 @@ alter table public.cms_pages
 
 alter table public.cms_pages drop constraint if exists cms_pages_page_type_check;
 alter table public.cms_pages add constraint cms_pages_page_type_check check (
-  page_type in ('home','about','product','landing','content','article','legal')
+  page_type in ('home','about','product','landing','content','article','legal','setting')
 );
 
 alter table public.cms_pages drop constraint if exists cms_pages_workflow_status_check;
