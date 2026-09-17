@@ -4,7 +4,7 @@ title: "قائمة مواصفات أبواب الأمان للمباني الت�
 seoTitle: "قائمة مواصفات أبواب الأمان التجارية | WONLY"
 description: "قائمة للمشاريع تشمل مناطق المخاطر والتصنيفات والعتاد والتحكم بالدخول والتركيب والتسليم."
 category: "Buying Guide"
-date: "2026-09-30"
+date: "2026-09-25"
 dateLabel: "30 سبتمبر 2026"
 readMins: 7
 cover: "images/articles/commercial-security-door.webp"

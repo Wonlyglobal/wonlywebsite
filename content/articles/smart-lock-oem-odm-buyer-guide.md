@@ -4,7 +4,7 @@ title: "Smart Lock OEM/ODM Buyer Guide: Samples, Firmware and Compliance"
 seoTitle: "Smart Lock OEM/ODM Buyer Guide | WONLY"
 description: "A procurement guide for evaluating smart lock OEM/ODM suppliers, from samples and firmware to compliance, production testing and support."
 category: "Buying Guide"
-date: "2026-09-25"
+date: "2026-09-22"
 dateLabel: "25 September 2026"
 readMins: 7
 cover: "images/articles/smart-lock-oem-development.webp"

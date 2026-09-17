@@ -4,7 +4,7 @@ title: "Guía de compra de cerraduras inteligentes OEM/ODM"
 seoTitle: "Cerraduras inteligentes OEM/ODM — Guía | WONLY"
 description: "Cómo evaluar proveedores OEM/ODM: muestras, firmware, cumplimiento, pruebas de producción y soporte."
 category: "Buying Guide"
-date: "2026-09-25"
+date: "2026-09-22"
 dateLabel: "25 de septiembre de 2026"
 readMins: 7
 cover: "images/articles/smart-lock-oem-development.webp"

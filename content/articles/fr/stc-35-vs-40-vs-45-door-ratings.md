@@ -4,7 +4,7 @@ title: "Portes STC 35, 40 ou 45 : choisir le bon indice acoustique"
 seoTitle: "Indices de porte STC 35, 40 et 45 expliqués | WONLY"
 description: "Comparez STC 35, 40 et 45 et l'effet des joints, cadres, vitrages, murs et de la pose sur la performance."
 category: "Technology"
-date: "2026-09-28"
+date: "2026-09-24"
 dateLabel: "28 septembre 2026"
 readMins: 7
 cover: "images/articles/stc-door-rating-lab.webp"

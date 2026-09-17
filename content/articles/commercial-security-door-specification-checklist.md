@@ -4,7 +4,7 @@ title: "Commercial Security Door Specification Checklist for Buildings"
 seoTitle: "Commercial Security Door Specification Checklist | WONLY"
 description: "A project checklist for specifying commercial security doors, including risk zones, ratings, hardware, access control, installation and handover."
 category: "Buying Guide"
-date: "2026-09-30"
+date: "2026-09-25"
 dateLabel: "30 September 2026"
 readMins: 7
 cover: "images/articles/commercial-security-door.webp"

@@ -4,7 +4,7 @@ title: "Puertas de salida de emergencia de acero: guía de especificación"
 seoTitle: "Puertas de salida de emergencia de acero — Guía | WONLY"
 description: "Cómo especificar puertas de salida de emergencia de acero: evacuación, herrajes, fuego, control de acceso e inspección."
 category: "Buying Guide"
-date: "2026-09-21"
+date: "2026-09-19"
 dateLabel: "21 de septiembre de 2026"
 readMins: 7
 cover: "images/articles/steel-emergency-exit-door.webp"

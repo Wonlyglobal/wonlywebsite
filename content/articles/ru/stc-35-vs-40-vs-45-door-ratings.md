@@ -4,7 +4,7 @@ title: "Двери STC 35, 40 и 45: выбор акустического ре�
 seoTitle: "Рейтинги дверей STC 35, 40 и 45 | WONLY"
 description: "Сравнение STC 35, 40 и 45 и влияние уплотнений, коробки, стекла, стен и монтажа на акустику."
 category: "Technology"
-date: "2026-09-28"
+date: "2026-09-24"
 dateLabel: "28 сентября 2026"
 readMins: 7
 cover: "images/articles/stc-door-rating-lab.webp"

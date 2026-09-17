@@ -4,7 +4,7 @@ title: "أبواب مخارج الطوارئ الفولاذية: دليل الم
 seoTitle: "دليل مواصفات أبواب مخارج الطوارئ الفولاذية | WONLY"
 description: "كيفية تحديد أبواب مخارج الطوارئ الفولاذية للمشاريع، بما يشمل عتاد الخروج والحريق والتحكم بالدخول والفحص."
 category: "Buying Guide"
-date: "2026-09-21"
+date: "2026-09-19"
 dateLabel: "21 سبتمبر 2026"
 readMins: 7
 cover: "images/articles/steel-emergency-exit-door.webp"

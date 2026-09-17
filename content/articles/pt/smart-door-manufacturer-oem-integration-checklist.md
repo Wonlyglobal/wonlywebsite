@@ -4,7 +4,7 @@ title: "Fabricante de Porta Inteligente - Checklist de Integração OEM"
 seoTitle: "Fabricante de Porta Inteligente - Checklist de Integração OEM | WONLY"
 description: "Um checklist prático para integrar a estrutura da porta, fechaduras inteligentes, energia, sensores, software e suporte ao projeto em um sistema de entrada inteligente."
 category: "Guia de compra"
-date: "2026-09-23"
+date: "2026-09-21"
 dateLabel: "23 de setembro de 2026"
 readMins: 7
 cover: "images/articles/smart-door-oem-integration.webp"

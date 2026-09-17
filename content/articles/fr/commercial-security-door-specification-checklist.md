@@ -4,7 +4,7 @@ title: "Checklist de spécification des portes de sécurité commerciales"
 seoTitle: "Checklist porte de sécurité commerciale | WONLY"
 description: "Checklist projet : zones de risque, classements, quincaillerie, contrôle d'accès, pose et remise."
 category: "Buying Guide"
-date: "2026-09-30"
+date: "2026-09-25"
 dateLabel: "30 septembre 2026"
 readMins: 7
 cover: "images/articles/commercial-security-door.webp"

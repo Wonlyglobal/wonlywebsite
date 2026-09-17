@@ -4,7 +4,7 @@ title: "Чек-лист спецификации коммерческих защ
 seoTitle: "Спецификация коммерческих защитных дверей | WONLY"
 description: "Чек-лист проекта: зоны риска, рейтинги, фурнитура, СКУД, монтаж и передача."
 category: "Buying Guide"
-date: "2026-09-30"
+date: "2026-09-25"
 dateLabel: "30 сентября 2026"
 readMins: 7
 cover: "images/articles/commercial-security-door.webp"

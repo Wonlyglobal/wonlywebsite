@@ -4,7 +4,7 @@ title: "قائمة تكامل OEM لمصنّع الأبواب الذكية"
 seoTitle: "قائمة تكامل مصنع الأبواب الذكية OEM | WONLY"
 description: "قائمة عملية لدمج هيكل الباب والقفل والطاقة والحساسات والبرمجيات والدعم في نظام مدخل ذكي واحد."
 category: "Buying Guide"
-date: "2026-09-23"
+date: "2026-09-21"
 dateLabel: "23 سبتمبر 2026"
 readMins: 7
 cover: "images/articles/smart-door-oem-integration.webp"

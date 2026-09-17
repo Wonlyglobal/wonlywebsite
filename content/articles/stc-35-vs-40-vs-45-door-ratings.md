@@ -4,7 +4,7 @@ title: "STC 35 vs 40 vs 45 Doors: How to Select an Acoustic Rating"
 seoTitle: "STC 35 vs 40 vs 45 Door Ratings Explained | WONLY"
 description: "Compare STC 35, 40 and 45 door ratings and learn how seals, frames, glazing, walls and installation affect project acoustic performance."
 category: "Technology"
-date: "2026-09-28"
+date: "2026-09-24"
 dateLabel: "28 September 2026"
 readMins: 7
 cover: "images/articles/stc-door-rating-lab.webp"

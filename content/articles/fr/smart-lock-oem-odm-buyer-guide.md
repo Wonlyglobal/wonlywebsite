@@ -4,7 +4,7 @@ title: "Guide d'achat de serrures intelligentes OEM/ODM"
 seoTitle: "Guide d'achat serrure intelligente OEM/ODM | WONLY"
 description: "Guide d'évaluation des fournisseurs OEM/ODM : échantillons, firmware, conformité, essais de production et support."
 category: "Buying Guide"
-date: "2026-09-25"
+date: "2026-09-22"
 dateLabel: "25 septembre 2026"
 readMins: 7
 cover: "images/articles/smart-lock-oem-development.webp"

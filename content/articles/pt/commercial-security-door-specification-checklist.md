@@ -4,7 +4,7 @@ title: "Checklist para Especificação de Porta de Segurança Comercial para Edi
 seoTitle: "Checklist para Especificação de Porta de Segurança Comercial | WONLY"
 description: "Um checklist para especificação de portas de segurança comerciais, incluindo zonas de risco, classificações, hardware, controle de acesso, instalação e entrega."
 category: "Guia de compra"
-date: "2026-09-30"
+date: "2026-09-25"
 dateLabel: "30 de setembro de 2026"
 readMins: 7
 cover: "images/articles/commercial-security-door.webp"

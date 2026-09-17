@@ -4,7 +4,7 @@ title: "Portes de sortie de secours en acier : guide de spécification"
 seoTitle: "Portes de sortie de secours en acier — Guide | WONLY"
 description: "Comment spécifier une porte de sortie de secours en acier : évacuation, quincaillerie, feu, contrôle d'accès et inspection."
 category: "Buying Guide"
-date: "2026-09-21"
+date: "2026-09-19"
 dateLabel: "21 septembre 2026"
 readMins: 7
 cover: "images/articles/steel-emergency-exit-door.webp"

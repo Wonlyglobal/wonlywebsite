@@ -4,7 +4,7 @@ title: "دليل شراء الأقفال الذكية OEM/ODM"
 seoTitle: "دليل شراء الأقفال الذكية OEM/ODM | WONLY"
 description: "دليل لتقييم موردي الأقفال الذكية من العينات والبرنامج الثابت إلى الامتثال واختبار الإنتاج والدعم."
 category: "Buying Guide"
-date: "2026-09-25"
+date: "2026-09-22"
 dateLabel: "25 سبتمبر 2026"
 readMins: 7
 cover: "images/articles/smart-lock-oem-development.webp"

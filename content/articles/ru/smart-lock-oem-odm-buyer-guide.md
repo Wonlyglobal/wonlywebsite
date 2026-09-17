@@ -4,7 +4,7 @@ title: "Руководство покупателя умных замков OEM/
 seoTitle: "Умные замки OEM/ODM — Руководство покупателя | WONLY"
 description: "Как оценить OEM/ODM-поставщика: образцы, прошивка, соответствие, производственные тесты и поддержка."
 category: "Buying Guide"
-date: "2026-09-25"
+date: "2026-09-22"
 dateLabel: "25 сентября 2026"
 readMins: 7
 cover: "images/articles/smart-lock-oem-development.webp"

@@ -4,7 +4,7 @@ title: "Guia para Compra de Fechadura Inteligente OEM/ODM: Amostras, Firmware e 
 seoTitle: "Guia para Compra de Fechadura Inteligente OEM/ODM | WONLY"
 description: "Um guia de aquisição para avaliar fornecedores de fechadura inteligente OEM/ODM, desde amostras e firmware até conformidade, testes de produção e suporte."
 category: "Guia de compra"
-date: "2026-09-25"
+date: "2026-09-22"
 dateLabel: "25 de setembro de 2026"
 readMins: 7
 cover: "images/articles/smart-lock-oem-development.webp"

@@ -4,7 +4,7 @@ title: "Smart Door Manufacturer OEM Integration Checklist"
 seoTitle: "Smart Door Manufacturer OEM Integration Checklist | WONLY"
 description: "A practical OEM checklist for integrating door structure, smart locks, power, sensors, software and project support into one smart entrance system."
 category: "Buying Guide"
-date: "2026-09-23"
+date: "2026-09-21"
 dateLabel: "23 September 2026"
 readMins: 7
 cover: "images/articles/smart-door-oem-integration.webp"

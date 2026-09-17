@@ -4,7 +4,7 @@ title: "Portas STC 35 vs 40 vs 45: como escolher a classificação acústica"
 seoTitle: "Classificações de portas STC 35 vs 40 vs 45 | WONLY"
 description: "Compare as classificações STC 35, 40 e 45 de portas e aprenda como selos, molduras, vidros, paredes e instalação afetam o desempenho acústico do projeto."
 category: "Tecnologia"
-date: "2026-09-28"
+date: "2026-09-24"
 dateLabel: "28 de setembro de 2026"
 readMins: 7
 cover: "images/articles/stc-door-rating-lab.webp"

@@ -4,7 +4,7 @@ title: "Portas de Emergência em Aço: Especificação, Hardware e Guia de Confo
 seoTitle: "Portas de Emergência em Aço — Guia de Especificação | WONLY"
 description: "Como especificar portas de emergência em aço para projetos comerciais, incluindo hardware de evacuação, comprovação de classificação contra incêndio, interfaces e inspeção."
 category: "Guia de compra"
-date: "2026-09-21"
+date: "2026-09-19"
 dateLabel: "21 de setembro de 2026"
 readMins: 7
 cover: "images/articles/steel-emergency-exit-door.webp"

@@ -4,7 +4,7 @@ title: "Чек-лист OEM-интеграции производителя ум
 seoTitle: "Производитель умных дверей — OEM-чек-лист | WONLY"
 description: "OEM-чек-лист интеграции двери, замка, питания, датчиков, ПО и поддержки в единую систему умного входа."
 category: "Buying Guide"
-date: "2026-09-23"
+date: "2026-09-21"
 dateLabel: "23 сентября 2026"
 readMins: 7
 cover: "images/articles/smart-door-oem-integration.webp"

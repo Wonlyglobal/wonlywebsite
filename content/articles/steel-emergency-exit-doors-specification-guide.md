@@ -4,7 +4,7 @@ title: "Steel Emergency Exit Doors: Specification, Hardware and Compliance Guide
 seoTitle: "Steel Emergency Exit Doors — Specification Guide | WONLY"
 description: "How to specify steel emergency exit doors for commercial projects, including egress hardware, fire-rating evidence, interfaces and inspection."
 category: "Buying Guide"
-date: "2026-09-21"
+date: "2026-09-19"
 dateLabel: "21 September 2026"
 readMins: 7
 cover: "images/articles/steel-emergency-exit-door.webp"

@@ -4,7 +4,7 @@ title: "أبواب STC 35 مقابل 40 مقابل 45: دليل الاختيار
 seoTitle: "شرح تصنيفات الأبواب STC 35 و40 و45 | WONLY"
 description: "مقارنة STC 35 و40 و45 وتأثير الحشوات والإطار والزجاج والجدار والتركيب في الأداء الصوتي."
 category: "Technology"
-date: "2026-09-28"
+date: "2026-09-24"
 dateLabel: "28 سبتمبر 2026"
 readMins: 7
 cover: "images/articles/stc-door-rating-lab.webp"

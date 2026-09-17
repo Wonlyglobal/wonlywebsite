@@ -4,7 +4,7 @@ title: "Стальные двери аварийного выхода: руко�
 seoTitle: "Стальные двери аварийного выхода — Спецификация | WONLY"
 description: "Как задать стальные двери аварийного выхода: эвакуационная фурнитура, огнестойкость, СКУД и приёмка."
 category: "Buying Guide"
-date: "2026-09-21"
+date: "2026-09-19"
 dateLabel: "21 сентября 2026"
 readMins: 7
 cover: "images/articles/steel-emergency-exit-door.webp"
