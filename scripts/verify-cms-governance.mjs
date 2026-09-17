@@ -20,6 +20,9 @@ const siteSearch=fs.readFileSync("src/pages/search/Index.tsx","utf8");
 const formMigration=fs.readFileSync("supabase/migrations/20260918030000_cms_form_builder.sql","utf8");
 const formBuilder=fs.readFileSync("src/cms/FormBuilder.tsx","utf8");
 const formRuntime=fs.readFileSync("src/lib/form-config.ts","utf8");
+const productMigration=fs.readFileSync("supabase/migrations/20260918050000_cms_product_management.sql","utf8");
+const productManager=fs.readFileSync("src/cms/ProductManager.tsx","utf8");
+const productRuntime=fs.readFileSync("src/lib/cms-products.ts","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -44,4 +47,6 @@ if(!siteSearch.includes("cms_search_site")||!siteSearch.includes("Search is temp
 for(const token of ["cms_forms","cms_validate_form_schema","cms_save_form","cms_publish_form","cms_published_forms","status='published'"])if(!formMigration.includes(token))throw new Error(`Form builder migration missing ${token}`);
 if(!formBuilder.includes("cms_save_form")||!formBuilder.includes("cms_publish_form")||!formBuilder.includes("draggable"))throw new Error("Form builder is missing governed save/publish or field ordering");
 if(!formRuntime.includes('from("cms_published_forms")')||!formRuntime.includes("USER_FIELDS")||!formRuntime.includes("is required"))throw new Error("Published form schema is not enforced by the existing enquiry delivery path");
+for(const token of ["cms_products","cms_validate_product_data","cms_save_product","cms_set_product_review","cms_publish_product","self_approval_or_invalid_status","cms_published_products"])if(!productMigration.includes(token))throw new Error(`Product management migration missing ${token}`);
+if(!productManager.includes("cms_save_product")||!productManager.includes("cms_publish_product")||!productRuntime.includes("cms_published_products"))throw new Error("Product management is not connected from governed CMS to published runtime");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");

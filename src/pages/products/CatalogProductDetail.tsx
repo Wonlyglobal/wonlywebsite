@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { BASE, CHAMP, CHAMP_BG, DARK, GOLD, GOLD_DEEP, MUTED, SILVER, SiteFooter, SiteHeader, Reveal, eyebrow, h2cls, useQuoteStore } from "@/lib/site-ui";
 import { DoorModelSelector } from "@/lib/DoorModelSelector";
+import { usePublishedProduct } from "@/lib/cms-products";
 
 export type ProductKey =
   | "s80-max" | "s60-max" | "s60-pro" | "s50-pro" | "s58-pro" | "p10-pro" | "s922-max" | "s936"
@@ -219,7 +220,7 @@ const PRODUCTS: Record<ProductKey, ProductData> = {
 };
 
 export default function CatalogProductDetail({ product }: { product: ProductKey }) {
-  const data = PRODUCTS[product];
+  const data = usePublishedProduct<ProductData & Record<string,unknown>>(product,PRODUCTS[product]);
   const openQuote = useQuoteStore((s) => s.openQuote);
   const jsonLd = [
     { "@context": "https://schema.org", "@type": "Product", name: data.title, model: data.model, category: data.category, brand: { "@type": "Brand", name: "WONLY" }, manufacturer: { "@type": "Organization", name: "WONLY" }, description: data.description, image: `${SITE_URL}${data.hero.replace(BASE, "/")}`, url: `${SITE_URL}${data.path}/` },

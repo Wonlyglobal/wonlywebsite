@@ -13,6 +13,7 @@ import TranslationWorkflow from "./TranslationWorkflow";
 import MediaManager from "./MediaManager";
 import SearchManager from "./SearchManager";
 import FormBuilder from "./FormBuilder";
+import ProductManager from "./ProductManager";
 import type{CmsRole}from"./cmsGovernance";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;updated_at:string;published_at:string|null};
@@ -36,7 +37,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
   if(module==="posts")return <ArticleManager session={session}/>;
   if(module==="calendar")return <PublishCalendar role={role}/>;
   if(module==="templates")return <PageTemplateLibrary role={role}/>;
-  if(module==="products")return renderPages("products");
+  if(module==="products")return <ProductManager role={role}/>;
   if(module==="seo")return <BulkSeoManager role={role}/>;
   if(module==="search")return <SearchManager/>;
   if(module==="languages")return <TranslationWorkflow role={role}/>;
