@@ -14,6 +14,7 @@ const redirectMigration=fs.readFileSync("supabase/migrations/20260917190000_cms_
 const redirects=fs.readFileSync("src/cms/RedirectManager.tsx","utf8");
 const translationMigration=fs.readFileSync("supabase/migrations/20260917210000_cms_translation_workflow.sql","utf8");
 const translations=fs.readFileSync("src/cms/TranslationWorkflow.tsx","utf8");
+const translationApi=fs.readFileSync("scripts/run-cms-ai-api.mjs","utf8");
 const mediaMigration=fs.readFileSync("supabase/migrations/20260917230000_cms_media_enhancements.sql","utf8");
 const media=fs.readFileSync("src/cms/MediaManager.tsx","utf8");
 const searchMigration=fs.readFileSync("supabase/migrations/20260918010000_cms_site_search.sql","utf8");
@@ -29,8 +30,10 @@ const navManager=fs.readFileSync("src/cms/NavigationManager.tsx","utf8");
 const navRuntime=fs.readFileSync("src/lib/cms-site-settings.ts","utf8");
 const releaseMigration=fs.readFileSync("supabase/migrations/20260918090000_cms_release_environments.sql","utf8");
 const releases=fs.readFileSync("src/cms/ReleaseManager.tsx","utf8");
+const deployApi=fs.readFileSync("scripts/run-cms-deploy-api.mjs","utf8");
 const qualityMigration=fs.readFileSync("supabase/migrations/20260918110000_cms_page_quality.sql","utf8");
 const quality=fs.readFileSync("src/cms/QualityDashboard.tsx","utf8");
+const qualityApi=fs.readFileSync("scripts/run-cms-quality-api.mjs","utf8");
 const roleMigration=fs.readFileSync("supabase/migrations/20260918130000_cms_role_administration.sql","utf8");
 const roleAdmin=fs.readFileSync("src/cms/RoleAdmin.tsx","utf8");
 const roleApi=fs.readFileSync("scripts/run-cms-admin-api.mjs","utf8");
@@ -68,6 +71,8 @@ for(const token of ["cms_redirect_rules","cms_save_redirect","cms_set_redirect_s
 if(!redirects.includes('rpc("cms_save_redirect"')||!redirects.includes('rpc("cms_set_redirect_status"')||!redirects.includes("等待生产网关同步"))throw new Error("Redirect UI bypasses governed draft/activation flow");
 for(const token of ["cms_translation_jobs","cms_assign_translation","cms_save_translation","cms_submit_translation","cms_review_translation","source_changed_reassign_required","self_review_or_invalid_status"])if(!translationMigration.includes(token))throw new Error(`Translation workflow migration missing ${token}`);
 if(!translations.includes("VITE_CMS_AI_API_URL")||!translations.includes("page_id:page.id,locale")||!translations.includes("AI 结果仅供预览，尚未保存")||!translations.includes("cms_save_translation"))throw new Error("Translation UI violates fixed-page AI preview or governed save requirements");
+for(const token of ["CMS_PUBLIC_SITE_ORIGIN","DEEPSEEK_API_KEY","invalid_fixed_page_request","route_outside_allowed_origin","public_text","deepseek_invalid_json"])if(!translationApi.includes(token))throw new Error(`Translation API missing ${token}`);
+if(translationApi.includes("draft_content"))throw new Error("Translation API must not send CMS draft content to an external AI provider");
 for(const token of ["cms_update_asset_metadata","cms_replace_asset","same_asset_forbidden","draft_pages_updated","published_content_changed',false"])if(!mediaMigration.includes(token))throw new Error(`Media migration missing ${token}`);
 if(!media.includes("cms_replace_asset")||!media.includes("cms_update_asset_metadata")||!media.includes("图片无法加载")||!media.includes("cms-media-replace"))throw new Error("Media manager is missing governed replacement, metadata, or broken-image handling");
 for(const token of ["cms_search_site","status='published'","published_content is not null","websearch_to_tsquery","grant execute on function public.cms_search_site(text,text,integer) to anon,authenticated"])if(!searchMigration.includes(token))throw new Error(`Site search migration missing ${token}`);
@@ -81,8 +86,10 @@ for(const token of ["cms_navigation","cms_validate_navigation_items","p_depth>3"
 if(!navManager.includes("draggable")||!navManager.includes("L{depth}")||!navManager.includes("cms_save_navigation")||!navRuntime.includes("cms_published_navigation"))throw new Error("Visual navigation tree is missing hierarchy, ordering, governed save, or runtime connection");
 for(const token of ["cms_environments","cms_releases","cms_request_release","cms_approve_release","cms_record_release_status","service_role_required","self_approval_or_invalid_status"])if(!releaseMigration.includes(token))throw new Error(`Release environment migration missing ${token}`);
 if(!releases.includes("VITE_CMS_DEPLOY_API_URL")||!releases.includes("release_id:release.id")||!releases.includes("状态以服务端回执为准"))throw new Error("Release manager bypasses the self-hosted, server-confirmed deployment flow");
+for(const token of ["CMS_DEPLOY_TARGETS","release_not_approved","cms_record_release_status","health_origin_not_allowed","provider_http_"])if(!deployApi.includes(token))throw new Error(`Deploy API missing ${token}`);
 for(const token of ["cms_quality_runs","cms_quality_issues","cms_request_quality_run","cms_record_quality_run","service_role_required","quality_run_not_mutable"])if(!qualityMigration.includes(token))throw new Error(`Page quality migration missing ${token}`);
 if(!quality.includes("VITE_CMS_QUALITY_API_URL")||!quality.includes("run_id:run.id")||!quality.includes("不显示估算分数"))throw new Error("Quality dashboard does not require a fixed run id and real server evidence");
+for(const token of ["CMS_PUBLIC_SITE_ORIGIN","invalid_quality_run","route_outside_allowed_origin","cms_record_quality_run","missing_alt","slow_response"])if(!qualityApi.includes(token))throw new Error(`Quality API missing ${token}`);
 for(const token of ["cms_list_admins","cms_set_admin_role","cms_register_invited_admin","p_email text","last_super_admin_protected","admin_role_updated","service_role_required"])if(!roleMigration.includes(token))throw new Error(`Role administration migration missing ${token}`);
 if(!roleAdmin.includes("VITE_CMS_ADMIN_API_URL")||!roleAdmin.includes('rpc("cms_set_admin_role"')||!roleAdmin.includes("最后一个启用中的超级管理员"))throw new Error("Role administration UI bypasses the self-hosted invite or governed update flow");
 for(const token of ["CMS_SUPABASE_SERVICE_ROLE_KEY","CMS_ADMIN_ALLOWED_ORIGIN","inviteUserByEmail","cms_register_invited_admin","admin_invited"])if(!roleApi.includes(token))throw new Error(`Role administration API missing ${token}`);

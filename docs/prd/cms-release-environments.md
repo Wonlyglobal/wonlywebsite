@@ -12,6 +12,10 @@
 - 浏览器触发时只向自有部署服务发送 `release_id`；服务端重新验证 JWT、环境和批准状态后执行，并用 service-role RPC 回写 queued/deploying/succeeded/failed。
 - 没有健康检查或部署回执时必须显示 unknown/待执行，不推断成功。
 
+## 服务配置
+
+运行 `scripts/run-cms-deploy-api.mjs`，配置 Supabase 服务端变量、`CMS_DEPLOY_ALLOWED_ORIGIN` 和服务器专用 `CMS_DEPLOY_TARGETS`。映射按环境键固定提供商 webhook、认证头、超时及允许的健康检查 origin；浏览器不能传 webhook、命令、分支或健康地址。服务只接受已批准的 release ID，并以真实提供商及健康检查结果回写终态。
+
 ## 验收流程
 
 1. 配置三个真实环境，核对域名、provider、branch、保护标识和健康 URL。

@@ -13,6 +13,10 @@
 - AI 返回只进入浏览器预览；管理员点击“应用为翻译草稿”后才调用受控 RPC。
 - 批准译文仍不会独立上线，必须随页面整体审批发布。
 
+## 服务配置
+
+运行 `scripts/run-cms-ai-api.mjs`，在自有服务器配置 `CMS_SUPABASE_URL`、`CMS_SUPABASE_SERVICE_ROLE_KEY`、`CMS_AI_ALLOWED_ORIGIN=https://cms.wonlyglobal.com`、`CMS_PUBLIC_SITE_ORIGIN=https://www.wonlyglobal.com` 与 `DEEPSEEK_API_KEY`。服务只按数据库固定路由读取公开官网 HTML、去除标签并截断后发送；不读取或发送后台草稿。
+
 ## 验收流程
 
 1. Editor 为固定页面创建五种语言任务，检查唯一约束和源版本。

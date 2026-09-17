@@ -12,6 +12,10 @@
 - 扫描服务使用 service-role 回写运行和问题；浏览器无写权限。
 - 没有完成回执时不显示分数；失败保留真实错误。
 
+## 服务配置
+
+运行 `scripts/run-cms-quality-api.mjs`，配置 Supabase 服务端变量、`CMS_QUALITY_ALLOWED_ORIGIN` 与固定 `CMS_PUBLIC_SITE_ORIGIN`。服务仅接受任务 ID，从数据库解析 route，拒绝跨源路由，并将真实 HTML、响应耗时、图片和链接证据通过 service-role RPC 回写。
+
 ## 验收流程
 
 1. 对首页、产品页、文章页各执行桌面和390px移动扫描，确认六类分数及证据来自真实页面。
