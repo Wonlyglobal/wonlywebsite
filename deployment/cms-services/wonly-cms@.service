@@ -1,0 +1,24 @@
+[Unit]
+Description=WONLY CMS service (%i)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=wonly-cms
+Group=wonly-cms
+WorkingDirectory=/opt/wonly-cms/current
+EnvironmentFile=/etc/wonly-cms/%i.env
+ExecStart=/usr/bin/env node ${CMS_ENTRYPOINT}
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=20s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/wonly-cms
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

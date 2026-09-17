@@ -1,0 +1,16 @@
+[Unit]
+Description=WONLY CMS due publication runner
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=wonly-cms
+Group=wonly-cms
+WorkingDirectory=/opt/wonly-cms/current
+EnvironmentFile=/etc/wonly-cms/publish-schedules.env
+ExecStart=/usr/bin/env node scripts/run-cms-publish-schedules.mjs
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+UMask=0077

@@ -27,6 +27,18 @@
 - `run-cms-webhook-worker.mjs`：长驻或每 10 秒轮询；端点与 HMAC 密钥来自 `CMS_WEBHOOK_ENDPOINTS`。
 - 所有 API 使用独立 `PORT` 覆盖默认端口，进程失败自动重启；发布与恢复进程设置单实例锁。
 
+## 可交付运行文件
+
+`deployment/cms-services/` 提供可直接交给服务器管理方的最小运行基线：
+
+- `wonly-cms@.service`：七个API共用的systemd模板；每个实例从`/etc/wonly-cms/<实例名>.env`读取独立环境变量。
+- `wonly-cms-publish-schedules.service/.timer`：每分钟执行到期发布任务。
+- `wonly-cms-webhook.service`：常驻Webhook投递worker。
+- `nginx-cms-api.conf`：七条固定HTTPS反代路径；不接受任意上游URL。
+- `env.example`：仅列变量名和占位符，不能把填入密钥的副本提交Git。
+
+服务器管理方需创建不可登录的`wonly-cms`系统账号，将同一已审核提交安装到`/opt/wonly-cms/current`，把运行期目录设为`/var/lib/wonly-cms`，并将环境文件设置为`root:wonly-cms`、权限`0640`。正式启用前先执行`nginx -t`、逐个检查systemd日志中无密钥/个人数据，再从错误Origin和无令牌请求开始验证拒绝路径。
+
 ## 上线前必需证据
 
 1. 每个 API 的预检请求、无令牌、错误角色、错误 Origin、未知 ID 和成功路径均有真实 HTTP 证据。

@@ -1,0 +1,22 @@
+[Unit]
+Description=WONLY CMS webhook delivery worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=wonly-cms
+Group=wonly-cms
+WorkingDirectory=/opt/wonly-cms/current
+EnvironmentFile=/etc/wonly-cms/webhook.env
+ExecStart=/usr/bin/env node scripts/run-cms-webhook-worker.mjs
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Run WONLY CMS due publications every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+Persistent=true
+RandomizedDelaySec=5s
+Unit=wonly-cms-publish-schedules.service
+
+[Install]
+WantedBy=timers.target
