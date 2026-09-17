@@ -44,6 +44,9 @@ const recommendationRuntime=fs.readFileSync("src/lib/cms-recommendations.tsx","u
 const healthMigration=fs.readFileSync("supabase/migrations/20260918230000_cms_integration_health.sql","utf8");
 const healthUi=fs.readFileSync("src/cms/IntegrationHealth.tsx","utf8");
 const healthApi=fs.readFileSync("scripts/run-cms-integration-health-api.mjs","utf8");
+const backupMigration=fs.readFileSync("supabase/migrations/20260919010000_cms_backup_restore.sql","utf8");
+const backupUi=fs.readFileSync("src/cms/BackupManager.tsx","utf8");
+const backupApi=fs.readFileSync("scripts/run-cms-backup-api.mjs","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -91,4 +94,8 @@ if(!recommendationRuntime.includes("route_prefix")||!recommendationRuntime.inclu
 for(const token of ["cms_integrations","cms_integration_checks","cms_request_integration_check","cms_record_integration_check","service_role_required","check_already_running"])if(!healthMigration.includes(token))throw new Error(`Integration health migration missing ${token}`);
 if(!healthUi.includes("VITE_CMS_HEALTH_API_URL")||!healthUi.includes("状态保持未知")||!healthUi.includes("查看证据"))throw new Error("Integration health UI lacks real server check or evidence states");
 for(const token of ["CMS_INTEGRATION_HEALTH_TARGETS","origin_forbidden","requested_by!==user.id","url_host"])if(!healthApi.includes(token))throw new Error(`Integration health API missing ${token}`);
+for(const token of ["cms_backup_jobs","cms_request_backup","cms_request_restore","cms_approve_restore","self_approval_forbidden","verified_backup_required","service_role_required"])if(!backupMigration.includes(token))throw new Error(`Backup migration missing ${token}`);
+if(!backupUi.includes("VITE_CMS_BACKUP_API_URL")||!backupUi.includes("另一名")||!backupUi.includes("不提供直接下载"))throw new Error("Backup UI lacks self-hosted execution, approval, or data-exposure safeguard");
+for(const token of ["pg_dump","pg_restore","backup_checksum_mismatch","pre_restore_backup_key","PGPASSWORD"])if(!backupApi.includes(token))throw new Error(`Backup API missing ${token}`);
+if(backupApi.includes("shell:true")||backupApi.includes("shell: true"))throw new Error("Backup API must never execute database tools through a shell");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
