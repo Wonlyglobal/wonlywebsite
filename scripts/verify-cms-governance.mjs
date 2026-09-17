@@ -41,6 +41,9 @@ const analyticsDashboard=fs.readFileSync("src/cms/AnalyticsDashboard.tsx","utf8"
 const analyticsApi=fs.readFileSync("scripts/run-cms-analytics-api.mjs","utf8");
 const recommendationMigration=fs.readFileSync("supabase/migrations/20260918210000_cms_personalization.sql","utf8");
 const recommendationRuntime=fs.readFileSync("src/lib/cms-recommendations.tsx","utf8");
+const healthMigration=fs.readFileSync("supabase/migrations/20260918230000_cms_integration_health.sql","utf8");
+const healthUi=fs.readFileSync("src/cms/IntegrationHealth.tsx","utf8");
+const healthApi=fs.readFileSync("scripts/run-cms-integration-health-api.mjs","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -85,4 +88,7 @@ if(!analyticsDashboard.includes("VITE_CMS_ANALYTICS_API_URL")||!analyticsDashboa
 for(const token of ["GOOGLE_SA_KEY","GA4_PROPERTY_ID","searchconsole.googleapis.com","analyticsdata.googleapis.com","cms_record_analytics_sync"])if(!analyticsApi.includes(token))throw new Error(`Analytics API missing ${token}`);
 for(const token of ["cms_recommendation_rules","cms_save_recommendation","cms_submit_recommendation","cms_publish_recommendation","self_approval_or_invalid_status","cms_published_recommendations"])if(!recommendationMigration.includes(token))throw new Error(`Personalization migration missing ${token}`);
 if(!recommendationRuntime.includes("route_prefix")||!recommendationRuntime.includes("utm_source")||!recommendationRuntime.includes("cms_published_recommendations"))throw new Error("Recommendation runtime lacks explainable matching or published-only source");
+for(const token of ["cms_integrations","cms_integration_checks","cms_request_integration_check","cms_record_integration_check","service_role_required","check_already_running"])if(!healthMigration.includes(token))throw new Error(`Integration health migration missing ${token}`);
+if(!healthUi.includes("VITE_CMS_HEALTH_API_URL")||!healthUi.includes("状态保持未知")||!healthUi.includes("查看证据"))throw new Error("Integration health UI lacks real server check or evidence states");
+for(const token of ["CMS_INTEGRATION_HEALTH_TARGETS","origin_forbidden","requested_by!==user.id","url_host"])if(!healthApi.includes(token))throw new Error(`Integration health API missing ${token}`);
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
