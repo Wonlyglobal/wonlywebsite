@@ -9,6 +9,7 @@ import PublishCalendar from "./PublishCalendar";
 import PageTemplateLibrary from "./PageTemplateLibrary";
 import BulkSeoManager from "./BulkSeoManager";
 import RedirectManager from "./RedirectManager";
+import TranslationWorkflow from "./TranslationWorkflow";
 import type{CmsRole}from"./cmsGovernance";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;updated_at:string;published_at:string|null};
@@ -33,7 +34,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
   if(module==="templates")return <PageTemplateLibrary role={role}/>;
   if(module==="products")return renderPages("products");
   if(module==="seo")return <BulkSeoManager role={role}/>;
-  if(module==="languages")return <div className="cms-table-wrap"><table className="cms-table"><thead><tr><th>页面</th><th>EN</th><th>AR</th><th>FR</th><th>RU</th><th>ES</th><th/></tr></thead><tbody>{CMS_PAGES.map(page=>{const row=pages.find(p=>p.page_key===page.key),langs=row?.translations??{};return <tr key={page.key}><td>{page.title}</td><td>原文</td>{["ar","fr","ru","es"].map(lang=><td key={lang}>{langs[lang]?"已填写":"待确认"}</td>)}<td><button onClick={()=>edit(page.key)}>编辑</button></td></tr>})}</tbody></table></div>;
+  if(module==="languages")return <TranslationWorkflow role={role}/>;
   if(module==="versions")return <div className="cms-version-layout"><div className="cms-table-wrap"><table className="cms-table"><thead><tr><th>页面</th><th>操作</th><th>版本</th><th>时间</th><th/></tr></thead><tbody>{revisions.map(row=><tr key={row.id}><td>{row.cms_pages?.title||row.cms_pages?.page_key||"页面"}</td><td>{row.action}</td><td>#{row.revision_no}</td><td>{new Date(row.created_at).toLocaleString("zh-CN")}</td><td><button onClick={()=>setSelectedRevision(row)}>查看差异</button></td></tr>)}</tbody></table></div>{selectedRevision?<div className="cms-card cms-version-panel"><h2>{selectedRevision.cms_pages?.title} · #{selectedRevision.revision_no}</h2><VersionDiff before={revisions.find(item=>item.page_id===selectedRevision.page_id&&item.revision_no===selectedRevision.revision_no-1)?.snapshot??{}} after={selectedRevision.snapshot}/><p className="cms-muted">恢复版本只会创建新草稿，不会直接改动线上内容。</p></div>:<div className="cms-card cms-version-panel"><p>选择一个版本查看字段级差异。</p></div>}</div>;
   if(module==="navigation")return <JsonListEditor title="导航项目" columns={["label","url"]} value={setting} setValue={setSetting}/>;
   if(module==="redirects")return <RedirectManager role={role}/>;

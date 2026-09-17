@@ -11,6 +11,8 @@ const seoMigration=fs.readFileSync("supabase/migrations/20260917170000_cms_bulk_
 const bulkSeo=fs.readFileSync("src/cms/BulkSeoManager.tsx","utf8");
 const redirectMigration=fs.readFileSync("supabase/migrations/20260917190000_cms_redirect_rules.sql","utf8");
 const redirects=fs.readFileSync("src/cms/RedirectManager.tsx","utf8");
+const translationMigration=fs.readFileSync("supabase/migrations/20260917210000_cms_translation_workflow.sql","utf8");
+const translations=fs.readFileSync("src/cms/TranslationWorkflow.tsx","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -26,4 +28,6 @@ for(const token of ["cms_bulk_update_seo","updates_count_out_of_range","invalid_
 if(!bulkSeo.includes('rpc("cms_bulk_update_seo"')||!bulkSeo.includes('can(role,"editSeo")')||!bulkSeo.includes("尚未发布"))throw new Error("Bulk SEO UI bypasses governed RPC or role restriction");
 for(const token of ["cms_redirect_rules","cms_save_redirect","cms_set_redirect_status","self_redirect_forbidden","redirect_loop_detected","version_conflict","cms_active_redirects"])if(!redirectMigration.includes(token))throw new Error(`Redirect migration missing ${token}`);
 if(!redirects.includes('rpc("cms_save_redirect"')||!redirects.includes('rpc("cms_set_redirect_status"')||!redirects.includes("等待生产网关同步"))throw new Error("Redirect UI bypasses governed draft/activation flow");
+for(const token of ["cms_translation_jobs","cms_assign_translation","cms_save_translation","cms_submit_translation","cms_review_translation","source_changed_reassign_required","self_review_or_invalid_status"])if(!translationMigration.includes(token))throw new Error(`Translation workflow migration missing ${token}`);
+if(!translations.includes("VITE_CMS_AI_API_URL")||!translations.includes("page_id:page.id,locale")||!translations.includes("AI 结果仅供预览，尚未保存")||!translations.includes("cms_save_translation"))throw new Error("Translation UI violates fixed-page AI preview or governed save requirements");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
