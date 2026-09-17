@@ -35,6 +35,7 @@ const roleAdmin=fs.readFileSync("src/cms/RoleAdmin.tsx","utf8");
 const roleApi=fs.readFileSync("scripts/run-cms-admin-api.mjs","utf8");
 const auditMigration=fs.readFileSync("supabase/migrations/20260918150000_cms_audit_center.sql","utf8");
 const auditCenter=fs.readFileSync("src/cms/AuditCenter.tsx","utf8");
+const restoreMigration=fs.readFileSync("supabase/migrations/20260918170000_cms_revision_restore.sql","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -72,4 +73,6 @@ if(!roleAdmin.includes("VITE_CMS_ADMIN_API_URL")||!roleAdmin.includes('rpc("cms_
 for(const token of ["CMS_SUPABASE_SERVICE_ROLE_KEY","CMS_ADMIN_ALLOWED_ORIGIN","inviteUserByEmail","cms_register_invited_admin","admin_invited"])if(!roleApi.includes(token))throw new Error(`Role administration API missing ${token}`);
 for(const token of ["cms_list_audit_logs","permission_denied","invalid_pagination","count(*) over()","audit_logs_are_immutable"])if(!auditMigration.includes(token))throw new Error(`Audit center migration missing ${token}`);
 if(!auditCenter.includes('rpc("cms_list_audit_logs"')||!auditCenter.includes("导出本页 CSV")||!auditCenter.includes("JSON.stringify(selected.metadata"))throw new Error("Audit center is missing governed pagination, export, or evidence detail");
+for(const token of ["cms_restore_revision","version_conflict","content_changed_after_scheduling","revision_restored","'restored'"])if(!restoreMigration.includes(token))throw new Error(`Revision restore migration missing ${token}`);
+if(!fs.readFileSync("src/cms/CmsModuleDashboard.tsx","utf8").includes('rpc("cms_restore_revision"'))throw new Error("Version history UI is not connected to governed draft restoration");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
