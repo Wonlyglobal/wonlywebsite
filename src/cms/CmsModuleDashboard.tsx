@@ -19,6 +19,7 @@ import ReleaseManager from "./ReleaseManager";
 import QualityDashboard from "./QualityDashboard";
 import RoleAdmin from "./RoleAdmin";
 import AuditCenter from "./AuditCenter";
+import AnalyticsDashboard from "./AnalyticsDashboard";
 import{can,type CmsRole}from"./cmsGovernance";
 
 type PageRow={id:string;page_key:string;title:string;page_type:string;route:string;status:string;draft_content:Record<string,unknown>;translations:Record<string,unknown>;content_version:number;updated_at:string;published_at:string|null};
@@ -26,7 +27,7 @@ type Asset={id:string;public_url:string;original_name:string;mime_type:string;by
 type Revision={id:string;action:string;revision_no:number;created_at:string;snapshot:Record<string,unknown>;page_id:string;cms_pages:{title?:string;page_key?:string}|null};
 type Audit={id:string;action:string;resource_type:string;resource_id:string|null;created_at:string;metadata:Record<string,unknown>};
 type SettingValue=Record<string,unknown>|unknown[];
-const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",forms:"表单构建器",media:"媒体库",posts:"文章管理",products:"产品管理",templates:"页面模板",calendar:"发布日历",seo:"SEO 设置",quality:"页面质量",search:"全站搜索",languages:"多语言",navigation:"导航菜单",redirects:"重定向",environments:"发布环境",versions:"版本与发布",settings:"站点设置",roles:"权限角色",audit:"审计日志",account:"我的账号"};
+const titles:Record<CmsWorkspace,string>={pages:"页面编辑",inquiries:"询盘管理",forms:"表单构建器",media:"媒体库",posts:"文章管理",products:"产品管理",templates:"页面模板",calendar:"发布日历",seo:"SEO 设置",analytics:"数据看板",quality:"页面质量",search:"全站搜索",languages:"多语言",navigation:"导航菜单",redirects:"重定向",environments:"发布环境",versions:"版本与发布",settings:"站点设置",roles:"权限角色",audit:"审计日志",account:"我的账号"};
 const defaults:Record<string,SettingValue>={navigation:{items:[{label:"Products",url:"/products/entrance-door"},{label:"About",url:"/about"},{label:"Insights",url:"/insights"},{label:"Contact",url:"/contact"}]},redirects:{items:[]},settings:{siteName:"WONLY Global",contactEmail:"inquiry@wonlyglobal.com",whatsapp:"+1 (205) 240-1832",defaultLanguage:"en",timezone:"Asia/Shanghai"}};
 const size=(bytes:number)=>bytes>1048576?`${(bytes/1048576).toFixed(1)} MB`:`${Math.ceil(bytes/1024)} KB`;
 export default function CmsModuleDashboard({module,session,onNavigate,onEditPage,onSignOut}:{module:CmsWorkspace;session:Session;onNavigate:(value:CmsWorkspace)=>void;onEditPage:(page:CmsPageDefinition)=>void;onSignOut:()=>void}){
@@ -45,6 +46,7 @@ export default function CmsModuleDashboard({module,session,onNavigate,onEditPage
   if(module==="templates")return <PageTemplateLibrary role={role}/>;
   if(module==="products")return <ProductManager role={role}/>;
   if(module==="seo")return <BulkSeoManager role={role}/>;
+  if(module==="analytics")return <AnalyticsDashboard role={role}/>;
   if(module==="quality")return <QualityDashboard/>;
   if(module==="search")return <SearchManager/>;
   if(module==="languages")return <TranslationWorkflow role={role}/>;

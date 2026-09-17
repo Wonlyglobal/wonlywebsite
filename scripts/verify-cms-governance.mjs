@@ -36,6 +36,9 @@ const roleApi=fs.readFileSync("scripts/run-cms-admin-api.mjs","utf8");
 const auditMigration=fs.readFileSync("supabase/migrations/20260918150000_cms_audit_center.sql","utf8");
 const auditCenter=fs.readFileSync("src/cms/AuditCenter.tsx","utf8");
 const restoreMigration=fs.readFileSync("supabase/migrations/20260918170000_cms_revision_restore.sql","utf8");
+const analyticsMigration=fs.readFileSync("supabase/migrations/20260918190000_cms_analytics_dashboard.sql","utf8");
+const analyticsDashboard=fs.readFileSync("src/cms/AnalyticsDashboard.tsx","utf8");
+const analyticsApi=fs.readFileSync("scripts/run-cms-analytics-api.mjs","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -75,4 +78,7 @@ for(const token of ["cms_list_audit_logs","permission_denied","invalid_paginatio
 if(!auditCenter.includes('rpc("cms_list_audit_logs"')||!auditCenter.includes("导出本页 CSV")||!auditCenter.includes("JSON.stringify(selected.metadata"))throw new Error("Audit center is missing governed pagination, export, or evidence detail");
 for(const token of ["cms_restore_revision","version_conflict","content_changed_after_scheduling","revision_restored","'restored'"])if(!restoreMigration.includes(token))throw new Error(`Revision restore migration missing ${token}`);
 if(!fs.readFileSync("src/cms/CmsModuleDashboard.tsx","utf8").includes('rpc("cms_restore_revision"'))throw new Error("Version history UI is not connected to governed draft restoration");
+for(const token of ["cms_analytics_syncs","cms_analytics_snapshots","cms_request_analytics_sync","cms_record_analytics_sync","ga4_and_gsc_required","cms_inquiry_dashboard","service_role_required"])if(!analyticsMigration.includes(token))throw new Error(`Analytics dashboard migration missing ${token}`);
+if(!analyticsDashboard.includes("VITE_CMS_ANALYTICS_API_URL")||!analyticsDashboard.includes("不会生成估算值")||!analyticsDashboard.includes("cms_inquiry_dashboard"))throw new Error("Analytics dashboard lacks real sync, explicit missing state, or enquiry evidence");
+for(const token of ["GOOGLE_SA_KEY","GA4_PROPERTY_ID","searchconsole.googleapis.com","analyticsdata.googleapis.com","cms_record_analytics_sync"])if(!analyticsApi.includes(token))throw new Error(`Analytics API missing ${token}`);
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
