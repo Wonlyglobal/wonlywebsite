@@ -10,6 +10,7 @@ import FloatingContact from "@/lib/floating-contact";
 import { LocaleDocument, localeFromPath } from "@/lib/i18n";
 import { FloatingLanguageSwitcher } from "@/lib/site-ui";
 import { getCmsSetting } from "@/lib/cms-site-settings";
+import CmsRecommendation from "@/lib/cms-recommendations";
 
 // Take over scroll handling from the browser so lazy routes behave predictably.
 if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
@@ -70,7 +71,7 @@ function ScrollManager() {
 function SiteFloaters() {
   const location = useLocation();
   if (location.pathname.startsWith("/cms")) return null;
-  return <><FloatingLanguageSwitcher /><FloatingContact /></>;
+  return <><FloatingLanguageSwitcher /><FloatingContact /><CmsRecommendation /></>;
 }
 
 function CmsRedirects() {

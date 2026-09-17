@@ -39,6 +39,8 @@ const restoreMigration=fs.readFileSync("supabase/migrations/20260918170000_cms_r
 const analyticsMigration=fs.readFileSync("supabase/migrations/20260918190000_cms_analytics_dashboard.sql","utf8");
 const analyticsDashboard=fs.readFileSync("src/cms/AnalyticsDashboard.tsx","utf8");
 const analyticsApi=fs.readFileSync("scripts/run-cms-analytics-api.mjs","utf8");
+const recommendationMigration=fs.readFileSync("supabase/migrations/20260918210000_cms_personalization.sql","utf8");
+const recommendationRuntime=fs.readFileSync("src/lib/cms-recommendations.tsx","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -81,4 +83,6 @@ if(!fs.readFileSync("src/cms/CmsModuleDashboard.tsx","utf8").includes('rpc("cms_
 for(const token of ["cms_analytics_syncs","cms_analytics_snapshots","cms_request_analytics_sync","cms_record_analytics_sync","ga4_and_gsc_required","cms_inquiry_dashboard","service_role_required"])if(!analyticsMigration.includes(token))throw new Error(`Analytics dashboard migration missing ${token}`);
 if(!analyticsDashboard.includes("VITE_CMS_ANALYTICS_API_URL")||!analyticsDashboard.includes("不会生成估算值")||!analyticsDashboard.includes("cms_inquiry_dashboard"))throw new Error("Analytics dashboard lacks real sync, explicit missing state, or enquiry evidence");
 for(const token of ["GOOGLE_SA_KEY","GA4_PROPERTY_ID","searchconsole.googleapis.com","analyticsdata.googleapis.com","cms_record_analytics_sync"])if(!analyticsApi.includes(token))throw new Error(`Analytics API missing ${token}`);
+for(const token of ["cms_recommendation_rules","cms_save_recommendation","cms_submit_recommendation","cms_publish_recommendation","self_approval_or_invalid_status","cms_published_recommendations"])if(!recommendationMigration.includes(token))throw new Error(`Personalization migration missing ${token}`);
+if(!recommendationRuntime.includes("route_prefix")||!recommendationRuntime.includes("utm_source")||!recommendationRuntime.includes("cms_published_recommendations"))throw new Error("Recommendation runtime lacks explainable matching or published-only source");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
