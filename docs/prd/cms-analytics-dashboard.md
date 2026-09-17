@@ -12,7 +12,7 @@
 
 ## 服务配置
 
-运行 `scripts/run-cms-analytics-api.mjs`，服务器配置 `CMS_SUPABASE_URL`、`CMS_SUPABASE_SERVICE_ROLE_KEY`、`CMS_ANALYTICS_ALLOWED_ORIGIN=https://cms.wonlyglobal.com`、`GOOGLE_SA_KEY`、`GA4_PROPERTY_ID`，可选 `GSC_SITE` 和 `PORT`。运行环境安装 `google-auth-library`；浏览器仅配置 `VITE_CMS_ANALYTICS_API_URL`。
+运行 `scripts/run-cms-analytics-api.mjs`，服务器配置 `CMS_SUPABASE_URL`、`CMS_SUPABASE_SERVICE_ROLE_KEY`、`CMS_ANALYTICS_ALLOWED_ORIGIN=https://cms.wonlyglobal.com`、`GOOGLE_SA_KEY`、`GA4_PROPERTY_ID`，可选 `GSC_SITE` 和 `PORT`。服务账号OAuth由Node内置RSA签名完成，不依赖额外Google运行时包；浏览器仅配置 `VITE_CMS_ANALYTICS_API_URL`。
 
 ## 验收流程
 
