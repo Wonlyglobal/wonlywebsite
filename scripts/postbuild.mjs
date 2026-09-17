@@ -201,6 +201,113 @@ function renderArticle(article, locale) {
   return { route, html };
 }
 
+const PRIORITY_LANDING_PAGES = [
+  {
+    route: '/security-door-manufacturer/',
+    title: 'Security Door Manufacturer & OEM Supplier | WONLY',
+    description: 'Source steel, cast-aluminium and fire-rated security doors from WONLY for distribution, residential and commercial projects with OEM/ODM support.',
+    eyebrow: 'Manufacturer & OEM',
+    h1: 'Security Door Manufacturer for Global Projects',
+    lead: 'Work directly with a security door manufacturer covering engineered doorsets, custom finishes, smart-lock integration, project documentation and export delivery.',
+    sections: [
+      ['A Manufacturing Partner From Specification to Delivery', 'WONLY manufactures security doors for residential, hospitality, commercial and institutional projects. The range covers steel and cast-aluminium entrance doors, fire-rated configurations, smart doors and coordinated lock options.'],
+      ['What Buyers Should Define Before Quotation', 'Provide the destination market, opening schedule, quantity, security target, fire and acoustic requirements, finish, smart-lock integration and export delivery plan.'],
+      ['From Requirement to Delivery', 'Review the proposed doorset, drawings and compliance scope; approve samples and a reference specification; then inspect, package and deliver with installation and handover documentation.'],
+    ],
+    faq: [
+      ['Does WONLY support OEM and private-label security doors?', 'Yes. Branding, finish, configuration and packaging can be reviewed against production, certification and minimum-order requirements.'],
+      ['Which security door types can be supplied?', 'The portfolio includes steel and cast-aluminium security doors, smart doors, fire-rated project doors and application-specific entrance solutions.'],
+    ],
+  },
+  {
+    route: '/smart-door-manufacturer/',
+    title: 'Smart Door Manufacturer for Projects & Distribution | WONLY',
+    description: 'Source integrated smart doors with biometric entry, sensing, automatic opening and project engineering from WONLY, a global smart door manufacturer.',
+    eyebrow: 'Integrated Smart Entry',
+    h1: 'Smart Door Manufacturer for Connected Entrances',
+    lead: 'Specify the door, lock, sensors, power, emergency access and whole-home connectivity as one coordinated entrance system.',
+    sections: [
+      ['Smart Entry Works Best as One Engineered System', 'A smart door is more than a conventional leaf fitted with an electronic lock. Structure, sensing distance, motorised opening, anti-pinch protection, power backup, network behaviour and mechanical emergency access must work together.'],
+      ['What Buyers Should Define Before Quotation', 'Define the user journey, door construction, access methods, power and connectivity, safety behaviour and the local service model before selecting a platform.'],
+      ['From Requirement to Delivery', 'Select a platform and confirm the door, lock, sensor, power and integration boundary; approve a working sample; then plan production, commissioning materials, spares and after-sales handover.'],
+    ],
+    faq: [
+      ['Can WONLY supply a complete smart door rather than only a lock?', 'Yes. WONLY coordinates the physical doorset and smart-entry functions as one product platform.'],
+      ['How is access retained during a power or network failure?', 'The specified configuration should include documented battery, backup-power and mechanical emergency-access paths.'],
+    ],
+  },
+  {
+    route: '/smart-lock-oem-odm/',
+    title: 'Smart Lock OEM & ODM Manufacturer | WONLY',
+    description: 'Build a private-label fingerprint, face or palm-vein smart lock range with WONLY OEM/ODM engineering, sampling, production and export support.',
+    eyebrow: 'Private Label Programme',
+    h1: 'Smart Lock OEM & ODM Manufacturing',
+    lead: 'Develop a market-ready smart-lock line with verified hardware, biometric options, branding, packaging and scalable production support.',
+    sections: [
+      ['Define the Market Before Selecting the Lock', 'A reliable OEM/ODM programme starts with the door type, target price band, user flow, climate, credentials, connectivity and local service model—not a cosmetic logo change at the end.'],
+      ['What Buyers Should Define Before Quotation', 'Confirm the target segment, door compatibility, credential mix, brand package, compliance and privacy requirements, quality controls and after-sales responsibility.'],
+      ['From Requirement to Delivery', 'Select the base platform, confirm engineering and compliance scope, validate samples for fit and reliability, then release production with inspection criteria and support documents.'],
+    ],
+    faq: [
+      ['What can be customised in an OEM smart lock?', 'Depending on the platform, options may include logo, colour, access methods, mortise preparation, packaging, manuals and selected software settings.'],
+      ['Can WONLY match a smart lock to an existing door range?', 'Yes. Door thickness, preparation, mortise, handing, wiring and installation details must be reviewed before selection.'],
+    ],
+  },
+];
+
+function renderStaticRoute({ route, title, description, body, jsonLd, alternates = '' }) {
+  const canonical = `${SITE}${route}`;
+  let html = shell
+    .replace(/<html\b[^>]*>/i, '<html lang="en" dir="ltr">')
+    .replace(/<link\s+rel="alternate"[^>]*>\s*/gi, '')
+    .replace('</head>', `${alternates}${jsonLd ? `\n<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}\n</head>`)
+    .replace('<div id="root"></div>', `<div id="root">${body}</div>`);
+  html = replaceTag(html, /<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  html = replaceTag(html, /<meta\s+name="description"[^>]*>/i, `<meta name="description" content="${escapeHtml(description)}" />`);
+  html = replaceTag(html, /<link\s+rel="canonical"[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
+  html = replaceTag(html, /<meta\s+property="og:title"[^>]*>/i, `<meta property="og:title" content="${escapeHtml(title)}" />`);
+  html = replaceTag(html, /<meta\s+property="og:description"[^>]*>/i, `<meta property="og:description" content="${escapeHtml(description)}" />`);
+  html = replaceTag(html, /<meta\s+property="og:url"[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
+  const output = path.join('dist', route.replace(/^\//, ''), 'index.html');
+  mkdirSync(path.dirname(output), { recursive: true });
+  writeFileSync(output, html, 'utf8');
+}
+
+function renderEnglishPriorityRoutes() {
+  for (const page of PRIORITY_LANDING_PAGES) {
+    const faq = page.faq.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } }));
+    const body = `<main id="seo-priority-page" style="max-width:980px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><article><p>${escapeHtml(page.eyebrow)}</p><h1>${escapeHtml(page.h1)}</h1><p>${escapeHtml(page.lead)}</p>${page.sections.map(([heading, text]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(text)}</p></section>`).join('')}<section><h2>Procurement Questions</h2>${page.faq.map(([question, answer]) => `<h3>${escapeHtml(question)}</h3><p>${escapeHtml(answer)}</p>`).join('')}</section><p><a href="/contact">Discuss Your Requirement</a></p></article></main>`;
+    renderStaticRoute({
+      ...page,
+      body,
+      jsonLd: [
+        { '@context': 'https://schema.org', '@type': 'WebPage', name: page.title, description: page.description, url: `${SITE}${page.route}` },
+        { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq },
+        { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` }, { '@type': 'ListItem', position: 2, name: page.h1, item: `${SITE}${page.route}` }] },
+      ],
+    });
+  }
+
+  const published = readdirSync(ARTICLE_DIR)
+    .filter((name) => /^[-a-z0-9]+\.md$/i.test(name))
+    .map((name) => parseArticle(path.join(ARTICLE_DIR, name)))
+    .filter((article) => article.meta.slug && article.meta.date && article.meta.date <= TODAY)
+    .sort((a, b) => b.meta.date.localeCompare(a.meta.date));
+  const insightsTitle = 'News & Insights — Security Door & Smart Lock Guides | WONLY';
+  const insightsDescription = 'WONLY News & Insights: buying guides, product technology, market outlooks and company updates for security door and smart lock distributors and project buyers.';
+  const articleLinks = published.map(({ meta }) => `<article><p>${escapeHtml(meta.category)} · ${escapeHtml(meta.dateLabel || meta.date)}</p><h2><a href="/insights/${escapeHtml(meta.slug)}/">${escapeHtml(meta.title)}</a></h2><p>${escapeHtml(meta.excerpt)}</p></article>`).join('');
+  const insightAlternates = [...LOCALES.map((locale) => `<link rel="alternate" hreflang="${locale}" href="${SITE}${locale === 'en' ? '' : `/${locale}`}/insights/" />`), `<link rel="alternate" hreflang="x-default" href="${SITE}/insights/" />`].join('\n');
+  renderStaticRoute({
+    route: '/insights/',
+    title: insightsTitle,
+    description: insightsDescription,
+    alternates: `${insightAlternates}\n`,
+    body: `<main id="seo-insights-index" style="max-width:1100px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><header><p>News & Insights</p><h1>Guides, Technology & Market Insight</h1><p>Practical knowledge for security door and smart lock distributors, project buyers and partners.</p></header><section>${articleLinks}</section></main>`,
+    jsonLd: { '@context': 'https://schema.org', '@type': 'Blog', name: 'WONLY News & Insights', url: `${SITE}/insights/`, description: insightsDescription },
+  });
+  console.log(`postbuild: generated ${PRIORITY_LANDING_PAGES.length + 1} English priority route shells`);
+}
+
 let rendered = 0;
 for (const locale of LOCALES) {
   const directory = locale === 'en' ? ARTICLE_DIR : path.join(ARTICLE_DIR, locale);
@@ -217,3 +324,4 @@ for (const locale of LOCALES) {
 
 console.log(`postbuild: generated ${rendered} scheduled article HTML files through ${TODAY}`);
 renderPortugueseCorePages();
+renderEnglishPriorityRoutes();
