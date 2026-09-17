@@ -126,6 +126,7 @@ const SectionComingSoon = lazy(() => import("./pages/placeholder/ComingSoon").th
 const Privacy = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Privacy })));
 const Terms = lazy(() => import("./pages/legal/Legal").then((m) => ({ default: m.Terms })));
 const PublishedVisualContent = lazy(() => import("./cms/PublishedVisualContent"));
+const SearchPage = lazy(() => import("./pages/search/Index"));
 
 function LegacyCmsRedirect() {
   useEffect(() => {
@@ -236,6 +237,7 @@ const App = () => (
           <Route path="/contact" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Contact /></Suspense>} />
           <Route path="/insights" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Insights /></Suspense>} />
           <Route path="/insights/:slug" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><InsightArticle /></Suspense>} />
+          <Route path="/search" element={<Suspense fallback={<div className="min-h-screen" />}><SearchPage /></Suspense>} />
 
           <Route path="/prototype" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><Prototype /></Suspense>} />
 

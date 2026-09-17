@@ -15,6 +15,8 @@ const translationMigration=fs.readFileSync("supabase/migrations/20260917210000_c
 const translations=fs.readFileSync("src/cms/TranslationWorkflow.tsx","utf8");
 const mediaMigration=fs.readFileSync("supabase/migrations/20260917230000_cms_media_enhancements.sql","utf8");
 const media=fs.readFileSync("src/cms/MediaManager.tsx","utf8");
+const searchMigration=fs.readFileSync("supabase/migrations/20260918010000_cms_site_search.sql","utf8");
+const siteSearch=fs.readFileSync("src/pages/search/Index.tsx","utf8");
 const required=["create table if not exists public.cms_audit_logs","create table if not exists public.cms_review_requests","create table if not exists public.cms_page_sections","create table if not exists public.cms_content_blocks","raise exception 'version_conflict'","raise exception 'self_approval_forbidden'","requested_version=v_page.content_version","revoke insert,update,delete on public.cms_pages from authenticated","create or replace function public.cms_publish_approved"];
 const missing=required.filter(token=>!migration.includes(token));
 if(missing.length)throw new Error(`Migration requirements missing:\n${missing.join("\n")}`);
@@ -34,4 +36,6 @@ for(const token of ["cms_translation_jobs","cms_assign_translation","cms_save_tr
 if(!translations.includes("VITE_CMS_AI_API_URL")||!translations.includes("page_id:page.id,locale")||!translations.includes("AI 结果仅供预览，尚未保存")||!translations.includes("cms_save_translation"))throw new Error("Translation UI violates fixed-page AI preview or governed save requirements");
 for(const token of ["cms_update_asset_metadata","cms_replace_asset","same_asset_forbidden","draft_pages_updated","published_content_changed',false"])if(!mediaMigration.includes(token))throw new Error(`Media migration missing ${token}`);
 if(!media.includes("cms_replace_asset")||!media.includes("cms_update_asset_metadata")||!media.includes("图片无法加载")||!media.includes("cms-media-replace"))throw new Error("Media manager is missing governed replacement, metadata, or broken-image handling");
+for(const token of ["cms_search_site","status='published'","published_content is not null","websearch_to_tsquery","grant execute on function public.cms_search_site(text,text,integer) to anon,authenticated"])if(!searchMigration.includes(token))throw new Error(`Site search migration missing ${token}`);
+if(!siteSearch.includes("cms_search_site")||!siteSearch.includes("Search is temporarily unavailable")||!siteSearch.includes("No results"))throw new Error("Public search page is missing real RPC, failure, or empty states");
 console.log("CMS governance verification passed: roles/audit, optimistic autosave, approval binding, block editor and version diff are wired.");
