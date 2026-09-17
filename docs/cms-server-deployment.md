@@ -37,6 +37,8 @@
 - `nginx-cms-api.conf`：七条固定HTTPS反代路径；不接受任意上游URL。
 - `env.example`：仅列变量名和占位符，不能把填入密钥的副本提交Git。
 
+恢复任务固定使用`pg_restore --single-transaction --exit-on-error`，任一步失败都必须由PostgreSQL回滚；发布健康检查必须在服务器环境映射中显式配置`health_origin`，不得以数据库中的地址自动建立允许来源。
+
 服务器管理方需创建不可登录的`wonly-cms`系统账号，将同一已审核提交安装到`/opt/wonly-cms/current`，把运行期目录设为`/var/lib/wonly-cms`，并将环境文件设置为`root:wonly-cms`、权限`0640`。正式启用前先执行`nginx -t`、逐个检查systemd日志中无密钥/个人数据，再从错误Origin和无令牌请求开始验证拒绝路径。
 
 ## 上线前必需证据
