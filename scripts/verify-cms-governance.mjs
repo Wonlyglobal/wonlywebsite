@@ -1,4 +1,5 @@
 import fs from "node:fs";
+if(!fs.readFileSync("scripts/build-cms-phase2-migration-bundle.mjs","utf8").includes("rollback"))throw new Error("Phase 2 migration preflight generator is missing rollback protection");
 for(const file of ["20260825090000_cms_foundation_baseline.sql","20260825110000_cms_public_published_view.sql","20260826090000_cms_inquiries_baseline.sql","20260826110000_cms_site_settings_baseline.sql"]){if(!fs.existsSync(`supabase/migrations/${file}`))throw new Error(`Rebuildable CMS baseline missing ${file}`)}
 const migration=fs.readFileSync("supabase/migrations/20260917090000_cms_governance_workflow.sql","utf8");
 const visual=fs.readFileSync("src/cms/VisualDashboard.tsx","utf8");

@@ -33,3 +33,7 @@
 2. staging 完成 25 份迁移、七角色权限矩阵和桌面/390px 流程；数据库备份恢复在 staging 演练。
 3. DeepSeek 只收到固定公开网页正文；GA4/GSC 与官方界面同周期对账；质量扫描有前后问题变化。
 4. production 发布由两人审批，记录 commit、提供商运行地址、健康检查和最终资源哈希。
+
+## 数据库增量预演
+
+线上已有治理基础时，不重放四份 baseline 和 `20260917090000_cms_governance_workflow.sql`。运行 `node scripts/build-cms-phase2-migration-bundle.mjs /tmp/cms-phase2-preflight.sql` 生成包含 5 秒锁等待、120 秒语句超时和最终 `ROLLBACK` 的增量预演包；只有预演无错误、备份完成并获得正式授权后，才使用 `--apply` 生成以 `COMMIT` 结尾的同源发布包。
