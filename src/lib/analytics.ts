@@ -85,13 +85,16 @@ export function initAnalytics(): void {
     const element = (event.target as Element | null)?.closest("button, a");
     if (!element) return;
     const ctaName = (element.textContent || element.getAttribute("aria-label") || "").replace(/\s+/g, " ").trim().slice(0, 120);
+    const rawHref = element.getAttribute("href") || "";
     const href = element instanceof HTMLAnchorElement ? element.href : "";
     lastClick = { cta_name: ctaName || element.tagName.toLowerCase(), source_section: sectionName(element), destination: href || undefined, captured_at: Date.now() };
-    if (/^mailto:/i.test(element.getAttribute("href") || "")) trackEvent("contact_click", { channel: "email", cta_name: ctaName, source_section: sectionName(element), destination: element.getAttribute("href") || "" });
-    else if (/^tel:/i.test(element.getAttribute("href") || "")) trackEvent("contact_click", { channel: "phone", cta_name: ctaName, source_section: sectionName(element), destination: element.getAttribute("href") || "" });
+    if (/^mailto:/i.test(rawHref)) trackEvent("contact_click", { channel: "email", cta_name: ctaName, source_section: sectionName(element), destination: rawHref });
+    else if (/^tel:/i.test(rawHref)) trackEvent("contact_click", { channel: "phone", cta_name: ctaName, source_section: sectionName(element), destination: rawHref });
     else if (/wa\.me\//i.test(href)) trackEvent("contact_click", { channel: "whatsapp", cta_name: ctaName, source_section: sectionName(element), destination: href });
-    else if ((element.getAttribute("href") || "").includes("#contact")) {
+    else if (rawHref.includes("#contact")) {
       trackEvent("cta_click", { cta_name: ctaName, source_section: sectionName(element), destination: "homepage_contact" });
+    } else if (/^\/(?:(?:ar|fr|ru|es|pt)\/)?contact\/?(?:[?#].*)?$/i.test(rawHref)) {
+      trackEvent("cta_click", { cta_name: ctaName, source_section: sectionName(element), destination: "contact_page", form_id: "contact_page" });
     }
   }, true);
 }
