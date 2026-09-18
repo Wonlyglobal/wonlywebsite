@@ -19,7 +19,7 @@ keywords:
 
 Buyers ask for a “soundproof” door; engineers deliver an STC number. Understanding the scale turns a vague comfort wish into a specification you can hold a supplier to — and it matters most in apartments, hotels and homes on busy streets.
 
-Project buyers should evaluate acoustic performance together with security, fire, hardware and installation requirements. WONLY's [security door manufacturer overview](/security-door-manufacturer) shows how to assemble those inputs into one project brief.
+Project buyers should evaluate acoustic performance together with security, fire, hardware and installation requirements. WONLY's [acoustic and STC-rated entrance door solution](/solutions/acoustic-stc-entrance-doors) maps the target, test evidence, seals, hardware and site-acceptance inputs into one project brief, while the [security door manufacturer overview](/security-door-manufacturer) covers the wider sourcing process.
 
 ## What STC Actually Measures
 

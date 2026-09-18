@@ -19,6 +19,8 @@ keywords:
 
 In hotels, hospitals and apartment buildings, many openings must satisfy two inspectors at once: the fire officer, who cares about minutes of integrity, and the security auditor, who cares about forced-entry resistance. A door that passes one and fails the other is a retrofit waiting to happen — the answer is a genuinely dual-rated doorset.
 
+WONLY's [fire-rated security door project page](/products/security-doors/fire-rated) provides the RFQ inputs, evidence checks and hardware-coordination path for these openings.
+
 ## Two Tests, One Construction
 
 Fire performance (EN 1634) and burglar resistance (EN 1627 / GB 17565) are separate test regimes with different protocols. A dual-rated door is one construction that has passed both — which is an engineering achievement, because fire design favours intumescent seals and sacrificial layers while security design favours mass, bolts and rigidity. Only the test certificates prove the combination works.

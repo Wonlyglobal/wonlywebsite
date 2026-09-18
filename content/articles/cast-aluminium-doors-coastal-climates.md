@@ -19,6 +19,8 @@ keywords:
 
 Ask a distributor in Lagos, Manila or Dubai what kills doors in their market and the answer is rarely burglars — it is weather. Salt-laden air, monsoon humidity and driven rain attack an entrance every day for decades. Material choice decides whether year ten looks like year one.
 
+For a procurement-ready exposure, materials, finish, hardware and maintenance checklist, see WONLY's [coastal corrosion-resistant security door solution](/solutions/coastal-corrosion-resistant-security-doors).
+
 ## How Coastal Air Destroys Steel Doors
 
 Steel only survives outdoors through its coating. Every scratch, weld seam, drainage hole and hinge cut-out is a breach — and salt spray turns each breach into a rust site that creeps under the surrounding finish. The result is familiar across coastal markets: bleeding stains at the hinges within two or three years, then swelling, flaking and warranty calls.

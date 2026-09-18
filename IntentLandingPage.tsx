@@ -1,12 +1,16 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
-import { SiteHeader, SiteFooter, CtaBand, Reveal, GOLD, GOLD_DEEP, DARK, MUTED, CHAMP_BG, eyebrow, h2cls } from "@/lib/site-ui";
+import { SiteHeader, SiteFooter, CtaBand, Reveal, GOLD, GOLD_DEEP, DARK, MUTED, CHAMP, CHAMP_BG, eyebrow, h2cls } from "@/lib/site-ui";
+import { trackEvent } from "@/lib/analytics";
 
 type PageKey =
   | "security-door-manufacturer"
   | "smart-door-manufacturer"
   | "smart-lock-oem-odm"
+  | "acoustic-stc-entrance-doors"
+  | "coastal-corrosion-resistant-security-doors"
   | "cast-aluminium-security-doors"
   | "fire-rated-security-doors"
   | "hotel-security-doors"
@@ -29,6 +33,8 @@ type PageData = {
   process: [string, string][];
   faq: [string, string][];
   related: [string, string][];
+  evidence?: [string, string][];
+  ctaSubject?: string;
 };
 
 const PAGES: Record<PageKey, PageData> = {
@@ -57,6 +63,8 @@ const PAGES: Record<PageKey, PageData> = {
     process: [["01", "Send the market, opening schedule, quantity and performance requirements."], ["02", "Review the proposed doorset, drawings, compliance scope and commercial options."], ["03", "Approve samples, finishes and a reference specification before batch production."], ["04", "Inspect, package and deliver with installation and handover documentation."]],
     faq: [["Does WONLY support OEM and private-label security doors?", "Yes. Branding, finish, configuration and packaging can be reviewed against production, certification and minimum-order requirements."], ["Which security door types can be supplied?", "The portfolio includes steel and cast-aluminium security doors, smart doors, fire-rated project doors and application-specific entrance solutions."], ["What is needed for a project quotation?", "Send destination, quantities, opening sizes, performance targets, finish, lock and delivery schedule so the correct configuration can be assessed."]],
     related: [["Security Door Range", "/products/security-doors"], ["Fire-Rated Security Doors", "/products/security-doors/fire-rated"], ["OEM / ODM Partnership", "/partnership"]],
+    evidence: [["Factory audit trail", "Review controlled drawings, material records, inspection checkpoints and corrective-action evidence before approval."], ["Configuration-specific reports", "Match every certificate or test report to the proposed leaf, frame, hardware, size and installation method."], ["Golden sample control", "Approve a signed reference sample and change-control process before batch production."], ["Export handover pack", "Define drawings, labels, packing lists, installation guidance, spare parts and inspection records required at delivery."]],
+    ctaSubject: "Security door project specification review",
   },
   "smart-door-manufacturer": {
     path: "/smart-door-manufacturer",
@@ -74,6 +82,8 @@ const PAGES: Record<PageKey, PageData> = {
     process: [["01", "Share the target market, entrance scenario, quantities and required smart functions."], ["02", "Select a platform and confirm the door, lock, sensor, power and integration boundary."], ["03", "Approve a working sample or reference unit, finish and user-flow tests."], ["04", "Plan batch production, commissioning materials, spares and after-sales handover."]],
     faq: [["Can WONLY supply a complete smart door rather than only a lock?", "Yes. WONLY coordinates the physical doorset and smart-entry functions as one product platform."], ["Are OEM/ODM smart-door programmes available?", "OEM/ODM options can be reviewed for branding, finish, feature configuration, packaging and market requirements."], ["How is access retained during a power or network failure?", "The specified configuration should include documented battery, backup-power and mechanical emergency-access paths."]],
     related: [["Smart Door 5.0", "/products/smart-doors/5-0"], ["Security Door Range", "/products/security-doors"], ["Whole-House Intelligence", "/products/whole-house"]],
+    evidence: [["Working reference unit", "Validate recognition, sensing, automatic opening, obstacle response and emergency access on a representative unit."], ["Power-failure plan", "Document battery endurance, backup supply, manual release and mechanical-entry behaviour."], ["Integration boundary", "Record which party owns the app, cloud service, API, commissioning, updates and local technical support."], ["Lifecycle support", "Confirm replaceable modules, diagnostics, spare parts, warranty boundaries and field-service instructions."]],
+    ctaSubject: "Smart door system and integration review",
   },
   "smart-lock-oem-odm": {
     path: "/smart-lock-oem-odm",
@@ -91,6 +101,44 @@ const PAGES: Record<PageKey, PageData> = {
     process: [["01", "Submit the market brief, door specification, functions, branding and volume forecast."], ["02", "Select the base platform and confirm engineering, compliance and commercial scope."], ["03", "Validate samples for fit, credentials, user flow, finish, packaging and reliability."], ["04", "Release production with inspection criteria, spare-parts plan and support documents."]],
     faq: [["What can be customised in an OEM smart lock?", "Depending on the platform, options may include logo, colour, access methods, mortise preparation, packaging, manuals and selected software settings."], ["Can WONLY match a smart lock to an existing door range?", "Yes. Door thickness, preparation, mortise, handing, wiring and installation details must be reviewed before selection."], ["What information is needed to start?", "Share the target country, application, door specification, required functions, branding, forecast volume and desired launch date."]],
     related: [["Smart Lock Range", "/products/smart-locks"], ["S80 Smart Lock", "/products/smart-locks/s80"], ["OEM / ODM Partnership", "/partnership"]],
+    evidence: [["Door-fit validation", "Confirm thickness, handing, mortise, backset, spindle, wiring and mounting before cosmetic customisation."], ["Credential testing", "Validate biometric recognition, PIN, card, app and mechanical backup across intended users and conditions."], ["Private-label release pack", "Approve logo, finish, manuals, labels, cartons, serialisation and market language on physical samples."], ["Production quality plan", "Define reliability tests, incoming inspection, final functional checks, sampling level and traceability before launch."]],
+    ctaSubject: "Smart lock OEM and ODM feasibility review",
+  },
+  "acoustic-stc-entrance-doors": {
+    path: "/solutions/acoustic-stc-entrance-doors",
+    title: "Acoustic & STC-Rated Entrance Doors for Projects | WONLY",
+    description: "Specify acoustic entrance doors for apartments, hotels and premium projects with STC targets, seals, thresholds, hardware and installation coordinated by WONLY.",
+    eyebrow: "Acoustic Door Systems",
+    h1: "Acoustic and STC-Rated Entrance Doors",
+    lead: "Coordinate the complete opening around a measurable sound-control target instead of treating the door leaf as an isolated acoustic product.",
+    image: "/images/door/gallery/g3-detail.jpg",
+    audience: "For consultants, developers, hotel teams, contractors and door distributors",
+    overviewTitle: "Acoustic Performance Belongs to the Complete Opening",
+    overview: ["STC or Rw performance depends on the tested door, frame, perimeter seals, threshold, glazing, hardware preparation and installation. A high-rated leaf cannot compensate for uncontrolled gaps or an incompatible frame.", "WONLY helps project teams define the target, review the evidence boundary and coordinate security, fire, access-control and acoustic requirements before drawings and samples are approved."],
+    requirements: [["Target rating", "State the required STC, Rw or project-specific criterion and the test method used by the consultant."], ["Opening construction", "Confirm wall type, frame profile, clearances, threshold and interfaces that affect leakage."], ["Seal system", "Coordinate perimeter seals, drop seals, meeting stiles and floor conditions for the tested configuration."], ["Hardware preparation", "Review viewers, locks, closers, access control and cable routes because every penetration can affect performance."], ["Conflicting requirements", "Resolve fire, egress, accessibility and security requirements without invalidating the acoustic assembly."], ["Site acceptance", "Define installation tolerances, inspection steps and any field test or commissioning requirement."]],
+    process: [["01", "Issue the acoustic target, wall build-up, opening schedule, hardware and other performance requirements."], ["02", "Select a documented assembly and identify differences between the tested specimen and proposed opening."], ["03", "Approve drawings, seal details, samples and installation interfaces before production."], ["04", "Inspect delivery and installation, record gaps and complete the agreed site acceptance checks."]],
+    faq: [["Is STC the same as Rw?", "No. They are different rating systems and should not be treated as numerically interchangeable without an acoustic consultant's review."], ["Can a smart lock be used on an acoustic entrance door?", "Yes when its preparation, cable route and hardware remain compatible with the documented assembly and seal strategy."], ["Does the laboratory rating guarantee site performance?", "No. Field performance also depends on wall interfaces, installation quality, gaps, seals and adjacent construction."]],
+    related: [["STC 35 vs 40 vs 45", "/insights/stc-35-vs-40-vs-45-door-ratings"], ["Soundproof Security Doors", "/insights/soundproof-security-doors-stc-ratings"], ["Hotel Door Solutions", "/solutions/hotel-security-doors"]],
+    evidence: [["Test configuration matrix", "Compare the report specimen, size, frame, seals, threshold, hardware and opening direction with the proposed doorset."], ["Seal-detail drawings", "Show continuous sealing at head, jambs, sill and meeting stiles, including hardware interruptions."], ["Installation checklist", "Record anchors, clearances, compression and automatic drop-seal contact before handover."], ["Field verification plan", "Agree visual inspection, gap measurements and any acoustic field testing before procurement release."]],
+    ctaSubject: "Acoustic and STC entrance door specification review",
+  },
+  "coastal-corrosion-resistant-security-doors": {
+    path: "/solutions/coastal-corrosion-resistant-security-doors",
+    title: "Coastal Corrosion-Resistant Security Doors | WONLY",
+    description: "Specify corrosion-resistant security doors for coastal villas and projects with material, finish, hardware, salt-exposure and maintenance requirements reviewed by WONLY.",
+    eyebrow: "Coastal Project Doors",
+    h1: "Coastal and Corrosion-Resistant Security Doors",
+    lead: "Select the complete doorset for salt, humidity, UV and cleaning exposure—not only a decorative finish described as weather resistant.",
+    image: "/images/door banner4.png",
+    audience: "For coastal developers, villa projects, architects, contractors and distributors",
+    overviewTitle: "Durability Starts With the Exposure Category",
+    overview: ["Distance from the sea alone does not define corrosion risk. Direct spray, prevailing wind, sheltered wet zones, humidity, UV, cleaning chemicals and maintenance frequency all influence the required material and finish system.", "WONLY supports review of the leaf, frame, fasteners, hinges, locks, decorative surfaces, drainage and packaging so the visible door and concealed components follow one durability strategy."],
+    requirements: [["Exposure statement", "Document distance from shore, direct salt spray, prevailing weather, canopy protection, humidity and cleaning regime."], ["Base materials", "Select compatible leaf, frame, reinforcement and fastener materials; avoid galvanic combinations without isolation."], ["Finish system", "Define preparation, coating layers, colour, edge protection and repair procedure for the actual environment."], ["Hardware durability", "Coordinate hinges, lock body, cylinder, handle, fixings and electronic components for moisture and salt exposure."], ["Drainage and detailing", "Avoid water traps, protect cut edges and provide drainage or ventilation where the design requires it."], ["Maintenance plan", "Specify cleaning, inspection, lubrication and touch-up intervals as part of handover."]],
+    process: [["01", "Submit the location, exposure, opening schedule, design references, security target and smart-lock needs."], ["02", "Review materials, finish system, hardware compatibility, samples and available durability evidence."], ["03", "Approve a reference specification with edge, fastener, drainage and maintenance details."], ["04", "Inspect finish and packaging, then deliver cleaning, touch-up and maintenance guidance."]],
+    faq: [["Is aluminium automatically suitable for every coastal project?", "No. Alloy, surface preparation, coating, hardware compatibility and maintenance must match the actual exposure."], ["Can coastal doors include smart locks?", "Yes, but electronic modules, cable entries, seals, mechanical components and backup access require coordinated moisture protection."], ["What evidence should buyers request?", "Request material declarations, finish specifications, applicable salt-spray or corrosion evidence, approved samples and a maintenance method for the selected configuration."]],
+    related: [["Cast Aluminium Security Doors", "/products/security-doors/cast-aluminium"], ["Coastal Climate Guide", "/insights/cast-aluminium-doors-coastal-climates"], ["Security Door Manufacturer", "/security-door-manufacturer"]],
+    evidence: [["Exposure-to-material matrix", "Link each exterior and concealed component to the stated environmental condition."], ["Finish sample and process", "Approve colour and texture together with preparation, coating build and edge treatment."], ["Hardware compatibility record", "Check dissimilar metals, fasteners, hinges, lock components and electronic penetrations."], ["Maintenance handover", "Provide cleaning frequency, approved products, inspection points and repair instructions."]],
+    ctaSubject: "Coastal corrosion-resistant security door review",
   },
   "cast-aluminium-security-doors": {
     path: "/products/security-doors/cast-aluminium",
@@ -221,6 +269,22 @@ const PAGES: Record<PageKey, PageData> = {
 
 export default function IntentLandingPage({ pageKey }: { pageKey: PageKey }) {
   const page = PAGES[pageKey];
+  useEffect(() => {
+    let fired = false;
+    const markEngaged = (engagementType: "time" | "scroll") => {
+      if (fired) return;
+      fired = true;
+      trackEvent("content_engaged", { content_group: "commercial_landing_page", content_id: page.path, engagement_type: engagementType });
+      window.removeEventListener("scroll", onScroll);
+    };
+    const onScroll = () => {
+      const available = document.documentElement.scrollHeight - window.innerHeight;
+      if (available > 0 && window.scrollY / available >= 0.5) markEngaged("scroll");
+    };
+    const timer = window.setTimeout(() => markEngaged("time"), 20000);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.clearTimeout(timer); window.removeEventListener("scroll", onScroll); };
+  }, [page.path]);
   const faqSchema = page.faq.map(([name, answer]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text: answer } }));
   useSeo({
     title: page.title,
@@ -266,10 +330,12 @@ export default function IntentLandingPage({ pageKey }: { pageKey: PageKey }) {
 
     <section className="px-[7vw] py-20 md:py-28"><div className="mx-auto max-w-6xl"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Project Workflow</div><h2 className={h2cls + " mt-4"}>From Requirement to Delivery</h2><div className="mt-12 grid gap-6 md:grid-cols-4">{page.process.map(([step, text]) => <div key={step} className="border-t-2 pt-5" style={{ borderColor: GOLD }}><div className="text-2xl font-light" style={{ color: GOLD_DEEP }}>{step}</div><p className="mt-3 text-sm leading-relaxed" style={{ color: MUTED }}>{text}</p></div>)}</div></div></section>
 
+    {page.evidence && <section className="px-[7vw] py-20 md:py-28" style={{ background: DARK }}><div className="mx-auto max-w-6xl"><div className={eyebrow} style={{ color: CHAMP }}>Evidence Before Award</div><h2 className={h2cls + " mt-4 max-w-3xl text-white"}>What a Project Buyer Should Verify</h2><div className="mt-12 grid gap-5 md:grid-cols-2">{page.evidence.map(([title, text], index) => <Reveal key={title} delay={(index % 2) * 60}><div className="h-full rounded-2xl border border-white/15 bg-white/[0.04] p-6"><h3 className="text-lg font-medium text-white">{title}</h3><p className="mt-3 text-sm leading-relaxed text-white/65">{text}</p></div></Reveal>)}</div></div></section>}
+
     <section className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}><div className="mx-auto max-w-4xl"><div className={eyebrow} style={{ color: GOLD_DEEP }}>FAQ</div><h2 className={h2cls + " mt-4"}>Procurement Questions</h2><div className="mt-10 divide-y divide-[#ded6c8]">{page.faq.map(([question, answer]) => <div key={question} className="py-6"><h3 className="text-lg font-semibold">{question}</h3><p className="mt-3 leading-relaxed" style={{ color: MUTED }}>{answer}</p></div>)}</div></div></section>
 
     <section className="px-[7vw] py-16"><div className="mx-auto max-w-6xl"><h2 className="text-sm font-semibold uppercase tracking-[0.15em]" style={{ color: GOLD_DEEP }}>Related Products & Guides</h2><div className="mt-6 grid gap-4 md:grid-cols-3">{page.related.map(([label, path]) => <Link key={path} to={path} className="group flex items-center justify-between rounded-xl border border-[#ded6c8] p-5 font-medium hover:bg-[#f8f5ee]">{label}<ArrowRight size={17} className="transition-transform group-hover:translate-x-1"/></Link>)}</div></div></section>
-    <CtaBand title="Discuss Your Door or Smart-Entry Requirement" sub="Send the market, project type, quantity, opening schedule and target delivery date. Our team will identify the next technical inputs." />
+    <CtaBand title="Discuss Your Door or Smart-Entry Requirement" sub="Send the market, project type, quantity, opening schedule and target delivery date. Our team will identify the next technical inputs." subject={page.ctaSubject || page.h1} />
     <SiteFooter />
   </div>;
 }

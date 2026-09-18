@@ -261,6 +261,18 @@ const SecurityDoors = () => {
             <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Explore smart-door OEM <ArrowRight size={15}/></span>
           </Link>
         </div>
+        <div className="mx-auto mt-4 grid max-w-6xl gap-4 md:grid-cols-3">
+          {[
+            ["Fire & Security", "Fire-Rated Security Doors", "Coordinate the tested doorset, hardware and submittal evidence.", "/products/security-doors/fire-rated"],
+            ["Acoustic Performance", "Acoustic & STC-Rated Doors", "Define ratings, seals, thresholds and site acceptance as one system.", "/solutions/acoustic-stc-entrance-doors"],
+            ["Coastal Durability", "Corrosion-Resistant Security Doors", "Match materials, finishes and hardware to salt and humidity exposure.", "/solutions/coastal-corrosion-resistant-security-doors"],
+          ].map(([tag, title, text, path]) => <Link key={path} to={path} className="group rounded-2xl border border-[#ded6c8] p-6 hover:bg-[#f8f5ee]">
+            <div className={eyebrow} style={{ color: GOLD }}>{tag}</div>
+            <h2 className="mt-3 text-lg font-semibold">{title}</h2>
+            <p className="mt-2 text-sm leading-relaxed" style={{ color: MUTED }}>{text}</p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Review project requirements <ArrowRight size={15}/></span>
+          </Link>)}
+        </div>
       </section>}
 
       <CtaBand eyebrowText={st("Ready to Secure Your Project?")} title={st("Custom Security-Door Solutions & Pricing")} sub={st("CTA Description")} />

@@ -19,6 +19,8 @@ keywords:
 
 An STC number describes laboratory sound-transmission performance across a frequency range. A higher number generally indicates more airborne-sound reduction, but STC 35, 40 and 45 are not interchangeable product labels. The result belongs to the tested assembly and depends on the leaf, frame, seals, threshold, hardware, glazing and installation.
 
+Use WONLY's [acoustic and STC-rated entrance door specification page](/solutions/acoustic-stc-entrance-doors) to turn the selected target into a doorset, evidence and site-acceptance checklist.
+
 ## What the Three Ratings Mean in Practice
 
 - STC 35 may suit spaces needing moderate speech and activity reduction

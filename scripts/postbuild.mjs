@@ -253,6 +253,57 @@ const PRIORITY_LANDING_PAGES = [
       ['Can WONLY match a smart lock to an existing door range?', 'Yes. Door thickness, preparation, mortise, handing, wiring and installation details must be reviewed before selection.'],
     ],
   },
+  {
+    route: '/solutions/acoustic-stc-entrance-doors/',
+    title: 'Acoustic & STC-Rated Entrance Doors for Projects | WONLY',
+    description: 'Specify acoustic entrance doors for apartments, hotels and premium projects with STC targets, seals, thresholds, hardware and installation coordinated by WONLY.',
+    eyebrow: 'Acoustic Door Systems',
+    h1: 'Acoustic and STC-Rated Entrance Doors',
+    lead: 'Coordinate the complete opening around a measurable sound-control target instead of treating the door leaf as an isolated acoustic product.',
+    sections: [
+      ['Acoustic Performance Belongs to the Complete Opening', 'STC or Rw performance depends on the tested door, frame, perimeter seals, threshold, glazing, hardware preparation and installation.'],
+      ['What Buyers Should Define Before Quotation', 'State the rating system and target, wall and frame construction, seal strategy, hardware preparation, conflicting fire or egress requirements and site acceptance method.'],
+      ['Evidence Before Award', 'Compare the proposed opening with the test specimen, approve seal-detail drawings and define installation and field-verification checkpoints.'],
+    ],
+    faq: [
+      ['Is STC the same as Rw?', 'No. They are different rating systems and should not be treated as numerically interchangeable without an acoustic consultant review.'],
+      ['Does a laboratory rating guarantee site performance?', 'No. Field performance also depends on wall interfaces, installation quality, gaps, seals and adjacent construction.'],
+    ],
+  },
+  {
+    route: '/products/security-doors/fire-rated/',
+    title: 'Fire-Rated Security Door Manufacturer for Projects | WONLY',
+    description: 'Specify fire-rated security doors for residential and commercial projects with documentation review, hardware coordination and bulk delivery support from WONLY.',
+    eyebrow: 'Project Doors',
+    h1: 'Fire-Rated Security Doors for Project Specifications',
+    lead: 'Coordinate fire resistance, forced-entry protection, hardware and installation as one documented doorset for residential, hospitality and commercial projects.',
+    sections: [
+      ['Fire Rating Belongs to the Tested Assembly', 'The leaf, frame, seals, hinges, lock, closer, glazing and installation method must match the documented assembly.'],
+      ['What Buyers Should Define Before Quotation', 'State the jurisdiction, test standard, rated duration, opening schedule, wall type, hardware, access-control needs and required submittal package.'],
+      ['Evidence Before Award', 'Verify the report scope against the exact proposed configuration and approve shop drawings, hardware matrix, labels, installation instructions and maintenance requirements.'],
+    ],
+    faq: [
+      ['Is every security door automatically fire-rated?', 'No. Fire resistance requires separate evidence for the complete doorset and intended configuration.'],
+      ['Can access control be added?', 'Often yes, but the selected hardware and preparation must remain within the approved assembly or be reviewed by the responsible authority.'],
+    ],
+  },
+  {
+    route: '/solutions/coastal-corrosion-resistant-security-doors/',
+    title: 'Coastal Corrosion-Resistant Security Doors | WONLY',
+    description: 'Specify corrosion-resistant security doors for coastal villas and projects with material, finish, hardware, salt-exposure and maintenance requirements reviewed by WONLY.',
+    eyebrow: 'Coastal Project Doors',
+    h1: 'Coastal and Corrosion-Resistant Security Doors',
+    lead: 'Select the complete doorset for salt, humidity, UV and cleaning exposure—not only a decorative finish described as weather resistant.',
+    sections: [
+      ['Durability Starts With the Exposure Category', 'Direct salt spray, prevailing weather, sheltered wet zones, humidity, UV, cleaning chemicals and maintenance frequency influence the required material and finish system.'],
+      ['What Buyers Should Define Before Quotation', 'Document exposure, compatible base materials, finish layers, hardware durability, drainage details and the maintenance plan.'],
+      ['Evidence Before Award', 'Review material declarations, finish specifications, hardware compatibility, applicable corrosion evidence, approved samples and maintenance instructions.'],
+    ],
+    faq: [
+      ['Is aluminium automatically suitable for every coastal project?', 'No. Alloy, surface preparation, coating, hardware compatibility and maintenance must match the actual exposure.'],
+      ['Can coastal doors include smart locks?', 'Yes, but electronic modules, cable entries, seals, mechanical components and backup access require coordinated moisture protection.'],
+    ],
+  },
 ];
 
 function renderStaticRoute({ route, title, description, body, jsonLd, alternates = '' }) {
