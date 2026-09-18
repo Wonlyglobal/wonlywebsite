@@ -40,6 +40,10 @@ Each step up adds reinforcement — thicker cores, more locking points, stronger
 
 An RC class is only real if the whole doorset — leaf, frame, hinges, lock and cylinder — passed the test together. Ask the manufacturer for the EN 1627 test certificate and confirm the tested configuration matches what you are ordering. WONLY doors are engineered to China's GB 17565 Class A (the highest grade) and tested for forced entry, with 16-bolt four-edge locking and a patented anti-drill cylindrical core; full test documentation is available for export projects.
 
+## Airports and Access-Controlled Facilities
+
+Airport staff entrances, operations rooms, plant areas and other controlled zones cannot be specified by RC class alone. The project team should map RC2, RC3 or RC4 to each opening, then coordinate frame anchors, panic or escape hardware, electronic locking, door contacts, fire-alarm release and power-loss behaviour. Use the [commercial steel security door project workflow](/solutions/commercial-steel-security-doors) to document those interfaces, and verify that access-control preparation does not move the supplied doorset outside its tested configuration.
+
 ## FAQ
 
 Is RC3 enough for a villa? For most residential risk profiles, yes — RC3 is the standard recommendation for street-facing homes. Escalate to RC4 for high-value contents or isolated locations.

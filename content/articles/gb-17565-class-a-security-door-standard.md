@@ -38,6 +38,8 @@ The two standards use different attack protocols, so there is no official equiva
 
 WONLY security doors carry GB 17565 Class A — the highest grade — with 200,000+ cycle testing, forced-entry testing and certification to ISO 9001/14001, CE, UL, CMA and CSPA. The company has manufactured security doors since 1996, holds 1,000+ patents and is listed on the Shanghai Stock Exchange (605268), so certification claims are backed by an audited, public manufacturer.
 
+Because the cylinder is part of the tested opening, project buyers should also review the [difference between a lock core, cylinder and lock body](/insights/cylindrical-lock-core-vs-standard-cylinder) rather than accepting component names as proof of resistance.
+
 ## FAQ
 
 Is a Class A door automatically fire-rated? No — fire performance is a separate test (EN 1634 or GB 12955). A door can carry both ratings; confirm each certificate separately.

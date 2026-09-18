@@ -46,6 +46,8 @@ A door that is compliant in one country may not clear customs or code in another
 
 The lock is the most-attacked point. Look for multi-point locking, an anti-drill / anti-bump cylinder, reinforced hinges, and hardware cycle-tested to a high count so it survives years of daily use.
 
+If supplier terminology is unclear, use the [lock core vs cylinder comparison](/insights/cylindrical-lock-core-vs-standard-cylinder) to distinguish the keyed cylinder assembly from the lock body and verify the proposed protection.
+
 ## 6. Vet the Supplier, Not Just the Sample
 
 - Track record — years in business, listed or audited status, patents
