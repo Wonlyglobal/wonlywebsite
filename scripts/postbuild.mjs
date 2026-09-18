@@ -201,6 +201,212 @@ function renderArticle(article, locale) {
   return { route, html };
 }
 
+const PRIORITY_LANDING_PAGES = [
+  {
+    route: '/security-door-manufacturer/',
+    title: 'Security Door Manufacturer & OEM Supplier | WONLY',
+    description: 'Source steel, cast-aluminium and fire-rated security doors from WONLY for distribution, residential and commercial projects with OEM/ODM support.',
+    eyebrow: 'Manufacturer & OEM',
+    h1: 'Security Door Manufacturer for Global Projects',
+    lead: 'Work directly with a security door manufacturer covering engineered doorsets, custom finishes, smart-lock integration, project documentation and export delivery.',
+    sections: [
+      ['A Manufacturing Partner From Specification to Delivery', 'WONLY manufactures security doors for residential, hospitality, commercial and institutional projects. The range covers steel and cast-aluminium entrance doors, fire-rated configurations, smart doors and coordinated lock options.'],
+      ['What Buyers Should Define Before Quotation', 'Provide the destination market, opening schedule, quantity, security target, fire and acoustic requirements, finish, smart-lock integration and export delivery plan.'],
+      ['From Requirement to Delivery', 'Review the proposed doorset, drawings and compliance scope; approve samples and a reference specification; then inspect, package and deliver with installation and handover documentation.'],
+    ],
+    faq: [
+      ['Does WONLY support OEM and private-label security doors?', 'Yes. Branding, finish, configuration and packaging can be reviewed against production, certification and minimum-order requirements.'],
+      ['Which security door types can be supplied?', 'The portfolio includes steel and cast-aluminium security doors, smart doors, fire-rated project doors and application-specific entrance solutions.'],
+    ],
+  },
+  {
+    route: '/smart-door-manufacturer/',
+    title: 'Smart Door Manufacturer for Projects & Distribution | WONLY',
+    description: 'Source integrated smart doors with biometric entry, sensing, automatic opening and project engineering from WONLY, a global smart door manufacturer.',
+    eyebrow: 'Integrated Smart Entry',
+    h1: 'Smart Door Manufacturer for Connected Entrances',
+    lead: 'Specify the door, lock, sensors, power, emergency access and whole-home connectivity as one coordinated entrance system.',
+    sections: [
+      ['Smart Entry Works Best as One Engineered System', 'A smart door is more than a conventional leaf fitted with an electronic lock. Structure, sensing distance, motorised opening, anti-pinch protection, power backup, network behaviour and mechanical emergency access must work together.'],
+      ['What Buyers Should Define Before Quotation', 'Define the user journey, door construction, access methods, power and connectivity, safety behaviour and the local service model before selecting a platform.'],
+      ['From Requirement to Delivery', 'Select a platform and confirm the door, lock, sensor, power and integration boundary; approve a working sample; then plan production, commissioning materials, spares and after-sales handover.'],
+    ],
+    faq: [
+      ['Can WONLY supply a complete smart door rather than only a lock?', 'Yes. WONLY coordinates the physical doorset and smart-entry functions as one product platform.'],
+      ['How is access retained during a power or network failure?', 'The specified configuration should include documented battery, backup-power and mechanical emergency-access paths.'],
+    ],
+  },
+  {
+    route: '/smart-lock-oem-odm/',
+    title: 'Smart Lock OEM & ODM Manufacturer | WONLY',
+    description: 'Build a private-label fingerprint, face or palm-vein smart lock range with WONLY OEM/ODM engineering, sampling, production and export support.',
+    eyebrow: 'Private Label Programme',
+    h1: 'Smart Lock OEM & ODM Manufacturing',
+    lead: 'Develop a market-ready smart-lock line with verified hardware, biometric options, branding, packaging and scalable production support.',
+    sections: [
+      ['Define the Market Before Selecting the Lock', 'A reliable OEM/ODM programme starts with the door type, target price band, user flow, climate, credentials, connectivity and local service model—not a cosmetic logo change at the end.'],
+      ['What Buyers Should Define Before Quotation', 'Confirm the target segment, door compatibility, credential mix, brand package, compliance and privacy requirements, quality controls and after-sales responsibility.'],
+      ['From Requirement to Delivery', 'Select the base platform, confirm engineering and compliance scope, validate samples for fit and reliability, then release production with inspection criteria and support documents.'],
+    ],
+    faq: [
+      ['What can be customised in an OEM smart lock?', 'Depending on the platform, options may include logo, colour, access methods, mortise preparation, packaging, manuals and selected software settings.'],
+      ['Can WONLY match a smart lock to an existing door range?', 'Yes. Door thickness, preparation, mortise, handing, wiring and installation details must be reviewed before selection.'],
+    ],
+  },
+  {
+    route: '/solutions/acoustic-stc-entrance-doors/',
+    title: 'Acoustic & STC-Rated Entrance Doors for Projects | WONLY',
+    description: 'Specify acoustic entrance doors for apartments, hotels and premium projects with STC targets, seals, thresholds, hardware and installation coordinated by WONLY.',
+    eyebrow: 'Acoustic Door Systems',
+    h1: 'Acoustic and STC-Rated Entrance Doors',
+    lead: 'Coordinate the complete opening around a measurable sound-control target instead of treating the door leaf as an isolated acoustic product.',
+    sections: [
+      ['Acoustic Performance Belongs to the Complete Opening', 'STC or Rw performance depends on the tested door, frame, perimeter seals, threshold, glazing, hardware preparation and installation.'],
+      ['What Buyers Should Define Before Quotation', 'State the rating system and target, wall and frame construction, seal strategy, hardware preparation, conflicting fire or egress requirements and site acceptance method.'],
+      ['Evidence Before Award', 'Compare the proposed opening with the test specimen, approve seal-detail drawings and define installation and field-verification checkpoints.'],
+    ],
+    faq: [
+      ['Is STC the same as Rw?', 'No. They are different rating systems and should not be treated as numerically interchangeable without an acoustic consultant review.'],
+      ['Does a laboratory rating guarantee site performance?', 'No. Field performance also depends on wall interfaces, installation quality, gaps, seals and adjacent construction.'],
+    ],
+  },
+  {
+    route: '/products/security-doors/fire-rated/',
+    title: 'Fire-Rated Security Door Manufacturer for Projects | WONLY',
+    description: 'Specify fire-rated security doors for residential and commercial projects with documentation review, hardware coordination and bulk delivery support from WONLY.',
+    eyebrow: 'Project Doors',
+    h1: 'Fire-Rated Security Doors for Project Specifications',
+    lead: 'Coordinate fire resistance, forced-entry protection, hardware and installation as one documented doorset for residential, hospitality and commercial projects.',
+    sections: [
+      ['Fire Rating Belongs to the Tested Assembly', 'The leaf, frame, seals, hinges, lock, closer, glazing and installation method must match the documented assembly.'],
+      ['What Buyers Should Define Before Quotation', 'State the jurisdiction, test standard, rated duration, opening schedule, wall type, hardware, access-control needs and required submittal package.'],
+      ['Evidence Before Award', 'Verify the report scope against the exact proposed configuration and approve shop drawings, hardware matrix, labels, installation instructions and maintenance requirements.'],
+    ],
+    faq: [
+      ['Is every security door automatically fire-rated?', 'No. Fire resistance requires separate evidence for the complete doorset and intended configuration.'],
+      ['Can access control be added?', 'Often yes, but the selected hardware and preparation must remain within the approved assembly or be reviewed by the responsible authority.'],
+    ],
+  },
+  {
+    route: '/solutions/coastal-corrosion-resistant-security-doors/',
+    title: 'Coastal Corrosion-Resistant Security Doors | WONLY',
+    description: 'Specify corrosion-resistant security doors for coastal villas and projects with material, finish, hardware, salt-exposure and maintenance requirements reviewed by WONLY.',
+    eyebrow: 'Coastal Project Doors',
+    h1: 'Coastal and Corrosion-Resistant Security Doors',
+    lead: 'Select the complete doorset for salt, humidity, UV and cleaning exposure—not only a decorative finish described as weather resistant.',
+    sections: [
+      ['Durability Starts With the Exposure Category', 'Direct salt spray, prevailing weather, sheltered wet zones, humidity, UV, cleaning chemicals and maintenance frequency influence the required material and finish system.'],
+      ['What Buyers Should Define Before Quotation', 'Document exposure, compatible base materials, finish layers, hardware durability, drainage details and the maintenance plan.'],
+      ['Evidence Before Award', 'Review material declarations, finish specifications, hardware compatibility, applicable corrosion evidence, approved samples and maintenance instructions.'],
+    ],
+    faq: [
+      ['Is aluminium automatically suitable for every coastal project?', 'No. Alloy, surface preparation, coating, hardware compatibility and maintenance must match the actual exposure.'],
+      ['Can coastal doors include smart locks?', 'Yes, but electronic modules, cable entries, seals, mechanical components and backup access require coordinated moisture protection.'],
+    ],
+  },
+  {
+    route: '/solutions/commercial-steel-security-doors/',
+    title: 'Commercial Steel Security Doors for Projects | WONLY',
+    description: 'Specify commercial steel security doors for offices, hotels, apartments and public buildings with coordinated ratings, hardware, access control and project delivery.',
+    eyebrow: 'Commercial Door Systems',
+    h1: 'Commercial Steel Security Doors for Building Projects',
+    lead: 'Turn the building risk strategy into coordinated steel doorsets, hardware, access control, fire and egress requirements for every opening.',
+    sections: [
+      ['Specify the Opening, Not a Generic Steel Door', 'Commercial entrances, service routes, plant rooms, offices and secure back-of-house openings face different traffic, attack, fire and egress conditions.'],
+      ['What Buyers Should Define Before Quotation', 'Issue the opening schedule, risk zones, performance criteria, hardware sets, access-control matrix, finishes, quantities and delivery batches.'],
+      ['Evidence Before Award', 'Verify the complete doorset, configuration-specific reports, hardware and controls matrix, approved sample, inspection plan and handover record.'],
+    ],
+    faq: [
+      ['Are commercial steel security doors automatically fire-rated?', 'No. Forced-entry, fire, smoke and egress are separate requirements. Where several apply, evidence must cover the proposed complete assembly.'],
+      ['Can access control and panic hardware be combined?', 'Often yes, but the operating logic, free egress, fire-alarm response, power-loss state and approved hardware configuration must be coordinated.'],
+    ],
+  },
+];
+
+function renderStaticRoute({ route, title, description, body, jsonLd, alternates = '', lang = 'en' }) {
+  const canonical = `${SITE}${route}`;
+  let html = shell
+    .replace(/<html\b[^>]*>/i, `<html lang="${lang}" dir="ltr">`)
+    .replace(/<link\s+rel="alternate"[^>]*>\s*/gi, '')
+    .replace('</head>', `${alternates}${jsonLd ? `\n<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}\n</head>`)
+    .replace('<div id="root"></div>', `<div id="root">${body}</div>`);
+  html = replaceTag(html, /<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  html = replaceTag(html, /<meta\s+name="description"[^>]*>/i, `<meta name="description" content="${escapeHtml(description)}" />`);
+  html = replaceTag(html, /<link\s+rel="canonical"[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
+  html = replaceTag(html, /<meta\s+property="og:title"[^>]*>/i, `<meta property="og:title" content="${escapeHtml(title)}" />`);
+  html = replaceTag(html, /<meta\s+property="og:description"[^>]*>/i, `<meta property="og:description" content="${escapeHtml(description)}" />`);
+  html = replaceTag(html, /<meta\s+property="og:url"[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
+  const output = path.join('dist', route.replace(/^\//, ''), 'index.html');
+  mkdirSync(path.dirname(output), { recursive: true });
+  writeFileSync(output, html, 'utf8');
+}
+
+function renderEnglishPriorityRoutes() {
+  for (const page of PRIORITY_LANDING_PAGES) {
+    const faq = page.faq.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } }));
+    const body = `<main id="seo-priority-page" style="max-width:980px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><article><p>${escapeHtml(page.eyebrow)}</p><h1>${escapeHtml(page.h1)}</h1><p>${escapeHtml(page.lead)}</p>${page.sections.map(([heading, text]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(text)}</p></section>`).join('')}<section><h2>Procurement Questions</h2>${page.faq.map(([question, answer]) => `<h3>${escapeHtml(question)}</h3><p>${escapeHtml(answer)}</p>`).join('')}</section><p><a href="/contact">Discuss Your Requirement</a></p></article></main>`;
+    renderStaticRoute({
+      ...page,
+      body,
+      jsonLd: [
+        { '@context': 'https://schema.org', '@type': 'WebPage', name: page.title, description: page.description, url: `${SITE}${page.route}` },
+        { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq },
+        { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` }, { '@type': 'ListItem', position: 2, name: page.h1, item: `${SITE}${page.route}` }] },
+      ],
+    });
+  }
+
+  const mexicoAlternates = `<link rel="alternate" hreflang="en" href="${SITE}/global/mexico/security-doors/" />\n<link rel="alternate" hreflang="es" href="${SITE}/es/global/mexico/security-doors/" />\n<link rel="alternate" hreflang="x-default" href="${SITE}/global/mexico/security-doors/" />\n`;
+  const mexicoPages = [
+    {
+      route: '/global/mexico/security-doors/', lang: 'en',
+      title: 'Security Doors for Mexico: Manufacturer & Project Supplier | WONLY',
+      description: 'Source security doors, smart locks and project entrance systems for Mexico with specification, finish, hardware, documentation and delivery support from WONLY.',
+      h1: 'Security Doors and Smart Entry for Mexico',
+      lead: 'A project-focused route for Mexican distributors, developers, contractors and door brands sourcing complete entrance systems from an experienced manufacturer.',
+      sections: [['Specify for the Mexican Project, Not a Generic Export Model', 'Start with the project location, opening schedule, security target, door construction, finish, smart-lock functions and delivery plan.'], ['Information Required for a Mexico Quotation', 'Provide city, building use, sizes, handing, wall conditions, security and fire requirements, climate exposure, hardware, access control, quantities and delivery sequence.']],
+      cta: 'Send project details',
+    },
+    {
+      route: '/es/global/mexico/security-doors/', lang: 'es',
+      title: 'Puertas de seguridad para México: fabricante y proveedor | WONLY',
+      description: 'Compre puertas de seguridad, cerraduras inteligentes y sistemas de acceso para proyectos en México con soporte técnico, documental y logístico de WONLY.',
+      h1: 'Puertas de seguridad y acceso inteligente para México',
+      lead: 'Una ruta de compra para distribuidores, desarrolladores, contratistas y marcas mexicanas que buscan sistemas de entrada completos directamente del fabricante.',
+      sections: [['Especifique para el proyecto en México, no un modelo genérico', 'Empiece por ciudad, cuadro de huecos, nivel de seguridad, construcción, acabado, funciones inteligentes y plan de entrega.'], ['Datos necesarios para cotizar en México', 'Incluya ciudad, uso, medidas, mano, muro, seguridad, fuego, clima, herrajes, control de acceso, cantidades y secuencia de entrega.']],
+      cta: 'Enviar datos del proyecto',
+    },
+  ];
+  for (const page of mexicoPages) {
+    const body = `<main id="seo-mexico-page" style="max-width:980px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><article><p>Mexico Market</p><h1>${escapeHtml(page.h1)}</h1><p>${escapeHtml(page.lead)}</p>${page.sections.map(([heading, text]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(text)}</p></section>`).join('')}<p><a href="${page.lang === 'es' ? '/es/contact/' : '/contact/'}">${escapeHtml(page.cta)}</a></p></article></main>`;
+    renderStaticRoute({
+      ...page,
+      body,
+      alternates: mexicoAlternates,
+      jsonLd: { '@context': 'https://schema.org', '@type': 'WebPage', name: page.h1, description: page.description, url: `${SITE}${page.route}`, inLanguage: page.lang },
+    });
+  }
+
+  const published = readdirSync(ARTICLE_DIR)
+    .filter((name) => /^[-a-z0-9]+\.md$/i.test(name))
+    .map((name) => parseArticle(path.join(ARTICLE_DIR, name)))
+    .filter((article) => article.meta.slug && article.meta.date && article.meta.date <= TODAY)
+    .sort((a, b) => b.meta.date.localeCompare(a.meta.date));
+  const insightsTitle = 'News & Insights — Security Door & Smart Lock Guides | WONLY';
+  const insightsDescription = 'WONLY News & Insights: buying guides, product technology, market outlooks and company updates for security door and smart lock distributors and project buyers.';
+  const articleLinks = published.map(({ meta }) => `<article><p>${escapeHtml(meta.category)} · ${escapeHtml(meta.dateLabel || meta.date)}</p><h2><a href="/insights/${escapeHtml(meta.slug)}/">${escapeHtml(meta.title)}</a></h2><p>${escapeHtml(meta.excerpt)}</p></article>`).join('');
+  const insightAlternates = [...LOCALES.map((locale) => `<link rel="alternate" hreflang="${locale}" href="${SITE}${locale === 'en' ? '' : `/${locale}`}/insights/" />`), `<link rel="alternate" hreflang="x-default" href="${SITE}/insights/" />`].join('\n');
+  renderStaticRoute({
+    route: '/insights/',
+    title: insightsTitle,
+    description: insightsDescription,
+    alternates: `${insightAlternates}\n`,
+    body: `<main id="seo-insights-index" style="max-width:1100px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><header><p>News & Insights</p><h1>Guides, Technology & Market Insight</h1><p>Practical knowledge for security door and smart lock distributors, project buyers and partners.</p></header><section>${articleLinks}</section></main>`,
+    jsonLd: { '@context': 'https://schema.org', '@type': 'Blog', name: 'WONLY News & Insights', url: `${SITE}/insights/`, description: insightsDescription },
+  });
+  console.log(`postbuild: generated ${PRIORITY_LANDING_PAGES.length + 1} English priority route shells and 2 Mexico market shells`);
+}
+
 let rendered = 0;
 for (const locale of LOCALES) {
   const directory = locale === 'en' ? ARTICLE_DIR : path.join(ARTICLE_DIR, locale);
@@ -217,3 +423,4 @@ for (const locale of LOCALES) {
 
 console.log(`postbuild: generated ${rendered} scheduled article HTML files through ${TODAY}`);
 renderPortugueseCorePages();
+renderEnglishPriorityRoutes();

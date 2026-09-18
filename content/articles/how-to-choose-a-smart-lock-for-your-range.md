@@ -34,6 +34,8 @@ The best-selling locks give users several ways in, plus a reliable backup.
 
 Look for encrypted communication, tamper and pry alarms, auto-relock and false-code lockout. These are what separate a serious security product from a gadget.
 
+Mechanical protection still matters: use the [lock core vs lock cylinder comparison](/insights/cylindrical-lock-core-vs-standard-cylinder) to verify the keyed backup, escutcheon, attack protection and lock-body interface.
+
 ## Power and Reliability
 
 Long battery life, clear low-battery alerts and an emergency power option (such as a USB backup) prevent the lockouts that generate complaints and returns.

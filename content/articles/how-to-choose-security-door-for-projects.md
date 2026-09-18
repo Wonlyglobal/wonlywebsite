@@ -21,6 +21,8 @@ For a distributor, developer or project buyer, choosing a security door is not a
 
 For production scope, customisation and export planning, use this guide together with the [WONLY security door manufacturer overview](/security-door-manufacturer).
 
+Where the scope includes service entrances, plant rooms, offices or other high-traffic openings, review the [commercial steel security door specification path](/solutions/commercial-steel-security-doors) before freezing hardware and access control.
+
 ## 1. Start With the Security Rating, Not the Price
 
 The first question is how secure the door needs to be. Specify a verified burglar-resistance rating — the European EN 1627 RC classes or China's GB 17565 grades — instead of a vague “high security” claim. Residential low-rise usually calls for RC2–RC3; commercial and institutional work needs RC4 or higher. Always ask for the test certificate, not just a spec sheet.
@@ -43,6 +45,8 @@ A door that is compliant in one country may not clear customs or code in another
 ## 5. Scrutinise the Lock and Hardware
 
 The lock is the most-attacked point. Look for multi-point locking, an anti-drill / anti-bump cylinder, reinforced hinges, and hardware cycle-tested to a high count so it survives years of daily use.
+
+If supplier terminology is unclear, use the [lock core vs cylinder comparison](/insights/cylindrical-lock-core-vs-standard-cylinder) to distinguish the keyed cylinder assembly from the lock body and verify the proposed protection.
 
 ## 6. Vet the Supplier, Not Just the Sample
 

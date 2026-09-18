@@ -1,15 +1,18 @@
 ---
 slug: "cylindrical-lock-core-vs-standard-cylinder"
-title: "The Patented Cylindrical Lock Core vs Standard Cylinders"
-seoTitle: "Cylindrical Lock Core vs Standard Cylinders | WONLY"
-description: "Why the industry-standard figure-eight cylinder is every door's weak point — and how WONLY's patented cylindrical core resists drilling, picking and bumping."
+title: "Door Lock Core vs Cylinder: What Is the Difference?"
+seoTitle: "Lock Core vs Lock Cylinder: Differences & Security | WONLY"
+description: "Compare a lock core vs lock cylinder, interchangeable cores and door lock bodies, plus the anti-snap, anti-drill and test evidence buyers should verify."
 category: "Technology"
 date: "2026-09-09"
 dateLabel: "9 September 2026"
 readMins: 5
 cover: "images/articles/euro-profile-cylinder-cutaway-v2.webp"
-excerpt: "Almost every brand uses the same gourd-shaped cylinder — and it is the weakest point of the door. Here is the engineering that replaced it."
+excerpt: "Lock core and cylinder are often used as synonyms, but buyers still need to compare the complete cylinder format, protection and test evidence."
 keywords:
+  - "door core vs cylinder"
+  - "lock core vs cylinder"
+  - "cylinder vs core"
   - "cylindrical lock core"
   - "anti-drill lock"
   - "anti-bump cylinder"
@@ -17,7 +20,18 @@ keywords:
   - "lock cylinder comparison"
 ---
 
-Ask a locksmith which part of a security door they attack, and the answer is never the slab — it is the cylinder. Most doors on the market, whatever the brand, share the same conventional figure-eight (“gourd”) cylinder: a soft brass body, a rotating face and an exposed keyway. That shared design is the industry's shared weakness.
+In door-hardware language, **lock core** and **lock cylinder** often refer to the same replaceable keyed component. “Core” can also mean the removable inner plug or interchangeable core, while “cylinder” usually means the complete housing installed through the lock or door. The exact meaning depends on the lock format, so buyers should compare drawings and part numbers rather than relying on the label alone.
+
+**Short answer:** a lock cylinder is normally the complete keyed housing; a lock core may mean that whole cylinder in general conversation or the removable inner unit in an interchangeable-core system. Neither term means the mortise lock body inside the door.
+
+## Lock Core vs Cylinder at a Glance
+
+- **Lock cylinder** — the complete keyed cylinder assembly, including its housing, plug or core, pins and cam or tailpiece
+- **Lock core** — sometimes a general name for the cylinder; in an interchangeable-core system, specifically the removable inner unit
+- **Door lock body** — the larger mortise or locking mechanism operated by the cylinder; it is not the cylinder itself
+- **Best comparison method** — confirm the profile, dimensions, attack protection, escutcheon, replacement method and test evidence for the proposed doorset
+
+Attackers commonly target the cylinder rather than the door slab because it can expose the locking mechanism. Many doors use a conventional figure-eight or euro-profile cylinder with a brass body, rotating plug and exposed keyway. Its real resistance depends on projection, material, anti-snap geometry, drill protection and the protective hardware around it.
 
 ## How Standard Cylinders Fail
 
@@ -45,3 +59,7 @@ A cylinder is only as good as the doorset around it. In WONLY doors the cylindri
 ## FAQ
 
 Can the cylindrical core be rekeyed or replaced? Yes — it is serviceable through authorised channels; what it resists is unauthorised attack, not legitimate maintenance.
+
+Is an interchangeable core the same as a euro cylinder? No. An interchangeable core is a removable core format designed for rapid authorised replacement; a euro-profile cylinder is a complete profile and housing format. Compare drawings, dimensions and the surrounding protective hardware.
+
+To evaluate the core, escutcheon, lock body and doorset together, send the proposed hardware schedule through the [WONLY project enquiry form](/contact) or review the [security door manufacturer capability page](/security-door-manufacturer).

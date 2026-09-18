@@ -44,6 +44,9 @@ const englishOnlyRoutes = [
   ["/security-door-manufacturer/", "2026-09-07", "monthly", "0.9"],
   ["/smart-door-manufacturer/", "2026-09-07", "monthly", "0.9"],
   ["/smart-lock-oem-odm/", "2026-09-07", "monthly", "0.9"],
+  ["/solutions/acoustic-stc-entrance-doors/", "2026-09-18", "monthly", "0.9"],
+  ["/solutions/coastal-corrosion-resistant-security-doors/", "2026-09-18", "monthly", "0.9"],
+  ["/solutions/commercial-steel-security-doors/", "2026-09-18", "monthly", "0.9"],
   ["/products/smart-locks/s80-max/", "2026-09-01", "monthly", "0.9"],
   ...["s60-max", "s60-pro", "s50-pro", "s58-pro", "p10-pro", "s922-max", "s936"].map((model) => [`/products/smart-locks/${model}/`, "2026-09-01", "monthly", "0.8"]),
   ...["1-0", "1-0-pro", "2-0", "3-0"].map((level) => [`/products/metal-doors/${level}/`, "2026-09-02", "monthly", "0.9"]),
@@ -99,6 +102,7 @@ const articles = readdirSync(CONTENT_DIR)
 
 const body = [
   ...routes.map(([route, lastmod, changefreq, priority]) => entry(route, lastmod, changefreq, priority)),
+  entry("/global/mexico/security-doors/", "2026-09-18", "monthly", "0.9", true, ["en", "es"]),
   ...englishOnlyRoutes.map(([route, lastmod, changefreq, priority]) => entry(route, lastmod, changefreq, priority, false)),
   entry("/privacy/", "2026-07-27", "yearly", "0.3", false),
   entry("/terms/", "2026-07-27", "yearly", "0.3", false),

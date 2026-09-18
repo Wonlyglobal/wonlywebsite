@@ -1561,6 +1561,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.wonlyglobal.com/global/mexico/security-doors/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/global/mexico/security-doors/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/global/mexico/security-doors/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/global/mexico/security-doors/" />
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/es/global/mexico/security-doors/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.wonlyglobal.com/global/mexico/security-doors/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.wonlyglobal.com/es/global/mexico/security-doors/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.wonlyglobal.com/global/mexico/security-doors/" />
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.wonlyglobal.com/security-door-manufacturer/</loc>
     <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
@@ -1575,6 +1593,24 @@
   <url>
     <loc>https://www.wonlyglobal.com/smart-lock-oem-odm/</loc>
     <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/solutions/acoustic-stc-entrance-doors/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/solutions/coastal-corrosion-resistant-security-doors/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.wonlyglobal.com/solutions/commercial-steel-security-doors/</loc>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

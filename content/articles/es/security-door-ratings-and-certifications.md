@@ -35,6 +35,8 @@ EN 1627 define RC1 a RC6 según el atacante, las herramientas y el tiempo mínim
 
 RC2–RC3 es el punto práctico para la mayoría de proyectos residenciales; RC4 o superior se especifica en aplicaciones comerciales, institucionales y de alto riesgo.
 
+Consulte la [comparación detallada EN 1627 entre RC2, RC3 y RC4](/insights/en-1627-rc2-rc3-rc4-security-door-grades) para relacionar herramientas, tiempo de ensayo y uso de cada hueco. Para compras regionales, revise también [puertas de seguridad para proyectos en México](/global/mexico/security-doors).
+
 ## GB 17565: grados chinos de puertas de seguridad
 
 GB 17565 clasifica las puertas A, B, C y D según el tiempo neto necesario para penetrarlas; la clase A resiste más. Un fabricante chino reputado puede suministrar certificación GB 17565 y EN 1627, y el comprador internacional debería solicitar ambas.
