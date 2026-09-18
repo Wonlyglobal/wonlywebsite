@@ -21,6 +21,8 @@ const mediaMigration=fs.readFileSync("supabase/migrations/20260917230000_cms_med
 const media=fs.readFileSync("src/cms/MediaManager.tsx","utf8");
 const searchMigration=fs.readFileSync("supabase/migrations/20260918010000_cms_site_search.sql","utf8");
 const searchDiscoveryMigration=fs.readFileSync("supabase/migrations/20260919050000_cms_search_discovery.sql","utf8");
+const searchRetentionMigration=fs.readFileSync("supabase/migrations/20260919060000_cms_search_retention.sql","utf8");
+const searchDashboardFiltersMigration=fs.readFileSync("supabase/migrations/20260919070000_cms_search_dashboard_filters.sql","utf8");
 const siteSearch=fs.readFileSync("src/pages/search/Index.tsx","utf8");
 const searchManager=fs.readFileSync("src/cms/SearchManager.tsx","utf8");
 const formMigration=fs.readFileSync("supabase/migrations/20260918030000_cms_form_builder.sql","utf8");
@@ -81,8 +83,10 @@ for(const token of ["cms_update_asset_metadata","cms_replace_asset","same_asset_
 if(!media.includes("cms_replace_asset")||!media.includes("cms_update_asset_metadata")||!media.includes("图片无法加载")||!media.includes("cms-media-replace"))throw new Error("Media manager is missing governed replacement, metadata, or broken-image handling");
 for(const token of ["cms_search_site","status='published'","published_content is not null","websearch_to_tsquery","grant execute on function public.cms_search_site(text,text,integer) to anon,authenticated"])if(!searchMigration.includes(token))throw new Error(`Site search migration missing ${token}`);
 for(const token of ["cms_search_events","cms_search_clicks","cms_search_discover","cms_record_search_click","cms_search_suggestions","cms_popular_content","cms_search_discovery_dashboard","[redacted sensitive query]"])if(!searchDiscoveryMigration.includes(token))throw new Error(`Search discovery migration missing ${token}`);
+for(const token of ["cms_prune_search_events","service_role","p_keep_days","deleted_searches"])if(!searchRetentionMigration.includes(token))throw new Error(`Search retention migration missing ${token}`);
+for(const token of ["cms_search_discovery_dashboard_v2","p_locale","p_query","generate_series","query_filter","trend"])if(!searchDashboardFiltersMigration.includes(token))throw new Error(`Search dashboard filter migration missing ${token}`);
 if(!siteSearch.includes("cms_search_discover")||!siteSearch.includes("cms_search_suggestions")||!siteSearch.includes("cms_popular_content")||!siteSearch.includes("cms_record_search_click")||!siteSearch.includes("Search is temporarily unavailable")||!siteSearch.includes("No results"))throw new Error("Public search discovery is missing analytics, suggestions, popular content, failure, or empty states");
-if(!searchManager.includes("zero_result_queries")||!searchManager.includes("popular_content")||!searchManager.includes("click_through_rate")||!searchManager.includes("不保存IP"))throw new Error("Search manager lacks discovery evidence or privacy disclosure");
+if(!searchManager.includes("zero_result_queries")||!searchManager.includes("popular_content")||!searchManager.includes("click_through_rate")||!searchManager.includes("只记录脱敏关键词"))throw new Error("Search manager lacks discovery evidence or privacy disclosure");
 for(const token of ["cms_forms","cms_validate_form_schema","cms_save_form","cms_publish_form","cms_published_forms","status='published'"])if(!formMigration.includes(token))throw new Error(`Form builder migration missing ${token}`);
 if(!formBuilder.includes("cms_save_form")||!formBuilder.includes("cms_publish_form")||!formBuilder.includes("draggable"))throw new Error("Form builder is missing governed save/publish or field ordering");
 if(!formRuntime.includes('from("cms_published_forms")')||!formRuntime.includes("USER_FIELDS")||!formRuntime.includes("is required"))throw new Error("Published form schema is not enforced by the existing enquiry delivery path");

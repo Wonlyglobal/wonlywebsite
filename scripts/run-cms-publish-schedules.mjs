@@ -1,8 +1,12 @@
 const url=process.env.CMS_SUPABASE_URL?.replace(/\/$/,"");
 const key=process.env.CMS_SUPABASE_SERVICE_ROLE_KEY;
 if(!url||!key)throw new Error("CMS_SUPABASE_URL and CMS_SUPABASE_SERVICE_ROLE_KEY are required");
-const response=await fetch(`${url}/rest/v1/rpc/cms_run_due_publications`,{method:"POST",headers:{apikey:key,authorization:`Bearer ${key}`,"content-type":"application/json"},body:JSON.stringify({p_limit:25})});
+const headers={apikey:key,authorization:`Bearer ${key}`,"content-type":"application/json"};
+const response=await fetch(`${url}/rest/v1/rpc/cms_run_due_publications`,{method:"POST",headers,body:JSON.stringify({p_limit:25})});
 const body=await response.text();
 if(!response.ok)throw new Error(`Scheduled publishing failed (${response.status}): ${body}`);
 const rows=body?JSON.parse(body):[];
-console.log(JSON.stringify({checkedAt:new Date().toISOString(),processed:rows.length,rows}));
+const cleanup=await fetch(`${url}/rest/v1/rpc/cms_prune_search_events`,{method:"POST",headers,body:JSON.stringify({p_keep_days:180})});
+const cleanupBody=await cleanup.text();
+const searchRetention=cleanup.ok?(cleanupBody?JSON.parse(cleanupBody):null):{ok:false,status:cleanup.status};
+console.log(JSON.stringify({checkedAt:new Date().toISOString(),processed:rows.length,rows,searchRetention}));
