@@ -21,6 +21,8 @@ In hotels, hospitals and apartment buildings, many openings must satisfy two ins
 
 WONLY's [fire-rated security door project page](/products/security-doors/fire-rated) provides the RFQ inputs, evidence checks and hardware-coordination path for these openings.
 
+For mixed-use schedules that also include non-fire-rated secure openings, use the [commercial steel security door project page](/solutions/commercial-steel-security-doors) to separate security, egress, access-control and traffic requirements by door mark.
+
 ## Two Tests, One Construction
 
 Fire performance (EN 1634) and burglar resistance (EN 1627 / GB 17565) are separate test regimes with different protocols. A dual-rated door is one construction that has passed both — which is an engineering achievement, because fire design favours intumescent seals and sacrificial layers while security design favours mass, bolts and rigidity. Only the test certificates prove the combination works.

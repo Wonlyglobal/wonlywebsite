@@ -261,9 +261,10 @@ const SecurityDoors = () => {
             <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>Explore smart-door OEM <ArrowRight size={15}/></span>
           </Link>
         </div>
-        <div className="mx-auto mt-4 grid max-w-6xl gap-4 md:grid-cols-3">
+        <div className="mx-auto mt-4 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
             ["Fire & Security", "Fire-Rated Security Doors", "Coordinate the tested doorset, hardware and submittal evidence.", "/products/security-doors/fire-rated"],
+            ["Commercial Projects", "Commercial Steel Security Doors", "Coordinate risk zones, ratings, hardware, access control and handover.", "/solutions/commercial-steel-security-doors"],
             ["Acoustic Performance", "Acoustic & STC-Rated Doors", "Define ratings, seals, thresholds and site acceptance as one system.", "/solutions/acoustic-stc-entrance-doors"],
             ["Coastal Durability", "Corrosion-Resistant Security Doors", "Match materials, finishes and hardware to salt and humidity exposure.", "/solutions/coastal-corrosion-resistant-security-doors"],
           ].map(([tag, title, text, path]) => <Link key={path} to={path} className="group rounded-2xl border border-[#ded6c8] p-6 hover:bg-[#f8f5ee]">

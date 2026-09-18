@@ -304,6 +304,23 @@ const PRIORITY_LANDING_PAGES = [
       ['Can coastal doors include smart locks?', 'Yes, but electronic modules, cable entries, seals, mechanical components and backup access require coordinated moisture protection.'],
     ],
   },
+  {
+    route: '/solutions/commercial-steel-security-doors/',
+    title: 'Commercial Steel Security Doors for Projects | WONLY',
+    description: 'Specify commercial steel security doors for offices, hotels, apartments and public buildings with coordinated ratings, hardware, access control and project delivery.',
+    eyebrow: 'Commercial Door Systems',
+    h1: 'Commercial Steel Security Doors for Building Projects',
+    lead: 'Turn the building risk strategy into coordinated steel doorsets, hardware, access control, fire and egress requirements for every opening.',
+    sections: [
+      ['Specify the Opening, Not a Generic Steel Door', 'Commercial entrances, service routes, plant rooms, offices and secure back-of-house openings face different traffic, attack, fire and egress conditions.'],
+      ['What Buyers Should Define Before Quotation', 'Issue the opening schedule, risk zones, performance criteria, hardware sets, access-control matrix, finishes, quantities and delivery batches.'],
+      ['Evidence Before Award', 'Verify the complete doorset, configuration-specific reports, hardware and controls matrix, approved sample, inspection plan and handover record.'],
+    ],
+    faq: [
+      ['Are commercial steel security doors automatically fire-rated?', 'No. Forced-entry, fire, smoke and egress are separate requirements. Where several apply, evidence must cover the proposed complete assembly.'],
+      ['Can access control and panic hardware be combined?', 'Often yes, but the operating logic, free egress, fire-alarm response, power-loss state and approved hardware configuration must be coordinated.'],
+    ],
+  },
 ];
 
 function renderStaticRoute({ route, title, description, body, jsonLd, alternates = '' }) {

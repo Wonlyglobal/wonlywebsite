@@ -11,6 +11,7 @@ type PageKey =
   | "smart-lock-oem-odm"
   | "acoustic-stc-entrance-doors"
   | "coastal-corrosion-resistant-security-doors"
+  | "commercial-steel-security-doors"
   | "cast-aluminium-security-doors"
   | "fire-rated-security-doors"
   | "hotel-security-doors"
@@ -62,7 +63,7 @@ const PAGES: Record<PageKey, PageData> = {
     ],
     process: [["01", "Send the market, opening schedule, quantity and performance requirements."], ["02", "Review the proposed doorset, drawings, compliance scope and commercial options."], ["03", "Approve samples, finishes and a reference specification before batch production."], ["04", "Inspect, package and deliver with installation and handover documentation."]],
     faq: [["Does WONLY support OEM and private-label security doors?", "Yes. Branding, finish, configuration and packaging can be reviewed against production, certification and minimum-order requirements."], ["Which security door types can be supplied?", "The portfolio includes steel and cast-aluminium security doors, smart doors, fire-rated project doors and application-specific entrance solutions."], ["What is needed for a project quotation?", "Send destination, quantities, opening sizes, performance targets, finish, lock and delivery schedule so the correct configuration can be assessed."]],
-    related: [["Security Door Range", "/products/security-doors"], ["Fire-Rated Security Doors", "/products/security-doors/fire-rated"], ["OEM / ODM Partnership", "/partnership"]],
+    related: [["Security Door Range", "/products/security-doors"], ["Commercial Steel Security Doors", "/solutions/commercial-steel-security-doors"], ["Fire-Rated Security Doors", "/products/security-doors/fire-rated"]],
     evidence: [["Factory audit trail", "Review controlled drawings, material records, inspection checkpoints and corrective-action evidence before approval."], ["Configuration-specific reports", "Match every certificate or test report to the proposed leaf, frame, hardware, size and installation method."], ["Golden sample control", "Approve a signed reference sample and change-control process before batch production."], ["Export handover pack", "Define drawings, labels, packing lists, installation guidance, spare parts and inspection records required at delivery."]],
     ctaSubject: "Security door project specification review",
   },
@@ -139,6 +140,24 @@ const PAGES: Record<PageKey, PageData> = {
     related: [["Cast Aluminium Security Doors", "/products/security-doors/cast-aluminium"], ["Coastal Climate Guide", "/insights/cast-aluminium-doors-coastal-climates"], ["Security Door Manufacturer", "/security-door-manufacturer"]],
     evidence: [["Exposure-to-material matrix", "Link each exterior and concealed component to the stated environmental condition."], ["Finish sample and process", "Approve colour and texture together with preparation, coating build and edge treatment."], ["Hardware compatibility record", "Check dissimilar metals, fasteners, hinges, lock components and electronic penetrations."], ["Maintenance handover", "Provide cleaning frequency, approved products, inspection points and repair instructions."]],
     ctaSubject: "Coastal corrosion-resistant security door review",
+  },
+  "commercial-steel-security-doors": {
+    path: "/solutions/commercial-steel-security-doors",
+    title: "Commercial Steel Security Doors for Projects | WONLY",
+    description: "Specify commercial steel security doors for offices, hotels, apartments and public buildings with coordinated ratings, hardware, access control and project delivery.",
+    eyebrow: "Commercial Door Systems",
+    h1: "Commercial Steel Security Doors for Building Projects",
+    lead: "Turn the building risk strategy into coordinated steel doorsets, hardware, access control, fire and egress requirements for every opening.",
+    image: "/images/eng-3.webp",
+    audience: "For developers, architects, contractors, consultants, distributors and facility teams",
+    overviewTitle: "Specify the Opening, Not a Generic Steel Door",
+    overview: ["Commercial entrances, service routes, plant rooms, offices and secure back-of-house openings face different traffic, attack, fire and egress conditions. One generic door construction cannot answer every location.", "WONLY helps project teams coordinate the steel leaf and frame, security performance, hardware, fire or smoke duties, access control, finish, installation and handover around an opening-by-opening schedule."],
+    requirements: [["Opening schedule", "Identify every opening, room relationship, finished size, handing, wall construction and exposure."], ["Security performance", "Define the threat, delay objective, locking points and evidence required for each risk zone."], ["Fire and egress", "Record rating, smoke control, swing, closer, latch, exit hardware and authority requirements separately."], ["Hardware and access", "Coordinate hinges, locks, closers, panic devices, readers, contacts, wiring and failure behaviour."], ["Traffic and environment", "Match cycle duty, impact exposure, corrosion protection and finish to operation and maintenance."], ["Installation and handover", "Define anchors, tolerances, perimeter interfaces, inspection records, labels, spares and maintenance files."]],
+    process: [["01", "Issue the door schedule, risk zones, performance criteria, hardware set and access-control matrix."], ["02", "Review the complete doorset, evidence boundary, drawings, samples and interface responsibilities."], ["03", "Approve a reference opening, finish, hardware operation, inspection plan and change-control process."], ["04", "Release production by batch, inspect installation and deliver the coordinated handover record."]],
+    faq: [["Are commercial steel security doors automatically fire-rated?", "No. Forced-entry, fire, smoke and egress are separate requirements. Where several apply, evidence must cover the proposed complete assembly."], ["Can access control and panic hardware be combined?", "Often yes, but the operating logic, free egress, fire-alarm response, power-loss state and approved hardware configuration must be coordinated."], ["What should be included in a commercial door RFQ?", "Provide the opening schedule, wall types, ratings, hardware sets, access-control matrix, finishes, quantities, delivery batches, destination and required documentation."]],
+    related: [["Security Door Manufacturer", "/security-door-manufacturer"], ["Fire-Rated Security Doors", "/products/security-doors/fire-rated"], ["Engineering Doors", "/products/engineering-doors"]],
+    evidence: [["Opening-by-opening compliance matrix", "Map security, fire, smoke, egress, accessibility and acoustic duties to each door mark."], ["Configuration-specific evidence", "Match the leaf, frame, anchors, hardware, glazing, size and wall interface to applicable reports."], ["Hardware and controls matrix", "Document normal use, fire alarm, power loss, network failure, override and emergency-release behaviour."], ["Inspection and handover pack", "Retain approved drawings, samples, production checks, installation records, labels, manuals and maintenance intervals."]],
+    ctaSubject: "Commercial steel security door schedule review",
   },
   "cast-aluminium-security-doors": {
     path: "/products/security-doors/cast-aluminium",

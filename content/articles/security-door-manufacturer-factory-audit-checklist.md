@@ -21,6 +21,8 @@ A polished catalogue does not prove that a factory can repeat the same doorset a
 
 Use the checklist alongside WONLY's [security door manufacturer capability overview](/security-door-manufacturer), which maps the information needed for project specification, OEM review and export delivery.
 
+For offices, hotels, apartment common areas and public buildings, the [commercial steel security door project guide](/solutions/commercial-steel-security-doors) turns the same controls into an opening-by-opening schedule covering hardware, access control, fire and egress.
+
 ## Confirm the Manufacturer and Project Scope
 
 - Verify the legal company name, factory address and whether production is owned, subcontracted or mixed
