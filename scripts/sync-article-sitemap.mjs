@@ -102,6 +102,7 @@ const articles = readdirSync(CONTENT_DIR)
 
 const body = [
   ...routes.map(([route, lastmod, changefreq, priority]) => entry(route, lastmod, changefreq, priority)),
+  entry("/global/mexico/security-doors/", "2026-09-18", "monthly", "0.9", true, ["en", "es"]),
   ...englishOnlyRoutes.map(([route, lastmod, changefreq, priority]) => entry(route, lastmod, changefreq, priority, false)),
   entry("/privacy/", "2026-07-27", "yearly", "0.3", false),
   entry("/terms/", "2026-07-27", "yearly", "0.3", false),

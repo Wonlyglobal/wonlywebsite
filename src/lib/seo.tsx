@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { LANGUAGES, localeFromPath, pathForLocale } from "./i18n";
+import { LANGUAGES, localeFromPath, pathForLocale, type Locale } from "./i18n";
 import { localizedSeo } from "./seo-locales";
 
 /**
@@ -55,6 +55,8 @@ interface SeoInput {
   jsonLd?: JsonLd | JsonLd[];
   /** Set false for pages whose body is intentionally available in English only. */
   localized?: boolean;
+  /** Restrict hreflang/indexing when a market page exists in selected languages only. */
+  hreflangLocales?: Locale[];
 }
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
@@ -107,6 +109,7 @@ export function useSeo({
   type = "website",
   jsonLd,
   localized: isLocalized = true,
+  hreflangLocales,
 }: SeoInput) {
   // CMS overrides (content/settings/tdk.json) beat the coded defaults.
   const ov = tdkFor(path);
@@ -137,7 +140,8 @@ export function useSeo({
     else document.head.querySelector('meta[name="keywords"]')?.remove();
     // Translated business and insight pages are independently indexable.
     // English-only pages point back to English when opened under a locale URL.
-    upsertMeta("name", "robots", isLocalized || locale === "en" ? "index,follow" : "noindex,follow");
+    const indexable = isLocalized && (!hreflangLocales || hreflangLocales.includes(locale)) || !isLocalized && locale === "en";
+    upsertMeta("name", "robots", indexable ? "index,follow" : "noindex,follow");
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", type);
@@ -153,6 +157,7 @@ export function useSeo({
     document.head.querySelectorAll('link[data-managed-hreflang="true"]').forEach((node) => node.remove());
     if (isLocalized) {
       for (const language of LANGUAGES) {
+        if (hreflangLocales && !hreflangLocales.includes(language.code)) continue;
         const alternatePath = pathForLocale(path, language.code);
         const normalizedAlternate = alternatePath === "/" || alternatePath.endsWith("/")
           ? alternatePath
@@ -180,5 +185,5 @@ export function useSeo({
     };
     // jsonLdKey captures deep changes to jsonLd without unstable identity.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title, description, path, image, type, jsonLdKey, isLocalized]);
+  }, [title, description, path, image, type, jsonLdKey, isLocalized, hreflangLocales?.join(",")]);
 }

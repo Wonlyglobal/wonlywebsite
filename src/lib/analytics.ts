@@ -10,13 +10,54 @@ type AnalyticsParams = Record<string, AnalyticsValue>;
 type ClickContext = { cta_name: string; source_section: string; destination?: string; captured_at: number };
 let lastClick: ClickContext | null = null;
 const JOURNEY_SESSION_KEY = "wonly_inquiry_journey_session";
+const JOURNEY_EVENTS_KEY = "wonly_inquiry_journey_events";
+const ATTRIBUTION_KEY = "wonly_inquiry_attribution";
 const JOURNEY_EVENT_NAMES = new Set(["cta_click", "form_open", "form_start", "form_submit", "form_error", "form_abandon", "contact_click"]);
 type JourneyEvent = {
   event_name: string; event_at: string; session_ref: string; form_id?: string;
   page_path: string; page_title: string; cta_name?: string; section_name?: string;
   language?: string; product_context?: string; error_type?: string;
 };
-const journeyEvents: JourneyEvent[] = [];
+const journeyEvents: JourneyEvent[] = (() => {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = JSON.parse(window.sessionStorage.getItem(JOURNEY_EVENTS_KEY) || "[]");
+    return Array.isArray(stored) ? stored.slice(-99) : [];
+  } catch { return []; }
+})();
+
+type InquiryAttribution = {
+  landing_page: string;
+  landing_referrer: string;
+  entry_channel: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+};
+
+function getInquiryAttribution(): InquiryAttribution {
+  const empty = { landing_page: "", landing_referrer: "", entry_channel: "direct", utm_source: "", utm_medium: "", utm_campaign: "" };
+  if (typeof window === "undefined") return empty;
+  try {
+    const saved = window.sessionStorage.getItem(ATTRIBUTION_KEY);
+    if (saved) return { ...empty, ...JSON.parse(saved) };
+    const query = new URLSearchParams(window.location.search);
+    const referrer = document.referrer || "";
+    const source = query.get("utm_source") || "";
+    const medium = query.get("utm_medium") || "";
+    const isSearch = /(?:google|bing|yahoo|duckduckgo|baidu|yandex)\./i.test(referrer);
+    const attribution: InquiryAttribution = {
+      landing_page: window.location.pathname + window.location.search,
+      landing_referrer: referrer.slice(0, 300),
+      entry_channel: source ? "campaign" : isSearch ? "organic_search" : referrer ? "referral" : "direct",
+      utm_source: source.slice(0, 100),
+      utm_medium: medium.slice(0, 100),
+      utm_campaign: (query.get("utm_campaign") || "").slice(0, 160),
+    };
+    window.sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution));
+    return attribution;
+  } catch { return empty; }
+}
 
 export function getJourneySession(): string {
   if (typeof window === "undefined") return "";
@@ -53,6 +94,7 @@ export function initAnalytics(): void {
   if (started || typeof window === "undefined") return;
   started = true;
   const w = window as any;
+  getInquiryAttribution();
 
   // --- Google Analytics 4 (gtag.js) ---
   if (GA_MEASUREMENT_ID) {
@@ -122,6 +164,7 @@ export function trackEvent(name: string, params: AnalyticsParams = {}): void {
       error_type: name === "form_error" && typeof payload.error_type === "string" ? payload.error_type.slice(0, 80) : undefined,
     });
     if (journeyEvents.length > 300) journeyEvents.splice(0, journeyEvents.length - 300);
+    try { window.sessionStorage.setItem(JOURNEY_EVENTS_KEY, JSON.stringify(journeyEvents.slice(-99))); } catch { /* storage unavailable */ }
   }
   if (GA_MEASUREMENT_ID && w.gtag) w.gtag("event", name, payload);
   if (CLARITY_PROJECT_ID && w.clarity) w.clarity("event", name);
@@ -153,5 +196,11 @@ export function trackPageview(path: string): void {
 
 /** GA4 lead-generation conversion — fire on a successful enquiry submit. */
 export function trackLead(params: Record<string, string> = {}): void {
-  trackEvent("generate_lead", { currency: "USD", value: 0, ...params });
+  trackEvent("generate_lead", {
+    currency: "USD",
+    value: 0,
+    journey_session: getJourneySession(),
+    ...getInquiryAttribution(),
+    ...params,
+  });
 }

@@ -1,8 +1,8 @@
 ---
 slug: "cylindrical-lock-core-vs-standard-cylinder"
 title: "Door Lock Core vs Cylinder: What Is the Difference?"
-seoTitle: "Door Lock Core vs Cylinder: Key Differences | WONLY"
-description: "Understand lock core vs cylinder terminology, how standard euro-profile cylinders are attacked, and what project buyers should verify in a high-security door lock."
+seoTitle: "Lock Core vs Lock Cylinder: Differences & Security | WONLY"
+description: "Compare a lock core vs lock cylinder, interchangeable cores and door lock bodies, plus the anti-snap, anti-drill and test evidence buyers should verify."
 category: "Technology"
 date: "2026-09-09"
 dateLabel: "9 September 2026"
@@ -21,6 +21,8 @@ keywords:
 ---
 
 In door-hardware language, **lock core** and **lock cylinder** often refer to the same replaceable keyed component. “Core” can also mean the removable inner plug or interchangeable core, while “cylinder” usually means the complete housing installed through the lock or door. The exact meaning depends on the lock format, so buyers should compare drawings and part numbers rather than relying on the label alone.
+
+**Short answer:** a lock cylinder is normally the complete keyed housing; a lock core may mean that whole cylinder in general conversation or the removable inner unit in an interchangeable-core system. Neither term means the mortise lock body inside the door.
 
 ## Lock Core vs Cylinder at a Glance
 
@@ -57,3 +59,7 @@ A cylinder is only as good as the doorset around it. In WONLY doors the cylindri
 ## FAQ
 
 Can the cylindrical core be rekeyed or replaced? Yes — it is serviceable through authorised channels; what it resists is unauthorised attack, not legitimate maintenance.
+
+Is an interchangeable core the same as a euro cylinder? No. An interchangeable core is a removable core format designed for rapid authorised replacement; a euro-profile cylinder is a complete profile and housing format. Compare drawings, dimensions and the surrounding protective hardware.
+
+To evaluate the core, escutcheon, lock body and doorset together, send the proposed hardware schedule through the [WONLY project enquiry form](/contact) or review the [security door manufacturer capability page](/security-door-manufacturer).

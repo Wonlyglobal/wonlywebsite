@@ -1,8 +1,8 @@
 ---
 slug: "cylindrical-lock-core-vs-standard-cylinder"
-title: "Núcleo cilíndrico frente a cilindro estándar"
-seoTitle: "Núcleo cilíndrico vs cilindro estándar | WONLY"
-description: "Compare rotura, taladrado y apertura técnica, y conozca las pruebas que debe solicitar para el conjunto completo."
+title: "Núcleo de cerradura vs cilindro: diferencias y seguridad"
+seoTitle: "Núcleo de cerradura vs cilindro: diferencias | WONLY"
+description: "Compare núcleo y cilindro de cerradura, bombín intercambiable, cuerpo de cerradura y pruebas antirrotura y antitaladro para puertas de seguridad."
 category: "Tecnología"
 date: "2026-09-09"
 dateLabel: "9 de septiembre de 2026"
@@ -15,7 +15,7 @@ keywords:
   - "cilindro alta seguridad"
 ---
 
-En una intrusión se suele atacar el cilindro antes que la hoja. Muchos conjuntos usan un perfil convencional que puede sobresalir del escudo; su geometría, material y protección deciden la resistencia.
+En herrajes, **núcleo y cilindro pueden nombrar la misma pieza con llave**, pero «núcleo» también puede ser la unidad interior extraíble y «cilindro» el alojamiento completo instalado en la puerta. Ninguno equivale al cuerpo de cerradura embutido. Compare siempre dibujo, medida y referencia, no solo el nombre.
 
 ## Ataques habituales
 
@@ -43,3 +43,7 @@ Hasta el mejor cilindro depende del escudo, cerradura, bulones, marco y fijacion
 ## Preguntas frecuentes
 
 **¿Se puede sustituir?** Sí, mediante servicio autorizado. Resistir ataques no debe impedir un mantenimiento documentado.
+
+**¿Un núcleo intercambiable es igual a un cilindro europeo?** No. El núcleo intercambiable es un formato extraíble para sustitución autorizada rápida; el cilindro europeo es un perfil completo. Deben compararse medidas, protección exterior y ensayos.
+
+Para revisar núcleo, escudo, cerradura y puerta como un sistema, envíe el cuadro de herrajes mediante el [formulario de proyecto WONLY](/contact). Para distribuidores y proyectos mexicanos, consulte [puertas de seguridad para México](/global/mexico/security-doors).

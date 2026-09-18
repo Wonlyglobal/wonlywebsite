@@ -1,8 +1,8 @@
 ---
 slug: "en-1627-rc2-rc3-rc4-security-door-grades"
 title: "EN 1627 RC2 vs RC3 vs RC4: Which Security Door Grade Do You Need?"
-seoTitle: "EN 1627 RC2 vs RC3 vs RC4 — Security Door Grades | WONLY"
-description: "EN 1627 resistance classes compared — what RC2, RC3 and RC4 actually resist, which projects each grade suits, and how to specify the right class."
+seoTitle: "EN 1627 RC2, RC3 & RC4 Door Classes | WONLY"
+description: "Compare EN 1627 RC2, RC3 and RC4 door classes, resistance times, attack tools and the tested doorset evidence required for each project opening."
 category: "Buying Guide"
 date: "2026-08-03"
 dateLabel: "3 August 2026"
@@ -17,7 +17,15 @@ keywords:
   - "which RC class do I need"
 ---
 
-EN 1627 gives buyers a shared language for burglar resistance — but most projects only ever choose between three classes: RC2, RC3 and RC4. Picking the right one is a cost decision as much as a security decision. Here is how the three grades differ in practice, and how to match them to real projects.
+EN 1627 gives buyers a shared language for burglar resistance. **RC2 is the usual baseline for protected residential entrances, RC3 adds resistance to an experienced attacker using a crowbar, and RC4 addresses higher-risk openings attacked with heavier tools.** The class must be proven on the complete doorset, not inferred from the leaf or lock alone.
+
+## EN 1627 RC2 vs RC3 vs RC4: Quick Comparison
+
+- **RC2:** approximately 3 minutes of net tool-contact time with basic hand tools; suited to lower-risk, protected residential openings.
+- **RC3:** approximately 5 minutes with additional leverage tools; commonly specified for exposed apartments, villas and townhouses.
+- **RC4:** approximately 10 minutes with saws, hammers, axes and cordless drills; intended for high-value or critical openings.
+
+These are laboratory resistance periods inside a defined test sequence, not a guarantee that every real attack will last only that long.
 
 ## What Each Class Actually Resists
 
@@ -49,3 +57,5 @@ Airport staff entrances, operations rooms, plant areas and other controlled zone
 Is RC3 enough for a villa? For most residential risk profiles, yes — RC3 is the standard recommendation for street-facing homes. Escalate to RC4 for high-value contents or isolated locations.
 
 Can I mix classes across one project? Yes — and you should. Specify by exposure: RC2 for protected interior entrances, RC3 for perimeter units, RC4 for critical rooms.
+
+For an opening-by-opening review, send the risk zones, door schedule, wall construction, hardware and access-control requirements through the [WONLY project enquiry form](/contact).

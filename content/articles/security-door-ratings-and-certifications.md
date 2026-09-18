@@ -35,6 +35,8 @@ EN 1627 is the European standard for the burglar resistance of doors and windows
 
 For most residential export projects, RC2 to RC3 is the practical sweet spot; RC4 and above is specified for commercial, institutional and high-risk applications.
 
+Use the detailed [EN 1627 RC2, RC3 and RC4 comparison](/insights/en-1627-rc2-rc3-rc4-security-door-grades) to map attacker tools, laboratory resistance time and project use to each opening.
+
 ## GB 17565: China's Security Door Grades
 
 Because so many security doors are manufactured in China, buyers should also recognise GB 17565, China's technical standard for burglar-resistant doors. It classifies doors into grades — A, B, C and D — based on the net working time an attacker needs to break through, with Class A resisting the longest. A reputable China-based manufacturer can supply doors certified to both GB 17565 and EN 1627 — which is what international buyers should ask for.

@@ -104,6 +104,7 @@ const Projects = lazy(() => import("./pages/projects/Index"));
 const Insights = lazy(() => import("./pages/insights/Index"));
 const InsightArticle = lazy(() => import("./pages/insights/Article"));
 const IntentLandingPage = lazy(() => import("../IntentLandingPage"));
+const MexicoSecurityDoors = lazy(() => import("./pages/global-strategy/MexicoSecurityDoors"));
 // Product category pages (each lists the full series in its line)
 const EntranceDoor = lazy(() => import("./pages/products/EntranceDoor"));
 const SecurityDoors = lazy(() => import("./pages/products/SecurityDoors"));
@@ -222,6 +223,7 @@ const App = () => (
           <Route path="/solutions/villa-security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="villa-security-doors" /></Suspense>} />
           <Route path="/global/saudi-arabia/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="saudi-arabia-security-doors" /></Suspense>} />
           <Route path="/global/uae/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><IntentLandingPage pageKey="uae-security-doors" /></Suspense>} />
+          <Route path="/global/mexico/security-doors" element={<Suspense fallback={<div className="min-h-screen" style={{ background: "#0d0d0d" }} />}><MexicoSecurityDoors /></Suspense>} />
 
           {/* Legacy singular /product/* URLs resolve to the canonical /products/* structure. */}
           <Route path="/product/door" element={<Navigate to="/products/entrance-door" replace />} />

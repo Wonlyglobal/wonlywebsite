@@ -30,6 +30,8 @@ Una cerradura inteligente suele ser el primer producto conectado que compra el c
 
 Busque comunicación cifrada, alarmas de palanca y sabotaje, cierre automático y bloqueo tras códigos falsos. Estos elementos distinguen un producto serio de un dispositivo accesorio.
 
+La protección mecánica sigue siendo esencial: consulte la [comparación entre núcleo y cilindro de cerradura](/insights/cylindrical-lock-core-vs-standard-cylinder) para revisar llave de respaldo, escudo, resistencia al ataque y cuerpo de cerradura.
+
 ## Energía y fiabilidad
 
 Una batería duradera, alertas claras y alimentación USB de emergencia evitan bloqueos, reclamaciones y devoluciones.

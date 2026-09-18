@@ -323,10 +323,10 @@ const PRIORITY_LANDING_PAGES = [
   },
 ];
 
-function renderStaticRoute({ route, title, description, body, jsonLd, alternates = '' }) {
+function renderStaticRoute({ route, title, description, body, jsonLd, alternates = '', lang = 'en' }) {
   const canonical = `${SITE}${route}`;
   let html = shell
-    .replace(/<html\b[^>]*>/i, '<html lang="en" dir="ltr">')
+    .replace(/<html\b[^>]*>/i, `<html lang="${lang}" dir="ltr">`)
     .replace(/<link\s+rel="alternate"[^>]*>\s*/gi, '')
     .replace('</head>', `${alternates}${jsonLd ? `\n<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}\n</head>`)
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`);
@@ -356,6 +356,37 @@ function renderEnglishPriorityRoutes() {
     });
   }
 
+  const mexicoAlternates = `<link rel="alternate" hreflang="en" href="${SITE}/global/mexico/security-doors/" />\n<link rel="alternate" hreflang="es" href="${SITE}/es/global/mexico/security-doors/" />\n<link rel="alternate" hreflang="x-default" href="${SITE}/global/mexico/security-doors/" />\n`;
+  const mexicoPages = [
+    {
+      route: '/global/mexico/security-doors/', lang: 'en',
+      title: 'Security Doors for Mexico: Manufacturer & Project Supplier | WONLY',
+      description: 'Source security doors, smart locks and project entrance systems for Mexico with specification, finish, hardware, documentation and delivery support from WONLY.',
+      h1: 'Security Doors and Smart Entry for Mexico',
+      lead: 'A project-focused route for Mexican distributors, developers, contractors and door brands sourcing complete entrance systems from an experienced manufacturer.',
+      sections: [['Specify for the Mexican Project, Not a Generic Export Model', 'Start with the project location, opening schedule, security target, door construction, finish, smart-lock functions and delivery plan.'], ['Information Required for a Mexico Quotation', 'Provide city, building use, sizes, handing, wall conditions, security and fire requirements, climate exposure, hardware, access control, quantities and delivery sequence.']],
+      cta: 'Send project details',
+    },
+    {
+      route: '/es/global/mexico/security-doors/', lang: 'es',
+      title: 'Puertas de seguridad para México: fabricante y proveedor | WONLY',
+      description: 'Compre puertas de seguridad, cerraduras inteligentes y sistemas de acceso para proyectos en México con soporte técnico, documental y logístico de WONLY.',
+      h1: 'Puertas de seguridad y acceso inteligente para México',
+      lead: 'Una ruta de compra para distribuidores, desarrolladores, contratistas y marcas mexicanas que buscan sistemas de entrada completos directamente del fabricante.',
+      sections: [['Especifique para el proyecto en México, no un modelo genérico', 'Empiece por ciudad, cuadro de huecos, nivel de seguridad, construcción, acabado, funciones inteligentes y plan de entrega.'], ['Datos necesarios para cotizar en México', 'Incluya ciudad, uso, medidas, mano, muro, seguridad, fuego, clima, herrajes, control de acceso, cantidades y secuencia de entrega.']],
+      cta: 'Enviar datos del proyecto',
+    },
+  ];
+  for (const page of mexicoPages) {
+    const body = `<main id="seo-mexico-page" style="max-width:980px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><article><p>Mexico Market</p><h1>${escapeHtml(page.h1)}</h1><p>${escapeHtml(page.lead)}</p>${page.sections.map(([heading, text]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(text)}</p></section>`).join('')}<p><a href="${page.lang === 'es' ? '/es/contact/' : '/contact/'}">${escapeHtml(page.cta)}</a></p></article></main>`;
+    renderStaticRoute({
+      ...page,
+      body,
+      alternates: mexicoAlternates,
+      jsonLd: { '@context': 'https://schema.org', '@type': 'WebPage', name: page.h1, description: page.description, url: `${SITE}${page.route}`, inLanguage: page.lang },
+    });
+  }
+
   const published = readdirSync(ARTICLE_DIR)
     .filter((name) => /^[-a-z0-9]+\.md$/i.test(name))
     .map((name) => parseArticle(path.join(ARTICLE_DIR, name)))
@@ -373,7 +404,7 @@ function renderEnglishPriorityRoutes() {
     body: `<main id="seo-insights-index" style="max-width:1100px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><header><p>News & Insights</p><h1>Guides, Technology & Market Insight</h1><p>Practical knowledge for security door and smart lock distributors, project buyers and partners.</p></header><section>${articleLinks}</section></main>`,
     jsonLd: { '@context': 'https://schema.org', '@type': 'Blog', name: 'WONLY News & Insights', url: `${SITE}/insights/`, description: insightsDescription },
   });
-  console.log(`postbuild: generated ${PRIORITY_LANDING_PAGES.length + 1} English priority route shells`);
+  console.log(`postbuild: generated ${PRIORITY_LANDING_PAGES.length + 1} English priority route shells and 2 Mexico market shells`);
 }
 
 let rendered = 0;
