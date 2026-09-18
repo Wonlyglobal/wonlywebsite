@@ -1,8 +1,8 @@
 ---
 slug: "soundproof-security-doors-stc-ratings"
-title: "Portes de sécurité acoustiques : comprendre le STC"
-seoTitle: "Portes acoustiques et classement STC | WONLY"
-description: "Ce que mesure le STC d'une porte d'entrée, les limites de STC 35+ et les détails de joints, âme et seuil à spécifier."
+title: "Portes classées STC : STC 35, STC 40 et isolation acoustique"
+seoTitle: "Portes STC 35 et STC 40 : classement acoustique | WONLY"
+description: "Comparez les portes STC 35 et STC 40, leur niveau d'isolation et les éléments à exiger dans le rapport d'essai du bloc-porte."
 category: "Technologie"
 date: "2026-08-14"
 dateLabel: "14 août 2026"
@@ -15,7 +15,9 @@ keywords:
   - "porte entrée STC 35"
 ---
 
-« Insonorisé » est une promesse imprécise ; STC ou Rw est une valeur mesurable. Pour les appartements, hôtels et logements sur rue, le chiffre doit concerner le bloc-porte complet et être accompagné des conditions d'essai.
+« Insonorisé » est une promesse imprécise ; une porte classée STC est mesurable. **STC 35 constitue un objectif pratique lorsque la voix forte peut rester audible sans être clairement comprise ; STC 40 renforce la confidentialité de la parole.** Le chiffre doit concerner le bloc-porte complet testé.
+
+La [solution WONLY pour portes d'entrée acoustiques classées STC](/solutions/acoustic-stc-entrance-doors) regroupe objectif, rapport, joints, quincaillerie et réception dans une même fiche projet.
 
 ## Ce que signifie STC
 
@@ -33,6 +35,10 @@ Le Sound Transmission Class évalue la réduction des bruits aériens, principal
 
 Une âme dense multicouche, un cadre rigide, des joints continus et un seuil automatique qui descend à la fermeture travaillent ensemble. Certaines séries WONLY associent âme acier alvéolaire, étanchéité périphérique et seuil escamotable avec une performance annoncée STC 35+ ; demandez le rapport correspondant aux dimensions et options commandées.
 
+## Une porte STC 35 est-elle suffisante ?
+
+STC 35 est un point de départ pertinent pour les entrées d'appartements, chambres d'hôtel et logements donnant sur un couloir. Envisagez STC 40 ou plus lorsque la confidentialité de la parole est prioritaire ou que la source sonore est plus forte. Vérifiez que le rapport couvre le vantail, le cadre, les joints, le seuil, le vitrage et la quincaillerie commandés.
+
 ## Prescription et réception
 
 - Inscrire STC ou Rw cible, standard d'essai et tolérance dans le bordereau.
@@ -40,3 +46,5 @@ Une âme dense multicouche, un cadre rigide, des joints continus et un seuil aut
 - Inclure joints et seuil de la configuration testée.
 - Contrôler jeux, compression des joints et réglages après pose.
 - Spécifier séparément sécurité, feu et acoustique : l'une ne prouve pas les autres.
+
+Pour une revue de projet, transmettez le tableau des ouvertures, le type de paroi, la cible acoustique et la quincaillerie via le [formulaire projet WONLY](/contact). Si le même bloc doit aussi résister au feu, consultez la [solution de porte de sécurité coupe-feu](/products/security-doors/fire-rated).

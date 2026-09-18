@@ -1,8 +1,8 @@
 ---
 slug: "60-90-120-minute-fire-doors"
-title: "Puertas cortafuego de 60, 90 o 120 minutos: cómo especificar"
-seoTitle: "Puertas cortafuego 60 vs 90 vs 120 minutos | WONLY"
-description: "Dónde se usan EI60, EI90 y EI120, diferencia entre E y EI y proceso para especificar un conjunto de puerta certificado."
+title: "Puertas cortafuego EI60, EI90 y EI120: ¿cuál elegir?"
+seoTitle: "Puertas cortafuego EI60 vs EI90 vs EI120 | WONLY"
+description: "Compare puertas cortafuego EI60, EI90 y EI120, la diferencia entre E y EI y el conjunto ensayado que debe especificarse en cada hueco."
 category: "Guía de compra"
 date: "2026-08-24"
 dateLabel: "24 de agosto de 2026"
@@ -16,6 +16,10 @@ keywords:
 ---
 
 Los minutos no son una puntuación de calidad, sino una exigencia normativa para cada hueco. Instalar 120 minutos en todo eleva peso y coste; instalar 60 donde se exigen 90 impide superar la inspección.
+
+## EI60, EI90 y EI120: respuesta rápida
+
+Una **puerta cortafuego EI60** aporta 60 minutos de integridad y aislamiento, EI90 aporta 90 y EI120 aporta 120 según la norma de ensayo indicada. La estrategia contra incendios debe asignar la clase a cada hueco; la cifra nunca sustituye la comprobación del conjunto completo ensayado.
 
 ## Usos habituales
 
@@ -38,4 +42,6 @@ La clasificación cubre hoja, marco, juntas intumescentes, cierrapuertas y herra
 3. Comprar el conjunto conforme al informe y su tabla de herrajes.
 4. Si también necesita protección, exigir certificación doble sobre la misma construcción.
 
-Las puertas de ingeniería WONLY ofrecen rendimiento EN 1634 de 90 minutos y, en modelos aplicables, seguridad GB 17565 Clase A. El proyectista y los certificados de la configuración pedida deben confirmar su idoneidad.
+Consulte la [solución WONLY de puertas de seguridad cortafuego](/products/security-doors/fire-rated) para revisar pruebas del conjunto, herrajes y datos de proyecto. Algunas configuraciones combinan rendimiento EN 1634 y seguridad GB 17565 Clase A; confirme siempre el alcance exacto del informe y la aprobación de destino.
+
+Envíe el cuadro de huecos, la clase E/EI, el muro, las dimensiones y los herrajes mediante el [formulario de consulta de WONLY](/contact) para revisar la configuración.

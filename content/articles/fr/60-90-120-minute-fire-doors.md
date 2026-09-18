@@ -1,8 +1,8 @@
 ---
 slug: "60-90-120-minute-fire-doors"
-title: "Portes coupe-feu 60, 90 ou 120 minutes : bien spécifier"
-seoTitle: "Portes coupe-feu 60 vs 90 vs 120 minutes | WONLY"
-description: "Où utiliser EI60, EI90 et EI120, différence entre E et EI et méthode pour spécifier un bloc-porte certifié par ouverture."
+title: "Classement porte coupe-feu : EI60, EI90 ou EI120 ?"
+seoTitle: "Classement porte coupe-feu EI60, EI90 et EI120 | WONLY"
+description: "Comparez les portes coupe-feu EI60, EI90 et EI120, la différence entre E et EI et le bloc-porte testé à prescrire pour chaque ouverture."
 category: "Guide d'achat"
 date: "2026-08-24"
 dateLabel: "24 août 2026"
@@ -16,6 +16,10 @@ keywords:
 ---
 
 La durée d'une porte coupe-feu n'est pas une note de qualité : c'est une exigence réglementaire propre à chaque ouverture. Installer 120 minutes partout augmente poids et coût ; installer 60 minutes là où 90 sont exigées entraîne un refus de réception.
+
+## EI60, EI90 et EI120 : réponse rapide
+
+Une **porte coupe-feu EI60** assure 60 minutes d'intégrité et d'isolation, EI90 en assure 90 et EI120 en assure 120 selon la norme d'essai indiquée. La stratégie incendie doit attribuer le classement à chaque ouverture. Pour une porte coupe-feu d'hôtel, vérifiez séparément la chambre, le couloir, l'escalier et les locaux techniques : ils peuvent exiger des durées différentes.
 
 ## Emplois courants
 
@@ -38,4 +42,6 @@ Le classement couvre le vantail, le cadre, les joints intumescents, le ferme-por
 3. Commander le bloc-porte conforme au rapport d'essai et son programme de quincaillerie.
 4. Pour une entrée sécurisée, exiger la double certification incendie et effraction sur la même construction.
 
-Les portes techniques WONLY sont proposées avec une performance EN 1634 de 90 minutes et, sur les modèles applicables, une sécurité GB 17565 classe A. L'adéquation exacte doit être confirmée par le concepteur incendie et les certificats de la configuration commandée.
+Consultez la [solution WONLY de portes de sécurité coupe-feu](/products/security-doors/fire-rated) pour les preuves d'ensemble, la coordination de quincaillerie et les données projet. Certaines configurations associent une performance EN 1634 et une sécurité GB 17565 classe A ; le concepteur incendie et les certificats commandés doivent confirmer l'adéquation exacte.
+
+Transmettez le tableau des ouvertures, la classe E/EI, la paroi, les dimensions et la quincaillerie via le [formulaire projet WONLY](/contact) pour une revue de configuration.

@@ -1,8 +1,8 @@
 ---
 slug: "60-90-120-minute-fire-doors"
-title: "60 vs 90 vs 120 Minutos de Porta de Incêndio: Como Especificar a Classificação Certa"
-seoTitle: "60 vs 90 vs 120 Minutos de Porta de Incêndio — Como Especificar | WONLY"
-description: "Onde as portas de incêndio de 60, 90 e 120 minutos são exigidas, quais classificações EI são adicionadas e um processo prático para especificar por abertura."
+title: "Portas Corta-Fogo EI60, EI90 e EI120: Qual Escolher?"
+seoTitle: "Portas Corta-Fogo EI60 vs EI90 vs EI120 | WONLY"
+description: "Compare portas corta-fogo EI60, EI90 e EI120, a diferença entre E e EI e o conjunto ensaiado que deve ser especificado em cada vão."
 category: "Guia de Compra"
 date: "2026-08-24"
 dateLabel: "24 de agosto de 2026"
@@ -17,6 +17,10 @@ keywords:
   - "Especificação de porta de incêndio"
 ---
 Minutos de porta de incêndio não são uma pontuação de qualidade — são uma exigência de código que varia por abertura. Especificar 120 em todos os lugares desperdiça orçamento; especificar 60 onde a estratégia exige 90 falha na inspeção. Aqui está o mapa prático.
+
+## EI60, EI90 e EI120: resposta rápida
+
+Uma **porta corta-fogo EI60** oferece 60 minutos de integridade e isolamento, EI90 oferece 90 e EI120 oferece 120 conforme a norma indicada. A estratégia de incêndio deve atribuir a classificação a cada vão, e o resultado só vale para o conjunto completo ensaiado.
 
 ## Onde Cada Classificação Pertence
 
@@ -39,7 +43,9 @@ A classificação certifica a folha, o quadro, as selas intumescentes, o fechado
 - 3. Combine as aprovações do mercado de destino (EN 1634-1 na maioria dos mercados de exportação, UL 10C na América do Norte)
 - 4. Para entradas que também exigem segurança, especifique uma porta com classificação dupla
 
-As portas de segurança da WONLY Engineering entregam 90 minutos de integridade conforme EN 1634, compatíveis com os códigos do Golfo, Sudeste da Ásia e Ásia Central, e podem ser combinadas com a segurança classe A conforme GB 17565 em modelos aplicáveis — uma porta, ambas as certificações.
+Consulte a [solução WONLY de portas de segurança corta-fogo](/products/security-doors/fire-rated) para verificar evidências do conjunto, ferragens e dados de projeto. Configurações aplicáveis podem combinar desempenho EN 1634 e segurança GB 17565 Classe A; confirme sempre o escopo do relatório e a aprovação do destino.
+
+Envie a tabela de vãos, classe E/EI, parede, dimensões e ferragens pelo [formulário de projeto WONLY](/contact) para revisão da configuração.
 
 ## Perguntas frequentes
 

@@ -1,8 +1,8 @@
 ---
 slug: "soundproof-security-doors-stc-ratings"
-title: "Soundproof Security Doors: STC Ratings Explained"
-seoTitle: "Soundproof Security Doors — STC Ratings Explained | WONLY"
-description: "What STC ratings mean for entrance doors, how much STC 35+ actually blocks, and how soundproofing is engineered into a security door."
+title: "STC-Rated Doors: STC 35, 40 and Acoustic Door Ratings"
+seoTitle: "STC-Rated Doors: STC 35, 40 & Acoustic Ratings | WONLY"
+description: "Compare STC 35 and STC 40 doors, understand what each acoustic rating means, and learn how to specify a tested soundproof security doorset."
 category: "Technology"
 date: "2026-08-14"
 dateLabel: "14 August 2026"
@@ -17,13 +17,17 @@ keywords:
   - "sound insulation door"
 ---
 
-Buyers ask for a “soundproof” door; engineers deliver an STC number. Understanding the scale turns a vague comfort wish into a specification you can hold a supplier to — and it matters most in apartments, hotels and homes on busy streets.
+Buyers ask for a “soundproof” door; engineers specify an STC-rated doorset. **STC 35 is a practical entrance-door target when loud speech should remain audible but not clearly intelligible; STC 40 provides stronger speech privacy.** The correct target still depends on the room, background noise and the tested complete assembly.
 
 Project buyers should evaluate acoustic performance together with security, fire, hardware and installation requirements. WONLY's [acoustic and STC-rated entrance door solution](/solutions/acoustic-stc-entrance-doors) maps the target, test evidence, seals, hardware and site-acceptance inputs into one project brief, while the [security door manufacturer overview](/security-door-manufacturer) covers the wider sourcing process.
 
 ## What STC Actually Measures
 
 Sound Transmission Class rates how much airborne sound a partition blocks across the speech-frequency range — the higher, the quieter. As rough reference points: at STC 25 normal speech is easily understood through the door; at STC 35 loud speech is audible but not intelligible; above STC 40 loud speech becomes a murmur. Every 10-point gain is a large, clearly perceptible improvement.
+
+## Is STC 35 Good for a Door?
+
+For many apartment entrances, hotel guestrooms and homes beside shared corridors, STC 35 is a useful specification starting point. Choose STC 40 or higher when speech privacy is more important or the source level is higher. Do not select the number alone: ask for the laboratory report covering the leaf, frame, seals, threshold, glazing and hardware configuration you will actually purchase.
 
 ## Where Door Sound Actually Leaks
 
@@ -51,6 +55,8 @@ STC is commonly used in North American specifications, while Rw is used in many 
 An acoustic line item should identify the laboratory rating, test standard, doorset size, frame, seals, threshold, hardware and installation boundary. At submittal, compare the proposed opening with the tested specimen. At handover, inspect clearances, seal compression, threshold contact, latching and the frame-to-wall perimeter. This closes the gap between a laboratory number and the installed result.
 
 For projects that also require forced-entry or fire performance, coordinate all three requirements before approving hardware substitutions. A lock, viewer, cable route or closer preparation can affect more than one tested characteristic.
+
+For a project review, send the opening schedule, wall type, target rating and hardware list through the [WONLY project enquiry form](/contact). If the same opening also needs fire resistance, compare the tested assembly requirements in the [fire-rated security door solution](/products/security-doors/fire-rated).
 
 ## FAQ
 

@@ -1,8 +1,8 @@
 ---
 slug: "60-90-120-minute-fire-doors"
-title: "60 vs 90 vs 120 Minute Fire Doors: How to Specify the Right Rating"
-seoTitle: "60 vs 90 vs 120 Minute Fire Doors — How to Specify | WONLY"
-description: "Where 60-, 90- and 120-minute fire doors are each required, what EI ratings add, and a practical process for specifying per opening."
+title: "EI60 vs EI90 vs EI120 Fire Doors: 60, 90 or 120 Minutes?"
+seoTitle: "EI60 vs EI90 vs EI120 Fire Doors | WONLY"
+description: "Compare EI60, EI90 and EI120 fire doors, understand E versus EI, and specify the tested rating and complete doorset required for each opening."
 category: "Buying Guide"
 date: "2026-08-24"
 dateLabel: "24 August 2026"
@@ -18,6 +18,10 @@ keywords:
 ---
 
 Fire-door minutes are not a quality score — they are a code requirement that varies opening by opening. Specifying 120 everywhere wastes budget; specifying 60 where the strategy demands 90 fails inspection. Here is the practical map.
+
+## EI60 vs EI90 vs EI120: Quick Answer
+
+An **EI60 fire door** provides 60 minutes of integrity and insulation, **EI90** provides 90 minutes, and **EI120** provides 120 minutes under the stated test standard. The project fire strategy—not a general preference—must assign the required classification to every opening. The rating applies only to the complete tested doorset.
 
 ## Where Each Rating Belongs
 
@@ -40,7 +44,9 @@ The rating certifies leaf, frame, intumescent seals, closer and hardware as one 
 - 3. Match destination-market approvals (EN 1634-1 in most export markets, UL 10C in North America)
 - 4. For entrances also needing security, specify a dual-rated doorset
 
-WONLY's Engineering Fire Doors deliver EN 1634 90-minute integrity, compliant with Gulf, SE Asia and Central Asia codes, and can be combined with GB 17565 Class A security on applicable models — one doorset, both certificates.
+Review WONLY's [fire-rated security door solution](/products/security-doors/fire-rated) for assembly evidence, hardware coordination and project inputs. Applicable configurations can combine EN 1634 fire performance with GB 17565 Class A security; confirm the exact report scope and destination approval before specifying.
+
+Send the opening schedule, required E/EI class, wall construction, dimensions and hardware through the [project enquiry form](/contact) for a configuration review.
 
 ## FAQ
 

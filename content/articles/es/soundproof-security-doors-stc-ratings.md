@@ -1,8 +1,8 @@
 ---
 slug: "soundproof-security-doors-stc-ratings"
-title: "Puertas de seguridad acústicas: clasificación STC"
-seoTitle: "Puertas acústicas y clasificación STC | WONLY"
-description: "Qué mide STC en una puerta de entrada, límites de STC 35+ y detalles de núcleo, juntas y umbral que deben especificarse."
+title: "Puertas con clasificación STC: STC 35, STC 40 y aislamiento"
+seoTitle: "Puertas STC 35 y STC 40: clasificación acústica | WONLY"
+description: "Compare puertas STC 35 y STC 40, descubra qué bloquea cada nivel y cómo especificar un conjunto de puerta acústica ensayado."
 category: "Tecnología"
 date: "2026-08-14"
 dateLabel: "14 de agosto de 2026"
@@ -15,7 +15,9 @@ keywords:
   - "puerta entrada STC 35"
 ---
 
-«Insonorizada» es una promesa imprecisa; STC o Rw es medible. En apartamentos, hoteles y viviendas con tráfico, el valor debe corresponder al conjunto completo y citar las condiciones de ensayo.
+«Insonorizada» es una promesa imprecisa; una puerta con clasificación STC es medible. **STC 35 es un objetivo práctico cuando una voz fuerte puede oírse pero no debe entenderse con claridad; STC 40 ofrece más privacidad de conversación.** El valor debe corresponder siempre al conjunto completo ensayado.
+
+La [solución WONLY de puertas de entrada acústicas y con clasificación STC](/solutions/acoustic-stc-entrance-doors) reúne objetivo, informe, juntas, herrajes y recepción en una sola especificación de proyecto.
 
 ## Qué significa STC
 
@@ -33,6 +35,10 @@ Sound Transmission Class evalúa la reducción de ruido aéreo, sobre todo en fr
 
 Núcleo denso multicapa, marco rígido, juntas continuas y sello automático inferior trabajan juntos. Algunas series WONLY combinan núcleo alveolar de acero, sellado y umbral retráctil con STC 35+ declarado; solicite el informe de dimensiones y opciones pedidas.
 
+## ¿STC 35 es adecuado para una puerta?
+
+Es un buen punto de partida para entradas de apartamentos, habitaciones de hotel y viviendas junto a pasillos. Considere STC 40 o superior si la privacidad de conversación es prioritaria o el ruido de origen es mayor. Antes de comprar, compruebe que el informe incluya hoja, marco, juntas, umbral, vidrio y herrajes de la configuración solicitada.
+
 ## Especificación y recepción
 
 - Indicar STC/Rw objetivo, norma y tolerancia.
@@ -40,3 +46,5 @@ Núcleo denso multicapa, marco rígido, juntas continuas y sello automático inf
 - Incluir juntas y umbral ensayados.
 - Comprobar holguras y compresión tras instalar.
 - Especificar por separado acústica, fuego y seguridad.
+
+Para revisar un proyecto, envíe el cuadro de huecos, el tipo de muro, la clasificación objetivo y los herrajes mediante el [formulario de consulta de WONLY](/contact). Si una misma puerta también debe resistir el fuego, consulte la [solución de puertas de seguridad cortafuego](/products/security-doors/fire-rated).
