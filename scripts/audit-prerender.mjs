@@ -39,7 +39,10 @@ for (const url of urls) {
   if (locale === "ar" && !html.includes('dir="rtl"')) errors.push(`${route}: Arabic page is not RTL`);
 
   const sitemapBlock = sitemapBlocks.find((block) => block.includes(`<loc>${url}</loc>`)) || "";
-  const expectedLocales = sitemapBlock.includes("hreflang=") ? LOCALES : ["en"];
+  const declaredLocales = [...sitemapBlock.matchAll(/hreflang="([^"]+)"/g)]
+    .map((match) => match[1])
+    .filter((value) => value !== "x-default");
+  const expectedLocales = declaredLocales.length ? declaredLocales : ["en"];
   for (const alternateLocale of expectedLocales) {
     if (!html.includes(`hreflang="${alternateLocale}"`) || !html.includes(`href="${localUrl(base, alternateLocale)}"`)) {
       errors.push(`${route}: missing ${alternateLocale} alternate`);
