@@ -236,6 +236,28 @@ async function main() {
     },
   };
 
+  // Keep a machine-readable, non-secret snapshot in the private Actions log so
+  // future optimisation work can be verified without relying on the Feishu UI.
+  console.log('SEO_REPORT_SNAPSHOT ' + JSON.stringify({
+    reportDate: today,
+    stage: { index: st.idx, name: st.name, percent: st.pct },
+    gsc: g ? {
+      period: [g.start, g.end], current: g.cur, previous: g.prev,
+      visiblePages: g.pageCount, sitemap: g.sitemap,
+      topQueries: g.topQ.map((r) => ({ query: r.keys[0], clicks: r.clicks, impressions: r.impressions, ctr: r.ctr, position: r.position })),
+      opportunities: g.opp.map((r) => ({ query: r.keys[0], clicks: r.clicks, impressions: r.impressions, ctr: r.ctr, position: r.position })),
+      topPages: g.topPages.map((r) => ({ page: short(r.keys[0]), clicks: r.clicks, impressions: r.impressions, ctr: r.ctr, position: r.position })),
+      countries: g.country, devices: g.device,
+    } : null,
+    ga4: a ? {
+      organicSessions: a.orgCur, previousOrganicSessions: a.orgPrev,
+      totalSessions: a.total, leads: a.leadCur, previousLeads: a.leadPrev,
+      engagementRate: a.engRate, averageDuration: a.avgDur,
+      landingPages: a.landing, countries: a.country, devices: a.device,
+    } : null,
+    errors,
+  }));
+
   const res = await fetch(FEISHU, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(card) });
   const txt = await res.text();
   console.log('飞书返回：', res.status, txt);

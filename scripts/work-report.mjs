@@ -15,9 +15,13 @@ if (!WEBHOOK) { console.error("FEISHU_WORK_WEBHOOK not set"); process.exit(1); }
 
 const sh = (cmd) => execSync(cmd, { encoding: "utf8" }).trim();
 
-// ---- Beijing "today" ----
+// ---- Report date (manual resend) or Beijing "today" ----
 const bj = new Date(Date.now() + 8 * 3600 * 1000);
-const today = bj.toISOString().slice(0, 10);
+const today = process.env.REPORT_DATE || bj.toISOString().slice(0, 10);
+if (!/^\d{4}-\d{2}-\d{2}$/.test(today)) {
+  console.error("REPORT_DATE must use YYYY-MM-DD");
+  process.exit(1);
+}
 
 // ---- File path → 中文页面/模块名 ----
 const PAGE_MAP = [
@@ -80,7 +84,7 @@ const catOf = (page) => {
 // ---- 1) 近 24h 提交 → 按类别整理成"做了什么" ----
 let workByCat = {}; let commitCount = 0;
 try {
-  const hashes = sh(`git log --since="24 hours ago" --no-merges --pretty=format:"%h"`).split("\n").filter(Boolean);
+  const hashes = sh(`git log --since="${today} 00:00:00 +0800" --until="${today} 23:59:59 +0800" --no-merges --pretty=format:"%h"`).split("\n").filter(Boolean);
   commitCount = hashes.length;
   for (const h of hashes) {
     const msg = sh(`git log -1 --pretty=format:"%s" ${h}`);
@@ -127,9 +131,9 @@ try {
 
 // ---- 组卡片 ----
 const md = [];
-md.push(`**📅 ${today} · 网站工作日报**`);
+md.push(`**📅 ${today} · 个人工作日报**`);
 md.push("");
-md.push(`**📝 今日自动上线文章**`);
+md.push(`**📝 当日自动上线文章**`);
 if (publishedToday.length) {
   for (const a of publishedToday) md.push(`• [${a.title}](https://www.wonlyglobal.com/insights/${a.slug}/)`);
 } else {
@@ -140,14 +144,14 @@ md.push("");
 const catOrder = ["📄 页面优化与建设", "✍️ 内容与文章", "🔍 SEO 建设", "🤖 自动化与工程", "🖼️ 素材", "🔩 其它"];
 const catsWithWork = catOrder.filter((c) => workByCat[c]?.length);
 if (catsWithWork.length) {
-  md.push(`**🔧 今日建设工作**（${commitCount} 次提交）`);
+  md.push(`**🔧 当日建设工作**（${commitCount} 次提交）`);
   for (const c of catsWithWork) {
     md.push(`**${c}**`);
     md.push(...workByCat[c].slice(0, 6));
     if (workByCat[c].length > 6) md.push(`• …等共 ${workByCat[c].length} 项`);
   }
 } else {
-  md.push(`**🔧 今日建设工作**：无代码改动（内容按排期自动发布中）`);
+  md.push(`**🔧 当日建设工作**：无代码改动（内容按排期自动发布中）`);
 }
 if (opsToday.length) {
   md.push("");
@@ -164,7 +168,7 @@ const card = {
   msg_type: "interactive",
   card: {
     header: {
-      title: { tag: "plain_text", content: `WONLY 官网工作日报 · ${today}` },
+      title: { tag: "plain_text", content: `WONLY 个人工作日报 · ${today}` },
       template: publishedToday.length || catsWithWork.length ? "green" : "blue",
     },
     elements: [{ tag: "markdown", content: md.join("\n") }],
