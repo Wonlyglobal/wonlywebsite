@@ -1,8 +1,8 @@
 ---
 slug: "cylindrical-lock-core-vs-standard-cylinder"
-title: "Door Lock Core vs Cylinder: What Is the Difference?"
-seoTitle: "Lock Core vs Lock Cylinder: Differences & Security | WONLY"
-description: "Compare a lock core vs lock cylinder, interchangeable cores and door lock bodies, plus the anti-snap, anti-drill and test evidence buyers should verify."
+title: "Door Core vs Cylinder: Lock Core, Cylinder and Lock Body Explained"
+seoTitle: "Door Core vs Cylinder: Key Differences | WONLY"
+description: "Is a door core the same as a lock cylinder? Compare lock cores, complete cylinders, interchangeable cores and lock bodies, with a buyer verification checklist."
 category: "Technology"
 date: "2026-09-09"
 dateLabel: "9 September 2026"
@@ -20,7 +20,7 @@ keywords:
   - "lock cylinder comparison"
 ---
 
-In door-hardware language, **lock core** and **lock cylinder** often refer to the same replaceable keyed component. “Core” can also mean the removable inner plug or interchangeable core, while “cylinder” usually means the complete housing installed through the lock or door. The exact meaning depends on the lock format, so buyers should compare drawings and part numbers rather than relying on the label alone.
+In door-hardware language, **door core**, **lock core** and **lock cylinder** are sometimes used for the same replaceable keyed component, but they are not always technically identical. “Core” can mean the removable inner unit, while “cylinder” usually means the complete housing installed through the lock or door. The exact meaning depends on the lock format, so buyers should compare drawings and part numbers rather than relying on the label alone.
 
 **Short answer:** a lock cylinder is normally the complete keyed housing; a lock core may mean that whole cylinder in general conversation or the removable inner unit in an interchangeable-core system. Neither term means the mortise lock body inside the door.
 
@@ -30,6 +30,8 @@ In door-hardware language, **lock core** and **lock cylinder** often refer to th
 - **Lock core** — sometimes a general name for the cylinder; in an interchangeable-core system, specifically the removable inner unit
 - **Door lock body** — the larger mortise or locking mechanism operated by the cylinder; it is not the cylinder itself
 - **Best comparison method** — confirm the profile, dimensions, attack protection, escutcheon, replacement method and test evidence for the proposed doorset
+
+For the common search question **“door core vs cylinder,” the practical answer is simple:** the cylinder is normally the complete keyed assembly; the core is either its removable inner component or an informal name for that assembly. The lock body is a separate mechanism inside the door.
 
 Attackers commonly target the cylinder rather than the door slab because it can expose the locking mechanism. Many doors use a conventional figure-eight or euro-profile cylinder with a brass body, rotating plug and exposed keyway. Its real resistance depends on projection, material, anti-snap geometry, drill protection and the protective hardware around it.
 
@@ -57,6 +59,8 @@ A cylinder is only as good as the doorset around it. In WONLY doors the cylindri
 - Full forced-entry and technical-opening reports are available from WONLY on request
 
 ## FAQ
+
+Is a door core the same as a lock cylinder? Sometimes in everyday product language, but not always. A complete cylinder includes the housing and operating parts; “core” may refer only to the removable keyed unit. Confirm the drawing, profile and part number before specifying replacements.
 
 Can the cylindrical core be rekeyed or replaced? Yes — it is serviceable through authorised channels; what it resists is unauthorised attack, not legitimate maintenance.
 

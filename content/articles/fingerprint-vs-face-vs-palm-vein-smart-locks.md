@@ -37,6 +37,8 @@ Young families lean on face unlock for pushchair-and-shopping arrivals; older us
 - Non-biometric fallbacks: anti-peep PIN, RFID, app and mechanical key
 - Cycle-tested hardware so the mechanism outlives the electronics hype
 
+Biometric convenience does not replace mechanical attack resistance. Buyers should verify the keyed backup, escutcheon and lock-body interface with the [door core vs cylinder comparison](/insights/cylindrical-lock-core-vs-standard-cylinder), especially when a smart lock will be integrated into a complete security doorset.
+
 ## WONLY's Multi-Biometric Approach
 
 WONLY smart locks combine 3D face, fingerprint and palm-vein with RFID, PIN and app access in one platform — 200,000+ cycle tested, encrypted local storage, and available embedded in certified Class A doorsets or as standalone locks for distributor ranges, with OEM/ODM configurations for market-specific line-ups.
@@ -44,3 +46,5 @@ WONLY smart locks combine 3D face, fingerprint and palm-vein with RFID, PIN and 
 ## FAQ
 
 Which single biometric is most secure? Palm-vein is generally hardest to spoof; 3D face with proper depth sensing is close behind. For a family door, breadth of reliable methods matters more than a single champion.
+
+For distributor samples, firmware options, certifications and market-specific configurations, review the [smart lock OEM/ODM programme](/smart-lock-oem-odm) or send your target specification through the [project enquiry form](/contact).
