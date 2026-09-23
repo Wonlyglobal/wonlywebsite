@@ -7,6 +7,7 @@ import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
 import { getJourneySession, serializeInquiryJourney, trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
+import DOOR_ANIMATION from "@/media/hero-door-inline.mp4?inline";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -808,15 +809,11 @@ const Prototype = () => {
     lockScroll();
 
     let openingStarted = false;
-    let animationUrl = "";
-    let animationRequested = false;
-    let readinessWatchdog = 0;
     let watchdog = 0;
     const playDoor = () => {
-      if (!door || done || !openingStarted || !animationUrl) return;
-      window.clearTimeout(readinessWatchdog);
-      if (door.src !== animationUrl) {
-        door.src = animationUrl;
+      if (!door || done || !openingStarted) return;
+      if (door.src !== DOOR_ANIMATION) {
+        door.src = DOOR_ANIMATION;
         door.load();
       }
       door.currentTime = 0;
@@ -832,9 +829,7 @@ const Prototype = () => {
         window.setTimeout(reveal_, 180);
         return;
       }
-      requestAnimation();
-      if (animationUrl) playDoor();
-      else readinessWatchdog = window.setTimeout(reveal_, 5000);
+      playDoor();
     };
     const onIntroKey = (event: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
@@ -844,24 +839,11 @@ const Prototype = () => {
     document.addEventListener("touchstart", startOpening, { capture: true, passive: true });
     window.addEventListener("keydown", onIntroKey, true);
 
-    function requestAnimation() {
-      if (animationRequested || lightweightMobile) return;
-      animationRequested = true;
-      import("@/media/hero-door-inline.mp4?inline").then((module) => {
-        if (done) return;
-        animationUrl = module.default;
-        if (door) {
-          door.src = animationUrl;
-          door.load();
-        }
-        if (openingStarted) playDoor();
-      }).catch(() => { if (openingStarted) reveal_(); });
-    }
-
     if (hadEarlyIntroIntent) startOpening();
 
     if (!lightweightMobile && door) {
-      requestAnimation();
+      door.src = DOOR_ANIMATION;
+      door.load();
       door.addEventListener("ended", reveal_, { once: true });
     }
 
@@ -870,7 +852,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(watchdog); door?.pause(); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); door?.pause(); };
   }, []);
 
   return (
