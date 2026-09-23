@@ -33,9 +33,24 @@
     <!-- Preload self-hosted fonts (used on every page) -->
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- The 1920px poster paints immediately. The compact 720p door clip ships in
-         the homepage bundle, eliminating a follow-up media request before playback. -->
-    <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var o=document.createElement("link");o.rel="preload";o.as="image";o.href="/images/interior-bg.jpg";document.head.appendChild(o);}</script>
+    <!-- Paint the poster immediately and warm the stable animated WebP before React mounts.
+         Coarse/mobile devices keep the lightweight still-image path. -->
+    <script>
+      if (location.pathname === "/") {
+        var p = document.createElement("link"); p.rel = "preload"; p.as = "image"; p.href = "/videos/hero-door-poster.webp"; document.head.appendChild(p);
+        var o = document.createElement("link"); o.rel = "preload"; o.as = "image"; o.href = "/images/interior-bg.jpg"; document.head.appendChild(o);
+        window.__wonlyLoadDoorAnimation = function () {
+          if (!window.__wonlyDoorAnimationBlob) {
+            window.__wonlyDoorAnimationBlob = fetch("/videos/hero-door-open.webp", { cache: "force-cache" }).then(function (response) {
+              if (!response.ok) throw new Error("Door animation failed: " + response.status);
+              return response.blob();
+            });
+          }
+          return window.__wonlyDoorAnimationBlob;
+        };
+        if (matchMedia("(min-width: 768px) and (pointer: fine)").matches) window.__wonlyLoadDoorAnimation();
+      }
+    </script>
     <!-- Preserve an intro gesture made before the React bundle has mounted. -->
     <script>
       if (location.pathname === "/" && !location.hash) {

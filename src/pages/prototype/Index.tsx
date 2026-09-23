@@ -7,7 +7,6 @@ import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
 import { getJourneySession, serializeInquiryJourney, trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
-import DOOR_ANIMATION from "@/media/hero-door-inline.mp4?inline";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
 const GOLD = "#BFA06A";
@@ -20,6 +19,7 @@ const MUTED = "#5f5a54";
 
 const BASE = import.meta.env.BASE_URL;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
+const DOOR_ANIMATION = `${BASE}videos/hero-door-open.webp`;
 const LOGO = `${BASE}images/logo-trim.webp`;
 const DOOR_ANIMATION_DURATION = 2800;
 
@@ -553,7 +553,7 @@ const scrollToId = (id: string) => {
 };
 
 const Prototype = () => {
-  const doorAnimation = useRef<HTMLVideoElement>(null);
+  const doorAnimation = useRef<HTMLImageElement>(null);
   const openFrame = useRef<HTMLImageElement>(null);
   const title = useRef<HTMLDivElement>(null);
   const scrim = useRef<HTMLDivElement>(null);
@@ -697,7 +697,12 @@ const Prototype = () => {
     const cmsParams = new URLSearchParams(window.location.search);
     const cmsCanvas = cmsParams.get("cms_canvas") === "1";
     const cmsStage = cmsParams.get("cms_stage") === "main" ? "main" : "intro";
-    const earlyWindow = window as Window & { __wonlyEarlyIntroIntent?: boolean; __wonlyEarlyIntroCleanup?: () => void };
+    const earlyWindow = window as Window & {
+      __wonlyEarlyIntroIntent?: boolean;
+      __wonlyEarlyIntroCleanup?: () => void;
+      __wonlyLoadDoorAnimation?: () => Promise<Blob>;
+      __wonlyDoorAnimationBlob?: Promise<Blob>;
+    };
     const hadEarlyIntroIntent = earlyWindow.__wonlyEarlyIntroIntent === true;
     const lightweightMobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
     earlyWindow.__wonlyEarlyIntroCleanup?.();
@@ -775,7 +780,7 @@ const Prototype = () => {
         if (scrim.current) scrim.current.style.opacity = "0";
         reveal_();
       } else {
-        if (door) { door.pause(); door.removeAttribute("src"); door.load(); }
+        if (door) door.src = DOOR_POSTER;
         if (title.current) { title.current.style.opacity = "1"; title.current.style.transform = "translateZ(0)"; }
         if (scrim.current) scrim.current.style.opacity = "1";
         if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; }
@@ -809,17 +814,16 @@ const Prototype = () => {
     lockScroll();
 
     let openingStarted = false;
+    let animationUrl = "";
+    let readinessWatchdog = 0;
     let watchdog = 0;
     const playDoor = () => {
-      if (!door || done || !openingStarted) return;
-      if (door.src !== DOOR_ANIMATION) {
-        door.src = DOOR_ANIMATION;
-        door.load();
-      }
-      door.currentTime = 0;
+      if (!door || done || !openingStarted || !animationUrl) return;
+      door.src = DOOR_POSTER;
+      void door.offsetWidth;
+      door.src = animationUrl;
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
-      door.play().catch(reveal_);
       watchdog = window.setTimeout(reveal_, DOOR_ANIMATION_DURATION + 300);
     };
     const startOpening = () => {
@@ -829,7 +833,8 @@ const Prototype = () => {
         window.setTimeout(reveal_, 180);
         return;
       }
-      playDoor();
+      if (animationUrl) playDoor();
+      else readinessWatchdog = window.setTimeout(reveal_, 8000);
     };
     const onIntroKey = (event: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
@@ -842,9 +847,20 @@ const Prototype = () => {
     if (hadEarlyIntroIntent) startOpening();
 
     if (!lightweightMobile && door) {
-      door.src = DOOR_ANIMATION;
-      door.load();
-      door.addEventListener("ended", reveal_, { once: true });
+      const animationBlob = earlyWindow.__wonlyDoorAnimationBlob
+        || earlyWindow.__wonlyLoadDoorAnimation?.()
+        || fetch(DOOR_ANIMATION, { cache: "force-cache" }).then((response) => {
+          if (!response.ok) throw new Error(`Door animation failed: ${response.status}`);
+          return response.blob();
+        });
+      animationBlob.then((blob) => {
+        if (done) return;
+        animationUrl = URL.createObjectURL(blob);
+        window.clearTimeout(readinessWatchdog);
+        if (openingStarted) playDoor();
+      }).catch(() => {
+        if (openingStarted) reveal_();
+      });
     }
 
     // Let the visitor skip the intro at any time.
@@ -852,7 +868,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); door?.pause(); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(watchdog); if (animationUrl) URL.revokeObjectURL(animationUrl); };
   }, []);
 
   return (
@@ -915,8 +931,8 @@ const Prototype = () => {
 
       {/* ══ 1 · Hero door animation + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <video ref={doorAnimation} poster={DOOR_POSTER} muted playsInline preload="auto" aria-hidden="true" className="absolute inset-0 z-0 w-full h-full object-cover object-center pointer-events-none" style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }} />
-        <img ref={openFrame} src={IMG.interior} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-[1] w-full h-full object-cover object-center pointer-events-none" style={{ opacity: 0, transition: "opacity .25s ease", transform: "translateZ(0)" }} />
+        <img ref={doorAnimation} src={DOOR_POSTER} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-0 pointer-events-none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transform: "translateZ(0)", backfaceVisibility: "hidden" }} />
+        <img ref={openFrame} src={IMG.interior} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-[1] pointer-events-none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0, transition: "opacity .25s ease", transform: "translateZ(0)" }} />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
 

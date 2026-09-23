@@ -257,10 +257,6 @@ export default defineConfig(({ mode }) => {
       ),
     },
     build: {
-      assetsInlineLimit(filePath) {
-        if (filePath.endsWith("hero-door-inline.mp4")) return true;
-        return undefined;
-      },
       rollupOptions: {
         output: {
           manualChunks(id) {
