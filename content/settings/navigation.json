@@ -70,7 +70,10 @@
     ] },
     { "h": "Get in Touch", "links": [
       { "l": "inquiry@wonlyglobal.com", "href": "mailto:inquiry@wonlyglobal.com" },
-      { "l": "WhatsApp +1 (205) 240-1832", "href": "https://wa.me/12052401832" }
+      { "l": "WhatsApp +1 (205) 240-1832", "href": "https://wa.me/12052401832" },
+      { "l": "Head Office: No. 9 Aigang Road, Economic Development Zone, Yongkang, Zhejiang, China" },
+      { "l": "International Sales: +86 579 8722 8658", "href": "tel:+8657987228658" },
+      { "l": "International Sales: +86 579 8929 1280", "href": "tel:+8657989291280" }
     ] }
   ]
 }
