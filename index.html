@@ -33,8 +33,8 @@
     <!-- Preload self-hosted fonts (used on every page) -->
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- The intro uses the already-preloaded 1920px poster for a GPU door-split
-         animation, so no secondary animation file can delay the first gesture. -->
+    <!-- The 1920px poster paints immediately; the compact 720p MP4 is warmed only
+         on desktop after the app is loaded, keeping mobile first paint lightweight. -->
     <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var o=document.createElement("link");o.rel="preload";o.as="image";o.href="/images/interior-bg.jpg";document.head.appendChild(o);}</script>
     <!-- Preserve an intro gesture made before the React bundle has mounted. -->
     <script>

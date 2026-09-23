@@ -18,9 +18,10 @@ const DARK = "#221F20";
 const MUTED = "#5f5a54";
 
 const BASE = import.meta.env.BASE_URL;
+const DOOR_ANIMATION = `${BASE}videos/hero-door.mp4`;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
 const LOGO = `${BASE}images/logo-trim.webp`;
-const DOOR_ANIMATION_DURATION = 1350;
+const DOOR_ANIMATION_DURATION = 2800;
 
 /* ── CMS 首屏文案: content/settings/homepage.json（在 /admin 站点后台编辑）──
    每个字段都有代码默认值兜底，JSON 缺失或留空也不会让首屏变空白。 */
@@ -552,9 +553,7 @@ const scrollToId = (id: string) => {
 };
 
 const Prototype = () => {
-  const doorAnimation = useRef<HTMLDivElement>(null);
-  const leftDoorPanel = useRef<HTMLDivElement>(null);
-  const rightDoorPanel = useRef<HTMLDivElement>(null);
+  const doorAnimation = useRef<HTMLVideoElement>(null);
   const openFrame = useRef<HTMLImageElement>(null);
   const title = useRef<HTMLDivElement>(null);
   const scrim = useRef<HTMLDivElement>(null);
@@ -776,7 +775,7 @@ const Prototype = () => {
         if (scrim.current) scrim.current.style.opacity = "0";
         reveal_();
       } else {
-        if (door) door.style.opacity = "1";
+        if (door) { door.pause(); door.removeAttribute("src"); door.load(); }
         if (title.current) { title.current.style.opacity = "1"; title.current.style.transform = "translateZ(0)"; }
         if (scrim.current) scrim.current.style.opacity = "1";
         if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; }
@@ -813,22 +812,12 @@ const Prototype = () => {
     let watchdog = 0;
     const playDoor = () => {
       if (!door || done || !openingStarted) return;
-      const motion = "transform 1.2s cubic-bezier(.22,.72,.18,1)";
-      if (leftDoorPanel.current) {
-        leftDoorPanel.current.style.transition = motion;
-        leftDoorPanel.current.style.transform = "translate3d(-102%,0,0)";
-      }
-      if (rightDoorPanel.current) {
-        rightDoorPanel.current.style.transition = motion;
-        rightDoorPanel.current.style.transform = "translate3d(102%,0,0)";
-      }
-      if (openFrame.current) {
-        openFrame.current.style.transition = "opacity .28s ease";
-        openFrame.current.style.opacity = "1";
-      }
+      if (!door.src) door.src = DOOR_ANIMATION;
+      door.currentTime = 0;
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
-      watchdog = window.setTimeout(reveal_, DOOR_ANIMATION_DURATION);
+      door.play().catch(reveal_);
+      watchdog = window.setTimeout(reveal_, DOOR_ANIMATION_DURATION + 300);
     };
     const startOpening = () => {
       if (openingStarted || done) return;
@@ -849,12 +838,18 @@ const Prototype = () => {
 
     if (hadEarlyIntroIntent) startOpening();
 
+    if (!lightweightMobile && door) {
+      door.src = DOOR_ANIMATION;
+      door.load();
+      door.addEventListener("ended", reveal_, { once: true });
+    }
+
     // Let the visitor skip the intro at any time.
     skipRef.current = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); door?.pause(); };
   }, []);
 
   return (
@@ -917,15 +912,8 @@ const Prototype = () => {
 
       {/* ══ 1 · Hero door animation + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <img ref={openFrame} src={IMG.interior} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-0 w-full h-full object-cover object-center pointer-events-none" style={{ opacity: 0, transform: "translateZ(0)" }} />
-        <div ref={doorAnimation} aria-hidden="true" className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
-          <div ref={leftDoorPanel} className="absolute inset-y-0 left-0 w-1/2 overflow-hidden" style={{ transform: "translate3d(0,0,0)", willChange: "transform", backfaceVisibility: "hidden" }}>
-            <img src={DOOR_POSTER} alt="" draggable={false} className="absolute inset-y-0 left-0 h-full max-w-none object-cover object-center" style={{ width: "100vw" }} />
-          </div>
-          <div ref={rightDoorPanel} className="absolute inset-y-0 right-0 w-1/2 overflow-hidden" style={{ transform: "translate3d(0,0,0)", willChange: "transform", backfaceVisibility: "hidden" }}>
-            <img src={DOOR_POSTER} alt="" draggable={false} className="absolute inset-y-0 right-0 h-full max-w-none object-cover object-center" style={{ width: "100vw" }} />
-          </div>
-        </div>
+        <video ref={doorAnimation} poster={DOOR_POSTER} muted playsInline preload="auto" aria-hidden="true" className="absolute inset-0 z-0 w-full h-full object-cover object-center pointer-events-none" style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }} />
+        <img ref={openFrame} src={IMG.interior} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-[1] w-full h-full object-cover object-center pointer-events-none" style={{ opacity: 0, transition: "opacity .25s ease", transform: "translateZ(0)" }} />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
 
