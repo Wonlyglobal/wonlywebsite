@@ -19,7 +19,7 @@ const MUTED = "#5f5a54";
 
 const BASE = import.meta.env.BASE_URL;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
-const DOOR_ANIMATION = `${BASE}videos/hero-door-open-hq.mp4`;
+const DOOR_ANIMATION = `${BASE}videos/hero-door.mp4`;
 const LOGO = `${BASE}images/logo-trim.webp`;
 const DOOR_ANIMATION_DURATION = 2800;
 

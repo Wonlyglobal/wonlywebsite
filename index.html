@@ -41,7 +41,7 @@
         var o = document.createElement("link"); o.rel = "preload"; o.as = "image"; o.href = "/images/interior-bg.jpg"; document.head.appendChild(o);
         window.__wonlyLoadDoorAnimation = function () {
           if (!window.__wonlyDoorAnimationBlob) {
-            window.__wonlyDoorAnimationBlob = fetch("/videos/hero-door-open-hq.mp4", { cache: "force-cache" }).then(function (response) {
+            window.__wonlyDoorAnimationBlob = fetch("/videos/hero-door.mp4", { cache: "force-cache" }).then(function (response) {
               if (!response.ok) throw new Error("Door animation failed: " + response.status);
               return response.blob();
             });
