@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "site": "wonlyglobal.com",
+  "generated_at": "2026-09-23T09:30:00+08:00",
+  "freshness": {
+    "ga4": { "through": "2026-09-22", "lag_days": 1, "status": "ok" },
+    "gsc": { "through": "2026-09-20", "lag_days": 3, "status": "partial" },
+    "semrush": { "through": "2026-09-07", "status": "stale" }
+  },
+  "windows": {
+    "7d": {
+      "gsc": { "clicks": 12, "impressions": 420, "ctr": 0.028571, "avg_position": 9.6 },
+      "ga4": { "organic_sessions": 20 }
+    },
+    "28d": {
+      "gsc": { "clicks": 28, "impressions": 1280, "ctr": 0.021875, "avg_position": 16.9 },
+      "ga4": { "organic_sessions": 74 }
+    }
+  },
+  "markets": [
+    { "country": "ES", "gsc_7d": { "clicks": 1, "impressions": 30, "ctr": 0.033333, "avg_position": 19.2 }, "ga4_7d": { "organic_sessions": 5 }, "status": "ok" },
+    { "country": "MX", "gsc_7d": { "clicks": null, "impressions": null, "ctr": null, "avg_position": null }, "ga4_7d": { "organic_sessions": null }, "status": "missing" }
+  ],
+  "funnel": {
+    "organic_7d": { "cta_click": 2, "form_open": 4, "form_start": 0, "inquiry_prompt_select": null, "form_submit": 0, "generate_lead": 0, "form_error": 0, "form_abandon": 0, "contact_click": 1 },
+    "organic_28d": { "cta_click": 2, "form_open": 13, "form_start": 2, "inquiry_prompt_select": null, "form_submit": 0, "generate_lead": 1, "form_error": 0, "form_abandon": 0, "contact_click": 2 },
+    "all_channels_7d": { "cta_click": 8, "form_open": 21, "form_start": 0, "inquiry_prompt_select": null, "form_submit": 0, "generate_lead": 0, "form_error": 0, "form_abandon": 0, "contact_click": 2 },
+    "all_channels_28d": { "cta_click": 23, "form_open": 63, "form_start": 16, "inquiry_prompt_select": null, "form_submit": 3, "generate_lead": 5, "form_error": 3, "form_abandon": 2, "contact_click": 5 }
+  },
+  "pages": [
+    {
+      "path": "/insights/door-lock-core-vs-cylinder/",
+      "role": "article",
+      "gsc_7d": { "clicks": 0, "impressions": 32, "ctr": 0, "avg_position": 7.1 },
+      "gsc_28d": { "clicks": null, "impressions": null, "ctr": null, "avg_position": null },
+      "issues": [{ "code": "LOW_CTR", "severity": "P1", "evidence": "synthetic example", "detected_at": "2026-09-23T09:30:00+08:00" }]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "lock-core-snippet-20260923",
+      "target_paths": ["/insights/door-lock-core-vs-cylinder/"],
+      "hypothesis": "A clearer comparison snippet can improve qualified organic CTR.",
+      "status": "observing_7d",
+      "baseline": { "window": "28d", "clicks": 0, "impressions": 90, "ctr": 0, "avg_position": 8.9 },
+      "launched_at": "2026-09-23T08:00:00+08:00",
+      "observe_7d_at": "2026-09-30T08:00:00+08:00",
+      "observe_14d_at": "2026-10-07T08:00:00+08:00",
+      "latest": { "window": "7d", "clicks": 0, "impressions": 32, "ctr": 0, "avg_position": 7.1 },
+      "decision": null
+    }
+  ],
+  "competitors": ["hormann.com", "dierre.com", "oikos.it", "kaadas.com", "cdfdistributors.com"],
+  "gaps": [
+    { "field": "markets.MX", "reason": "not_acquired", "since": "2026-09-23T09:30:00+08:00" },
+    { "field": "funnel.*.inquiry_prompt_select", "reason": "data_lag", "since": "2026-09-23T09:30:00+08:00" }
+  ],
+  "sources": [
+    { "name": "GA4", "captured_at": "2026-09-23T09:30:00+08:00", "through": "2026-09-22", "status": "ok" },
+    { "name": "GSC", "captured_at": "2026-09-23T09:30:00+08:00", "through": "2026-09-20", "status": "partial" },
+    { "name": "SEMrush", "captured_at": "2026-09-23T09:30:00+08:00", "through": "2026-09-07", "status": "stale" }
+  ]
+}
