@@ -1,0 +1,11 @@
+[Unit]
+Description=Run WONLY live SEO summary collection daily
+
+[Timer]
+OnCalendar=*-*-* 01:30:00 UTC
+Persistent=true
+RandomizedDelaySec=120
+Unit=wonly-seo-summary-collector.service
+
+[Install]
+WantedBy=timers.target

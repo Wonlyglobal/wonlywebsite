@@ -1,0 +1,26 @@
+[
+  {
+    "id": "lock-core-snippet-20260923",
+    "target_paths": ["/insights/door-lock-core-vs-cylinder/"],
+    "hypothesis": "Expanded comparison coverage and a clearer snippet can improve qualified organic CTR.",
+    "status": "observing_7d",
+    "baseline": { "window": "28d", "clicks": 0, "impressions": 95, "ctr": 0, "avg_position": 8.9 },
+    "launched_at": "2026-09-23T08:00:00+08:00",
+    "observe_7d_at": "2026-09-30T08:00:00+08:00",
+    "observe_14d_at": "2026-10-07T08:00:00+08:00",
+    "latest": {},
+    "decision": null
+  },
+  {
+    "id": "en1627-proof-checklist-20260923",
+    "target_paths": ["/insights/en-1627-rc2-vs-rc3-vs-rc4-security-doors/"],
+    "hypothesis": "A complete certification checklist can improve relevance and qualified clicks for EN 1627 comparisons.",
+    "status": "observing_7d",
+    "baseline": { "window": "28d", "clicks": 0, "impressions": 100, "ctr": 0, "avg_position": 10.2 },
+    "launched_at": "2026-09-23T08:00:00+08:00",
+    "observe_7d_at": "2026-09-30T08:00:00+08:00",
+    "observe_14d_at": "2026-10-07T08:00:00+08:00",
+    "latest": {},
+    "decision": null
+  }
+]

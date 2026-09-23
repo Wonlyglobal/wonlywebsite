@@ -99,6 +99,8 @@ node scripts/generate-seo-summary-snapshot.mjs \
 
 The daily SEO workflow should build the sanitized input directly from the same GA4/GSC aggregates used for the report. It must not parse Feishu messages or expose raw Google responses. SEMrush remains a dated historical snapshot with `stale` status unless a new verified export is available.
 
+The production collector candidate is `scripts/generate-live-seo-summary.mjs`, scheduled by `deployment/seo-summary/wonly-seo-summary-collector.timer` for 01:30 UTC (09:30 Asia/Shanghai). It queries only aggregate GA4/GSC reports, performs a public-page metadata audit, joins the non-secret experiment registry, and writes the same validated snapshot atomically. Its Google credentials remain in `/etc/wonly-seo-summary/collector.env`; they are never returned by the read API.
+
 ## Review and deployment gate
 
 `scripts/run-seo-summary-api.mjs` and `scripts/generate-seo-summary-snapshot.mjs` are the reviewable implementation. Deployment requires a separate approval, creation of the independent service account/directories, a production hostname or private route, TLS, rate limiting and audit logging at the proxy, secrets provisioning on both servers, and a first-snapshot reconciliation. No current CMS role or endpoint should be weakened.
