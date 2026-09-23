@@ -19,7 +19,7 @@ const MUTED = "#5f5a54";
 
 const BASE = import.meta.env.BASE_URL;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
-const DOOR_ANIMATION = `${BASE}videos/hero-door-open.webp`;
+const DOOR_ANIMATION = `${BASE}videos/hero-door-open-hq.mp4`;
 const LOGO = `${BASE}images/logo-trim.webp`;
 const DOOR_ANIMATION_DURATION = 2800;
 
@@ -553,7 +553,7 @@ const scrollToId = (id: string) => {
 };
 
 const Prototype = () => {
-  const doorAnimation = useRef<HTMLImageElement>(null);
+  const doorAnimation = useRef<HTMLVideoElement>(null);
   const openFrame = useRef<HTMLImageElement>(null);
   const title = useRef<HTMLDivElement>(null);
   const scrim = useRef<HTMLDivElement>(null);
@@ -780,7 +780,7 @@ const Prototype = () => {
         if (scrim.current) scrim.current.style.opacity = "0";
         reveal_();
       } else {
-        if (door) door.src = DOOR_POSTER;
+        if (door) { door.pause(); door.removeAttribute("src"); door.load(); }
         if (title.current) { title.current.style.opacity = "1"; title.current.style.transform = "translateZ(0)"; }
         if (scrim.current) scrim.current.style.opacity = "1";
         if (reveal.current) { reveal.current.style.opacity = "0"; reveal.current.style.visibility = "hidden"; }
@@ -819,12 +819,13 @@ const Prototype = () => {
     let watchdog = 0;
     const playDoor = () => {
       if (!door || done || !openingStarted || !animationUrl) return;
-      door.src = DOOR_POSTER;
-      void door.offsetWidth;
       door.src = animationUrl;
+      door.currentTime = 0;
+      door.load();
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
-      watchdog = window.setTimeout(reveal_, DOOR_ANIMATION_DURATION + 300);
+      door.play().catch(reveal_);
+      watchdog = window.setTimeout(reveal_, DOOR_ANIMATION_DURATION + 500);
     };
     const startOpening = () => {
       if (openingStarted || done) return;
@@ -861,6 +862,7 @@ const Prototype = () => {
       }).catch(() => {
         if (openingStarted) reveal_();
       });
+      door.addEventListener("ended", reveal_, { once: true });
     }
 
     // Let the visitor skip the intro at any time.
@@ -868,7 +870,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(watchdog); if (animationUrl) URL.revokeObjectURL(animationUrl); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(watchdog); door?.pause(); if (animationUrl) URL.revokeObjectURL(animationUrl); };
   }, []);
 
   return (
@@ -931,7 +933,7 @@ const Prototype = () => {
 
       {/* ══ 1 · Hero door animation + 2 · reveal on interior frame ══ */}
       <section id="top" className="relative h-[100dvh] w-full overflow-hidden" style={{ background: "#0d0d0d" }}>
-        <img ref={doorAnimation} src={DOOR_POSTER} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-0 pointer-events-none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transform: "translateZ(0)", backfaceVisibility: "hidden" }} />
+        <video ref={doorAnimation} poster={DOOR_POSTER} muted playsInline preload="auto" aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transform: "translateZ(0)", backfaceVisibility: "hidden" }} />
         <img ref={openFrame} src={IMG.interior} alt="" aria-hidden="true" loading="eager" className="absolute inset-0 z-[1] pointer-events-none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0, transition: "opacity .25s ease", transform: "translateZ(0)" }} />
 
         <div ref={scrim} className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(72% 78% at 50% 45%, rgba(13,13,13,0.68) 0%, rgba(13,13,13,0.40) 50%, rgba(13,13,13,0) 82%)", willChange: "opacity", transform: "translateZ(0)" }} />
