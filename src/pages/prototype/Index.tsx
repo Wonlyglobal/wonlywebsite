@@ -588,6 +588,21 @@ const Prototype = () => {
     setForm((f) => ({ ...f, [name]: value }));
     setErrors((er) => { if (!er[name]) return er; const n = { ...er }; delete n[name]; return n; });
   };
+  const applyInquiryPrompt = (interest: string, message: string) => {
+    if (!contactStarted.current) {
+      contactStarted.current = true;
+      trackFormEvent("form_start", "homepage_contact", { start_method: "quick_prompt" });
+    }
+    setForm((current) => ({ ...current, interest, message }));
+    setErrors((current) => {
+      if (!current.interest && !current.message) return current;
+      const next = { ...current };
+      delete next.interest;
+      delete next.message;
+      return next;
+    });
+    trackEvent("inquiry_prompt_select", { form_id: "homepage_contact", prompt_type: interest });
+  };
   const onContactSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     if (!contactStarted.current) { contactStarted.current = true; trackFormEvent("form_start", "homepage_contact"); }
@@ -1223,6 +1238,21 @@ const Prototype = () => {
               </div>
             ) : (
             <form ref={contactFormRef} noValidate onSubmit={onContactSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="sm:col-span-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3.5">
+                <p className="text-sm font-medium text-white">{t("Start with what you need")}</p>
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {[
+                    ["Distributor", "Please send distributor pricing, MOQ and market-support details."],
+                    ["Project", "Please recommend specifications and pricing for my project."],
+                    ["OEM / ODM", "Please send your OEM/ODM options, MOQ and lead time."],
+                  ].map(([promptType, message]) => (
+                    <button key={promptType} type="button" onClick={() => applyInquiryPrompt(promptType, message)} className="rounded-full border border-white/20 px-3 py-2 text-xs text-white/85 transition-colors hover:border-[#BFA06A] hover:text-white">
+                      {t(promptType)}
+                    </button>
+                  ))}
+                </div>
+                <p className="mt-2.5 text-[11px] leading-relaxed" style={{ color: "rgba(245,241,234,0.58)" }}>{t("No commitment. Your project details stay confidential. We reply within one business day.")}</p>
+              </div>
               {([["name", "Full Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country / Region", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, inputType]) => (
                 <label key={key} className="block">
                   <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} {key === "company" ? <span className="normal-case tracking-normal">({t("optional")})</span> : <span style={{ color: "#e6928a" }}>*</span>}</span>
