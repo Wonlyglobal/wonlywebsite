@@ -33,9 +33,9 @@
     <!-- Preload self-hosted fonts (used on every page) -->
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Keep the first paint lightweight. Mobile never downloads the HD animated
-         WebP; desktop warms it only after window.load so it cannot block the app. -->
-    <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var o=document.createElement("link");o.rel="preload";o.as="image";o.href="/images/interior-bg.jpg";document.head.appendChild(o);window.__wonlyLoadDoorAnimation=function(){return window.__wonlyDoorAnimationBlob||(window.__wonlyDoorAnimationBlob=fetch("/videos/hero-door-open-hd.webp",{cache:"force-cache"}).then(function(r){if(!r.ok)throw new Error("door animation "+r.status);return r.blob();}));};if(matchMedia("(min-width: 768px) and (pointer: fine)").matches){addEventListener("load",function(){var run=function(){window.__wonlyLoadDoorAnimation();};window.requestIdleCallback?requestIdleCallback(run,{timeout:2500}):setTimeout(run,800);},{once:true});}}</script>
+    <!-- The intro uses the already-preloaded 1920px poster for a GPU door-split
+         animation, so no secondary animation file can delay the first gesture. -->
+    <script>if(location.pathname==="/"){var p=document.createElement("link");p.rel="preload";p.as="image";p.href="/videos/hero-door-poster.webp";document.head.appendChild(p);var o=document.createElement("link");o.rel="preload";o.as="image";o.href="/images/interior-bg.jpg";document.head.appendChild(o);}</script>
     <!-- Preserve an intro gesture made before the React bundle has mounted. -->
     <script>
       if (location.pathname === "/" && !location.hash) {
