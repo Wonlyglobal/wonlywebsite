@@ -1,4 +1,4 @@
-import { GoogleAuth } from 'google-auth-library';
+import { createSign } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { writeSnapshot } from './lib/seo-summary.mjs';
@@ -10,8 +10,40 @@ const storeDir = process.env.SEO_SUMMARY_STORE_DIR;
 const host = 'https://www.wonlyglobal.com';
 if (!credentials || !property || !storeDir) throw new Error('GOOGLE_SA_KEY, GA4_PROPERTY_ID and SEO_SUMMARY_STORE_DIR are required');
 
-const auth = new GoogleAuth({ credentials: JSON.parse(credentials), scopes: ['https://www.googleapis.com/auth/analytics.readonly', 'https://www.googleapis.com/auth/webmasters.readonly'] });
-const token = async () => { const client = await auth.getClient(); const value = await client.getAccessToken(); return typeof value === 'string' ? value : value.token; };
+const serviceAccount = JSON.parse(credentials);
+const scopes = ['https://www.googleapis.com/auth/analytics.readonly', 'https://www.googleapis.com/auth/webmasters.readonly'];
+const b64url = (value) => Buffer.from(value).toString('base64url');
+let cachedToken;
+let cachedTokenExpiresAt = 0;
+const token = async () => {
+  if (cachedToken && Date.now() < cachedTokenExpiresAt - 60_000) return cachedToken;
+  const now = Math.floor(Date.now() / 1000);
+  const header = b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
+  const claims = b64url(JSON.stringify({
+    iss: serviceAccount.client_email,
+    scope: scopes.join(' '),
+    aud: serviceAccount.token_uri || 'https://oauth2.googleapis.com/token',
+    iat: now,
+    exp: now + 3600,
+  }));
+  const unsigned = `${header}.${claims}`;
+  const signer = createSign('RSA-SHA256');
+  signer.update(unsigned);
+  signer.end();
+  const assertion = `${unsigned}.${signer.sign(serviceAccount.private_key).toString('base64url')}`;
+  const response = await fetch(serviceAccount.token_uri || 'https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer', assertion }),
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!response.ok) throw new Error(`google_oauth_${response.status}`);
+  const payload = await response.json();
+  if (typeof payload.access_token !== 'string') throw new Error('google_oauth_invalid_response');
+  cachedToken = payload.access_token;
+  cachedTokenExpiresAt = Date.now() + Number(payload.expires_in || 3600) * 1000;
+  return cachedToken;
+};
 const iso = (date) => date.toISOString().slice(0, 10);
 const ago = (days) => { const date = new Date(); date.setUTCDate(date.getUTCDate() - days); return date; };
 const number = (value) => Number(value || 0);

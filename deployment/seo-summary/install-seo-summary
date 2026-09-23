@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if [[ ${EUID} -ne 0 ]]; then echo "run as root" >&2; exit 1; fi
+source_dir=${1:-}
+revision=${2:-}
+collector_env_source=${3:-}
+[[ -d "$source_dir/.git" || -f "$source_dir/.git" ]] || { echo "invalid checkout" >&2; exit 1; }
+[[ "$revision" =~ ^[0-9a-f]{40}$ ]] || { echo "revision must be a full commit SHA" >&2; exit 1; }
+[[ -f "$collector_env_source" ]] || { echo "collector env missing" >&2; exit 1; }
+actual_revision=$(/usr/bin/git -C "$source_dir" rev-parse HEAD)
+[[ "$actual_revision" == "$revision" ]] || { echo "checkout does not match revision" >&2; exit 1; }
+/usr/bin/git -C "$source_dir" diff-index --quiet HEAD -- || { echo "checkout has tracked changes" >&2; exit 1; }
+remote_main=$(/usr/bin/git ls-remote https://github.com/Wonlyglobal/wonlywebsite.git refs/heads/main | /usr/bin/awk '{print $1}')
+[[ "$remote_main" == "$revision" ]] || { echo "revision is not current trusted main" >&2; exit 1; }
+
+service_user=wonly-seo
+state_dir=/var/lib/wonly-seo-summary
+env_dir=/etc/wonly-seo-summary
+image="wonly-seo-summary:$revision"
+id "$service_user" >/dev/null 2>&1 || useradd --system --uid 8796 --home-dir "$state_dir" --shell /usr/sbin/nologin "$service_user"
+install -d -o root -g root -m 0755 /opt/wonly-seo-summary /var/www/letsencrypt
+install -d -o "$service_user" -g "$service_user" -m 0750 "$state_dir"
+install -d -o root -g "$service_user" -m 0750 "$env_dir"
+
+api_env="$env_dir/api.env"
+if [[ ! -s "$api_env" ]]; then
+  secret=$(/usr/bin/openssl rand -hex 32)
+  umask 0077
+  printf 'PORT=8796\nSEO_SUMMARY_STORE_DIR=/data\nSEO_SUMMARY_CLIENTS_JSON={"crm-grace-prod":"%s"}\n' "$secret" > "$api_env"
+  unset secret
+fi
+chown root:"$service_user" "$api_env"
+chmod 0640 "$api_env"
+install -o root -g "$service_user" -m 0640 "$collector_env_source" "$env_dir/collector.env"
+
+/usr/bin/docker build --pull -f "$source_dir/deployment/seo-summary/Dockerfile" -t "$image" "$source_dir"
+printf 'SEO_SUMMARY_IMAGE=%s\n' "$image" > "$env_dir/image.env"
+chown root:"$service_user" "$env_dir/image.env"
+chmod 0640 "$env_dir/image.env"
+
+install -o root -g root -m 0644 "$source_dir/deployment/seo-summary/wonly-seo-summary.service" /etc/systemd/system/wonly-seo-summary.service
+install -o root -g root -m 0644 "$source_dir/deployment/seo-summary/wonly-seo-summary-collector.service" /etc/systemd/system/wonly-seo-summary-collector.service
+install -o root -g root -m 0644 "$source_dir/deployment/seo-summary/wonly-seo-summary-collector.timer" /etc/systemd/system/wonly-seo-summary-collector.timer
+test -s /etc/letsencrypt/live/seo-api.wonlyglobal.com/fullchain.pem
+install -o root -g root -m 0644 "$source_dir/deployment/seo-summary/nginx-seo-summary.conf" /etc/nginx/sites-available/seo-api.wonlyglobal.com
+ln -sfn /etc/nginx/sites-available/seo-api.wonlyglobal.com /etc/nginx/sites-enabled/seo-api.wonlyglobal.com
+
+systemctl daemon-reload
+systemctl stop wonly-seo-summary.service 2>/dev/null || true
+systemctl start wonly-seo-summary-collector.service
+systemctl enable --now wonly-seo-summary.service wonly-seo-summary-collector.timer
+nginx -t
+systemctl reload nginx
+systemctl --quiet is-active wonly-seo-summary.service
+systemctl --quiet is-active wonly-seo-summary-collector.timer
+/usr/bin/docker run --rm --network host --env-file "$api_env" "$image" node scripts/verify-seo-summary-production.mjs
+printf '%s\n' "$revision" > "$state_dir/deployed-revision"
+chown "$service_user":"$service_user" "$state_dir/deployed-revision"
+chmod 0644 "$state_dir/deployed-revision"
+echo "WONLY SEO summary deployed at $revision"

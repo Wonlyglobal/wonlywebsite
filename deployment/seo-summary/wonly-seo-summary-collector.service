@@ -5,14 +5,10 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-User=wonly-seo
-Group=wonly-seo
-WorkingDirectory=/opt/wonly-seo-summary/current
-EnvironmentFile=/etc/wonly-seo-summary/collector.env
-ExecStart=/usr/bin/env node scripts/generate-live-seo-summary.mjs
+EnvironmentFile=/etc/wonly-seo-summary/image.env
+ExecStart=/usr/bin/docker run --rm --name wonly-seo-summary-collector --network host --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,noexec,nosuid,size=16m --user 8796:8796 --env-file /etc/wonly-seo-summary/collector.env --volume /var/lib/wonly-seo-summary:/data:rw ${SEO_SUMMARY_IMAGE} node scripts/generate-live-seo-summary.mjs
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectHome=true
 ProtectSystem=strict
-ReadWritePaths=/var/lib/wonly-seo-summary
 UMask=0077

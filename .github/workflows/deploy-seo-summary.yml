@@ -1,0 +1,80 @@
+name: Deploy SEO summary service
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: Full 40-character SHA already on main
+        required: true
+        type: string
+      confirmation:
+        description: Type DEPLOY-SEO-SUMMARY-PRODUCTION
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-summary-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: inputs.confirmation == 'DEPLOY-SEO-SUMMARY-PRODUCTION'
+    runs-on: [self-hosted, linux, x64, wonly-cms-production]
+    environment: seo-summary-production
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit_sha }}
+          fetch-depth: 0
+          clean: true
+
+      - name: Require immutable current main revision
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          revision='${{ inputs.commit_sha }}'
+          [[ "$revision" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$revision"
+          git fetch --no-tags origin main
+          test "$(git rev-parse origin/main)" = "$revision"
+
+      - name: Verify package
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check scripts/run-seo-summary-api.mjs
+          node --check scripts/generate-live-seo-summary.mjs
+          node --check scripts/verify-seo-summary-production.mjs
+          node scripts/test-seo-summary-api.mjs
+          test -f deployment/seo-summary/Dockerfile
+          test -f deployment/seo-summary/nginx-seo-summary.conf
+
+      - name: Install isolated production service
+        shell: bash
+        env:
+          GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: |
+          set -Eeuo pipefail
+          test -n "$GOOGLE_SA_KEY"
+          test -n "$GA4_PROPERTY_ID"
+          umask 077
+          env_file="$GITHUB_WORKSPACE/.seo-summary-collector.env"
+          trap 'rm -f "$env_file"' EXIT
+          printf 'SEO_SUMMARY_STORE_DIR=/data\nGOOGLE_SA_KEY=%s\nGA4_PROPERTY_ID=%s\nGSC_SITE=sc-domain:wonlyglobal.com\n' "$GOOGLE_SA_KEY" "$GA4_PROPERTY_ID" > "$env_file"
+          sudo -n /usr/local/sbin/install-wonly-seo-summary "$GITHUB_WORKSPACE" '${{ inputs.commit_sha }}' "$env_file"
+
+      - name: Record non-secret acceptance evidence
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          systemctl --quiet is-active wonly-seo-summary.service
+          systemctl --quiet is-active wonly-seo-summary-collector.timer
+          test "$(cat /var/lib/wonly-seo-summary/deployed-revision)" = '${{ inputs.commit_sha }}'
+          status=$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 15 http://127.0.0.1:8796/seo-summary/v1/current)
+          test "$status" = 401
+          echo 'SEO summary service deployed and signed snapshot verified.' >> "$GITHUB_STEP_SUMMARY"
