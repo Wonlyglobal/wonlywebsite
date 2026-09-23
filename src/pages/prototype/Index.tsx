@@ -22,6 +22,7 @@ const DOOR_ANIMATION = `${BASE}videos/hero-door-open-hd.webp`;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
 const LOGO = `${BASE}images/logo-trim.webp`;
 const DOOR_ANIMATION_DURATION = 2800;
+const DOOR_ANIMATION_READY_TIMEOUT = 3000;
 
 /* ── CMS 首屏文案: content/settings/homepage.json（在 /admin 站点后台编辑）──
    每个字段都有代码默认值兜底，JSON 缺失或留空也不会让首屏变空白。 */
@@ -835,7 +836,7 @@ const Prototype = () => {
       }
       requestAnimation();
       if (animationUrl) playDoor();
-      else readinessWatchdog = window.setTimeout(reveal_, 8000);
+      else readinessWatchdog = window.setTimeout(reveal_, DOOR_ANIMATION_READY_TIMEOUT);
     };
     const onIntroKey = (event: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
