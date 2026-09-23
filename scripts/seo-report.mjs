@@ -96,9 +96,17 @@ const RPrev = [{ startDate: '14daysAgo', endDate: '8daysAgo' }];
 const R28 = [{ startDate: '28daysAgo', endDate: 'yesterday' }];
 const RPrev28 = [{ startDate: '56daysAgo', endDate: '29daysAgo' }];
 const ORGANIC = { filter: { fieldName: 'sessionDefaultChannelGroup', stringFilter: { value: 'Organic Search' } } };
+const FUNNEL_EVENTS = ['cta_click', 'form_open', 'form_start', 'form_submit', 'generate_lead', 'form_error', 'form_abandon', 'contact_click'];
+const FUNNEL_FILTER = { filter: { fieldName: 'eventName', inListFilter: { values: FUNNEL_EVENTS } } };
+const ORGANIC_FUNNEL_FILTER = { andGroup: { expressions: [ORGANIC, FUNNEL_FILTER] } };
+const eventCounts = (report) => Object.fromEntries(FUNNEL_EVENTS.map((name) => {
+  const row = (report.rows || []).find((item) => item.dimensionValues?.[0]?.value === name);
+  return [name, Number(row?.metricValues?.[0]?.value || 0)];
+}));
+const funnelLine = (counts) => `CTA ${counts.cta_click} → 打开 ${counts.form_open} → 开始 ${counts.form_start} → 提交 ${counts.form_submit} → 成功 ${counts.generate_lead} · 错误 ${counts.form_error} · 放弃 ${counts.form_abandon} · 直接联系 ${counts.contact_click}`;
 
 async function getGa4() {
-  const [chCur, chPrev, ch28, chPrev28, eng, land, ctry, dev, leadCur, leadPrev, lead28, leadPrev28] = await Promise.all([
+  const [chCur, chPrev, ch28, chPrev28, eng, land, ctry, dev, funnel7, funnelPrev7, funnel28, organicFunnel7, organicFunnelPrev7, organicFunnel28] = await Promise.all([
     ga({ dateRanges: R7, dimensions: [{ name: 'sessionDefaultChannelGroup' }], metrics: [{ name: 'sessions' }], orderBys: [{ metric: { metricName: 'sessions' }, desc: true }] }),
     ga({ dateRanges: RPrev, dimensions: [{ name: 'sessionDefaultChannelGroup' }], metrics: [{ name: 'sessions' }] }),
     ga({ dateRanges: R28, dimensions: [{ name: 'sessionDefaultChannelGroup' }], metrics: [{ name: 'sessions' }] }),
@@ -107,10 +115,12 @@ async function getGa4() {
     ga({ dateRanges: R7, dimensions: [{ name: 'landingPagePlusQueryString' }], metrics: [{ name: 'sessions' }], dimensionFilter: ORGANIC, orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 6 }),
     ga({ dateRanges: R7, dimensions: [{ name: 'country' }], metrics: [{ name: 'sessions' }], dimensionFilter: ORGANIC, orderBys: [{ metric: { metricName: 'sessions' }, desc: true }], limit: 6 }),
     ga({ dateRanges: R7, dimensions: [{ name: 'deviceCategory' }], metrics: [{ name: 'sessions' }], dimensionFilter: ORGANIC }),
-    ga({ dateRanges: R7, metrics: [{ name: 'eventCount' }], dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'generate_lead' } } } }),
-    ga({ dateRanges: RPrev, metrics: [{ name: 'eventCount' }], dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'generate_lead' } } } }),
-    ga({ dateRanges: R28, metrics: [{ name: 'eventCount' }], dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'generate_lead' } } } }),
-    ga({ dateRanges: RPrev28, metrics: [{ name: 'eventCount' }], dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'generate_lead' } } } }),
+    ga({ dateRanges: R7, dimensions: [{ name: 'eventName' }], metrics: [{ name: 'eventCount' }], dimensionFilter: FUNNEL_FILTER }),
+    ga({ dateRanges: RPrev, dimensions: [{ name: 'eventName' }], metrics: [{ name: 'eventCount' }], dimensionFilter: FUNNEL_FILTER }),
+    ga({ dateRanges: R28, dimensions: [{ name: 'eventName' }], metrics: [{ name: 'eventCount' }], dimensionFilter: FUNNEL_FILTER }),
+    ga({ dateRanges: R7, dimensions: [{ name: 'eventName' }], metrics: [{ name: 'eventCount' }], dimensionFilter: ORGANIC_FUNNEL_FILTER }),
+    ga({ dateRanges: RPrev, dimensions: [{ name: 'eventName' }], metrics: [{ name: 'eventCount' }], dimensionFilter: ORGANIC_FUNNEL_FILTER }),
+    ga({ dateRanges: R28, dimensions: [{ name: 'eventName' }], metrics: [{ name: 'eventCount' }], dimensionFilter: ORGANIC_FUNNEL_FILTER }),
   ]);
   const chRows = chCur.rows || [];
   const orgCur = Number((chRows.find((r) => r.dimensionValues[0].value === 'Organic Search') || { metricValues: [{ value: 0 }] }).metricValues[0].value);
@@ -119,8 +129,8 @@ async function getGa4() {
   const orgPrev28 = Number(((chPrev28.rows || []).find((r) => r.dimensionValues[0].value === 'Organic Search') || { metricValues: [{ value: 0 }] }).metricValues[0].value);
   const val = (r) => (r && r.rows && r.rows[0] ? r.rows[0].metricValues : null);
   const engV = val(eng);
-  const leadC = val(leadCur), leadP = val(leadPrev);
-  const lead28V = val(lead28), leadPrev28V = val(leadPrev28);
+  const f7 = eventCounts(funnel7), fPrev7 = eventCounts(funnelPrev7), f28 = eventCounts(funnel28);
+  const organicF7 = eventCounts(organicFunnel7), organicFPrev7 = eventCounts(organicFunnelPrev7), organicF28 = eventCounts(organicFunnel28);
   return {
     orgCur, orgPrev, org28, orgPrev28,
     total: chRows.reduce((s, r) => s + Number(r.metricValues[0].value || 0), 0),
@@ -130,10 +140,14 @@ async function getGa4() {
     landing: (land.rows || []).map((r) => `${short(r.dimensionValues[0].value)}（${r.metricValues[0].value}）`),
     country: (ctry.rows || []).map((r) => `${r.dimensionValues[0].value} ${r.metricValues[0].value}`),
     device: (dev.rows || []).map((r) => `${r.dimensionValues[0].value} ${r.metricValues[0].value}`),
-    leadCur: leadC ? Number(leadC[0].value) : 0,
-    leadPrev: leadP ? Number(leadP[0].value) : 0,
-    lead28: lead28V ? Number(lead28V[0].value) : 0,
-    leadPrev28: leadPrev28V ? Number(leadPrev28V[0].value) : 0,
+    funnel7: f7, funnelPrev7: fPrev7, funnel28: f28,
+    organicFunnel7: organicF7, organicFunnelPrev7: organicFPrev7, organicFunnel28: organicF28,
+    leadCur: organicF7.generate_lead,
+    leadPrev: organicFPrev7.generate_lead,
+    lead28: organicF28.generate_lead,
+    allLeadCur: f7.generate_lead,
+    allLeadPrev: fPrev7.generate_lead,
+    allLead28: f28.generate_lead,
   };
 }
 
@@ -147,6 +161,12 @@ function advice(g, a) {
   }
   if (a) {
     if (a.orgCur < a.orgPrev) t.push('自然搜索会话环比下降：结合 GSC 排名变化排查。');
+    const f = a.organicFunnel7;
+    if (f.cta_click > 0 && f.form_open === 0) t.push('SEO访客点击了CTA但未打开表单：检查目标锚点、弹窗或跨页跳转。');
+    if (f.form_open >= 3 && f.form_start / f.form_open < 0.3) t.push('SEO表单打开后开始填写率低于30%：继续减少首屏字段并强化价值说明。');
+    if (f.form_start >= 3 && f.form_submit / f.form_start < 0.3) t.push('SEO表单开始后提交率低于30%：检查必填字段、手机键盘与错误提示。');
+    if (f.form_submit > f.generate_lead) t.push('存在提交但未产生generate_lead：优先排查表单接口失败或成功事件漏记。');
+    if (f.form_error > 0) t.push(`SEO漏斗近7天记录到 ${f.form_error} 次表单错误：按错误类型定位验证、网络或接口问题。`);
     if (a.leadCur > 0) t.push(`自然流量本周带来 ${a.leadCur} 条询盘，保持内容产出与转化跟进。`);
     else t.push('本周自然流量暂无询盘：检查联系表单/CTA 是否显眼、落地页是否对应买家意图。');
   }
@@ -181,8 +201,10 @@ async function main() {
     ga4Md =
       `**📊 GA4 流量与询盘**（近7天，对比上周）\n`
       + `自然搜索会话 **${a.orgCur}**${wow(a.orgCur, a.orgPrev)}　｜　全站会话 ${a.total}\n`
-      + `询盘 generate_lead **${a.leadCur}**${wow(a.leadCur, a.leadPrev)}\n`
-      + `28天自然会话 **${a.org28}**${wow(a.org28, a.orgPrev28)}　｜　28天询盘 **${a.lead28}**${wow(a.lead28, a.leadPrev28)}\n`
+      + `SEO询盘 generate_lead **${a.leadCur}**${wow(a.leadCur, a.leadPrev)}　｜　全渠道询盘 ${a.allLeadCur}${wow(a.allLeadCur, a.allLeadPrev)}\n`
+      + `28天自然会话 **${a.org28}**${wow(a.org28, a.orgPrev28)}　｜　28天SEO询盘 **${a.lead28}**　｜　全渠道询盘 ${a.allLead28}\n`
+      + `**SEO漏斗：** ${funnelLine(a.organicFunnel7)}\n`
+      + `**全渠道漏斗：** ${funnelLine(a.funnel7)}\n`
       + `参与度 ${a.engRate}　｜　平均时长 ${a.avgDur}\n`
       + `渠道占比：${a.channels.join(' / ') || '—'}\n`
       + `自然流量设备：${a.device.join(' / ') || '—'}\n\n`
@@ -234,7 +256,10 @@ async function main() {
     } : null,
     ga4: a ? {
       organicSessions: a.orgCur, previousOrganicSessions: a.orgPrev,
-      totalSessions: a.total, leads: a.leadCur, previousLeads: a.leadPrev,
+      totalSessions: a.total, organicLeads: a.leadCur, previousOrganicLeads: a.leadPrev,
+      allChannelLeads: a.allLeadCur, previousAllChannelLeads: a.allLeadPrev,
+      organicFunnel7: a.organicFunnel7, organicFunnel28: a.organicFunnel28,
+      allChannelFunnel7: a.funnel7, allChannelFunnel28: a.funnel28,
       engagementRate: a.engRate, averageDuration: a.avgDur,
       landingPages: a.landing, countries: a.country, devices: a.device,
     } : null,

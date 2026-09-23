@@ -80,7 +80,6 @@ export default function Contact() {
     if (!startedRef.current) { startedRef.current = true; trackFormEvent("form_start", "contact_page"); }
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
-    if (!form.company.trim()) e.company = "Please enter your company.";
     if (!form.country.trim()) e.country = "Please enter your country or region.";
     if (!form.email.trim()) e.email = "Please enter your email.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Please enter a valid email address.";
@@ -193,7 +192,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <label className="block"><span className={label} style={{ color: MUTED }}>{t("Full Name")} <span style={{ color: "#c0564a" }}>*</span></span>
                     <input className={input} style={border("name")} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your full name" />{errors.name && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.name}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Company")} <span style={{ color: "#c0564a" }}>*</span></span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Company")} <span className="normal-case tracking-normal">({t("optional")})</span></span>
                     <input className={input} style={border("company")} value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Company name" />{errors.company && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.company}</span>}</label>
                   <label className="block"><span className={label} style={{ color: MUTED }}>{t("Job Title")}</span>
                     <input className={input} style={border("role")} value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. Purchasing Manager" /></label>

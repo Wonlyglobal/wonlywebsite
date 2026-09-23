@@ -593,11 +593,9 @@ const Prototype = () => {
     if (!contactStarted.current) { contactStarted.current = true; trackFormEvent("form_start", "homepage_contact"); }
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = t("Please enter your name.");
-    if (!form.company.trim()) e.company = t("Please enter your company name.");
     if (!form.country.trim()) e.country = t("Please enter your country or region.");
     if (!form.email.trim()) e.email = t("Please enter your email.");
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t("Please enter a valid email address.");
-    if (!form.interest) e.interest = t("Please select an option.");
     if (!form.message.trim()) e.message = "Please tell us about your project.";
     setErrors(e);
     if (Object.keys(e).length > 0) { trackFormEvent("form_error", "homepage_contact", { error_type: "validation", error_fields: Object.keys(e).join(",") }); return; }
@@ -1227,13 +1225,13 @@ const Prototype = () => {
             <form ref={contactFormRef} noValidate onSubmit={onContactSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {([["name", "Full Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country / Region", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, inputType]) => (
                 <label key={key} className="block">
-                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} <span style={{ color: "#e6928a" }}>*</span></span>
+                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} {key === "company" ? <span className="normal-case tracking-normal">({t("optional")})</span> : <span style={{ color: "#e6928a" }}>*</span>}</span>
                   <input type={inputType} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={t(ph)} />
                   {errors[key] && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors[key]}</span>}
                 </label>
               ))}
               <label className="block sm:col-span-2">
-                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Interest")} <span style={{ color: "#e6928a" }}>*</span></span>
+                <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Interest")} <span className="normal-case tracking-normal">({t("optional")})</span></span>
                 <select value={form.interest} onChange={(ev) => setField("interest", ev.target.value)} aria-invalid={!!errors.interest} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors.interest ? "#c0564a" : "rgba(255,255,255,0.15)", color: form.interest ? "#fff" : "rgba(255,255,255,0.3)" }}>
                   <option value="" disabled className="text-black">{t("Select an option…")}</option>
                   <option value="Distributor" className="text-black">{t("Distributor")}</option>
