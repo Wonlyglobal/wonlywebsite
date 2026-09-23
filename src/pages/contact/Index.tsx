@@ -204,19 +204,19 @@ export default function Contact() {
                 <h3 className="text-[22px] font-normal">{t("Send an Enquiry")}</h3>
                 <p className="text-[13px] mt-1.5" style={{ color: MUTED }}>Tell us about your project or territory. Fields marked <span style={{ color: "#c0564a" }}>*</span> are required.</p>
                 <div className="my-5 rounded-xl border border-[#e4ddcf] bg-[#faf8f4] p-3.5">
-                  <p className="text-[13px] font-semibold" style={{ color: DARK }}>Start with what you need</p>
+                  <p className="text-[13px] font-semibold" style={{ color: DARK }}>{t("Start with what you need")}</p>
                   <div className="mt-2.5 flex flex-wrap gap-2">
                     {[
                       ["Distributor", "Please send distributor pricing, MOQ and market-support details."],
                       ["Project", "Please recommend specifications and pricing for my project."],
                       ["OEM / ODM", "Please send your OEM/ODM options, MOQ and lead time."],
                     ].map(([promptType, message]) => (
-                      <button key={promptType} type="button" onClick={() => applyInquiryPrompt(promptType, message)} className="rounded-full border border-[#d8cdbb] bg-white px-3 py-2 text-xs transition-colors hover:border-[#B08D4F]" style={{ color: DARK }}>
-                        {promptType}
+                      <button key={promptType} type="button" onClick={() => applyInquiryPrompt(promptType, t(message))} className="rounded-full border border-[#d8cdbb] bg-white px-3 py-2 text-xs transition-colors hover:border-[#B08D4F]" style={{ color: DARK }}>
+                        {t(promptType)}
                       </button>
                     ))}
                   </div>
-                  <p className="mt-2.5 text-[11px] leading-relaxed" style={{ color: MUTED }}>No commitment. Your project details stay confidential. We reply within one business day.</p>
+                  <p className="mt-2.5 text-[11px] leading-relaxed" style={{ color: MUTED }}>{t("No commitment. Your project details stay confidential. We reply within one business day.")}</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <label className="block"><span className={label} style={{ color: MUTED }}>{t("Full Name")} <span style={{ color: "#c0564a" }}>*</span></span>

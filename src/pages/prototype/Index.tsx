@@ -1246,7 +1246,7 @@ const Prototype = () => {
                     ["Project", "Please recommend specifications and pricing for my project."],
                     ["OEM / ODM", "Please send your OEM/ODM options, MOQ and lead time."],
                   ].map(([promptType, message]) => (
-                    <button key={promptType} type="button" onClick={() => applyInquiryPrompt(promptType, message)} className="rounded-full border border-white/20 px-3 py-2 text-xs text-white/85 transition-colors hover:border-[#BFA06A] hover:text-white">
+                    <button key={promptType} type="button" onClick={() => applyInquiryPrompt(promptType, t(message))} className="rounded-full border border-white/20 px-3 py-2 text-xs text-white/85 transition-colors hover:border-[#BFA06A] hover:text-white">
                       {t(promptType)}
                     </button>
                   ))}
