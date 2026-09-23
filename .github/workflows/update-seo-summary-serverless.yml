@@ -1,0 +1,42 @@
+name: Update SEO summary Serverless snapshot
+
+on:
+  schedule:
+    - cron: '35 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seo-summary-snapshot
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate sanitized live snapshot
+        env:
+          GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GSC_SITE: sc-domain:wonlyglobal.com
+          SEO_SUMMARY_STORE_DIR: serverless/seo-summary/data
+        run: |
+          set -Eeuo pipefail
+          node scripts/generate-live-seo-summary.mjs
+          node scripts/sync-seo-summary-serverless.mjs
+          node scripts/generate-seo-summary-snapshot.mjs --input serverless/seo-summary/data/current.json --store /tmp/seo-summary-verify
+      - name: Commit changed sanitized snapshot
+        run: |
+          set -Eeuo pipefail
+          if git diff --quiet -- serverless/seo-summary/data; then exit 0; fi
+          git config user.name 'WONLY SEO Automation'
+          git config user.email 'seo-automation@wonlyglobal.com'
+          git add serverless/seo-summary/data/current.json serverless/seo-summary/data/history.json
+          git commit -m 'Update SEO summary snapshot'
+          git push
