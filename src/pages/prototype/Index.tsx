@@ -18,7 +18,6 @@ const DARK = "#221F20";
 const MUTED = "#5f5a54";
 
 const BASE = import.meta.env.BASE_URL;
-const DOOR_ANIMATION = `${BASE}videos/hero-door.mp4`;
 const DOOR_POSTER = `${BASE}videos/hero-door-poster.webp`;
 const LOGO = `${BASE}images/logo-trim.webp`;
 const DOOR_ANIMATION_DURATION = 2800;
@@ -809,10 +808,17 @@ const Prototype = () => {
     lockScroll();
 
     let openingStarted = false;
+    let animationUrl = "";
+    let animationRequested = false;
+    let readinessWatchdog = 0;
     let watchdog = 0;
     const playDoor = () => {
-      if (!door || done || !openingStarted) return;
-      if (!door.src) door.src = DOOR_ANIMATION;
+      if (!door || done || !openingStarted || !animationUrl) return;
+      window.clearTimeout(readinessWatchdog);
+      if (door.src !== animationUrl) {
+        door.src = animationUrl;
+        door.load();
+      }
       door.currentTime = 0;
       if (title.current) { title.current.style.transition = "opacity .55s ease, transform .55s ease"; title.current.style.opacity = "0"; title.current.style.transform = "translateY(-48px)"; }
       if (scrim.current) { scrim.current.style.transition = "opacity .7s ease"; scrim.current.style.opacity = "0"; }
@@ -826,7 +832,9 @@ const Prototype = () => {
         window.setTimeout(reveal_, 180);
         return;
       }
-      playDoor();
+      requestAnimation();
+      if (animationUrl) playDoor();
+      else readinessWatchdog = window.setTimeout(reveal_, 5000);
     };
     const onIntroKey = (event: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " "].includes(event.key)) startOpening();
@@ -836,11 +844,24 @@ const Prototype = () => {
     document.addEventListener("touchstart", startOpening, { capture: true, passive: true });
     window.addEventListener("keydown", onIntroKey, true);
 
+    function requestAnimation() {
+      if (animationRequested || lightweightMobile) return;
+      animationRequested = true;
+      import("@/media/hero-door-inline.mp4?inline").then((module) => {
+        if (done) return;
+        animationUrl = module.default;
+        if (door) {
+          door.src = animationUrl;
+          door.load();
+        }
+        if (openingStarted) playDoor();
+      }).catch(() => { if (openingStarted) reveal_(); });
+    }
+
     if (hadEarlyIntroIntent) startOpening();
 
     if (!lightweightMobile && door) {
-      door.src = DOOR_ANIMATION;
-      door.load();
+      requestAnimation();
       door.addEventListener("ended", reveal_, { once: true });
     }
 
@@ -849,7 +870,7 @@ const Prototype = () => {
       reveal_();
     };
 
-    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(watchdog); door?.pause(); };
+    return () => { unlockScroll(); window.history.scrollRestoration = previousScrollRestoration; window.removeEventListener("pageshow", pinIntroToTop); window.removeEventListener("scroll", pinIntroToTop); document.removeEventListener("wheel", startOpening, true); document.removeEventListener("touchstart", startOpening, true); window.removeEventListener("keydown", onIntroKey, true); window.cancelAnimationFrame(topPinFrame); window.clearTimeout(topPinTimer); window.clearTimeout(readinessWatchdog); window.clearTimeout(watchdog); door?.pause(); };
   }, []);
 
   return (
