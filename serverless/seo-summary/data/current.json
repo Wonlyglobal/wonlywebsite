@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-09-24T06:42:18.227Z",
+  "generated_at": "2026-09-25T06:33:55.559Z",
   "freshness": {
     "ga4": {
-      "through": "2026-09-23",
+      "through": "2026-09-24",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-09-21",
+      "through": "2026-09-22",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,24 +21,24 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 15,
-        "impressions": 452,
-        "ctr": 0.033185840707964605,
-        "avg_position": 9.47787610619469
+        "clicks": 13,
+        "impressions": 448,
+        "ctr": 0.029017857142857144,
+        "avg_position": 9.542410714285714
       },
       "ga4": {
-        "organic_sessions": 23
+        "organic_sessions": 20
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 32,
-        "impressions": 1366,
-        "ctr": 0.02342606149341142,
-        "avg_position": 16.45095168374817
+        "clicks": 34,
+        "impressions": 1428,
+        "ctr": 0.023809523809523808,
+        "avg_position": 16.17857142857143
       },
       "ga4": {
-        "organic_sessions": 80
+        "organic_sessions": 81
       }
     }
   },
@@ -47,12 +47,12 @@
       "country": "ES",
       "gsc_7d": {
         "clicks": 1,
-        "impressions": 21,
-        "ctr": 0.047619047619047616,
-        "avg_position": 8.714285714285715
+        "impressions": 22,
+        "ctr": 0.045454545454545456,
+        "avg_position": 4.590909090909091
       },
       "ga4_7d": {
-        "organic_sessions": 5
+        "organic_sessions": 4
       },
       "status": "ok"
     },
@@ -60,9 +60,9 @@
       "country": "MX",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 15,
+        "impressions": 16,
         "ctr": 0,
-        "avg_position": 50.13333333333333
+        "avg_position": 46.6875
       },
       "ga4_7d": {
         "organic_sessions": 0
@@ -73,18 +73,18 @@
   "funnel": {
     "organic_7d": {
       "cta_click": 5,
-      "form_open": 6,
+      "form_open": 7,
       "form_start": 0,
       "inquiry_prompt_select": 0,
       "form_submit": 0,
       "generate_lead": 0,
       "form_error": 0,
       "form_abandon": 0,
-      "contact_click": 1
+      "contact_click": 0
     },
     "organic_28d": {
       "cta_click": 6,
-      "form_open": 17,
+      "form_open": 18,
       "form_start": 2,
       "inquiry_prompt_select": 0,
       "form_submit": 0,
@@ -94,25 +94,25 @@
       "contact_click": 2
     },
     "all_channels_7d": {
-      "cta_click": 11,
-      "form_open": 21,
-      "form_start": 0,
-      "inquiry_prompt_select": 0,
+      "cta_click": 13,
+      "form_open": 22,
+      "form_start": 2,
+      "inquiry_prompt_select": 22,
       "form_submit": 0,
       "generate_lead": 0,
       "form_error": 0,
-      "form_abandon": 0,
-      "contact_click": 2
+      "form_abandon": 1,
+      "contact_click": 1
     },
     "all_channels_28d": {
-      "cta_click": 27,
-      "form_open": 68,
-      "form_start": 11,
-      "inquiry_prompt_select": 0,
+      "cta_click": 29,
+      "form_open": 71,
+      "form_start": 13,
+      "inquiry_prompt_select": 22,
       "form_submit": 3,
-      "generate_lead": 5,
+      "generate_lead": 4,
       "form_error": 3,
-      "form_abandon": 2,
+      "form_abandon": 3,
       "contact_click": 5
     }
   },
@@ -137,7 +137,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-24T06:42:20.027Z"
+          "detected_at": "2026-09-25T06:33:59.176Z"
         }
       ]
     },
@@ -161,7 +161,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-24T06:42:20.026Z"
+          "detected_at": "2026-09-25T06:33:59.176Z"
         }
       ]
     },
@@ -202,7 +202,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-24T06:42:20.249Z"
+          "detected_at": "2026-09-25T06:33:59.409Z"
         }
       ]
     },
@@ -226,7 +226,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-24T06:42:20.510Z"
+          "detected_at": "2026-09-25T06:33:59.408Z"
         }
       ]
     }
@@ -302,26 +302,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-09-24T06:42:18.227Z",
-      "through": "2026-09-23",
+      "captured_at": "2026-09-25T06:33:55.559Z",
+      "through": "2026-09-24",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-09-24T06:42:18.227Z",
-      "through": "2026-09-21",
+      "captured_at": "2026-09-25T06:33:55.559Z",
+      "through": "2026-09-22",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-09-24T06:42:18.227Z",
+      "captured_at": "2026-09-25T06:33:55.559Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-09-24T06:42:18.227Z",
-      "through": "2026-09-24",
+      "captured_at": "2026-09-25T06:33:55.559Z",
+      "through": "2026-09-25",
       "status": "ok"
     }
   ]
