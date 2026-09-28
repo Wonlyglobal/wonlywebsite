@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-09-27T07:03:28.429Z",
+  "generated_at": "2026-09-28T07:33:50.679Z",
   "freshness": {
     "ga4": {
-      "through": "2026-09-26",
+      "through": "2026-09-27",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-09-24",
+      "through": "2026-09-25",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,24 +21,24 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 10,
-        "impressions": 425,
-        "ctr": 0.023529411764705882,
-        "avg_position": 10.08470588235294
+        "clicks": 12,
+        "impressions": 433,
+        "ctr": 0.02771362586605081,
+        "avg_position": 9.41339491916859
       },
       "ga4": {
-        "organic_sessions": 22
+        "organic_sessions": 23
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 38,
-        "impressions": 1539,
-        "ctr": 0.024691358024691357,
-        "avg_position": 15.62962962962963
+        "clicks": 40,
+        "impressions": 1569,
+        "ctr": 0.025493945188017845,
+        "avg_position": 15.026768642447419
       },
       "ga4": {
-        "organic_sessions": 86
+        "organic_sessions": 87
       }
     }
   },
@@ -47,9 +47,9 @@
       "country": "ES",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 18,
+        "impressions": 15,
         "ctr": 0,
-        "avg_position": 4.888888888888889
+        "avg_position": 4.8
       },
       "ga4_7d": {
         "organic_sessions": 2
@@ -60,9 +60,9 @@
       "country": "MX",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 15,
+        "impressions": 12,
         "ctr": 0,
-        "avg_position": 40.86666666666667
+        "avg_position": 38.333333333333336
       },
       "ga4_7d": {
         "organic_sessions": 0
@@ -94,8 +94,8 @@
       "contact_click": 3
     },
     "all_channels_7d": {
-      "cta_click": 14,
-      "form_open": 22,
+      "cta_click": 11,
+      "form_open": 19,
       "form_start": 2,
       "inquiry_prompt_select": 22,
       "form_submit": 0,
@@ -137,7 +137,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-27T07:03:30.461Z"
+          "detected_at": "2026-09-28T07:33:52.762Z"
         }
       ]
     },
@@ -161,7 +161,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-27T07:03:30.457Z"
+          "detected_at": "2026-09-28T07:33:52.794Z"
         }
       ]
     },
@@ -202,7 +202,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-27T07:03:30.459Z"
+          "detected_at": "2026-09-28T07:33:53.079Z"
         }
       ]
     },
@@ -226,7 +226,7 @@
           "code": "H1_MISSING",
           "severity": "P2",
           "evidence": "Static HTML H1 missing",
-          "detected_at": "2026-09-27T07:03:31.004Z"
+          "detected_at": "2026-09-28T07:33:53.412Z"
         }
       ]
     }
@@ -302,26 +302,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-09-27T07:03:28.429Z",
-      "through": "2026-09-26",
+      "captured_at": "2026-09-28T07:33:50.679Z",
+      "through": "2026-09-27",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-09-27T07:03:28.429Z",
-      "through": "2026-09-24",
+      "captured_at": "2026-09-28T07:33:50.679Z",
+      "through": "2026-09-25",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-09-27T07:03:28.429Z",
+      "captured_at": "2026-09-28T07:33:50.679Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-09-27T07:03:28.429Z",
-      "through": "2026-09-27",
+      "captured_at": "2026-09-28T07:33:50.679Z",
+      "through": "2026-09-28",
       "status": "ok"
     }
   ]
