@@ -100,11 +100,11 @@ const generatedAt = new Date().toISOString();
 const gscEnd = iso(ago(3)), gsc7Start = iso(ago(9)), gsc28Start = iso(ago(30));
 const gaEnd = iso(ago(1)), ga7Start = iso(ago(7)), ga28Start = iso(ago(28));
 const targetPages = [
-  ['/insights/door-lock-core-vs-cylinder/', 'article'],
-  ['/insights/en-1627-rc2-vs-rc3-vs-rc4-security-doors/', 'article'],
+  ['/insights/cylindrical-lock-core-vs-standard-cylinder/', 'article'],
+  ['/insights/en-1627-rc2-rc3-rc4-security-door-grades/', 'article'],
   ['/security-door-manufacturer/', 'commercial'],
-  ['/security-doors-mexico/', 'commercial'],
-  ['/es/puertas-de-seguridad-mexico/', 'commercial'],
+  ['/global/mexico/security-doors/', 'commercial'],
+  ['/es/global/mexico/security-doors/', 'commercial'],
 ];
 
 const [gsc7, gsc28, gscPages7, gscPages28, gscCountries7, gaSessions7, gaSessions28, gaCountries7, all7, all28, organic7, organic28, experiments] = await Promise.all([
