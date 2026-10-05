@@ -3941,7 +3941,7 @@
     {
       "schema_version": "1.0",
       "site": "wonlyglobal.com",
-      "generated_at": "2026-10-05T07:39:05.348Z",
+      "generated_at": "2026-10-05T13:22:29.331Z",
       "freshness": {
         "ga4": {
           "through": "2026-10-04",
@@ -4058,52 +4058,38 @@
       },
       "pages": [
         {
-          "path": "/insights/door-lock-core-vs-cylinder/",
+          "path": "/insights/cylindrical-lock-core-vs-standard-cylinder/",
           "role": "article",
           "gsc_7d": {
             "clicks": 0,
-            "impressions": 0,
+            "impressions": 5,
             "ctr": 0,
-            "avg_position": null
+            "avg_position": 14
           },
           "gsc_28d": {
             "clicks": 0,
-            "impressions": 0,
+            "impressions": 193,
             "ctr": 0,
-            "avg_position": null
+            "avg_position": 8.673575129533678
           },
-          "issues": [
-            {
-              "code": "H1_MISSING",
-              "severity": "P2",
-              "evidence": "Static HTML H1 missing",
-              "detected_at": "2026-10-05T07:39:08.509Z"
-            }
-          ]
+          "issues": []
         },
         {
-          "path": "/insights/en-1627-rc2-vs-rc3-vs-rc4-security-doors/",
+          "path": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
           "role": "article",
           "gsc_7d": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "avg_position": null
+            "clicks": 1,
+            "impressions": 20,
+            "ctr": 0.05,
+            "avg_position": 7.4
           },
           "gsc_28d": {
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "avg_position": null
+            "clicks": 1,
+            "impressions": 132,
+            "ctr": 0.007575757575757576,
+            "avg_position": 7.628787878787879
           },
-          "issues": [
-            {
-              "code": "H1_MISSING",
-              "severity": "P2",
-              "evidence": "Static HTML H1 missing",
-              "detected_at": "2026-10-05T07:39:08.494Z"
-            }
-          ]
+          "issues": []
         },
         {
           "path": "/security-door-manufacturer/",
@@ -4123,7 +4109,7 @@
           "issues": []
         },
         {
-          "path": "/security-doors-mexico/",
+          "path": "/global/mexico/security-doors/",
           "role": "commercial",
           "gsc_7d": {
             "clicks": 0,
@@ -4137,45 +4123,31 @@
             "ctr": 0,
             "avg_position": null
           },
-          "issues": [
-            {
-              "code": "H1_MISSING",
-              "severity": "P2",
-              "evidence": "Static HTML H1 missing",
-              "detected_at": "2026-10-05T07:39:08.844Z"
-            }
-          ]
+          "issues": []
         },
         {
-          "path": "/es/puertas-de-seguridad-mexico/",
+          "path": "/es/global/mexico/security-doors/",
           "role": "commercial",
           "gsc_7d": {
             "clicks": 0,
-            "impressions": 0,
+            "impressions": 1,
             "ctr": 0,
-            "avg_position": null
+            "avg_position": 4
           },
           "gsc_28d": {
             "clicks": 0,
-            "impressions": 0,
+            "impressions": 1,
             "ctr": 0,
-            "avg_position": null
+            "avg_position": 4
           },
-          "issues": [
-            {
-              "code": "H1_MISSING",
-              "severity": "P2",
-              "evidence": "Static HTML H1 missing",
-              "detected_at": "2026-10-05T07:39:09.130Z"
-            }
-          ]
+          "issues": []
         }
       ],
       "experiments": [
         {
           "id": "lock-core-snippet-20260923",
           "target_paths": [
-            "/insights/door-lock-core-vs-cylinder/"
+            "/insights/cylindrical-lock-core-vs-standard-cylinder/"
           ],
           "hypothesis": "Expanded comparison coverage and a clearer snippet can improve qualified organic CTR.",
           "status": "observing_7d",
@@ -4192,16 +4164,16 @@
           "latest": {
             "window": "7d",
             "clicks": 0,
-            "impressions": 0,
+            "impressions": 5,
             "ctr": 0,
-            "avg_position": null
+            "avg_position": 14
           },
           "decision": null
         },
         {
           "id": "en1627-proof-checklist-20260923",
           "target_paths": [
-            "/insights/en-1627-rc2-vs-rc3-vs-rc4-security-doors/"
+            "/insights/en-1627-rc2-rc3-rc4-security-door-grades/"
           ],
           "hypothesis": "A complete certification checklist can improve relevance and qualified clicks for EN 1627 comparisons.",
           "status": "observing_7d",
@@ -4217,10 +4189,10 @@
           "observe_14d_at": "2026-10-07T08:00:00+08:00",
           "latest": {
             "window": "7d",
-            "clicks": 0,
-            "impressions": 0,
-            "ctr": 0,
-            "avg_position": null
+            "clicks": 1,
+            "impressions": 20,
+            "ctr": 0.05,
+            "avg_position": 7.4
           },
           "decision": null
         }
@@ -4242,25 +4214,25 @@
       "sources": [
         {
           "name": "GA4",
-          "captured_at": "2026-10-05T07:39:05.348Z",
+          "captured_at": "2026-10-05T13:22:29.331Z",
           "through": "2026-10-04",
           "status": "ok"
         },
         {
           "name": "GSC",
-          "captured_at": "2026-10-05T07:39:05.348Z",
+          "captured_at": "2026-10-05T13:22:29.331Z",
           "through": "2026-10-02",
           "status": "ok"
         },
         {
           "name": "SEMrush",
-          "captured_at": "2026-10-05T07:39:05.348Z",
+          "captured_at": "2026-10-05T13:22:29.331Z",
           "through": "2026-09-07",
           "status": "stale"
         },
         {
           "name": "production_audit",
-          "captured_at": "2026-10-05T07:39:05.348Z",
+          "captured_at": "2026-10-05T13:22:29.331Z",
           "through": "2026-10-05",
           "status": "ok"
         }
