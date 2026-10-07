@@ -1,0 +1,17 @@
+{
+  "review_date": "2026-10-07",
+  "source_commit": "a181814",
+  "captured_at": "2026-10-07T07:41:34.802Z",
+  "gsc_through": "2026-10-04",
+  "experiments": [
+    {"id":"lock-core-snippet-20260923","decision":"证据不足","latest_7d":{"clicks":0,"impressions":1,"ctr":0,"position":7},"reason":"14天日历节点已到，但数据截止10月4日；7天仅1次展示，不与28天基线直接比较，不能认定排名提升有效。","next_action":"保留页面，10月10日检查覆盖至10月7日的完整观察数据；补齐发布前7天与发布后等长窗口、页面级自然会话及询盘。"},
+    {"id":"en1627-proof-checklist-20260923","decision":"证据不足","latest_7d":{"clicks":1,"impressions":20,"ctr":0.05,"position":7.4},"reason":"已有点击信号但仅1次，数据尚未覆盖完整14天，缺少等长基线和页面询盘归因，不能归因本次改动。","next_action":"保留页面，10月10日复评，不扩大或回滚。"}
+  ],
+  "priority_queue": [
+    {"priority":1,"task":"核实并恢复已审核到期文章的生产发布","evidence":"10月5日及10月7日文章返回首页200兜底且最新文章不在Sitemap","effort":"中","risk":"中；补发不能绕过每日最多1篇及六语、封面、类型、构建、静态SEO和坏链门禁","acceptance":"实际文章正文及自指canonical上线，六语Sitemap收录，无未来文章提前曝光"},
+    {"priority":2,"task":"补齐非重叠对比期、设备及自然着陆页数据","evidence":"现有脱敏快照不含这些维度，无法执行真实周环比或桌面排名判断","effort":"中","risk":"低，只读数据；采集器代码部署另需确认","acceptance":"7/28天及前期统计窗口明确，查询/页面/国家/设备拆分和着陆页可核验"},
+    {"priority":3,"task":"观察自然搜索开始填写与询盘","evidence":"7天8自然会话、2次form_open、0 form_start、0 generate_lead；全渠道1次generate_lead","effort":"低","risk":"低，只读且不制造询盘","acceptance":"区分真实事件次数与用户转化率；有充足样本后再决定改版"}
+  ],
+  "scoring_note":"缺少增量与等长基线，未虚构数值收益评分；按已证实发布缺陷、数据阻塞、低样本漏斗顺序处理。",
+  "publication_status":"仅分析台账，不是官网部署或文章发布记录"
+}
