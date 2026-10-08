@@ -10,7 +10,7 @@ const CONTENT_DIR = "content/articles";
 const SITEMAP = "public/sitemap.xml";
 const LOCALES = ["en", "ar", "fr", "ru", "es", "pt"];
 const ARTICLE_LOCALES = ["en", "ar", "fr", "ru", "es", "pt"];
-const today = new Intl.DateTimeFormat("en-CA", {
+const today = process.env.WONLY_PUBLICATION_DATE || new Intl.DateTimeFormat("en-CA", {
   timeZone: "Asia/Shanghai",
   year: "numeric",
   month: "2-digit",

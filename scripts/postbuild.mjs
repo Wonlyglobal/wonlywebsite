@@ -28,19 +28,18 @@ if (existsSync(src)) {
 // Codeup's production job runs `npm run build` and packages dist/ immediately.
 // Keep scheduled articles and their crawler-facing HTML inside that standard
 // build instead of depending on a separate Chromium prerender step.
-execFileSync(process.execPath, ['scripts/sync-article-sitemap.mjs'], { stdio: 'inherit' });
+const publicationDate = JSON.parse(readFileSync('dist/publication.json', 'utf8')).date;
+if (!/^\d{4}-\d{2}-\d{2}$/.test(publicationDate)) throw new Error('Invalid publication cutoff');
+execFileSync(process.execPath, ['scripts/sync-article-sitemap.mjs'], {
+  stdio: 'inherit', env: { ...process.env, WONLY_PUBLICATION_DATE: publicationDate },
+});
 copyFileSync('public/sitemap.xml', 'dist/sitemap.xml');
 
 const SITE = 'https://www.wonlyglobal.com';
 const ARTICLE_DIR = 'content/articles';
 const LOCALES = ['en', 'ar', 'fr', 'ru', 'es', 'pt'];
 const RTL = new Set(['ar']);
-const TODAY = new Intl.DateTimeFormat("en-CA", {
-  timeZone: "Asia/Shanghai",
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-}).format(new Date());
+const TODAY = publicationDate;
 const shell = readFileSync(src, 'utf8');
 
 const escapeHtml = (value = '') => String(value)

@@ -47,6 +47,6 @@ WONLY builds the full stack — robotic smart doors, multi-biometric locks, smar
 
 Can whole-home smart security be retrofitted? Yes — start with the door and locks, add wireless sensors room by room; a hub-based architecture avoids rewiring.
 
-Explore WONLY's [smart-lock portfolio](/products/smart-locks/), [whole-house intelligence platform](/product/whole-house) and [international project support](/contact/) when defining an integrated entrance-security specification.
+Explore WONLY's [smart-lock portfolio](/products/smart-locks/), [whole-house intelligence platform](/products/whole-house/) and [international project support](/contact/) when defining an integrated entrance-security specification.
 
 *Editorial responsibility: WONLY International Project Team. Technical review: WONLY Smart Security Engineering.*
