@@ -215,12 +215,16 @@ function scheduledArticleHtml(): Plugin {
       // the browser-free article postbuild from the Vite lifecycle as well so
       // the production dist always contains crawlable article deep links.
       execFileSync(process.execPath, ['scripts/postbuild.mjs'], { stdio: 'inherit' });
+      execFileSync(process.execPath, ['scripts/check-publication.mjs'], { stdio: 'inherit' });
     },
   };
 }
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  const publicationDate = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date());
   return {
     // "/" for a custom domain at root; set VITE_BASE="/<repo>/" for a GitHub
     // Pages project page. Vite exposes this to the app as import.meta.env.BASE_URL.
@@ -230,6 +234,12 @@ export default defineConfig(({ mode }) => {
       port: 8080,
     },
     plugins: [
+      {
+        name: 'publication-cutoff',
+        generateBundle() {
+          this.emitFile({ type: 'asset', fileName: 'publication.json', source: JSON.stringify({ date: publicationDate }) });
+        },
+      },
       tailwindcss(),
       react(),
       mode === 'development' &&
@@ -247,6 +257,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
+      __PUBLICATION_DATE__: JSON.stringify(publicationDate),
       // Define environment variables for build-time configuration
       // In production, this will be false by default unless explicitly set to 'true'
       // In development and test, this will be true by default

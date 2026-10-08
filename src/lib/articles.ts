@@ -123,10 +123,9 @@ const ALL_ARTICLES: (Article & { locale: Locale })[] = Object.entries(RAW)
   })
   .filter((a): a is Article => !!a && !!a.slug && !!a.date);
 
-// Scheduled publishing: articles with a future date stay hidden until the daily
-// rebuild on/after that date. Dates compare as UTC ISO strings on both the CI
-// build and the client, so visibility is consistent everywhere.
-const TODAY = new Date().toISOString().slice(0, 10);
+// Freeze visibility to the deployed build, matching its static HTML and sitemap.
+// A visitor's clock must never publish an article before a verified rebuild.
+const TODAY = __PUBLICATION_DATE__;
 export const articlesForLocale = (locale: Locale): Article[] => ALL_ARTICLES
   .filter((a) => a.locale === locale && a.date <= TODAY)
   .sort((a, b) => (a.date < b.date ? 1 : -1));

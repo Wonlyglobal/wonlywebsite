@@ -38,6 +38,6 @@ Arrivées, départs, livraisons et tentatives d'intrusion passent par l'entrée.
 
 WONLY regroupe portes robotisées, serrures multibiométriques, fenêtres intelligentes et commande globale. Pour un projet, validez l'interopérabilité, la propriété des données, les scénarios hors ligne et la matrice de garantie sur un prototype installé.
 
-Découvrez la [gamme de serrures intelligentes](/fr/products/smart-locks/), la [plateforme d'intelligence pour toute la maison](/fr/product/whole-house) et l'[assistance aux projets internationaux](/fr/contact/) de WONLY.
+Découvrez la [gamme de serrures intelligentes](/fr/products/smart-locks/), la [plateforme d'intelligence pour toute la maison](/fr/products/whole-house/) et l'[assistance aux projets internationaux](/fr/contact/) de WONLY.
 
 *Responsabilité éditoriale : équipe Projets internationaux WONLY. Relecture technique : ingénierie de la sécurité intelligente WONLY.*

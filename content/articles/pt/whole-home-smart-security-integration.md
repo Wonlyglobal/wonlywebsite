@@ -44,6 +44,6 @@ A WONLY constrói toda a pilha — portas inteligentes robóticas, fechaduras mu
 
 A segurança inteligente para toda a casa pode ser retrofitada? Sim — comece com a porta e as fechaduras, adicione sensores sem fio por cômodo; uma arquitetura baseada em hub evita a relocação de fiação.
 
-Explore o [portfólio de fechaduras inteligentes](/pt/products/smart-locks/), a [plataforma de inteligência residencial completa](/pt/product/whole-house) e o [suporte a projetos internacionais](/pt/contact/) da WONLY.
+Explore o [portfólio de fechaduras inteligentes](/pt/products/smart-locks/), a [plataforma de inteligência residencial completa](/pt/products/whole-house/) e o [suporte a projetos internacionais](/pt/contact/) da WONLY.
 
 *Responsabilidade editorial: equipe de Projetos Internacionais da WONLY. Revisão técnica: engenharia de segurança inteligente da WONLY.*
