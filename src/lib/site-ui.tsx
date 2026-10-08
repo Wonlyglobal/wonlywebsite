@@ -263,7 +263,7 @@ export function QuoteModal() {
                 <input autoComplete="country-name" className={qInput} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" /><Err k="country" /></label>
               <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Email")} <span style={{ color: "#c0564a" }}>*</span></span>
                 <input type="email" inputMode="email" autoComplete="email" className={qInput} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" /><Err k="email" /></label>
-              <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Phone / WhatsApp")}</span>
+              <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Phone")}</span>
                 <input type="tel" inputMode="tel" autoComplete="tel" className={qInput} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+1 ..." /></label>
               <label className="block"><span className={qLabel} style={{ color: MUTED }}>{t("Business Type")} <span className="normal-case tracking-normal">({t("Optional")})</span></span>
                 <select className={qInput} style={{ ...border("biz"), color: form.biz ? "#221F20" : "rgba(34,31,32,0.4)" }} value={form.biz} onChange={(e) => set("biz", e.target.value)}>

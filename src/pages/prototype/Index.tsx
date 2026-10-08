@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation, SITE_NAV, SITE_FOOTER } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
@@ -1158,7 +1158,7 @@ const Prototype = () => {
             </p>
             <div className="mt-10 space-y-3 text-sm font-light" style={{ color: "rgba(245,241,234,0.85)" }}>
               <a href="mailto:inquiry@wonlyglobal.com" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> inquiry@wonlyglobal.com</a>
-              <a href="https://wa.me/12052401832" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:underline"><MessageCircle size={16} style={{ color: GOLD }} /> WhatsApp +1 (205) 240-1832</a>
+              <a href="mailto:inquiry@wonlyglobal.com?subject=WONLY%20Product%20Enquiry" className="flex items-center gap-3 hover:underline"><Mail size={16} style={{ color: GOLD }} /> Email WONLY Sales</a>
             </div>
           </Reveal>
 

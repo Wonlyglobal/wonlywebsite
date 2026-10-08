@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
-import { useCmsSetting } from "@/lib/cms-site-settings";
 
-/* ── 全站悬浮客服:WhatsApp 按钮 + Crisp 在线聊天(在 /admin 站点后台配置)──
+/* ── 全站悬浮联系:邮件按钮 + Crisp 在线聊天──
    读取 content/settings/site.json:
-     whatsapp   非空 → 显示右下角 WhatsApp 悬浮按钮(纯链接,零脚本)
      crispId    非空 → 注入 Crisp 在线聊天脚本
-   两者都留空则本组件不渲染任何内容,也不加载任何第三方脚本。 */
+   邮件入口直接调起访客默认邮件客户端，不加载第三方通讯脚本。 */
 
 const SITE_RAW = import.meta.glob("/content/settings/site.json", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 const SITE_CFG = (() => {
   try { return JSON.parse(Object.values(SITE_RAW)[0] || "{}"); } catch { return {}; }
-})() as { whatsapp?: string; whatsappLabel?: string; crispId?: string };
+})() as { crispId?: string };
 
-const WA_LABEL = SITE_CFG.whatsappLabel?.trim() || "Chat on WhatsApp";
+const CONTACT_EMAIL = "inquiry@wonlyglobal.com";
+const EMAIL_LABEL = "Email WONLY";
+const EMAIL_HREF = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("WONLY Product Enquiry")}`;
 const CRISP_ID = (SITE_CFG.crispId || "").trim();
 
 export default function FloatingContact() {
   const [hover, setHover] = useState(false);
-  const cmsSettings = useCmsSetting("settings");
-  const waNumber = (cmsSettings?.whatsapp || SITE_CFG.whatsapp || "").replace(/\D/g, "");
-  const waLabel = cmsSettings?.whatsappLabel?.trim() || WA_LABEL;
 
   // 在线聊天仅保留 Crisp；延迟到页面空闲后注入，不拖累首屏。
   useEffect(() => {
@@ -38,17 +35,13 @@ export default function FloatingContact() {
     return () => window.clearTimeout(t);
   }, []);
 
-  if (!waNumber) return null;
-
-  // 聊天气泡占用右下角;启用聊天时 WhatsApp 按钮上移避让。
+  // 聊天气泡占用右下角;启用聊天时邮件按钮上移避让。
   const bottom = CRISP_ID ? 96 : 24;
 
   return (
     <a
-      href={`https://wa.me/${waNumber}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={waLabel}
+      href={EMAIL_HREF}
+      aria-label={EMAIL_LABEL}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -74,7 +67,7 @@ export default function FloatingContact() {
             boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
           }}
         >
-          {waLabel}
+          {EMAIL_LABEL}
         </span>
       )}
       <span
@@ -82,17 +75,18 @@ export default function FloatingContact() {
           width: 54,
           height: 54,
           borderRadius: "50%",
-          background: "#25D366",
+          background: "#B08D4F",
           display: "grid",
           placeItems: "center",
-          boxShadow: "0 10px 28px rgba(37,211,102,0.45), 0 3px 10px rgba(0,0,0,0.2)",
+          boxShadow: "0 10px 28px rgba(176,141,79,0.4), 0 3px 10px rgba(0,0,0,0.2)",
           transition: "transform 0.18s ease",
           transform: hover ? "scale(1.08)" : "scale(1)",
         }}
       >
-        {/* WhatsApp glyph */}
-        <svg viewBox="0 0 32 32" width="30" height="30" fill="#fff" aria-hidden="true">
-          <path d="M16.02 5.33c-5.87 0-10.64 4.77-10.64 10.64 0 1.88.49 3.71 1.43 5.32L5.3 26.7l5.55-1.46a10.6 10.6 0 0 0 5.17 1.34h.01c5.86 0 10.63-4.77 10.63-10.64 0-2.84-1.1-5.51-3.11-7.52a10.57 10.57 0 0 0-7.53-3.1zm0 19.46h-.01a8.8 8.8 0 0 1-4.49-1.23l-.32-.19-3.3.86.88-3.21-.21-.33a8.79 8.79 0 0 1-1.35-4.72c0-4.88 3.97-8.85 8.86-8.85 2.36 0 4.58.92 6.25 2.59a8.8 8.8 0 0 1 2.59 6.26c0 4.88-3.98 8.85-8.86 8.85zm4.86-6.63c-.27-.13-1.58-.78-1.82-.87-.24-.09-.42-.13-.6.13-.18.27-.69.87-.85 1.05-.16.18-.31.2-.58.07-.27-.13-1.13-.42-2.15-1.33-.79-.71-1.33-1.58-1.48-1.85-.16-.27-.02-.41.12-.54.12-.12.27-.31.4-.47.13-.16.18-.27.27-.44.09-.18.04-.34-.02-.47-.07-.13-.6-1.45-.82-1.98-.22-.52-.44-.45-.6-.46l-.51-.01c-.18 0-.47.07-.71.34-.24.27-.93.91-.93 2.21 0 1.3.95 2.56 1.08 2.74.13.18 1.87 2.86 4.53 4.01.63.27 1.13.44 1.51.56.64.2 1.22.17 1.68.11.51-.08 1.58-.65 1.8-1.27.22-.62.22-1.16.16-1.27-.07-.11-.24-.18-.51-.31z" />
+        {/* Email glyph */}
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <rect x="4.5" y="7" width="23" height="18" rx="2.5" />
+          <path d="m6.5 9 9.5 7.5L25.5 9" />
         </svg>
       </span>
     </a>

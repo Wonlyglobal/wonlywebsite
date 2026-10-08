@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Mail, MessageCircle, MapPin, ArrowUpRight, Check } from "lucide-react";
+import { Mail, MapPin, ArrowUpRight, Check } from "lucide-react";
 import { SiteHeader, SiteFooter, GOLD, DARK, CHAMP, MUTED } from "@/lib/site-ui";
 import { getJourneySession, serializeInquiryJourney, trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
@@ -17,9 +17,6 @@ const C = {
   subtitle: C_CMS.hero?.subtitle?.trim() || "Distributor, project or OEM/ODM enquiry — our overseas team replies within 24 hours with specifications, compliance documents and pricing.",
   email: (C_CMS.email || "").trim() || "inquiry@wonlyglobal.com",
   emailNote: (C_CMS.emailNote || "").trim() || "Overseas sales & partnership enquiries",
-  whatsapp: (C_CMS.whatsapp || "").trim() || "+1 (205) 240-1832",
-  whatsappLink: (C_CMS.whatsappLink || "").trim() || "https://wa.me/12052401832",
-  whatsappNote: (C_CMS.whatsappNote || "").trim() || "Fastest response — message us anytime",
   hqTitle: (C_CMS.hqTitle || "").trim() || "Zhejiang, China",
   hqNote: (C_CMS.hqNote || "").trim() || "WONLY · SSE: 605268",
   prevSiteLabel: (C_CMS.prevSiteLabel || "").trim() || "en.wanglianfang.com",
@@ -36,7 +33,7 @@ export default function Contact() {
   const { t } = useLocale();
   useSeo({
     title: "Contact | WONLY",
-    description: "Contact WONLY for distributor, project or OEM/ODM enquiries. Email inquiry@wonlyglobal.com or message us on WhatsApp — replies within 24 hours.",
+    description: "Contact WONLY for distributor, project or OEM/ODM enquiries. Email inquiry@wonlyglobal.com — our overseas team replies within 24 hours.",
     path: "/contact",
   });
 
@@ -157,12 +154,12 @@ export default function Contact() {
             </span>
           </a>
 
-          <a href={C.whatsappLink} target="_blank" rel="noopener noreferrer" className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
-            <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><MessageCircle size={19} style={{ color: GOLD }} /></span>
+          <a href={`mailto:${C.email}?subject=${encodeURIComponent("WONLY Product Enquiry")}`} className="flex gap-4 py-5 border-b border-[#e4ddcf] group">
+            <span className="w-[42px] h-[42px] shrink-0 rounded-xl grid place-items-center bg-white border border-[#e4ddcf]"><Mail size={19} style={{ color: GOLD }} /></span>
             <span>
-              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>WhatsApp</span>
-              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">{C.whatsapp}</span>
-              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>{C.whatsappNote}</span>
+              <span className="block text-[12px] tracking-[0.14em] uppercase" style={{ color: MUTED }}>{t("Email")}</span>
+              <span className="block text-[16px] font-semibold mt-0.5 group-hover:text-[#B08D4F] transition-colors">{C.email}</span>
+              <span className="block text-[13px] mt-0.5" style={{ color: MUTED }}>Open your email app to contact our overseas team</span>
             </span>
           </a>
 
@@ -229,7 +226,7 @@ export default function Contact() {
                     <input className={input} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" />{errors.country && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.country}</span>}</label>
                   <label className="block"><span className={label} style={{ color: MUTED }}>{t("Email")} <span style={{ color: "#c0564a" }}>*</span></span>
                     <input type="email" className={input} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" />{errors.email && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.email}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Phone / WhatsApp")}</span>
+                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Phone")}</span>
                     <input className={input} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+.." /></label>
                 </div>
                 <label className="block mt-4"><span className={label} style={{ color: MUTED }}>{t("Message")} <span style={{ color: "#c0564a" }}>*</span></span>
