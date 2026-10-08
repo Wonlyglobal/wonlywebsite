@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-10-08T01:41:22.863Z",
+  "generated_at": "2026-10-08T07:57:29.510Z",
   "freshness": {
     "ga4": {
       "through": "2026-10-07",
@@ -21,10 +21,10 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 3,
-        "impressions": 353,
-        "ctr": 0.0084985835694051,
-        "avg_position": 11.719546742209632
+        "clicks": 6,
+        "impressions": 426,
+        "ctr": 0.014084507042253521,
+        "avg_position": 11.434272300469484
       },
       "ga4": {
         "organic_sessions": 11
@@ -32,10 +32,10 @@
     },
     "28d": {
       "gsc": {
-        "clicks": 37,
-        "impressions": 1580,
-        "ctr": 0.02341772151898734,
-        "avg_position": 10.996835443037975
+        "clicks": 40,
+        "impressions": 1653,
+        "ctr": 0.024198427102238355,
+        "avg_position": 10.95523290986086
       },
       "ga4": {
         "organic_sessions": 80
@@ -46,10 +46,10 @@
     {
       "country": "ES",
       "gsc_7d": {
-        "clicks": 0,
-        "impressions": 57,
-        "ctr": 0,
-        "avg_position": 15.964912280701755
+        "clicks": 1,
+        "impressions": 66,
+        "ctr": 0.015151515151515152,
+        "avg_position": 15.5
       },
       "ga4_7d": {
         "organic_sessions": 2
@@ -60,9 +60,9 @@
       "country": "MX",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 20,
+        "impressions": 25,
         "ctr": 0,
-        "avg_position": 20.3
+        "avg_position": 19
       },
       "ga4_7d": {
         "organic_sessions": 1
@@ -122,15 +122,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 1,
+        "impressions": 6,
         "ctr": 0,
-        "avg_position": 7
+        "avg_position": 9.333333333333334
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 193,
+        "impressions": 198,
         "ctr": 0,
-        "avg_position": 8.673575129533678
+        "avg_position": 8.702020202020202
       },
       "issues": []
     },
@@ -138,16 +138,16 @@
       "path": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
       "role": "article",
       "gsc_7d": {
-        "clicks": 1,
-        "impressions": 16,
-        "ctr": 0.0625,
-        "avg_position": 7.5625
+        "clicks": 2,
+        "impressions": 24,
+        "ctr": 0.08333333333333333,
+        "avg_position": 6.75
       },
       "gsc_28d": {
-        "clicks": 1,
-        "impressions": 130,
-        "ctr": 0.007692307692307693,
-        "avg_position": 7.6461538461538465
+        "clicks": 2,
+        "impressions": 138,
+        "ctr": 0.014492753623188406,
+        "avg_position": 7.5
       },
       "issues": []
     },
@@ -224,9 +224,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 1,
+        "impressions": 6,
         "ctr": 0,
-        "avg_position": 7
+        "avg_position": 9.333333333333334
       },
       "decision": null
     },
@@ -249,10 +249,10 @@
       "observe_14d_at": "2026-10-07T08:00:00+08:00",
       "latest": {
         "window": "7d",
-        "clicks": 1,
-        "impressions": 16,
-        "ctr": 0.0625,
-        "avg_position": 7.5625
+        "clicks": 2,
+        "impressions": 24,
+        "ctr": 0.08333333333333333,
+        "avg_position": 6.75
       },
       "decision": null
     }
@@ -274,25 +274,25 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-10-08T01:41:22.863Z",
+      "captured_at": "2026-10-08T07:57:29.510Z",
       "through": "2026-10-07",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-10-08T01:41:22.863Z",
+      "captured_at": "2026-10-08T07:57:29.510Z",
       "through": "2026-10-05",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-10-08T01:41:22.863Z",
+      "captured_at": "2026-10-08T07:57:29.510Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-10-08T01:41:22.863Z",
+      "captured_at": "2026-10-08T07:57:29.510Z",
       "through": "2026-10-08",
       "status": "ok"
     }
