@@ -2,10 +2,11 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
-import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation } from "@/lib/site-ui";
+import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation, SITE_NAV } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
+import { ProcurementEntrances } from "@/components/ProcurementEntrances";
 import { getJourneySession, serializeInquiryJourney, trackEvent, trackFormEvent, trackLead } from "@/lib/analytics";
 
 /* ── Silver-White-Gold palette ─────────────────────────────── */
@@ -70,53 +71,7 @@ const IMG = {
 type NavSubChild = { label: string; href: string; img?: string; children?: NavSubChild[] };
 type NavChild = { label: string; href?: string; to?: string; img?: string; children?: NavSubChild[] };
 type NavItem = { label: string; to?: string; href?: string; children?: NavChild[] };
-const NAV: NavItem[] = [
-  { label: "Product", children: [
-    { label: "Door", href: "/products/entrance-door", img: `${BASE}images/category-renders/door.webp`, children: [
-      { label: "Metal Door", href: "/products/metal-doors/3-0", img: `${BASE}images/category-renders/metal-door.webp`, children: [
-        { label: "1.0", href: "/products/metal-doors/1-0" },
-        { label: "1.0 Pro", href: "/products/metal-doors/1-0-pro" },
-        { label: "2.0", href: "/products/metal-doors/2-0" },
-        { label: "3.0", href: "/products/metal-doors/3-0" },
-      ] },
-      { label: "Smart Door", href: "/products/smart-doors/5-0", img: `${BASE}images/catalog-2026/hero-renders/x70.webp`, children: [
-        { label: "3.0 Pro", href: "/products/smart-doors/3-0-pro" },
-        { label: "3.0 Max", href: "/products/smart-doors/3-0-max" },
-        { label: "4.0", href: "/products/smart-doors/4-0" },
-        { label: "5.0", href: "/products/smart-doors/5-0" },
-      ] },
-      { label: "Wooden Door", href: "/products/wooden-doors", img: `${BASE}images/category-renders/wooden-door.webp`, children: [
-        { label: "Custom", href: "/products/wooden-doors/custom" },
-        { label: "Minimalist", href: "/products/wooden-doors/minimalist" },
-        { label: "PVC", href: "/products/wooden-doors/pvc" },
-        { label: "Solid Wood", href: "/products/wooden-doors/solid-wood" },
-        { label: "Aluminum Alloy", href: "/products/wooden-doors/aluminum-alloy" },
-      ] },
-    ] },
-    { label: "Smart Lock", href: "/products/smart-locks", img: `${BASE}images/category-renders/smart-lock.webp`, children: [
-      { label: "S80", href: "/products/smart-locks/s80" },
-      { label: "S80 Max", href: "/products/smart-locks/s80-max" },
-      { label: "S60 Max", href: "/products/smart-locks/s60-max" },
-      { label: "S60 Pro", href: "/products/smart-locks/s60-pro" },
-      { label: "S50 Pro", href: "/products/smart-locks/s50-pro" },
-      { label: "S58 Pro", href: "/products/smart-locks/s58-pro" },
-      { label: "P10 Pro", href: "/products/smart-locks/p10-pro" },
-      { label: "S922 Max", href: "/products/smart-locks/s922-max" },
-      { label: "S936", href: "/products/smart-locks/s936" },
-    ] },
-    { label: "Smart Window", href: "/products/smart-windows", img: `${BASE}images/category-renders/smart-window.webp` },
-    { label: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/category-renders/whole-house.webp` },
-  ] },
-  { label: "Advantages", href: "/advantages", children: [
-    { label: "Why Wonly Door", href: "/advantages#why-wonly-door" },
-    { label: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
-    { label: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
-  ] },
-  { label: "Manufacturing & R&D", href: "/manufacturing-rd" },
-  { label: "Global Strategy", href: "/global-strategy" },
-  { label: "Partnership", href: "/partnership" },
-  { label: "Contact", href: "/contact" },
-];
+const NAV = SITE_NAV;
 
 /* ── Section 2 · capacity stats ────────────────────────────── */
 const STATS: { to?: number; text?: string; comma?: boolean; suffix?: string; per?: string; label: string }[] = [
@@ -895,7 +850,7 @@ const Prototype = () => {
           <button onClick={() => scrollToId("top")} className="shrink-0" aria-label="WONLY — home">
             <img src={LOGO} alt="WONLY" className="h-5 md:h-6 w-auto" />
           </button>
-          <nav className="hidden lg:flex items-center gap-1 transition-opacity duration-700" style={{ opacity: contentIn ? 1 : 0, pointerEvents: contentIn ? "auto" : "none" }}>
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
             {NAV.map((n) => (
               <div key={n.label} className="relative" onMouseEnter={() => n.children && setOpenDrop(n.label)} onMouseLeave={() => setOpenDrop(null)}>
                 {n.href ? (
@@ -991,9 +946,14 @@ const Prototype = () => {
           </div>
         </div>
 
+        <div className="absolute bottom-16 sm:bottom-6 left-6 z-40 flex gap-3">
+          <Link to="/products/entrance-door/" className="rounded-full bg-[#BFA06A] px-5 py-3 text-sm text-[#221F20]">{t('Product')}</Link>
+          <Link to="/partnership/" className="rounded-full bg-black/70 px-5 py-3 text-sm text-white">{t('OEM / ODM')}</Link>
+        </div>
         <button type="button" onClick={() => skipRef.current()} className="absolute bottom-6 right-6 z-40 text-[11px] tracking-[0.3em] uppercase font-light text-white/60 hover:text-white transition-colors mix-blend-difference">{ht("Skip")} ↓</button>
       </section>
 
+      <ProcurementEntrances />
       {/* ══ 3 · Why WONLY — headline → numbers coverflow → manufacturing strength ══ */}
       <section id="why" className={SECTION} style={{ background: BG_CHAMP }}>
         <div className={CONTAINER}>

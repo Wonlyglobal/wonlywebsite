@@ -14,6 +14,9 @@ function currentLocalePrefix(pathname: string) {
   return first && LOCALE_PREFIXES.has(first) ? `/${first}` : "";
 }
 function localizeDestination(to: React.ComponentProps<typeof RRD.Link>["to"], pathname: string) {
+  // Procurement landing pages currently have English-only canonical routes.
+  const englishOnly = new Set(['security-door-manufacturer', 'smart-door-manufacturer', 'smart-lock-oem-odm', 'solutions/hotel-security-doors', 'solutions/villa-security-doors', 'solutions/commercial-steel-security-doors']);
+  if (typeof to === 'string' && englishOnly.has(to.split(/[?#]/)[0].replace(/^\/|\/$/g, ''))) return to;
   const prefix = currentLocalePrefix(pathname);
   if (!prefix || typeof to !== "string" || !to.startsWith("/") || to.startsWith(prefix + "/") || to === prefix) return to;
   return `${prefix}${to}`;
@@ -21,6 +24,12 @@ function localizeDestination(to: React.ComponentProps<typeof RRD.Link>["to"], pa
 
 export function Link(props: React.ComponentProps<typeof RRD.Link>) {
   const location = RRD.useLocation();
+  const englishOnly = new Set(['security-door-manufacturer', 'smart-door-manufacturer', 'smart-lock-oem-odm', 'solutions/hotel-security-doors', 'solutions/villa-security-doors', 'solutions/commercial-steel-security-doors']);
+  if (typeof props.to === 'string' && englishOnly.has(props.to.split(/[?#]/)[0].replace(/^\/|\/$/g, ''))) {
+    // BrowserRouter's locale basename would otherwise prefix even an absolute path.
+    const { to, ...rest } = props;
+    return <a {...rest} href={to} />;
+  }
   return <RRD.Link {...props} to={localizeDestination(props.to, location.pathname)} />;
 }
 

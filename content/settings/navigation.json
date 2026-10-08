@@ -1,79 +1,306 @@
 {
   "nav": [
-    { "label": "Product", "href": "", "children": [
-      { "label": "Door", "href": "/products/entrance-door", "img": "images/category-renders/door.webp", "children": [
-        { "label": "Metal Door", "href": "/products/metal-doors/3-0", "img": "images/category-renders/metal-door.webp", "children": [
-          { "label": "1.0", "href": "/products/metal-doors/1-0" },
-          { "label": "1.0 Pro", "href": "/products/metal-doors/1-0-pro" },
-          { "label": "2.0", "href": "/products/metal-doors/2-0" },
-          { "label": "3.0", "href": "/products/metal-doors/3-0" }
-        ] },
-        { "label": "Smart Door", "href": "/products/smart-doors/5-0", "img": "images/5products/nav-security-door.png", "children": [
-          { "label": "3.0 Pro", "href": "/products/smart-doors/3-0-pro" },
-          { "label": "3.0 Max", "href": "/products/smart-doors/3-0-max" },
-          { "label": "4.0", "href": "/products/smart-doors/4-0" },
-          { "label": "5.0", "href": "/products/smart-doors/5-0" }
-        ] },
-        { "label": "Wooden Door", "href": "/products/wooden-doors", "img": "images/category-renders/wooden-door.webp", "children": [
-          { "label": "Custom", "href": "/products/wooden-doors/custom" },
-          { "label": "Minimalist", "href": "/products/wooden-doors/minimalist" },
-          { "label": "PVC", "href": "/products/wooden-doors/pvc" },
-          { "label": "Solid Wood", "href": "/products/wooden-doors/solid-wood" },
-          { "label": "Aluminum Alloy", "href": "/products/wooden-doors/aluminum-alloy" }
-        ] }
-      ] },
-      { "label": "Smart Lock", "href": "/products/smart-locks", "img": "images/category-renders/smart-lock.webp", "children": [
-        { "label": "S80", "href": "/products/smart-locks/s80" },
-        { "label": "S80 Max", "href": "/products/smart-locks/s80-max" },
-        { "label": "S60 Max", "href": "/products/smart-locks/s60-max" },
-        { "label": "S60 Pro", "href": "/products/smart-locks/s60-pro" },
-        { "label": "S50 Pro", "href": "/products/smart-locks/s50-pro" },
-        { "label": "S58 Pro", "href": "/products/smart-locks/s58-pro" },
-        { "label": "P10 Pro", "href": "/products/smart-locks/p10-pro" },
-        { "label": "S922 Max", "href": "/products/smart-locks/s922-max" },
-        { "label": "S936", "href": "/products/smart-locks/s936" }
-      ] },
-      { "label": "Smart Window", "href": "/products/smart-windows", "img": "images/category-renders/smart-window.webp" },
-      { "label": "Whole-House Intelligence", "href": "/products/whole-house", "img": "images/category-renders/whole-house.webp" }
-    ] },
-    { "label": "Advantages", "href": "/advantages", "children": [
-      { "label": "Why Wonly Door", "href": "/advantages#why-wonly-door" },
-      { "label": "Why Wonly Lock", "href": "/advantages#why-wonly-lock" },
-      { "label": "Innovation & Certifications", "href": "/advantages#innovation-certifications" }
-    ] },
-    { "label": "Manufacturing & R&D", "href": "/manufacturing-rd" },
-    { "label": "Global Strategy", "href": "/global-strategy" },
-    { "label": "Partnership", "href": "/partnership" },
-    { "label": "Contact", "href": "/contact" }
+    {
+      "label": "Product",
+      "href": "",
+      "children": [
+        {
+          "label": "Door",
+          "href": "/products/entrance-door",
+          "img": "images/category-renders/door.webp",
+          "children": [
+            {
+              "label": "Metal Door",
+              "href": "/products/metal-doors/3-0",
+              "img": "images/category-renders/metal-door.webp",
+              "children": [
+                {
+                  "label": "1.0",
+                  "href": "/products/metal-doors/1-0"
+                },
+                {
+                  "label": "1.0 Pro",
+                  "href": "/products/metal-doors/1-0-pro"
+                },
+                {
+                  "label": "2.0",
+                  "href": "/products/metal-doors/2-0"
+                },
+                {
+                  "label": "3.0",
+                  "href": "/products/metal-doors/3-0"
+                }
+              ]
+            },
+            {
+              "label": "Smart Door",
+              "href": "/products/smart-doors/5-0",
+              "img": "images/5products/nav-security-door.png",
+              "children": [
+                {
+                  "label": "3.0 Pro",
+                  "href": "/products/smart-doors/3-0-pro"
+                },
+                {
+                  "label": "3.0 Max",
+                  "href": "/products/smart-doors/3-0-max"
+                },
+                {
+                  "label": "4.0",
+                  "href": "/products/smart-doors/4-0"
+                },
+                {
+                  "label": "5.0",
+                  "href": "/products/smart-doors/5-0"
+                }
+              ]
+            },
+            {
+              "label": "Wooden Door",
+              "href": "/products/wooden-doors",
+              "img": "images/category-renders/wooden-door.webp",
+              "children": [
+                {
+                  "label": "Custom",
+                  "href": "/products/wooden-doors/custom"
+                },
+                {
+                  "label": "Minimalist",
+                  "href": "/products/wooden-doors/minimalist"
+                },
+                {
+                  "label": "PVC",
+                  "href": "/products/wooden-doors/pvc"
+                },
+                {
+                  "label": "Solid Wood",
+                  "href": "/products/wooden-doors/solid-wood"
+                },
+                {
+                  "label": "Aluminum Alloy",
+                  "href": "/products/wooden-doors/aluminum-alloy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Smart Lock",
+          "href": "/products/smart-locks",
+          "img": "images/category-renders/smart-lock.webp",
+          "children": [
+            {
+              "label": "S80",
+              "href": "/products/smart-locks/s80"
+            },
+            {
+              "label": "S80 Max",
+              "href": "/products/smart-locks/s80-max"
+            },
+            {
+              "label": "S60 Max",
+              "href": "/products/smart-locks/s60-max"
+            },
+            {
+              "label": "S60 Pro",
+              "href": "/products/smart-locks/s60-pro"
+            },
+            {
+              "label": "S50 Pro",
+              "href": "/products/smart-locks/s50-pro"
+            },
+            {
+              "label": "S58 Pro",
+              "href": "/products/smart-locks/s58-pro"
+            },
+            {
+              "label": "P10 Pro",
+              "href": "/products/smart-locks/p10-pro"
+            },
+            {
+              "label": "S922 Max",
+              "href": "/products/smart-locks/s922-max"
+            },
+            {
+              "label": "S936",
+              "href": "/products/smart-locks/s936"
+            }
+          ]
+        },
+        {
+          "label": "Smart Window",
+          "href": "/products/smart-windows",
+          "img": "images/category-renders/smart-window.webp"
+        },
+        {
+          "label": "Whole-House Intelligence",
+          "href": "/products/whole-house",
+          "img": "images/category-renders/whole-house.webp"
+        }
+      ]
+    },
+    {
+      "label": "Solutions",
+      "href": "/projects",
+      "children": [
+        {
+          "label": "Hotel Security Doors",
+          "href": "/solutions/hotel-security-doors"
+        },
+        {
+          "label": "Villa Security Doors",
+          "href": "/solutions/villa-security-doors"
+        },
+        {
+          "label": "Commercial Steel Doors",
+          "href": "/solutions/commercial-steel-security-doors"
+        }
+      ]
+    },
+    {
+      "label": "OEM / ODM",
+      "href": "/partnership",
+      "children": [
+        {
+          "label": "Security Door Manufacturing",
+          "href": "/security-door-manufacturer"
+        },
+        {
+          "label": "Smart Door Manufacturing",
+          "href": "/smart-door-manufacturer"
+        },
+        {
+          "label": "Smart Lock OEM & ODM",
+          "href": "/smart-lock-oem-odm"
+        }
+      ]
+    },
+    {
+      "label": "Resources",
+      "href": "/insights"
+    },
+    {
+      "label": "About WONLY",
+      "href": "/about",
+      "children": [
+        {
+          "label": "Advantages",
+          "href": "/advantages"
+        },
+        {
+          "label": "Manufacturing & R&D",
+          "href": "/manufacturing-rd"
+        },
+        {
+          "label": "Global Strategy",
+          "href": "/global-strategy"
+        }
+      ]
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
   ],
   "footer": [
-    { "h": "Product", "links": [
-      { "l": "Door", "href": "/product/door" },
-      { "l": "Metal Door", "href": "/products/metal-doors/3-0" },
-      { "l": "Smart Door", "href": "/products/smart-doors/5-0" },
-      { "l": "Wooden Door", "href": "/product/door/wooden-door" },
-      { "l": "Smart Lock", "href": "/product/smart-lock" },
-      { "l": "Smart Window", "href": "/product/smart-window" },
-      { "l": "Whole-House Intelligence", "href": "/product/whole-house" }
-    ] },
-    { "h": "Advantages", "links": [
-      { "l": "Why Wonly Door", "href": "/advantages#why-wonly-door" },
-      { "l": "Why Wonly Lock", "href": "/advantages#why-wonly-lock" },
-      { "l": "Innovation & Certifications", "href": "/advantages#innovation-certifications" }
-    ] },
-    { "h": "Company", "links": [
-      { "l": "Manufacturing & R&D", "href": "/manufacturing-rd" },
-      { "l": "Global Strategy", "href": "/global-strategy" },
-      { "l": "Partnership", "href": "/partnership" },
-      { "l": "News & Insights", "href": "/insights" },
-      { "l": "Contact", "href": "/contact" }
-    ] },
-    { "h": "Get in Touch", "links": [
-      { "l": "inquiry@wonlyglobal.com", "href": "mailto:inquiry@wonlyglobal.com" },
-      { "l": "WhatsApp +1 (205) 240-1832", "href": "https://wa.me/12052401832" },
-      { "l": "Head Office: No. 9 Aigang Road, Economic Development Zone, Yongkang, Zhejiang, China" },
-      { "l": "International Sales: +86 579 8722 8658", "href": "tel:+8657987228658" },
-      { "l": "International Sales: +86 579 8929 1280", "href": "tel:+8657989291280" }
-    ] }
+    {
+      "h": "Product",
+      "links": [
+        {
+          "l": "Door",
+          "href": "/product/door"
+        },
+        {
+          "l": "Metal Door",
+          "href": "/products/metal-doors/3-0"
+        },
+        {
+          "l": "Smart Door",
+          "href": "/products/smart-doors/5-0"
+        },
+        {
+          "l": "Wooden Door",
+          "href": "/product/door/wooden-door"
+        },
+        {
+          "l": "Smart Lock",
+          "href": "/product/smart-lock"
+        },
+        {
+          "l": "Smart Window",
+          "href": "/product/smart-window"
+        },
+        {
+          "l": "Whole-House Intelligence",
+          "href": "/product/whole-house"
+        }
+      ]
+    },
+    {
+      "h": "Advantages",
+      "links": [
+        {
+          "l": "Why Wonly Door",
+          "href": "/advantages#why-wonly-door"
+        },
+        {
+          "l": "Why Wonly Lock",
+          "href": "/advantages#why-wonly-lock"
+        },
+        {
+          "l": "Innovation & Certifications",
+          "href": "/advantages#innovation-certifications"
+        }
+      ]
+    },
+    {
+      "h": "Company",
+      "links": [
+        {
+          "l": "Manufacturing & R&D",
+          "href": "/manufacturing-rd"
+        },
+        {
+          "l": "Global Strategy",
+          "href": "/global-strategy"
+        },
+        {
+          "l": "Partnership",
+          "href": "/partnership"
+        },
+        {
+          "l": "News & Insights",
+          "href": "/insights"
+        },
+        {
+          "l": "Contact",
+          "href": "/contact"
+        }
+      ]
+    },
+    {
+      "h": "Get in Touch",
+      "links": [
+        {
+          "l": "inquiry@wonlyglobal.com",
+          "href": "mailto:inquiry@wonlyglobal.com"
+        },
+        {
+          "l": "WhatsApp +1 (205) 240-1832",
+          "href": "https://wa.me/12052401832"
+        },
+        {
+          "l": "Head Office: No. 9 Aigang Road, Economic Development Zone, Yongkang, Zhejiang, China"
+        },
+        {
+          "l": "International Sales: +86 579 8722 8658",
+          "href": "tel:+8657987228658"
+        },
+        {
+          "l": "International Sales: +86 579 8929 1280",
+          "href": "tel:+8657989291280"
+        }
+      ]
+    }
   ]
 }

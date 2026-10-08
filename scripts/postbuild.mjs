@@ -341,12 +341,16 @@ function renderStaticRoute({ route, title, description, body, jsonLd, alternates
 }
 
 function renderEnglishPriorityRoutes() {
+  const procurement = JSON.parse(readFileSync('content/settings/procurement.json', 'utf8'));
   for (const page of PRIORITY_LANDING_PAGES) {
     const faq = page.faq.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } }));
     const body = `<main id="seo-priority-page" style="max-width:980px;margin:0 auto;padding:48px 24px;font-family:Arial,sans-serif;color:#221f20"><article><p>${escapeHtml(page.eyebrow)}</p><h1>${escapeHtml(page.h1)}</h1><p>${escapeHtml(page.lead)}</p>${page.sections.map(([heading, text]) => `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(text)}</p></section>`).join('')}<section><h2>Procurement Questions</h2>${page.faq.map(([question, answer]) => `<h3>${escapeHtml(question)}</h3><p>${escapeHtml(answer)}</p>`).join('')}</section><p><a href="/contact">Discuss Your Requirement</a></p></article></main>`;
     renderStaticRoute({
       ...page,
-      body,
+      body: procurement[page.route.split('/')[1]] ? body.replace('</h1>', `</h1>${(() => {
+        const item = procurement[page.route.split('/')[1]];
+        return `<section id="product-selection"><h2>Choose a starting point</h2>${item.products.map(([label, href]) => `<p><a href="${escapeHtml(href)}">${escapeHtml(label)}</a></p>`).join('')}<h3>What to share</h3><p>${escapeHtml(item.inputs)}</p><h3>What we will review</h3><p>${escapeHtml(item.next)}</p><p>Certification and performance must be verified for the selected model and complete configuration, not assumed for the entire range.</p></section>`;
+      })()}`) : body,
       jsonLd: [
         { '@context': 'https://schema.org', '@type': 'WebPage', name: page.title, description: page.description, url: `${SITE}${page.route}` },
         { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq },
