@@ -1,0 +1,278 @@
+{
+  "/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/about/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/projects/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/entrance-door/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/security-doors/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/security-doors/x70/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/wooden-doors/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/smart-locks/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/smart-locks/s80/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/smart-windows/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/whole-house/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/engineering-doors/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/medical-doors/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/products/yizhai-yishu/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/advantages/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/manufacturing-rd/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/global-strategy/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/partnership/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/contact/": [
+    "en",
+    "ar",
+    "fr",
+    "ru",
+    "es",
+    "pt"
+  ],
+  "/global/mexico/security-doors/": [
+    "en",
+    "es"
+  ],
+  "/security-door-manufacturer/": [
+    "en"
+  ],
+  "/smart-door-manufacturer/": [
+    "en"
+  ],
+  "/smart-lock-oem-odm/": [
+    "en"
+  ],
+  "/solutions/acoustic-stc-entrance-doors/": [
+    "en"
+  ],
+  "/solutions/coastal-corrosion-resistant-security-doors/": [
+    "en"
+  ],
+  "/solutions/commercial-steel-security-doors/": [
+    "en"
+  ],
+  "/products/smart-locks/s80-max/": [
+    "en"
+  ],
+  "/products/smart-locks/s60-max/": [
+    "en"
+  ],
+  "/products/smart-locks/s60-pro/": [
+    "en"
+  ],
+  "/products/smart-locks/s50-pro/": [
+    "en"
+  ],
+  "/products/smart-locks/s58-pro/": [
+    "en"
+  ],
+  "/products/smart-locks/p10-pro/": [
+    "en"
+  ],
+  "/products/smart-locks/s922-max/": [
+    "en"
+  ],
+  "/products/smart-locks/s936/": [
+    "en"
+  ],
+  "/products/metal-doors/1-0/": [
+    "en"
+  ],
+  "/products/metal-doors/1-0-pro/": [
+    "en"
+  ],
+  "/products/metal-doors/2-0/": [
+    "en"
+  ],
+  "/products/metal-doors/3-0/": [
+    "en"
+  ],
+  "/products/smart-doors/3-0-pro/": [
+    "en"
+  ],
+  "/products/smart-doors/3-0-max/": [
+    "en"
+  ],
+  "/products/smart-doors/4-0/": [
+    "en"
+  ],
+  "/products/smart-doors/5-0/": [
+    "en"
+  ],
+  "/products/security-doors/x60-max/": [
+    "en"
+  ],
+  "/products/security-doors/x60-pro/": [
+    "en"
+  ],
+  "/products/security-doors/x50-max/": [
+    "en"
+  ],
+  "/products/security-doors/x50-pro/": [
+    "en"
+  ],
+  "/products/security-doors/t200/": [
+    "en"
+  ],
+  "/products/wooden-doors/custom/": [
+    "en"
+  ],
+  "/products/wooden-doors/minimalist/": [
+    "en"
+  ],
+  "/products/wooden-doors/pvc/": [
+    "en"
+  ],
+  "/products/wooden-doors/solid-wood/": [
+    "en"
+  ],
+  "/products/wooden-doors/aluminum-alloy/": [
+    "en"
+  ],
+  "/products/security-doors/cast-aluminium/": [
+    "en"
+  ],
+  "/products/security-doors/fire-rated/": [
+    "en"
+  ],
+  "/solutions/hotel-security-doors/": [
+    "en"
+  ],
+  "/solutions/villa-security-doors/": [
+    "en"
+  ],
+  "/global/saudi-arabia/security-doors/": [
+    "en"
+  ],
+  "/global/uae/security-doors/": [
+    "en"
+  ],
+  "/privacy/": [
+    "en"
+  ],
+  "/terms/": [
+    "en"
+  ]
+}
