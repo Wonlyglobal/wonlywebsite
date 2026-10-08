@@ -4,7 +4,8 @@ import { ArrowRight, ChevronDown, X, Check, Globe, Menu } from "lucide-react";
 import { create } from "zustand";
 import { getJourneySession, serializeInquiryJourney, trackFormEvent, trackLead, trackQuoteOpen } from "@/lib/analytics";
 import { submitEnquiry } from "@/lib/form-config";
-import { LANGUAGES, localeFromPath, pathForLocale, useLocale } from "@/lib/i18n";
+import { LANGUAGES, localeFromPath, pathForLocale, stripLocale, useLocale } from "@/lib/i18n";
+import routeLanguages from "../../content/settings/route-languages.json";
 import { useCmsSetting } from "@/lib/cms-site-settings";
 
 /* Shared silver-white-gold design tokens (matches the homepage) */
@@ -537,11 +538,16 @@ export function SiteFooter() {
 export function FloatingLanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const { locale, language, pathname, t } = useLocale();
+  const route = `${stripLocale(pathname).replace(/\/$/, '')}/`;
+  // Articles are reviewed in all six languages; other routes follow the sitemap.
+  const supported = route.startsWith('/insights/')
+    ? LANGUAGES.map((item) => item.code)
+    : (routeLanguages as Record<string, string[]>)[route] || ['en'];
   return (
     <div className="fixed top-20 right-4 md:top-24 md:right-6 z-[85]">
       {open && (
         <div role="menu" className="absolute top-12 right-0 min-w-[180px] rounded-xl bg-[#F5F1EA]/98 shadow-2xl border border-black/10 p-2 mt-2">
-          {LANGUAGES.map((item) => (
+          {LANGUAGES.filter((item) => supported.includes(item.code)).map((item) => (
             <a key={item.code} role="menuitem" href={pathForLocale(pathname, item.code)} hrefLang={item.code} lang={item.code} onClick={() => setOpen(false)} className="flex items-center justify-between px-3 py-2 rounded-lg text-sm hover:bg-black/[0.05]" style={{ color: DARK, fontWeight: item.code === locale ? 600 : 400 }}>
               <span>{item.nativeLabel}</span><span className="text-[10px] uppercase opacity-50">{item.code}</span>
             </a>

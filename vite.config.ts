@@ -217,6 +217,7 @@ function scheduledArticleHtml(): Plugin {
       execFileSync(process.execPath, ['scripts/postbuild.mjs'], { stdio: 'inherit' });
       execFileSync(process.execPath, ['scripts/check-publication.mjs'], { stdio: 'inherit' });
       execFileSync(process.execPath, ['scripts/check-navigation-links.mjs'], { stdio: 'inherit' });
+      execFileSync(process.execPath, ['scripts/check-route-languages.mjs'], { stdio: 'inherit' });
     },
   };
 }
