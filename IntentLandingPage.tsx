@@ -4,6 +4,8 @@ import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { SiteHeader, SiteFooter, CtaBand, Reveal, GOLD, GOLD_DEEP, DARK, MUTED, CHAMP, CHAMP_BG, eyebrow, h2cls } from "@/lib/site-ui";
 import { trackEvent } from "@/lib/analytics";
+import { useQuoteStore } from "@/lib/site-ui";
+import procurement from "./content/settings/procurement.json";
 
 type PageKey =
   | "security-door-manufacturer"
@@ -288,6 +290,8 @@ const PAGES: Record<PageKey, PageData> = {
 
 export default function IntentLandingPage({ pageKey }: { pageKey: PageKey }) {
   const page = PAGES[pageKey];
+  const buying = procurement[pageKey as keyof typeof procurement];
+  const openQuote = useQuoteStore(s => s.openQuote);
   useEffect(() => {
     let fired = false;
     const markEngaged = (engagementType: "time" | "scroll") => {
@@ -334,9 +338,11 @@ export default function IntentLandingPage({ pageKey }: { pageKey: PageKey }) {
         <h1 className="mt-4 max-w-4xl text-[38px] md:text-[64px] font-light leading-[1.05] text-white">{page.h1}</h1>
         <p className="mt-6 max-w-3xl text-[16px] md:text-[18px] leading-relaxed text-white/80">{page.lead}</p>
         <div className="mt-7 text-sm font-medium" style={{ color: "#d8c8a7" }}>{page.audience}</div>
+        {buying && <div className="mt-8 flex flex-wrap gap-4"><a href="#product-selection" className="rounded-full border border-white/50 px-6 py-3 text-white">Explore product options</a><button onClick={() => openQuote({ subject: buying.label })} className="rounded-full bg-[#BFA06A] px-6 py-3 text-[#221F20]">Discuss specifications & quote</button></div>}
       </div>
     </section>
 
+    {buying && <section id="product-selection" className="scroll-mt-24 px-[7vw] py-14 bg-[#F5F1EA]"><div className="mx-auto max-w-6xl"><h2 className="text-3xl font-light">Choose a starting point</h2><div className="mt-7 grid gap-4 md:grid-cols-3">{buying.products.map(([label, href]) => <Link key={href} to={href} className="rounded-xl border border-[#ded6c8] bg-white p-6 hover:border-[#BFA06A]">{label} →</Link>)}</div><div className="mt-9 grid gap-8 md:grid-cols-2"><div><h3 className="font-semibold">What to share</h3><p className="mt-3">{buying.inputs}</p></div><div><h3 className="font-semibold">What we will review</h3><p className="mt-3">{buying.next}</p></div></div><p className="mt-6 text-sm">Certification and performance must be verified for the selected model and complete configuration, not assumed for the entire range.</p></div></section>}
     <section className="px-[7vw] py-20 md:py-28"><div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[0.9fr_1.1fr]">
       <Reveal><div className={eyebrow} style={{ color: GOLD_DEEP }}>Buyer Brief</div><h2 className={h2cls + " mt-4"}>{page.overviewTitle}</h2></Reveal>
       <div>{page.overview.map((text) => <p key={text} className="mb-5 text-[16px] leading-[1.8]" style={{ color: MUTED }}>{text}</p>)}</div>

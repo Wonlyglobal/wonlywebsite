@@ -60,11 +60,12 @@ const mapChild = (c: NavChild): NavChild => ({
   img: img_(c.img),
   children: c.children?.map(mapChild),
 });
-const NAV: NavItem[] = SITE_NAV_DATA.nav.map((n) => ({
+export const SITE_NAV: NavItem[] = SITE_NAV_DATA.nav.map((n) => ({
   label: n.label,
   href: n.href || undefined,
   children: n.children?.map(mapChild),
 }));
+const NAV = SITE_NAV;
 
 const productMenuText = (locale: string, label: string, t: (text: string) => string) => {
   if (locale !== "pt") return t(label);
@@ -353,7 +354,7 @@ export function SiteHeader() {
   const openQuote = useQuoteStore((s) => s.openQuote);
   const { t } = useLocale();
   const cmsNavigation = useCmsSetting("navigation");
-  const requiredNavigation = ["product", "advantages", "manufacturing & r&d", "global strategy", "partnership", "contact"];
+  const requiredNavigation = ["product", "solutions", "oem / odm", "resources", "about wonly", "contact"];
   const cmsItems = cmsNavigation?.items ?? [];
   const normalizeNavLabel = (label: string) => label.trim().toLowerCase().replace(/products$/, "product");
   const completeCmsNavigation = requiredNavigation.every(required =>
