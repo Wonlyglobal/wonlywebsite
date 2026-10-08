@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, ArrowUpRight, Mail, MessageCircle, Phone, Check, Play, X } from "lucide-react";
 import { useSeo, SITE_URL } from "@/lib/seo";
-import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation, SITE_NAV } from "@/lib/site-ui";
+import { useQuoteStore, QuoteModal, ProductMegaMenu, MobileNavigation, SITE_NAV, SITE_FOOTER } from "@/lib/site-ui";
 import { useLocale } from "@/lib/i18n";
 import { homeCopy, homeFeature, homePartnership, homeProductDescription, homeSectionText, homeStatCard, homeTimeline } from "@/lib/home-locales";
 import { submitEnquiry } from "@/lib/form-config";
@@ -109,10 +109,10 @@ const FOOTPRINT_STATS = [
 /* ── Section 4 · Products ──────────────────────────────────── */
 // Product gallery — doors first. Each card links to its /product/ route (see App.tsx).
 const PRODUCTS_GALLERY = [
-  { name: "Door", href: "/product/door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Metal and wooden doors — the entire building entry, protection outside and quiet craft within." },
-  { name: "Smart Lock", href: "/product/smart-lock", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
-  { name: "Smart Window", href: "/product/smart-window", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
-  { name: "Whole-House Intelligence", href: "/product/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
+  { name: "Door", href: "/products/entrance-door", img: `${BASE}images/5products/prod-security-doors.jpg`, d: "Metal and wooden doors — the entire building entry, protection outside and quiet craft within." },
+  { name: "Smart Lock", href: "/products/smart-locks", img: `${BASE}images/5products/prod-smart-locks.jpg`, d: "True-sensing biometric locks with hands-free entry and encrypted access control." },
+  { name: "Smart Window", href: "/products/smart-windows", img: `${BASE}images/5products/prod-smart-windows.jpg`, d: "Sealed aluminum systems that insulate like a wall and auto-close in wind and rain." },
+  { name: "Whole-House Intelligence", href: "/products/whole-house", img: `${BASE}images/5products/prod-whole-house.jpg`, d: "One ecosystem linking doors, locks and windows into a single smart-home layer." },
 ];
 
 /* ── Section 5 · Solutions ─────────────────────────────────── */
@@ -176,34 +176,7 @@ const PARTNER_PHOTOS = [
 ];
 
 type FooterLink = { l: string; href?: string; to?: string };
-const FOOTER: { h: string; links: FooterLink[] }[] = [
-  { h: "Product", links: [
-    { l: "Door", href: "/product/door" },
-    { l: "Metal Door", href: "/product/door/metal-door" },
-    { l: "Wooden Door", href: "/product/door/wooden-door" },
-    { l: "Smart Lock", href: "/product/smart-lock" },
-    { l: "Smart Window", href: "/product/smart-window" },
-    { l: "Whole-House Intelligence", href: "/product/whole-house" },
-  ] },
-  { h: "Advantages", links: [
-    { l: "Why Wonly Door", href: "/advantages#why-wonly-door" },
-    { l: "Why Wonly Lock", href: "/advantages#why-wonly-lock" },
-    { l: "Innovation & Certifications", href: "/advantages#innovation-certifications" },
-  ] },
-  { h: "Company", links: [
-    { l: "Manufacturing & R&D", href: "/manufacturing-rd" },
-    { l: "Global Strategy", href: "/global-strategy" },
-    { l: "Partnership", href: "/partnership" },
-    { l: "Contact", href: "/contact" },
-  ] },
-  { h: "Get in Touch", links: [
-    { l: "inquiry@wonlyglobal.com", href: "mailto:inquiry@wonlyglobal.com" },
-    { l: "WhatsApp +1 (205) 240-1832", href: "https://wa.me/12052401832" },
-    { l: "Head Office: No. 9 Aigang Road, Economic Development Zone, Yongkang, Zhejiang, China" },
-    { l: "International Sales: +86 579 8722 8658", href: "tel:+8657987228658" },
-    { l: "International Sales: +86 579 8929 1280", href: "tel:+8657989291280" },
-  ] },
-];
+const FOOTER: { h: string; links: FooterLink[] }[] = SITE_FOOTER;
 
 /* ── Helpers ───────────────────────────────────────────────── */
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -1017,7 +990,7 @@ const Prototype = () => {
               <div className={eyebrow}>{ht("Our Products")}</div>
               <h2 className={h2cls + " mt-[14px]"} style={{ color: DARK }}>{ht("Built For Every Opening")}</h2>
             </div>
-            <Link to="/product/door" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>{ht("Explore Products")} <ArrowRight size={15} /></Link>
+            <Link to="/products/entrance-door" className={BTN_PRIMARY + " shrink-0 self-start md:self-auto"} style={{ background: GOLD, color: DARK }}>{ht("Explore Products")} <ArrowRight size={15} /></Link>
           </div>
         </Reveal>
         <div className="product-gallery mt-10 md:mt-12 flex flex-col md:flex-row gap-1.5 md:h-[520px]">

@@ -452,7 +452,8 @@ export function CtaBand({ eyebrowText = "Get Solutions & Quote", title = "Ready 
 
 /* Footer columns come from the same CMS file (content/settings/navigation.json),
    so header and footer stay in sync from one place in /admin. */
-const FOOTER: { h: string; links: { l: string; href?: string }[] }[] = SITE_NAV_DATA.footer;
+export const SITE_FOOTER: { h: string; links: { l: string; href?: string }[] }[] = SITE_NAV_DATA.footer;
+const FOOTER = SITE_FOOTER;
 
 export function SiteFooter() {
   const { locale, t } = useLocale();

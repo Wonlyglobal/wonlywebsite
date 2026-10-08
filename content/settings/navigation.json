@@ -208,7 +208,7 @@
       "links": [
         {
           "l": "Door",
-          "href": "/product/door"
+          "href": "/products/entrance-door"
         },
         {
           "l": "Metal Door",
@@ -220,19 +220,19 @@
         },
         {
           "l": "Wooden Door",
-          "href": "/product/door/wooden-door"
+          "href": "/products/wooden-doors"
         },
         {
           "l": "Smart Lock",
-          "href": "/product/smart-lock"
+          "href": "/products/smart-locks"
         },
         {
           "l": "Smart Window",
-          "href": "/product/smart-window"
+          "href": "/products/smart-windows"
         },
         {
           "l": "Whole-House Intelligence",
-          "href": "/product/whole-house"
+          "href": "/products/whole-house"
         }
       ]
     },
