@@ -216,6 +216,7 @@ function scheduledArticleHtml(): Plugin {
       // the production dist always contains crawlable article deep links.
       execFileSync(process.execPath, ['scripts/postbuild.mjs'], { stdio: 'inherit' });
       execFileSync(process.execPath, ['scripts/check-publication.mjs'], { stdio: 'inherit' });
+      execFileSync(process.execPath, ['scripts/check-navigation-links.mjs'], { stdio: 'inherit' });
     },
   };
 }
