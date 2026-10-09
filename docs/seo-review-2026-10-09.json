@@ -1,0 +1,20 @@
+{
+  "review_date": "2026-10-09",
+  "source_snapshot": "a437a8e",
+  "weekly_conclusion": "证据不足：10月8日结构与技术改动尚不足7天，GSC仅截至10月6日，不可归因于昨日上线。",
+  "primary_goal": "验证真实询盘交付与自然搜索开始填写，而非继续扩大低样本页面改版。",
+  "constraints": ["商业自然流量不足", "自然7天13次form_open但0次form_start，需排除内部验收访问影响", "缺前期、查询、设备与着陆页拆分，无法可靠归因"],
+  "scoring_method": "增量×商业价值×证据强度÷工作量风险；增量数据缺失，不生成虚假数值分，仅给证据驱动优先级。",
+  "tasks": [
+    {"priority": 1, "date": "2026-10-09至2026-10-12", "task": "核对已有成功事件与去个人化邮件/归档状态", "impact": "识别线索丢失与统计口径", "effort": "中", "risk": "只读低风险", "dependency": "授权的投递与归档状态", "acceptance": "区分接口成功、邮件接收、归档成功，不制造测试客户"},
+    {"priority": 2, "date": "2026-10-10至2026-10-13", "task": "补齐非重叠前期、桌面、查询及自然着陆页拆分", "impact": "定位锁芯CTR与商业意图缺口", "effort": "中", "risk": "低", "dependency": "Google报表访问；采集器代码部署需当次授权", "acceptance": "完整7/28天及前期对比，缺失不作0"},
+    {"priority": 3, "date": "2026-10-15至2026-10-22", "task": "复核10月8日导航及三商业页实验", "impact": "验证采购入口到开始填写", "effort": "低", "risk": "低", "dependency": "至少7天观察期及有效访问过滤", "acceptance": "7天观察、14天结论，不以一次事件宣称询盘增长"}
+  ],
+  "experiments": [
+    {"page": "cylindrical-lock-core-vs-standard-cylinder", "result": "保留；证据不足", "current_7d": {"clicks": 0, "impressions": 9, "position": 9}, "next": "取得查询意图与完整观察期，暂不扩大改版"},
+    {"page": "en-1627-rc2-rc3-rc4-security-door-grades", "result": "保留；有正向信号但不足以证明因果", "current_7d": {"clicks": 2, "impressions": 25, "position": 5.72}, "next": "10月10日复核完整延迟数据；不回滚、不扩大"}
+  ],
+  "roadmap": {"30d": "补数据与真实交付闭环，稳定观察采购结构", "60d": "按交易查询扩充证据充分的西语墨西哥与商业内容", "90d": "根据有效询盘扩大获胜集群，准备行业公关外链草稿"},
+  "deferred": ["批量改标题", "自动外链联络", "未审核新文章发布", "20篇四周候选库存尚待补齐"],
+  "deployment": "仅运营计划，不自动部署非紧急代码"
+}
