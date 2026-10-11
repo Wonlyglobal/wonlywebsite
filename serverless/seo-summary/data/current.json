@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-10-10T07:42:28.659Z",
+  "generated_at": "2026-10-11T07:47:12.701Z",
   "freshness": {
     "ga4": {
-      "through": "2026-10-09",
+      "through": "2026-10-10",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-10-07",
+      "through": "2026-10-08",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,24 +21,24 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 6,
-        "impressions": 358,
-        "ctr": 0.01675977653631285,
-        "avg_position": 12.310055865921788
+        "clicks": 8,
+        "impressions": 402,
+        "ctr": 0.01990049751243781,
+        "avg_position": 11.271144278606965
       },
       "ga4": {
-        "organic_sessions": 16
+        "organic_sessions": 23
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 40,
-        "impressions": 1613,
-        "ctr": 0.024798512089274645,
-        "avg_position": 10.189088654680718
+        "clicks": 41,
+        "impressions": 1668,
+        "ctr": 0.024580335731414868,
+        "avg_position": 10.063549160671462
       },
       "ga4": {
-        "organic_sessions": 78
+        "organic_sessions": 85
       }
     }
   },
@@ -47,22 +47,22 @@
       "country": "ES",
       "gsc_7d": {
         "clicks": 1,
-        "impressions": 65,
-        "ctr": 0.015384615384615385,
-        "avg_position": 15.123076923076923
+        "impressions": 68,
+        "ctr": 0.014705882352941176,
+        "avg_position": 14.558823529411764
       },
       "ga4_7d": {
-        "organic_sessions": 2
+        "organic_sessions": 3
       },
       "status": "ok"
     },
     {
       "country": "MX",
       "gsc_7d": {
-        "clicks": 0,
-        "impressions": 26,
-        "ctr": 0,
-        "avg_position": 22.192307692307693
+        "clicks": 1,
+        "impressions": 29,
+        "ctr": 0.034482758620689655,
+        "avg_position": 20.482758620689655
       },
       "ga4_7d": {
         "organic_sessions": 1
@@ -72,48 +72,48 @@
   ],
   "funnel": {
     "organic_7d": {
-      "cta_click": 10,
-      "form_open": 14,
-      "form_start": 0,
+      "cta_click": 16,
+      "form_open": 21,
+      "form_start": 1,
       "inquiry_prompt_select": 0,
-      "form_submit": 0,
-      "generate_lead": 0,
+      "form_submit": 1,
+      "generate_lead": 1,
       "form_error": 0,
       "form_abandon": 0,
       "contact_click": 0
     },
     "organic_28d": {
-      "cta_click": 20,
-      "form_open": 34,
-      "form_start": 2,
+      "cta_click": 26,
+      "form_open": 41,
+      "form_start": 3,
       "inquiry_prompt_select": 22,
-      "form_submit": 0,
-      "generate_lead": 0,
+      "form_submit": 1,
+      "generate_lead": 1,
       "form_error": 0,
       "form_abandon": 1,
       "contact_click": 3
     },
     "all_channels_7d": {
-      "cta_click": 27,
-      "form_open": 29,
-      "form_start": 5,
-      "inquiry_prompt_select": 5,
-      "form_submit": 1,
-      "generate_lead": 1,
-      "form_error": 0,
-      "form_abandon": 1,
-      "contact_click": 14
-    },
-    "all_channels_28d": {
-      "cta_click": 50,
-      "form_open": 79,
+      "cta_click": 41,
+      "form_open": 46,
       "form_start": 9,
-      "inquiry_prompt_select": 27,
-      "form_submit": 2,
-      "generate_lead": 2,
-      "form_error": 0,
+      "inquiry_prompt_select": 9,
+      "form_submit": 4,
+      "generate_lead": 3,
+      "form_error": 1,
       "form_abandon": 2,
       "contact_click": 19
+    },
+    "all_channels_28d": {
+      "cta_click": 64,
+      "form_open": 97,
+      "form_start": 13,
+      "inquiry_prompt_select": 31,
+      "form_submit": 5,
+      "generate_lead": 4,
+      "form_error": 1,
+      "form_abandon": 3,
+      "contact_click": 24
     }
   },
   "pages": [
@@ -122,15 +122,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 9,
+        "impressions": 12,
         "ctr": 0,
-        "avg_position": 9
+        "avg_position": 8.916666666666668
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 201,
+        "impressions": 205,
         "ctr": 0,
-        "avg_position": 8.696517412935323
+        "avg_position": 8.68780487804878
       },
       "issues": []
     },
@@ -139,15 +139,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 2,
-        "impressions": 24,
-        "ctr": 0.08333333333333333,
-        "avg_position": 5.916666666666667
+        "impressions": 32,
+        "ctr": 0.0625,
+        "avg_position": 6.65625
       },
       "gsc_28d": {
         "clicks": 2,
-        "impressions": 130,
-        "ctr": 0.015384615384615385,
-        "avg_position": 7.6
+        "impressions": 131,
+        "ctr": 0.015267175572519083,
+        "avg_position": 7.6106870229007635
       },
       "issues": []
     },
@@ -224,9 +224,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 9,
+        "impressions": 12,
         "ctr": 0,
-        "avg_position": 9
+        "avg_position": 8.916666666666668
       },
       "decision": null
     },
@@ -250,9 +250,9 @@
       "latest": {
         "window": "7d",
         "clicks": 2,
-        "impressions": 24,
-        "ctr": 0.08333333333333333,
-        "avg_position": 5.916666666666667
+        "impressions": 32,
+        "ctr": 0.0625,
+        "avg_position": 6.65625
       },
       "decision": null
     }
@@ -274,26 +274,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-10-10T07:42:28.659Z",
-      "through": "2026-10-09",
+      "captured_at": "2026-10-11T07:47:12.701Z",
+      "through": "2026-10-10",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-10-10T07:42:28.659Z",
-      "through": "2026-10-07",
+      "captured_at": "2026-10-11T07:47:12.701Z",
+      "through": "2026-10-08",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-10-10T07:42:28.659Z",
+      "captured_at": "2026-10-11T07:47:12.701Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-10-10T07:42:28.659Z",
-      "through": "2026-10-10",
+      "captured_at": "2026-10-11T07:47:12.701Z",
+      "through": "2026-10-11",
       "status": "ok"
     }
   ]
