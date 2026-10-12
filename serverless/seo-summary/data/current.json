@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-10-11T23:53:07.180Z",
+  "generated_at": "2026-10-12T01:37:28.755Z",
   "freshness": {
     "ga4": {
-      "through": "2026-10-10",
+      "through": "2026-10-11",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-10-08",
+      "through": "2026-10-09",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,24 +21,24 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 8,
-        "impressions": 402,
-        "ctr": 0.01990049751243781,
-        "avg_position": 11.271144278606965
+        "clicks": 9,
+        "impressions": 391,
+        "ctr": 0.023017902813299233,
+        "avg_position": 10.445012787723785
       },
       "ga4": {
-        "organic_sessions": 23
+        "organic_sessions": 27
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 41,
-        "impressions": 1668,
-        "ctr": 0.024580335731414868,
-        "avg_position": 10.063549160671462
+        "clicks": 43,
+        "impressions": 1686,
+        "ctr": 0.025504151838671413,
+        "avg_position": 9.795373665480428
       },
       "ga4": {
-        "organic_sessions": 85
+        "organic_sessions": 87
       }
     }
   },
@@ -47,9 +47,9 @@
       "country": "ES",
       "gsc_7d": {
         "clicks": 1,
-        "impressions": 68,
-        "ctr": 0.014705882352941176,
-        "avg_position": 14.558823529411764
+        "impressions": 69,
+        "ctr": 0.014492753623188406,
+        "avg_position": 14.507246376811594
       },
       "ga4_7d": {
         "organic_sessions": 3
@@ -60,9 +60,9 @@
       "country": "MX",
       "gsc_7d": {
         "clicks": 1,
-        "impressions": 29,
-        "ctr": 0.034482758620689655,
-        "avg_position": 20.482758620689655
+        "impressions": 27,
+        "ctr": 0.037037037037037035,
+        "avg_position": 19.85185185185185
       },
       "ga4_7d": {
         "organic_sessions": 1
@@ -95,18 +95,18 @@
     },
     "all_channels_7d": {
       "cta_click": 41,
-      "form_open": 46,
+      "form_open": 44,
       "form_start": 9,
       "inquiry_prompt_select": 9,
       "form_submit": 4,
       "generate_lead": 3,
       "form_error": 1,
       "form_abandon": 2,
-      "contact_click": 19
+      "contact_click": 18
     },
     "all_channels_28d": {
-      "cta_click": 64,
-      "form_open": 97,
+      "cta_click": 66,
+      "form_open": 98,
       "form_start": 13,
       "inquiry_prompt_select": 31,
       "form_submit": 5,
@@ -122,15 +122,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 12,
+        "impressions": 17,
         "ctr": 0,
-        "avg_position": 8.916666666666668
+        "avg_position": 8.941176470588236
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 205,
+        "impressions": 210,
         "ctr": 0,
-        "avg_position": 8.68780487804878
+        "avg_position": 8.695238095238096
       },
       "issues": []
     },
@@ -138,16 +138,16 @@
       "path": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
       "role": "article",
       "gsc_7d": {
-        "clicks": 2,
-        "impressions": 32,
-        "ctr": 0.0625,
-        "avg_position": 6.65625
+        "clicks": 1,
+        "impressions": 29,
+        "ctr": 0.034482758620689655,
+        "avg_position": 7.275862068965517
       },
       "gsc_28d": {
         "clicks": 2,
-        "impressions": 131,
-        "ctr": 0.015267175572519083,
-        "avg_position": 7.6106870229007635
+        "impressions": 129,
+        "ctr": 0.015503875968992248,
+        "avg_position": 7.728682170542636
       },
       "issues": []
     },
@@ -190,9 +190,9 @@
       "role": "commercial",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 1,
+        "impressions": 0,
         "ctr": 0,
-        "avg_position": 4
+        "avg_position": null
       },
       "gsc_28d": {
         "clicks": 0,
@@ -224,9 +224,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 12,
+        "impressions": 17,
         "ctr": 0,
-        "avg_position": 8.916666666666668
+        "avg_position": 8.941176470588236
       },
       "decision": null
     },
@@ -249,10 +249,10 @@
       "observe_14d_at": "2026-10-07T08:00:00+08:00",
       "latest": {
         "window": "7d",
-        "clicks": 2,
-        "impressions": 32,
-        "ctr": 0.0625,
-        "avg_position": 6.65625
+        "clicks": 1,
+        "impressions": 29,
+        "ctr": 0.034482758620689655,
+        "avg_position": 7.275862068965517
       },
       "decision": null
     }
@@ -274,26 +274,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-10-11T23:53:07.180Z",
-      "through": "2026-10-10",
+      "captured_at": "2026-10-12T01:37:28.755Z",
+      "through": "2026-10-11",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-10-11T23:53:07.180Z",
-      "through": "2026-10-08",
+      "captured_at": "2026-10-12T01:37:28.755Z",
+      "through": "2026-10-09",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-10-11T23:53:07.180Z",
+      "captured_at": "2026-10-12T01:37:28.755Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-10-11T23:53:07.180Z",
-      "through": "2026-10-11",
+      "captured_at": "2026-10-12T01:37:28.755Z",
+      "through": "2026-10-12",
       "status": "ok"
     }
   ]
