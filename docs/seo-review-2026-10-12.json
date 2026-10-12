@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-12",
+  "timezone": "Asia/Shanghai",
+  "primary_goal": "确认自然询盘真实交付，并在不反复改版的前提下恢复可靠的国际SEO与到期内容发布",
+  "evidence": {
+    "snapshot_commit": "1e42813",
+    "captured_at": "2026-10-12T07:53:07+08:00",
+    "gsc_through": "2026-10-08",
+    "ga4_through": "2026-10-10",
+    "organic_sessions_7d": 23,
+    "organic_funnel_7d": {"form_open":21,"form_start":1,"form_submit":1,"generate_lead":1},
+    "actual_delivery": "未获取，不把事件作为销售确认线索",
+    "missing": ["前一非重叠7/28天", "查询", "设备/桌面排名", "自然着陆页", "最新SEMrush"]
+  },
+  "opportunity_scoring": {
+    "formula": "预期增量×商业价值×证据强度÷工作量与风险",
+    "numeric_score": null,
+    "reason": "缺少可归因增量与完整对照数据，仅列证据支持的序位，不虚构得分"
+  },
+  "tasks": [
+    {"priority":1,"dates":"10-12至10-14","target":"首页/contact/报价弹窗","action":"对账自然1次及全渠道3次成功事件与去个人化投递/归档状态","acceptance":"能区分成功入库、邮件失败和仅埋点成功，不读取个人内容或制造询盘","dependency":"授权只读后台状态；GitHub存在表单修复但Codeup未上线，不能混入库存发布","effort":"中","risk":"只读低，投递改动高且需当次授权"},
+    {"priority":2,"dates":"10-12至10-16","target":"三商业页、英西墨西哥及到期文章","action":"验证库存发布；准备精确hreflang修复验收，不自动部署修复","acceptance":"到期六语独立正文与canonical/Sitemap齐全；alternate只含真实等价翻译，不指向语言首页","dependency":"库存全部门禁；代码修复部署需授权","effort":"中","risk":"中"},
+    {"priority":3,"dates":"10-15至10-22","target":"采购结构、锁芯、EN1627、Security Door Manufacturer","action":"补齐分设备/查询/着陆页与匹配对照，观察采购改版7/14天","acceptance":"输出点击/展示/CTR/排名/会话/询盘对比及扩大、保留、回滚或证据不足结论","dependency":"GSC/GA4细分可访问，采集器变更需授权","effort":"中","risk":"低"}
+  ],
+  "experiments": [
+    {"id":"lock-core-snippet-20260923","latest_7d":{"clicks":0,"impressions":12,"position":8.9167},"decision":"保留，证据不足","reason":"28天仍0点击，不能以展示变化证明有效；无匹配前期"},
+    {"id":"en1627-proof-checklist-20260923","latest_7d":{"clicks":2,"impressions":32,"position":6.6563},"decision":"保留，证据不足","reason":"点击正向但样本小且窗口不匹配"},
+    {"id":"procurement-20261008","observe_7d":"2026-10-15","observe_14d":"2026-10-22","decision":"继续观察，不提前二次实质改版"}
+  ],
+  "roadmap": {"30d":"交付与分析口径闭环、hreflang及发布健康","60d":"按查询和商业落地证据扩充英西区域内容","90d":"扩大获胜主题集群，准备行业数字公关与真实外链联络草稿"},
+  "candidate_backlog_status": "20个待查重/关键词验证/技术审核候选，不是已审核文章，不授权自动发布",
+  "candidate_backlog": [
+    "Security door RFQ drawing package", "Door opening measurement tolerances", "Door handing and swing schedule", "Frame fixing and substrate checklist", "Door hardware compatibility matrix",
+    "Euro cylinder size measurement", "Keyed alike versus master key procurement", "Lock cylinder replacement compatibility", "EN 1627 certificate scope verification", "Security door test specimen traceability",
+    "Mexico distributor sample approval", "Mexico coastal finish maintenance", "Spanish security door RFQ glossary", "Latin America smart lock offline operation", "Smart lock OEM firmware change control",
+    "Smart door power outage acceptance", "Door sample versus mass production inspection", "Export door packing inspection", "Hotel door multi-performance evidence", "Door after-sales spare parts planning"
+  ],
+  "content_queue": {"10-12":"核验10-11安装验收库存并完成门禁", "10-13":"审核库存拉美智能锁OEM到期检查", "10-15":"审核库存酒店综合性能门到期检查及采购7天观察", "10-16":"周度评估及候选去重", "10-19":"重排优先级；首批5个候选brief供审核", "10-22":"采购14天观察", "10-23":"周报与下周排期"},
+  "deferred": ["未经审核的新文章发布", "批量购买外链", "没有查询证据就重写标题", "未完成门禁的库存上线"],
+  "publication_policy": "目标每周约5篇、同日最多1篇；审核和质量优先，不用候选数量冒充可上线库存"
+}
