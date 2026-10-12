@@ -3,11 +3,11 @@
   "timezone": "Asia/Shanghai",
   "primary_goal": "确认自然询盘真实交付，并在不反复改版的前提下恢复可靠的国际SEO与到期内容发布",
   "evidence": {
-    "snapshot_commit": "1e42813",
-    "captured_at": "2026-10-12T07:53:07+08:00",
-    "gsc_through": "2026-10-08",
-    "ga4_through": "2026-10-10",
-    "organic_sessions_7d": 23,
+    "snapshot_commit": "64ef949",
+    "captured_at": "2026-10-12T09:37:28+08:00",
+    "gsc_through": "2026-10-09",
+    "ga4_through": "2026-10-11",
+    "organic_sessions_7d": 27,
     "organic_funnel_7d": {"form_open":21,"form_start":1,"form_submit":1,"generate_lead":1},
     "actual_delivery": "未获取，不把事件作为销售确认线索",
     "missing": ["前一非重叠7/28天", "查询", "设备/桌面排名", "自然着陆页", "最新SEMrush"]
@@ -23,8 +23,8 @@
     {"priority":3,"dates":"10-15至10-22","target":"采购结构、锁芯、EN1627、Security Door Manufacturer","action":"补齐分设备/查询/着陆页与匹配对照，观察采购改版7/14天","acceptance":"输出点击/展示/CTR/排名/会话/询盘对比及扩大、保留、回滚或证据不足结论","dependency":"GSC/GA4细分可访问，采集器变更需授权","effort":"中","risk":"低"}
   ],
   "experiments": [
-    {"id":"lock-core-snippet-20260923","latest_7d":{"clicks":0,"impressions":12,"position":8.9167},"decision":"保留，证据不足","reason":"28天仍0点击，不能以展示变化证明有效；无匹配前期"},
-    {"id":"en1627-proof-checklist-20260923","latest_7d":{"clicks":2,"impressions":32,"position":6.6563},"decision":"保留，证据不足","reason":"点击正向但样本小且窗口不匹配"},
+    {"id":"lock-core-snippet-20260923","latest_7d":{"clicks":0,"impressions":17,"position":8.9412},"decision":"保留，证据不足","reason":"28天仍0点击，不能以展示变化证明有效；无匹配前期"},
+    {"id":"en1627-proof-checklist-20260923","latest_7d":{"clicks":1,"impressions":29,"position":7.2759},"decision":"保留，证据不足","reason":"点击正向但样本小且窗口不匹配"},
     {"id":"procurement-20261008","observe_7d":"2026-10-15","observe_14d":"2026-10-22","decision":"继续观察，不提前二次实质改版"}
   ],
   "roadmap": {"30d":"交付与分析口径闭环、hreflang及发布健康","60d":"按查询和商业落地证据扩充英西区域内容","90d":"扩大获胜主题集群，准备行业数字公关与真实外链联络草稿"},
