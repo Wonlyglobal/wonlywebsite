@@ -15,6 +15,7 @@ import http from 'node:http';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
+import { assertRouteHreflang, sitemapLanguageGroups } from './lib/hreflang.mjs';
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 
 const DIST = path.resolve(process.env.PRERENDER_DIST || 'dist');
@@ -105,6 +106,7 @@ function outFileFor(route) {
 
 async function main() {
   const allRoutes = await getRoutes();
+  const languageGroups = sitemapLanguageGroups(await readFile(path.join(DIST, 'sitemap.xml'), 'utf8'));
   const requestedRoutes = (process.env.PRERENDER_ROUTES || "")
     .split(",")
     .map((route) => route.trim())
@@ -152,6 +154,8 @@ async function main() {
       await page.waitForTimeout(500);
 
       const html = await page.content();
+      const base = `${route.replace(/^\/(ar|fr|ru|es|pt)(?=\/)/, '').replace(/\/+$/, '')}/`;
+      assertRouteHreflang(html, route, languageGroups[base]);
       const title = await page.title();
       const out = outFileFor(route);
       await mkdir(path.dirname(out), { recursive: true });
