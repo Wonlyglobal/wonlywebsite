@@ -88,6 +88,7 @@ function setAlternate(hreflang: string, href: string) {
     el.setAttribute("data-managed-hreflang", "true");
     document.head.appendChild(el);
   }
+  el.setAttribute("data-managed-hreflang", "true");
   el.href = href;
 }
 
@@ -154,7 +155,9 @@ export function useSeo({
     upsertMeta("name", "twitter:image", image);
 
     upsertLink("canonical", url);
-    document.head.querySelectorAll('link[data-managed-hreflang="true"]').forEach((node) => node.remove());
+    // A prerendered or generic shell can contain alternates from another route.
+    // Replace the complete language set, including tags without a managed marker.
+    document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((node) => node.remove());
     if (isLocalized) {
       for (const language of LANGUAGES) {
         if (hreflangLocales && !hreflangLocales.includes(language.code)) continue;
