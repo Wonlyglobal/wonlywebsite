@@ -1186,14 +1186,17 @@ const Prototype = () => {
                 </div>
                 <p className="mt-2.5 text-[11px] leading-relaxed" style={{ color: "rgba(245,241,234,0.58)" }}>{t("No commitment. Your project details stay confidential. We reply within one business day.")}</p>
               </div>
-              {([["name", "Full Name", "Your full name", "text"], ["company", "Company", "Company name", "text"], ["country", "Country / Region", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, inputType]) => (
+              {([["name", "Full Name", "Your full name", "text"], ["country", "Country / Region", "Country / region", "text"], ["email", "Email", "you@company.com", "email"]] as const).map(([key, l, ph, inputType]) => (
                 <label key={key} className="block">
-                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} {key === "company" ? <span className="normal-case tracking-normal">({t("optional")})</span> : <span style={{ color: "#e6928a" }}>*</span>}</span>
-                  <input type={inputType} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={t(ph)} />
+                  <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t(l)} <span style={{ color: "#e6928a" }}>*</span></span>
+                  <input autoComplete={key === "country" ? "country-name" : key} type={inputType} value={form[key]} onChange={(ev) => setField(key, ev.target.value)} aria-invalid={!!errors[key]} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors[key] ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={t(ph)} />
                   {errors[key] && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors[key]}</span>}
                 </label>
               ))}
-              <label className="block sm:col-span-2">
+              <details className="sm:col-span-2 rounded-lg border border-white/15 p-3 order-1">
+                <summary className="cursor-pointer text-xs text-white/65">{t("Company")} / {t("Interest")} ({t("optional")})</summary>
+                <label className="mt-3 block"><span className="text-xs text-white/65">{t("Company")}</span><input autoComplete="organization" value={form.company} onChange={(ev) => setField("company", ev.target.value)} className="mt-1.5 w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white" /></label>
+              <label className="mt-3 block">
                 <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Interest")} <span className="normal-case tracking-normal">({t("optional")})</span></span>
                 <select value={form.interest} onChange={(ev) => setField("interest", ev.target.value)} aria-invalid={!!errors.interest} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#BFA06A]" style={{ borderColor: errors.interest ? "#c0564a" : "rgba(255,255,255,0.15)", color: form.interest ? "#fff" : "rgba(255,255,255,0.3)" }}>
                   <option value="" disabled className="text-black">{t("Select an option…")}</option>
@@ -1203,13 +1206,14 @@ const Prototype = () => {
                 </select>
                 {errors.interest && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.interest}</span>}
               </label>
+              </details>
               <label className="block sm:col-span-2">
                 <span className="text-[11px] tracking-wide uppercase" style={{ color: "rgba(245,241,234,0.55)" }}>{t("Message")} <span style={{ color: "#e6928a" }}>*</span></span>
                 <textarea rows={3} value={form.message} onChange={(ev) => setField("message", ev.target.value)} aria-invalid={!!errors.message} className="mt-1.5 w-full bg-white/5 border rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#BFA06A] resize-none" style={{ borderColor: errors.message ? "#c0564a" : "rgba(255,255,255,0.15)" }} placeholder={t("Tell us about your project or territory...")} />
                 {errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#e79b93" }}>{errors.message}</span>}
               </label>
-              {errors.submit && <div className="sm:col-span-2 text-center text-[12px]" style={{ color: "#e79b93" }}>{errors.submit}</div>}
-              <button type="submit" disabled={sending} className="sm:col-span-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100" style={{ background: GOLD, color: DARK }}>{sending ? t("Sending…") : t("Get Solutions & Quote")}</button>
+              {errors.submit && <div className="sm:col-span-2 order-2 text-center text-[12px]" style={{ color: "#e79b93" }}>{errors.submit}</div>}
+              <button type="submit" disabled={sending} className="sm:col-span-2 order-2 mt-2 px-8 py-4 rounded-full text-sm font-medium transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100" style={{ background: GOLD, color: DARK }}>{sending ? t("Sending…") : t("Get Solutions & Quote")}</button>
             </form>
             )}
           </Reveal>

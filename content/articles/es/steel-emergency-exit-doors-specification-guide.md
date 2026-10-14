@@ -1,15 +1,16 @@
 ---
 slug: "steel-emergency-exit-doors-specification-guide"
 title: "Puertas de salida de emergencia de acero: guía de especificación"
-seoTitle: "Puertas de salida de emergencia de acero — Guía | WONLY"
-description: "Cómo especificar puertas de salida de emergencia de acero: evacuación, herrajes, fuego, control de acceso e inspección."
+seoTitle: "Puertas de emergencia: acero y barra antipánico | WONLY"
+description: "Guía para comprar puertas de emergencia de acero: medidas, sentido de apertura, barra antipánico, protección contra incendios y datos para solicitar cotización."
 category: "Buying Guide"
 date: "2026-09-19"
-dateLabel: "21 de septiembre de 2026"
+dateLabel: "19 de septiembre de 2026"
 readMins: 7
 cover: "images/articles/steel-emergency-exit-door.webp"
 excerpt: "Checklist para coordinar puertas de acero, barras antipánico, requisitos de fuego, control de acceso y recepción."
 keywords:
+  - "puertas de emergencia"
   - "puertas de salida de emergencia de acero"
   - "puertas de salida comerciales"
   - "puerta cortafuego de acero"
@@ -18,6 +19,14 @@ keywords:
 ---
 
 Una puerta de salida de emergencia de acero es un elemento de seguridad vital, no solo una hoja pesada con una señal de salida. Su desempeño depende del hueco completo: hoja, marco, anclajes, bisagras, pestillo, dispositivo de salida, cierrapuertas, sellos, vidrio, interfaces de acceso e instalación.
+
+## ¿Qué debe incluir una puerta de emergencia?
+
+Para solicitar una puerta de emergencia, defina el paso libre, el sentido de apertura, el marco y sus anclajes, los herrajes de salida y las condiciones del edificio. Una barra antipánico no convierte por sí sola una puerta en cortafuego: la documentación debe cubrir el conjunto propuesto y su instalación.
+
+## Datos para una cotización de proyecto
+
+Envíe ciudad y país, uso del edificio, cantidad de puertas, medidas del hueco, tipo de muro y plano de apertura. Indique si necesita barra antipánico, cierre automático, control de acceso o evidencia de resistencia al fuego. Consulte la [gama de puertas de seguridad](/es/products/security-doors/) y [envíe los datos del proyecto](/es/contact/). Para compras destinadas a México, revise la [guía de suministro para México](/es/global/mexico/security-doors/).
 
 ## Separe evacuación, fuego y seguridad
 

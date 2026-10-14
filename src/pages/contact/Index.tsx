@@ -217,20 +217,22 @@ export default function Contact() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <label className="block"><span className={label} style={{ color: MUTED }}>{t("Full Name")} <span style={{ color: "#c0564a" }}>*</span></span>
-                    <input className={input} style={border("name")} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your full name" />{errors.name && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.name}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Company")} <span className="normal-case tracking-normal">({t("optional")})</span></span>
-                    <input className={input} style={border("company")} value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Company name" />{errors.company && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.company}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Job Title")}</span>
-                    <input className={input} style={border("role")} value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. Purchasing Manager" /></label>
+                    <input autoComplete="name" className={input} style={border("name")} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your full name" />{errors.name && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.name}</span>}</label>
                   <label className="block"><span className={label} style={{ color: MUTED }}>{t("Country / Region")} <span style={{ color: "#c0564a" }}>*</span></span>
-                    <input className={input} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" />{errors.country && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.country}</span>}</label>
+                    <input autoComplete="country-name" className={input} style={border("country")} value={form.country} onChange={(e) => set("country", e.target.value)} placeholder="Country / region" />{errors.country && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.country}</span>}</label>
                   <label className="block"><span className={label} style={{ color: MUTED }}>{t("Email")} <span style={{ color: "#c0564a" }}>*</span></span>
-                    <input type="email" className={input} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" />{errors.email && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.email}</span>}</label>
-                  <label className="block"><span className={label} style={{ color: MUTED }}>{t("Phone")}</span>
-                    <input className={input} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+.." /></label>
+                    <input type="email" autoComplete="email" inputMode="email" className={input} style={border("email")} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@company.com" />{errors.email && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.email}</span>}</label>
                 </div>
                 <label className="block mt-4"><span className={label} style={{ color: MUTED }}>{t("Message")} <span style={{ color: "#c0564a" }}>*</span></span>
                   <textarea className={input + " min-h-[110px] resize-y"} style={border("message")} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Products, quantities, target market, timeline…" />{errors.message && <span className="mt-1 block text-[11px]" style={{ color: "#c0564a" }}>{errors.message}</span>}</label>
+                <details className="mt-4 rounded-lg border border-[#e4ddcf] p-3">
+                  <summary className="cursor-pointer text-xs" style={{ color: MUTED }}>{t("Company")} / {t("Job Title")} / {t("Phone")} ({t("optional")})</summary>
+                  <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label><span className={label}>{t("Company")}</span><input autoComplete="organization" className={input} style={border("company")} value={form.company} onChange={(e) => set("company", e.target.value)} /></label>
+                    <label><span className={label}>{t("Job Title")}</span><input autoComplete="organization-title" className={input} style={border("role")} value={form.role} onChange={(e) => set("role", e.target.value)} /></label>
+                    <label><span className={label}>{t("Phone")}</span><input type="tel" autoComplete="tel" className={input} style={border("phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} /></label>
+                  </div>
+                </details>
                 {errors.submit && <div className="mt-4 text-[13px] text-center" style={{ color: "#c0564a" }}>{errors.submit}</div>}
                 <button type="submit" disabled={sending} className="mt-5 w-full py-[15px] rounded-lg text-sm font-semibold text-white disabled:opacity-60" style={{ background: DARK }}>{sending ? t("Sending…") : `${t("Submit Enquiry")} →`}</button>
                 <div className="mt-3 text-[12px] text-center" style={{ color: MUTED }}>Or email us directly at inquiry@wonlyglobal.com — we reply within 24 hours.</div>

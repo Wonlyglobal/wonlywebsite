@@ -1,4 +1,6 @@
 // Site analytics: Google Analytics 4 (gtag) + Microsoft Clarity.
+import { isInternalAnalyticsLocation } from "./analytics-context";
+const internalVisit = () => typeof window !== "undefined" && isInternalAnalyticsLocation(window.location.pathname, window.location.search);
 // Fill the two IDs below once each property is created. Leaving an ID empty
 // keeps that tool fully disabled — no script is injected and no request is made.
 export const GA_MEASUREMENT_ID = "G-PV49HRLD18"; // e.g. "G-XXXXXXXXXX"  (Google Analytics 4)
@@ -19,7 +21,7 @@ type JourneyEvent = {
   language?: string; product_context?: string; error_type?: string;
 };
 const journeyEvents: JourneyEvent[] = (() => {
-  if (typeof window === "undefined") return [];
+  if (typeof window === "undefined" || internalVisit()) return [];
   try {
     const stored = JSON.parse(window.sessionStorage.getItem(JOURNEY_EVENTS_KEY) || "[]");
     return Array.isArray(stored) ? stored.slice(-99) : [];
@@ -37,7 +39,7 @@ type InquiryAttribution = {
 
 function getInquiryAttribution(): InquiryAttribution {
   const empty = { landing_page: "", landing_referrer: "", entry_channel: "direct", utm_source: "", utm_medium: "", utm_campaign: "" };
-  if (typeof window === "undefined") return empty;
+  if (typeof window === "undefined" || internalVisit()) return empty;
   try {
     const saved = window.sessionStorage.getItem(ATTRIBUTION_KEY);
     if (saved) return { ...empty, ...JSON.parse(saved) };
@@ -60,7 +62,7 @@ function getInquiryAttribution(): InquiryAttribution {
 }
 
 export function getJourneySession(): string {
-  if (typeof window === "undefined") return "";
+  if (typeof window === "undefined" || internalVisit()) return "";
   try {
     let value = window.sessionStorage.getItem(JOURNEY_SESSION_KEY) || "";
     if (!value) {
@@ -74,6 +76,7 @@ export function getJourneySession(): string {
 }
 
 export function serializeInquiryJourney(formId: string): string {
+  if (internalVisit()) return "[]";
   return JSON.stringify(journeyEvents.filter((event) => event.form_id === formId).slice(-99));
 }
 
@@ -91,7 +94,7 @@ const sectionName = (element: Element) => {
 
 /** Inject the analytics scripts once. Safe to call on every mount. */
 export function initAnalytics(): void {
-  if (started || typeof window === "undefined") return;
+  if (started || typeof window === "undefined" || internalVisit()) return;
   started = true;
   const w = window as any;
   getInquiryAttribution();
@@ -143,7 +146,7 @@ export function initAnalytics(): void {
 
 /** Send a structured GA4 event and a matching Clarity session marker. */
 export function trackEvent(name: string, params: AnalyticsParams = {}): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || internalVisit()) return;
   const w = window as any;
   const payload = { ...pageContext(), ...(name === "form_abandon" ? { transport_type: "beacon" } : {}), ...params };
   if (JOURNEY_EVENT_NAMES.has(name)) {
@@ -183,7 +186,7 @@ export function trackFormEvent(name: "form_start" | "form_submit" | "form_error"
 
 /** Report a virtual page view to GA4 after a client-side route change. */
 export function trackPageview(path: string): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || internalVisit()) return;
   const w = window as any;
   if (GA_MEASUREMENT_ID && w.gtag) {
     w.gtag("event", "page_view", {
@@ -196,6 +199,7 @@ export function trackPageview(path: string): void {
 
 /** GA4 lead-generation conversion — fire on a successful enquiry submit. */
 export function trackLead(params: Record<string, string> = {}): void {
+  if (internalVisit()) return;
   trackEvent("generate_lead", {
     currency: "USD",
     value: 0,

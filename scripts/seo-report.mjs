@@ -156,18 +156,19 @@ function advice(g, a) {
   const t = [];
   if (g) {
     if (g.cur.ctr < 0.02 && g.cur.impressions > 50) t.push('整体 CTR 偏低（<2%）：优化核心页 title/description 更贴买家搜索意图。');
-    if (g.opp && g.opp.length) t.push(`有 ${g.opp.length} 个"机会词"排在第 2 页（8–20 名），针对性优化对应页面内容可冲进首页。`);
+    if (g.opp && g.opp.length) t.push(`有 ${g.opp.length} 个"机会词"位于8–20名：8–10名应提升点击率，11–20名应核对对应页面意图与内容，不保证进入首页。`);
     if (g.cur.clicks < g.prev.clicks) t.push('点击环比下降：核对近期是否有页面掉排名或收录异常。');
   }
   if (a) {
     if (a.orgCur < a.orgPrev) t.push('自然搜索会话环比下降：结合 GSC 排名变化排查。');
     const f = a.organicFunnel7;
     if (f.cta_click > 0 && f.form_open === 0) t.push('SEO访客点击了CTA但未打开表单：检查目标锚点、弹窗或跨页跳转。');
-    if (f.form_open >= 3 && f.form_start / f.form_open < 0.3) t.push('SEO表单打开后开始填写率低于30%：继续减少首屏字段并强化价值说明。');
+    if (a.landing.some((page) => /cms_(?:canvas|stage)=/.test(page))) t.push('落地页包含CMS编辑预览流量：先隔离统计；历史数据仍可能受污染，不作为纯买家访问。');
+    if (f.form_open >= 3 && f.form_start / f.form_open < 0.3) t.push('SEO开始/展示事件比值低于30%（非人数转化率）：收起选填字段，按表单来源和设备继续观察。');
     if (f.form_start >= 3 && f.form_submit / f.form_start < 0.3) t.push('SEO表单开始后提交率低于30%：检查必填字段、手机键盘与错误提示。');
     if (f.form_submit > f.generate_lead) t.push('存在提交但未产生generate_lead：优先排查表单接口失败或成功事件漏记。');
     if (f.form_error > 0) t.push(`SEO漏斗近7天记录到 ${f.form_error} 次表单错误：按错误类型定位验证、网络或接口问题。`);
-    if (a.leadCur > 0) t.push(`自然流量本周带来 ${a.leadCur} 条询盘，保持内容产出与转化跟进。`);
+    if (a.leadCur > 0) t.push(`自然流量本周记录 ${a.leadCur} 次generate_lead；核对真实投递和CRM入库后再计为有效询盘。`);
     else t.push('本周自然流量暂无询盘：检查联系表单/CTA 是否显眼、落地页是否对应买家意图。');
   }
   if (!t.length) t.push('各项平稳，持续每月产出文章 + 优化标题即可。');
@@ -193,7 +194,7 @@ async function main() {
       + `**28天趋势：** 点击 ${g.days28.clicks}${wow(g.days28.clicks, g.prev28.clicks)} · 展示 ${g.days28.impressions}${wow(g.days28.impressions, g.prev28.impressions)} · CTR ${(g.days28.ctr * 100).toFixed(1)}% · 排名 ${g.days28.position.toFixed(1)}\n\n`
       + `**🔑 热门查询词 Top10：**\n${list(g.topQ, (r) => `· ${r.keys[0]}（${r.clicks}点/${r.impressions}展·第${r.position.toFixed(0)}名）`)}\n\n`
       + `**📄 热门落地页 Top8：**\n${list(g.topPages, (r) => `· ${short(r.keys[0])}（${r.clicks}点/${r.impressions}展）`)}\n\n`
-      + `**🚀 冲首页机会词（第2页附近·展示高）：**\n${list(g.opp, (r) => `· ${r.keys[0]}（第${r.position.toFixed(0)}名·${r.impressions}展）`)}`;
+      + `**🚀 机会词（8–20名·需核对页面意图）：**\n${list(g.opp, (r) => `· ${r.keys[0]}（第${r.position.toFixed(0)}名·${r.impressions}展）`)}`;
   } catch (e) { errors.push('GSC ' + e.message); gscMd = `**🔍 GSC**：拉取失败\n${e.message}`; }
 
   try {
