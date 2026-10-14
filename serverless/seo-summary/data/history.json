@@ -6637,6 +6637,306 @@
           "status": "ok"
         }
       ]
+    },
+    {
+      "schema_version": "1.0",
+      "site": "wonlyglobal.com",
+      "generated_at": "2026-10-14T01:27:41.158Z",
+      "freshness": {
+        "ga4": {
+          "through": "2026-10-13",
+          "lag_days": 1,
+          "status": "ok"
+        },
+        "gsc": {
+          "through": "2026-10-11",
+          "lag_days": 3,
+          "status": "ok"
+        },
+        "semrush": {
+          "through": "2026-09-07",
+          "status": "stale"
+        }
+      },
+      "windows": {
+        "7d": {
+          "gsc": {
+            "clicks": 14,
+            "impressions": 393,
+            "ctr": 0.035623409669211195,
+            "avg_position": 7.885496183206107
+          },
+          "ga4": {
+            "organic_sessions": 36
+          }
+        },
+        "28d": {
+          "gsc": {
+            "clicks": 45,
+            "impressions": 1712,
+            "ctr": 0.026285046728971962,
+            "avg_position": 9.535046728971963
+          },
+          "ga4": {
+            "organic_sessions": 87
+          }
+        }
+      },
+      "markets": [
+        {
+          "country": "ES",
+          "gsc_7d": {
+            "clicks": 1,
+            "impressions": 47,
+            "ctr": 0.02127659574468085,
+            "avg_position": 11.191489361702128
+          },
+          "ga4_7d": {
+            "organic_sessions": 3
+          },
+          "status": "ok"
+        },
+        {
+          "country": "MX",
+          "gsc_7d": {
+            "clicks": 1,
+            "impressions": 24,
+            "ctr": 0.041666666666666664,
+            "avg_position": 17.791666666666668
+          },
+          "ga4_7d": {
+            "organic_sessions": 2
+          },
+          "status": "ok"
+        }
+      ],
+      "funnel": {
+        "organic_7d": {
+          "cta_click": 17,
+          "form_open": 22,
+          "form_start": 3,
+          "inquiry_prompt_select": 0,
+          "form_submit": 1,
+          "generate_lead": 1,
+          "form_error": 0,
+          "form_abandon": 0,
+          "contact_click": 0
+        },
+        "organic_28d": {
+          "cta_click": 28,
+          "form_open": 40,
+          "form_start": 5,
+          "inquiry_prompt_select": 22,
+          "form_submit": 1,
+          "generate_lead": 1,
+          "form_error": 0,
+          "form_abandon": 1,
+          "contact_click": 2
+        },
+        "all_channels_7d": {
+          "cta_click": 42,
+          "form_open": 45,
+          "form_start": 11,
+          "inquiry_prompt_select": 9,
+          "form_submit": 4,
+          "generate_lead": 3,
+          "form_error": 1,
+          "form_abandon": 2,
+          "contact_click": 18
+        },
+        "all_channels_28d": {
+          "cta_click": 66,
+          "form_open": 92,
+          "form_start": 15,
+          "inquiry_prompt_select": 31,
+          "form_submit": 5,
+          "generate_lead": 4,
+          "form_error": 1,
+          "form_abandon": 3,
+          "contact_click": 23
+        }
+      },
+      "pages": [
+        {
+          "path": "/insights/cylindrical-lock-core-vs-standard-cylinder/",
+          "role": "article",
+          "gsc_7d": {
+            "clicks": 0,
+            "impressions": 18,
+            "ctr": 0,
+            "avg_position": 8.777777777777779
+          },
+          "gsc_28d": {
+            "clicks": 0,
+            "impressions": 208,
+            "ctr": 0,
+            "avg_position": 8.322115384615385
+          },
+          "issues": []
+        },
+        {
+          "path": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
+          "role": "article",
+          "gsc_7d": {
+            "clicks": 1,
+            "impressions": 30,
+            "ctr": 0.03333333333333333,
+            "avg_position": 7.166666666666667
+          },
+          "gsc_28d": {
+            "clicks": 2,
+            "impressions": 119,
+            "ctr": 0.01680672268907563,
+            "avg_position": 7.5966386554621845
+          },
+          "issues": []
+        },
+        {
+          "path": "/security-door-manufacturer/",
+          "role": "commercial",
+          "gsc_7d": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "avg_position": null
+          },
+          "gsc_28d": {
+            "clicks": 0,
+            "impressions": 3,
+            "ctr": 0,
+            "avg_position": 5.666666666666667
+          },
+          "issues": []
+        },
+        {
+          "path": "/global/mexico/security-doors/",
+          "role": "commercial",
+          "gsc_7d": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "avg_position": null
+          },
+          "gsc_28d": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "avg_position": null
+          },
+          "issues": []
+        },
+        {
+          "path": "/es/global/mexico/security-doors/",
+          "role": "commercial",
+          "gsc_7d": {
+            "clicks": 0,
+            "impressions": 0,
+            "ctr": 0,
+            "avg_position": null
+          },
+          "gsc_28d": {
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "avg_position": 4
+          },
+          "issues": []
+        }
+      ],
+      "experiments": [
+        {
+          "id": "lock-core-snippet-20260923",
+          "target_paths": [
+            "/insights/cylindrical-lock-core-vs-standard-cylinder/"
+          ],
+          "hypothesis": "Expanded comparison coverage and a clearer snippet can improve qualified organic CTR.",
+          "status": "observing_7d",
+          "baseline": {
+            "window": "28d",
+            "clicks": 0,
+            "impressions": 95,
+            "ctr": 0,
+            "avg_position": 8.9
+          },
+          "launched_at": "2026-09-23T08:00:00+08:00",
+          "observe_7d_at": "2026-09-30T08:00:00+08:00",
+          "observe_14d_at": "2026-10-07T08:00:00+08:00",
+          "latest": {
+            "window": "7d",
+            "clicks": 0,
+            "impressions": 18,
+            "ctr": 0,
+            "avg_position": 8.777777777777779
+          },
+          "decision": null
+        },
+        {
+          "id": "en1627-proof-checklist-20260923",
+          "target_paths": [
+            "/insights/en-1627-rc2-rc3-rc4-security-door-grades/"
+          ],
+          "hypothesis": "A complete certification checklist can improve relevance and qualified clicks for EN 1627 comparisons.",
+          "status": "observing_7d",
+          "baseline": {
+            "window": "28d",
+            "clicks": 0,
+            "impressions": 100,
+            "ctr": 0,
+            "avg_position": 10.2
+          },
+          "launched_at": "2026-09-23T08:00:00+08:00",
+          "observe_7d_at": "2026-09-30T08:00:00+08:00",
+          "observe_14d_at": "2026-10-07T08:00:00+08:00",
+          "latest": {
+            "window": "7d",
+            "clicks": 1,
+            "impressions": 30,
+            "ctr": 0.03333333333333333,
+            "avg_position": 7.166666666666667
+          },
+          "decision": null
+        }
+      ],
+      "competitors": [
+        "hormann.com",
+        "dierre.com",
+        "oikos.it",
+        "kaadas.com",
+        "cdfdistributors.com"
+      ],
+      "gaps": [
+        {
+          "field": "freshness.semrush",
+          "reason": "data_lag",
+          "since": "2026-09-07T00:00:00Z"
+        }
+      ],
+      "sources": [
+        {
+          "name": "GA4",
+          "captured_at": "2026-10-14T01:27:41.158Z",
+          "through": "2026-10-13",
+          "status": "ok"
+        },
+        {
+          "name": "GSC",
+          "captured_at": "2026-10-14T01:27:41.158Z",
+          "through": "2026-10-11",
+          "status": "ok"
+        },
+        {
+          "name": "SEMrush",
+          "captured_at": "2026-10-14T01:27:41.158Z",
+          "through": "2026-09-07",
+          "status": "stale"
+        },
+        {
+          "name": "production_audit",
+          "captured_at": "2026-10-14T01:27:41.158Z",
+          "through": "2026-10-14",
+          "status": "ok"
+        }
+      ]
     }
   ]
 }
