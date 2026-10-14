@@ -1,0 +1,18 @@
+{
+  "review_date": "2026-10-14",
+  "source_commit": "bd51a9a",
+  "captured_at": "2026-10-14T09:27:41+08:00",
+  "gsc_through": "2026-10-11",
+  "ga4_through": "2026-10-13",
+  "experiments": [
+    {"id":"lock-core-snippet-20260923","path":"/insights/cylindrical-lock-core-vs-standard-cylinder/","launched_at":"2026-09-23T08:00:00+08:00","baseline_7d":null,"baseline_28d":{"clicks":0,"impressions":95,"position":8.9},"latest_7d":{"clicks":0,"impressions":18,"ctr":0,"position":8.7778},"latest_28d":{"clicks":0,"impressions":208,"ctr":0,"position":8.3221},"decision":"保留，证据不足","reason":"仍未产生点击；滚动窗口包含上线前后日期，缺匹配对照和查询/设备拆分，不能归因或扩大。","next_action":"先补查询/设备/等长对照，审核搜索意图后决定下一轮摘要实验。"},
+    {"id":"en1627-proof-checklist-20260923","path":"/insights/en-1627-rc2-rc3-rc4-security-door-grades/","launched_at":"2026-09-23T08:00:00+08:00","baseline_7d":null,"baseline_28d":{"clicks":0,"impressions":100,"position":10.2},"latest_7d":{"clicks":1,"impressions":30,"ctr":0.0333333,"position":7.1667},"latest_28d":{"clicks":2,"impressions":119,"ctr":0.0168067,"position":7.5966},"decision":"保留，证据不足","reason":"有点击和排名正向信号，但样本少且没有匹配前后窗口或页面询盘归因。","next_action":"继续观察，不重复修改核心文案。"},
+    {"id":"procurement-20261008","launched_on":"2026-10-08","observe_7d":"2026-10-15","observe_14d":"2026-10-22","decision":"继续观察","latest_organic_funnel_7d":{"form_open":22,"form_start":3,"form_submit":1,"generate_lead":1},"reason":"这是全站自然事件次数，不能代替采购页或首页/contact分表单实验归因；7天日历节点尚未到。","next_action":"按原定日期复核，并标明GSC/GA4截止日和细分缺失。"}
+  ],
+  "constraints": ["真实询盘投递/CRM确认未获取", "查询、设备/桌面、自然着陆页、非重叠前期未获取", "SEMrush仍09-07过期", "已验证hreflang修复3f4abbd尚未正式部署"],
+  "priority_order": ["去个人化询盘交付对账", "已完成语言映射修复的发布准备及精确验收", "补齐数据对照后复核采购结构"],
+  "scoring": {"formula":"预期增量×商业价值×证据强度÷工作量与风险","numeric_scores":null,"reason":"缺可信增量与匹配对照，只给证据支持的序位；交付核对中工作量/低风险、语言修复发布低工作量/中风险、数据补齐中工作量/低风险。"},
+  "plan_reference": "docs/seo-review-2026-10-12.json",
+  "next_scheduled_publication": "2026-10-15 hotel-fire-acoustic-security-doors；六语及全部门禁通过后到期发布",
+  "publication_status": "今日仅只读检查与分析文档同步，无非紧急代码部署"
+}
