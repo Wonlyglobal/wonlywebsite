@@ -1,0 +1,16 @@
+{
+  "date":"2026-10-15",
+  "scheduled_date":"2026-10-16",
+  "mode":"built-in ImageGen",
+  "covers":[
+    {"path":"public/images/articles/security-door-rfq-drawings.webp","prompt":"Wide 3:2 editorial overhead photograph of a door-RFQ planning desk, door elevation/section drawings, blank checklist, metal finish samples, mechanical pencil and measuring tape. Natural neutral daylight; no logos, readable words, watermarks or certification claims; not an actual WONLY facility."},
+    {"path":"public/images/articles/euro-cylinder-measurement.webp","prompt":"Wide 3:2 editorial macro photograph of one intact unbranded satin-nickel euro-profile cylinder on a gray workbench with a separate caliper and blank worksheet. Realistic machining; no cutaways, pins, keys, bypass tools, people, logos, dimensional labels or rating claims."}
+  ],
+  "image_review":"Both compositions inspected; cylinder profile intact, no misleading measurement labels. Covers are illustrative, not product specifications or evidence of WONLY facilities.",
+  "reference":"https://www.abus.com/uk/Consumer/Highlights/The-world-of-door-cylinders/Replace-and-maintain-door-cylinder",
+  "reference_scope":"Centre fixing screw reference and allowance for fittings only; no copied installation/removal procedure or universal projection tolerance.",
+  "content_review":"Two distinct procurement intents; no invented search volume, approvals, product dimensions, availability or customer cases. Six languages each have independent TDK, body, FAQ and three internal contextual resources.",
+  "validation":{"typescript":"passed","six_language":"49 source articles × 5 translations passed","production_build":"2070 modules passed","local_future_static_html":"12 new language pages verified with local 10-16 static-generation cutoff; all 294 article pages and links passed","covers":"49 source covers exist and have unique content hashes","actual_cutoff":"Restored 10-15 build: 282 current article pages; both new slugs absent from sitemap and static output"},
+  "release_status":"GitHub inventory only; not merged into Codeup production and not publicly published. On due date apply content-only changes to latest Codeup and rerun gates; do not include unrelated GitHub CRM code.",
+  "batch_progress":{"ready":2,"remaining_briefs":18,"published":0}
+}
