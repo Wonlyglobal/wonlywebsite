@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-15",
+  "scope": "Remaining 18 topics, 108 language files; full authorized batch 20 topics, 120 language files",
+  "publication": "Scheduled inventory only; 2026-10-17 through 2026-10-25, two per day. Not production.",
+  "verification": {"i18n":"67 topics × 5 translations passed", "typescript":"passed", "production_build":"2178 modules passed; existing large article chunk warning remains", "future_simulation":"2026-10-25: 402 static article pages, internal links and SEO audit passed", "restored_today":"2026-10-15: 282 static article pages; 20 future topics excluded from sitemap/static routes", "covers":"67 unique source covers passed hash audit; remaining 18 contact-sheet images inspected"},
+  "review": "Distinct procurement checklist intents; no invented volumes, performance claims or customer cases. Translations editorially checked, not certified native-language review. Covers illustrative, not product or testing evidence.",
+  "sources": [
+    {
+      "url": "https://www.abloy.com/global/en-us/abloy-technology/master-keying",
+      "scope": "General master-key background, not WONLY product capability"
+    },
+    {
+      "url": "https://www.bsigroup.com/en-GB/products-and-services/assessment-and-certification/product-testing-certification/accelerating-progress-in-fenestration-with-expert-testing-and-certification-for-windows-and-doors/",
+      "scope": "General testing/certification background; no access to normative EN 1627 text claimed"
+    }
+  ],
+  "assets": [
+    {
+      "id": 3,
+      "slug": "door-opening-measurement-survey",
+      "prompt": "Use case: photorealistic-natural. Create a distinct 3:2 landscape editorial cover for a B2B door procurement article. Scene: An unfinished masonry doorway surveyed with a laser distance meter on a tripod and a spirit level leaning nearby; no people; architectural site photography. Premium restrained realism, accurate simple objects, natural light. No brands, watermarks, legible text, readable numbers, certifications, personal data or safety claims. Illustrative scene, not a WONLY installation or facility.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-8529d40f-192f-41ce-b4e8-73c8ed02fcbf.png",
+      "saved": "public/images/articles/door-opening-measurement-survey.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 4,
+      "slug": "keyed-alike-vs-master-key-procurement",
+      "prompt": "Use case: photorealistic-natural. Create a distinct 3:2 landscape editorial cover for a B2B door procurement article. Scene: A controlled key-management desk with three separate groups of ordinary keys on individual rings, a closed secure key cabinet in background and blank permission grid; no readable key codes. Premium restrained realism, accurate simple objects, natural light. No brands, watermarks, legible text, readable numbers, certifications, personal data or safety claims. Illustrative scene, not a WONLY installation or facility.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-890020c3-f220-49cb-a974-0cf20d75c343.png",
+      "saved": "public/images/articles/keyed-alike-vs-master-key-procurement.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 5,
+      "slug": "door-handing-swing-schedule",
+      "prompt": "Use case: photorealistic-natural. Create a distinct 3:2 landscape editorial cover for a B2B door procurement article. Scene: Top-down still life of an architectural door swing plan with curved opening arrows, two plain miniature door leaves on a model base, pencil and neutral sample chips. Premium restrained realism, accurate simple objects, natural light. No brands, watermarks, legible text, readable numbers, certifications, personal data or safety claims. Illustrative scene, not a WONLY installation or facility.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-910169ac-d008-401a-9e40-e877be965de6.png",
+      "saved": "public/images/articles/door-handing-swing-schedule.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 6,
+      "slug": "lock-cylinder-replacement-compatibility",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 landscape editorial B2B door procurement cover. Three intact unbranded euro-profile cylinders of visibly different lengths alongside a plain lock body and blank compatibility checklist; no opened internals or tools for bypass. Restrained premium realism and natural light. No legible text, logos, watermarks, certifications, exact measurement labels or brand claims; illustrative, not a WONLY facility.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-92f136d4-abf5-4be2-acc7-b9b00cd5d4a4.png",
+      "saved": "public/images/articles/lock-cylinder-replacement-compatibility.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 7,
+      "slug": "door-frame-fixing-substrate-review",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 landscape editorial B2B door procurement cover. Three small wall cross-section samples of concrete, masonry and metal-stud plasterboard, each containing a simple door-frame corner sample, on a neutral engineering bench. Restrained premium realism and natural light. No legible text, logos, watermarks, certifications, exact measurement labels or brand claims; illustrative, not a WONLY facility.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-5045041f-6829-44bf-a81a-0888496f1c30.png",
+      "saved": "public/images/articles/door-frame-fixing-substrate-review.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 8,
+      "slug": "en-1627-certificate-scope-check",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 landscape editorial B2B door procurement cover. A thick blank test-report binder, magnifying glass and unbranded solid door corner sample in a laboratory document-review room; no seals, certificates, scores or readable text. Restrained premium realism and natural light. No legible text, logos, watermarks, certifications, exact measurement labels or brand claims; illustrative, not a WONLY facility.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-03ee8bc7-8c3f-49bc-990e-6d9ef89f1a3a.png",
+      "saved": "public/images/articles/en-1627-certificate-scope-check.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 9,
+      "slug": "door-hardware-substitution-approval",
+      "prompt": "Use case: photorealistic-natural. Unique 3:2 landscape editorial cover for door procurement. Several different unbranded hinge and closer hardware samples in divided trays beside a blank approval grid and architectural drawing. Clean precise objects, restrained premium realism, natural daylight. No brands, legible text, watermarks, certification marks, personal details or claimed technical measurements; illustrative not a real WONLY site.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-8e7145ff-3244-47d1-874f-bf2ee01ada71.png",
+      "saved": "public/images/articles/door-hardware-substitution-approval.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 10,
+      "slug": "security-door-test-specimen-traceability",
+      "prompt": "Use case: photorealistic-natural. Unique 3:2 landscape editorial cover for door procurement. A factory inspection bench with a single plain door hinge, metal finish coupon, door-frame corner and blank batch tags linked with neutral paper folders; no people. Clean precise objects, restrained premium realism, natural daylight. No brands, legible text, watermarks, certification marks, personal details or claimed technical measurements; illustrative not a real WONLY site.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-32b53b85-098b-4449-afd9-98ae5a1da164.png",
+      "saved": "public/images/articles/security-door-test-specimen-traceability.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 11,
+      "slug": "mexico-distributor-door-sample-approval",
+      "prompt": "Use case: photorealistic-natural. Unique 3:2 landscape editorial cover for door procurement. A full-height charcoal entrance door sample standing safely in a bright distributor showroom beside a sealed finish sample box and blank approval clipboard. Clean precise objects, restrained premium realism, natural daylight. No brands, legible text, watermarks, certification marks, personal details or claimed technical measurements; illustrative not a real WONLY site.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-d61be115-1d17-4e40-b6f8-0a934a4be83d.png",
+      "saved": "public/images/articles/mexico-distributor-door-sample-approval.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 12,
+      "slug": "coastal-door-finish-maintenance-record",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 landscape editorial procurement cover. An intact painted exterior door corner near a distant ocean, with a closed neutral maintenance notebook and soft cloth on a dry inspection table; realistic non-corroded finish. Refined realistic material textures and natural light. No legible text, numbers, brands, watermarks, certification logos, exposed secrets or product performance promises. Illustrative scene only.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-8653ddd6-8708-4806-bc0c-c9595bcbb0c2.png",
+      "saved": "public/images/articles/coastal-door-finish-maintenance-record.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 13,
+      "slug": "spanish-security-door-rfq-glossary",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 landscape editorial procurement cover. An overhead translator's worktable with two open blank-column technical glossaries, a miniature door-frame section and neutral pencils; no letters or readable words. Refined realistic material textures and natural light. No legible text, numbers, brands, watermarks, certification logos, exposed secrets or product performance promises. Illustrative scene only.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-32885ca4-79d6-4c14-b5b0-c4a3bcbe3945.png",
+      "saved": "public/images/articles/spanish-security-door-rfq-glossary.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 14,
+      "slug": "smart-lock-offline-operation-acceptance",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 landscape editorial procurement cover. An intact unbranded smart-lock front and back panel displayed on a testing bench beside an unplugged Ethernet cable and a powered-off router; no screen text. Refined realistic material textures and natural light. No legible text, numbers, brands, watermarks, certification logos, exposed secrets or product performance promises. Illustrative scene only.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-a141f6d6-57c2-4e7b-9a23-a78c0398fc83.png",
+      "saved": "public/images/articles/smart-lock-offline-operation-acceptance.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 15,
+      "slug": "smart-lock-firmware-change-control",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 editorial landscape for industrial door purchasing. A closed generic smart-lock sample on an electronics quality desk, a laptop showing only abstract unlabelled version blocks and a blank approval checklist; no code or passwords. Precise simple realistic props, soft natural lighting. No legible words or numbers, logos, certification marks, watermarks, sensitive codes or false product performance assertions. Illustrative not documentary.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-3ff17df6-c1fb-4b3e-95e2-b97de7b96af3.png",
+      "saved": "public/images/articles/smart-lock-firmware-change-control.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 16,
+      "slug": "smart-door-power-outage-acceptance",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 editorial landscape for industrial door purchasing. A plain residential entrance door viewed from inside with a neutral electrical distribution box safely closed and a small backup-power unit nearby; no sparks, damage or people. Precise simple realistic props, soft natural lighting. No legible words or numbers, logos, certification marks, watermarks, sensitive codes or false product performance assertions. Illustrative not documentary.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-9a419fcb-719e-47c8-88ca-27c3d2613abd.png",
+      "saved": "public/images/articles/smart-door-power-outage-acceptance.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 17,
+      "slug": "approved-door-sample-production-comparison",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 editorial landscape for industrial door purchasing. Two matching plain metal door corner samples side by side on an inspection table with a metal ruler and blank approved-sample card. Precise simple realistic props, soft natural lighting. No legible words or numbers, logos, certification marks, watermarks, sensitive codes or false product performance assertions. Illustrative not documentary.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-7269e7d4-a31a-4afa-969c-2167a434343a.png",
+      "saved": "public/images/articles/approved-door-sample-production-comparison.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 18,
+      "slug": "export-door-packing-inspection",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 editorial landscape for industrial door purchasing. A securely packed full-length door crate in a bright shipping inspection bay, foam edge protectors visible, blank label card and corner guards; no shipping logos. Precise simple realistic props, soft natural lighting. No legible words or numbers, logos, certification marks, watermarks, sensitive codes or false product performance assertions. Illustrative not documentary.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-a6b8ee4f-41b6-48b1-b0b9-63643785f6d9.png",
+      "saved": "public/images/articles/export-door-packing-inspection.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 19,
+      "slug": "door-variation-request-register",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 editorial landscape for industrial door purchasing. An engineering change-review desk with two stacked door elevation drawings, colored revision tabs and a closed plain hinge sample case; no readable drawing text. Precise simple realistic props, soft natural lighting. No legible words or numbers, logos, certification marks, watermarks, sensitive codes or false product performance assertions. Illustrative not documentary.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-f4fccb28-fb22-4113-a867-eed9b8b25244.png",
+      "saved": "public/images/articles/door-variation-request-register.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    },
+    {
+      "id": 20,
+      "slug": "door-lock-spare-parts-planning",
+      "prompt": "Use case: photorealistic-natural. Distinct 3:2 editorial landscape for industrial door purchasing. An organized spare-parts cabinet with separate labelled-but-unreadable compartments containing matching unbranded hinges, seals and intact lock modules; warm service workshop. Precise simple realistic props, soft natural lighting. No legible words or numbers, logos, certification marks, watermarks, sensitive codes or false product performance assertions. Illustrative not documentary.",
+      "source": "/Users/a1234/.codex/generated_images/01a07f90-3583-7881-8826-7ae176ab0d84/exec-ca5acae7-d7d0-41ac-ab9a-c842f43e2f52.png",
+      "saved": "public/images/articles/door-lock-spare-parts-planning.webp",
+      "qa": "Viewed in contact sheet; distinct scene; illustrative generic hardware, no certification marks"
+    }
+  ]
+}

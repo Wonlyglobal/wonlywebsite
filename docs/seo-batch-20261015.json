@@ -7,9 +7,9 @@
   "includes_weekends": true,
   "start_date": "2026-10-16",
   "planned_end_date": "2026-10-25",
-  "status": "2_reviewed_18_briefs",
-  "drafts_complete": 2,
-  "reviewed_complete": 2,
+  "status": "20_reviewed_ready_for_due_build",
+  "drafts_complete": 20,
+  "reviewed_complete": 20,
   "published_complete": 0,
   "languages": [
     "en",
@@ -81,7 +81,12 @@
       "keyword": "door opening measurement checklist",
       "target": "/security-door-manufacturer/",
       "brief": "聚焦下单前多点测量表、垂直度/方正度和成品地面基准；不得编造统一安装公差。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/door-opening-measurement-survey.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 4,
@@ -91,7 +96,12 @@
       "keyword": "keyed alike vs master key",
       "target": "/products/smart-locks",
       "brief": "从权限矩阵、失钥撤权、备用管理和交付核对比较；不宣称现有型号全部支持。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/keyed-alike-vs-master-key-procurement.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 5,
@@ -101,7 +111,12 @@
       "keyword": "door handing schedule",
       "target": "/security-door-manufacturer/",
       "brief": "强调不同地区命名不一致，用观察侧、铰链侧、箭头图和双方签字冻结方向。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/door-handing-swing-schedule.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 6,
@@ -111,7 +126,12 @@
       "keyword": "replacement lock cylinder compatibility",
       "target": "/insights/cylindrical-lock-core-vs-standard-cylinder/",
       "brief": "列轮廓、拨轮/传动、固定点、护罩和锁体兼容表，区别于术语对比及防断等级文章。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/lock-cylinder-replacement-compatibility.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 7,
@@ -121,7 +141,12 @@
       "keyword": "door frame fixing substrate",
       "target": "/security-door-manufacturer/",
       "brief": "不同基层责任交接、锚固设计资料和报告适用边界；不给通用孔距或承载保证。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/door-frame-fixing-substrate-review.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 8,
@@ -131,7 +156,12 @@
       "keyword": "EN 1627 certificate scope",
       "target": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
       "brief": "独立证据核验工作表：证书持有人、样品构造、尺寸、五金、墙体及允许变化，不重复RC级别比较。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/en-1627-certificate-scope-check.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 9,
@@ -141,7 +171,12 @@
       "keyword": "door hardware substitution approval",
       "target": "/solutions/commercial-steel-security-doors",
       "brief": "变更影响矩阵及发起/设计/检测/采购审批责任，区别于既有五金表概览；正文链接须核验真实路由。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/door-hardware-substitution-approval.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 10,
@@ -151,7 +186,12 @@
       "keyword": "security door test specimen traceability",
       "target": "/security-door-manufacturer/",
       "brief": "型号/BOM/图纸修订/样品照片到批次的证据链，区分供应商声明与第三方报告。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/security-door-test-specimen-traceability.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 11,
@@ -161,7 +201,12 @@
       "keyword": "Mexico door distributor sample approval",
       "target": "/es/global/mexico/security-doors/",
       "brief": "样品批准表与当地安装伙伴确认流程，优先完善西语，避免虚构墨西哥进口或消防要求。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/mexico-distributor-door-sample-approval.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 12,
@@ -171,7 +216,12 @@
       "keyword": "coastal door finish maintenance",
       "target": "/es/global/mexico/security-doors/",
       "brief": "清洁方法向涂层供应商确认、盐沉积记录和损伤处理责任；区别于既有沿海材料选择文章。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/coastal-door-finish-maintenance-record.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 13,
@@ -181,7 +231,12 @@
       "keyword": "security door RFQ Spanish glossary",
       "target": "/es/global/mexico/security-doors/",
       "brief": "提供门框、门扇、手向、净开口、五金表和证据术语对照；六语各自保留英西对照及本地释义。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/spanish-security-door-rfq-glossary.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 14,
@@ -191,7 +246,12 @@
       "keyword": "smart lock offline operation checklist",
       "target": "/smart-lock-oem-odm/",
       "brief": "断网时凭证、时钟、日志、恢复同步与本地应急能力的测试记录，不重复电池寿命指南。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/smart-lock-offline-operation-acceptance.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 15,
@@ -201,7 +261,12 @@
       "keyword": "smart lock OEM firmware change control",
       "target": "/smart-lock-oem-odm/",
       "brief": "固件版本、测试矩阵、兼容范围、批准与回退责任；不宣称特定云平台能力。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/smart-lock-firmware-change-control.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 16,
@@ -211,7 +276,12 @@
       "keyword": "smart door power outage test",
       "target": "/smart-door-manufacturer/",
       "brief": "外部供电/备用/机械操作/恢复流程分工，区分安全与逃生，性能必须由项目配置核实。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/smart-door-power-outage-acceptance.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 17,
@@ -221,7 +291,12 @@
       "keyword": "door sample mass production inspection",
       "target": "/security-door-manufacturer/",
       "brief": "冻结外观样板、尺寸、BOM、五金和包装版本，列偏差处理及签字点，不重复工厂审计概览。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/approved-door-sample-production-comparison.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 18,
@@ -231,7 +306,12 @@
       "keyword": "export door packing inspection",
       "target": "/security-door-manufacturer/",
       "brief": "货物保护、箱号对应门号、运输损伤证据、装柜确认和责任；不编造通用运输认证。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/export-door-packing-inspection.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 19,
@@ -241,7 +321,12 @@
       "keyword": "door variation request register",
       "target": "/security-door-manufacturer/",
       "brief": "提供变更记录字段和成本/交期/测试范围影响核验，防止批准后口头替换。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/door-variation-request-register.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     },
     {
       "id": 20,
@@ -251,7 +336,12 @@
       "keyword": "door smart lock spare parts planning",
       "target": "/smart-lock-oem-odm/",
       "brief": "按型号修订、交付批次、维修技能和保管条件规划备件；不建议未经证据的固定备件比例。",
-      "status": "brief"
+      "status": "reviewed_ready_for_due_build",
+      "content_locales": ["en", "ar", "fr", "ru", "es", "pt"],
+      "cover": "images/articles/door-lock-spare-parts-planning.webp",
+      "reviewed_on": "2026-10-15",
+      "published_at": null,
+      "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。"
     }
   ]
 }
