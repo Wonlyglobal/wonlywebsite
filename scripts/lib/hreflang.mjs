@@ -4,7 +4,7 @@ const SITE = 'https://www.wonlyglobal.com';
 const normalize = route => route === '/' ? '/' : `${route.replace(/\/+$/, '')}/`;
 
 export function assertRouteHreflang(html, route, locales) {
-  const base = normalize(route.replace(/^\/(ar|fr|ru|es|pt)(?=\/)/, '') || '/');
+  const base = normalize(route.replace(/^\/(ar|fr|ru|es|pt)(?=\/|$)/, '') || '/');
   const expected = locales.map(locale => [locale, `${SITE}${locale === 'en' ? '' : `/${locale}`}${base}`]);
   expected.push(['x-default', `${SITE}${base}`]);
   const actual = [];
@@ -22,7 +22,7 @@ export function sitemapLanguageGroups(xml) {
   const groups = {};
   for (const [, url] of xml.matchAll(/<loc>(.*?)<\/loc>/g)) {
     const route = new URL(url).pathname;
-    const locale = route.match(/^\/(ar|fr|ru|es|pt)(?=\/)/)?.[1] || 'en';
+    const locale = route.match(/^\/(ar|fr|ru|es|pt)(?=\/|$)/)?.[1] || 'en';
     const base = normalize(locale === 'en' ? route : route.slice(locale.length + 1));
     (groups[base] ||= []).push(locale);
   }

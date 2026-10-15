@@ -103,6 +103,7 @@ export default function DoorGradePage({ grade }: { grade: DoorGrade }) {
     description: data.description,
     path: data.path,
     type: "website",
+    localized: false,
     jsonLd: {
       "@context": "https://schema.org", "@type": "ItemList", name: `${data.title} models`,
       itemListElement: data.models.map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item.name, ...(item.href ? { item: `${SITE_URL}${item.href}` } : {}) })),

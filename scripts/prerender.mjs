@@ -154,7 +154,7 @@ async function main() {
       await page.waitForTimeout(500);
 
       const html = await page.content();
-      const base = `${route.replace(/^\/(ar|fr|ru|es|pt)(?=\/)/, '').replace(/\/+$/, '')}/`;
+      const base = `${route.replace(/^\/(ar|fr|ru|es|pt)(?=\/|$)/, '').replace(/\/+$/, '')}/`;
       assertRouteHreflang(html, route, languageGroups[base]);
       const title = await page.title();
       const out = outFileFor(route);
