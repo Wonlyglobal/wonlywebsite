@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-10-15T01:36:42.215Z",
+  "generated_at": "2026-10-15T06:23:08.741Z",
   "freshness": {
     "ga4": {
       "through": "2026-10-14",
@@ -274,25 +274,25 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-10-15T01:36:42.215Z",
+      "captured_at": "2026-10-15T06:23:08.741Z",
       "through": "2026-10-14",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-10-15T01:36:42.215Z",
+      "captured_at": "2026-10-15T06:23:08.741Z",
       "through": "2026-10-12",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-10-15T01:36:42.215Z",
+      "captured_at": "2026-10-15T06:23:08.741Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-10-15T01:36:42.215Z",
+      "captured_at": "2026-10-15T06:23:08.741Z",
       "through": "2026-10-15",
       "status": "ok"
     }
