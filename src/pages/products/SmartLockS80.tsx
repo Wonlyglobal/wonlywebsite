@@ -168,28 +168,6 @@ const SmartLockS80 = () => {
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}>
-        <Reveal className="max-w-3xl">
-          <div className={eyebrow} style={{ color: GOLD }}>{t("how", "How It Works")}</div>
-          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("steps", "Three Steps. Under Two Seconds")}</h2>
-        </Reveal>
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 90}>
-              <div className="rounded-2xl p-8 h-full" style={{ background: "#fff", border: `1px solid ${SILVER}44` }}>
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: GOLD }}><s.icon size={22} style={{ color: "#fff" }} /></div>
-                  <span className="text-3xl font-light" style={{ color: SILVER }}>{s.n}</span>
-                </div>
-                <h3 className="mt-6 text-xl font-medium" style={{ color: DARK }}>{s.t}</h3>
-                <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{s.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* Immersive feature story — media-led, with searchable HTML copy */}
       <section className="px-[5vw] py-24 md:py-32" style={{ background: "#0d0c0b" }}>
         <Reveal className="max-w-3xl">
@@ -217,6 +195,55 @@ const SmartLockS80 = () => {
                 </div>
                 <div><h3 className="mt-5 text-lg font-medium text-white">{f.t}</h3><p className="mt-2 text-sm leading-relaxed text-white/60">{f.d}</p></div>
               </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* How it works — follows the core feature presentation */}
+      <section className="px-[7vw] py-20 md:py-28" style={{ background: CHAMP_BG }}>
+        <Reveal className="max-w-3xl">
+          <div className={eyebrow} style={{ color: GOLD }}>{t("how", "How It Works")}</div>
+          <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("steps", "Three Steps. Under Two Seconds")}</h2>
+        </Reveal>
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 90}>
+              <div className="rounded-2xl p-8 h-full" style={{ background: "#fff", border: `1px solid ${SILVER}44` }}>
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: GOLD }}><s.icon size={22} style={{ color: "#fff" }} /></div>
+                  <span className="text-3xl font-light" style={{ color: SILVER }}>{s.n}</span>
+                </div>
+                <h3 className="mt-6 text-xl font-medium" style={{ color: DARK }}>{s.t}</h3>
+                <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{s.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Use cases — follows the workflow */}
+      <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          <Reveal className="max-w-3xl">
+            <div className={eyebrow} style={{ color: GOLD }}>{t("fits", "Where It Fits")}</div>
+            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("every", "One Lock, Every Kind Of Door")}</h2>
+            <p className="mt-6 text-base leading-relaxed" style={{ color: MUTED }}>{t("arrivalBody", "From family arrivals to managed properties, the S80 is designed for entrances where convenient access and accountable control matter every day.")}</p>
+          </Reveal>
+          <Reveal delay={100}>
+            <figure className="overflow-hidden rounded-3xl" style={{ background: "#f2ede5" }}>
+              <img src={IMG.familyVilla} alt="Family arriving at a contemporary villa entrance equipped with a WONLY S80 smart lock" loading="lazy" className="w-full aspect-[4/3] object-cover" />
+            </figure>
+          </Reveal>
+        </div>
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {scenarios.map((s, i) => (
+            <Reveal key={s.t} delay={(i % 4) * 80}>
+              <div className="group h-full rounded-2xl p-7 border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ background: "#f7f7f5", borderColor: `${SILVER}66` }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: GOLD }}><s.icon size={20} style={{ color: "#fff" }} /></div>
+                <h3 className="mt-5 text-lg font-medium" style={{ color: DARK }}>{s.t}</h3>
+                <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{s.d}</p>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -253,33 +280,6 @@ const SmartLockS80 = () => {
           <div className={eyebrow + " mb-5"} style={{ color: CHAMP }}>{t("precision", "Precision Engineered")}</div>
           <h2 className="font-light text-white leading-[1.1] text-[28px] md:text-[50px]">{t("vault", "Built To The Same Standard As Our Vault Doors")}</h2>
         </Reveal>
-      </section>
-
-      {/* Where it fits */}
-      <section className="px-[7vw] py-24 md:py-32" style={{ background: "#fff" }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
-          <Reveal className="max-w-3xl">
-            <div className={eyebrow} style={{ color: GOLD }}>{t("fits", "Where It Fits")}</div>
-            <h2 className={h2cls + " mt-5"} style={{ color: DARK }}>{t("every", "One Lock, Every Kind Of Door")}</h2>
-            <p className="mt-6 text-base leading-relaxed" style={{ color: MUTED }}>{t("arrivalBody", "From family arrivals to managed properties, the S80 is designed for entrances where convenient access and accountable control matter every day.")}</p>
-          </Reveal>
-          <Reveal delay={100}>
-            <figure className="overflow-hidden rounded-3xl" style={{ background: "#f2ede5" }}>
-              <img src={IMG.familyVilla} alt="Family arriving at a contemporary villa entrance equipped with a WONLY S80 smart lock" loading="lazy" className="w-full aspect-[4/3] object-cover" />
-            </figure>
-          </Reveal>
-        </div>
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {scenarios.map((s, i) => (
-            <Reveal key={s.t} delay={(i % 4) * 80}>
-              <div className="group h-full rounded-2xl p-7 border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ background: "#f7f7f5", borderColor: `${SILVER}66` }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ background: GOLD }}><s.icon size={20} style={{ color: "#fff" }} /></div>
-                <h3 className="mt-5 text-lg font-medium" style={{ color: DARK }}>{s.t}</h3>
-                <p className="mt-2.5 text-sm font-normal leading-relaxed" style={{ color: MUTED }}>{s.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </section>
 
       {/* Specs */}

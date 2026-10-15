@@ -1,9 +1,8 @@
-import { ArrowRight, Check, ShieldCheck, Sparkles, ScanFace, Hand, BatteryCharging, Monitor, Wind, LockKeyhole, DoorOpen } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck, Sparkles, ScanFace, Hand, BatteryCharging, Monitor, Wind, LockKeyhole, DoorOpen, Fingerprint, Radar, Video, KeyRound, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSeo, SITE_URL } from "@/lib/seo";
 import { BASE, CHAMP, CHAMP_BG, DARK, GOLD, GOLD_DEEP, MUTED, SILVER, SiteFooter, SiteHeader, Reveal, eyebrow, h2cls, useQuoteStore } from "@/lib/site-ui";
 import { DoorModelSelector } from "@/lib/DoorModelSelector";
-import { usePublishedProduct } from "@/lib/cms-products";
 
 export type ProductKey =
   | "s80-max" | "s60-max" | "s60-pro" | "s50-pro" | "s58-pro" | "p10-pro" | "s922-max" | "s936"
@@ -21,6 +20,7 @@ type ProductData = {
   intro: string;
   highlights: string[];
   bestFor: string[];
+  steps?: { icon: typeof ShieldCheck; title: string; text: string }[];
   applications?: { image: string; alt: string; title: string; text: string }[];
   features: { icon: typeof ShieldCheck; title: string; text: string }[];
   gallery: { image: string; alt: string; title: string; text: string }[];
@@ -38,6 +38,44 @@ type CatalogueModel = {
   access?: string;
   dimensions?: string;
   bestFor: string[];
+};
+
+const SMART_LOCK_STEPS: Partial<Record<ProductKey, ProductData["steps"]>> = {
+  "s60-max": [
+    { icon: Radar, title: "1 · Sense the approach", text: "Remote-sensing recognition prepares the lock as the user approaches the entrance." },
+    { icon: ScanFace, title: "2 · Verify identity", text: "3D face recognition provides biometric access; fingerprint, passcode, encrypted M1 card, key and app are also listed access methods." },
+    { icon: DoorOpen, title: "3 · View or open", text: "Use remote video and the 4.5-inch HD display. Automatic opening is an optional configuration." },
+  ],
+  "s60-pro": [
+    { icon: ScanFace, title: "1 · Verify with 3D face", text: "The catalogue lists 3D face recognition as the model's primary biometric function." },
+    { icon: Video, title: "2 · Check the entrance", text: "Remote video, a smart door viewer and loitering snapshots help users review entrance activity." },
+    { icon: Monitor, title: "3 · Choose another access method", text: "Fingerprint, passcode, encrypted M1 card, mechanical key and app are listed alternatives; the model includes a 4.5-inch HD display." },
+  ],
+  "s50-pro": [
+    { icon: ScanFace, title: "1 · Verify with 3D face", text: "3D face recognition is the S50 Pro's listed biometric access function." },
+    { icon: Video, title: "2 · Review the visitor", text: "Remote video and the door viewer help users check the entrance, with loitering snapshots available." },
+    { icon: Monitor, title: "3 · View from indoors", text: "The rear 4.5-inch display presents the door-viewer experience; fingerprint, passcode, card, key and app are listed access options." },
+  ],
+  "s58-pro": [
+    { icon: Video, title: "1 · Receive a visitor call", text: "The video-intercom function lets the resident check a visitor at the entrance." },
+    { icon: ScanFace, title: "2 · Authenticate at the lock", text: "3D face recognition is supported alongside the model's listed fingerprint, passcode, card and key methods." },
+    { icon: Smartphone, title: "3 · Respond remotely", text: "Remote unlocking and a 4.5-inch rear display support visitor handling at home or away." },
+  ],
+  "p10-pro": [
+    { icon: ScanFace, title: "1 · Choose a biometric", text: "The catalogue lists 3D face or palm-vein recognition for this model." },
+    { icon: Fingerprint, title: "2 · Authenticate", text: "Fingerprint, passcode, mechanical key, encrypted M1 card and WeChat official account are also listed access methods." },
+    { icon: Monitor, title: "3 · Review the entrance", text: "Use the door viewer, 4.5-inch HD rear display and loitering snapshots to check entrance activity." },
+  ],
+  "s922-max": [
+    { icon: ScanFace, title: "1 · Verify with 3D face", text: "Face recognition is the model's listed biometric access function." },
+    { icon: Video, title: "2 · Check the doorway", text: "A door viewer, loitering snapshots and a compact 4-inch rear display help review visitors." },
+    { icon: Smartphone, title: "3 · Open or manage access", text: "Remote unlocking is supported, alongside fingerprint, passcode, encrypted card, mechanical key and WeChat official account." },
+  ],
+  "s936": [
+    { icon: Hand, title: "1 · Grip to open", text: "The S936 uses a grip-to-open operation for a direct handle interaction." },
+    { icon: Fingerprint, title: "2 · Use a listed credential", text: "AI fingerprint access, anti-peep passcode, encrypted M1 card and mechanical key are listed methods." },
+    { icon: KeyRound, title: "3 · Close and secure", text: "Semi-automatic locking supports the everyday close-and-secure routine." },
+  ],
 };
 
 const catalogueModel = ({ key, model, family, type, colour, signature, access, dimensions, bestFor }: CatalogueModel): ProductData => {
@@ -60,6 +98,7 @@ const catalogueModel = ({ key, model, family, type, colour, signature, access, d
       : `${model} is a Smart Door 5.0 entrance platform combining powered operation, security construction and connected access in one project-ready system.`,
     highlights: signature.slice(0, 3),
     bestFor,
+    steps: family === "smart-lock" ? SMART_LOCK_STEPS[key] : undefined,
     features: signature.map((item, index) => ({
       icon: [ScanFace, Monitor, ShieldCheck, LockKeyhole, Hand, Sparkles][index % 6],
       title: item,
@@ -108,6 +147,11 @@ const PRODUCTS: Record<ProductKey, ProductData> = {
     intro: "A flagship Smart Lock 4.0 platform designed to recognize an authorized user before they reach the door, then open and close automatically without a handle pull.",
     highlights: ["2-4 m remote-sensing recognition", "Triple-Protection Separation architecture", "Anti-pinch lock body exclusive to WONLY"],
     bestFor: ["Premium apartments", "Villas and smart homes", "Executive residences", "High-end residential projects"],
+    steps: [
+      { icon: Radar, title: "1 · Sense the approach", text: "A dedicated SIM credential in a compatible phone, watch or key fob lets remote sensing prepare the lock as the user approaches." },
+      { icon: ScanFace, title: "2 · Verify identity", text: "3D face recognition is supported alongside fingerprint, passcode, encrypted M1 card, mechanical key and app access." },
+      { icon: DoorOpen, title: "3 · Open with the configured lock body", text: "The automatic opening experience depends on the selected compatible lock-body configuration; anti-pinch protection is part of the S80 Max platform." },
+    ],
     features: [
       { icon: Sparkles, title: "Arrive. It Is Already Open.", text: "Remote-sensing recognition works with a dedicated SIM card carried in a phone, watch or key fob to prepare the lock before arrival." },
       { icon: ScanFace, title: "Multiple Verified Entry Methods", text: "3D face recognition, fingerprint, passcode, encrypted M1 card, mechanical key and app access support different users and situations." },
@@ -220,7 +264,7 @@ const PRODUCTS: Record<ProductKey, ProductData> = {
 };
 
 export default function CatalogProductDetail({ product }: { product: ProductKey }) {
-  const data = usePublishedProduct<ProductData & Record<string,unknown>>(product,PRODUCTS[product]);
+  const data = PRODUCTS[product];
   const openQuote = useQuoteStore((s) => s.openQuote);
   const jsonLd = [
     { "@context": "https://schema.org", "@type": "Product", name: data.title, model: data.model, category: data.category, brand: { "@type": "Brand", name: "WONLY" }, manufacturer: { "@type": "Organization", name: "WONLY" }, description: data.description, image: `${SITE_URL}${data.hero.replace(BASE, "/")}`, url: `${SITE_URL}${data.path}/` },
@@ -246,6 +290,8 @@ export default function CatalogProductDetail({ product }: { product: ProductKey 
       {product !== "t200" && <section className="px-[6vw] py-20 md:py-28"><div className="max-w-[1450px] mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Product Advantages</div><h2 className={h2cls + " mt-4 max-w-3xl"}>Built Around Real Entrance Needs</h2><div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">{data.features.map((feature, i) => <Reveal key={feature.title} delay={(i % 3) * 60}><article className="h-full rounded-2xl bg-white border p-7" style={{ borderColor: `${SILVER}55` }}><feature.icon size={25} style={{ color: GOLD }} /><h3 className="mt-5 text-xl font-medium">{feature.title}</h3><p className="mt-3 text-sm leading-7" style={{ color: MUTED }}>{feature.text}</p></article></Reveal>)}</div></div></section>}
 
       <section className="px-[6vw] py-20 md:py-28 bg-white"><div className="max-w-[1450px] mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>See the Difference</div><h2 className={h2cls + " mt-4 max-w-3xl"}>Functions You Can Understand at a Glance</h2><p className="mt-5 max-w-3xl leading-7" style={{ color: MUTED }}>Each function is shown as a separate product or use-case image, with searchable page text explaining the buyer benefit.</p><div className={`mt-12 grid md:grid-cols-2 ${data.gallery.length > 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"} gap-7`}>{data.gallery.map((item, index) => <Reveal key={item.title} delay={(index % 3) * 60}><article className="h-full overflow-hidden rounded-3xl border" style={{ borderColor: `${SILVER}55`, background: CHAMP_BG }}><div className="aspect-[16/10] bg-[#eeeae2] flex items-center justify-center overflow-hidden"><img src={item.image} alt={item.alt} className="w-full h-full object-contain" loading="lazy" /></div><div className="p-7 md:p-8"><h3 className="text-xl md:text-2xl font-medium">{item.title}</h3><p className="mt-3 leading-7" style={{ color: MUTED }}>{item.text}</p></div></article></Reveal>)}</div></div></section>
+
+      {data.steps && <section className="px-[6vw] py-20 md:py-28" style={{ background: CHAMP_BG }}><div className="max-w-[1450px] mx-auto"><div className={eyebrow} style={{ color: GOLD_DEEP }}>How It Works</div><h2 className={h2cls + " mt-4 max-w-3xl"}>From Access Method to Entry</h2><p className="mt-5 max-w-3xl leading-7" style={{ color: MUTED }}>Exact access methods and automatic functions depend on the selected model and market configuration.</p><div className="mt-10 grid md:grid-cols-3 gap-5">{data.steps.map((step, index) => <Reveal key={step.title} delay={index * 70}><article className="h-full rounded-2xl bg-white border p-7 md:p-8" style={{ borderColor: `${SILVER}55` }}><div className="flex items-center justify-between"><span className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: GOLD }}><step.icon size={21} style={{ color: "#fff" }} /></span><span className="text-3xl font-light" style={{ color: SILVER }}>0{index + 1}</span></div><h3 className="mt-6 text-xl font-medium">{step.title.replace(/^\d+ · /, "")}</h3><p className="mt-3 text-sm leading-7" style={{ color: MUTED }}>{step.text}</p></article></Reveal>)}</div></div></section>}
 
       <section className="px-[6vw] py-20 md:py-28"><div className="max-w-[1450px] mx-auto"><div className="max-w-3xl"><div className={eyebrow} style={{ color: GOLD_DEEP }}>Applications</div><h2 className={h2cls + " mt-4"}>Where {data.model} Fits</h2><p className="mt-5 leading-7" style={{ color: MUTED }}>Final product configuration is confirmed by WONLY sales engineering according to the market, door specification and project requirements.</p></div>{data.applications ? <div className="mt-12 grid md:grid-cols-2 gap-7">{data.applications.map((item, index) => <Reveal key={item.title} delay={(index % 2) * 70}><article className="h-full overflow-hidden rounded-3xl bg-white border" style={{ borderColor: `${SILVER}55` }}><div className="aspect-[16/10] overflow-hidden bg-[#e8e2d8]"><img src={item.image} alt={item.alt} className="w-full h-full object-cover" loading="lazy" /></div><div className="p-7 md:p-8"><h3 className="text-xl md:text-2xl font-medium">{item.title}</h3><p className="mt-3 leading-7" style={{ color: MUTED }}>{item.text}</p></div></article></Reveal>)}</div> : <div className="mt-12 grid sm:grid-cols-2 gap-4">{data.bestFor.map((item) => <div key={item} className="rounded-2xl p-6 flex gap-3 items-center bg-white"><Check size={18} style={{ color: GOLD }} /><span className="font-medium">{item}</span></div>)}</div>}</div></section>
 

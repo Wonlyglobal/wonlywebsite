@@ -20,6 +20,7 @@ const data: ProductPageData = {
   highlights: ["Hands-free long-range sensing", "Palm-vein & fingerprint biometrics", "Encrypted, tamper-proof design"],
   seriesEyebrow: "Lock Range",
   seriesTitle: "A Lock For Every Door",
+  clickableSeriesCards: true,
   series: [
     { name: "S80 True-Sensing Smart Lock", tag: "Flagship", d: "Hands-free sensing, biometric access and connected control in WONLY's immersive flagship lock page.", img: `${BASE}images/lock-s80.webp`, path: "/products/smart-locks/s80" },
     { name: "S80 Max Remote-Sensing True Smart Lock", tag: "Flagship 4.0", d: "Hands-free approach recognition, 3D face access, anti-pinch protection and an integrated door viewer.", img: `${BASE}images/catalog-2026/s80.webp`, path: "/products/smart-locks/s80-max" },

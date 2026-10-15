@@ -175,9 +175,73 @@ const SMART_LOCK: Partial<Record<Locale, WoodenCopy>> = {
   pt: { seo: { title: "Fabricante de fechaduras inteligentes biométricas | WONLY", description: "Fechaduras WONLY: acesso sem uso das mãos, veias da palma, impressão digital, vídeo, aplicação e segurança cifrada antissabotagem para distribuidores e projetos." }, eyebrow: "Fechaduras inteligentes", title: "Acesso sem uso das mãos True-Sensing", sub: "Detecção de longo alcance, biométrica e segurança cifrada antissabotagem: o coração inteligente da porta WONLY.", highlights: ["Detecção de longo alcance sem uso das mãos", "Biométrica de palma e impressão digital", "Design cifrado antissabotagem"], seriesEyebrow: "Gama de fechaduras", seriesTitle: "Uma fechadura para cada porta", series: [{ name: "Fechadura S80 True-Sensing", tag: "Principal", description: "Detecção de longo alcance sem uso das mãos, biométrica e controle por aplicação." }, { name: "Fechadura push-pull de veias da palma", tag: "Biométrica", description: "Reconhecimento sem contato da palma e manilha push-pull em um movimento." }, { name: "Fechadura inteligente Video Guard", tag: "Com câmera", description: "Câmera integrada e alertas de movimento mostram as visitas no telefone." }, { name: "Sistema de acesso comercial", tag: "Empresa", description: "RFID, PIN e aplicação para escritórios, hotéis e edifícios públicos." }], featuresEyebrow: "Engenharia integrada", featuresTitle: "Segurança sem precisar pensar", features: [{ title: "Acesso True-Sensing", description: "Detecção de longo alcance reconhece e abre ao aproximar-se." }, { title: "Multibiometria", description: "Palma, impressão digital, PIN, cartão e aplicação: até seis formas de acesso." }, { title: "Video Guard", description: "Câmera com detecção de movimento transmite as visitas para o telefone." }, { title: "Aplicação e cenários", description: "Abertura remota, senhas temporárias e cenários de casa inteligente." }, { title: "Anti-sabotagem", description: "Comunicação cifrada e estrutura antipalancas e antiperfuração." }, { title: "Ativação automática", description: "A casa se arma ao sair e se desarma ao retornar." }], bandEyebrow: "Fabricação própria", bandTitle: "Milhões de fechaduras inteligentes por ano em linhas próprias", ctaTitle: "Leve as fechaduras WONLY para seu mercado", ctaSub: "Residencial, hoteleiro ou comercial: solicite catálogo, amostras e preços." },
 };
 
+type SmartLockModelCopy = { tag: string; description: string };
+const SMART_LOCK_MODEL_COPY: Partial<Record<Locale, SmartLockModelCopy[]>> = {
+  ar: [
+    { tag: "استشعار حقيقي", description: "دخول دون استخدام اليدين مع استشعار الوصول والمصادقة البيومترية والتحكم بالتطبيق." },
+    { tag: "الرائد · 4.0", description: "استشعار من 2 إلى 4 أمتار، تعرف ثلاثي الأبعاد على الوجه، حماية من الانحشار وشاشة مراقبة 5 بوصات." },
+    { tag: "Max · 4.0", description: "استشعار بعيد، تعرف ثلاثي الأبعاد على الوجه، فيديو عن بعد وشاشة HD مقاس 4.5 بوصة؛ فتح تلقائي اختياري." },
+    { tag: "Pro · 3.0", description: "تعرف ثلاثي الأبعاد على الوجه، فتح وفيديو عن بعد، عارض باب ذكي وشاشة داخلية HD مقاس 4.5 بوصة." },
+    { tag: "Pro · فيديو", description: "تعرف على الوجه ثلاثي الأبعاد وفيديو عن بعد ولقطات للانتظار وشاشة داخلية 4.5 بوصة." },
+    { tag: "Pro · اتصال مرئي", description: "تعرف على الوجه، اتصال مرئي، فتح عن بعد وشاشة داخلية مقاس 4.5 بوصة." },
+    { tag: "الوجه أو الوريد", description: "تعرف على الوجه ثلاثي الأبعاد أو أوردة الكف، مع عارض باب وشاشة داخلية HD مقاس 4.5 بوصة." },
+    { tag: "Max · مدمج", description: "تعرف على الوجه ثلاثي الأبعاد وفتح عن بعد ولقطات للانتظار وشاشة داخلية مدمجة مقاس 4 بوصات." },
+    { tag: "التجزئة · بصمة", description: "فتح بقبضة اليد وبصمة ذكية ورمز مضاد للتلصص وبطاقة مشفرة ومفتاح ميكانيكي." },
+    { tag: "علامة خاصة", description: "طوّر مجموعة أقفال بعلامتك التجارية مع اختيار المنصة والتوافق الميكانيكي والعينات والتغليف." },
+  ],
+  fr: [
+    { tag: "True-Sensing", description: "Accès mains libres avec détection d’approche, authentification biométrique et commande par application." },
+    { tag: "Phare · 4.0", description: "Détection de 2 à 4 m, reconnaissance faciale 3D, protection anti-pincement et écran de contrôle 5 pouces." },
+    { tag: "Max · 4.0", description: "Détection à distance, visage 3D, vidéo à distance et écran HD 4,5 pouces ; ouverture automatique en option." },
+    { tag: "Pro · 3.0", description: "Visage 3D, déverrouillage et vidéo à distance, judas intelligent et écran intérieur HD 4,5 pouces." },
+    { tag: "Pro · vidéo", description: "Visage 3D, vidéo à distance, captures en cas de présence prolongée et écran intérieur 4,5 pouces." },
+    { tag: "Pro · interphone", description: "Reconnaissance faciale, interphone vidéo, déverrouillage à distance et écran intérieur 4,5 pouces." },
+    { tag: "Visage ou paume", description: "Reconnaissance faciale 3D ou des veines de la paume, judas et écran intérieur HD 4,5 pouces." },
+    { tag: "Max · compact", description: "Visage 3D, déverrouillage à distance, captures de présence et écran intérieur compact 4 pouces." },
+    { tag: "Retail · empreinte", description: "Prise en main, empreinte digitale, code anti-regard indiscret, carte chiffrée et clé mécanique." },
+    { tag: "Marque distributeur", description: "Créez une gamme sous votre marque : plateforme, compatibilité mécanique, échantillons et emballage." },
+  ],
+  ru: [
+    { tag: "True-Sensing", description: "Бесконтактный вход с распознаванием приближения, биометрической проверкой и управлением через приложение." },
+    { tag: "Флагман · 4.0", description: "Распознавание на расстоянии 2–4 м, 3D-лицо, защита от защемления и 5-дюймовый монитор." },
+    { tag: "Max · 4.0", description: "Дальнее распознавание, 3D-лицо, удалённое видео и HD-экран 4,5 дюйма; автооткрытие опционально." },
+    { tag: "Pro · 3.0", description: "3D-распознавание лица, удалённое открытие и видео, видеоглазок и внутренний HD-экран 4,5 дюйма." },
+    { tag: "Pro · видео", description: "3D-лицо, удалённое видео, снимки при задержке у двери и внутренний экран 4,5 дюйма." },
+    { tag: "Pro · видеосвязь", description: "Распознавание лица, видеодомофон, удалённое открытие и внутренний экран 4,5 дюйма." },
+    { tag: "Лицо или ладонь", description: "3D-распознавание лица или вен ладони, видеоглазок и внутренний HD-экран 4,5 дюйма." },
+    { tag: "Max · компактный", description: "3D-лицо, удалённое открытие, снимки при задержке у двери и компактный экран 4 дюйма." },
+    { tag: "Розница · отпечаток", description: "Открытие хватом, отпечаток пальца, PIN-код с защитой от подсматривания, карта и ключ." },
+    { tag: "Собственная марка", description: "Создайте линейку под своим брендом: платформа, механическая совместимость, образцы и упаковка." },
+  ],
+  es: [
+    { tag: "True-Sensing", description: "Acceso sin manos con detección de aproximación, autenticación biométrica y control por aplicación." },
+    { tag: "Insignia · 4.0", description: "Detección de 2 a 4 m, reconocimiento facial 3D, protección antipinzamiento y pantalla de 5 pulgadas." },
+    { tag: "Max · 4.0", description: "Detección remota, rostro 3D, vídeo remoto y pantalla HD de 4,5 pulgadas; apertura automática opcional." },
+    { tag: "Pro · 3.0", description: "Rostro 3D, apertura y vídeo remotos, visor inteligente y pantalla interior HD de 4,5 pulgadas." },
+    { tag: "Pro · vídeo", description: "Rostro 3D, vídeo remoto, capturas ante merodeo y pantalla interior de 4,5 pulgadas." },
+    { tag: "Pro · videoportero", description: "Reconocimiento facial, videoportero, apertura remota y pantalla interior de 4,5 pulgadas." },
+    { tag: "Rostro o palma", description: "Reconocimiento facial 3D o de venas de la palma, visor de puerta y pantalla HD interior de 4,5 pulgadas." },
+    { tag: "Max · compacto", description: "Rostro 3D, apertura remota, capturas ante merodeo y pantalla interior compacta de 4 pulgadas." },
+    { tag: "Retail · huella", description: "Apertura al agarrar, huella digital, PIN anti-miradas, tarjeta cifrada y llave mecánica." },
+    { tag: "Marca propia", description: "Desarrolle una gama con su marca: plataforma, compatibilidad mecánica, muestras y embalaje." },
+  ],
+  pt: [
+    { tag: "True-Sensing", description: "Acesso sem usar as mãos, com detecção de aproximação, autenticação biométrica e controle por aplicativo." },
+    { tag: "Principal · 4.0", description: "Detecção de 2 a 4 m, reconhecimento facial 3D, proteção antiesmagamento e tela de 5 polegadas." },
+    { tag: "Max · 4.0", description: "Detecção remota, face 3D, vídeo remoto e tela HD de 4,5 polegadas; abertura automática opcional." },
+    { tag: "Pro · 3.0", description: "Face 3D, abertura e vídeo remotos, visor inteligente e tela interna HD de 4,5 polegadas." },
+    { tag: "Pro · vídeo", description: "Face 3D, vídeo remoto, capturas por permanência na porta e tela interna de 4,5 polegadas." },
+    { tag: "Pro · interfone", description: "Reconhecimento facial, interfone de vídeo, abertura remota e tela interna de 4,5 polegadas." },
+    { tag: "Face ou palma", description: "Reconhecimento facial 3D ou das veias da palma, visor e tela interna HD de 4,5 polegadas." },
+    { tag: "Max · compacto", description: "Face 3D, abertura remota, capturas por permanência e tela interna compacta de 4 polegadas." },
+    { tag: "Varejo · digital", description: "Abertura por empunhadura, impressão digital, PIN anti-olhadela, cartão cifrado e chave mecânica." },
+    { tag: "Marca própria", description: "Desenvolva uma linha com sua marca: plataforma, compatibilidade mecânica, amostras e embalagem." },
+  ],
+};
+
 export function localizeSmartLocks(data: ProductPageData, locale: Locale): ProductPageData {
   const c = SMART_LOCK[locale]; if (!c) return data;
-  return { ...data, seo: { ...data.seo, ...c.seo }, hero: { ...data.hero, eyebrow: c.eyebrow, title: c.title, sub: c.sub }, highlights: c.highlights, seriesEyebrow: c.seriesEyebrow, seriesTitle: c.seriesTitle, series: data.series.map((item, i) => ({ ...item, name: c.series[i]?.name ?? item.name, tag: c.series[i]?.tag ?? item.tag, d: c.series[i]?.description ?? item.d })), featuresEyebrow: c.featuresEyebrow, featuresTitle: c.featuresTitle, features: data.features.map((item, i) => ({ ...item, t: c.features[i]?.title ?? item.t, d: c.features[i]?.description ?? item.d })), band: { ...data.band, eyebrow: c.bandEyebrow, title: c.bandTitle }, cta: { title: c.ctaTitle, sub: c.ctaSub } };
+  return { ...data, seo: { ...data.seo, ...c.seo }, hero: { ...data.hero, eyebrow: c.eyebrow, title: c.title, sub: c.sub }, highlights: c.highlights, seriesEyebrow: c.seriesEyebrow, seriesTitle: c.seriesTitle, series: data.series.map((item, i) => ({ ...item, tag: SMART_LOCK_MODEL_COPY[locale]?.[i]?.tag ?? item.tag, d: SMART_LOCK_MODEL_COPY[locale]?.[i]?.description ?? item.d })), featuresEyebrow: c.featuresEyebrow, featuresTitle: c.featuresTitle, features: data.features.map((item, i) => ({ ...item, t: c.features[i]?.title ?? item.t, d: c.features[i]?.description ?? item.d })), band: { ...data.band, eyebrow: c.bandEyebrow, title: c.bandTitle }, cta: { title: c.ctaTitle, sub: c.ctaSub } };
 }
 
 const SMART_WINDOW: Partial<Record<Locale, WoodenCopy>> = {

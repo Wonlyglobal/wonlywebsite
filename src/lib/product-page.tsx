@@ -13,6 +13,7 @@ export type ProductPageData = {
   seriesEyebrow?: string;
   seriesTitle?: string;
   series?: Series[];
+  clickableSeriesCards?: boolean;
   featuresEyebrow: string;
   featuresTitle: string;
   features: Feature[];
@@ -85,7 +86,21 @@ export function ProductPage({ data }: { data: ProductPageData }) {
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.series.map((s, i) => (
               <Reveal key={s.name} delay={(i % 3) * 80}>
-                <div className="group h-full flex flex-col rounded-2xl overflow-hidden border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ borderColor: `${SILVER}66` }}>
+                {data.clickableSeriesCards && s.path ? (
+                  <Link to={s.path} aria-label={`View ${s.name} details`} className="group block h-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b99a5b]">
+                    <div className="h-full flex flex-col rounded-2xl overflow-hidden border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ borderColor: `${SILVER}66` }}>
+                      <div className="relative h-[220px] overflow-hidden shrink-0" style={{ background: CHAMP_BG }}>
+                        <img src={s.img} alt={s.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        {s.tag && <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{s.tag}</span>}
+                      </div>
+                      <div className="p-6 flex flex-col flex-1">
+                        <h3 className="text-lg font-medium" style={{ color: DARK }}>{s.name}</h3>
+                        <p className="mt-2 text-sm font-normal leading-relaxed flex-1" style={{ color: MUTED }}>{s.d}</p>
+                        <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>View details <ArrowRight size={15} /></span>
+                      </div>
+                    </div>
+                  </Link>
+                ) : <div className="group h-full flex flex-col rounded-2xl overflow-hidden border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgba(34,31,32,0.28)]" style={{ borderColor: `${SILVER}66` }}>
                   <div className="relative h-[220px] overflow-hidden shrink-0" style={{ background: CHAMP_BG }}>
                     <img src={s.img} alt={s.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     {s.tag && <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-medium" style={{ background: GOLD, color: DARK }}>{s.tag}</span>}
@@ -95,7 +110,7 @@ export function ProductPage({ data }: { data: ProductPageData }) {
                     <p className="mt-2 text-sm font-normal leading-relaxed flex-1" style={{ color: MUTED }}>{s.d}</p>
                     {s.path && <Link to={s.path} className="mt-4 inline-flex items-center gap-2 text-sm font-medium" style={{ color: GOLD }}>View details <ArrowRight size={15} /></Link>}
                   </div>
-                </div>
+                </div>}
               </Reveal>
             ))}
           </div>
