@@ -1,0 +1,20 @@
+{
+  "review_date": "2026-10-15",
+  "snapshot_commit": "35a2de4",
+  "captured_at": "2026-10-15T09:36:42+08:00",
+  "gsc_through": "2026-10-12",
+  "ga4_through": "2026-10-14",
+  "experiments": [
+    {"id":"lock-core-snippet-20260923","baseline_7d":null,"baseline_28d":{"clicks":0,"impressions":95,"position":8.9},"latest_7d":{"clicks":0,"impressions":19,"position":7.9474},"latest_28d":{"clicks":0,"impressions":197,"position":8.1168},"decision":"保留，证据不足","next_action":"先补等长对照和查询/设备意图，不能用全站排名或展示变化推断页面收益。"},
+    {"id":"en1627-proof-checklist-20260923","baseline_7d":null,"baseline_28d":{"clicks":0,"impressions":100,"position":10.2},"latest_7d":{"clicks":0,"impressions":23,"position":8.0435},"latest_28d":{"clicks":2,"impressions":111,"position":7.6577},"decision":"保留，证据不足","next_action":"7天点击由1变0是重叠低样本变化，不构成掉出20或优化失效证据。"},
+    {"id":"procurement-20261008","launched_on":"2026-10-08","baseline_7d":null,"baseline_28d":null,"observe_7d":"2026-10-15","observe_14d":"2026-10-22","latest_global_organic_funnel_7d":{"form_open":23,"form_start":3,"form_submit":1,"generate_lead":1},"decision":"保留，7天节点证据不足","reason":"GSC仅截止12日、GA4仅截止14日，缺完整上线后7天、页面/表单归因和匹配前期。全站事件不能归因采购页；14日新表单改版构成叠加干预。","next_action":"22日复核；补齐页面/表单来源和完整观察窗口，保持页面不变。"},
+    {"id":"form-preview-cleanup-20261014","launched_on":"2026-10-14","commit":"3e2911f","baseline_7d":{"organic_sessions":36,"form_open":22,"form_start":3,"form_submit":1,"generate_lead":1},"baseline_28d":{"organic_sessions":87,"form_open":40,"form_start":5,"form_submit":1,"generate_lead":1},"changes":["首页及联系页选填收起","CMS预览统计隔离"],"observe_7d":"2026-10-21","observe_14d":"2026-10-28","decision":"观察，尚未满7天","caveat":"历史CMS流量不能追溯清理；成功事件需另核实真实交付，不提交测试表单。"},
+    {"id":"es-emergency-intent-20261014","launched_on":"2026-10-14","path":"/es/insights/steel-emergency-exit-doors-specification-guide/","query":"puertas de emergencia","baseline_7d":{"query_clicks":0,"query_impressions":13,"query_position":18.3846},"baseline_28d":null,"query_page_mapping":"未获取，语义匹配不等于GSC精确对应","observe_7d":"2026-10-21","observe_14d":"2026-10-28","decision":"观察，不提前重复改页"}
+  ],
+  "constraints":["真实投递与CRM确认未获取","查询/设备及桌面排名/着陆页/非重叠7与28天对照未获取","SEMrush仍09-07过期"],
+  "priority_order":["去个人化真实交付对账","补齐可归因数据和对照","按审核排期完成酒店门库存发布及复验"],
+  "scoring":{"formula":"预期增量×商业价值×证据强度÷工作量与风险","numeric_scores":null,"reason":"缺可信增量和匹配对照，仅以证据排序，不编造分数；交付对账中工作量低风险，数据补齐中工作量低风险，到期发布低工作量中部署风险。"},
+  "plan_reference":"docs/seo-review-2026-10-12.json",
+  "roadmap_status":"沿用30/60/90天路线图与两周队列，20个候选不是已审核库存；酒店门发布后现有47篇库存已全部到期，10-19首批brief继续待审核，不自动新写发布。",
+  "deployment_boundary":"本轮仅允许已审核到期文章，无非紧急代码改动部署。"
+}
