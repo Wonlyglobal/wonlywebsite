@@ -279,4 +279,4 @@
 2026-10-08 | 验证与修复:经用户授权将文章可见性、静态HTML和Sitemap统一为构建时北京时间截止日期，新增publication.json及发布审计，并修复全屋智能六语文章产品链接；GitHub修复00464d5已推送，TypeScript、六语完整性、258个静态文章HTML、内部链接、47封面唯一性及未来文章隔离通过。Codeup正式部署后线上待验；询盘实际投递与归档对账待办，未提交测试询盘。
 2026-10-08 | 询盘转化与正式发布:将官网悬浮联系按钮、首页联系区、全站页脚及Contact渠道改为邮件直达inquiry@wonlyglobal.com并预填WONLY Product Enquiry主题，六语询盘表单统一显示Phone；Codeup正式提交8042f0f与页脚补漏265428e已发布，TypeScript及2,057模块构建通过。正式首页资源为index-BY27wg3y.js、/healthz为ok，真实浏览器确认Contact、页脚和悬浮入口均为mailto且不再显示WhatsApp；WONLY-CMS未改动。
 2026-10-16 | 部署与工程:基于最新Codeup master fb42f6d仅纳入今日已审核RFQ图纸资料、欧标锁芯测量两篇六语稿及2张独立封面；49篇×5译文、TypeScript、2070模块生产构建、294静态文章坏链/SEO、49唯一封面、58导航/110语言路由及325精确hreflang检查通过，未来18篇不纳入发布包；发布前正式Sitemap444URL且两篇仍首页壳，待推送生产分支及线上复验，未混入GitHub待上线CRM代码或独立CMS。
-2026-10-16 | Favicon修复:从WONLY金色字标重制透明底金色W图标，更新64/256像素PNG、ICO、Apple Touch Icon和带版本号的HTML引用，解决旧白底图标及浏览器同名资源缓存问题；生产构建/发布/线上验证正在执行。
+2026-10-16 | Favicon黑线修复与部署:从WONLY金色字标重新合成透明底W图标，修复上下黑线像素并更新64/256像素PNG、ICO、Apple Touch Icon及HTML缓存版本号；多尺寸像素检查和Vite生产构建通过，基于Codeup master@998d93a隔离提交，正式流水线及线上验收待完成；WONLY-CMS未改动。
