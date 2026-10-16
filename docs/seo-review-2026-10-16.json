@@ -1,0 +1,373 @@
+{
+  "date": "2026-10-16",
+  "timezone": "Asia/Shanghai",
+  "captured_at": "2026-10-16T01:34:28.276Z",
+  "source": "GA4/GSC service-account read-only capture, workflow 38835758687 (duplicate run 38835832064 also succeeded); GitHub snapshot8331193",
+  "fact_snapshot": {
+    "windows": {
+      "7d": {
+        "gsc": {
+          "clicks": 14,
+          "impressions": 421,
+          "ctr": 0.0332541567695962,
+          "avg_position": 7.572446555819478
+        },
+        "ga4": {
+          "organic_sessions": 43
+        }
+      },
+      "28d": {
+        "gsc": {
+          "clicks": 44,
+          "impressions": 1727,
+          "ctr": 0.025477707006369428,
+          "avg_position": 9.488708743485814
+        },
+        "ga4": {
+          "organic_sessions": 94
+        }
+      }
+    },
+    "markets": [
+      {
+        "country": "ES",
+        "gsc_7d": {
+          "clicks": 1,
+          "impressions": 34,
+          "ctr": 0.029411764705882353,
+          "avg_position": 10.882352941176471
+        },
+        "ga4_7d": {
+          "organic_sessions": 3
+        },
+        "status": "ok"
+      },
+      {
+        "country": "MX",
+        "gsc_7d": {
+          "clicks": 1,
+          "impressions": 21,
+          "ctr": 0.047619047619047616,
+          "avg_position": 13.952380952380953
+        },
+        "ga4_7d": {
+          "organic_sessions": 1
+        },
+        "status": "ok"
+      }
+    ],
+    "funnel": {
+      "organic_7d": {
+        "cta_click": 10,
+        "form_open": 13,
+        "form_start": 3,
+        "inquiry_prompt_select": 0,
+        "form_submit": 1,
+        "generate_lead": 1,
+        "form_error": 0,
+        "form_abandon": 0,
+        "contact_click": 0
+      },
+      "organic_28d": {
+        "cta_click": 29,
+        "form_open": 41,
+        "form_start": 5,
+        "inquiry_prompt_select": 22,
+        "form_submit": 1,
+        "generate_lead": 1,
+        "form_error": 0,
+        "form_abandon": 1,
+        "contact_click": 1
+      },
+      "all_channels_7d": {
+        "cta_click": 34,
+        "form_open": 39,
+        "form_start": 11,
+        "inquiry_prompt_select": 9,
+        "form_submit": 4,
+        "generate_lead": 3,
+        "form_error": 1,
+        "form_abandon": 2,
+        "contact_click": 17
+      },
+      "all_channels_28d": {
+        "cta_click": 69,
+        "form_open": 94,
+        "form_start": 15,
+        "inquiry_prompt_select": 31,
+        "form_submit": 5,
+        "generate_lead": 4,
+        "form_error": 1,
+        "form_abandon": 3,
+        "contact_click": 22
+      }
+    },
+    "pages": [
+      {
+        "path": "/insights/cylindrical-lock-core-vs-standard-cylinder/",
+        "role": "article",
+        "gsc_7d": {
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": 0,
+          "avg_position": 7.590909090909091
+        },
+        "gsc_28d": {
+          "clicks": 0,
+          "impressions": 180,
+          "ctr": 0,
+          "avg_position": 8.088888888888889
+        },
+        "issues": []
+      },
+      {
+        "path": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
+        "role": "article",
+        "gsc_7d": {
+          "clicks": 0,
+          "impressions": 24,
+          "ctr": 0,
+          "avg_position": 7.583333333333333
+        },
+        "gsc_28d": {
+          "clicks": 2,
+          "impressions": 107,
+          "ctr": 0.018691588785046728,
+          "avg_position": 7.626168224299065
+        },
+        "issues": []
+      },
+      {
+        "path": "/security-door-manufacturer/",
+        "role": "commercial",
+        "gsc_7d": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "avg_position": null
+        },
+        "gsc_28d": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "avg_position": 5.666666666666667
+        },
+        "issues": []
+      },
+      {
+        "path": "/global/mexico/security-doors/",
+        "role": "commercial",
+        "gsc_7d": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "avg_position": null
+        },
+        "gsc_28d": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "avg_position": null
+        },
+        "issues": []
+      },
+      {
+        "path": "/es/global/mexico/security-doors/",
+        "role": "commercial",
+        "gsc_7d": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "avg_position": null
+        },
+        "gsc_28d": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "avg_position": 4
+        },
+        "issues": []
+      }
+    ]
+  },
+  "windows": {
+    "gsc7": "2026-10-07..2026-10-13",
+    "gsc28": "2026-09-16..2026-10-13",
+    "ga7": "2026-10-09..2026-10-15",
+    "ga28": "2026-09-18..2026-10-15"
+  },
+  "comparison": {
+    "source": "History snapshot2026-10-09T07:58:18.033Z; adjacent non-overlapping seven-day periods, no attribution claim",
+    "gsc_previous7": {
+      "window": "2026-09-30..2026-10-06",
+      "clicks": 6,
+      "impressions": 415,
+      "ctr": 0.0144578313,
+      "position": 11.416867
+    },
+    "ga_previous7": {
+      "window": "2026-10-02..2026-10-08",
+      "organic_sessions": 16,
+      "organic_funnel": {
+        "cta_click": 10,
+        "form_open": 13,
+        "form_start": 0,
+        "form_submit": 0,
+        "generate_lead": 0
+      }
+    },
+    "changes": {
+      "clicks_pct": 133.33,
+      "impressions_pct": 1.45,
+      "ctr_percentage_points": 1.88,
+      "position_improvement": 3.84,
+      "organic_sessions_pct": 168.75
+    },
+    "previous_nonoverlap28": "未获取；不可用10-09的重叠28天快照代替"
+  },
+  "missing": [
+    "查询拆分",
+    "设备/桌面排名",
+    "国家28天",
+    "自然着陆页",
+    "前一非重叠28天",
+    "最新SEMrush（09-07过期）",
+    "真实邮件与CRM交付确认"
+  ],
+  "weekly_decision": "全站点击、自然会话较相邻前7天上升，但样本少且缺页面归因，不能认定本周改版有效；锁芯0点击、EN1627七天从2点击到0，均保留、证据不足。",
+  "constraints": [
+    {
+      "rank": 1,
+      "issue": "询盘真实交付未闭环",
+      "evidence": "自然7天1个generate_lead、全渠道3个，不等同已确认客户",
+      "impact": "无法区分埋点成功、邮件投递、CRM入库及有效商机",
+      "effort": "中",
+      "risk": "只读低",
+      "acceptance": "去个人化成功/失败/归档状态对账；不读个人内容、不提交测试询盘"
+    },
+    {
+      "rank": 2,
+      "issue": "商业搜索覆盖极少",
+      "evidence": "Security Door Manufacturer近28天3展示0点击；英墨西哥无展示、西墨西哥1展示0点击；锁芯180展示0点击",
+      "impact": "新增流量尚未证明集中在商业采购意图",
+      "effort": "中",
+      "risk": "低至中",
+      "acceptance": "补查询/着陆页与设备后确定下一页；不靠批量改标题推断收益"
+    },
+    {
+      "rank": 3,
+      "issue": "缺细分数据和成熟实验窗口",
+      "evidence": "采购改版10-22复核、10-14表单/西语改版10-21/28复核",
+      "impact": "过早重改会破坏归因",
+      "effort": "中",
+      "risk": "低",
+      "acceptance": "保留现状，补相同页面和等长前期"
+    }
+  ],
+  "scoring": {
+    "formula": "预期增量×商业价值×证据强度÷工作量与风险",
+    "numeric_scores": null,
+    "reason": "没有可信增量估计，不虚构数值；以上按现有证据排序"
+  },
+  "primary_goal_next_week": "验证真实自然询盘交付，并让采购型内容按期、可抓取地上线",
+  "tasks": [
+    {
+      "priority": 1,
+      "date": "10-16..10-20",
+      "target": "首页/contact/报价弹窗",
+      "action": "去个人化交付状态对账",
+      "dependency": "可访问的只读邮件/CRM状态",
+      "acceptance": "能区分成功事件、投递确认和有效商机"
+    },
+    {
+      "priority": 2,
+      "date": "10-17..10-25",
+      "target": "docs/seo-batch-20261015.json",
+      "action": "每天最多2篇六语库存按期发布，逐次全门禁与正式验收",
+      "dependency": "Codeup最新基线、发布流水线健康",
+      "acceptance": "12语言URL/天、封面哈希、Sitemap和未来隔离正确"
+    },
+    {
+      "priority": 3,
+      "date": "10-21..10-28",
+      "target": "锁芯/EN1627/采购商业页/西语逃生门",
+      "action": "补查询/桌面/着陆页与非重叠对照，复核7/14天观察",
+      "dependency": "数据权限与延迟",
+      "acceptance": "按点击/展示/CTR/排名/会话/询盘给出扩大、保留、回滚或证据不足"
+    }
+  ],
+  "roadmap": {
+    "30d": "真实交付与数据口径闭环、按期库存和技术健康",
+    "60d": "根据商业查询及英西墨西哥流量证据扩展有收益页面",
+    "90d": "扩大经过验证的内容集群、准备真实行业公关/外链草稿，不购买或自动外发"
+  },
+  "content_queue": "20篇均完成六语/封面；10-16两篇发布进行中；10-17至25每天2篇，余18篇不得提前公开；20篇生产停止。两周10-16至29按台账执行，10-26至29不新增未授权文章。",
+  "deferred": [
+    "非紧急代码自动部署",
+    "刚上线页面7天内再次实质修改",
+    "未经授权外链购买/邮件/第三方表单",
+    "缺失数据写成零"
+  ],
+  "experiment_reviews": [
+    {
+      "id": "lock-core-snippet-20260923",
+      "baseline28": {
+        "clicks": 0,
+        "impressions": 95,
+        "position": 8.9
+      },
+      "latest7": {
+        "clicks": 0,
+        "impressions": 22,
+        "ctr": 0,
+        "avg_position": 7.590909090909091
+      },
+      "latest28": {
+        "clicks": 0,
+        "impressions": 180,
+        "ctr": 0,
+        "avg_position": 8.088888888888889
+      },
+      "decision": "保留、证据不足"
+    },
+    {
+      "id": "en1627-proof-checklist-20260923",
+      "baseline28": {
+        "clicks": 0,
+        "impressions": 100,
+        "position": 10.2
+      },
+      "latest7": {
+        "clicks": 0,
+        "impressions": 24,
+        "ctr": 0,
+        "avg_position": 7.583333333333333
+      },
+      "latest28": {
+        "clicks": 2,
+        "impressions": 107,
+        "ctr": 0.018691588785046728,
+        "avg_position": 7.626168224299065
+      },
+      "decision": "保留、证据不足；前7天2点击至0，低样本不认定优化失效"
+    },
+    {
+      "id": "procurement-20261008",
+      "observe14": "2026-10-22",
+      "decision": "保留；缺页面归因且10-14表单存在叠加干预"
+    },
+    {
+      "id": "form-preview-cleanup-20261014",
+      "observe7": "2026-10-21",
+      "observe14": "2026-10-28",
+      "decision": "尚未满7天"
+    },
+    {
+      "id": "es-emergency-intent-20261014",
+      "observe7": "2026-10-21",
+      "observe14": "2026-10-28",
+      "decision": "尚未满7天"
+    }
+  ],
+  "needs_confirmation": "只读分析和已授权库存继续执行；投递修复/其他非紧急部署需当次明确授权。"
+}

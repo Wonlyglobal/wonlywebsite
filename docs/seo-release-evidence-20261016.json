@@ -1,0 +1,146 @@
+{
+  "captured_at": "2026-10-16T01:42:56.561Z",
+  "publication": "{\"date\":\"2026-10-16\"}",
+  "sitemapCount": 456,
+  "futureAbsent": true,
+  "pages": [
+    {
+      "path": "/insights/security-door-rfq-drawing-package/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ar/insights/security-door-rfq-drawing-package/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/fr/insights/security-door-rfq-drawing-package/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ru/insights/security-door-rfq-drawing-package/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/es/insights/security-door-rfq-drawing-package/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/pt/insights/security-door-rfq-drawing-package/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/insights/euro-cylinder-size-measurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ar/insights/euro-cylinder-size-measurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/fr/insights/euro-cylinder-size-measurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ru/insights/euro-cylinder-size-measurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/es/insights/euro-cylinder-size-measurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/pt/insights/euro-cylinder-size-measurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    }
+  ],
+  "covers": [
+    {
+      "path": "/images/articles/security-door-rfq-drawings.webp",
+      "status": 200,
+      "bytes": 157988,
+      "hashMatches": true
+    },
+    {
+      "path": "/images/articles/euro-cylinder-measurement.webp",
+      "status": 200,
+      "bytes": 107810,
+      "hashMatches": true
+    }
+  ],
+  "production_commit": "f3f45da",
+  "baseline": "fb42f6d",
+  "gates": {
+    "i18n": "49 topics ×5 translations",
+    "typescript": "passed",
+    "build": "2070 modules",
+    "static": "294 six-language pages; all internal links",
+    "covers": "49 source covers unique",
+    "hreflang": "325 exact generated HTML passed",
+    "navigation": "58 links,110language routes",
+    "future": "remaining18 topics not in production source or sitemap"
+  },
+  "mobile": {
+    "method": "Codex in-app browser,390×844, no form interaction or submission",
+    "rfq": {
+      "clientWidth": 384,
+      "scrollWidth": 384,
+      "broken": 0,
+      "h1": true
+    },
+    "cylinder": {
+      "clientWidth": 384,
+      "scrollWidth": 384,
+      "broken": 0,
+      "h1": true
+    },
+    "note": "Initial standalone Playwright attempt unavailable; final checks performed through supported browser API."
+  }
+}

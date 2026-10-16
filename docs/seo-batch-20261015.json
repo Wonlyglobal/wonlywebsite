@@ -7,10 +7,10 @@
   "includes_weekends": true,
   "start_date": "2026-10-16",
   "planned_end_date": "2026-10-25",
-  "status": "20_reviewed_ready_for_due_build",
+  "status": "2_published_18_reviewed_ready",
   "drafts_complete": 20,
   "reviewed_complete": 20,
-  "published_complete": 0,
+  "published_complete": 2,
   "languages": [
     "en",
     "ar",
@@ -37,7 +37,7 @@
       "keyword": "security door RFQ drawings",
       "target": "/security-door-manufacturer/",
       "brief": "给出可填报价资料表：门号、洞口、墙体、五金版本、缺项责任；区别于泛化OEM采购指南。",
-      "status": "reviewed_ready_for_due_build",
+      "status": "published_verified",
       "content_locales": [
         "en",
         "ar",
@@ -48,8 +48,11 @@
       ],
       "cover": "images/articles/security-door-rfq-drawings.webp",
       "reviewed_on": "2026-10-15",
-      "published_at": null,
-      "note": "已完成编辑与技术核验，非第三方认证审核；到期需在Codeup最新生产基线重跑门禁。"
+      "published_at": "2026-10-16",
+      "production_commit": "f3f45da",
+      "production_verified_at": "2026-10-16T01:42:56Z",
+      "publication_status": "live_verified",
+      "note": "六语正式URL、封面哈希、Sitemap及390像素浏览器已验收，正式上线完成。"
     },
     {
       "id": 2,
@@ -59,7 +62,7 @@
       "keyword": "euro cylinder measurement",
       "target": "/insights/cylindrical-lock-core-vs-standard-cylinder/",
       "brief": "解释中心固定点到内外面的尺寸记录、护罩和突出量核验、示意图及供方确认；不提供开锁绕过方法。",
-      "status": "reviewed_ready_for_due_build",
+      "status": "published_verified",
       "content_locales": [
         "en",
         "ar",
@@ -70,8 +73,11 @@
       ],
       "cover": "images/articles/euro-cylinder-measurement.webp",
       "reviewed_on": "2026-10-15",
-      "published_at": null,
-      "note": "已完成编辑与技术核验，非第三方认证审核；到期需在Codeup最新生产基线重跑门禁。"
+      "published_at": "2026-10-16",
+      "production_commit": "f3f45da",
+      "production_verified_at": "2026-10-16T01:42:56Z",
+      "publication_status": "live_verified",
+      "note": "六语正式URL、封面哈希、Sitemap及390像素浏览器已验收，正式上线完成。"
     },
     {
       "id": 3,
