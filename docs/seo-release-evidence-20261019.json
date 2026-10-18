@@ -1,0 +1,144 @@
+{
+  "captured_at": "2026-10-18T23:50:55.505Z",
+  "publication": "{\"date\":\"2026-10-19\"}",
+  "sitemapCount": 468,
+  "futureAbsent": true,
+  "pages": [
+    {
+      "path": "/insights/door-opening-measurement-survey/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ar/insights/door-opening-measurement-survey/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/fr/insights/door-opening-measurement-survey/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ru/insights/door-opening-measurement-survey/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/es/insights/door-opening-measurement-survey/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/pt/insights/door-opening-measurement-survey/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/insights/keyed-alike-vs-master-key-procurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ar/insights/keyed-alike-vs-master-key-procurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/fr/insights/keyed-alike-vs-master-key-procurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/ru/insights/keyed-alike-vs-master-key-procurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/es/insights/keyed-alike-vs-master-key-procurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    },
+    {
+      "path": "/pt/insights/keyed-alike-vs-master-key-procurement/",
+      "status": 200,
+      "canonical": true,
+      "lang": true,
+      "h1": true,
+      "inSitemap": true
+    }
+  ],
+  "covers": [
+    {
+      "path": "/images/articles/door-opening-measurement-survey.webp",
+      "status": 200,
+      "bytes": 183240,
+      "hashMatches": true
+    },
+    {
+      "path": "/images/articles/keyed-alike-vs-master-key-procurement.webp",
+      "status": 200,
+      "bytes": 110914,
+      "hashMatches": true
+    }
+  ],
+  "baseline": "fc3e025",
+  "production_commit": "7f0ae07",
+  "gates": {
+    "i18n": "51×5 translations passed",
+    "typescript": "passed",
+    "build": "2082 modules; existing large article chunk warning remains",
+    "static": "306 six-language HTML, internal links passed",
+    "covers": "51 unique source covers",
+    "hreflang": "337 exact generated HTML",
+    "navigation": "58 links;112language routes",
+    "future": "remaining16 batch topics not in production source or sitemap"
+  },
+  "mobile": {
+    "viewport": "390×844",
+    "both_articles": {
+      "clientWidth": 384,
+      "scrollWidth": 384,
+      "broken": 0,
+      "h1": true
+    },
+    "method": "Chrome supported browser API, no form interaction/submission"
+  },
+  "source_check": {
+    "url": "https://www.assaabloy.com/it/en/solutions/topics/keyed-alike-systems",
+    "scope": "Only generic keyed-alike/master-key distinction verified; no WONLY capability/certification extrapolation"
+  }
+}
