@@ -30,9 +30,9 @@ const HOME_RAW = import.meta.glob("/content/settings/homepage.json", { query: "?
 const HOME_CMS = (() => { try { return JSON.parse(Object.values(HOME_RAW)[0] || "{}"); } catch { return {}; } })() as { hero?: Record<string, string>; reveal?: Record<string, string> };
 const HOME_HERO = {
   eyebrow: HOME_CMS.hero?.eyebrow?.trim() || "Security Doors · Smart Locks · OEM/ODM Manufacturer",
-  line1: HOME_CMS.hero?.line1?.trim() || "Open the Door",
-  line2: HOME_CMS.hero?.line2?.trim() || "to Your",
-  line3: HOME_CMS.hero?.line3?.trim() || "Next Market",
+  line1: HOME_CMS.hero?.line1?.trim() || "Doors & Smart Locks",
+  line2: HOME_CMS.hero?.line2?.trim() || "for Distributors",
+  line3: HOME_CMS.hero?.line3?.trim() || "and Projects",
   subtitle: HOME_CMS.hero?.subtitle?.trim() || "A trusted manufacturer of premium security doors and smart locks — supplying distributors and projects worldwide.",
   scrollLabel: HOME_CMS.hero?.scrollLabel?.trim() || "Scroll to Enter ↓",
 };
@@ -576,9 +576,9 @@ const Prototype = () => {
   };
 
   useSeo({
-    title: "WONLY | Global Smart-Security Ecosystem Leader — Security Doors & Smart Locks Manufacturer",
+    title: "Door & Smart Lock Manufacturer | WONLY Global",
     description:
-      "WONLY is a listed (SSE: 605268) manufacturer of premium security doors and smart locks — 1,000,000+ m² base, 6M doors & 3M locks a year, 1,000+ patents, serving distributors and projects in 60+ countries.",
+      "Explore WONLY’s steel doors, wooden doors, smart doors and smart locks, with OEM/ODM manufacturing for distributors and project buyers worldwide.",
     path: "/",
     type: "website",
     jsonLd: {
