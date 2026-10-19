@@ -1,5 +1,38 @@
 {
   "date": "2026-10-19",
+  "latest_refresh": {
+    "captured_beijing": "2026-10-19T09:38:06+08:00",
+    "workflow": "39186228658",
+    "snapshot_commit": "62a434c",
+    "source": "serverless/seo-summary/data/current.json",
+    "note": "本对象为当天最新复评；下方07:44快照保留为历史证据，不视为最新。",
+    "gsc_windows": ["2026-10-10..16", "2026-09-19..10-16"],
+    "ga4_windows": ["2026-10-12..18", "2026-09-21..10-18"],
+    "gsc_previous7": "2026-10-03..09",
+    "ga4_previous7": "2026-10-05..11",
+    "previous_snapshot": "2026-10-12T07:56:45.197Z",
+    "gsc7": {"clicks":15,"impressions":460,"ctr":0.0326087,"position":8.53478},
+    "gsc28": {"clicks":42,"impressions":1720,"ctr":0.0244186,"position":9.65756},
+    "organic_sessions": {"7d":37,"28d":96,"previous7":27},
+    "deltas": {"clicks_pct":66.67,"impressions_pct":17.65,"position_improvement":1.91,"organic_sessions_pct":37.04,"organic_cta_pct":-68.75,"organic_form_open_pct":-71.43},
+    "alert": "自然与全渠道7天提交/成功均0，CTA及打开下降超过30%；事件非用户转化率，叠加预览隔离与低样本，不能直接断言表单损坏。",
+    "experiment_decisions": {
+      "lock_core": "保留/证据不足；28天0点击134展示，缺完整匹配前期和查询拆分",
+      "en1627": "保留/证据不足；28天2点击112展示，平均排名7.37",
+      "procurement": "维持10-22复核，不修改实验页",
+      "form_and_spanish": "维持10-21及28复核，先调查来源/设备和真实交付"
+    },
+    "weekly_goal": "核实提交流失与真实交付；今日已发布2篇，不再补发",
+    "top3": [
+      {"dates":"10-19..21","task":"按表单来源/设备补齐漏斗并核对邮件、CMS和CRM聚合状态","acceptance":"区分无提交/发送失败/投递失败/未归档，不以成功事件代替商机","effort":"中","risk":"只读低；投递改动需当次确认"},
+      {"dates":"10-20..27","task":"最早到期库存每天最多2篇，全门禁后发布","acceptance":"六语、唯一封面、静态正文、内链、未来隔离及正式验收","effort":"低至中","risk":"中"},
+      {"dates":"10-21/22/28","task":"补查询/设备/着陆页与匹配前期后复评实验","acceptance":"按点击、CTR、排名、自然会话和真实询盘给出结论","effort":"中","risk":"低"}
+    ],
+    "roadmap": {"30d":"交付与数据闭环、可靠发布、首页静态正文方案","60d":"有查询证据的全品类与区域商业内容","90d":"扩大验证有效集群并准备真实行业外链草稿"},
+    "score": "预期增量缺可信估计，不虚构数值；按商业价值、证据强度、工作量和风险排序",
+    "missing": ["查询/设备/桌面排名","自然着陆页","国家28天","非重叠前28天","SEMrush最新数据","实际邮件收件与CMS逐笔交付核销"],
+    "confirmed_state": "Codeup master7f0ae07/test913b660；正式468URL和6资源正常；英文首页静态H1缺失仍P2；用户指定首页TDK/H1仅隔离目录本地完成，不自动部署。"
+  },
   "captured_beijing": "2026-10-19T07:44:19+08:00",
   "workflow": "39177749402",
   "snapshot_commit": "f6b4fed",
