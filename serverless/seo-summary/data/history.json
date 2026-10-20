@@ -8441,7 +8441,7 @@
     {
       "schema_version": "1.0",
       "site": "wonlyglobal.com",
-      "generated_at": "2026-10-20T01:32:04.757Z",
+      "generated_at": "2026-10-20T06:32:20.620Z",
       "freshness": {
         "ga4": {
           "through": "2026-10-19",
@@ -8467,7 +8467,7 @@
             "avg_position": 9.239669421487603
           },
           "ga4": {
-            "organic_sessions": 35
+            "organic_sessions": 39
           }
         },
         "28d": {
@@ -8478,7 +8478,7 @@
             "avg_position": 9.6779176201373
           },
           "ga4": {
-            "organic_sessions": 96
+            "organic_sessions": 100
           }
         }
       },
@@ -8492,7 +8492,7 @@
             "avg_position": 5.90625
           },
           "ga4_7d": {
-            "organic_sessions": 2
+            "organic_sessions": 3
           },
           "status": "ok"
         },
@@ -8512,8 +8512,8 @@
       ],
       "funnel": {
         "organic_7d": {
-          "cta_click": 3,
-          "form_open": 4,
+          "cta_click": 4,
+          "form_open": 5,
           "form_start": 0,
           "inquiry_prompt_select": 0,
           "form_submit": 0,
@@ -8523,8 +8523,8 @@
           "contact_click": 0
         },
         "organic_28d": {
-          "cta_click": 29,
-          "form_open": 40,
+          "cta_click": 30,
+          "form_open": 41,
           "form_start": 5,
           "inquiry_prompt_select": 22,
           "form_submit": 1,
@@ -8534,8 +8534,8 @@
           "contact_click": 1
         },
         "all_channels_7d": {
-          "cta_click": 12,
-          "form_open": 22,
+          "cta_click": 13,
+          "form_open": 23,
           "form_start": 0,
           "inquiry_prompt_select": 0,
           "form_submit": 0,
@@ -8545,8 +8545,8 @@
           "contact_click": 0
         },
         "all_channels_28d": {
-          "cta_click": 70,
-          "form_open": 95,
+          "cta_click": 71,
+          "form_open": 96,
           "form_start": 15,
           "inquiry_prompt_select": 31,
           "form_submit": 5,
@@ -8714,25 +8714,25 @@
       "sources": [
         {
           "name": "GA4",
-          "captured_at": "2026-10-20T01:32:04.757Z",
+          "captured_at": "2026-10-20T06:32:20.620Z",
           "through": "2026-10-19",
           "status": "ok"
         },
         {
           "name": "GSC",
-          "captured_at": "2026-10-20T01:32:04.757Z",
+          "captured_at": "2026-10-20T06:32:20.620Z",
           "through": "2026-10-17",
           "status": "ok"
         },
         {
           "name": "SEMrush",
-          "captured_at": "2026-10-20T01:32:04.757Z",
+          "captured_at": "2026-10-20T06:32:20.620Z",
           "through": "2026-09-07",
           "status": "stale"
         },
         {
           "name": "production_audit",
-          "captured_at": "2026-10-20T01:32:04.757Z",
+          "captured_at": "2026-10-20T06:32:20.620Z",
           "through": "2026-10-20",
           "status": "ok"
         }
