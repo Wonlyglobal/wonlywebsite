@@ -139,7 +139,7 @@
       "keyword": "door handing schedule",
       "target": "/security-door-manufacturer/",
       "brief": "强调不同地区命名不一致，用观察侧、铰链侧、箭头图和双方签字冻结方向。",
-      "status": "reviewed_queued_rescheduled",
+      "status": "delayed_quality_gate",
       "content_locales": [
         "en",
         "ar",
@@ -152,7 +152,9 @@
       "reviewed_on": "2026-10-15",
       "published_at": null,
       "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。",
-      "release_not_before": "2026-10-20"
+      "release_not_before": "2026-10-20",
+      "quality_gate_on": "2026-10-20",
+      "quality_gate_result": "英文正文无上下文内链，仅文末3条资源链接；未满足至少3条相关正文内链，延期且未部署。须同步六语并重新通过全部门禁。"
     },
     {
       "id": 6,
@@ -162,7 +164,7 @@
       "keyword": "replacement lock cylinder compatibility",
       "target": "/insights/cylindrical-lock-core-vs-standard-cylinder/",
       "brief": "列轮廓、拨轮/传动、固定点、护罩和锁体兼容表，区别于术语对比及防断等级文章。",
-      "status": "reviewed_queued_rescheduled",
+      "status": "delayed_quality_gate",
       "content_locales": [
         "en",
         "ar",
@@ -175,7 +177,9 @@
       "reviewed_on": "2026-10-15",
       "published_at": null,
       "note": "编辑检查与技术门禁，不代表第三方认证或母语专业审校；到期须在Codeup生产基线复验。",
-      "release_not_before": "2026-10-20"
+      "release_not_before": "2026-10-20",
+      "quality_gate_on": "2026-10-20",
+      "quality_gate_result": "英文正文无上下文内链，文末3条中2条指向同一锁芯对比页；未满足相关正文内链要求，延期且未部署。须同步六语并重新通过全部门禁。"
     },
     {
       "id": 7,
