@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-21",
+  "status": "partial_data_capture",
+  "captured_at_beijing": "2026-10-21 09:32-09:38",
+  "latest_available_snapshot": {
+    "generated_at_utc": "2026-10-20T06:32:20.620Z",
+    "reported_generated_at_beijing": "2026-10-20 14:32:20",
+    "timestamp_note": "2026-10-20 worklog reports 09:32 Beijing for this snapshot; its ISO-Z timestamp converts to 14:32 Beijing. Resolve this timestamp mismatch before using capture time for daily attribution.",
+    "ga4_through": "2026-10-19",
+    "gsc_through": "2026-10-17",
+    "semrush_through": "2026-09-07",
+    "fresh_snapshot_on_2026_10_21": false,
+    "freshness_status": "data_delay"
+  },
+  "search_console": {
+    "7d_window": "2026-10-11..2026-10-17",
+    "7d": {"clicks": 13, "impressions": 484, "ctr_pct": 2.69, "avg_position": 9.24},
+    "28d_window": "2026-09-20..2026-10-17",
+    "28d": {"clicks": 42, "impressions": 1748, "ctr_pct": 2.40, "avg_position": 9.68},
+    "comparison_7d_window": "2026-10-04..2026-10-10",
+    "comparison_7d": {"clicks": 11, "impressions": 389, "ctr_pct": 2.83, "avg_position": 9.80},
+    "change_vs_comparison": {"clicks_pct": 18.2, "impressions_pct": 24.4, "avg_position_change": -0.56},
+    "desktop_query_page_breakdowns": "未获取",
+    "previous_non_overlapping_28d": "未获取",
+    "landing_page_breakdown": "未获取"
+  },
+  "markets": {
+    "ES": {"gsc_7d": {"clicks": 1, "impressions": 32, "ctr_pct": 3.13, "avg_position": 5.91}, "ga4_organic_sessions_7d": 3, "gsc_28d": "未获取"},
+    "MX": {"gsc_7d": {"clicks": 0, "impressions": 15, "ctr_pct": 0, "avg_position": 6.93}, "ga4_organic_sessions_7d": 0, "gsc_28d": "未获取"}
+  },
+  "priority_pages": {
+    "/insights/cylindrical-lock-core-vs-standard-cylinder/": {"7d": {"clicks": 0, "impressions": 18, "ctr_pct": 0, "avg_position": 7.72}, "28d": {"clicks": 0, "impressions": 130, "ctr_pct": 0, "avg_position": 8.42}},
+    "/insights/en-1627-rc2-rc3-rc4-security-door-grades/": {"7d": {"clicks": 0, "impressions": 26, "ctr_pct": 0, "avg_position": 6.69}, "28d": {"clicks": 2, "impressions": 112, "ctr_pct": 1.79, "avg_position": 7.31}},
+    "/security-door-manufacturer/": {"7d": {"clicks": 0, "impressions": 7, "ctr_pct": 0, "avg_position": 6.14}, "28d": {"clicks": 0, "impressions": 10, "ctr_pct": 0, "avg_position": 6.00}},
+    "/global/mexico/security-doors/": {"7d": "未获取（无展示记录）", "28d": "未获取（无展示记录）"},
+    "/es/global/mexico/security-doors/": {"7d": "未获取（无展示记录）", "28d": {"clicks": 0, "impressions": 1, "ctr_pct": 0, "avg_position": 4.00}}
+  },
+  "ga4": {
+    "7d_window": "2026-10-13..2026-10-19",
+    "organic_sessions_7d": 39,
+    "28d_window": "2026-09-22..2026-10-19",
+    "organic_sessions_28d": 100,
+    "comparison_7d": "未获取（latest snapshot has no comparable prior-period field）",
+    "funnel_event_order": ["cta_click", "form_open", "form_start", "inquiry_prompt_select", "form_submit", "generate_lead", "form_error", "form_abandon", "contact_click"],
+    "organic_7d": [4, 5, 0, 0, 0, 0, 0, 0, 0],
+    "organic_28d": [30, 41, 5, 22, 1, 1, 0, 1, 1],
+    "all_channels_7d": [13, 23, 0, 0, 0, 0, 0, 0, 0],
+    "all_channels_28d": [71, 96, 15, 31, 5, 4, 1, 3, 21],
+    "interpretation": "7d form_start, form_submit and generate_lead are zero for both organic and all channels; small event counts and possible event instrumentation gaps mean this does not alone prove the form or delivery is broken."
+  },
+  "production_audit": {
+    "captured_at_utc": "2026-10-21T01:32:02.585Z",
+    "status": "15 checked paths returned HTTP 200; six JS/CSS assets returned 200 with expected content types",
+    "healthz": "200 ok",
+    "robots": "200",
+    "sitemap": "200; 468 loc entries",
+    "publication_json": {"status": 200, "date": "2026-10-19"},
+    "homepage": {"status": 200, "title": "Door & Smart Lock Manufacturer | WONLY Global", "description_present": true, "canonical_present": true, "robots": "index,follow", "lang": "en", "raw_html_h1_count": 0, "hreflang_count": 7, "jsonld_count": 1},
+    "insights_and_commercial_pages": "Insights, Security Door Manufacturer, Smart Door Manufacturer and Smart Lock OEM/ODM pages returned 200 with title/description/canonical/robots/lang/H1/JSON-LD present",
+    "key_pages": "Lock-cylinder, EN 1627 and English/Spanish Mexico pages returned 200 with expected metadata and structured data",
+    "mobile_interaction": "未获取",
+    "homepage_oem_odm_ui": "Live rendered DOM still exposes an OEM/ODM navigation link, an OEM/ODM Services partnership card, and an OEM/ODM inquiry-selection button. The hero heading area itself has no OEM/ODM button."
+  },
+  "experiment_reviews": [
+    {
+      "id": "lock-core-snippet-20260923",
+      "target": "/insights/cylindrical-lock-core-vs-standard-cylinder/",
+      "baseline_28d": {"clicks": 0, "impressions": 95, "avg_position": 8.9},
+      "latest_28d": {"window": "2026-09-20..2026-10-17", "clicks": 0, "impressions": 130, "ctr_pct": 0, "avg_position": 8.42},
+      "decision": "证据不足；保留现有版本",
+      "reason": "展示增加且平均位置略有改善，但仍为0点击；查询拆分、目标页GA4着陆会话和完整对比期未获取。",
+      "next_action": "先补查询词、设备和页面着陆数据；避免再次改TDK，等页面级转化路径可比后复核。"
+    },
+    {
+      "id": "en1627-proof-checklist-20260923",
+      "target": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
+      "baseline_28d": {"clicks": 0, "impressions": 100, "avg_position": 10.2},
+      "latest_28d": {"window": "2026-09-20..2026-10-17", "clicks": 2, "impressions": 112, "ctr_pct": 1.79, "avg_position": 7.31},
+      "decision": "保留；暂不扩大改版",
+      "reason": "点击从0到2、平均位置改善2.89，但样本小且查询/设备与GA4页面会话缺失。",
+      "next_action": "保持页面稳定，补取桌面查询词、着陆页会话和询盘漏斗后再决定扩展相关集群。"
+    },
+    {
+      "id": "homepage-full-range-tdk-20261019",
+      "target": "/",
+      "launched_at": "2026-10-19",
+      "decision": "观察中",
+      "next_observation_not_before": "2026-10-26",
+      "reason": "上线不足7天；现有GSC窗口截止10-17，早于上线或未覆盖完整观察期，不能归因。"
+    }
+  ],
+  "codeup": {
+    "latest_remote_verification": "blocked",
+    "reason": "SSH returned Permission denied (publickey); HTTPS requested unavailable credentials.",
+    "local_tracking_refs_only": {"master": "f3f45da (2026-10-16)", "test": "913b660 (2026-09-07)"},
+    "remote_head": "未验证"
+  },
+  "content_batch": {
+    "batch": "docs/seo-batch-20261015.json",
+    "published_verified": 4,
+    "planned_total": 20,
+    "remaining": 16,
+    "production_publication_date": "2026-10-19",
+    "sitemap_count": 468,
+    "today_due_or_overdue_candidates": [
+      "door-handing-swing-schedule (delayed_quality_gate; release_not_before 2026-10-20)",
+      "lock-cylinder-replacement-compatibility (delayed_quality_gate; release_not_before 2026-10-20)",
+      "door-frame-fixing-substrate-review (queued; release_not_before 2026-10-21)",
+      "en-1627-certificate-scope-check (queued; release_not_before 2026-10-21)"
+    ],
+    "release_result": "No article released today: delayed drafts did not pass the previously recorded minimum of three contextual body links, and current Codeup source/draft availability could not be verified. Daily release cap not consumed by fabricated completion; no backfill over cap."
+  },
+  "top_constraints_and_actions": [
+    {"priority": 1, "constraint": "Fresh GA4/GSC snapshot not delivered today; GSC is through Oct 17 and SEMrush through Sep 7.", "action": "Restore/confirm daily snapshot workflow and make capture timestamp consistent between ISO UTC and Beijing worklog."},
+    {"priority": 2, "constraint": "Latest available GA4 funnel has 23 all-channel form opens but zero starts/submits/leads in the 7d window.", "action": "Compare event firing by form_id/source section/device and independently reconcile aggregate successful server deliveries; do not infer failure from GA4 alone."},
+    {"priority": 3, "constraint": "Two due/overdue articles are already held for missing contextual body links; no current Codeup verification access.", "action": "Repair all six-language drafts, ensure >=3 unique relevant in-body links per article, then re-run full publication gates against current production master."}
+  ],
+  "release_state": "No code deployed and no articles published in this run."
+}
