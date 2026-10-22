@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-22",
+  "status": "partial_data_capture",
+  "captured_at_beijing": "2026-10-22 09:26-09:35",
+  "latest_snapshot": {
+    "github_actions_run": "Update SEO summary Serverless snapshot #47",
+    "run_status": "success",
+    "snapshot_commit": "77a99c0",
+    "generated_at_utc": "2026-10-22T06:31:03.897Z",
+    "timestamp_note": "GitHub UI shows manual run at 09:29 Beijing, while the snapshot generated_at UTC converts to 14:31 Beijing; timestamp mismatch retained, not silently reconciled.",
+    "ga4_through": "2026-10-20",
+    "gsc_snapshot_through": "2026-10-18",
+    "semrush_through": "2026-09-07 (stale)"
+  },
+  "search_console_live_ui": {
+    "7d_window": "2026-10-13..2026-10-19",
+    "7d": {"clicks": 15, "impressions": 511, "ctr_pct": 2.9, "avg_position": 10.3},
+    "28d_window": "2026-09-22..2026-10-19",
+    "28d": {"clicks": 44, "impressions": 1780, "ctr_pct": 2.5, "avg_position": 9.8},
+    "7d_device": {
+      "desktop": {"clicks": 11, "impressions": 327, "avg_position": 12.6},
+      "mobile": {"clicks": 3, "impressions": 175, "avg_position": 6.4},
+      "tablet": {"clicks": 1, "impressions": 9, "avg_position": 5.2}
+    },
+    "28d_device": {
+      "desktop": {"clicks": 24, "impressions": 1092, "avg_position": 12.2},
+      "mobile": {"clicks": 19, "impressions": 674, "avg_position": 6.0},
+      "tablet": {"clicks": 1, "impressions": 17, "avg_position": 5.1}
+    },
+    "markets_7d": {
+      "ES": {"clicks": 3, "impressions": 42, "ctr_pct": 7.1, "avg_position": 6.8},
+      "MX": {"clicks": 0, "impressions": 18, "ctr_pct": 0, "avg_position": 6.6}
+    },
+    "top_pages_28d": [
+      {"page": "/", "clicks": 24, "impressions": 398, "avg_position": 2.1},
+      {"page": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/", "clicks": 2, "impressions": 104, "avg_position": 7.4},
+      {"page": "/es/", "clicks": 2, "impressions": 58, "avg_position": 2.7},
+      {"page": "/contact/", "clicks": 2, "impressions": 43, "avg_position": 29.0}
+    ],
+    "special_page_breakdowns": "Latest dated snapshot through Oct18: lock-core page 0 clicks/129 impressions/position 8.43; EN1627 2/106/position 7.40. Refreshed Oct19 page-filter values were not independently captured."
+  },
+  "ga4": {
+    "latest_pipeline_snapshot": {"through": "2026-10-20", "organic_sessions_7d": 38, "organic_sessions_28d": 101},
+    "funnel_event_order": ["cta_click", "form_open", "form_start", "inquiry_prompt_select", "form_submit", "generate_lead", "form_error", "form_abandon", "contact_click"],
+    "organic_7d": [6, 8, 0, 0, 0, 0, 0, 0, 0],
+    "organic_28d": [32, 44, 5, 22, 1, 1, 0, 1, 1],
+    "all_channels_7d": [18, 31, 2, 0, 1, 1, 0, 0, 0],
+    "all_channels_28d": [76, 102, 17, 31, 6, 5, 1, 3, 21],
+    "interpretation": "Organic form starts and successful submissions remain zero for the latest 7-day window; the 28-day report has one organic submit and one generate_lead. GA4 event data does not prove CRM/email receipt. Low counts and possible measurement gaps prevent concluding the form itself is broken.",
+    "direct_ga4_linked_search_report": {"window": "2026-09-24..2026-10-21", "organic_clicks": 37, "impressions": 1841, "ctr_pct": 2.01, "avg_position": 9.52, "active_users": 55, "engaged_sessions": 47, "engagement_rate_pct": 51.09, "avg_engagement": "2m16s", "key_events": 1, "note": "Linked Google organic dashboard; key event is not independently reconciled to CRM delivery."}
+  },
+  "production_audit": {
+    "status": "partial_read_only_check",
+    "healthz": "200; body ok",
+    "homepage": {"rendered": true, "title": "Door & Smart Lock Manufacturer | WONLY Global", "description_present": true, "canonical_present": true, "robots": "index,follow", "lang": "en", "hreflang_count": 7, "h1": "DOORS & SMART LOCKS FOR DISTRIBUTORS AND PROJECTS"},
+    "sitemap": {"valid_xml": true, "url_count": 468},
+    "publication_json": {"date": "2026-10-19", "status": "stale_as_of_2026-10-22"},
+    "homepage_oem_odm_ui": "Still visible in live DOM: OEM/ODM navigation link, Smart Lock OEM/ODM procurement tile, OEM/ODM Services partnership card/CTA, and OEM/ODM inquiry selection. User's previously reported removal issue remains unresolved; no code change or deploy made.",
+    "technical_audit_scope_note": "Browser confirmed health endpoint, homepage render/metadata, sitemap and publication date. Full requested URL/assets/mobile-device audit not completed in this run."
+  },
+  "codeup": {
+    "status": "blocked",
+    "latest_master_test": "not verified; git ls-remote SSH failed with Permission denied (publickey), HTTPS could not resolve/authenticate",
+    "source_worktree": "contains unrelated user modifications; preserved read-only"
+  },
+  "content_batch": {
+    "published_verified": 4,
+    "total": 20,
+    "publication_feed_date": "2026-10-19",
+    "overdue_ids": [5, 6, 7, 8],
+    "due_2026_10_22_ids": [9, 10],
+    "decision": "No publication today: overdue releases exceed the two-post daily cap, latest Codeup source and mandatory content/build/static-SEO/link gates could not be verified. Defer; do not skip older items or exceed cap."
+  },
+  "priority_findings": [
+    "Organic search is not yet producing reliable recorded form-start/submission volume: latest 7d funnel is 38 sessions, 6 CTA clicks, 8 form opens, 0 starts and 0 submissions.",
+    "Desktop GSC position (12.6 over 7d; 12.2 over 28d) trails mobile (6.4; 6.0), suggesting a desktop ranking opportunity; query-level attribution unavailable.",
+    "Spain has 3 clicks/42 impressions in 7d while Mexico has 0/18; country samples are small.",
+    "Homepage OEM/ODM calls-to-action remain live despite removal request."
+  ],
+  "experiment_decisions": {
+    "lock_core": "Evidence insufficient; hold existing version; latest dated pipeline is 0 clicks/129 impressions/position 8.43 through Oct18.",
+    "en_1627": "Retain; latest dated pipeline 2 clicks/106 impressions/position 7.40 through Oct18; low volume.",
+    "homepage_tdk": "Continue observation; deployed Oct19, avoid another substantive change before Oct26 unless P0/P1.",
+    "inquiry_funnel": "Investigate measurement and actual delivery correlation; do not send test inquiry or infer successful receipt from generate_lead alone."
+  }
+}
