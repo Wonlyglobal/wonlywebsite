@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-23",
+  "status": "partial_data_capture",
+  "captured_at_beijing": "2026-10-23 09:28-09:35",
+  "weekly_review": {
+    "main_goal": "Improve qualified organic traffic and verify the path from organic entry to a genuinely received inquiry.",
+    "assessment": "Evidence mixed, conversion experiment inconclusive. Search visibility is steady but desktop position remains weaker than mobile; organic traffic generated no recorded form starts or submissions in the latest 7-day window.",
+    "next_3_tasks": [
+      "Reconcile form_open/form_start/form_submit/generate_lead with CRM or mailbox delivery using existing real records only; do not submit a test inquiry.",
+      "Prioritize desktop search queries and landing pages; current GSC desktop average position is 13.1 over 7 days versus mobile 6.5.",
+      "Resume the 20-article release queue only after Codeup source and all six-language, unique-cover, TypeScript, production-build, static-SEO and broken-link gates are verifiable."
+    ],
+    "deferred": ["OEM/ODM homepage CTA removal remains pending; no non-emergency production change made.", "New article publication remains blocked by outdated live publication feed and unverified mandatory release gates."],
+    "acceptance_metrics": ["Organic form_start and submit counts reconciled to actual delivered leads", "Desktop query/page ranking and CTR reviewed against a non-overlapping baseline", "Publication feed advances only after each scheduled article passes all required gates"]
+  },
+  "search_console": {
+    "live_ui_updated": "2026-10-23 approximately 09:00 Beijing",
+    "7d_window": "2026-10-14..2026-10-20",
+    "7d": {"clicks": 15, "impressions": 543, "ctr_pct": 2.8, "avg_position": 10.6},
+    "28d_window": "2026-09-23..2026-10-20",
+    "28d": {"clicks": 46, "impressions": 1820, "ctr_pct": 2.5, "avg_position": 9.8},
+    "7d_device": {
+      "desktop": {"clicks": 8, "impressions": 342, "avg_position": 13.1},
+      "mobile": {"clicks": 6, "impressions": 191, "avg_position": 6.5},
+      "tablet": {"clicks": 1, "impressions": 10, "avg_position": 4.0}
+    },
+    "28d_device": {
+      "desktop": {"clicks": 24, "impressions": 1120, "avg_position": 12.2},
+      "mobile": {"clicks": 21, "impressions": 683, "avg_position": 6.0},
+      "tablet": {"clicks": 1, "impressions": 19, "avg_position": 4.7}
+    },
+    "latest_pipeline_snapshot_through_2026_10_19": {
+      "ES_7d": {"clicks": 3, "impressions": 42, "ctr_pct": 7.14, "avg_position": 6.83, "ga4_organic_sessions": 2},
+      "MX_7d": {"clicks": 0, "impressions": 18, "ctr_pct": 0, "avg_position": 6.56, "ga4_organic_sessions": 0},
+      "note": "The refreshed GSC UI country table for Oct14-20 showed Spain 2/41/position 6.8; Mexico was not among the first ten displayed rows, so no refreshed exact Mexico figure is claimed."
+    },
+    "latest_pipeline_priority_pages_through_2026_10_19": {
+      "/insights/cylindrical-lock-core-vs-standard-cylinder/": {"7d": {"clicks": 0, "impressions": 14, "avg_position": 8.36}, "28d": {"clicks": 0, "impressions": 108, "avg_position": 8.5}},
+      "/insights/en-1627-rc2-rc3-rc4-security-door-grades/": {"7d": {"clicks": 0, "impressions": 27, "avg_position": 6.67}, "28d": {"clicks": 2, "impressions": 104, "avg_position": 7.42}},
+      "/security-door-manufacturer/": {"7d": {"clicks": 0, "impressions": 9, "avg_position": 7.44}, "28d": {"clicks": 0, "impressions": 10, "avg_position": 7.7}, "status": "weak sample"},
+      "/global/mexico/security-doors/": {"7d": "no impressions in snapshot", "28d": "no impressions in snapshot"},
+      "/es/global/mexico/security-doors/": {"7d": "no impressions in snapshot", "28d": {"clicks": 0, "impressions": 1, "avg_position": 4}}
+    },
+    "comparison": "No matching non-overlapping previous-period data captured today; do not label rolling-window differences as week-over-week."
+  },
+  "ga4": {
+    "latest_snapshot_through": "2026-10-21",
+    "organic_sessions_7d": 30,
+    "organic_sessions_28d": 98,
+    "funnel_order": ["cta_click", "form_open", "form_start", "inquiry_prompt_select", "form_submit", "generate_lead", "form_error", "form_abandon", "contact_click"],
+    "organic_7d": [5, 6, 0, 0, 0, 0, 0, 0, 0],
+    "organic_28d": [28, 40, 5, 22, 1, 1, 0, 1, 1],
+    "all_channels_7d": [16, 23, 2, 0, 1, 1, 0, 0, 0],
+    "all_channels_28d": [73, 97, 17, 31, 6, 5, 1, 3, 21],
+    "delivery_verification": "GA4 generate_lead is an analytics event and is not proof of CRM/email receipt; actual delivery correlation not obtained."
+  },
+  "production": {
+    "healthz": "200; body ok",
+    "sitemap": "Browser loaded sitemap.xml successfully as XML; URL count not measured in this run.",
+    "publication_json": {"date": "2026-10-19", "stale_as_of": "2026-10-23"},
+    "homepage": {"rendered": true, "title": "Door & Smart Lock Manufacturer | WONLY Global", "h1": "DOORS & SMART LOCKS FOR DISTRIBUTORS AND PROJECTS", "oem_odm_elements_visible": ["header navigation", "procurement tile", "partnership service card and CTA", "inquiry form selection"]},
+    "scope": "Read-only spot check only; not a complete page, asset or mobile audit. No website code changes or deployment."
+  },
+  "freshness_and_access": {
+    "automated_snapshot_commit": "3dd91ae",
+    "automated_workflow_run": "#48 success, scheduled 2026-10-22 14:32 Beijing",
+    "ga4_status": "ok through 2026-10-21",
+    "gsc_automation_status": "ok through 2026-10-19; refreshed GSC UI available through 2026-10-20",
+    "semrush_status": "stale through 2026-09-07",
+    "codeup_master_test": "not verified; hostname/DNS access failed from this environment. Local project worktree contains unrelated user changes and was preserved read-only."
+  },
+  "experiment_decisions": {
+    "lock_core": "Evidence insufficient; latest 28d 0 clicks/108 impressions/position 8.5; hold and seek query/page detail before changing again.",
+    "en1627": "Retain; 2 clicks/104 impressions/position 7.42 over 28d, still low sample; no expansion justified yet.",
+    "homepage_full_range_tdk": "Preserve current variant; no causal conclusion from overlapping/short windows.",
+    "organic_inquiry_funnel": "P1 investigation: latest 7d has 30 sessions, 5 CTA clicks and 6 form opens but zero recorded starts/submits; reconcile instrumentation and actual received leads before editing form.",
+    "homepage_oem_odm_cta_removal": "Still not reflected on live page; awaiting safe, source-verified implementation path."
+  },
+  "content_batch": {
+    "batch_size": 20,
+    "verified_published": 4,
+    "live_publication_date": "2026-10-19",
+    "current_action": "No new article release today. Earlier overdue items remain queued; source and full release gates are unavailable for verification, so do not skip order or exceed two/day."
+  }
+}
