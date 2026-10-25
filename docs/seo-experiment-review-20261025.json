@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-25",
+  "status": "p1_funnel_gap_and_scheduled_release_blocked",
+  "captured_at_beijing": "2026-10-25 19:00-19:04",
+  "weekly_review": {
+    "main_goal": "Resolve the organic inquiry form-open to form-start gap while restoring safe, source-verified article releases.",
+    "assessment": "Search visibility remains present but modest. GSC's latest live 7-day window has 15 clicks and 701 impressions; average position is 12.3 overall and 14.4 on desktop. GA4 has 23 organic sessions, 4 organic form_open events and no organic form_start, submit or generate_lead events in the latest 7 days. This is a high-priority funnel signal, not proof that the form or delivery system is broken.",
+    "opportunity_ranking": [
+      {
+        "area": "Organic form_open to form_start",
+        "priority": "P1",
+        "score": "not numerically estimated; expected lift has no verified baseline",
+        "evidence": "4 organic form_open and 0 organic form_start in 7 days; 37 form_open and 3 form_start in 28 days. No verified delivery reconciliation.",
+        "next_action": "Audit event trigger semantics, mobile/desktop behavior, and reconcile only genuine submissions with existing CRM/email records."
+      },
+      {
+        "area": "Desktop search visibility",
+        "priority": "P1",
+        "score": "not numerically estimated; query-level opportunity and lift are unavailable",
+        "evidence": "Latest GSC 7-day desktop average position 14.4 on 472 impressions; mobile is position 8.2 on 219 impressions.",
+        "next_action": "Retrieve desktop query/page splits and prioritize high-intent terms before making page changes."
+      },
+      {
+        "area": "Scheduled SEO article release",
+        "priority": "P1 operational blocker",
+        "score": "not numerically estimated; publication impact depends on passing all release gates",
+        "evidence": "Batch ledger records 4/20 verified published. Items 5-14 remain unpublished; items 15-16 have 2026-10-25 release dates. Codeup master/test could not be fetched, and candidate routes are not present in the live Insights list; one route redirects to Insights and another renders the generic shell.",
+        "next_action": "Keep unpublished; verify source baseline and every language, cover, build, static SEO, broken-link and future-isolation gate before any release. Do not exceed two releases in a day."
+      }
+    ],
+    "next_3_tasks": [
+      "Reconcile the form_open/form_start event definitions and actual received genuine inquiry records without submitting a test inquiry.",
+      "Restore Codeup connectivity/source verification, then process the oldest eligible queued articles through all release gates; do not skip earlier backlog or publish unverified pages.",
+      "Retrieve desktop query/page splits and build a desktop-specific CTR/ranking backlog; keep the 2026-10-19 homepage TDK change under observation rather than editing it again before the 7-day window."
+    ],
+    "deferred": [
+      "No new website code or production deployment: Codeup DNS/remote verification failed and non-emergency changes cannot be source-verified.",
+      "SEMrush remains stale through 2026-09-07; no current competitive-difficulty or backlink change is claimed.",
+      "No current CRM/email delivery reconciliation; GA4 generate_lead is an analytics event, not proof of receipt."
+    ],
+    "acceptance_metrics": [
+      "Organic form starts and successful submissions can be reconciled to genuine received records with a defined event contract.",
+      "Each article release has verified six-language completeness, unique existing cover, type/build/static-HTML/broken-link/date-isolation checks and live URL/Sitemap validation.",
+      "Desktop query/page reporting identifies high-intent opportunities and uses a non-overlapping comparison period where available."
+    ]
+  },
+  "search_console": {
+    "live_ui_updated": "2026-10-25 approximately 15:30 Beijing; latest complete date 2026-10-23",
+    "7d_window": "2026-10-17..2026-10-23",
+    "7d": {"clicks": 15, "impressions": 701, "ctr_pct": 2.1, "avg_position": 12.3},
+    "28d_window": "2026-09-26..2026-10-23",
+    "28d": {"clicks": 45, "impressions": 1990, "ctr_pct": 2.3, "avg_position": 10.7},
+    "7d_device": {
+      "desktop": {"clicks": 7, "impressions": 472, "avg_position": 14.4},
+      "mobile": {"clicks": 7, "impressions": 219, "avg_position": 8.2},
+      "tablet": {"clicks": 1, "impressions": 10, "avg_position": 3.2}
+    },
+    "7d_country": {
+      "Spain": {"clicks": 2, "impressions": 39, "avg_position": 7.2},
+      "Mexico": "not in visible top-10 country rows; latest complete underlying snapshot through 2026-10-22 was 0 clicks/20 impressions/position 5.7"
+    },
+    "priority_pages": {
+      "/insights/cylindrical-lock-core-vs-standard-cylinder/": {
+        "7d": {"clicks": 0, "impressions": 12, "avg_position": 8.4},
+        "28d": {"clicks": 0, "impressions": 53, "avg_position": 8.8},
+        "top_queries_28d": ["cylindrical locks market: 2 impressions, position 24", "lock core vs cylinder: 1 impression, position 6", "cylindrical core: 1 impression, position 9"],
+        "baseline_28d": {"clicks": 0, "impressions": 95, "avg_position": 8.9},
+        "decision": "retain without substantial rewrite; low query volume and no clicks, evidence insufficient to expand or roll back"
+      },
+      "/insights/en-1627-rc2-rc3-rc4-security-door-grades/": {
+        "7d": {"clicks": 0, "impressions": 17, "avg_position": 7.1},
+        "28d": {"clicks": 2, "impressions": 90, "ctr_pct": 2.2, "avg_position": 7.2},
+        "baseline_28d": {"clicks": 0, "impressions": 100, "avg_position": 10.2},
+        "decision": "retain; visibility/rank improved against baseline but sample remains small and causality is unproven"
+      },
+      "/security-door-manufacturer/": {
+        "7d": {"clicks": 0, "impressions": 7, "avg_position": 7.9},
+        "28d": {"clicks": 0, "impressions": 10, "avg_position": 6.8}
+      },
+      "/global/mexico/security-doors/": {"28d": "0 clicks, 0 impressions; average position not applicable"},
+      "/es/global/mexico/security-doors/": {
+        "7d": "0 clicks, 0 impressions; average position not available",
+        "28d": {"clicks": 0, "impressions": 1, "avg_position": 4.0}
+      }
+    },
+    "comparison": "Compared with the prior live window 2026-10-15..21, the new 7-day window overlaps five days: clicks 16 to 15, impressions 631 to 701, CTR 2.5% to 2.1%, position 12.3 to 12.3. This is a rolling-window comparison, not a non-overlapping week-over-week test. For 28 days, 44/1,910/position 10.5 moved to 45/1,990/10.7 across overlapping windows."
+  },
+  "ga4": {
+    "latest_snapshot_generated_at": "2026-10-25T06:46:31.717Z",
+    "latest_snapshot_through": "2026-10-24",
+    "organic_sessions_7d": 23,
+    "organic_sessions_28d": 96,
+    "funnel_order": ["cta_click", "form_open", "form_start", "inquiry_prompt_select", "form_submit", "generate_lead", "form_error", "form_abandon", "contact_click"],
+    "organic_7d": [3, 4, 0, 0, 0, 0, 0, 0, 0],
+    "organic_28d": [28, 37, 3, 0, 1, 1, 0, 0, 0],
+    "all_channels_7d": [13, 18, 2, 0, 1, 1, 0, 0, 0],
+    "all_channels_28d": [72, 95, 15, 9, 6, 5, 1, 2, 20],
+    "markets_7d": {"Spain": {"organic_sessions": 2}, "Mexico": {"organic_sessions": 0}},
+    "delivery_verification": "No current CRM/email reconciliation was available. generate_lead remains an analytics event and does not establish that a message arrived or was handled."
+  },
+  "production": {
+    "healthz": "200; body ok",
+    "robots_txt": "not freshly verified in this run",
+    "sitemap": "loaded in browser; visible lastmod values remained 2026-08-11; candidate batch routes were not demonstrated as present",
+    "publication_json": {"date": "2026-10-19", "stale_as_of": "2026-10-25"},
+    "homepage": {
+      "rendered": true,
+      "title": "Door & Smart Lock Manufacturer | WONLY Global",
+      "h1": "DOORS & SMART LOCKS FOR DISTRIBUTORS AND PROJECTS",
+      "oem_odm_elements_visible": ["header navigation OEM / ODM", "procurement card Smart Lock OEM & ODM", "partnership service card OEM / ODM Services", "inquiry form option OEM / ODM"]
+    },
+    "insights": "Page rendered; newest batch entries visible are dated 2026-10-17, with no newer batch article shown.",
+    "due_articles": {
+      "2026-10-25": ["smart-lock-firmware-change-control", "smart-door-power-outage-acceptance"],
+      "verification": "not live as content: firmware route rendered generic app shell; power-outage route resolved to /insights. No release inferred from a generic 200/fallback."
+    },
+    "scope": "Read-only production spot checks. No website code, third-party settings, article records or deployments were changed."
+  },
+  "freshness_and_access": {
+    "gsc_live_ui_status": "success; updated approximately 3.5 hours before capture; complete through 2026-10-23",
+    "ga4_status": "success through 2026-10-24",
+    "semrush_status": "stale through 2026-09-07",
+    "codeup_master_test": "not verified; git ls-remote failed because codeup.aliyun.com hostname/DNS could not be resolved"
+  },
+  "release_decision": {
+    "batch_size": 20,
+    "verified_published": 4,
+    "unpublished": 16,
+    "action_today": "hold all new releases; prioritize oldest pending items and do not exceed two per day",
+    "blockers": ["Codeup master/test unavailable", "all mandatory current-source release gates could not be rerun", "two Oct 25 candidate routes are not live as article content", "older pending batch items remain ahead of today's scheduled items"]
+  }
+}
