@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-10-24T06:24:38.344Z",
+  "generated_at": "2026-10-25T06:46:31.717Z",
   "freshness": {
     "ga4": {
-      "through": "2026-10-23",
+      "through": "2026-10-24",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-10-21",
+      "through": "2026-10-22",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,21 +21,21 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 16,
-        "impressions": 631,
-        "ctr": 0.025356576862123614,
-        "avg_position": 12.294770206022188
+        "clicks": 14,
+        "impressions": 647,
+        "ctr": 0.021638330757341576,
+        "avg_position": 12.10046367851623
       },
       "ga4": {
-        "organic_sessions": 20
+        "organic_sessions": 23
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 44,
-        "impressions": 1906,
-        "ctr": 0.023084994753410283,
-        "avg_position": 10.472717733473242
+        "clicks": 46,
+        "impressions": 1936,
+        "ctr": 0.023760330578512397,
+        "avg_position": 10.417355371900827
       },
       "ga4": {
         "organic_sessions": 96
@@ -49,10 +49,10 @@
         "clicks": 2,
         "impressions": 45,
         "ctr": 0.044444444444444446,
-        "avg_position": 6.666666666666667
+        "avg_position": 6.844444444444444
       },
       "ga4_7d": {
-        "organic_sessions": 1
+        "organic_sessions": 2
       },
       "status": "ok"
     },
@@ -60,9 +60,9 @@
       "country": "MX",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 15,
+        "impressions": 20,
         "ctr": 0,
-        "avg_position": 4.933333333333334
+        "avg_position": 5.7
       },
       "ga4_7d": {
         "organic_sessions": 0
@@ -105,8 +105,8 @@
       "contact_click": 0
     },
     "all_channels_28d": {
-      "cta_click": 73,
-      "form_open": 96,
+      "cta_click": 72,
+      "form_open": 95,
       "form_start": 15,
       "inquiry_prompt_select": 9,
       "form_submit": 6,
@@ -122,15 +122,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 10,
+        "impressions": 13,
         "ctr": 0,
-        "avg_position": 8.4
+        "avg_position": 8.153846153846153
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 83,
+        "impressions": 67,
         "ctr": 0,
-        "avg_position": 8.734939759036145
+        "avg_position": 8.940298507462686
       },
       "issues": []
     },
@@ -139,15 +139,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 21,
+        "impressions": 17,
         "ctr": 0,
-        "avg_position": 6.190476190476191
+        "avg_position": 6.882352941176471
       },
       "gsc_28d": {
         "clicks": 2,
-        "impressions": 98,
-        "ctr": 0.02040816326530612,
-        "avg_position": 7.326530612244898
+        "impressions": 91,
+        "ctr": 0.02197802197802198,
+        "avg_position": 7.208791208791209
       },
       "issues": []
     },
@@ -162,9 +162,9 @@
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 10,
+        "impressions": 9,
         "ctr": 0,
-        "avg_position": 7.7
+        "avg_position": 7.444444444444445
       },
       "issues": []
     },
@@ -224,9 +224,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 10,
+        "impressions": 13,
         "ctr": 0,
-        "avg_position": 8.4
+        "avg_position": 8.153846153846153
       },
       "decision": null
     },
@@ -250,9 +250,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 21,
+        "impressions": 17,
         "ctr": 0,
-        "avg_position": 6.190476190476191
+        "avg_position": 6.882352941176471
       },
       "decision": null
     }
@@ -274,26 +274,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-10-24T06:24:38.344Z",
-      "through": "2026-10-23",
+      "captured_at": "2026-10-25T06:46:31.717Z",
+      "through": "2026-10-24",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-10-24T06:24:38.344Z",
-      "through": "2026-10-21",
+      "captured_at": "2026-10-25T06:46:31.717Z",
+      "through": "2026-10-22",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-10-24T06:24:38.344Z",
+      "captured_at": "2026-10-25T06:46:31.717Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-10-24T06:24:38.344Z",
-      "through": "2026-10-24",
+      "captured_at": "2026-10-25T06:46:31.717Z",
+      "through": "2026-10-25",
       "status": "ok"
     }
   ]
