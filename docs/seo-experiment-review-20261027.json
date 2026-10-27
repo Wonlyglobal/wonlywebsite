@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-27",
+  "status": "p1_funnel_gap_data_refresh_and_article_release_blocked",
+  "captured_at_beijing": "2026-10-27 09:39-09:40",
+  "weekly_review": {
+    "main_goal": "Close the organic inquiry form-start gap and restore verifiable daily reporting and safe article releases.",
+    "assessment": "No fresh GA4/GSC snapshot was available at capture time. Last available data remains yesterday's snapshot (GA4 through Oct 25, GSC through Oct 23), so today's values and comparisons cannot be inferred. Live production site routes remain accessible, but four of the twenty authorized batch articles are verified live and the oldest queued entries have unresolved release gates.",
+    "priority_method": "Qualitative expected lift × commercial value × evidence strength ÷ effort/risk. No numeric opportunity scores assigned because current query-level conversion and incremental-lift baselines are unavailable.",
+    "priorities": [
+      {
+        "area": "Daily GA4/GSC refresh and organic form funnel",
+        "priority": "P1",
+        "evidence": "GitHub snapshot run #53 scheduled Oct 26 failed; no Oct 27 run appeared by 09:40 Beijing although workflow cron is 09:35 Beijing. The in-app GA4 browser tab could not be attached. Current GSC/GA4 values are therefore not obtained today.",
+        "last_available_context": "Through Oct 25 GA4 showed 4 organic form_open and 0 form_start in 7 days; no CRM/email receipt reconciliation.",
+        "next_action": "Restore authorized access or confirm the scheduled workflow; inspect the failed job log. Reconcile only genuine aggregate inquiries, without test submissions or personal data."
+      },
+      {
+        "area": "Twenty-article production release integrity",
+        "priority": "P1 operational blocker",
+        "evidence": "Ledger: 4/20 verified live; 16 unpublished. Items 5-6 fail the contextual-body-link gate; item 19 and item 20 candidate URLs both resolve to the generic Insights listing rather than article bodies. Codeup master/test is not accessible with the current SSH identity.",
+        "next_action": "Hold new articles until source and all six-language, unique-cover, TypeScript, production-build, static-HTML, broken-link, and future-date-isolation gates pass. Resume from oldest eligible items and do not exceed two articles per day."
+      },
+      {
+        "area": "Homepage OEM/ODM entry points and sitemap freshness",
+        "priority": "P2 outstanding implementation",
+        "evidence": "Live homepage still renders an OEM/ODM navigation link, procurement-path card, partnership card, CTA and form option. The sitemap has 468 loc entries; visible lastmod values are stale, and batch item 19/20 routes are absent.",
+        "next_action": "Keep the previously requested OEM/ODM button removal on the open implementation list; no nonurgent website code was changed or deployed in this heartbeat. Review sitemap generation after release source access returns."
+      }
+    ],
+    "next_3_tasks": [
+      "Restore the snapshot workflow and authenticated GA4/GSC access, then inspect run #53's failing step and record a fresh, non-overlapping comparison where available.",
+      "Repair the oldest article's verified quality-gate failures and revalidate publication source, all languages, cover uniqueness, build, static SEO and URL isolation before release.",
+      "When authorized release work resumes, remove the outstanding homepage OEM/ODM entry points and verify sitemap loc count, lastmod and actual article bodies after deployment."
+    ],
+    "deferred": [
+      "No fresh GSC or GA4 metrics today; do not reuse Oct 26 values as today's data.",
+      "No website source changes or production deployment; Codeup master/test read failed with SSH public-key denial.",
+      "No CRM/email receipt reconciliation and no customer personal records viewed; generate_lead is not proof of delivery.",
+      "SEMrush latest available data remains stale through 2026-09-07."
+    ],
+    "acceptance_metrics": [
+      "Scheduled snapshot succeeds and reports explicit data-through dates, current GSC windows, GA4 funnel and missing-data status.",
+      "Organic form opens/starts/submits/success events have documented trigger semantics and privacy-safe reconciliation to genuine received inquiries.",
+      "Every released article passes all required language, unique cover, build, static SEO, broken-link, publication-date and production URL/Sitemap checks."
+    ]
+  },
+  "data_capture": {
+    "today_status": "Fresh GSC and GA4 data not obtained. GitHub workflow list still showed latest run #53, a failed scheduled run on Oct 26 at 14:53 GMT+8; no Oct 27 run was listed by Oct 27 09:40 GMT+8. In-app GA4 tab attachment timed out. Do not treat previous-snapshot values as current-day measurements.",
+    "workflow": {
+      "name": "Update SEO summary Serverless snapshot",
+      "scheduled_cron": "35 1 * * * UTC (09:35 Asia/Shanghai)",
+      "latest_run": "#53, failed, scheduled 2026-10-26 14:53 GMT+8, 13 seconds",
+      "visible_error": "Process completed with exit code 1; detailed job logs require GitHub sign-in, so root cause is unverified.",
+      "today_run": "No run #54 visible by 2026-10-27 09:40 GMT+8."
+    },
+    "last_available_snapshot_not_today": {
+      "captured_at": "2026-10-26 09:51 GMT+8",
+      "gsc_through": "2026-10-23",
+      "ga4_through": "2026-10-25",
+      "gsc_7d_window": "2026-10-17..2026-10-23",
+      "gsc_7d": {"clicks": 15, "impressions": 701, "ctr_pct": 2.1398, "avg_position": 12.3438},
+      "gsc_28d_window": "2026-09-26..2026-10-23",
+      "gsc_28d": {"clicks": 45, "impressions": 1988, "ctr_pct": 2.2636, "avg_position": 10.6579},
+      "gsc_7d_device": {
+        "desktop": {"clicks": 7, "impressions": 472, "avg_position": 14.4},
+        "mobile": {"clicks": 7, "impressions": 219, "avg_position": 8.2},
+        "tablet": {"clicks": 1, "impressions": 10, "avg_position": 3.2}
+      },
+      "gsc_7d_countries": {
+        "Spain": {"clicks": 2, "impressions": 39, "ctr_pct": 5.1282, "avg_position": 7.1538},
+        "Mexico": {"clicks": 0, "impressions": 16, "ctr_pct": 0, "avg_position": 5.9375}
+      },
+      "gsc_priority_pages": {
+        "cylindrical-lock-core-vs-standard-cylinder": {"7d": "0 clicks / 12 impressions / position 8.42", "28d": "0 clicks / 53 impressions / position 8.83"},
+        "en-1627-rc2-rc3-rc4-security-door-grades": {"7d": "0 / 17 / position 7.12", "28d": "2 clicks / 90 impressions / CTR 2.22% / position 7.17"},
+        "security-door-manufacturer": {"7d": "0 / 7 / position 7.86", "28d": "0 / 10 / position 6.80"},
+        "english-mexico-security-doors": "0 impressions in available 7d and 28d data",
+        "spanish-mexico-security-doors": "0 impressions in 7d; 0 clicks / 1 impression / position 4 in 28d"
+      },
+      "ga4_sessions": {"organic_7d": 23, "organic_28d": 95},
+      "ga4_funnel_order": ["cta_click", "form_open", "form_start", "inquiry_prompt_select", "form_submit", "generate_lead", "form_error", "form_abandon", "contact_click"],
+      "ga4_organic_7d": [3, 4, 0, 0, 0, 0, 0, 0, 0],
+      "ga4_organic_28d": [28, 37, 3, 0, 1, 1, 0, 0, 0],
+      "ga4_all_channels_7d": [13, 18, 2, 0, 1, 1, 0, 0, 0],
+      "ga4_all_channels_28d": [72, 95, 15, 9, 6, 5, 1, 2, 20],
+      "ga4_delivery_reconciliation": "Not obtained. No test form submission and no personal data access."
+    },
+    "comparison": "Today's comparison is unavailable because there is no new snapshot. Oct 26 GSC's 7-day interval was identical to its previous snapshot, and its 28-day interval overlapped; neither is an independent Oct 27 week-over-week comparison."
+  },
+  "production_audit": {
+    "scope": "Read-only browser inspection; no website changes, form submission or third-party configuration edits.",
+    "healthz": "Opened directly; body 'ok'.",
+    "robots_txt": "Opened directly; named crawlers and wildcard are allowed; sitemap URL is present.",
+    "sitemap": {
+      "status": "Loaded as XML in browser.",
+      "verified_loc_count": 468,
+      "observed_lastmod_range": "2026-03-19 through 2026-10-17 for visible dated routes; many core entries remain 2026-08-11.",
+      "batch_item_19_route": "door-variation-request-register resolves to /insights/ listing.",
+      "batch_item_20_route": "door-lock-spare-parts-planning resolves to /insights listing.",
+      "correction": "Oct 26 worklog said 2,848 sitemap entries; today's direct XML/accessibility-tree count is 468 loc entries. The prior count was erroneous and is corrected here."
+    },
+    "homepage": {
+      "title": "Door & Smart Lock Manufacturer | WONLY Global",
+      "description": "Explore WONLY’s steel doors, wooden doors, smart doors and smart locks, with OEM/ODM manufacturing for distributors and project buyers worldwide.",
+      "h1": "Doors & Smart Locks for Distributors and Projects",
+      "canonical": "https://www.wonlyglobal.com/",
+      "robots": "index,follow",
+      "lang": "en",
+      "hreflang_count": 7,
+      "json_ld_count": 2,
+      "remaining_oem_odm_entry_points": ["header navigation", "Smart Lock OEM & ODM procurement card", "OEM / ODM Services partnership card", "homepage CTA", "inquiry-form option"]
+    },
+    "pages": [
+      {"path": "/security-door-manufacturer/", "title": "Security Door Manufacturer & OEM Supplier | WONLY", "lang": "en", "canonical": "self", "robots": "index,follow", "h1": "Security Door Manufacturer for Global Projects"},
+      {"path": "/smart-door-manufacturer/", "title": "Smart Door Manufacturer for Projects & Distribution | WONLY", "lang": "en", "canonical": "self", "robots": "index,follow", "h1": "Smart Door Manufacturer for Connected Entrances"},
+      {"path": "/smart-lock-oem-odm/", "title": "Smart Lock OEM & ODM Manufacturer | WONLY", "lang": "en", "canonical": "self", "robots": "index,follow", "h1": "Smart Lock OEM & ODM Manufacturing"},
+      {"path": "/insights/", "title": "News & Insights — Security Door & Smart Lock Guides | WONLY", "lang": "en", "canonical": "self", "robots": "index,follow", "h1": "Guides, Technology & Market Insight"},
+      {"path": "/insights/keyed-alike-vs-master-key-procurement/", "title": "Keyed Alike vs Master Key: Build the Permission Matrix First | WONLY", "h1": "Keyed Alike vs Master Key: Build the Permission Matrix First", "status": "Latest confirmed batch article; published content visible."}
+    ],
+    "contact": "Contact route loaded; title, English lang, self canonical, index/follow robots and H1 were visible. No form was submitted."
+  },
+  "batch_status": {
+    "authorized_count": 20,
+    "verified_published": 4,
+    "unpublished": 16,
+    "oldest_pending": [
+      {"id": 5, "slug": "door-handing-swing-schedule", "release_not_before": "2026-10-20", "blocker": "English body lacks contextual inline links; three links are only at the end."},
+      {"id": 6, "slug": "lock-cylinder-replacement-compatibility", "release_not_before": "2026-10-20", "blocker": "English body lacks contextual inline links; two of three end links point to the same comparison page."}
+    ],
+    "items_7_20": "Queued/rescheduled and not live verified; planned end date 2026-10-27.",
+    "today_due": ["door-variation-request-register", "door-lock-spare-parts-planning"],
+    "release_decision": "Hold. Codeup baseline and all required release gates cannot be verified, and both candidates resolve to the generic Insights listing rather than article content. Do not skip older queue items or publish more than two per day."
+  },
+  "access_and_status": {
+    "gsc": "No fresh Oct 27 capture; last available snapshot through Oct 23.",
+    "ga4": "No fresh Oct 27 capture; last available snapshot through Oct 25; in-app browser connection timed out.",
+    "semrush": "Stale through 2026-09-07.",
+    "codeup_master_test": "Not obtained; read-only git ls-remote returned Permission denied (publickey).",
+    "github": "Workflow history read-only via public Actions page. Failed run #53 detail shows exit code 1; detailed job logs require sign-in, so root cause is unverified.",
+    "website_deploy": "No code modified or deployed; no articles published."
+  },
+  "next_actions": [
+    "Restore authorized GA4/GSC and GitHub workflow visibility or let the scheduled snapshot run recover; inspect failure details, then write fresh data with clear windows.",
+    "Resolve Codeup access; fix item 5/6 contextual links and rerun six-language plus all release gates from the latest source baseline.",
+    "Track the unresolved OEM/ODM homepage removal separately; it remains visible in navigation, procurement cards, services and CTA/form choices."
+  ]
+}
