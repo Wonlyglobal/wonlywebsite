@@ -8,7 +8,7 @@
 // Runs in GitHub Actions (daily-work-report.yml); needs fetch-depth: 0.
 
 import { execSync } from "node:child_process";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 
 const WEBHOOK = process.env.FEISHU_WORK_WEBHOOK;
 if (!WEBHOOK) { console.error("FEISHU_WORK_WEBHOOK not set"); process.exit(1); }
@@ -116,6 +116,26 @@ const live = arts.filter((a) => a.date <= today);
 const scheduled = arts.filter((a) => a.date > today).sort((a, b) => (a.date < b.date ? -1 : 1));
 const next = scheduled[0];
 
+// The production report may run from a commit that does not yet contain
+// locally prepared drafts. Read the editorial queue as a separate source so
+// due articles remain visible as pending/deferred instead of disappearing.
+let africaBatch;
+try {
+  africaBatch = JSON.parse(readFileSync("docs/seo-africa-batch-20261029.json", "utf8"));
+} catch { /* this batch file is optional for older branches */ }
+const africaArticles = Array.isArray(africaBatch?.articles) ? africaBatch.articles : [];
+const africaDueToday = africaArticles.filter((a) => a.date === today);
+const africaFuture = africaArticles.filter((a) => a.date > today).sort((a, b) => a.date.localeCompare(b.date));
+const africaVerifiedLive = africaArticles.filter((a) => /^live_verified_public_page_/.test(a.production_status || ""));
+const africaStatusLabel = (article) => {
+  const status = article.production_status || "";
+  if (/^live_verified_public_page_/.test(status)) return "已核验上线";
+  if (/^deferred_/.test(status)) return `已延期（${status.replace(/^deferred_/, "").replaceAll("_", " ")}）`;
+  if (/build_static_seo_and_publication_audit_passed_pending_production_deploy/.test(status)) return "发布门槛已通过，待生产部署与公网核验";
+  if (existsSync(`content/articles/${article.slug}.md`)) return "稿件已进入当前版本，等待发布验收";
+  return "今日排期，稿件未进入当前版本";
+};
+
 // ---- 3) Sitemap ----
 let urlCount = "?";
 try { urlCount = String((readFileSync("public/sitemap.xml", "utf8").match(/<loc>/g) || []).length); } catch { /* ignore */ }
@@ -133,13 +153,27 @@ try {
 const md = [];
 md.push(`**📅 ${today} · 个人工作日报**`);
 md.push("");
-md.push(`**📝 当日自动上线文章**`);
-if (publishedToday.length) {
-  for (const a of publishedToday) md.push(`• [${a.title}](https://www.wonlyglobal.com/insights/${a.slug}/)`);
+md.push(`**📝 当日文章排期与上线状态**`);
+const dueBySlug = new Map();
+for (const article of publishedToday) dueBySlug.set(article.slug, article);
+for (const article of africaDueToday) dueBySlug.set(article.slug, article);
+if (dueBySlug.size) {
+  for (const article of dueBySlug.values()) {
+    const batchArticle = africaArticles.find((item) => item.slug === article.slug);
+    if (batchArticle && /^live_verified_public_page_/.test(batchArticle.production_status || "")) {
+      md.push(`• [${article.title}](https://www.wonlyglobal.com/insights/${article.slug}/)：${africaStatusLabel(batchArticle)}`);
+    } else {
+      md.push(`• ${article.title}：${batchArticle ? africaStatusLabel(batchArticle) : "已到排期日，待正式部署与公网核验"}`);
+    }
+  }
 } else {
-  md.push("• 今日无排期文章");
+  md.push("• 今日无文章排期");
 }
-md.push(`**📚 内容进度**：已上线 ${live.length}/${arts.length} 篇${next ? `，下一篇 ${next.date}` : "，排期已发完 ✅"}`);
+if (africaBatch) {
+  md.push(`**🌍 非洲市场批次**：正式站核验 ${africaVerifiedLive.length}/${africaArticles.length} 篇；今日排期 ${africaDueToday.length} 篇`);
+  md.push(`**📆 批次后续排期**：${africaFuture.length} 篇${africaFuture[0] ? `；下一篇 ${africaFuture[0].date}` : "；没有后续排期"}`);
+}
+md.push(`**📚 内容库**：当前版本 ${arts.length} 篇稿件（日期已到 ${live.length}，未来日期 ${scheduled.length}）${next ? `；下一篇 ${next.date}` : ""}`);
 md.push("");
 const catOrder = ["📄 页面优化与建设", "✍️ 内容与文章", "🔍 SEO 建设", "🤖 自动化与工程", "🖼️ 素材", "🔩 其它"];
 const catsWithWork = catOrder.filter((c) => workByCat[c]?.length);

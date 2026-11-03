@@ -1,0 +1,331 @@
+{
+  "batch": "africa-market-2026-10",
+  "status": "production_in_progress",
+  "created_at": "2026-10-29",
+  "publication_window": {
+    "timezone": "Asia/Shanghai",
+    "start_date": "2026-10-29",
+    "end_date": "2026-11-07",
+    "daily_limit": 2,
+    "languages": [
+      "en",
+      "ar",
+      "fr",
+      "ru",
+      "es",
+      "pt"
+    ],
+    "rule": "Publish no more than two articles per Beijing calendar day, only after all content, translation, cover, source, build, static SEO, internal-link and future-publication checks pass. Do not backfill missed dates."
+  },
+  "notes": [
+    "This is a topic queue, not evidence that any article has been written, reviewed, scheduled in the CMS, or published.",
+    "Topics are procurement-intent hypotheses, not verified search-volume or ranking claims.",
+    "Avoid unsupported continent-wide demand statistics and country-specific legal or certification claims. Verify any such claim against current primary sources during drafting.",
+    "Every article must have a distinct buyer problem and at least three contextual internal links plus a relevant inquiry path.",
+    "As of 2026-10-29, slots 3-20 have six-language draft files and unique cover assets locally; they remain unpublished until individual QA/build and scheduled dates. Draft creation is not publication."
+  ],
+  "articles": [
+    {
+      "slot": 1,
+      "date": "2026-10-29",
+      "slug": "kenya-security-door-project-rfq-checklist",
+      "title": "Kenya Security Door Project RFQ: A Buyer’s Checklist for Drawings, Openings and Hardware",
+      "intent": "Kenya project buyer preparing a comparable supplier quotation",
+      "angle": "Define opening schedule, handing, wall build-up, hardware, finish, quantity breaks and submittal evidence; distinguish a usable RFQ from a broad price request.",
+      "production_status": "live_verified_public_page_2026-10-29",
+      "cover_path": "public/images/articles/kenya-security-door-project-rfq.webp",
+      "link_targets": [
+        "/insights/security-door-rfq-drawing-package/",
+        "/insights/door-opening-measurement-survey/",
+        "/products/entrance-door/",
+        "/contact/"
+      ]
+    },
+    {
+      "slot": 2,
+      "date": "2026-10-29",
+      "slug": "nigeria-door-distributor-product-range-planning",
+      "title": "Planning a Door Range for Nigerian Distributors: Segments, Samples and Reorder Checks",
+      "intent": "Nigeria distributor planning a door assortment",
+      "angle": "Build a range matrix by customer segment, opening type, finish, hardware and replenishment; use sample feedback and sell-through evidence rather than one assumed national profile.",
+      "production_status": "live_verified_public_page_2026-10-29",
+      "cover_path": "public/images/articles/nigeria-door-distributor-range.webp",
+      "link_targets": [
+        "/insights/how-to-choose-security-door-for-projects/",
+        "/insights/how-to-choose-a-smart-lock-for-your-range/",
+        "/products/metal-doors/3-0",
+        "/contact/"
+      ]
+    },
+    {
+      "slot": 3,
+      "date": "2026-10-30",
+      "slug": "ghana-coastal-door-finish-selection-checklist",
+      "title": "Door Finish Selection for Coastal Projects in Ghana: A Specification and Sample Checklist",
+      "intent": "Ghana coastal project team choosing exterior door finishes",
+      "angle": "Assess exposure, substrate, coating system, edge details, maintenance plan and sample approval; avoid implying a finish is corrosion-proof without test evidence.",
+      "link_targets": [
+        "/insights/cast-aluminium-doors-coastal-climates/",
+        "/insights/cast-aluminium-door-finishes-customisation/",
+        "/insights/security-door-ratings-and-certifications/",
+        "/contact/"
+      ],
+      "production_status": "missed_not_published_no_backfill"
+    },
+    {
+      "slot": 4,
+      "date": "2026-10-30",
+      "slug": "south-africa-multiresidential-door-procurement",
+      "title": "South Africa Multi-Residential Door Procurement: From Door Schedule to Evidence Review",
+      "intent": "South African developer or contractor procuring door sets for multi-residential buildings",
+      "angle": "Coordinate door marks, performance requirements, hardware, accessibility, fire strategy and project-specific approvals; direct readers to verify applicable local requirements with the responsible professional.",
+      "link_targets": [
+        "/insights/commercial-door-hardware-schedule/",
+        "/insights/fire-door-certifications-en-1634-ul-10c/",
+        "/insights/security-door-installation-inspection-checklist/",
+        "/contact/"
+      ],
+      "production_status": "missed_not_published_no_backfill"
+    },
+    {
+      "slot": 5,
+      "date": "2026-10-31",
+      "slug": "egypt-commercial-door-schedule-project-buyers",
+      "title": "Egypt Commercial Door Schedule: What to Confirm Before Requesting a Project Quote",
+      "intent": "Egyptian commercial project buyer preparing a door package",
+      "angle": "Map door locations to use, dimensions, handing, finish, lock/access needs, documentation and delivery phases; separate confirmed specification from open design decisions.",
+      "link_targets": [
+        "/insights/commercial-security-door-specification-checklist/",
+        "/insights/commercial-door-hardware-schedule/",
+        "/products/entrance-door/",
+        "/contact/"
+      ],
+      "production_status": "missed_not_published_no_backfill"
+    },
+    {
+      "slot": 6,
+      "date": "2026-10-31",
+      "slug": "ethiopia-contractor-security-door-drawing-package",
+      "title": "Ethiopia Contractor Guide: Preparing a Security Door Drawing and Submittal Package",
+      "intent": "Ethiopian contractor submitting door details for project review",
+      "angle": "List elevations, schedules, opening data, wall interface, hardware set, finish samples and evidence register needed to reduce clarification cycles.",
+      "link_targets": [
+        "/insights/security-door-rfq-drawing-package/",
+        "/insights/door-opening-measurement-survey/",
+        "/insights/security-door-manufacturer-factory-audit-checklist/",
+        "/contact/"
+      ],
+      "production_status": "missed_not_published_no_backfill"
+    },
+    {
+      "slot": 7,
+      "date": "2026-11-01",
+      "slug": "tanzania-hotel-door-set-coordination-checklist",
+      "title": "Tanzania Hotel Door Sets: Coordinating Guestroom, Service and Common-Area Requirements",
+      "intent": "Tanzania hotel owner or consultant coordinating door-set packages",
+      "angle": "Separate guestroom, service, plant and public-area schedules; coordinate privacy, access, acoustic and fire requirements only where the project brief calls for them.",
+      "link_targets": [
+        "/insights/hotel-guest-room-door-specification/",
+        "/insights/hotel-fire-acoustic-security-doors/",
+        "/insights/keyed-alike-vs-master-key-procurement/",
+        "/contact/"
+      ],
+      "production_status": "missed_not_published_no_backfill"
+    },
+    {
+      "slot": 8,
+      "date": "2026-11-01",
+      "slug": "uganda-door-distributor-after-sales-spares-plan",
+      "title": "A Practical After-Sales and Spare-Parts Plan for Door Distributors in Uganda",
+      "intent": "Uganda distributor planning service and spare-parts support",
+      "angle": "Create a model/part cross-reference, warranty escalation path, installer training plan, reorder thresholds and customer handover pack without promising unsupported local service coverage.",
+      "link_targets": [
+        "/insights/how-to-choose-a-smart-lock-for-your-range/",
+        "/insights/smart-lock-battery-backup-reliability/",
+        "/products/smart-locks",
+        "/contact/"
+      ],
+      "production_status": "missed_not_published_no_backfill"
+    },
+    {
+      "slot": 9,
+      "date": "2026-11-02",
+      "slug": "rwanda-hospitality-project-door-access-control-brief",
+      "title": "Rwanda Hospitality Projects: A Door and Access-Control Brief for Procurement Teams",
+      "intent": "Rwanda hotel or serviced-apartment project team coordinating access",
+      "angle": "Translate room types and operational workflows into a door/lock matrix, guest/staff permission levels, emergency procedures and commissioning checks; no blanket smart-lock compatibility claims.",
+      "link_targets": [
+        "/insights/hotel-guest-room-door-specification/",
+        "/insights/keyed-alike-vs-master-key-procurement/",
+        "/insights/smart-locks-for-apartment-projects/",
+        "/contact/"
+      ],
+      "production_status": "pushed_pending_aliyun_flow_deploy_and_live_verification"
+    },
+    {
+      "slot": 10,
+      "date": "2026-11-02",
+      "slug": "morocco-door-distributor-localized-range-launch",
+      "title": "Launching a Door Product Range in Morocco: Distributor Localization Checklist",
+      "intent": "Morocco distributor preparing localized product and sales materials",
+      "angle": "Plan French/Arabic terminology review, sample selection, installation documentation, product naming and channel training; validate translations with local technical reviewers.",
+      "link_targets": [
+        "/insights/how-to-choose-security-door-for-projects/",
+        "/insights/how-to-choose-a-smart-lock-for-your-range/",
+        "/products/wooden-doors",
+        "/contact/"
+      ],
+      "production_status": "pushed_pending_aliyun_flow_deploy_and_live_verification"
+    },
+    {
+      "slot": 11,
+      "date": "2026-11-03",
+      "slug": "cote-divoire-door-project-french-submittal-checklist",
+      "title": "Côte d’Ivoire Door Projects: A French-Language Technical Submittal Checklist",
+      "intent": "Côte d’Ivoire consultant or contractor assembling a French project submittal",
+      "angle": "Organize bilingual product schedules, drawings, approved samples, hardware, test evidence and revision control; identify which project authority must confirm applicable requirements.",
+      "link_targets": [
+        "/insights/security-door-rfq-drawing-package/",
+        "/insights/security-door-ratings-and-certifications/",
+        "/insights/commercial-security-door-specification-checklist/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 12,
+      "date": "2026-11-03",
+      "slug": "senegal-apartment-door-quotation-preparation",
+      "title": "Preparing a Door Quotation for Apartment Projects in Senegal",
+      "intent": "Senegal developer or contractor seeking comparable apartment door quotations",
+      "angle": "Group repeated opening types, record finish and hardware options, define mock-up approval and phase quantities, and issue a clear inclusions/exclusions schedule.",
+      "link_targets": [
+        "/insights/smart-locks-for-apartment-projects/",
+        "/insights/commercial-door-hardware-schedule/",
+        "/insights/door-opening-measurement-survey/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 13,
+      "date": "2026-11-04",
+      "slug": "mozambique-coastal-project-door-submittal-and-maintenance",
+      "title": "Mozambique Coastal Projects: Door Submittals, Finish Review and Maintenance Planning",
+      "intent": "Mozambique project buyer evaluating doors for coastal exposure",
+      "angle": "Turn exposure assumptions into documented finish selection, sample review, installation details and maintenance instructions; keep performance claims tied to supplier evidence.",
+      "link_targets": [
+        "/insights/cast-aluminium-doors-coastal-climates/",
+        "/insights/cast-aluminium-door-finishes-customisation/",
+        "/insights/security-door-installation-inspection-checklist/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 14,
+      "date": "2026-11-04",
+      "slug": "zambia-construction-door-installation-handover",
+      "title": "Zambia Project Handover: Inspecting Door Installation, Hardware and Records",
+      "intent": "Zambia contractor or owner representative preparing door handover",
+      "angle": "Provide an observable inspection sequence for clearances, operation, hardware, labels, finish, defects and close-out records; distinguish visual checks from certified testing.",
+      "link_targets": [
+        "/insights/security-door-installation-inspection-checklist/",
+        "/insights/commercial-door-hardware-schedule/",
+        "/insights/fire-door-certifications-en-1634-ul-10c/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 15,
+      "date": "2026-11-04",
+      "slug": "angola-project-door-rfq-from-design-brief-to-quote",
+      "title": "Angola Project Door RFQs: Turning a Design Brief into a Comparable Supplier Quote",
+      "intent": "Angola project procurement team creating an RFQ from design documents",
+      "angle": "Use a scope matrix for door marks, quantities, dimensions, wall interfaces, finishes, hardware, approvals, packing and delivery milestones; flag missing data instead of guessing.",
+      "link_targets": [
+        "/insights/security-door-rfq-drawing-package/",
+        "/insights/door-opening-measurement-survey/",
+        "/insights/commercial-security-door-specification-checklist/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 16,
+      "date": "2026-11-05",
+      "slug": "west-africa-door-import-packaging-receiving-checklist",
+      "title": "Door Shipment Receiving Checklist for West African Distributors and Project Teams",
+      "intent": "West African importer or distributor planning shipment receipt and damage control",
+      "angle": "Specify packaging labels, pallet/container plan, photo records, count reconciliation, moisture protection and claims workflow; do not invent customs rules or transit times.",
+      "link_targets": [
+        "/insights/security-door-manufacturer-factory-audit-checklist/",
+        "/insights/sourcing-security-doors-from-china-oem-odm/",
+        "/insights/security-door-installation-inspection-checklist/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 17,
+      "date": "2026-11-05",
+      "slug": "east-africa-multi-building-door-schedule-template",
+      "title": "East Africa Multi-Building Projects: A Door Schedule Template for Phased Procurement",
+      "intent": "Regional project team purchasing doors across multiple buildings or phases",
+      "angle": "Show how to normalize door marks, variants, quantities, finish, hardware, approval status and delivery phase without losing building-level traceability.",
+      "link_targets": [
+        "/insights/commercial-door-hardware-schedule/",
+        "/insights/commercial-security-door-specification-checklist/",
+        "/insights/security-door-rfq-drawing-package/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 18,
+      "date": "2026-11-06",
+      "slug": "africa-smart-lock-site-survey-and-power-backup-checklist",
+      "title": "Smart Lock Site Survey for African Projects: Connectivity, Power and Support Questions",
+      "intent": "Project buyer checking smart-lock fit before specifying bulk quantities",
+      "angle": "Survey door preparation, network architecture, power/backup, credential workflow, privacy, installation and support; make no claims about local network quality or product compatibility without verification.",
+      "link_targets": [
+        "/insights/smart-lock-battery-backup-reliability/",
+        "/insights/how-smart-lock-access-works/",
+        "/insights/smart-locks-for-apartment-projects/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 19,
+      "date": "2026-11-06",
+      "slug": "africa-door-project-mockup-sample-approval-workflow",
+      "title": "Door Mock-Ups and Sample Approval: A Project Workflow for African Buyers",
+      "intent": "Architect or procurement team planning product samples and mock-up approvals",
+      "angle": "Define representative opening selection, finish/colour approval, hardware coordination, sign-off roles, revision capture and release-to-production checkpoints.",
+      "link_targets": [
+        "/insights/cast-aluminium-door-finishes-customisation/",
+        "/insights/security-door-rfq-drawing-package/",
+        "/insights/security-door-manufacturer-factory-audit-checklist/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    },
+    {
+      "slot": 20,
+      "date": "2026-11-07",
+      "slug": "africa-door-buyer-project-documentation-matrix",
+      "title": "Door Project Documentation Matrix: What African Importers Should Request and Retain",
+      "intent": "Importer or project buyer organizing supplier documents and close-out records",
+      "angle": "Create a document register for drawings, specifications, test reports, installation instructions, warranties, packing records and revisions; explain matching each document to the exact product configuration.",
+      "link_targets": [
+        "/insights/security-door-ratings-and-certifications/",
+        "/insights/security-door-rfq-drawing-package/",
+        "/insights/security-door-installation-inspection-checklist/",
+        "/contact/"
+      ],
+      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+    }
+  ]
+}
