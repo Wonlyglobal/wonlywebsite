@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-11-04T07:57:52.260Z",
+  "generated_at": "2026-11-05T08:27:30.831Z",
   "freshness": {
     "ga4": {
-      "through": "2026-11-03",
+      "through": "2026-11-04",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-11-01",
+      "through": "2026-11-02",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,24 +21,24 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 11,
-        "impressions": 752,
-        "ctr": 0.014627659574468085,
-        "avg_position": 10.38031914893617
+        "clicks": 14,
+        "impressions": 743,
+        "ctr": 0.018842530282637954,
+        "avg_position": 10.588156123822342
       },
       "ga4": {
-        "organic_sessions": 40
+        "organic_sessions": 34
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 51,
-        "impressions": 2368,
-        "ctr": 0.02153716216216216,
-        "avg_position": 10.446368243243244
+        "clicks": 53,
+        "impressions": 2418,
+        "ctr": 0.021918941273779982,
+        "avg_position": 10.425144747725392
       },
       "ga4": {
-        "organic_sessions": 135
+        "organic_sessions": 132
       }
     }
   },
@@ -47,9 +47,9 @@
       "country": "ES",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 46,
+        "impressions": 44,
         "ctr": 0,
-        "avg_position": 7.217391304347826
+        "avg_position": 7.340909090909091
       },
       "ga4_7d": {
         "organic_sessions": 3
@@ -59,10 +59,10 @@
     {
       "country": "MX",
       "gsc_7d": {
-        "clicks": 1,
+        "clicks": 2,
         "impressions": 24,
-        "ctr": 0.041666666666666664,
-        "avg_position": 6.458333333333333
+        "ctr": 0.08333333333333333,
+        "avg_position": 6.375
       },
       "ga4_7d": {
         "organic_sessions": 0
@@ -72,12 +72,12 @@
   ],
   "funnel": {
     "organic_7d": {
-      "cta_click": 6,
-      "form_open": 13,
-      "form_start": 2,
+      "cta_click": 4,
+      "form_open": 9,
+      "form_start": 1,
       "inquiry_prompt_select": 1,
-      "form_submit": 1,
-      "generate_lead": 1,
+      "form_submit": 0,
+      "generate_lead": 0,
       "form_error": 0,
       "form_abandon": 0,
       "contact_click": 0
@@ -85,8 +85,8 @@
     "organic_28d": {
       "cta_click": 32,
       "form_open": 49,
-      "form_start": 5,
-      "inquiry_prompt_select": 1,
+      "form_start": 6,
+      "inquiry_prompt_select": 2,
       "form_submit": 2,
       "generate_lead": 2,
       "form_error": 0,
@@ -95,20 +95,20 @@
     },
     "all_channels_7d": {
       "cta_click": 17,
-      "form_open": 33,
-      "form_start": 5,
+      "form_open": 27,
+      "form_start": 4,
       "inquiry_prompt_select": 1,
-      "form_submit": 2,
-      "generate_lead": 2,
+      "form_submit": 1,
+      "generate_lead": 1,
       "form_error": 0,
       "form_abandon": 1,
       "contact_click": 4
     },
     "all_channels_28d": {
-      "cta_click": 83,
+      "cta_click": 86,
       "form_open": 119,
-      "form_start": 18,
-      "inquiry_prompt_select": 10,
+      "form_start": 19,
+      "inquiry_prompt_select": 11,
       "form_submit": 7,
       "generate_lead": 6,
       "form_error": 1,
@@ -122,15 +122,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 10,
+        "impressions": 7,
         "ctr": 0,
-        "avg_position": 8.9
+        "avg_position": 8.714285714285715
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 58,
+        "impressions": 53,
         "ctr": 0,
-        "avg_position": 8.39655172413793
+        "avg_position": 8.264150943396228
       },
       "issues": []
     },
@@ -139,15 +139,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 16,
+        "impressions": 17,
         "ctr": 0,
-        "avg_position": 5.75
+        "avg_position": 6.882352941176471
       },
       "gsc_28d": {
-        "clicks": 1,
-        "impressions": 88,
-        "ctr": 0.011363636363636364,
-        "avg_position": 6.886363636363637
+        "clicks": 0,
+        "impressions": 86,
+        "ctr": 0,
+        "avg_position": 7.151162790697675
       },
       "issues": []
     },
@@ -158,13 +158,13 @@
         "clicks": 0,
         "impressions": 5,
         "ctr": 0,
-        "avg_position": 3
+        "avg_position": 3.2
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 15,
+        "impressions": 16,
         "ctr": 0,
-        "avg_position": 5.533333333333333
+        "avg_position": 5.5
       },
       "issues": []
     },
@@ -224,9 +224,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 10,
+        "impressions": 7,
         "ctr": 0,
-        "avg_position": 8.9
+        "avg_position": 8.714285714285715
       },
       "decision": null
     },
@@ -250,9 +250,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 16,
+        "impressions": 17,
         "ctr": 0,
-        "avg_position": 5.75
+        "avg_position": 6.882352941176471
       },
       "decision": null
     }
@@ -274,26 +274,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-11-04T07:57:52.260Z",
-      "through": "2026-11-03",
+      "captured_at": "2026-11-05T08:27:30.831Z",
+      "through": "2026-11-04",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-11-04T07:57:52.260Z",
-      "through": "2026-11-01",
+      "captured_at": "2026-11-05T08:27:30.831Z",
+      "through": "2026-11-02",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-11-04T07:57:52.260Z",
+      "captured_at": "2026-11-05T08:27:30.831Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-11-04T07:57:52.260Z",
-      "through": "2026-11-04",
+      "captured_at": "2026-11-05T08:27:30.831Z",
+      "through": "2026-11-05",
       "status": "ok"
     }
   ]
