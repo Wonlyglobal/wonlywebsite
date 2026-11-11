@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-11-10T08:48:37.994Z",
+  "generated_at": "2026-11-11T08:20:10.811Z",
   "freshness": {
     "ga4": {
-      "through": "2026-11-09",
+      "through": "2026-11-10",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-11-07",
+      "through": "2026-11-08",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,24 +21,24 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 14,
-        "impressions": 767,
-        "ctr": 0.018252933507170794,
-        "avg_position": 12.538461538461538
+        "clicks": 11,
+        "impressions": 766,
+        "ctr": 0.014360313315926894,
+        "avg_position": 12.14621409921671
       },
       "ga4": {
-        "organic_sessions": 21
+        "organic_sessions": 20
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 51,
-        "impressions": 2721,
-        "ctr": 0.018743109151047408,
-        "avg_position": 11.104005880191107
+        "clicks": 48,
+        "impressions": 2741,
+        "ctr": 0.017511856986501276,
+        "avg_position": 11.288580809923385
       },
       "ga4": {
-        "organic_sessions": 118
+        "organic_sessions": 119
       }
     }
   },
@@ -47,12 +47,12 @@
       "country": "ES",
       "gsc_7d": {
         "clicks": 2,
-        "impressions": 42,
-        "ctr": 0.047619047619047616,
-        "avg_position": 5.714285714285714
+        "impressions": 43,
+        "ctr": 0.046511627906976744,
+        "avg_position": 4.930232558139535
       },
       "ga4_7d": {
-        "organic_sessions": 2
+        "organic_sessions": 1
       },
       "status": "ok"
     },
@@ -60,9 +60,9 @@
       "country": "MX",
       "gsc_7d": {
         "clicks": 2,
-        "impressions": 33,
-        "ctr": 0.06060606060606061,
-        "avg_position": 6.666666666666667
+        "impressions": 31,
+        "ctr": 0.06451612903225806,
+        "avg_position": 6.516129032258065
       },
       "ga4_7d": {
         "organic_sessions": 1
@@ -72,8 +72,8 @@
   ],
   "funnel": {
     "organic_7d": {
-      "cta_click": 2,
-      "form_open": 4,
+      "cta_click": 1,
+      "form_open": 3,
       "form_start": 1,
       "inquiry_prompt_select": 1,
       "form_submit": 0,
@@ -84,7 +84,7 @@
     },
     "organic_28d": {
       "cta_click": 16,
-      "form_open": 29,
+      "form_open": 30,
       "form_start": 3,
       "inquiry_prompt_select": 2,
       "form_submit": 1,
@@ -94,19 +94,19 @@
       "contact_click": 1
     },
     "all_channels_7d": {
-      "cta_click": 12,
-      "form_open": 21,
-      "form_start": 5,
+      "cta_click": 7,
+      "form_open": 14,
+      "form_start": 3,
       "inquiry_prompt_select": 1,
-      "form_submit": 2,
-      "generate_lead": 2,
+      "form_submit": 1,
+      "generate_lead": 1,
       "form_error": 0,
       "form_abandon": 0,
-      "contact_click": 5
+      "contact_click": 1
     },
     "all_channels_28d": {
       "cta_click": 48,
-      "form_open": 86,
+      "form_open": 88,
       "form_start": 10,
       "inquiry_prompt_select": 2,
       "form_submit": 4,
@@ -122,9 +122,9 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 10,
+        "impressions": 9,
         "ctr": 0,
-        "avg_position": 8.8
+        "avg_position": 8.666666666666668
       },
       "gsc_28d": {
         "clicks": 0,
@@ -145,9 +145,9 @@
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 77,
+        "impressions": 76,
         "ctr": 0,
-        "avg_position": 6.64935064935065
+        "avg_position": 6.631578947368421
       },
       "issues": []
     },
@@ -224,9 +224,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 10,
+        "impressions": 9,
         "ctr": 0,
-        "avg_position": 8.8
+        "avg_position": 8.666666666666668
       },
       "decision": null
     },
@@ -274,26 +274,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-11-10T08:48:37.994Z",
-      "through": "2026-11-09",
+      "captured_at": "2026-11-11T08:20:10.811Z",
+      "through": "2026-11-10",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-11-10T08:48:37.994Z",
-      "through": "2026-11-07",
+      "captured_at": "2026-11-11T08:20:10.811Z",
+      "through": "2026-11-08",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-11-10T08:48:37.994Z",
+      "captured_at": "2026-11-11T08:20:10.811Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-11-10T08:48:37.994Z",
-      "through": "2026-11-10",
+      "captured_at": "2026-11-11T08:20:10.811Z",
+      "through": "2026-11-11",
       "status": "ok"
     }
   ]
