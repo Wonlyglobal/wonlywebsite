@@ -1,15 +1,15 @@
 {
   "schema_version": "1.0",
   "site": "wonlyglobal.com",
-  "generated_at": "2026-11-11T08:20:10.811Z",
+  "generated_at": "2026-11-12T08:47:38.233Z",
   "freshness": {
     "ga4": {
-      "through": "2026-11-10",
+      "through": "2026-11-11",
       "lag_days": 1,
       "status": "ok"
     },
     "gsc": {
-      "through": "2026-11-08",
+      "through": "2026-11-09",
       "lag_days": 3,
       "status": "ok"
     },
@@ -21,24 +21,24 @@
   "windows": {
     "7d": {
       "gsc": {
-        "clicks": 11,
-        "impressions": 766,
-        "ctr": 0.014360313315926894,
-        "avg_position": 12.14621409921671
+        "clicks": 10,
+        "impressions": 768,
+        "ctr": 0.013020833333333334,
+        "avg_position": 12.079427083333334
       },
       "ga4": {
-        "organic_sessions": 20
+        "organic_sessions": 24
       }
     },
     "28d": {
       "gsc": {
-        "clicks": 48,
-        "impressions": 2741,
-        "ctr": 0.017511856986501276,
-        "avg_position": 11.288580809923385
+        "clicks": 52,
+        "impressions": 2786,
+        "ctr": 0.01866475233309404,
+        "avg_position": 11.295046661880832
       },
       "ga4": {
-        "organic_sessions": 119
+        "organic_sessions": 116
       }
     }
   },
@@ -46,23 +46,23 @@
     {
       "country": "ES",
       "gsc_7d": {
-        "clicks": 2,
-        "impressions": 43,
-        "ctr": 0.046511627906976744,
-        "avg_position": 4.930232558139535
+        "clicks": 3,
+        "impressions": 47,
+        "ctr": 0.06382978723404255,
+        "avg_position": 4.872340425531915
       },
       "ga4_7d": {
-        "organic_sessions": 1
+        "organic_sessions": 4
       },
       "status": "ok"
     },
     {
       "country": "MX",
       "gsc_7d": {
-        "clicks": 2,
-        "impressions": 31,
-        "ctr": 0.06451612903225806,
-        "avg_position": 6.516129032258065
+        "clicks": 1,
+        "impressions": 29,
+        "ctr": 0.034482758620689655,
+        "avg_position": 6.620689655172414
       },
       "ga4_7d": {
         "organic_sessions": 1
@@ -72,10 +72,10 @@
   ],
   "funnel": {
     "organic_7d": {
-      "cta_click": 1,
+      "cta_click": 2,
       "form_open": 3,
-      "form_start": 1,
-      "inquiry_prompt_select": 1,
+      "form_start": 0,
+      "inquiry_prompt_select": 0,
       "form_submit": 0,
       "generate_lead": 0,
       "form_error": 0,
@@ -84,7 +84,7 @@
     },
     "organic_28d": {
       "cta_click": 16,
-      "form_open": 30,
+      "form_open": 29,
       "form_start": 3,
       "inquiry_prompt_select": 2,
       "form_submit": 1,
@@ -95,9 +95,9 @@
     },
     "all_channels_7d": {
       "cta_click": 7,
-      "form_open": 14,
-      "form_start": 3,
-      "inquiry_prompt_select": 1,
+      "form_open": 17,
+      "form_start": 2,
+      "inquiry_prompt_select": 0,
       "form_submit": 1,
       "generate_lead": 1,
       "form_error": 0,
@@ -106,7 +106,7 @@
     },
     "all_channels_28d": {
       "cta_click": 48,
-      "form_open": 88,
+      "form_open": 84,
       "form_start": 10,
       "inquiry_prompt_select": 2,
       "form_submit": 4,
@@ -122,15 +122,15 @@
       "role": "article",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 9,
+        "impressions": 14,
         "ctr": 0,
-        "avg_position": 8.666666666666668
+        "avg_position": 8.285714285714285
       },
       "gsc_28d": {
         "clicks": 0,
-        "impressions": 49,
+        "impressions": 48,
         "ctr": 0,
-        "avg_position": 8.306122448979592
+        "avg_position": 8.395833333333332
       },
       "issues": []
     },
@@ -138,16 +138,16 @@
       "path": "/insights/en-1627-rc2-rc3-rc4-security-door-grades/",
       "role": "article",
       "gsc_7d": {
-        "clicks": 0,
-        "impressions": 18,
-        "ctr": 0,
-        "avg_position": 6.277777777777778
+        "clicks": 1,
+        "impressions": 16,
+        "ctr": 0.0625,
+        "avg_position": 6.5625
       },
       "gsc_28d": {
-        "clicks": 0,
-        "impressions": 76,
-        "ctr": 0,
-        "avg_position": 6.631578947368421
+        "clicks": 1,
+        "impressions": 79,
+        "ctr": 0.012658227848101266,
+        "avg_position": 6.772151898734177
       },
       "issues": []
     },
@@ -156,9 +156,9 @@
       "role": "commercial",
       "gsc_7d": {
         "clicks": 0,
-        "impressions": 2,
+        "impressions": 1,
         "ctr": 0,
-        "avg_position": 4.5
+        "avg_position": 4
       },
       "gsc_28d": {
         "clicks": 0,
@@ -224,9 +224,9 @@
       "latest": {
         "window": "7d",
         "clicks": 0,
-        "impressions": 9,
+        "impressions": 14,
         "ctr": 0,
-        "avg_position": 8.666666666666668
+        "avg_position": 8.285714285714285
       },
       "decision": null
     },
@@ -249,10 +249,10 @@
       "observe_14d_at": "2026-10-07T08:00:00+08:00",
       "latest": {
         "window": "7d",
-        "clicks": 0,
-        "impressions": 18,
-        "ctr": 0,
-        "avg_position": 6.277777777777778
+        "clicks": 1,
+        "impressions": 16,
+        "ctr": 0.0625,
+        "avg_position": 6.5625
       },
       "decision": null
     }
@@ -274,26 +274,26 @@
   "sources": [
     {
       "name": "GA4",
-      "captured_at": "2026-11-11T08:20:10.811Z",
-      "through": "2026-11-10",
+      "captured_at": "2026-11-12T08:47:38.233Z",
+      "through": "2026-11-11",
       "status": "ok"
     },
     {
       "name": "GSC",
-      "captured_at": "2026-11-11T08:20:10.811Z",
-      "through": "2026-11-08",
+      "captured_at": "2026-11-12T08:47:38.233Z",
+      "through": "2026-11-09",
       "status": "ok"
     },
     {
       "name": "SEMrush",
-      "captured_at": "2026-11-11T08:20:10.811Z",
+      "captured_at": "2026-11-12T08:47:38.233Z",
       "through": "2026-09-07",
       "status": "stale"
     },
     {
       "name": "production_audit",
-      "captured_at": "2026-11-11T08:20:10.811Z",
-      "through": "2026-11-11",
+      "captured_at": "2026-11-12T08:47:38.233Z",
+      "through": "2026-11-12",
       "status": "ok"
     }
   ]
