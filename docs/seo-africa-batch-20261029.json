@@ -1,6 +1,6 @@
 {
   "batch": "africa-market-2026-10",
-  "status": "production_in_progress",
+  "status": "publication_window_closed_2026-11-07",
   "created_at": "2026-10-29",
   "publication_window": {
     "timezone": "Asia/Shanghai",
@@ -22,7 +22,8 @@
     "Topics are procurement-intent hypotheses, not verified search-volume or ranking claims.",
     "Avoid unsupported continent-wide demand statistics and country-specific legal or certification claims. Verify any such claim against current primary sources during drafting.",
     "Every article must have a distinct buyer problem and at least three contextual internal links plus a relevant inquiry path.",
-    "As of 2026-10-29, slots 3-20 have six-language draft files and unique cover assets locally; they remain unpublished until individual QA/build and scheduled dates. Draft creation is not publication."
+    "As of 2026-10-29, slots 3-20 have six-language draft files and unique cover assets locally; they remain unpublished until individual QA/build and scheduled dates. Draft creation is not publication.",
+    "As of 2026-11-16, the 2026-10-29 through 2026-11-07 publication window is closed. Only slots 1-2 have public verification records; all later slots remain unpublished/missed (slots 9-10 also retain the recorded TypeScript-gate failure). Do not backfill or expose these expired articles."
   ],
   "articles": [
     {
@@ -70,7 +71,7 @@
         "/insights/security-door-ratings-and-certifications/",
         "/contact/"
       ],
-      "production_status": "missed_not_published_no_backfill"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 4,
@@ -85,7 +86,7 @@
         "/insights/security-door-installation-inspection-checklist/",
         "/contact/"
       ],
-      "production_status": "missed_not_published_no_backfill"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 5,
@@ -100,7 +101,7 @@
         "/products/entrance-door/",
         "/contact/"
       ],
-      "production_status": "missed_not_published_no_backfill"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 6,
@@ -115,7 +116,7 @@
         "/insights/security-door-manufacturer-factory-audit-checklist/",
         "/contact/"
       ],
-      "production_status": "missed_not_published_no_backfill"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 7,
@@ -130,7 +131,7 @@
         "/insights/keyed-alike-vs-master-key-procurement/",
         "/contact/"
       ],
-      "production_status": "missed_not_published_no_backfill"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 8,
@@ -145,7 +146,7 @@
         "/products/smart-locks",
         "/contact/"
       ],
-      "production_status": "missed_not_published_no_backfill"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 9,
@@ -160,7 +161,7 @@
         "/insights/smart-locks-for-apartment-projects/",
         "/contact/"
       ],
-      "production_status": "pushed_pending_aliyun_flow_deploy_and_live_verification"
+      "production_status": "missed_no_backfill_deferred_2026-11-02_typescript_gate_failed"
     },
     {
       "slot": 10,
@@ -175,7 +176,7 @@
         "/products/wooden-doors",
         "/contact/"
       ],
-      "production_status": "pushed_pending_aliyun_flow_deploy_and_live_verification"
+      "production_status": "missed_no_backfill_deferred_2026-11-02_typescript_gate_failed"
     },
     {
       "slot": 11,
@@ -190,7 +191,7 @@
         "/insights/commercial-security-door-specification-checklist/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 12,
@@ -205,7 +206,7 @@
         "/insights/door-opening-measurement-survey/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 13,
@@ -220,7 +221,7 @@
         "/insights/security-door-installation-inspection-checklist/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 14,
@@ -235,7 +236,7 @@
         "/insights/fire-door-certifications-en-1634-ul-10c/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 15,
@@ -250,7 +251,7 @@
         "/insights/commercial-security-door-specification-checklist/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 16,
@@ -265,7 +266,7 @@
         "/insights/security-door-installation-inspection-checklist/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 17,
@@ -280,7 +281,7 @@
         "/insights/security-door-rfq-drawing-package/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 18,
@@ -295,7 +296,7 @@
         "/insights/smart-locks-for-apartment-projects/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 19,
@@ -310,7 +311,7 @@
         "/insights/security-door-manufacturer-factory-audit-checklist/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     },
     {
       "slot": 20,
@@ -325,7 +326,7 @@
         "/insights/security-door-installation-inspection-checklist/",
         "/contact/"
       ],
-      "production_status": "six_language_draft_local_build_passed_pending_publication_review"
+      "production_status": "missed_not_published_no_backfill_publication_window_closed_2026-11-07"
     }
   ]
 }

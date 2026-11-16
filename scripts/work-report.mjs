@@ -127,9 +127,11 @@ const africaArticles = Array.isArray(africaBatch?.articles) ? africaBatch.articl
 const africaDueToday = africaArticles.filter((a) => a.date === today);
 const africaFuture = africaArticles.filter((a) => a.date > today).sort((a, b) => a.date.localeCompare(b.date));
 const africaVerifiedLive = africaArticles.filter((a) => /^live_verified_public_page_/.test(a.production_status || ""));
+const africaMissed = africaArticles.filter((a) => a.date < today && !/^live_verified_public_page_/.test(a.production_status || ""));
 const africaStatusLabel = (article) => {
   const status = article.production_status || "";
   if (/^live_verified_public_page_/.test(status)) return "已核验上线";
+  if (/^missed_/.test(status)) return `逾期未发布（${status.replace(/^missed_/, "").replaceAll("_", " ")}）`;
   if (/^deferred_/.test(status)) return `已延期（${status.replace(/^deferred_/, "").replaceAll("_", " ")}）`;
   if (/build_static_seo_and_publication_audit_passed_pending_production_deploy/.test(status)) return "发布门槛已通过，待生产部署与公网核验";
   if (existsSync(`content/articles/${article.slug}.md`)) return "稿件已进入当前版本，等待发布验收";
@@ -171,6 +173,7 @@ if (dueBySlug.size) {
 }
 if (africaBatch) {
   md.push(`**🌍 非洲市场批次**：正式站核验 ${africaVerifiedLive.length}/${africaArticles.length} 篇；今日排期 ${africaDueToday.length} 篇`);
+  if (africaMissed.length) md.push(`**⏱️ 逾期未上线**：${africaMissed.length} 篇；原排期已过，按“不补发”规则保留为未发布`);
   md.push(`**📆 批次后续排期**：${africaFuture.length} 篇${africaFuture[0] ? `；下一篇 ${africaFuture[0].date}` : "；没有后续排期"}`);
 }
 md.push(`**📚 内容库**：当前版本 ${arts.length} 篇稿件（日期已到 ${live.length}，未来日期 ${scheduled.length}）${next ? `；下一篇 ${next.date}` : ""}`);
