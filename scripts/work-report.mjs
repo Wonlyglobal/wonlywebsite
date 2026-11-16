@@ -176,7 +176,7 @@ if (africaBatch) {
   if (africaMissed.length) md.push(`**⏱️ 逾期未上线**：${africaMissed.length} 篇；原排期已过，按“不补发”规则保留为未发布`);
   md.push(`**📆 批次后续排期**：${africaFuture.length} 篇${africaFuture[0] ? `；下一篇 ${africaFuture[0].date}` : "；没有后续排期"}`);
 }
-md.push(`**📚 内容库**：当前版本 ${arts.length} 篇稿件（日期已到 ${live.length}，未来日期 ${scheduled.length}）${next ? `；下一篇 ${next.date}` : ""}`);
+md.push(`**📚 内容库**：当前版本 ${arts.length} 篇稿件（计划日期已到 ${live.length} 篇、未来日期 ${scheduled.length} 篇；日期到期不等于实际上线）${next ? `；下一篇 ${next.date}` : ""}`);
 md.push("");
 const catOrder = ["📄 页面优化与建设", "✍️ 内容与文章", "🔍 SEO 建设", "🤖 自动化与工程", "🖼️ 素材", "🔩 其它"];
 const catsWithWork = catOrder.filter((c) => workByCat[c]?.length);
